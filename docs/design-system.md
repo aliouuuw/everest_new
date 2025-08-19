@@ -428,14 +428,6 @@ const slideUp = {
   ease: "power3.out"
 };
 
-// Mountain Float Animation
-const mountainFloat = {
-  y: "-=3",
-  duration: 4,
-  ease: "power1.inOut",
-  yoyo: true,
-  repeat: -1
-};
 ```
 
 ## Responsive Breakpoints

@@ -30,12 +30,10 @@ A minimalist yet bold landing page for Everest Finance SGI that embodies the com
 ### Current Focus Areas
 1. **Hero Section**
    - White-smoke background
-   - Animated mountain SVG (vector-style, brand-aligned)
    - Subtle WebGL/GSAP animations
    - Clean typography presentation
 
 2. **Navigation System**
-   - Bottom dock design
    - BRVM stock information slider
    - Modern, accessible interface
    - Smooth interactions
