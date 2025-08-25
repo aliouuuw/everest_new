@@ -7,11 +7,12 @@
   --white-smoke: #f5f5f5; /* A very light grey for subtle contrast */
   --timberwolf: #e0e0e0; /* A slightly darker grey for borders */
   --line-soft: #eeeeee;
-  --gold-metallic: #c8a96b; /* Refined soft gold */
-  --gold-light: #eddcbf;
-  --gold-dark: #9b7c46;
-  --night: #0e0e10; /* Deeper, ink-like black */
-  --night-80: rgba(26, 26, 26, 0.8);
+  /* Accent kept subtle for a minimalist, tech-forward feel */
+  --gold-metallic: #b7a47a;
+  --gold-light: #e9e1cb;
+  --gold-dark: #8c7a52;
+  --night: #0f1115; /* Deep, neutral ink */
+  --night-80: rgba(15, 17, 21, 0.8);
   
   /* Extended Palette */
   --success-green: #10b981;
@@ -19,14 +20,15 @@
   
   /* Opacity Variations */
   --white-smoke-80: rgba(245, 245, 245, 0.8);
-  --night-10: rgba(10, 10, 10, 0.1);
-  --night-20: rgba(10, 10, 10, 0.2);
+  --night-10: rgba(15, 17, 21, 0.08);
+  --night-20: rgba(15, 17, 21, 0.16);
   --gold-metallic-20: rgba(199, 164, 105, 0.2);
   --gold-metallic-10: rgba(199, 164, 105, 0.1);
   
   /* Typography */
   --font-primary: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  /* Prefer a single, modern sans for a cleaner tech tone */
+  --font-display: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -48,7 +50,7 @@ body {
   font-family: var(--font-primary);
   font-kerning: normal;
   font-feature-settings: "kern" 1, "liga" 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   font-optical-sizing: auto;
   font-variant-numeric: proportional-nums;
   -webkit-font-smoothing: antialiased;
@@ -57,10 +59,10 @@ body {
 
 /* Custom Utilities */
 @utility glassmorphism {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 
 @utility gradient-gold {
@@ -68,7 +70,7 @@ body {
 }
 
 @utility gradient-gold-subtle {
-  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 65%);
+  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 75%);
 }
 
 @utility text-gradient-gold {
@@ -202,20 +204,20 @@ body {
 /* Luxury text treatments */
 .luxury-heading {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.25rem, 6vw, 5rem);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--night);
 }
 
 .luxury-subheading {
   font-family: var(--font-primary);
   font-weight: 400;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
   line-height: 1.7;
   color: var(--night-80);
-  max-width: 40rem;
+  max-width: 42rem;
   margin: 0 auto;
 }
 
@@ -235,12 +237,32 @@ body {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply px-7 py-3 bg-[var(--gold-metallic)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--gold-dark)] hover:shadow-xl relative overflow-hidden;
+  @apply px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-black/10 rounded-lg relative overflow-hidden cursor-pointer;
   border: 0;
+  transform: translateY(0);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
 .btn-secondary {
-  @apply px-7 py-3 border border-[var(--night)]/20 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--gold-metallic)] hover:text-[var(--gold-metallic)] relative overflow-hidden;
+  @apply px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 hover:bg-[var(--night)]/2 rounded-lg relative overflow-hidden cursor-pointer;
+  transform: translateY(0);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
 /* Card Styles */
@@ -295,12 +317,7 @@ body {
   }
 }
 
-.shimmer-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-effect::before {
+.btn-primary::before {
   content: '';
   position: absolute;
   top: 0;
@@ -310,10 +327,34 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1),
     transparent
   );
-  animation: shimmer 2s infinite;
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(15, 17, 21, 0.05),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
 }
 
 /* Motion Preferences */

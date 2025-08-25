@@ -10,26 +10,26 @@ function App() {
           style={{
             backgroundImage:
               `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
-            backgroundSize: '72px 72px',
+            backgroundSize: '88px 88px',
           }}
         />
       </div>
 
       {/* Header */}
       <header className="sticky top-0 z-20">
-        <div className="glassmorphism mx-auto max-w-6xl px-5 py-3 mt-5 rounded-2xl flex items-center justify-between">
+        <div className="mx-auto max-w-6xl px-5 py-4 mt-5 rounded-xl flex items-center justify-between bg-white/70 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
           <div className="flex items-center gap-3">
-            <div className="size-7 rounded-md gradient-gold" />
-            <div className="brand-heading text-base tracking-tight">Everest Finance SGI</div>
+            <div className="size-6 rounded-sm bg-[var(--night)]" />
+            <div className="brand-heading text-sm tracking-tight">Everest Finance</div>
           </div>
-          <nav className="hidden sm:flex items-center gap-6 text-sm text-secondary">
-            <a href="#services" className="hover:text-[var(--gold-metallic)] transition-colors">Services</a>
-            <a href="#insights" className="hover:text-[var(--gold-metallic)] transition-colors">Marchés</a>
-            <a href="#about" className="hover:text-[var(--gold-metallic)] transition-colors">À propos</a>
-            <a href="#contact" className="hover:text-[var(--gold-metallic)] transition-colors">Contact</a>
+          <nav className="hidden sm:flex items-center gap-5 text-sm text-secondary">
+            <a href="#services" className="hover:text-[var(--night)] transition-colors">Services</a>
+            <a href="#insights" className="hover:text-[var(--night)] transition-colors">Marchés</a>
+            <a href="#about" className="hover:text-[var(--night)] transition-colors">À propos</a>
+            <a href="#contact" className="hover:text-[var(--night)] transition-colors">Contact</a>
           </nav>
           <div className="hidden sm:block">
-            <a href="#get-started" className="btn-primary rounded-lg shimmer-effect font-display tracking-wide">Get started</a>
+            <a href="#get-started" className="btn-primary font-display tracking-wide">Commencer</a>
           </div>
         </div>
       </header>
