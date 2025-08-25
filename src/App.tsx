@@ -1,5 +1,6 @@
 import { HeroSection } from './components/Hero';
 import { Header } from './components/Header';
+import { CTA, Insights, Services, ValueProps } from './components/Sections';
 
 function App() {
   return (
@@ -7,6 +8,10 @@ function App() {
       {/* Hero Section - Full viewport background */}
       <main className="relative z-0">
         <HeroSection />
+        <ValueProps />
+        <Services />
+        <Insights />
+        <CTA scheme="metallic" />
       </main>
 
       {/* Header - Overlays the hero */}

@@ -286,7 +286,22 @@ body {
 
 /* Card Styles */
 .stat-card {
-  @apply p-8 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10;
+  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Edge-to-edge media inside cards */
+.stat-card .edge-media {
+  margin-left: -2rem; /* match p-8 */
+  margin-right: -2rem;
+}
+
+.stat-card .font-display,
+.stat-card .text-secondary {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Enhanced Typography */
@@ -386,3 +401,23 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- Scroll Reveal Utilities --- */
+.reveal { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+.reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); transition: opacity 700ms var(--ease-out-cubic), transform 700ms var(--ease-out-cubic), filter 700ms var(--ease-out-cubic); }
+
+.reveal-stagger > * { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+.reveal-stagger.in > * { opacity: 1; transform: translateY(0); filter: blur(0); }
+.reveal-stagger.in > * { transition: opacity 650ms var(--ease-out-cubic), transform 650ms var(--ease-out-cubic), filter 650ms var(--ease-out-cubic); }
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 120ms; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 300ms; }
+
+/* Card hover micro-interactions */
+.card-hover { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--gold-metallic-10); }
+
+/* Icon badge */
+.icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: var(--white-smoke-80); border: 1px solid var(--timberwolf); }
