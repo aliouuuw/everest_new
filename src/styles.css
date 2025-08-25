@@ -252,7 +252,7 @@ body {
 }
 
 .btn-secondary {
-  @apply px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 hover:bg-[var(--night)]/2 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 bg-[var(--white-smoke)]/80 hover:bg-[var(--night)]/2 rounded-lg relative overflow-hidden cursor-pointer;
   transform: translateY(0);
 }
 

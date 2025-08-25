@@ -18,9 +18,9 @@ export const HeroSection: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 flex min-h-screen justify-center pt-32">
         <div className="text-center px-6 max-w-3xl mx-auto">
-          <span className="kicker opacity-70">Société de Gestion et d’Intermédiation</span>
+          <span className="kicker opacity-70">Au sommet de l'excellence financière</span>
           <h1 className="luxury-heading mt-4 mb-6">
-            La finance, sobre et précise
+            Élevez vos ambitions vers de nouveaux sommets
           </h1>
 
           <p className="luxury-subheading mb-10">

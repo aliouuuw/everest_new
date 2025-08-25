@@ -3,18 +3,6 @@ import { HeroSection } from './components/Hero';
 function App() {
   return (
     <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      {/* Subtle tech grid background */}
-      <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage:
-              `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
-            backgroundSize: '88px 88px',
-          }}
-        />
-      </div>
-
       {/* Header */}
       <header className="sticky top-0 z-20">
         <div className="mx-auto max-w-6xl px-5 py-4 mt-5 rounded-xl flex items-center justify-between bg-white/70 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
