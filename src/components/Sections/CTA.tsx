@@ -55,7 +55,7 @@ export const CTA: React.FC<{ scheme?: CtaScheme }> = ({ scheme = 'ivory' }) => {
   const s = schemes[scheme];
 
   return (
-    <section ref={sectionRef} className="reveal py-24">
+    <section ref={sectionRef} className="reveal py-24 gradient-gold">
       <div className="mx-auto max-w-6xl px-6">
         <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14`}>
           {/* left gold bar accent */}

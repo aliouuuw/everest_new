@@ -15,7 +15,7 @@ export const ValueProps: React.FC = () => {
             <h2 className="luxury-heading mt-3 mb-5">Exécution rigoureuse, confiance durable</h2>
             <p className="luxury-subheading mb-10">Nous allions discipline de marché, ingénierie financière et accompagnement client pour créer de la valeur sur le long terme.</p>
 
-            <div ref={listRef} className="reveal-stagger pt-8 grid grid-cols-1 gap-3">
+            <div ref={listRef} className="reveal-stagger pt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="stat-card card-hover">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-[var(--white-smoke)] border border-gray-200 text-gray-700"><FaShieldAlt /></div>
@@ -25,7 +25,7 @@ export const ValueProps: React.FC = () => {
               </div>
               <div className="stat-card card-hover">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="icon-badge"><FaHandshake /></div>
+                  <div className="border border-[var(--night)]/20 rounded-full p-2"><FaHandshake /></div>
                   <div className="font-display">Accompagnement</div>
                 </div>
                 <div className="text-secondary text-sm">Conseil dédié et transparent.</div>

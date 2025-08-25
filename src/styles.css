@@ -126,6 +126,15 @@ body {
   }
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 /* Stock Ticker Animations */
 .ticker-scroll {
   animation: tickerScroll 45s linear infinite;
@@ -134,6 +143,10 @@ body {
 .ticker-scroll-paused {
   animation: tickerScroll 45s linear infinite;
   animation-play-state: paused;
+}
+
+.animate-scroll {
+  animation: scroll 60s linear infinite;
 }
 
 /* Typography Classes */

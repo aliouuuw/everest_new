@@ -1,12 +1,15 @@
 import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'react-icons/fa';
 import { HeroSection } from './components/Hero';
-import { Header } from './components/Header';
+import { BRVMTicker, Header } from './components/Header';
 import { CTA, ClientPortalPreview, Insights, PerformanceDashboard, Services, ValueProps } from './components/Sections';
 import { WhatsAppButton } from './components/WhatsAppButton';
 
 function App() {
   return (
     <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
+      {/* Header - Overlays the hero */}
+      <Header />
+      
       {/* Hero Section - Full viewport background */}
       <main className="relative z-0">
         <HeroSection />
@@ -15,12 +18,12 @@ function App() {
         <Insights />
         <PerformanceDashboard />
         <ClientPortalPreview />
-        <CTA scheme="metallic" />
+        <CTA scheme="ivory" />
       </main>
 
-      {/* Header - Overlays the hero */}
-      <Header />
 
+      {/* BRVM Live Ticker */}
+      <BRVMTicker />
       {/* Footer */}
       <footer className="mt-24 mb-10">
         <div className="mx-auto max-w-6xl px-5">
