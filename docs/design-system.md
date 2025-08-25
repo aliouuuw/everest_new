@@ -1,402 +1,90 @@
 # Everest Finance Design System
 
-## Color Palette
+## Foundations
 
-### Primary Colors
+### Color Palette (Source of Truth)
 ```css
 /* Brand Core Colors */
 :root {
-  --white-smoke: #f5f5f5;      /* hsla(0, 0%, 96%, 1) */
-  --timberwolf: #dcdad2;       /* hsla(48, 13%, 84%, 1) */
-  --gold-metallic: #e4bd61;    /* hsla(42, 71%, 64%, 1) */
-  --night: #0a0a0a;            /* hsla(0, 0%, 4%, 1) */
-}
-```
+  --pure-white: #FFFFFF;
+  --white-smoke: #f5f5f5;      /* subtle background */
+  --timberwolf: #e0e0e0;       /* borders/dividers */
+  --line-soft: #eeeeee;        /* hairline dividers */
 
-### Semantic Color Usage
+  --gold-metallic: #b7a47a;    /* brand accent */
+  --gold-light: #e9e1cb;       /* light accent */
+  --gold-dark: #8c7a52;        /* dark accent */
 
-#### Background Colors
-- **Primary Background**: `white-smoke` - Main site background
-- **Secondary Background**: `timberwolf` - Card backgrounds, sections
-- **Contrast Background**: `night` - Dark sections, overlays
+  --night: #0f1115;            /* primary ink */
+  --night-80: rgba(15, 17, 21, 0.8);
 
-#### Accent & Interactive
-- **Primary Accent**: `gold-metallic` - Buttons, links, highlights
-- **Text Primary**: `night` - Main text content
-- **Text Secondary**: `rgba(10, 10, 10, 0.7)` - Supporting text
-- **Text Muted**: `rgba(10, 10, 10, 0.5)` - Meta information
+  /* Extended Palette */
+  --success-green: #10b981;
+  --error-red: #ef4444;
 
-### Extended Color Palette
-```css
-/* Additional Utility Colors */
-:root {
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --info: #3b82f6;
-  
   /* Opacity Variations */
   --white-smoke-80: rgba(245, 245, 245, 0.8);
-  --night-10: rgba(10, 10, 10, 0.1);
-  --night-20: rgba(10, 10, 10, 0.2);
-  --gold-metallic-20: rgba(228, 189, 97, 0.2);
-  
-  /* Gradient Colors - Golden Brand Only */
-  --gradient-gold-light: #f4d03f;
-  --gradient-gold-medium: #e4bd61;
-  --gradient-gold-dark: #d4a843;
+  --night-10: rgba(15, 17, 21, 0.08);
+  --night-20: rgba(15, 17, 21, 0.16);
+  --gold-metallic-20: rgba(199, 164, 105, 0.2);
+  --gold-metallic-10: rgba(199, 164, 105, 0.1);
 }
 ```
 
-### Brand Gradient Usage
-**Gradient Restriction**: Only use gradients with golden brand colors to maintain brand consistency.
+- Backgrounds: `--pure-white` (base), `--white-smoke` (panels), `--night` (rare dark accents)
+- Text: `--night` primary, `--night-80` secondary
+- Accents: `--gold-metallic` family only for brand emphasis
 
-```css
-/* Approved Gradient Combinations */
-:root {
-  --gradient-primary: linear-gradient(135deg, var(--gradient-gold-light) 0%, var(--gold-metallic) 100%);
-  --gradient-secondary: linear-gradient(90deg, var(--gold-metallic) 0%, var(--gradient-gold-dark) 100%);
-  --gradient-subtle: linear-gradient(180deg, var(--gold-metallic-20) 0%, transparent 100%);
-  --gradient-radial: radial-gradient(circle, var(--gold-metallic-20) 0%, transparent 70%);
-}
-```
-
-**Usage Examples**:
-- Hero section subtle background enhancement
-- Button hover states
-- Card accent borders
-- Loading states and progress indicators
-
-## Icon System
-
-### React Icons Implementation
-**Library**: `react-icons/fa` (Font Awesome icons)
-**Installation**: `npm install react-icons`
-
-```javascript
-// Icon imports
-import { 
-  FaChartLine,     // Stock/financial data
-  FaMountain,      // Brand mountain theme
-  FaPlay,          // Play/start actions
-  FaPause,         // Pause actions
-  FaArrowRight,    // Navigation arrows
-  FaArrowLeft,     // Navigation arrows
-  FaChevronDown,   // Dropdown indicators
-  FaExternalLinkAlt, // External links
-  FaPhone,         // Contact
-  FaEnvelope,      // Email
-  FaMapMarkerAlt,  // Location
-  FaClock,         // Time/updates
-  FaInfoCircle,    // Information
-  FaExclamationTriangle, // Warnings
-  FaCheckCircle,   // Success states
-  FaTimes,         // Close/cancel
-  FaBars,          // Menu toggle
-  FaSearch,        // Search functionality
-  FaUser,          // User/profile
-  FaCog,           // Settings
-  FaHome,          // Home navigation
-  FaBuilding,      // Company/corporate
-  FaHandshake,     // Partnership/trust
-  FaShieldAlt,     // Security/compliance
-  FaTrendingUp,    // Growth/performance
-  FaGlobe,         // Global/international
-  FaCalculator,    // Financial tools
-  FaFileAlt,       // Documents/reports
-  FaUsers,         // Team/clients
-  FaAward          // Excellence/achievements
-} from 'react-icons/fa';
-```
-
-### Icon Usage Guidelines
-
-#### Size Standards
+### Fonts
 ```css
 :root {
-  --icon-xs: 12px;
-  --icon-sm: 16px;
-  --icon-base: 20px;
-  --icon-lg: 24px;
-  --icon-xl: 32px;
-  --icon-2xl: 48px;
+  --font-primary: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 ```
 
-#### Color Application
+Tailwind is used for sizing/spacing; custom classes provide hierarchy and tone.
+
+## Utilities
+
+### Glassmorphism
 ```css
-/* Icon color classes */
-.icon-primary { color: var(--night); }
-.icon-accent { color: var(--gold-metallic); }
-.icon-muted { color: rgba(10, 10, 10, 0.5); }
-.icon-success { color: var(--success); }
-.icon-warning { color: var(--warning); }
-.icon-error { color: var(--error); }
+@utility glassmorphism {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
 ```
 
-#### Component Examples
-```javascript
-// Stock ticker with icon
-<div className="stock-ticker">
-  <FaChartLine className="icon-accent" size={16} />
-  <span className="stock-symbol">BOAS</span>
-  <span className="stock-price">1,250 XOF</span>
-  <FaTrendingUp className="icon-success" size={14} />
-</div>
-
-// Navigation button with icon
-<button className="nav-button">
-  <FaArrowRight className="icon-primary" size={18} />
-  <span>Explore Services</span>
-</button>
-
-// Status indicator with icon
-<div className="market-status">
-  <FaClock className="icon-muted" size={14} />
-  <span>Market Open</span>
-</div>
-```
-
-## Typography System
-
-### Font Stack
+### Brand Gradients
 ```css
-:root {
-  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-                  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 
-                  sans-serif;
-  --font-mono: 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', 
-               Consolas, monospace;
+@utility gradient-gold {
+  background: linear-gradient(120deg, var(--gold-light) 0%, var(--gold-metallic) 55%, var(--gold-dark) 100%);
+}
+@utility gradient-gold-subtle {
+  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 75%);
+}
+@utility text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-metallic) 0%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 ```
 
-### Type Scale & Hierarchy
+### Animations
 ```css
-/* Typography Scale */
-:root {
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 1rem;     /* 16px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.25rem;    /* 20px */
-  --text-2xl: 1.5rem;    /* 24px */
-  --text-3xl: 1.875rem;  /* 30px */
-  --text-4xl: 2.25rem;   /* 36px */
-  --text-5xl: 3rem;      /* 48px */
-  --text-6xl: 3.75rem;   /* 60px */
-}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideInFromLeft { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideInFromRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+@keyframes tickerScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-/* Line Heights */
-:root {
-  --leading-tight: 1.25;
-  --leading-snug: 1.375;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.625;
-  --leading-loose: 2;
-}
+.ticker-scroll { animation: tickerScroll 45s linear infinite; }
+.ticker-scroll-paused { animation: tickerScroll 45s linear infinite; animation-play-state: paused; }
 
-/* Font Weights */
-:root {
-  --font-light: 300;
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-}
-```
-
-### Typography Components
-
-#### Headings
-```css
-.heading-1 {
-  font-size: var(--text-5xl);
-  font-weight: var(--font-bold);
-  line-height: var(--leading-tight);
-  color: var(--night);
-  letter-spacing: -0.025em;
-}
-
-.heading-2 {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-semibold);
-  line-height: var(--leading-snug);
-  color: var(--night);
-}
-
-.heading-3 {
-  font-size: var(--text-xl);
-  font-weight: var(--font-medium);
-  line-height: var(--leading-normal);
-  color: var(--night);
-}
-```
-
-#### Body Text
-```css
-.text-primary {
-  font-size: var(--text-lg);
-  font-weight: var(--font-normal);
-  line-height: var(--leading-relaxed);
-  color: var(--night);
-}
-
-.text-secondary {
-  font-size: var(--text-base);
-  font-weight: var(--font-normal);
-  line-height: var(--leading-normal);
-  color: rgba(10, 10, 10, 0.7);
-}
-
-.text-caption {
-  font-size: var(--text-sm);
-  font-weight: var(--font-normal);
-  line-height: var(--leading-normal);
-  color: rgba(10, 10, 10, 0.5);
-}
-```
-
-## Spacing System
-
-### Spacing Scale
-```css
-:root {
-  --space-px: 1px;
-  --space-0: 0;
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
-  --space-20: 5rem;     /* 80px */
-  --space-24: 6rem;     /* 96px */
-  --space-32: 8rem;     /* 128px */
-}
-```
-
-### Layout Spacing
-- **Section Padding**: `var(--space-20)` (80px)
-- **Container Max Width**: `1200px`
-- **Container Padding**: `var(--space-6)` (24px)
-- **Card Padding**: `var(--space-8)` (32px)
-- **Button Padding**: `var(--space-3) var(--space-6)` (12px 24px)
-
-## Components
-
-### Buttons
-
-#### Primary Button
-```css
-.button-primary {
-  background: var(--gradient-primary);
-  color: var(--night);
-  border: none;
-  border-radius: 8px;
-  padding: var(--space-3) var(--space-6);
-  font-size: var(--text-base);
-  font-weight: var(--font-medium);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.button-primary:hover {
-  background: var(--gradient-secondary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(228, 189, 97, 0.3);
-}
-```
-
-#### Secondary Button
-```css
-.button-secondary {
-  background: transparent;
-  color: var(--night);
-  border: 2px solid var(--timberwolf);
-  border-radius: 8px;
-  padding: var(--space-3) var(--space-6);
-  font-size: var(--text-base);
-  font-weight: var(--font-medium);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.button-secondary:hover {
-  border-color: var(--gold-metallic);
-  background: var(--gradient-subtle);
-}
-```
-
-### Cards
-```css
-.card {
-  background: var(--white-smoke);
-  border-radius: 12px;
-  padding: var(--space-8);
-  box-shadow: 0 2px 8px var(--night-10);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--night-20);
-}
-```
-
-### Stock Ticker Component
-```css
-.stock-ticker {
-  display: flex;
-  align-items: center;
-  background: rgba(245, 245, 245, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 12px;
-  padding: var(--space-4);
-  min-width: 160px;
-  transition: all 0.2s ease;
-}
-
-.stock-symbol {
-  font-size: var(--text-sm);
-  font-weight: var(--font-bold);
-  color: var(--night);
-  margin-bottom: var(--space-1);
-}
-
-.stock-price {
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  color: var(--night);
-}
-
-.stock-change {
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium);
-}
-
-.stock-change.positive {
-  color: var(--success);
-}
-
-.stock-change.negative {
-  color: var(--error);
-}
-```
-
-## Animation Guidelines
-
-### Timing Functions
-```css
 :root {
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
   --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -404,67 +92,90 @@ import {
 }
 ```
 
-### Animation Durations
-- **Micro Interactions**: 150ms
-- **UI Transitions**: 250ms
-- **Page Transitions**: 400ms
-- **Ambient Animations**: 2000ms+
+- Respect `prefers-reduced-motion`; long-running ambient animations are subtle.
 
-### GSAP Animation Presets
-```javascript
-// Fade In Animation
-const fadeIn = {
-  opacity: 0,
-  y: 20,
-  duration: 0.6,
-  ease: "power2.out"
-};
+## Typography
 
-// Slide Up Animation  
-const slideUp = {
-  y: 50,
-  opacity: 0,
-  duration: 0.8,
-  ease: "power3.out"
-};
-
-```
-
-## Responsive Breakpoints
-
-### Breakpoint System
+### Classes
 ```css
-:root {
-  --screen-sm: 640px;
-  --screen-md: 768px;
-  --screen-lg: 1024px;
-  --screen-xl: 1280px;
-  --screen-2xl: 1536px;
-}
+.kicker { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 600; font-size: 0.7rem; }
+.heading-display { font-weight: 500; line-height: 1.08; letter-spacing: -0.02em; }
+.brand-heading { font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; }
+.numeric-tabular { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
+
+.luxury-heading { font-weight: 300; font-size: clamp(2.25rem, 6vw, 4.25rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--night); }
+.luxury-subheading { font-weight: 400; font-size: clamp(0.95rem, 1.6vw, 1.125rem); line-height: 1.7; color: var(--night-80); max-width: 42rem; margin: 0 auto; }
+
+.text-primary { line-height: 1.6; }
+.text-secondary { line-height: 1.5; color: var(--night-80); }
 ```
 
-### Component Responsive Behavior
-- **Hero Section**: Full height on desktop, 70vh on mobile
-- **Bottom Dock**: 80px height on desktop, 60px on mobile
-- **Stock Slider**: 5 items on desktop, 2-3 on mobile
-- **Typography**: Scale down 10-15% on mobile
+### Usage
+- Kicker: small uppercase descriptor above headings
+- Luxury heading: hero headline tone
+- Numeric tabular: use for prices/index values
 
-## Accessibility Standards
+## Components
 
-### Focus States
+### Buttons
+- Primary: `.btn-primary` dark ink on light, subtle gold shimmer on hover
+- Secondary: `.btn-secondary` bordered, soft backgrounds on hover
+
+```html
+<button class="btn-primary font-display tracking-wide">Call to action</button>
+<button class="btn-secondary font-display tracking-wide">Secondary</button>
+```
+
+Focus style uses gold-tinted shadows.
 ```css
-.focus-visible {
-  outline: 2px solid var(--gold-metallic);
-  outline-offset: 2px;
-}
+.btn-primary:focus-visible { box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic); outline: none; }
+.btn-secondary:focus-visible { box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic); outline: none; }
 ```
 
-### Motion Preferences
+### Cards
+```html
+<div class="stat-card">...</div>
+```
+- Light background with gold-tinted border and soft shadow on hover.
+
+### Header
+- Fixed, centered container with `glassmorphism`
+- Desktop: nav with hover dropdowns
+- Mobile: hamburger toggles a blurred panel menu
+
+### Hero
+- Background: subtle `gradient-gold-subtle` and animated `MountainWireframe`
+- Content: `kicker`, `luxury-heading`, `luxury-subheading`, primary/secondary buttons
+- Extras: bottom-left license text, centered minimal scroll indicator
+
+## Icons
+- Library: `react-icons` (Font Awesome glyphs)
+- Current usage: `FaUser` in header; expand as needed
+
+```bash
+npm install react-icons
+```
+
+```tsx
+import { FaUser } from 'react-icons/fa';
+```
+
+## Layout & Spacing
+- Tailwind handles spacing and breakpoints
+- Common container: `max-w-6xl mx-auto px-4/5/6`
+- Hero grid: single column on mobile, two columns on large screens
+
+## Responsive Behavior
+- Header nav hidden on `<lg`, mobile menu enabled
+- Hero is full viewport height across breakpoints
+
+## Accessibility
+- Focus: visible focus rings on interactive elements (gold-tinted shadows)
+- Motion: honor `prefers-reduced-motion`
+
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -472,13 +183,14 @@ const slideUp = {
 }
 ```
 
-### Color Contrast Requirements
-- **Normal Text**: 4.5:1 minimum contrast ratio
-- **Large Text**: 3:1 minimum contrast ratio
-- **UI Components**: 3:1 minimum contrast ratio
+- Contrast: meet WCAG AA — text 4.5:1, large text 3:1, UI components 3:1
+
+## Implementation Notes
+- Tailwind v4 is used alongside custom utilities defined in `:root`
+- Tokens live in `src/styles.css` and should be the single source of truth
 
 ---
 
-*Design System Version: 1.0*  
-*Last Updated: [Current Date]*  
-*Maintained by: Design Team*
+Design System Version: 1.1  
+Last Updated: 2025-08-25  
+Maintained by: Design Team
