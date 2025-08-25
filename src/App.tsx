@@ -20,12 +20,12 @@ function App() {
         <div className="glassmorphism mx-auto max-w-6xl px-5 py-3 mt-5 rounded-2xl flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="size-7 rounded-md gradient-gold" />
-            <div className="brand-heading text-base tracking-tight">Everest Finance</div>
+            <div className="brand-heading text-base tracking-tight">Everest Finance SGI</div>
           </div>
           <nav className="hidden sm:flex items-center gap-6 text-sm text-secondary">
             <a href="#services" className="hover:text-[var(--gold-metallic)] transition-colors">Services</a>
-            <a href="#insights" className="hover:text-[var(--gold-metallic)] transition-colors">Insights</a>
-            <a href="#about" className="hover:text-[var(--gold-metallic)] transition-colors">About</a>
+            <a href="#insights" className="hover:text-[var(--gold-metallic)] transition-colors">Marchés</a>
+            <a href="#about" className="hover:text-[var(--gold-metallic)] transition-colors">À propos</a>
             <a href="#contact" className="hover:text-[var(--gold-metallic)] transition-colors">Contact</a>
           </nav>
           <div className="hidden sm:block">
@@ -44,7 +44,7 @@ function App() {
           <div className="border-t border-[var(--night)]/10 pt-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="size-5 rounded-md gradient-gold" />
-              <span className="kicker opacity-70">Everest Finance</span>
+              <span className="kicker opacity-70">Everest Finance SGI — Dakar, Sénégal</span>
             </div>
             <div className="text-secondary text-sm">
               © {new Date().getFullYear()} Everest Finance. All rights reserved.

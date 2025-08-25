@@ -19,20 +19,20 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 flex min-h-screen items-center justify-center">
         <div className="text-center px-6 max-w-4xl mx-auto">
           <h1 className="luxury-heading mb-6">
-            Precision Finance for Ambitious Builders
+            SGI agréée au service de vos ambitions
           </h1>
           
           <p className="luxury-subheading mb-10">
-            Clarity, speed, and rigor. We partner with founders and operators to navigate capital, risk, and growth with uncommon precision.
+            Société de Gestion et d’Intermédiation basée à Dakar, licenciée CREPMF SGI/DA/2016/60. Courtage BRVM, émissions primaires et ingénierie financière avec écoute, accompagnement et performance.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <button className="btn-primary rounded-lg shimmer-effect font-display tracking-wide">
-              Get started
+              Nous contacter
             </button>
             
             <button className="btn-secondary rounded-lg font-display tracking-wide">
-              Learn more
+              Découvrir nos services
             </button>
           </div>
         </div>
