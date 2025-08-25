@@ -4,11 +4,11 @@ export const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen w-full overflow-hidden" style={{ background: 'var(--pure-white)' }}>
       {/* Background wireframe animation */}
-      <div className="absolute inset-0" style={{ opacity: 0.4 }}>
+      <div className="absolute inset-0" style={{ opacity: 0.28 }}>
         <MountainWireframe
-          color={0x1a1a1a}
-          opacity={0.4}
-          elevationScale={0.9}
+          color={0x0e0e10}
+          opacity={0.35}
+          elevationScale={0.75}
         />
       </div>
       
@@ -17,36 +17,33 @@ export const HeroSection: React.FC = () => {
       
       {/* Content overlay */}
       <div className="relative z-10 flex min-h-screen items-center justify-center">
-        <div className="text-center px-6 max-w-5xl mx-auto">
-          <div className="luxury-heading text-6xl md:text-8xl mb-8">
-            Scale New
-            <span className="block text-gradient-gold font-display">
-              Financial Heights
-            </span>
-          </div>
+        <div className="text-center px-6 max-w-4xl mx-auto">
+          <h1 className="luxury-heading mb-6">
+            Precision Finance for Ambitious Builders
+          </h1>
           
-          <div className="luxury-subheading mb-12 max-w-3xl mx-auto">
-            Navigate the peaks and valleys of finance with precision, insight, and unwavering determination. Experience the pinnacle of financial excellence.
-          </div>
+          <p className="luxury-subheading mb-10">
+            Clarity, speed, and rigor. We partner with founders and operators to navigate capital, risk, and growth with uncommon precision.
+          </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="btn-primary rounded-xl shimmer-effect font-display tracking-wide">
-              Start Your Journey
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+            <button className="btn-primary rounded-lg shimmer-effect font-display tracking-wide">
+              Get started
             </button>
             
-            <button className="btn-secondary rounded-xl font-display tracking-wide">
-              Explore Services
+            <button className="btn-secondary rounded-lg font-display tracking-wide">
+              Learn more
             </button>
           </div>
         </div>
       </div>
       
       {/* Enhanced grid overlay with glassmorphism */}
-      <div className="absolute inset-0" style={{ opacity: 0.15 }}>
+      <div className="absolute inset-0" style={{ opacity: 0.1 }}>
         <div className="w-full h-full" 
              style={{
                backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
-               backgroundSize: '60px 60px'
+               backgroundSize: '72px 72px'
              }}>
         </div>
       </div>
@@ -57,9 +54,9 @@ export const HeroSection: React.FC = () => {
       <div className="absolute bottom-1/3 left-16 w-1.5 h-1.5 rounded-full floating-animation" style={{ background: 'var(--gold-metallic)', opacity: 0.5, animationDelay: '4s' }}></div>
       
       {/* Elegant scroll indicator */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2" style={{ color: 'var(--night-80)' }}>
-        <div className="flex flex-col items-center glassmorphism px-4 py-3 rounded-full">
-          <span className="kicker mb-3 opacity-80">Scroll to explore</span>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2" style={{ color: 'var(--night-80)' }}>
+        <div className="flex flex-col items-center glassmorphism px-3.5 py-2.5 rounded-full">
+          <span className="kicker mb-2 opacity-80">Scroll</span>
           <div className="w-5 h-8 border border-current rounded-full flex justify-center opacity-60">
             <div className="w-0.5 h-2 bg-current rounded-full mt-1.5 animate-pulse"></div>
           </div>
