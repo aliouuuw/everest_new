@@ -1,90 +1,70 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { MountainWireframe } from './MountainWireframe';
 
-const HeroSection: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current, ctaRef.current], {
-        opacity: 0,
-        y: 40
-      });
-
-      const tl = gsap.timeline({ delay: 0.4 });
-
-      tl.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out"
-      })
-      .to(subtitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power2.out"
-      }, "-=0.5")
-      .to(ctaRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.4");
-
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
-
+export const HeroSection: React.FC = () => {
   return (
-    <section 
-      ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center bg-[var(--pure-white)] overflow-hidden"
-    >
-      <div className="absolute inset-0 gradient-gold-subtle opacity-60 pointer-events-none"></div>
-      <img
-        src="/bg-mountain-1.webp"
-        alt=""
-        className="absolute inset-0 -z-10 w-full h-full object-cover object-bottom opacity-70 pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 
-            ref={titleRef}
-            className="heading-display text-5xl md:text-6xl lg:text-7xl text-night tracking-tight mb-8"
-          >
-            Des idées et des valeurs
-            <span className="block text-gradient-gold mt-3">au service de vos ambitions</span>
-          </h1>
-
-          <p 
-            ref={subtitleRef}
-            className="text-secondary kicker mb-12"
-          >
-            Gestion • Intermédiation • Conseil
-          </p>
-
-          <div 
-            ref={ctaRef}
-            className="flex items-center justify-center"
-          >
-            <a
-              href="#contact"
-              className="px-8 py-3 rounded-full border border-[var(--gold-metallic)] text-night text-sm md:text-base font-medium transition-colors duration-200 hover:bg-[var(--gold-metallic)] hover:text-[var(--pure-white)]"
-            >
-              Nous contacter
-            </a>
+    <section className="relative min-h-screen w-full overflow-hidden" style={{ background: 'var(--pure-white)' }}>
+      {/* Background wireframe animation */}
+      <div className="absolute inset-0" style={{ opacity: 0.4 }}>
+        <MountainWireframe
+          color={0x1a1a1a}
+          opacity={0.4}
+          elevationScale={0.9}
+        />
+      </div>
+      
+      {/* Gradient overlay for depth */}
+      <div className="absolute inset-0 gradient-gold-subtle opacity-30"></div>
+      
+      {/* Content overlay */}
+      <div className="relative z-10 flex min-h-screen items-center justify-center">
+        <div className="text-center px-6 max-w-5xl mx-auto">
+          <div className="luxury-heading text-6xl md:text-8xl mb-8">
+            Scale New
+            <span className="block text-gradient-gold font-display">
+              Financial Heights
+            </span>
+          </div>
+          
+          <div className="luxury-subheading mb-12 max-w-3xl mx-auto">
+            Navigate the peaks and valleys of finance with precision, insight, and unwavering determination. Experience the pinnacle of financial excellence.
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <button className="btn-primary rounded-xl shimmer-effect font-display tracking-wide">
+              Start Your Journey
+            </button>
+            
+            <button className="btn-secondary rounded-xl font-display tracking-wide">
+              Explore Services
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Enhanced grid overlay with glassmorphism */}
+      <div className="absolute inset-0" style={{ opacity: 0.15 }}>
+        <div className="w-full h-full" 
+             style={{
+               backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
+               backgroundSize: '60px 60px'
+             }}>
+        </div>
+      </div>
+      
+      {/* Floating elements for depth */}
+      <div className="absolute top-1/4 left-8 w-2 h-2 rounded-full floating-animation" style={{ background: 'var(--gold-metallic)', opacity: 0.6 }}></div>
+      <div className="absolute top-1/3 right-12 w-1 h-1 rounded-full floating-animation" style={{ background: 'var(--gold-metallic)', opacity: 0.4, animationDelay: '2s' }}></div>
+      <div className="absolute bottom-1/3 left-16 w-1.5 h-1.5 rounded-full floating-animation" style={{ background: 'var(--gold-metallic)', opacity: 0.5, animationDelay: '4s' }}></div>
+      
+      {/* Elegant scroll indicator */}
+      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2" style={{ color: 'var(--night-80)' }}>
+        <div className="flex flex-col items-center glassmorphism px-4 py-3 rounded-full">
+          <span className="kicker mb-3 opacity-80">Scroll to explore</span>
+          <div className="w-5 h-8 border border-current rounded-full flex justify-center opacity-60">
+            <div className="w-0.5 h-2 bg-current rounded-full mt-1.5 animate-pulse"></div>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-export default HeroSection;
