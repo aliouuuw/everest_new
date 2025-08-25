@@ -265,6 +265,25 @@ body {
   transition-duration: 100ms;
 }
 
+/* Subtle gold-tinted focus rings and hover shadows */
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 24px var(--gold-metallic-20);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 8px 24px var(--gold-metallic-10);
+}
+
 /* Card Styles */
 .stat-card {
   @apply p-8 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10;
