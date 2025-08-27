@@ -15,7 +15,7 @@ export const CTA: React.FC<{ scheme?: CtaScheme }> = ({ scheme = 'ivory' }) => {
     gridOpacity: number;
   }> = {
     ivory: {
-      card: 'bg-[var(--pure-white)] border border-[var(--night)]/10 shadow-sm',
+      card: 'bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 shadow-sm',
       bar: 'bg-[var(--gold-metallic)]',
       title: 'text-[var(--night)]',
       body: 'text-secondary',
@@ -57,7 +57,9 @@ export const CTA: React.FC<{ scheme?: CtaScheme }> = ({ scheme = 'ivory' }) => {
   return (
     <section ref={sectionRef} className="reveal py-24 gradient-gold">
       <div className="mx-auto max-w-6xl px-6">
-        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14`}>
+        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover`}>
+          {/* Decorative gold glow */}
+          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
           {/* left gold bar accent */}
           <div className={`absolute left-0 top-0 bottom-0 w-1 ${s.bar}`} />
           {/* subtle grid pattern */}

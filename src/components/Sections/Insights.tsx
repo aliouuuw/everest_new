@@ -21,13 +21,19 @@ export const Insights: React.FC = () => {
 
         <div ref={listRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
           {items.map((it, i) => (
-            <a key={i} href={it.href} className="stat-card card-hover block group">
-              <div className="h-36 edge-media bg-[var(--white-smoke)]/80 flex items-center justify-center text-secondary mb-5">Cover Placeholder</div>
+            <a key={i} href={it.href} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover block">
+              {/* Decorative gold glow */}
+              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              
+              <div className="h-36 edge-media bg-[var(--white-smoke)]/80 flex items-center justify-center text-secondary mb-5 rounded-xl">Cover Placeholder</div>
               <div className="font-display flex items-center gap-2">
                 <span className="group-hover:underline">{it.title}</span>
                 <FaExternalLinkAlt className="text-secondary" />
               </div>
               <div className="text-secondary text-sm mt-1">{it.desc}</div>
+              
+              {/* Subtle divider */}
+              <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
             </a>
           ))}
         </div>

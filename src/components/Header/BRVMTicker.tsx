@@ -76,7 +76,7 @@ export const BRVMTicker: React.FC = () => {
           <div className="flex items-center gap-4 text-secondary">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
-              <span className="kicker text-[var(--gold-dark)]">BRVM</span>
+              <span className="kicker text-[var(--gold-dark)] pr-2">BRVM</span>
             </div>
           </div>
 
