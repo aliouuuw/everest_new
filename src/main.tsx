@@ -12,6 +12,20 @@ import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 import App from './App.tsx'
+import {
+  AboutPage,
+  AssistedMgmtPage,
+  BoursePage,
+  CapitalMarketsPage,
+  CEOMessagePage,
+  DiscretionaryMgmtPage,
+  FAQPage,
+  InvestmentBankingPage,
+  MandateMgmtPage,
+  NewsroomPage,
+  PortalPage,
+  ResearchAnalyticsPage,
+} from './routes'
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -27,7 +41,93 @@ const indexRoute = createRoute({
   component: App,
 })
 
-const routeTree = rootRoute.addChildren([indexRoute])
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/about',
+  component: AboutPage,
+})
+
+const newsroomRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/newsroom',
+  component: NewsroomPage,
+})
+
+const faqRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/faq',
+  component: FAQPage,
+})
+
+const ceoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/mot-dg',
+  component: CEOMessagePage,
+})
+
+const capitalMarketsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/marche-capitaux',
+  component: CapitalMarketsPage,
+})
+
+const ibRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/ingenieurie-financiere',
+  component: InvestmentBankingPage,
+})
+
+const researchRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/recherche-analyses',
+  component: ResearchAnalyticsPage,
+})
+
+const gestionLibreRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/gestion-libre',
+  component: DiscretionaryMgmtPage,
+})
+
+const gestionMandatRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/gestion-sous-mandat',
+  component: MandateMgmtPage,
+})
+
+const gestionAssisteeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/gestion-assistee',
+  component: AssistedMgmtPage,
+})
+
+const bourseRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/bourse',
+  component: BoursePage,
+})
+
+const portalRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/portal',
+  component: PortalPage,
+})
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  aboutRoute,
+  newsroomRoute,
+  faqRoute,
+  ceoRoute,
+  capitalMarketsRoute,
+  ibRoute,
+  researchRoute,
+  gestionLibreRoute,
+  gestionMandatRoute,
+  gestionAssisteeRoute,
+  bourseRoute,
+  portalRoute,
+])
 
 const router = createRouter({
   routeTree,

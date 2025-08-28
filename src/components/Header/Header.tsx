@@ -1,5 +1,6 @@
 /* eslint-disable sort-imports */
 import { useState, useRef, useEffect } from 'react';
+import { Link } from '@tanstack/react-router';
 import { FaUser} from "react-icons/fa";
 
 interface DropdownItem {
@@ -66,13 +67,13 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-sm border border-black/10 rounded-xl shadow-lg py-2 z-50">
           {items.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.href}
+              to={item.href}
               className="block px-4 py-3 text-sm text-secondary hover:text-[var(--gold-dark)] hover:bg-[var(--gold-light)]/10 transition-colors"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}
@@ -124,22 +125,22 @@ export const Header: React.FC = () => {
   }, [openDropdown]);
 
   const societeItems: Array<DropdownItem> = [
-    { label: 'À propos', href: '#about' },
-    { label: 'Newsroom', href: '#newsroom' },
-    { label: 'Abécédaire / FAQ', href: '#faq' },
-    { label: 'Mot du DG', href: '#mot-dg' },
+    { label: 'À propos', href: '/about' },
+    { label: 'Newsroom', href: '/newsroom' },
+    { label: 'Abécédaire / FAQ', href: '/faq' },
+    { label: 'Mot du DG', href: '/mot-dg' },
   ];
 
   const offresItems: Array<DropdownItem> = [
-    { label: 'Marché des capitaux', href: '#marche-capitaux' },
-    { label: 'Ingénieurie financière', href: '#ingenieurie-financiere' },
-    { label: 'Recherche et analyses', href: '#recherche-analyses' },
+    { label: 'Marché des capitaux', href: '/marche-capitaux' },
+    { label: 'Ingénieurie financière', href: '/ingenieurie-financiere' },
+    { label: 'Recherche et analyses', href: '/recherche-analyses' },
   ];
 
   const servicesItems: Array<DropdownItem> = [
-    { label: 'Gestion libre', href: '#gestion-libre' },
-    { label: 'Gestion sous-mandat', href: '#gestion-sous-mandat' },
-    { label: 'Gestion assistée', href: '#gestion-assistee' },
+    { label: 'Gestion libre', href: '/gestion-libre' },
+    { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
+    { label: 'Gestion assistée', href: '/gestion-assistee' },
   ];
 
   return (
@@ -179,22 +180,22 @@ export const Header: React.FC = () => {
             onClose={closeDropdownByName}
           />
 
-          <a 
-            href="#bourse" 
+          <Link 
+            to="/bourse" 
             className="transition-colors hover:text-[var(--gold-dark)]"
           >
             Bourse
-          </a>
+          </Link>
         </nav>
 
         {/* Connexion Button */}
         <div className="hidden lg:block">
-          <a 
-            href="/portal" 
+          <Link 
+            to="/portal" 
             className="btn-primary font-display tracking-wide flex items-center gap-2"
           >
             <FaUser /> Accès Client
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -226,14 +227,14 @@ export const Header: React.FC = () => {
               <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Société</div>
               <div className="space-y-2 pl-3">
                 {societeItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={item.href}
+                    to={item.href}
                     className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -243,14 +244,14 @@ export const Header: React.FC = () => {
               <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Offres</div>
               <div className="space-y-2 pl-3">
                 {offresItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={item.href}
+                    to={item.href}
                     className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -260,36 +261,36 @@ export const Header: React.FC = () => {
               <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Services</div>
               <div className="space-y-2 pl-3">
                 {servicesItems.map((item, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href={item.href}
+                    to={item.href}
                     className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
 
             {/* Bourse Link */}
-            <a 
-              href="#bourse" 
+            <Link 
+              to="/bourse" 
               className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Bourse
-            </a>
+            </Link>
 
             {/* Connexion Button */}
             <div className="pt-4 border-t border-black/10">
-              <a 
-                href="/portal" 
+              <Link 
+                to="/portal" 
                 className="btn-primary font-display tracking-wide w-full text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <FaUser /> Accès Client
-              </a>
+              </Link>
             </div>
           </div>
         </div>
