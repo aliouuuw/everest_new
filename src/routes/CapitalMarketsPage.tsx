@@ -1,7 +1,8 @@
+import { FaChartLine, FaCheckCircle, FaFileSignature, FaHandshake } from 'react-icons/fa'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
+import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
-import { FaChartLine, FaHandshake, FaFileSignature, FaCheckCircle } from 'react-icons/fa'
 
 export const CapitalMarketsPage = () => {
   const heroRef = useReveal<HTMLElement>()
@@ -159,20 +160,8 @@ export const CapitalMarketsPage = () => {
           </div>
         </section>
 
-        {/* Contact anchor for CTA links */}
-        <section id="contact" className="py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-8 text-center">
-              <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-              <h3 className="font-display text-xl">Un projet d’émission ou une question d’accès marché ?</h3>
-              <p className="text-secondary mt-2">Nos équipes vous répondent sous 24h ouvrées.</p>
-              <div className="mt-6 flex items-center justify-center gap-4">
-                <a href="mailto:contact@everest-finance.sn" className="btn-primary font-display tracking-wide">Écrire à un conseiller</a>
-                <a href="#processus" className="btn-secondary font-display tracking-wide">Voir le processus</a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <div id="contact" className="sr-only" />
+        <CTA scheme="ivory" primaryHref="mailto:contact@everest-finance.sn" primaryLabel="Écrire à un conseiller" secondaryHref="#processus" secondaryLabel="Voir le processus" />
     </main>
 
     <Footer />

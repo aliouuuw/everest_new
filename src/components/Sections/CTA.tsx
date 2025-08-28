@@ -2,7 +2,13 @@ import { useReveal } from "../Hooks/useReveal";
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
-export const CTA: React.FC<{ scheme?: CtaScheme }> = ({ scheme = 'ivory' }) => {
+export const CTA: React.FC<{
+  scheme?: CtaScheme;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}> = ({ scheme = 'ivory', primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryHref = '#offres', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
 
   const schemes: Record<CtaScheme, {
@@ -73,8 +79,10 @@ export const CTA: React.FC<{ scheme?: CtaScheme }> = ({ scheme = 'ivory' }) => {
             <p className={`${s.body} mt-3 max-w-2xl`}>Échangeons autour de vos objectifs d’investissement et de la meilleure manière de les atteindre.</p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <a href="#contact" className={`${s.primaryBtn} font-display`}>Nous contacter</a>
-              <a href="#offres" className={`${s.secondaryBtn} font-display`}>Découvrir nos offres</a>
+              <a href={primaryHref} className={`${s.primaryBtn} font-display`}>{primaryLabel}</a>
+              {secondaryHref && (
+                <a href={secondaryHref} className={`${s.secondaryBtn} font-display`}>{secondaryLabel}</a>
+              )}
             </div>
           </div>
         </div>
