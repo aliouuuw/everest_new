@@ -2,9 +2,9 @@ import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'reac
 
 export const Footer = () => {
   return (
-    <footer className="mt-24 mb-10">
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="border-t border-[var(--night)]/10 pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="mt-24 mb-10" style={{ background: 'linear-gradient(180deg, var(--pure-white) 0%, var(--white-smoke) 10%, var(--white-smoke) 90%)' }}>
+      <div className="mx-auto max-w-6xl px-5 py-8">
+        <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-3">
