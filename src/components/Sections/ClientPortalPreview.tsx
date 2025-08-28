@@ -2,18 +2,18 @@
 import { useReveal } from "../Hooks/useReveal";
 import {
   FaBell,
-  FaCloudDownloadAlt,
-  FaFileInvoice,
-  FaListUl,
-  FaUserShield,
-  FaHome,
   FaChartLine,
+  FaCloudDownloadAlt,
   FaCog,
+  FaFileInvoice,
+  FaHome,
+  FaListUl,
   FaSearch,
+  FaUserShield,
 } from "react-icons/fa";
 
 // Lightweight inline sparkline (no external libs)
-const Sparkline: React.FC<{ points: number[]; stroke?: string; fill?: string }> = ({ points, stroke = "#B68D40", fill = "rgba(182,141,64,0.15)" }) => {
+const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: string }> = ({ points, stroke = "#B68D40", fill = "rgba(182,141,64,0.15)" }) => {
   const width = 120;
   const height = 36;
   const max = Math.max(...points);
@@ -95,6 +95,7 @@ export const ClientPortalPreview: React.FC = () => {
 
               <div className="mt-6 p-3 rounded-lg bg-white/70 border border-[var(--night)]/10">
                 <div className="text-xs text-secondary">Solde espèces</div>
+                {/* eslint-disable-next-line no-irregular-whitespace */}
                 <div className="font-display text-lg">9 300 000 FCFA</div>
               </div>
             </aside>
@@ -128,7 +129,7 @@ export const ClientPortalPreview: React.FC = () => {
                       <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
                     </div>
                     <div className="mt-2 opacity-80">
-                      <Sparkline points={k.trend as number[]} />
+                      <Sparkline points={k.trend} />
                     </div>
                   </div>
                 ))}

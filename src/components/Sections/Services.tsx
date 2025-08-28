@@ -1,6 +1,6 @@
 import { FaCalculator, FaFileAlt, FaUsers } from "react-icons/fa";
-import type { IconType } from "react-icons";
 import { useReveal } from "../Hooks/useReveal";
+import type { IconType } from "react-icons";
 
 type Service = {
   icon: IconType;
@@ -8,7 +8,7 @@ type Service = {
   desc: string;
 };
 
-const services: Service[] = [
+const services: Array<Service> = [
   {
     icon: FaCalculator,
     title: 'Ingénierie financière',

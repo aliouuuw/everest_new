@@ -1,7 +1,12 @@
-import { FiClipboard, FiShield, FiSliders, FiTarget } from 'react-icons/fi'
+import { FiClipboard, FiShield, FiSliders, FiTarget, FiTrendingUp, FiUsers, FiAward } from 'react-icons/fi'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { CTA } from '../components/Sections/CTA'
+import { ServiceComparison } from '../components/Sections/ServiceComparison'
+import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
+import { PerformanceComparison } from '../components/Sections/PerformanceComparison'
+import { InvestmentCalculator } from '../components/Sections/InvestmentCalculator'
+import { ServiceFAQ } from '../components/Sections/ServiceFAQ'
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const MandateMgmtPage = () => {
@@ -10,6 +15,10 @@ export const MandateMgmtPage = () => {
   const profilesGridRef = useReveal<HTMLDivElement>()
   const govSectionRef = useReveal<HTMLElement>()
   const govGridRef = useReveal<HTMLDivElement>()
+  const advantagesSectionRef = useReveal<HTMLElement>()
+  const advantagesGridRef = useReveal<HTMLDivElement>()
+  const expertiseSectionRef = useReveal<HTMLElement>()
+  const expertiseGridRef = useReveal<HTMLDivElement>()
 
   return (
     <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -143,6 +152,110 @@ export const MandateMgmtPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Avantages Clés */}
+        <section ref={advantagesSectionRef} className="reveal py-14 sm:py-18">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="kicker text-gradient-gold">Avantages</span>
+              <h2 className="luxury-heading mt-3">Pourquoi déléguer votre gestion ?</h2>
+              <p className="luxury-subheading mt-5">Confiez vos investissements à des experts tout en gardant la maîtrise des objectifs.</p>
+            </div>
+            <div ref={advantagesGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiShield /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Expertise dédiée</div>
+                    <p className="text-secondary text-sm">Équipe d'experts financiers spécialisés dans la gestion BRVM.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiTrendingUp /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Performance ciblée</div>
+                    <p className="text-secondary text-sm">Stratégies adaptées à votre profil de risque et à vos objectifs.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiUsers /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Suivi personnalisé</div>
+                    <p className="text-secondary text-sm">Conseiller dédié et points réguliers pour faire le bilan.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Expertise & Track Record */}
+        <section ref={expertiseSectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="kicker text-gradient-gold">Expertise</span>
+              <h2 className="luxury-heading mt-3">Notre approche d'investissement</h2>
+              <p className="luxury-subheading mt-5">Une méthodologie éprouvée et des résultats constants sur la durée.</p>
+            </div>
+            <div ref={expertiseGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-5">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiTarget /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Analyse fondamentale</div>
+                    <p className="text-secondary text-sm">Sélection rigoureuse des valeurs basée sur l'analyse financière approfondie des entreprises cotées.</p>
+                  </div>
+                </div>
+                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
+                <ul className="mt-3 text-secondary text-sm space-y-1">
+                  <li>• Étude des états financiers</li>
+                  <li>• Évaluation de la qualité de gestion</li>
+                  <li>• Analyse sectorielle et macro-économique</li>
+                </ul>
+              </div>
+
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-5">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiAward /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Gestion active</div>
+                    <p className="text-secondary text-sm">Ajustements réguliers du portefeuille en fonction des conditions de marché et des opportunités.</p>
+                  </div>
+                </div>
+                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
+                <ul className="mt-3 text-secondary text-sm space-y-1">
+                  <li>• Rééquilibrages périodiques</li>
+                  <li>• Arbitrages opportunistes</li>
+                  <li>• Gestion du risque en temps réel</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Service Comparison */}
+        <ServiceComparison currentService="mandate" />
+
+        {/* Testimonials */}
+        <TestimonialsCarousel service="mandate" />
+
+        {/* Performance Comparison */}
+        <PerformanceComparison />
+
+        {/* Investment Calculator */}
+        <InvestmentCalculator />
+
+        {/* FAQ */}
+        <ServiceFAQ service="mandate" />
 
         {/* CTA band */}
         <div id="contact" className="sr-only" />

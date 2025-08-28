@@ -1,7 +1,12 @@
-import { FiCompass, FiDollarSign, FiGrid, FiTrendingUp } from 'react-icons/fi'
+import { FiCompass, FiDollarSign, FiGrid, FiTrendingUp, FiCheckCircle, FiClock, FiShield } from 'react-icons/fi'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { CTA } from '../components/Sections/CTA'
+import { ServiceComparison } from '../components/Sections/ServiceComparison'
+import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
+import { PerformanceComparison } from '../components/Sections/PerformanceComparison'
+import { InvestmentCalculator } from '../components/Sections/InvestmentCalculator'
+import { ServiceFAQ } from '../components/Sections/ServiceFAQ'
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const DiscretionaryMgmtPage = () => {
@@ -10,6 +15,10 @@ export const DiscretionaryMgmtPage = () => {
   const approachGridRef = useReveal<HTMLDivElement>()
   const packsSectionRef = useReveal<HTMLElement>()
   const packsGridRef = useReveal<HTMLDivElement>()
+  const advantagesSectionRef = useReveal<HTMLElement>()
+  const advantagesGridRef = useReveal<HTMLDivElement>()
+  const processSectionRef = useReveal<HTMLElement>()
+  const processGridRef = useReveal<HTMLDivElement>()
 
   return (
     <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -131,6 +140,90 @@ export const DiscretionaryMgmtPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Avantages Clés */}
+        <section ref={advantagesSectionRef} className="reveal py-14 sm:py-18">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="kicker text-gradient-gold">Avantages</span>
+              <h2 className="luxury-heading mt-3">Pourquoi choisir la gestion libre ?</h2>
+              <p className="luxury-subheading mt-5">Une approche qui allie autonomie et expertise professionnelle.</p>
+            </div>
+            <div ref={advantagesGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiCheckCircle /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Contrôle total</div>
+                    <p className="text-secondary text-sm">Vous prenez toutes les décisions d'investissement selon vos critères.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiClock /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Réactivité</div>
+                    <p className="text-secondary text-sm">Exécution rapide de vos ordres sur la BRVM.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="flex items-start gap-4">
+                  <div className="icon-badge text-[var(--night)] text-xl"><FiShield /></div>
+                  <div>
+                    <div className="font-display text-lg mb-1">Transparence</div>
+                    <p className="text-secondary text-sm">Frais clairs et reporting régulier de vos opérations.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Processus */}
+        <section ref={processSectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <span className="kicker text-gradient-gold">Processus</span>
+              <h2 className="luxury-heading mt-3">Comment ça fonctionne</h2>
+              <p className="luxury-subheading mt-5">Un processus simple et efficace en 4 étapes.</p>
+            </div>
+            <div ref={processGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+              {[
+                { step: '01', title: 'Ouverture compte', desc: 'Remplissez le formulaire en ligne et signez électroniquement.' },
+                { step: '02', title: 'Définition profil', desc: 'Établissez vos objectifs, contraintes et niveau de risque.' },
+                { step: '03', title: 'Premier dépôt', desc: 'Effectuez votre premier versement selon vos moyens.' },
+                { step: '04', title: 'Prise de contrôle', desc: 'Commencez à passer vos ordres via notre plateforme.' },
+              ].map((s) => (
+                <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover text-center">
+                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                  <div className="numeric-tabular text-2xl font-display text-[var(--gold-dark)] mb-3">{s.step}</div>
+                  <div className="font-display text-lg mb-2">{s.title}</div>
+                  <p className="text-secondary text-sm">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Service Comparison */}
+        <ServiceComparison currentService="discretionary" />
+
+        {/* Testimonials */}
+        <TestimonialsCarousel service="discretionary" />
+
+        {/* Performance Comparison */}
+        <PerformanceComparison />
+
+        {/* Investment Calculator */}
+        <InvestmentCalculator />
+
+        {/* FAQ */}
+        <ServiceFAQ service="discretionary" />
 
         {/* CTA band */}
         <div id="contact" className="sr-only" />
