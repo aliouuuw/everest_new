@@ -1,6 +1,6 @@
 import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
-import type { IconType } from "react-icons";
 import { useReveal } from "../Hooks/useReveal";
+import type { IconType } from "react-icons";
 
 type Feature = {
   icon: IconType;
@@ -36,7 +36,7 @@ export const ValueProps: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const listRef = useReveal<HTMLDivElement>();
 
-  const features: Feature[] = [
+  const features: Array<Feature> = [
     { icon: FaShieldAlt, title: "Sécurité", description: "Conformité et garde des actifs." },
     { icon: FaHandshake, title: "Accompagnement", description: "Conseil dédié et transparent." },
     { icon: FaChartLine, title: "Performance", description: "Allocation et exécution précises." },
@@ -55,8 +55,12 @@ export const ValueProps: React.FC = () => {
 
           {/* Visual side */}
           <div className="relative w-full h-[360px] rounded-2xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
-            <div className="absolute inset-0" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '24px 24px' }} />
-            <div className="absolute inset-0 flex items-center justify-center text-secondary">Image Placeholder</div>
+            <img 
+              src="/value_props.jpg" 
+              alt="Salle de conférence moderne avec table de réunion et chaises roses dans un style industriel" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--night-20)] to-transparent" />
           </div>
         </div>
 

@@ -4,13 +4,13 @@
 :root {
   /* Brand Colors - Classic White & Gold */
   --pure-white: #FFFFFF;
-  --white-smoke: #f5f5f5; /* A very light grey for subtle contrast */
+  --white-smoke: #f5f5f7; /* A very light grey for subtle contrast */
   --timberwolf: #e0e0e0; /* A slightly darker grey for borders */
   --line-soft: #eeeeee;
   /* Accent kept subtle for a minimalist, tech-forward feel */
-  --gold-metallic: #b7a47a;
+  --gold-metallic: #ca942f;
   --gold-light: #e9e1cb;
-  --gold-dark: #8c7a52;
+  --gold-dark: #ad7e28;
   --night: #0f1115; /* Deep, neutral ink */
   --night-80: rgba(15, 17, 21, 0.8);
   
@@ -217,6 +217,14 @@ html {
   color: var(--night-80);
 }
 
+/* Dark Mode Text Colors */
+.text-secondary-dark {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* Enhanced typography for luxury feel */
 .font-display {
   font-family: var(--font-display);
@@ -247,6 +255,26 @@ html {
   font-size: clamp(0.95rem, 1.6vw, 1.125rem);
   line-height: 1.7;
   color: var(--night-80);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Dark Mode Luxury text treatments */
+.luxury-heading-dark {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.25rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--pure-white);
+}
+
+.luxury-subheading-dark {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
   max-width: 42rem;
   margin: 0 auto;
 }
@@ -320,6 +348,58 @@ html {
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+/* Dark Mode Card Styles */
+.stat-card-dark {
+  @apply p-4 bg-[var(--night)]/90 backdrop-blur-sm border border-[var(--gold-metallic)]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Glassmorphic Dark Cards */
+.glass-card-dark {
+  @apply p-6 rounded-3xl transition-all duration-500;
+  background: rgba(15, 17, 21, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(202, 148, 47, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 2px 8px rgba(202, 148, 47, 0.08),
+    inset 0 0 16px rgba(202, 148, 47, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(202, 148, 47, 0.3) 50%,
+    transparent 100%);
+  opacity: 0.6;
+}
+
+.glass-card-dark::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(202, 148, 47, 0.2) 50%,
+    transparent 100%);
+  opacity: 0.4;
 }
 
 /* Edge-to-edge media inside cards */
@@ -448,6 +528,35 @@ html {
 /* Card hover micro-interactions */
 .card-hover { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
 .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--gold-metallic-10); }
+
+/* Dark Mode Card hover micro-interactions */
+.card-hover-dark { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
+.card-hover-dark:hover { transform: translateY(-4px); box-shadow: 0 8px 20px var(--gold-metallic-10); }
+
+/* Glassmorphic Card hover effects */
+.glass-card-hover {
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(15, 17, 21, 0.25);
+  border-color: rgba(202, 148, 47, 0.25);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 8px 32px rgba(202, 148, 47, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 4px 16px rgba(202, 148, 47, 0.15),
+    inset 0 0 32px rgba(202, 148, 47, 0.08);
+}
+
+.glass-card-hover:hover::before {
+  opacity: 0.8;
+}
+
+.glass-card-hover:hover::after {
+  opacity: 0.6;
+}
 
 /* Icon badge */
 .icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: var(--white-smoke-80); border: 1px solid var(--timberwolf); }

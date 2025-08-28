@@ -61,17 +61,17 @@ export const CTA: React.FC<{
   const s = schemes[scheme];
 
   return (
-    <section ref={sectionRef} className="reveal py-24 gradient-gold" id="contact">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover`}>
+    <section ref={sectionRef} className="reveal py-24" id="contact">
+      <div className="mx-auto max-w-6xl px-6 ">
+        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover `}>
           {/* Decorative gold glow */}
-          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
+          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#ca942f] blur-3xl" />
           {/* left gold bar accent */}
           <div className={`absolute left-0 top-0 bottom-0 w-1 ${s.bar}`} />
           {/* subtle grid pattern */}
-          <div className="absolute inset-0 pointer-events-none" style={{ opacity: s.gridOpacity }}>
+          {/* <div className="absolute inset-0 pointer-events-none" style={{ opacity: s.gridOpacity }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '48px 48px' }} />
-          </div>
+          </div> */}
 
           <div className="relative z-10 text-left">
             <span className="kicker text-gradient-gold">Prise de contact</span>

@@ -73,12 +73,24 @@ export const Services: React.FC = () => {
   });
 
   return (
-    <section ref={sectionRef} className="reveal py-24 bg-[var(--white-smoke)]" id="services">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={sectionRef} className="reveal py-24 relative overflow-hidden" id="services">
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: 'url(/background-sol.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      
+      {/* Content overlay */}
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="text-center max-w-2xl mx-auto">
           <span className="kicker text-gradient-gold">Nos offres</span>
           <h2 className="luxury-heading mt-3">Solutions pour chaque profil investisseur</h2>
-          <p className="luxury-subheading mt-5 pt-10">De la structuration d’opérations aux portefeuilles délégués, nous couvrons l’essentiel du cycle d’investissement.</p>
+          <p className="luxury-subheading mt-5 pt-10">De la structuration d'opérations aux portefeuilles délégués, nous couvrons l'essentiel du cycle d'investissement.</p>
         </div>
 
         <div ref={gridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
