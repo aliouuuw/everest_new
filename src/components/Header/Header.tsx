@@ -148,11 +148,20 @@ export const Header: React.FC = () => {
       <div className="mx-auto max-w-6xl px-4 py-1 mt-5 rounded-xl flex items-center justify-between bg-white/70 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <img src="/logo-everest.png" alt="Everest Finance" className="h-16 w-18" />
+          <Link to="/" className="transition-opacity hover:opacity-80">
+            <img src="/logo-everest.png" alt="Everest Finance" className="h-16 w-18" />
+          </Link>
         </div>
 
         {/* Navigation */}
         <nav className="hidden lg:flex items-center gap-6 text-sm text-secondary">
+          <Link 
+            to="/" 
+            className="transition-colors hover:text-[var(--gold-dark)]"
+          >
+            Accueil
+          </Link>
+          
           <Dropdown
             name="societe"
             title="Société"
@@ -222,6 +231,15 @@ export const Header: React.FC = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white/95 backdrop-blur-sm border border-black/10 rounded-xl shadow-lg py-4 z-50">
           <div className="px-4 space-y-4">
+            {/* Accueil Link */}
+            <Link 
+              to="/" 
+              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Accueil
+            </Link>
+
             {/* Société Section */}
             <div>
               <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Société</div>
@@ -286,7 +304,7 @@ export const Header: React.FC = () => {
             <div className="pt-4 border-t border-black/10">
               <Link 
                 to="/portal" 
-                className="btn-primary font-display tracking-wide w-full text-center"
+                className="btn-primary font-display tracking-wide w-full text-center flex items-center justify-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <FaUser /> Accès Client
