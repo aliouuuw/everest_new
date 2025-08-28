@@ -87,7 +87,7 @@ export const FAQPage = () => {
   return (
     <div>
         {/* Hero: Compact Centered */}
-        <section ref={heroRef} className="reveal py-16 sm:py-28">
+        <section ref={heroRef} className="reveal py-34 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">Abécédaire & FAQ</span>
             <h1 className="luxury-heading mt-3">Comprendre nos services</h1>

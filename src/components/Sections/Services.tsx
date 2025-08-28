@@ -7,6 +7,7 @@ type Service = {
   icon: IconType;
   title: string;
   desc: string;
+  href: string;
 };
 
 const services: Array<Service> = [
@@ -14,20 +15,23 @@ const services: Array<Service> = [
     icon: FaCalculator,
     title: 'Ingénierie financière',
     desc: "Structuration, émissions et placements primaires.",
+    href: "/ingenieurie-financiere",
   },
   {
     icon: FaUsers,
     title: 'Marché des capitaux',
     desc: "Gestion sous-mandat, émissions primaires, placements.",
-  },
+    href: "/marche-capitaux",
+  },  
   {
     icon: FaFileAlt,
     title: 'Recherche & analyses',
     desc: "Veille, notes et tableaux de bord marchés.",
+    href: "/recherche-analyses",
   },
 ];
 
-const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc }) => {
+const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc, href }) => {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
       {/* Decorative gold glow */}
@@ -49,7 +53,7 @@ const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc }) => {
 
       {/* Subtle divider and affordance */}
       <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-      <a href="#" className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 cursor-pointer inline-flex items-center gap-1 group/link">
+      <a href={href} className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 cursor-pointer inline-flex items-center gap-1 group/link">
         En savoir plus
         <span className="text-[var(--night-80)]/60 group-hover/link:text-[var(--gold-metallic)] transition-colors duration-200">→</span>
       </a>
@@ -79,7 +83,7 @@ export const Services: React.FC = () => {
 
         <div ref={gridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {services.map((s) => (
-            <ServiceCard key={s.title} {...s} />
+            <ServiceCard key={s.title} {...s} href={s.href} />
           ))}
         </div>
       </div>

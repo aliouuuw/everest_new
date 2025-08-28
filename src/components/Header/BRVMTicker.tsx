@@ -63,6 +63,9 @@ export const BRVMTicker: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handlePause = () => setIsPaused(true);
+  const handleResume = () => setIsPaused(false);
+
   if (!isVisible) return null;
 
   return (
@@ -73,25 +76,25 @@ export const BRVMTicker: React.FC = () => {
     >
       <div className="mx-auto max-w-6xl px-4 text-[var(--night)]">
         <div className="flex items-center justify-between pb-2">
-          <div className="flex items-center gap-4 text-secondary">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
-              <span className="kicker text-[var(--gold-dark)] pr-2">BRVM</span>
-            </div>
+          {/* BRVM Label - visible on all screen sizes */}
+          <div className="flex items-center gap-2 text-secondary">
+            <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
+            <span className="kicker text-[var(--gold-dark)] pr-2">BRVM</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-6 overflow-hidden">
+          {/* Desktop Ticker - hidden on mobile */}
+          <div className="hidden lg:flex items-center gap-6 overflow-hidden flex-1 mx-4">
             <div
               className="flex items-center gap-6 animate-scroll"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
+              onMouseEnter={handlePause}
+              onMouseLeave={handleResume}
               style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
               aria-hidden
             >
               {currentData.map((stock) => (
-                <div key={stock.symbol} className="flex items-center gap-3 whitespace-nowrap min-w-[160px]">
+                <div key={stock.symbol} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display">{stock.symbol}</div>
+                    <div className="font-medium font-display truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -104,22 +107,22 @@ export const BRVMTicker: React.FC = () => {
                     }`}
                   >
                     {stock.change > 0 ? (
-                      <FaArrowUp className="w-2.5 h-2.5" />
+                      <FaArrowUp className="w-2.5 h-2.5 flex-shrink-0" />
                     ) : stock.change < 0 ? (
-                      <FaArrowDown className="w-2.5 h-2.5" />
+                      <FaArrowDown className="w-2.5 h-2.5 flex-shrink-0" />
                     ) : (
-                      <FaMinus className="w-2.5 h-2.5" />
+                      <FaMinus className="w-2.5 h-2.5 flex-shrink-0" />
                     )}
-                    <span>{Math.abs(stock.change).toLocaleString()}</span>
-                    <span>({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)</span>
+                    <span className="truncate">{Math.abs(stock.change).toLocaleString()}</span>
+                    <span className="truncate">({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)</span>
                   </div>
                 </div>
               ))}
               {/* Duplicate for seamless scrolling */}
               {currentData.map((stock) => (
-                <div key={`${stock.symbol}-duplicate`} className="flex items-center gap-3 whitespace-nowrap min-w-[160px]">
+                <div key={`${stock.symbol}-duplicate`} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display">{stock.symbol}</div>
+                    <div className="font-medium font-display truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -132,51 +135,87 @@ export const BRVMTicker: React.FC = () => {
                     }`}
                   >
                     {stock.change > 0 ? (
-                      <FaArrowUp className="w-2.5 h-2.5" />
+                      <FaArrowUp className="w-2.5 h-2.5 flex-shrink-0" />
                     ) : stock.change < 0 ? (
-                      <FaArrowDown className="w-2.5 h-2.5" />
+                      <FaArrowDown className="w-2.5 h-2.5 flex-shrink-0" />
                     ) : (
-                      <FaMinus className="w-2.5 h-2.5" />
+                      <FaMinus className="w-2.5 h-2.5 flex-shrink-0" />
                     )}
-                    <span>{Math.abs(stock.change).toLocaleString()}</span>
-                    <span>({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)</span>
+                    <span className="truncate">{Math.abs(stock.change).toLocaleString()}</span>
+                    <span className="truncate">({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="md:hidden text-xs">
-            <div className="flex items-center gap-4 overflow-hidden text-secondary">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
-                <span className="kicker text-[var(--gold-dark)]">BRVM</span>
-              </div>
-              <div
-                className="flex items-center gap-3 animate-scroll"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
-                aria-hidden
-              >
-                {currentData.slice(0, 3).map((stock) => (
-                  <div key={stock.symbol} className="flex items-center gap-1 whitespace-nowrap">
-                    <span className="font-medium font-display">{stock.symbol}</span>
-                    <span className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</span>
-                    <span
-                      className={`${
-                        stock.change > 0
-                          ? 'text-[var(--success-green)]'
-                          : stock.change < 0
-                          ? 'text-[var(--error-red)]'
-                          : 'text-secondary'
-                      }`}
-                    >
-                      {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(1)}%
-                    </span>
+          {/* Tablet Ticker - visible on md screens */}
+          <div className="hidden md:flex lg:hidden items-center gap-4 overflow-hidden flex-1 mx-4">
+            <div
+              className="flex items-center gap-4 animate-scroll"
+              onMouseEnter={handlePause}
+              onMouseLeave={handleResume}
+              style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
+              aria-hidden
+            >
+              {currentData.slice(0, 5).map((stock) => (
+                <div key={stock.symbol} className="flex items-center gap-2 whitespace-nowrap min-w-[120px] max-w-[150px]">
+                  <div className="text-xs">
+                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
-                ))}
-              </div>
+                  <div
+                    className={`flex items-center gap-1 text-xs numeric-tabular ${
+                      stock.change > 0
+                        ? 'text-[var(--success-green)]'
+                        : stock.change < 0
+                        ? 'text-[var(--error-red)]'
+                        : 'text-secondary'
+                    }`}
+                  >
+                    {stock.change > 0 ? (
+                      <FaArrowUp className="w-2.5 h-2.5 flex-shrink-0" />
+                    ) : stock.change < 0 ? (
+                      <FaArrowDown className="w-2.5 h-2.5 flex-shrink-0" />
+                    ) : (
+                      <FaMinus className="w-2.5 h-2.5 flex-shrink-0" />
+                    )}
+                    <span className="truncate">{Math.abs(stock.change).toLocaleString()}</span>
+                    <span className="truncate">({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(1)}%)</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Mobile Ticker - visible on small screens */}
+          <div className="md:hidden text-xs flex-1 mx-2">
+            <div
+              className="flex items-center gap-3 animate-scroll"
+              onTouchStart={handlePause}
+              onTouchEnd={handleResume}
+              onMouseEnter={handlePause}
+              onMouseLeave={handleResume}
+              style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
+              aria-hidden
+            >
+              {currentData.slice(0, 4).map((stock) => (
+                <div key={stock.symbol} className="flex items-center gap-1.5 whitespace-nowrap min-w-[80px] max-w-[100px]">
+                  <span className="font-medium font-display truncate">{stock.symbol}</span>
+                  <span className="opacity-80 numeric-tabular truncate">{stock.price.toLocaleString()}</span>
+                  <span
+                    className={`truncate ${
+                      stock.change > 0
+                        ? 'text-[var(--success-green)]'
+                        : stock.change < 0
+                        ? 'text-[var(--error-red)]'
+                        : 'text-secondary'
+                    }`}
+                  >
+                    {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(1)}%
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

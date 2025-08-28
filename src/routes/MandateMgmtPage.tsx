@@ -27,7 +27,7 @@ export const MandateMgmtPage = () => {
           <div className="absolute inset-0" style={{ opacity: 0.06 }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28 lg:py-32">
+          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
                 <span className="kicker text-gradient-gold">Offres — Gestion sous-mandat</span>

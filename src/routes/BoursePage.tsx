@@ -260,7 +260,7 @@ export const BoursePage: React.FC = () => {
   return (
     <div>
         {/* Hero Section with enhanced interactivity */}
-        <section ref={heroRef} className="reveal py-16 sm:py-24 lg:py-28 relative">
+        <section ref={heroRef} className="reveal py-34 sm:py-24 lg:py-28 relative">
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">BRVM — Marchés</span>
             <h1 className="luxury-heading mt-3">Indices et tendances de marché</h1>
