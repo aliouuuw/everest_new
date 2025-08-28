@@ -28,6 +28,7 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const mountainRef = useRef<THREE.Group | null>(null);
   const animationRef = useRef<number | null>(null);
+  const lastFrameTime = useRef<number>(0);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -132,12 +133,17 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
       return mesh;
     };
 
-    const mountainMesh = createMountainMesh(80, 80, 160);
+    // Reduced geometry complexity for better performance
+    const mountainMesh = createMountainMesh(60, 60, 80);
     mountainGroup.add(mountainMesh);
 
-    // Animation loop
-    const animate = () => {
+    // Throttled animation loop for better performance
+    const animate = (currentTime: number) => {
       animationRef.current = requestAnimationFrame(animate);
+
+      // Limit to ~30 FPS for better performance
+      if (currentTime - lastFrameTime.current < 1000 / 30) return;
+      lastFrameTime.current = currentTime;
 
       // Gentle rotation with pointer-based parallax
       if (mountainGroup) {
@@ -148,10 +154,10 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
         mountainGroup.rotation.z += (targetY * 0.3 - mountainGroup.rotation.z) * 0.06;
       }
 
-      // Animate camera
-      const time = Date.now() * 0.001;
-      camera.position.x = Math.sin(time * 0.2) * 5;
-      camera.position.z = 30 + Math.cos(time * 0.3) * 3;
+      // Animate camera (reduced frequency)
+      const time = currentTime * 0.0005; // Slower animation
+      camera.position.x = Math.sin(time * 0.1) * 3;
+      camera.position.z = 30 + Math.cos(time * 0.15) * 2;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);

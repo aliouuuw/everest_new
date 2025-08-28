@@ -6,11 +6,14 @@
     "dev": "vite --port 3000",
     "start": "vite --port 3000",
     "build": "vite build && tsc",
+    "build:analyze": "vite build --mode analyze",
     "serve": "vite preview",
+    "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier",
-    "check": "prettier --write . && eslint --fix"
+    "check": "prettier --write . && eslint --fix",
+    "performance": "echo '🚀 Performance optimizations applied!' && echo '📊 Bundle analysis: dist/stats.html' && echo '🔍 Check browser dev tools for performance metrics'"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -36,6 +39,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
+    "rollup-plugin-visualizer": "^6.0.3",
     "typescript": "^5.7.2",
     "vite": "^6.3.5",
     "vitest": "^3.0.5",

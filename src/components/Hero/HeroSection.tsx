@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { Suspense, lazy, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLenisContext } from '../Hooks/useLenisContext.tsx';
-import { MountainWireframe } from './MountainWireframe';
+
+// Lazy load the heavy Three.js component
+const MountainWireframe = lazy(() => import('./MountainWireframe').then(m => ({ default: m.MountainWireframe })));
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -50,93 +52,66 @@ export const HeroSection: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Split heading text into spans for per-character animation
-      const headingEl = headingRef.current;
-      let originalHeadingText: string | null = null;
-      if (headingEl) {
-        originalHeadingText = headingEl.textContent || '';
-        headingEl.setAttribute('data-original', originalHeadingText);
-        headingEl.innerHTML = '';
-        for (const ch of originalHeadingText) {
-          const span = document.createElement('span');
-          span.className = 'char';
-          span.style.display = 'inline-block';
-          span.style.willChange = 'transform, opacity, filter';
-          if (ch === ' ') {
-            span.textContent = '\u00A0';
-          } else {
-            span.textContent = ch;
-          }
-          headingEl.appendChild(span);
-        }
-      }
-
-      // Elements to animate (excluding heading, which uses char-level animation)
-      const elements = [kickerRef.current, subheadingRef.current, buttonsRef.current];
-      const headingChars = headingEl?.querySelectorAll<HTMLSpanElement>('span.char') || [];
+      // Elements to animate with simpler animations
+      const elements = [kickerRef.current, headingRef.current, subheadingRef.current, buttonsRef.current];
 
       // Initial states with subtle blur
-      gsap.set(elements, { opacity: 0, y: 24, filter: 'blur(10px)' });
-      gsap.set(headingChars, { opacity: 0, y: 24, filter: 'blur(10px)' });
+      gsap.set(elements, { opacity: 0, y: 30, filter: 'blur(8px)' });
 
-      // Timeline: kicker -> heading chars -> subheading -> buttons
-      const tl = gsap.timeline({ delay: 0.35 });
+      // Timeline with staggered entrance - much more performant
+      const tl = gsap.timeline({ delay: 0.2 });
+
       tl.to(kickerRef.current, {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 0.6,
+        ease: 'power2.out',
         clearProps: 'filter'
       })
-      .to(headingChars, {
+      .to(headingRef.current, {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
-        duration: 0.9,
-        stagger: { each: 0.03, from: 'start' },
-        ease: 'power3.out',
+        duration: 0.8,
+        ease: 'power2.out',
         clearProps: 'filter'
-      }, '-=0.3')
+      }, '-=0.4')
       .to(subheadingRef.current, {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 0.6,
+        ease: 'power2.out',
         clearProps: 'filter'
-      }, '-=0.2')
+      }, '-=0.3')
       .to(buttonsRef.current, {
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 0.6,
+        ease: 'power2.out',
         clearProps: 'filter'
-      }, '-=0.2');
+      }, '-=0.3');
 
     }, heroRef);
 
     return () => {
       ctx.revert();
-      const headingEl = headingRef.current;
-      const original = headingEl?.getAttribute('data-original');
-      if (headingEl && original !== null) {
-        headingEl.textContent = original || '';
-        headingEl.removeAttribute('data-original');
-      }
-    }; // cleanup
+    };
   }, []);
 
   return (
     <section ref={heroRef} className="relative min-h-screen w-full overflow-hidden" style={{ background: 'var(--pure-white)' }}>
       {/* Background wireframe animation */}
       <div className="absolute inset-0 top-[50%]" style={{ opacity: 0.22 }}>
-        <MountainWireframe
-          color={0x0f1115}
-          opacity={0.28}
-          elevationScale={1.5}
-        />
+        <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200" />}>
+          <MountainWireframe
+            color={0x0f1115}
+            opacity={0.28}
+            elevationScale={1.5}
+          />
+        </Suspense>
       </div>
 
       {/* Subtle gradient for depth */}

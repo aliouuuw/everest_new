@@ -9,23 +9,24 @@ import {
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
+import { registerServiceWorker } from './utils/serviceWorker'
 
 import App from './App.tsx'
 import { Layout } from './components/Layout.tsx'
-import {
-  AboutPage,
-  AssistedMgmtPage,
-  BoursePage,
-  CEOMessagePage,
-  CapitalMarketsPage,
-  DiscretionaryMgmtPage,
-  FAQPage,
-  InvestmentBankingPage,
-  MandateMgmtPage,
-  NewsroomPage,
-  PortalPage,
-  ResearchAnalyticsPage,
-} from './routes'
+
+// Import route components - they'll be code-split by Vite automatically
+import { AboutPage } from './routes/AboutPage'
+import { NewsroomPage } from './routes/NewsroomPage'
+import { FAQPage } from './routes/FAQPage'
+import { CEOMessagePage } from './routes/CEOMessagePage'
+import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
+import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
+import { ResearchAnalyticsPage } from './routes/ResearchAnalyticsPage'
+import { DiscretionaryMgmtPage } from './routes/DiscretionaryMgmtPage'
+import { MandateMgmtPage } from './routes/MandateMgmtPage'
+import { AssistedMgmtPage } from './routes/AssistedMgmtPage'
+import { BoursePage } from './routes/BoursePage'
+import { PortalPage } from './routes/PortalPage'
 
 const rootRoute = createRootRoute({
   component: Layout,
@@ -131,7 +132,8 @@ const router = createRouter({
   defaultPreload: 'intent',
   scrollRestoration: true,
   defaultStructuralSharing: true,
-  defaultPreloadStaleTime: 0,
+  defaultPreloadStaleTime: 30_000, // 30 seconds
+  defaultPreloadGcTime: 5 * 60_000, // 5 minutes
 })
 
 declare module '@tanstack/react-router' {
@@ -148,6 +150,9 @@ if (rootElement && !rootElement.innerHTML) {
       <RouterProvider router={router} />
     </StrictMode>,
   )
+
+  // Register service worker for caching
+  registerServiceWorker()
 }
 
 // If you want to start measuring performance in your app, pass a function

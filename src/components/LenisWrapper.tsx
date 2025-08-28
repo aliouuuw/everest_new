@@ -34,15 +34,18 @@ export const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
   return (
     <LenisProvider
       options={{
-        duration: 1.2,
+        duration: 0.8, // Reduced from 1.2 for better performance
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
+        mouseMultiplier: 0.8, // Reduced for less aggressive scrolling
+        smoothTouch: false, // Disable smooth touch for better mobile performance
+        touchMultiplier: 1.5, // Reduced for better touch performance
         infinite: false,
+        // Performance optimizations
+        normalizeWheel: true,
+        autoResize: true,
       }}
     >
       <LenisContent>{children}</LenisContent>
