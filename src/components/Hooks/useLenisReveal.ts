@@ -21,7 +21,7 @@ export function useLenisReveal<T extends HTMLElement>(
     const {
       rootMargin = '0px 0px -10% 0px',
       threshold = 0.1,
-      triggerOffset = 0,
+      triggerOffset: _, // Reserved for future scroll-based offset calculations
       once = true,
     } = options;
 
@@ -79,7 +79,7 @@ export function useLenisScrollReveal<T extends HTMLElement>(
     const {
       rootMargin = '0px 0px -10% 0px',
       threshold = 0.1,
-      triggerOffset = 0,
+      triggerOffset = 0, // Reserved for future scroll-based offset calculations
       once = true,
       lenis,
       scrollDirection = 'vertical',

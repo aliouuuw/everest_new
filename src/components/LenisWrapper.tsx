@@ -15,7 +15,7 @@ const LenisContent: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       e.preventDefault();
       const element = document.querySelector(target.hash);
       if (element && lenis && isReady) {
-        lenis.scrollTo(element, { offset: -80 }); // Account for fixed header
+        lenis.scrollTo(element as HTMLElement, { offset: -80 }); // Account for fixed header
       }
     }
   };
@@ -43,9 +43,6 @@ export const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
         smoothTouch: false, // Disable smooth touch for better mobile performance
         touchMultiplier: 1.5, // Reduced for better touch performance
         infinite: false,
-        // Performance optimizations
-        normalizeWheel: true,
-        autoResize: true,
       }}
     >
       <LenisContent>{children}</LenisContent>

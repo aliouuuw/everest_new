@@ -16,7 +16,7 @@ export const useLenisScroll = () => {
     if (isReady) {
       const element = document.querySelector(selector);
       if (element) {
-        scrollTo(element, {
+        scrollTo(element as HTMLElement, {
           offset: options.offset ?? -80, // Account for fixed header
           duration: options.duration ?? 1.2,
         });

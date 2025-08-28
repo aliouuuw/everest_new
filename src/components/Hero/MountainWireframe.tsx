@@ -163,7 +163,7 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
       renderer.render(scene, camera);
     };
 
-    animate();
+    animate(Date.now());
 
     // GSAP animations for entrance
     gsap.fromTo(
