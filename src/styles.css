@@ -55,6 +55,23 @@ body {
   font-variant-numeric: proportional-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Lenis smooth scrolling optimization */
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll styles */
+html {
+  scroll-behavior: auto; /* Disable native scroll behavior for Lenis */
+}
+
+/* Ensure Lenis works with all scrollable containers */
+[data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Prevent scroll restoration conflicts */
+html {
+  scroll-restoration: manual;
 }
 
 /* Custom Utilities */

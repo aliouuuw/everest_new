@@ -33,12 +33,12 @@ export const Insights: React.FC = () => {
     { title: "Note de marché BRVM", desc: "Tendances hebdomadaires et opportunités.", href: "#", category: "note", date: "2025-06-15" },
     { title: "Étude secteur bancaire", desc: "Qualité d’actifs et perspectives 2025.", href: "#", category: "etude", date: "2025-05-30" },
     { title: "Point taux et émissions", desc: "Marché primaire et courbe des rendements.", href: "#", category: "marches", date: "2025-06-10" },
-    { title: "Revue hebdo actions", desc: "Performances, volumes et catalyseurs.", href: "#", category: "revue", date: "2025-06-22" },
-    { title: "Analyse secteur télécoms", desc: "ARPU, capex et dynamics concurrentielles.", href: "#", category: "analyse", date: "2025-06-18" },
-    { title: "Étude microfinance UEMOA", desc: "Croissance, risques et réglementation.", href: "#", category: "etude", date: "2025-04-20" },
-    { title: "Note monétaire BCEAO", desc: "Inflation, taux directeurs et liquidité.", href: "#", category: "note", date: "2025-06-05" },
-    { title: "Marché primaire obligations", desc: "Calendrier d’émissions et spreads.", href: "#", category: "marches", date: "2025-06-12" },
-    { title: "Revue sectorielle banques", desc: "Qualité d’actifs et ROE.", href: "#", category: "revue", date: "2025-05-12" },
+    // { title: "Revue hebdo actions", desc: "Performances, volumes et catalyseurs.", href: "#", category: "revue", date: "2025-06-22" },
+    // { title: "Analyse secteur télécoms", desc: "ARPU, capex et dynamics concurrentielles.", href: "#", category: "analyse", date: "2025-06-18" },
+    // { title: "Étude microfinance UEMOA", desc: "Croissance, risques et réglementation.", href: "#", category: "etude", date: "2025-04-20" },
+    // { title: "Note monétaire BCEAO", desc: "Inflation, taux directeurs et liquidité.", href: "#", category: "note", date: "2025-06-05" },
+    // { title: "Marché primaire obligations", desc: "Calendrier d’émissions et spreads.", href: "#", category: "marches", date: "2025-06-12" },
+    // { title: "Revue sectorielle banques", desc: "Qualité d’actifs et ROE.", href: "#", category: "revue", date: "2025-05-12" },
   ];
 
   const categories: Array<InsightCategory | typeof ALL_LABEL> = useMemo(

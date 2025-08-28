@@ -61,7 +61,7 @@ export const CTA: React.FC<{
   const s = schemes[scheme];
 
   return (
-    <section ref={sectionRef} className="reveal py-24 gradient-gold">
+    <section ref={sectionRef} className="reveal py-24 gradient-gold" id="contact">
       <div className="mx-auto max-w-6xl px-6">
         <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover`}>
           {/* Decorative gold glow */}

@@ -1,5 +1,6 @@
 import { FaCalculator, FaFileAlt, FaUsers } from "react-icons/fa";
 import { useReveal } from "../Hooks/useReveal";
+import { useLenisContext } from "../Hooks/useLenisContext.tsx";
 import type { IconType } from "react-icons";
 
 type Service = {
@@ -16,8 +17,8 @@ const services: Array<Service> = [
   },
   {
     icon: FaUsers,
-    title: 'Gestion sous-mandat',
-    desc: "Mandats adaptés à vos objectifs et contraintes.",
+    title: 'Marché des capitaux',
+    desc: "Gestion sous-mandat, émissions primaires, placements.",
   },
   {
     icon: FaFileAlt,
@@ -57,11 +58,18 @@ const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc }) => {
 };
 
 export const Services: React.FC = () => {
-  const sectionRef = useReveal<HTMLElement>();
-  const gridRef = useReveal<HTMLDivElement>();
+  const { lenis, isReady } = useLenisContext();
+  const sectionRef = useReveal<HTMLElement>({
+    lenis: isReady ? lenis : undefined,
+    triggerOffset: -50
+  });
+  const gridRef = useReveal<HTMLDivElement>({
+    lenis: isReady ? lenis : undefined,
+    triggerOffset: -30
+  });
 
   return (
-    <section ref={sectionRef} className="reveal py-24 bg-[var(--white-smoke)]">
+    <section ref={sectionRef} className="reveal py-24 bg-[var(--white-smoke)]" id="services">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center max-w-2xl mx-auto">
           <span className="kicker text-gradient-gold">Nos offres</span>

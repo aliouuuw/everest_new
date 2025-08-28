@@ -3,26 +3,29 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { BRVMTicker } from './Header/BRVMTicker'
 import { WhatsAppButton } from './WhatsAppButton'
+import { LenisWrapper } from './LenisWrapper'
 
 export const Layout = () => {
   return (
-    <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
-      {/* Header - Fixed position overlay */}
-      <Header />
+    <LenisWrapper>
+      <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
+        {/* Header - Fixed position overlay */}
+        <Header />
 
-      {/* Main content area - No padding needed since Header is fixed */}
-      <main className="relative">
-        <Outlet />
-      </main>
+        {/* Main content area - No padding needed since Header is fixed */}
+        <main className="relative">
+          <Outlet />
+        </main>
 
-      {/* BRVM Live Ticker */}
-      <BRVMTicker />
+        {/* BRVM Live Ticker */}
+        <BRVMTicker />
 
-      {/* Footer */}
-      <Footer />
+        {/* Footer */}
+        <Footer />
 
-      {/* Floating WhatsApp Button */}
-      <WhatsAppButton />
-    </div>
+        {/* Floating WhatsApp Button */}
+        <WhatsAppButton />
+      </div>
+    </LenisWrapper>
   )
 }

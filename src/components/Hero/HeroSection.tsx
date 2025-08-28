@@ -1,13 +1,52 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLenisContext } from '../Hooks/useLenisContext.tsx';
 import { MountainWireframe } from './MountainWireframe';
 
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
 export const HeroSection: React.FC = () => {
+  const { lenis, scrollTo, isReady } = useLenisContext();
   const heroRef = useRef<HTMLElement>(null);
   const kickerRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Configure ScrollTrigger to work with Lenis only when ready
+    if (lenis && isReady) {
+      ScrollTrigger.scrollerProxy(document.body, {
+        scrollTop(value) {
+          return arguments.length && value !== undefined
+            ? lenis.scrollTo(value, { duration: 0 })
+            : lenis.scroll;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+          };
+        }
+      });
+
+      // Update ScrollTrigger when Lenis scrolls
+      lenis.on('scroll', ScrollTrigger.update);
+
+      // Refresh ScrollTrigger on resize
+      const handleResize = () => ScrollTrigger.refresh();
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        lenis.off('scroll', ScrollTrigger.update);
+      };
+    }
+  }, [lenis, isReady]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -116,12 +155,28 @@ export const HeroSection: React.FC = () => {
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">
-            <button className="btn-primary font-display tracking-wide">
+            <button
+              className="btn-primary font-display tracking-wide"
+              onClick={() => {
+                const contactElement = document.getElementById('contact');
+                if (contactElement) {
+                  scrollTo(contactElement, { offset: -80 });
+                }
+              }}
+            >
               Nous contacter
             </button>
 
-            <button className="btn-secondary font-display tracking-wide">
-              Découvrir nos services
+            <button
+              className="btn-secondary font-display tracking-wide"
+              onClick={() => {
+                const servicesElement = document.getElementById('services');
+                if (servicesElement) {
+                  scrollTo(servicesElement, { offset: -80 });
+                }
+              }}
+            >
+              Découvrir nos offres
             </button>
           </div>
         </div>
