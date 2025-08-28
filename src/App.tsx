@@ -11,7 +11,7 @@ function App() {
       <Insights />
       <PerformanceDashboard />
       <ClientPortalPreview />
-      <CTA scheme="ivory" secondaryHref="/newsroom" secondaryLabel="Voir nos analyses" />
+      <CTA scheme="ivory" secondaryHref="/ingenieurie-financiere/#offres" secondaryLabel="Découvrir nos offres" />
     </>
   );
 }
