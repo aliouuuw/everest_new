@@ -15,59 +15,108 @@ export const ResearchAnalyticsPage = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
       <Header />
-      <main className="pt-24 sm:pt-28">
+      <main className="pt-24 sm:pt-28 lg:pt-32">
         {/* Hero — Split pattern explaining the offer */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />
           <div className="absolute inset-0" style={{ opacity: 0.06 }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28 lg:py-32">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
                 <span className="kicker text-gradient-gold">Offres — Recherche & analyses</span>
                 <h1 className="luxury-heading mt-3">L'intelligence au service de vos investissements</h1>
-                <p className="luxury-subheading mt-5 pt-8">Analyses approfondies, données exclusives et insights stratégiques pour prendre les bonnes décisions sur la BRVM. Plus de 10 ans d'expertise en recherche financière.</p>
+                <p className="luxury-subheading mt-5 pt-8 leading-relaxed">Analyses approfondies, données exclusives et insights stratégiques pour prendre les bonnes décisions sur la BRVM. Plus de 10 ans d'expertise en recherche financière.</p>
 
                 {/* Key Differentiators */}
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-3">
-                    <FaChartLine className="text-gold-metallic text-lg" />
-                    <span className="text-sm font-medium">Données exclusives</span>
+                <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                  <div className="group flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FaChartLine className="text-base md:text-lg" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
+                    <span className="text-sm md:text-base font-medium">Données exclusives</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <FiEye className="text-gold-metallic text-lg" />
-                    <span className="text-sm font-medium">Vision prospective</span>
+                  <div className="group flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FiEye className="text-base md:text-lg" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
+                    <span className="text-sm md:text-base font-medium">Vision prospective</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <FiBookOpen className="text-gold-metallic text-lg" />
-                    <span className="text-sm font-medium">Expertise sectorielle</span>
+                  <div className="group flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FiBookOpen className="text-base md:text-lg" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
+                    <span className="text-sm md:text-base font-medium">Expertise sectorielle</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <FaAward className="text-gold-metallic text-lg" />
-                    <span className="text-sm font-medium">Reconnaissance marché</span>
+                  <div className="group flex items-center gap-3">
+                    <div className="relative shrink-0">
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FaAward className="text-base md:text-lg" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
+                    <span className="text-sm md:text-base font-medium">Reconnaissance marché</span>
                   </div>
                 </div>
 
-                <div className="mt-10 flex flex-col sm:flex-row gap-4">
+                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
                   <a href="#contact" className="btn-primary font-display tracking-wide">Demander une analyse personnalisée</a>
                   <a href="/newsroom" className="btn-secondary font-display tracking-wide">Découvrir nos publications</a>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
                 <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
+                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
                   <div className="absolute inset-0 grid grid-cols-3 gap-3 p-6">
                     <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <FiSearch className="text-xl mb-2" />
+                      <div className="relative shrink-0 mb-2">
+                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
+                            <FiSearch className="text-sm" />
+                          </div>
+                        </div>
+                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                      </div>
                       <div className="text-xs font-display">Couverture</div>
                     </div>
                     <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <FiFileText className="text-xl mb-2" />
+                      <div className="relative shrink-0 mb-2">
+                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
+                            <FiFileText className="text-sm" />
+                          </div>
+                        </div>
+                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                      </div>
                       <div className="text-xs font-display">Études</div>
                     </div>
                     <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <FiTrendingUp className="text-xl mb-2" />
+                      <div className="relative shrink-0 mb-2">
+                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
+                            <FiTrendingUp className="text-sm" />
+                          </div>
+                        </div>
+                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                      </div>
                       <div className="text-xs font-display">Notes marchés</div>
                     </div>
                   </div>
@@ -78,13 +127,13 @@ export const ResearchAnalyticsPage = () => {
         </section>
 
         {/* Research Impact & Recognition */}
-        <section className="py-14 sm:py-18 bg-gradient-to-br from-[var(--gold-light)]/5 to-transparent">
+        <section className="py-14 sm:py-18 lg:py-20 bg-gradient-to-br from-[var(--gold-light)]/5 to-transparent">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-3xl mx-auto">
               <span className="kicker text-gradient-gold">Notre reconnaissance</span>
               <h2 className="luxury-heading mt-3">Une recherche qui fait référence sur le marché</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mt-12">
               {[
                 { value: '500+', label: 'Publications', icon: FiFileText },
                 { value: '15+', label: 'Années d\'expérience', icon: FiTrendingUp },
@@ -92,11 +141,16 @@ export const ResearchAnalyticsPage = () => {
                 { value: '200+', label: 'Clients institutionnels', icon: FiUsers }
               ].map((stat, index) => (
                 <div key={index} className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--gold-metallic-10)] mb-4 group-hover:bg-[var(--gold-metallic)] transition-colors">
-                    <stat.icon className="text-2xl text-[var(--night)] group-hover:text-white transition-colors" />
+                  <div className="relative inline-flex items-center justify-center mb-4">
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                        <stat.icon className="text-base md:text-lg" />
+                      </div>
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
                   </div>
                   <div className="numeric-tabular text-3xl font-display text-[var(--night)] mb-1">{stat.value}</div>
-                  <div className="text-sm text-secondary">{stat.label}</div>
+                  <div className="text-sm md:text-base text-secondary">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -106,43 +160,64 @@ export const ResearchAnalyticsPage = () => {
               <div className="text-center mb-8">
                 <h3 className="luxury-heading text-xl">Exemples de nos dernières publications</h3>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
                   <div className="flex items-center gap-3 mb-4">
-                    <FiTrendingUp className="text-gold-metallic text-xl" />
+                    <div className="relative shrink-0">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FiTrendingUp className="text-sm md:text-base" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
                     <span className="text-sm font-medium text-[var(--gold-metallic)]">Note de marché</span>
                   </div>
                   <h4 className="font-display text-lg mb-2">BRVM : Perspectives 2024</h4>
-                  <p className="text-secondary text-sm mb-4">Analyse des tendances macroéconomiques et impacts sur les marchés actions de la région UEMOA.</p>
+                  <p className="text-secondary text-sm md:text-base leading-relaxed mb-4">Analyse des tendances macroéconomiques et impacts sur les marchés actions de la région UEMOA.</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-secondary">15 pages • PDF</span>
                     <span className="px-3 py-1 bg-[var(--gold-light)]/20 text-xs rounded-full">Gratuit</span>
                   </div>
                 </div>
 
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
+                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
                   <div className="flex items-center gap-3 mb-4">
-                    <FiBarChart className="text-gold-metallic text-xl" />
+                    <div className="relative shrink-0">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FiBarChart className="text-sm md:text-base" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
                     <span className="text-sm font-medium text-[var(--gold-metallic)]">Étude sectorielle</span>
                   </div>
                   <h4 className="font-display text-lg mb-2">Secteur bancaire : Résilience et croissance</h4>
-                  <p className="text-secondary text-sm mb-4">Analyse comparative des performances des établissements bancaires et perspectives d'évolution.</p>
+                  <p className="text-secondary text-sm md:text-base leading-relaxed mb-4">Analyse comparative des performances des établissements bancaires et perspectives d'évolution.</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-secondary">25 pages • PDF</span>
                     <span className="px-3 py-1 bg-[var(--gold-light)]/20 text-xs rounded-full">Premium</span>
                   </div>
                 </div>
 
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
+                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
                   <div className="flex items-center gap-3 mb-4">
-                    <FiSearch className="text-gold-metallic text-xl" />
+                    <div className="relative shrink-0">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                        <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                          <FiSearch className="text-sm md:text-base" />
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    </div>
                     <span className="text-sm font-medium text-[var(--gold-metallic)]">Analyse sur mesure</span>
                   </div>
                   <h4 className="font-display text-lg mb-2">Valorisation entreprise technologique</h4>
-                  <p className="text-secondary text-sm mb-4">Évaluation détaillée avec modélisation DCF et comparables sectoriels pour comité d'investissement.</p>
+                  <p className="text-secondary text-sm md:text-base leading-relaxed mb-4">Évaluation détaillée avec modélisation DCF et comparables sectoriels pour comité d'investissement.</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-secondary">40 pages • PDF + Excel</span>
                     <span className="px-3 py-1 bg-[var(--gold-light)]/20 text-xs rounded-full">Sur mesure</span>
@@ -154,59 +229,80 @@ export const ResearchAnalyticsPage = () => {
         </section>
 
         {/* Capabilities */}
-        <section ref={capsSectionRef} className="reveal py-14 sm:py-18">
+        <section ref={capsSectionRef} className="reveal py-14 sm:py-18 lg:py-20">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Capacités</span>
               <h2 className="luxury-heading mt-3">Couverture et livrables</h2>
-              <p className="luxury-subheading mt-5">Une offre claire : revues marché, études sectorielles, et analyses ad hoc.</p>
+              <p className="luxury-subheading mt-5 leading-relaxed">Une offre claire : revues marché, études sectorielles, et analyses ad hoc.</p>
             </div>
-            <div ref={capsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+            <div ref={capsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-12">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <div className="flex items-start gap-5">
-                  <div className="icon-badge text-[var(--night)] text-xl"><FiTrendingUp /></div>
+                <div className="flex items-start gap-5 md:gap-6">
+                  <div className="relative shrink-0">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                        <FiTrendingUp />
+                      </div>
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                  </div>
                   <div>
-                    <div className="font-display text-lg mb-1">Notes & revues de marché</div>
-                    <p className="text-secondary text-sm mb-3">Publications hebdomadaires et mensuelles sur l'évolution des indices BRVM, volumes de transactions, flux primaire et analyse des valorisations.</p>
+                    <div className="font-display text-lg md:text-xl mb-1">Notes & revues de marché</div>
+                    <p className="text-secondary text-sm md:text-base leading-relaxed mb-3">Publications hebdomadaires et mensuelles sur l'évolution des indices BRVM, volumes de transactions, flux primaire et analyse des valorisations.</p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Hebdomadaire</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Mensuel</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Gratuit</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Hebdomadaire</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Mensuel</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Gratuit</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                <a href="/newsroom" className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Voir les dernières notes <span>→</span></a>
+                <a href="/newsroom" className="mt-3 text-xs md:text-sm text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Voir les dernières notes <span>→</span></a>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <div className="flex items-start gap-5">
-                  <div className="icon-badge text-[var(--night)] text-xl"><FiFileText /></div>
+                <div className="flex items-start gap-5 md:gap-6">
+                  <div className="relative shrink-0">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                        <FiFileText />
+                      </div>
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                  </div>
                   <div>
-                    <div className="font-display text-lg mb-1">Études sectorielles approfondies</div>
-                    <p className="text-secondary text-sm mb-3">Analyses fondamentales complètes avec benchmarks sectoriels, évaluation des tendances et recommandations d'investissement par secteur économique.</p>
+                    <div className="font-display text-lg md:text-xl mb-1">Études sectorielles approfondies</div>
+                    <p className="text-secondary text-sm md:text-base leading-relaxed mb-3">Analyses fondamentales complètes avec benchmarks sectoriels, évaluation des tendances et recommandations d'investissement par secteur économique.</p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Banques</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Télécoms</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Immobilier</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Banques</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Télécoms</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Immobilier</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
                 <a href="/newsroom" className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Explorer les études <span>→</span></a>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <div className="flex items-start gap-5">
-                  <div className="icon-badge text-[var(--night)] text-xl"><FiSearch /></div>
+                <div className="flex items-start gap-5 md:gap-6">
+                  <div className="relative shrink-0">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                        <FiSearch />
+                      </div>
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                  </div>
                   <div>
-                    <div className="font-display text-lg mb-1">Analyses sur mesure</div>
-                    <p className="text-secondary text-sm mb-3">Études personnalisées pour comités d'investissement, due diligences, valorisations d'entreprises et analyses de marché spécifiques.</p>
+                    <div className="font-display text-lg md:text-xl mb-1">Analyses sur mesure</div>
+                    <p className="text-secondary text-sm md:text-base leading-relaxed mb-3">Études personnalisées pour comités d'investissement, due diligences, valorisations d'entreprises et analyses de marché spécifiques.</p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">DCF</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Comparables</span>
-                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs rounded-md">Risques</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">DCF</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Comparables</span>
+                      <span className="px-2 py-1 bg-[var(--gold-light)]/20 text-xs md:text-sm rounded-md">Risques</span>
                     </div>
                   </div>
                 </div>
@@ -218,12 +314,12 @@ export const ResearchAnalyticsPage = () => {
         </section>
 
         {/* Méthodologie (timeline) */}
-        <section id="methodologie" ref={methodSectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
+        <section id="methodologie" ref={methodSectionRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--white-smoke)]">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Notre approche méthodologique</span>
               <h2 className="luxury-heading mt-3">De la collecte des données à la recommandation stratégique</h2>
-              <p className="luxury-subheading mt-5">Un processus rigoureux combinant analyse quantitative et qualitative pour des insights fiables et actionnables.</p>
+              <p className="luxury-subheading mt-5 leading-relaxed">Un processus rigoureux combinant analyse quantitative et qualitative pour des insights fiables et actionnables.</p>
             </div>
             <div className="relative mt-12">
               <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
@@ -260,14 +356,14 @@ export const ResearchAnalyticsPage = () => {
                 ].map((s, index) => (
                   <li key={s.step} className="relative">
                     <div className={`flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''} sm:items-start sm:justify-between gap-4`}>
-                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 transition-all card-hover">
+                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 md:p-6 transition-all card-hover">
                         <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
                         <div className="flex items-start justify-between mb-3">
                           <span className="text-xs font-medium tracking-wider text-[var(--night-80)]/80">Étape {s.step}</span>
                           <span className="text-xs px-2 py-1 rounded-md bg-[var(--gold-light)]/20 text-[var(--gold-metallic)] font-medium">{s.duration}</span>
                         </div>
-                        <div className="font-display text-lg mb-2">{s.title}</div>
-                        <p className="text-secondary text-sm mb-4">{s.desc}</p>
+                        <div className="font-display text-lg md:text-xl mb-2">{s.title}</div>
+                        <p className="text-secondary text-sm md:text-base leading-relaxed mb-4">{s.desc}</p>
                         <div className="border-t border-[var(--gold-light)]/20 pt-3">
                           <div className="text-xs text-[var(--night-80)]/80 mb-2">Outils & méthodes:</div>
                           <div className="flex flex-wrap gap-1">
