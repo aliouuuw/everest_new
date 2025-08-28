@@ -1,6 +1,5 @@
 import { FiAward, FiClipboard, FiLayers, FiSend, FiTarget, FiTrendingUp, FiUsers } from 'react-icons/fi'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+
 import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
 
@@ -12,9 +11,7 @@ export const InvestmentBankingPage = () => {
   const processListRef = useReveal<HTMLUListElement>()
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-      <main className="pt-24 sm:pt-28 lg:pt-32">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
         {/* Hero — Split pattern with capabilities */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />
@@ -348,9 +345,7 @@ export const InvestmentBankingPage = () => {
 
         {/* CTA band (shared) */}
         <div id="contact" className="sr-only" />
-        <CTA scheme="ivory" primaryHref="mailto:contact@everest-finance.sn" primaryLabel="Écrire à un conseiller" secondaryHref="#processus" secondaryLabel="Voir le processus" />
-      </main>
-      <Footer />
+      <CTA scheme="ivory" primaryHref="mailto:contact@everest-finance.sn" primaryLabel="Écrire à un conseiller" secondaryHref="#processus" secondaryLabel="Voir le processus" />
     </div>
   )
 }

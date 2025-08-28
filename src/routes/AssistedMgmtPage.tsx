@@ -1,7 +1,6 @@
 import { FiHeadphones, FiHelpCircle, FiMessageCircle, FiPhone, FiSliders, FiUserCheck } from 'react-icons/fi'
 import { FaLightbulb } from 'react-icons/fa'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+
 import { CTA } from '../components/Sections/CTA'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
@@ -22,10 +21,7 @@ export const AssistedMgmtPage = () => {
   const benefitsGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-
-      <main className="pt-24 sm:pt-28 lg:pt-32">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
         {/* Hero — Split pattern with advisor angle */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />
@@ -280,16 +276,13 @@ export const AssistedMgmtPage = () => {
 
         {/* CTA band */}
         <div id="contact" className="sr-only" />
-        <CTA
-          scheme="ivory"
-          primaryHref="mailto:contact@everest-finance.sn"
-          primaryLabel="Parler à un conseiller"
-          secondaryHref="#marche"
-          secondaryLabel="Voir le fonctionnement"
-        />
-      </main>
-
-      <Footer />
+      <CTA
+        scheme="ivory"
+        primaryHref="mailto:contact@everest-finance.sn"
+        primaryLabel="Parler à un conseiller"
+        secondaryHref="#marche"
+        secondaryLabel="Voir le fonctionnement"
+      />
     </div>
   )
 }

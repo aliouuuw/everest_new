@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { FiLock, FiMail, FiStar, FiTrendingUp, FiZap } from 'react-icons/fi'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const PortalPage = () => {
@@ -13,10 +12,7 @@ export const PortalPage = () => {
   const [activeTab, setActiveTab] = useState<'signup' | 'signin'>('signup')
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-
-      <main className="pt-24 sm:pt-28">
+    <div className="pt-24 sm:pt-28">
         {/* Hero — Compact Centered */}
         <section ref={heroRef} className="reveal py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 text-center">
@@ -178,11 +174,7 @@ export const PortalPage = () => {
               </div>
             </div>
           </div>
-        </section>
-
-      </main>
-
-      <Footer />
+      </section>
     </div>
   )
 }

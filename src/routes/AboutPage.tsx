@@ -1,7 +1,5 @@
 import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
-import { Header } from '../components/Header'
 import { CTA } from '../components/Sections/CTA'
-import { Footer } from '../components/Footer'
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const AboutPage = () => {
@@ -31,9 +29,7 @@ export const AboutPage = () => {
   const conformiteGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-      <main className="pt-24 sm:pt-28">
+    <div className="pt-24 sm:pt-28">
         {/* Hero */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           {/* Background treatments */}
@@ -318,12 +314,8 @@ export const AboutPage = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <CTA scheme="ivory" />
-      </main>
-
-      {/* Footer */}
-      <Footer />
+      {/* CTA */}
+      <CTA scheme="ivory" />
     </div>
   )
 }

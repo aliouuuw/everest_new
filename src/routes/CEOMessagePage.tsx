@@ -1,5 +1,4 @@
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const CEOMessagePage = () => {
@@ -7,9 +6,7 @@ export const CEOMessagePage = () => {
   const heroRef = useReveal<HTMLElement>()
 
   return (
-  <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-    <Header />
-    <main className="pt-24 sm:pt-28">
+  <div className="pt-24 sm:pt-28">
       {/* Hero: Compact Centered */}
       <section ref={heroRef} className="reveal py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6 text-center">
@@ -75,9 +72,7 @@ export const CEOMessagePage = () => {
             </div>
           </div>
         </div>
-      </section>
-    </main>
-    <Footer />
+    </section>
   </div>
   )
 }

@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { FaExternalLinkAlt } from 'react-icons/fa'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+
 import { useReveal } from '../components/Hooks/useReveal'
 
 type NewsCategory = 'communique' | 'presse' | 'entreprise' | 'marches' | 'evenement'
@@ -55,10 +54,7 @@ export const NewsroomPage = () => {
   }, [items, activeCategory])
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-
-      <main className="pt-24 sm:pt-28">
+    <div className="pt-24 sm:pt-28">
         {/* Hero: Compact Centered */}
         <section ref={heroRef} className="reveal py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6 text-center">
@@ -127,10 +123,7 @@ export const NewsroomPage = () => {
               </a>
             </div>
           </div>
-        </section>
-      </main>
-
-      <Footer />
+      </section>
     </div>
   )
 }

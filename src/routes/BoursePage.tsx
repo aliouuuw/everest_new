@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FiActivity, FiArrowDownRight, FiArrowUpRight, FiRefreshCw, FiTrendingDown, FiTrendingUp } from 'react-icons/fi'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
 import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
 
@@ -260,10 +258,7 @@ export const BoursePage: React.FC = () => {
   }, [refreshData])
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      <Header />
-
-      <main className="pt-24 sm:pt-28 lg:pt-32">
+    <div className="pt-24 sm:pt-28 lg:pt-32">
         {/* Hero Section with enhanced interactivity */}
         <section ref={heroRef} className="reveal py-16 sm:py-20 lg:py-24 relative">
           <div className="mx-auto max-w-6xl px-6 text-center">
@@ -356,17 +351,14 @@ export const BoursePage: React.FC = () => {
           </div>
         </section>
 
-        {/* Enhanced CTA with more context */}
-        <CTA
-          scheme="ivory"
-          primaryHref="/portal"
-          primaryLabel="Ouvrir un compte"
-          secondaryHref="/newsroom"
-          secondaryLabel="Voir nos analyses"
-        />
-      </main>
-
-      <Footer />
+      {/* Enhanced CTA with more context */}
+      <CTA
+        scheme="ivory"
+        primaryHref="/portal"
+        primaryLabel="Ouvrir un compte"
+        secondaryHref="/newsroom"
+        secondaryLabel="Voir nos analyses"
+      />
     </div>
   )
 }

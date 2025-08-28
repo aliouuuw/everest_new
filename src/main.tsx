@@ -12,12 +12,13 @@ import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 
 import App from './App.tsx'
+import { Layout } from './components/Layout.tsx'
 import {
   AboutPage,
   AssistedMgmtPage,
   BoursePage,
-  CapitalMarketsPage,
   CEOMessagePage,
+  CapitalMarketsPage,
   DiscretionaryMgmtPage,
   FAQPage,
   InvestmentBankingPage,
@@ -28,11 +29,7 @@ import {
 } from './routes'
 
 const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-    </>
-  ),
+  component: Layout,
 })
 
 const indexRoute = createRoute({
