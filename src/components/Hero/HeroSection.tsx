@@ -104,12 +104,14 @@ export const HeroSection: React.FC = () => {
   return (
     <section ref={heroRef} className="relative min-h-screen w-full overflow-hidden" style={{ background: 'var(--pure-white)' }}>
       {/* Background wireframe animation */}
-      <div className="absolute inset-0 top-[50%]" style={{ opacity: 0.22 }}>
+      <div className="absolute inset-0 top-[50%]" style={{ opacity: 0.25 }}>
         <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200" />}>
           <MountainWireframe
             color={0x0f1115}
-            opacity={0.28}
-            elevationScale={1.5}
+            opacity={0.35}
+            elevationScale={1.8}
+            rotateSpeed={0.003}
+            parallaxStrength={0.1}
           />
         </Suspense>
       </div>

@@ -19,8 +19,8 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
   opacity = 0.6,
   elevationScale = 1.0,
   noiseScale = 0.045,
-  rotateSpeed = 0.001,
-  parallaxStrength = 0.06,
+  rotateSpeed = 0.002, // Increased rotation speed for more visible movement
+  parallaxStrength = 0.08, // Increased parallax strength for more responsive interaction
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -28,7 +28,6 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const mountainRef = useRef<THREE.Group | null>(null);
   const animationRef = useRef<number | null>(null);
-  const lastFrameTime = useRef<number>(0);
   const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -55,11 +54,15 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
       canvas: canvasRef.current,
       alpha: true,
       antialias: true,
+      powerPreference: "high-performance",
     });
     rendererRef.current = renderer;
     renderer.setSize(canvasRef.current.clientWidth, canvasRef.current.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0); // Transparent
+    
+    // Force initial render
+    renderer.render(scene, camera);
 
     // Create mountain group
     const mountainGroup = new THREE.Group();
@@ -133,17 +136,13 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
       return mesh;
     };
 
-    // Reduced geometry complexity for better performance
-    const mountainMesh = createMountainMesh(60, 60, 80);
+    // Balanced geometry complexity for good performance and visual quality
+    const mountainMesh = createMountainMesh(80, 80, 120);
     mountainGroup.add(mountainMesh);
 
-    // Throttled animation loop for better performance
+    // Animation loop with better performance
     const animate = (currentTime: number) => {
       animationRef.current = requestAnimationFrame(animate);
-
-      // Limit to ~30 FPS for better performance
-      if (currentTime - lastFrameTime.current < 1000 / 30) return;
-      lastFrameTime.current = currentTime;
 
       // Gentle rotation with pointer-based parallax
       if (mountainGroup) {
@@ -154,35 +153,30 @@ export const MountainWireframe: React.FC<MountainWireframeProps> = ({
         mountainGroup.rotation.z += (targetY * 0.3 - mountainGroup.rotation.z) * 0.06;
       }
 
-      // Animate camera (reduced frequency)
-      const time = currentTime * 0.0005; // Slower animation
-      camera.position.x = Math.sin(time * 0.1) * 3;
-      camera.position.z = 30 + Math.cos(time * 0.15) * 2;
+      // Animate camera with more visible movement
+      const time = currentTime * 0.001; // Increased animation speed
+      camera.position.x = Math.sin(time * 0.2) * 5;
+      camera.position.z = 30 + Math.cos(time * 0.3) * 3;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
     };
 
-    animate(Date.now());
+    // Start animation immediately
+    animate(performance.now());
 
-    // GSAP animations for entrance
-    gsap.fromTo(
-      mountainGroup.rotation,
-      { y: -Math.PI },
-      { y: 0, duration: 3, ease: "power2.out" }
-    );
-
+    // GSAP animations for entrance - simplified for immediate visibility
     gsap.fromTo(
       mountainGroup.scale,
-      { x: 0, y: 0, z: 0 },
-      { x: 1, y: 1, z: 1, duration: 2, ease: "back.out(1.7)" }
+      { x: 0.8, y: 0.8, z: 0.8 },
+      { x: 1, y: 1, z: 1, duration: 1, ease: "power2.out" }
     );
 
     // Fade in the mountain wireframe
     gsap.fromTo(
       (mountainMesh.material as THREE.MeshBasicMaterial),
       { opacity: 0 },
-      { opacity: opacity, duration: 1.2, ease: 'power2.out', delay: 0.2 }
+      { opacity: opacity, duration: 0.8, ease: 'power2.out' }
     );
 
     // Resize handler
