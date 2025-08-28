@@ -1,4 +1,5 @@
 import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 export const PortalPage = () => (
   <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -7,6 +8,7 @@ export const PortalPage = () => (
       <h1 className="font-display text-3xl mb-4">Accès Client</h1>
       <p className="text-secondary">Connexion au portail client.</p>
     </main>
+    <Footer />
   </div>
 )
 

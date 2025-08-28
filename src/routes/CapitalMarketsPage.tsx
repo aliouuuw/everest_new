@@ -1,4 +1,5 @@
 import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 export const CapitalMarketsPage = () => (
   <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -7,6 +8,7 @@ export const CapitalMarketsPage = () => (
       <h1 className="font-display text-3xl mb-4">Marché des capitaux</h1>
       <p className="text-secondary">Services de courtage et marchés.</p>
     </main>
+    <Footer />
   </div>
 )
 

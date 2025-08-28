@@ -1,4 +1,5 @@
 import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 export const FAQPage = () => (
   <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -7,6 +8,7 @@ export const FAQPage = () => (
       <h1 className="font-display text-3xl mb-4">Abécédaire / FAQ</h1>
       <p className="text-secondary">Questions fréquentes et définitions.</p>
     </main>
+    <Footer />
   </div>
 )
 

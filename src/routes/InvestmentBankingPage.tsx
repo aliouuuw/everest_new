@@ -1,4 +1,5 @@
 import { Header } from '../components/Header'
+import { Footer } from '../components/Footer'
 
 export const InvestmentBankingPage = () => (
   <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
@@ -7,6 +8,7 @@ export const InvestmentBankingPage = () => (
       <h1 className="font-display text-3xl mb-4">Ingénierie financière</h1>
       <p className="text-secondary">Structuration et émissions primaires.</p>
     </main>
+    <Footer />
   </div>
 )
 
