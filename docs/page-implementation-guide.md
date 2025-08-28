@@ -26,7 +26,7 @@ export const SomePage = () => {
 
       <main className="pt-24 sm:pt-28">
         {/* Hero (choose one of the approved patterns below) */}
-        <section ref={sectionRef} className="reveal py-16 sm:py-20">
+        <section ref={sectionRef} className="reveal py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6">
             <span className="kicker text-gradient-gold">Section Eyebrow</span>
             <h1 className="luxury-heading mt-3">Page headline</h1>
@@ -93,7 +93,7 @@ Choose one per page.
 - Optional filters immediately below using `btn-secondary` chips.
 
 ```tsx
-<section ref={heroRef} className="reveal py-16 sm:py-20">
+<section ref={heroRef} className="reveal py-16 sm:py-28">
   <div className="mx-auto max-w-6xl px-6 text-center">
     <span className="kicker text-gradient-gold">Eyebrow</span>
     <h1 className="luxury-heading mt-3">Headline</h1>

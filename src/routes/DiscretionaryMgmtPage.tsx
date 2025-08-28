@@ -20,7 +20,7 @@ export const DiscretionaryMgmtPage = () => {
   const processGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-32">
+    <div>
         {/* Hero — Split pattern focused on approach */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />

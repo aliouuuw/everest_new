@@ -11,7 +11,7 @@ export const InvestmentBankingPage = () => {
   const processListRef = useReveal<HTMLUListElement>()
 
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-32">
+    <div>
         {/* Hero — Split pattern with capabilities */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />

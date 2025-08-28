@@ -12,9 +12,9 @@ export const PortalPage = () => {
   const [activeTab, setActiveTab] = useState<'signup' | 'signin'>('signup')
 
   return (
-    <div className="pt-24 sm:pt-28">
+    <div>
         {/* Hero — Compact Centered */}
-        <section ref={heroRef} className="reveal py-16 sm:py-20">
+        <section ref={heroRef} className="reveal py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">Accès Client</span>
             <h1 className="luxury-heading mt-3">Créez votre compte en toute sécurité</h1>

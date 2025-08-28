@@ -29,7 +29,7 @@ export const AboutPage = () => {
   const conformiteGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div className="pt-24 sm:pt-28">
+    <div>
         {/* Hero */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           {/* Background treatments */}
@@ -315,7 +315,7 @@ export const AboutPage = () => {
         </section>
 
       {/* CTA */}
-      <CTA scheme="ivory" />
+      <CTA scheme="ivory" primaryHref="/portal" primaryLabel="Ouvrir un compte" secondaryHref="/newsroom" secondaryLabel="Voir nos analyses" />
     </div>
   )
 }

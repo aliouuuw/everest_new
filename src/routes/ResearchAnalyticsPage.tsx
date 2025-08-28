@@ -12,7 +12,7 @@ export const ResearchAnalyticsPage = () => {
   const methodListRef = useReveal<HTMLUListElement>()
 
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-32">
+    <div>
         {/* Hero — Split pattern explaining the offer */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />

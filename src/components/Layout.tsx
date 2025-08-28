@@ -8,11 +8,11 @@ import { WhatsAppButton } from './WhatsAppButton'
 export const Layout = () => {
   return (
     <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
-      {/* Header - Overlays content */}
+      {/* Header - Fixed position overlay */}
       <Header />
 
-      {/* Main content area - All routes render here */}
-      <main className="relative z-0">
+      {/* Main content area - No padding needed since Header is fixed */}
+      <main className="relative">
         <Outlet />
       </main>
 

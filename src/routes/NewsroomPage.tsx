@@ -54,9 +54,9 @@ export const NewsroomPage = () => {
   }, [items, activeCategory])
 
   return (
-    <div className="pt-24 sm:pt-28">
+    <div>
         {/* Hero: Compact Centered */}
-        <section ref={heroRef} className="reveal py-16 sm:py-20">
+        <section ref={heroRef} className="reveal py-16 sm:py-28">
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">Actualités</span>
             <h1 className="luxury-heading mt-3">Newsroom</h1>

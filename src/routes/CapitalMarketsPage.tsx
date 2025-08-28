@@ -13,7 +13,7 @@ export const CapitalMarketsPage = () => {
   const casesGridRef = useReveal<HTMLDivElement>()
 
   return (
-  <div className="pt-24 sm:pt-28 lg:pt-32">
+  <div>
         {/* Hero — Split pattern */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
           <div className="absolute inset-0 gradient-gold-subtle" />
