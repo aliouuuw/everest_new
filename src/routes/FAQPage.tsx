@@ -1,7 +1,7 @@
+import { useMemo, useState } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { useReveal } from '../components/Hooks/useReveal'
-import { useMemo, useState } from 'react'
 
 type QA = { q: string; a: string }
 type Glossary = { term: string; def: string }
@@ -77,7 +77,7 @@ export const FAQPage = () => {
   }, [glossary])
 
   const grouped = useMemo(() => {
-    const map = new Map<string, Glossary[]>()
+    const map = new Map<string, Array<Glossary>>()
     for (const g of filteredGlossary) {
       const l = g.term.charAt(0).toUpperCase()
       if (!map.has(l)) map.set(l, [])
