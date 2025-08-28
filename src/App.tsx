@@ -11,7 +11,7 @@ function App() {
       <Insights />
       <PerformanceDashboard />
       <ClientPortalPreview />
-      <CTA scheme="ivory" />
+      <CTA scheme="ivory" secondaryHref="/newsroom" secondaryLabel="Voir nos analyses" />
     </>
   );
 }
