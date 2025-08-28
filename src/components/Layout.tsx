@@ -1,4 +1,3 @@
-import React from 'react'
 import { Outlet } from '@tanstack/react-router'
 import { Header } from './Header'
 import { Footer } from './Footer'

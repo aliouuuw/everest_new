@@ -2,11 +2,6 @@ import { useState } from 'react';
 import { FiChevronDown, FiHelpCircle } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
 interface ServiceFAQProps {
   service: 'discretionary' | 'mandate' | 'assisted';
 }
