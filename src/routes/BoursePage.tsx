@@ -350,15 +350,6 @@ export const BoursePage: React.FC = () => {
             )}
           </div>
         </section>
-
-      {/* Enhanced CTA with more context */}
-      <CTA
-        scheme="ivory"
-        primaryHref="/portal"
-        primaryLabel="Ouvrir un compte"
-        secondaryHref="/publications"
-        secondaryLabel="Voir nos analyses"
-      />
     </div>
   )
 }

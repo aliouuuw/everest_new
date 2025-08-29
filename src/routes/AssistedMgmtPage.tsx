@@ -274,15 +274,6 @@ export const AssistedMgmtPage = () => {
         {/* FAQ */}
         <ServiceFAQ service="assisted" />
 
-        {/* CTA band */}
-        <div id="contact" className="sr-only" />
-      <CTA
-        scheme="ivory"
-        primaryHref="mailto:contact@everest-finance.sn"
-        primaryLabel="Parler à un conseiller"
-        secondaryHref="#marche"
-        secondaryLabel="Voir le fonctionnement"
-      />
     </div>
   )
 }

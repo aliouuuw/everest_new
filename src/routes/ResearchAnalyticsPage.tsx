@@ -379,16 +379,6 @@ export const ResearchAnalyticsPage = () => {
             </div>
           </div>
         </section>
-
-        {/* CTA — contact primary, publications secondary */}
-        <div id="contact" className="sr-only" />
-      <CTA
-        scheme="ivory"
-        primaryHref="mailto:contact@everest-finance.sn"
-        primaryLabel="Écrire à un analyste"
-        secondaryHref="/publications"
-        secondaryLabel="Voir nos publications"
-      />
     </div>
   )
 }

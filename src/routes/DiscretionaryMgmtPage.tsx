@@ -276,16 +276,6 @@ export const DiscretionaryMgmtPage = () => {
 
         {/* FAQ */}
         <ServiceFAQ service="discretionary" />
-
-        {/* CTA band */}
-        <div id="contact" className="sr-only" />
-      <CTA
-        scheme="ivory"
-        primaryHref="mailto:contact@everest-finance.sn"
-        primaryLabel="Ouvrir un compte"
-        secondaryHref="#packs"
-        secondaryLabel="Voir les packs"
-      />
     </div>
   )
 }

@@ -313,9 +313,6 @@ export const AboutPage = () => {
             </div>
           </div>
         </section>
-
-      {/* CTA */}
-      <CTA scheme="ivory" primaryHref="/portal" primaryLabel="Ouvrir un compte" secondaryHref="/publications" secondaryLabel="Voir nos analyses" />
     </div>
   )
 }
