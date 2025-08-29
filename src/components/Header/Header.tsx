@@ -3,12 +3,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 // Fingerprint Icon Component
 const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
-  <img
-    src="/fingerprint-svgrepo-com.svg"
-    alt="Fingerprint"
+  <svg
     className={className}
-    style={{ filter: 'brightness(0) invert(1)' }} // Make it white to match the text color
-  />
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    style={{ color: '#2c1810' }}
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.97-4.659.97-7.132A8 8 0 0012 4a8 8 0 00-8 8c0 2.473.325 4.866.97 7.132M9 12a2 2 0 104 0m-4 0a2 2 0 104 0" />
+  </svg>
 );
 
 interface DropdownItem {
@@ -215,9 +218,17 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/portal"
-            className="btn-primary-dark font-display tracking-wide flex items-center gap-2"
+            className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-gradient-to-r from-[#ca942f] via-[#e9d89c] to-[#ca942f] text-[#2c1810] rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 border border-[#b8860b]/30 hover:border-[#b8860b]/50 overflow-hidden"
           >
-            <FingerprintIcon /> Accès Client
+            {/* Metallic shine effect */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+            <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
+            
+            <div className="relative">
+              <FingerprintIcon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+            </div>
+            <span className="relative z-10 tracking-wide drop-shadow-sm">Accès Client</span>
           </Link>
         </div>
 
@@ -319,10 +330,18 @@ export const Header: React.FC = () => {
             <div className="pt-4 border-t border-black/10">
               <Link
                 to="/portal"
-                className="btn-primary-dark font-display tracking-wide w-full text-center flex items-center justify-center gap-2"
+                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-gradient-to-r from-[#ca942f] via-[#e9d89c] to-[#ca942f] text-[#2c1810] rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 border border-[#b8860b]/30 hover:border-[#b8860b]/50 overflow-hidden w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon /> Accès Client
+                {/* Metallic shine effect */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
+                
+                <div className="relative">
+                  <FingerprintIcon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                </div>
+                <span className="relative z-10 tracking-wide drop-shadow-sm">Accès Client</span>
               </Link>
             </div>
           </div>
