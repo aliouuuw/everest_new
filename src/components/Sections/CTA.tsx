@@ -48,13 +48,13 @@ export const CTA: React.FC<{
       gridOpacity: 0.10,
     },
     metallic: {
-      card: 'bg-gradient-to-br from-[var(--gold-light)] to-[var(--gold-metallic)] border border-[var(--gold-dark)]/30 shadow-lg shadow-[var(--gold-metallic)]/20',
-      bar: 'bg-[var(--gold-dark)]',
-      title: 'text-[var(--night)]',
-      body: 'text-[var(--night)]/85',
-      primaryBtn: 'px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg rounded-lg',
-      secondaryBtn: 'px-7 py-3.5 border border-[var(--night)]/25 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/40 bg-[var(--pure-white)]/80 hover:bg-[var(--pure-white)]/95 rounded-lg backdrop-blur-sm',
-      gridOpacity: 0.06,
+      card: 'relative bg-gradient-to-br from-[#ca942f] via-[#e9d89c] to-[#ca942f] border border-[#b8860b]/40 shadow-2xl shadow-[#d4af37]/30 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:animate-pulse',
+      bar: 'bg-gradient-to-b from-[#ffd700] to-[#b8860b]',
+      title: 'text-[#2c1810] drop-shadow-sm',
+      body: 'text-[#2c1810]/90 drop-shadow-sm',
+      primaryBtn: 'px-7 py-3.5 bg-gradient-to-r from-[#2c1810] to-[#1a0f08] text-[#f4e6b8] font-medium text-sm tracking-wide transition-all duration-300 hover:from-[#1a0f08] hover:to-[#0d0704] hover:shadow-lg hover:shadow-[#2c1810]/30 rounded-lg border border-[#b8860b]/30',
+      secondaryBtn: 'px-7 py-3.5 border-2 border-[#b8860b]/50 text-[#2c1810] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[#b8860b]/70 bg-[#f4e6b8]/20 hover:bg-[#f4e6b8]/40 rounded-lg backdrop-blur-sm',
+      gridOpacity: 0.04,
     },
   };
 
@@ -63,20 +63,29 @@ export const CTA: React.FC<{
   return (
     <section ref={sectionRef} className="reveal py-24" id="contact">
       <div className="mx-auto max-w-6xl px-6 ">
-        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover `}>
+        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover ${scheme === 'metallic' ? 'metallic-card' : ''}`}>
+          {/* Metallic shine effect */}
+          {scheme === 'metallic' && (
+            <>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] animate-shine" />
+              <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
+            </>
+          )}
+
           {/* Decorative gold glow */}
-          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#ca942f] blur-3xl" />
+          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#var(--gold-light)] blur-3xl" />
           {/* left gold bar accent */}
-          <div className={`absolute left-0 top-0 bottom-0 w-1 ${s.bar}`} />
+          <div className={`absolute left-0 top-0 bottom-0 w-1 ${s.bar} ${scheme === 'metallic' ? 'metallic-bar' : ''}`} />
           {/* subtle grid pattern */}
           {/* <div className="absolute inset-0 pointer-events-none" style={{ opacity: s.gridOpacity }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '48px 48px' }} />
           </div> */}
 
           <div className="relative z-10 text-left">
-            <span className="kicker text-gradient-gold">Prise de contact</span>
+            <span className="kicker">Prise de contact</span>
             <h3 className={`heading-display ${s.title} text-2xl sm:text-3xl mt-3`}>Prêts à franchir un cap ?</h3>
-            <p className={`${s.body} mt-3 max-w-2xl`}>Échangeons autour de vos objectifs d’investissement et de la meilleure manière de les atteindre.</p>
+            <p className={`${s.body} mt-3 max-w-2xl`}>Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.</p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <a href={primaryHref} className={`${s.primaryBtn} font-display`}>{primaryLabel}</a>
@@ -90,5 +99,3 @@ export const CTA: React.FC<{
     </section>
   );
 };
-
-

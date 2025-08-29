@@ -558,5 +558,175 @@ html {
   opacity: 0.6;
 }
 
+/* Metallic Card Effects */
+.metallic-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.metallic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 215, 0, 0.3),
+    transparent
+  );
+  animation: metallic-shine 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.metallic-card:hover::before {
+  animation-duration: 1.5s;
+}
+
+.metallic-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.metallic-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+/* Metallic Shine Animation */
+@keyframes metallic-shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Enhanced metallic button effects */
+.metallic-card .btn-primary,
+.metallic-card .btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.metallic-card .btn-primary::before,
+.metallic-card .btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.metallic-card .btn-primary:hover::before,
+.metallic-card .btn-secondary:hover::before {
+  left: 100%;
+}
+
 /* Icon badge */
 .icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: var(--white-smoke-80); border: 1px solid var(--timberwolf); }
+
+/* Mountain Transition Animations */
+.mountain-transition {
+  will-change: transform;
+}
+
+.mountain-transition.mountain-reveal {
+  animation: mountainFadeIn 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.mountain-layer-1 {
+  animation: mountainSlideUp 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both;
+}
+
+.mountain-layer-2 {
+  animation: mountainSlideUp 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
+}
+
+.mountain-layer-3 {
+  animation: mountainSlideUp 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
+}
+
+@keyframes mountainFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    filter: blur(2px);
+  }
+  25% {
+    opacity: 0.4;
+    transform: translateY(25px) scale(0.985);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(10px) scale(0.995);
+    filter: blur(0.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes mountainSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(1px);
+  }
+  25% {
+    opacity: 0.3;
+    transform: translateY(40px);
+    filter: blur(0.7px);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(20px);
+    filter: blur(0.3px);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translateY(5px);
+    filter: blur(0.1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Enhanced parallax effects for mountain layers */
+.mountain-transition svg path {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
