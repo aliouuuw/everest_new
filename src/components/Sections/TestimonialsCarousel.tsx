@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
+import { useCounter } from '../Hooks/useCounter';
 
 interface Testimonial {
   id: string;
@@ -104,7 +105,30 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
+  const [countersTriggered, setCountersTriggered] = useState(false);
   const sectionRef = useReveal<HTMLElement>();
+
+  // Counter animations for stats
+  const clientsCounter = useCounter("500+", { startOnMount: false, trigger: countersTriggered });
+  const satisfactionCounter = useCounter("98%", { startOnMount: false, trigger: countersTriggered });
+  const ratingCounter = useCounter("4.9/5", { startOnMount: false, trigger: countersTriggered });
+
+  // Trigger counters when section is revealed
+  useEffect(() => {
+    if (sectionRef.current && !countersTriggered) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setCountersTriggered(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(sectionRef.current);
+      return () => observer.disconnect();
+    }
+  }, [sectionRef, countersTriggered]);
 
   // Filter testimonials based on service
   const filteredTestimonials = testimonials.filter(t =>
@@ -291,17 +315,17 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--gold-metallic)]/25">
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">500+</div>
+              <div className="font-display text-xl text-[var(--gold-dark)]">{clientsCounter.value}</div>
               <div className="text-xs text-secondary">Clients satisfaits</div>
             </div>
             <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">4.9/5</div>
+              <div className="font-display text-xl text-[var(--gold-dark)]">{ratingCounter.value}</div>
               <div className="text-xs text-secondary">Note moyenne</div>
             </div>
             <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">98%</div>
+              <div className="font-display text-xl text-[var(--gold-dark)]">{satisfactionCounter.value}</div>
               <div className="text-xs text-secondary">Recommandation</div>
             </div>
           </div>

@@ -1,5 +1,7 @@
 /* eslint-disable import/order */
+import { useEffect, useState } from "react";
 import { useReveal } from "../Hooks/useReveal";
+import { useCounter } from "../Hooks/useCounter";
 import {
   FaBell,
   FaChartLine,
@@ -36,6 +38,47 @@ const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: strin
 
 export const ClientPortalPreview: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
+  const [countersTriggered, setCountersTriggered] = useState(false);
+
+  // Counter animations for portal stats
+  const cashBalanceCounter = useCounter("9 300 000 FCFA", { startOnMount: false, trigger: countersTriggered });
+  const totalValueCounter = useCounter("124,5 M FCFA", { startOnMount: false, trigger: countersTriggered });
+  const ytdPerfCounter = useCounter("+8,6%", { startOnMount: false, trigger: countersTriggered });
+  const liquidityCounter = useCounter("9,3 M", { startOnMount: false, trigger: countersTriggered });
+
+  // Position values counters
+  const sonatelValueCounter = useCounter("2 430 000", { startOnMount: false, trigger: countersTriggered });
+  const bicisValueCounter = useCounter("1 564 500", { startOnMount: false, trigger: countersTriggered });
+  const palmciValueCounter = useCounter("1 800 000", { startOnMount: false, trigger: countersTriggered });
+  const oatValueCounter = useCounter("4 160 000", { startOnMount: false, trigger: countersTriggered });
+
+  // Performance counters
+  const sonatelPerfCounter = useCounter("+6,4%", { startOnMount: false, trigger: countersTriggered });
+  const bicisPerfCounter = useCounter("+2,1%", { startOnMount: false, trigger: countersTriggered });
+  const palmciPerfCounter = useCounter("-1,2%", { startOnMount: false, trigger: countersTriggered });
+  const oatPerfCounter = useCounter("+0,8%", { startOnMount: false, trigger: countersTriggered });
+
+  // Allocation counters
+  const stocksAllocCounter = useCounter("58%", { startOnMount: false, trigger: countersTriggered });
+  const bondsAllocCounter = useCounter("34%", { startOnMount: false, trigger: countersTriggered });
+  const cashAllocCounter = useCounter("8%", { startOnMount: false, trigger: countersTriggered });
+
+  // Trigger counters when section is revealed
+  useEffect(() => {
+    if (sectionRef.current && !countersTriggered) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setCountersTriggered(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(sectionRef.current);
+      return () => observer.disconnect();
+    }
+  }, [sectionRef, countersTriggered]);
 
   return (
     <section ref={sectionRef} id="portal-preview" className="reveal py-24">
@@ -96,7 +139,7 @@ export const ClientPortalPreview: React.FC = () => {
               <div className="mt-6 p-3 rounded-lg bg-white/70 border border-[var(--night)]/10">
                 <div className="text-xs text-secondary">Solde espèces</div>
                 {/* eslint-disable-next-line no-irregular-whitespace */}
-                <div className="font-display text-lg">9 300 000 FCFA</div>
+                <div className="font-display text-lg">{cashBalanceCounter.value}</div>
               </div>
             </aside>
 
@@ -117,15 +160,15 @@ export const ClientPortalPreview: React.FC = () => {
               {/* KPI cards */}
               <div className="reveal-stagger grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
-                  { label: "Valeur totale", value: "124,5 M FCFA", delta: "+1,2%", trend: [92, 95, 93, 98, 105, 110, 124] },
-                  { label: "Perf. YTD", value: "+8,6%", delta: "+0,3%", trend: [2, 3, 2, 4, 5, 7, 8.6] },
-                  { label: "Liquidités", value: "9,3 M", delta: "=", trend: [7, 7.5, 8, 8.6, 9, 9.3, 9.3] },
+                  { label: "Valeur totale", counter: totalValueCounter, delta: "+1,2%", trend: [92, 95, 93, 98, 105, 110, 124] },
+                  { label: "Perf. YTD", counter: ytdPerfCounter, delta: "+0,3%", trend: [2, 3, 2, 4, 5, 7, 8.6] },
+                  { label: "Liquidités", counter: liquidityCounter, delta: "=", trend: [7, 7.5, 8, 8.6, 9, 9.3, 9.3] },
                   { label: "Risque", value: "Modéré", delta: "Stable", trend: [60, 58, 59, 57, 58, 58, 58] },
                 ].map((k, i) => (
                   <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10">
                     <div className="text-secondary text-xs">{k.label}</div>
                     <div className="flex items-end justify-between mt-1">
-                      <div className="font-display text-lg">{k.value}</div>
+                      <div className="font-display text-lg">{k.counter ? k.counter.value : k.value}</div>
                       <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
                     </div>
                     <div className="mt-2 opacity-80">
@@ -157,17 +200,17 @@ export const ClientPortalPreview: React.FC = () => {
                       </thead>
                       <tbody className="align-top">
                         {[
-                          { t: 'SONATEL', q: 120, pm: '20 100', v: '2 430 000', p: '+6,4%', a: 34 },
-                          { t: 'BICIS', q: 210, pm: '7 450', v: '1 564 500', p: '+2,1%', a: 21 },
-                          { t: 'PALMCI', q: 300, pm: '6 000', v: '1 800 000', p: '-1,2%', a: 18 },
-                          { t: 'OAT SN 2028 6.2%', q: 40, pm: '100 000', v: '4 160 000', p: '+0,8%', a: 27 },
+                          { t: 'SONATEL', q: 120, pm: '20 100', valueCounter: sonatelValueCounter, perfCounter: sonatelPerfCounter, a: 34 },
+                          { t: 'BICIS', q: 210, pm: '7 450', valueCounter: bicisValueCounter, perfCounter: bicisPerfCounter, a: 21 },
+                          { t: 'PALMCI', q: 300, pm: '6 000', valueCounter: palmciValueCounter, perfCounter: palmciPerfCounter, a: 18 },
+                          { t: 'OAT SN 2028 6.2%', q: 40, pm: '100 000', valueCounter: oatValueCounter, perfCounter: oatPerfCounter, a: 27 },
                         ].map((row, i) => (
                           <tr key={i} className="border-t border-[var(--night)]/10">
                             <td className="py-2 font-medium">{row.t}</td>
                             <td className="py-2">{row.q}</td>
                             <td className="py-2">{row.pm}</td>
-                            <td className="py-2">{row.v} FCFA</td>
-                            <td className={`py-2 ${String(row.p).startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.p}</td>
+                            <td className="py-2">{row.valueCounter.value} FCFA</td>
+                            <td className={`py-2 ${row.perfCounter.value.startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.perfCounter.value}</td>
                             <td className="py-2">
                               <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
                                 <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--gold-metallic)' }} />
@@ -191,9 +234,9 @@ export const ClientPortalPreview: React.FC = () => {
                          }}
                     />
                     <div className="text-sm">
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: 58%</div>
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: 34%</div>
-                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: 8%</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: {stocksAllocCounter.value}</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: {bondsAllocCounter.value}</div>
+                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: {cashAllocCounter.value}</div>
                     </div>
                   </div>
                   <div className="mt-4 text-xs text-secondary">Profil de risque: Modéré • Devise: FCFA</div>

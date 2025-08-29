@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { FiTrendingUp } from 'react-icons/fi';
 import { FaCalculator, FaChartLine } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
+import { useCounter } from '../Hooks/useCounter';
 
 interface CalculatorInputs {
   initialAmount: number;
@@ -51,6 +52,7 @@ export const InvestmentCalculator: React.FC = () => {
   });
 
   const [activeTab, setActiveTab] = useState<'calculator' | 'comparison'>('calculator');
+  const [countersTriggered, setCountersTriggered] = useState(false);
 
   // Calculate investment results
   useEffect(() => {
@@ -90,6 +92,30 @@ export const InvestmentCalculator: React.FC = () => {
 
     calculateResults();
   }, [inputs]);
+
+  // Counter animations for results
+  const totalInvestedCounter = useCounter(formatCurrency(results.totalInvested), { startOnMount: false, trigger: countersTriggered });
+  const totalFeesCounter = useCounter(formatCurrency(results.totalFees), { startOnMount: false, trigger: countersTriggered });
+  const projectedValueCounter = useCounter(formatCurrency(results.projectedValue), { startOnMount: false, trigger: countersTriggered });
+  const netReturnCounter = useCounter(formatCurrency(results.netReturn), { startOnMount: false, trigger: countersTriggered });
+  const avgReturnCounter = useCounter(formatPercentage(results.totalInvested > 0 ? results.netReturn / results.totalInvested / inputs.timeHorizon : 0), { startOnMount: false, trigger: countersTriggered });
+
+  // Trigger counters when results section is revealed
+  useEffect(() => {
+    if (sectionRef.current && !countersTriggered && results.totalInvested > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setCountersTriggered(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(sectionRef.current);
+      return () => observer.disconnect();
+    }
+  }, [sectionRef, countersTriggered, results.totalInvested]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('fr-FR', {
@@ -299,17 +325,17 @@ export const InvestmentCalculator: React.FC = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic)]/25">
                     <span className="text-secondary">Total investi</span>
-                    <span className="font-display text-lg">{formatCurrency(results.totalInvested)}</span>
+                    <span className="font-display text-lg">{totalInvestedCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic)]/25">
                     <span className="text-secondary">Frais estimés ({serviceFees[inputs.service].min}%)</span>
-                    <span className="font-display text-lg text-red-600">-{formatCurrency(results.totalFees)}</span>
+                    <span className="font-display text-lg text-red-600">-{totalFeesCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b-2 border-[var(--gold-metallic)]/25">
                     <span className="text-secondary">Valeur projetée</span>
-                    <span className="font-display text-xl text-green-600">{formatCurrency(results.projectedValue)}</span>
+                    <span className="font-display text-xl text-green-600">{projectedValueCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3">
@@ -317,7 +343,7 @@ export const InvestmentCalculator: React.FC = () => {
                     <span className={`font-display text-lg ${
                       results.netReturn >= 0 ? 'text-green-600' : 'text-red-600'
                     }`}>
-                      {formatCurrency(results.netReturn)}
+                      {netReturnCounter.value}
                     </span>
                   </div>
 
@@ -327,7 +353,7 @@ export const InvestmentCalculator: React.FC = () => {
                       <span className="font-display text-sm">Rendement annuel moyen estimé</span>
                     </div>
                     <div className="text-2xl font-display text-[var(--gold-dark)]">
-                      {formatPercentage(results.totalInvested > 0 ? results.netReturn / results.totalInvested / inputs.timeHorizon : 0)}
+                      {avgReturnCounter.value}
                     </div>
                   </div>
                 </div>

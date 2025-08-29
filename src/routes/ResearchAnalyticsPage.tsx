@@ -1,8 +1,7 @@
-import { FiBarChart, FiBookOpen, FiEye, FiFileText, FiSearch, FiTrendingUp, FiUsers } from 'react-icons/fi'
-import { FaAward, FaChartLine } from 'react-icons/fa'
+import { FiBarChart, FiFileText, FiSearch, FiTrendingUp, FiUsers } from 'react-icons/fi'
 
-import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
+import { StatsSection } from '../components/Sections/StatsSection'
 
 export const ResearchAnalyticsPage = () => {
   const heroRef = useReveal<HTMLElement>()
@@ -23,36 +22,22 @@ export const ResearchAnalyticsPage = () => {
           </div>
         </section>
 
-        {/* Research Impact & Recognition */}
-        <section className="py-14 sm:py-18 lg:py-20 bg-gradient-to-br from-[var(--gold-light)]/5 to-transparent">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-3xl mx-auto">
-              <span className="kicker text-gradient-gold">Notre reconnaissance</span>
-              <h2 className="luxury-heading mt-3">Une recherche qui fait référence sur le marché</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mt-12">
-              {[
-                { value: '500+', label: 'Publications', icon: FiFileText },
-                { value: '15+', label: 'Années d\'expérience', icon: FiTrendingUp },
-                { value: '98%', label: 'Précision prévisions', icon: FiBarChart },
-                { value: '200+', label: 'Clients institutionnels', icon: FiUsers }
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="relative inline-flex items-center justify-center mb-4">
-                    <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                        <stat.icon className="text-base md:text-lg" />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                  </div>
-                  <div className="numeric-tabular text-3xl font-display text-[var(--night)] mb-1">{stat.value}</div>
-                  <div className="text-sm md:text-base text-secondary">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+        <StatsSection
+          title="Une recherche qui fait référence sur le marché"
+          kicker="Notre reconnaissance"
+          background="gradient"
+          columns={4}
+          stats={[
+            { value: "500", suffix: '+', label: 'Publications', icon: FiFileText, animateWithUnits: false },
+            { value: "15", suffix: '+', label: 'Années d\'expérience', icon: FiTrendingUp, animateWithUnits: false },
+            { value: "98%", label: 'Précision prévisions', icon: FiBarChart, animateWithUnits: true },
+            { value: "200", suffix: '+', label: 'Clients institutionnels', icon: FiUsers, animateWithUnits: false }
+          ]}
+        />
 
-            {/* Sample Research Preview */}
+        {/* Sample Research Preview */}
+        <section className="py-14 sm:py-18 lg:py-20">
+          <div className="mx-auto max-w-6xl px-6">
             <div className="mt-16">
               <div className="text-center mb-8">
                 <h3 className="luxury-heading text-xl">Exemples de nos dernières publications</h3>

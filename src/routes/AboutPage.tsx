@@ -1,6 +1,8 @@
+import React from 'react'
 import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
 import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
+import { StatsSection } from '../components/Sections/StatsSection'
 
 export const AboutPage = () => {
   const timelineItems = [
@@ -19,14 +21,15 @@ export const AboutPage = () => {
   const missionVisionGridRef = useReveal<HTMLDivElement>()
   const philosophieRef = useReveal<HTMLElement>()
   const philosophieGridRef = useReveal<HTMLDivElement>()
-  const chiffresRef = useReveal<HTMLElement>()
-  const chiffresGridRef = useReveal<HTMLDivElement>()
+
   const histoireRef = useReveal<HTMLElement>()
   const histoireListRef = useReveal<HTMLUListElement>()
   const equipeRef = useReveal<HTMLElement>()
   const equipeGridRef = useReveal<HTMLDivElement>()
   const conformiteRef = useReveal<HTMLElement>()
   const conformiteGridRef = useReveal<HTMLDivElement>()
+
+
 
   return (
     <div>
@@ -148,26 +151,17 @@ export const AboutPage = () => {
           </div>
         </section>
 
-        {/* Chiffres clés */}
-        <section ref={chiffresRef} id="chiffres" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Chiffres clés</h2>
-            <div ref={chiffresGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="stat-card rounded-2xl p-6">
-                <div className="text-3xl font-display">11</div>
-                <div className="text-secondary text-sm">ans d’existence</div>
-              </div>
-              <div className="stat-card rounded-2xl p-6">
-                <div className="text-3xl font-display">500 Mds F CFA</div>
-                <div className="text-secondary text-sm">Levée de fonds (obligations, titres de capital, FCT)</div>
-              </div>
-              <div className="stat-card rounded-2xl p-6">
-                <div className="text-3xl font-display">200 Mds F CFA</div>
-                <div className="text-secondary text-sm">Transactions au marché financier</div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <StatsSection
+          id="chiffres"
+          title="Chiffres clés"
+          background="light"
+          columns={3}
+          stats={[
+            { value: "11", label: "ans d'existence", animateWithUnits: false },
+            { value: "500 Mds F CFA", label: "Levée de fonds (obligations, titres de capital, FCT)", animateWithUnits: true },
+            { value: "200 Mds F CFA", label: "Transactions au marché financier", animateWithUnits: true }
+          ]}
+        />
 
         {/* Histoire */}
         <section ref={histoireRef} id="histoire" className="reveal py-14 sm:py-18">

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { FiTarget, FiTrendingUp } from 'react-icons/fi';
 import { FaChartLine } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
+import { useCounter } from '../Hooks/useCounter';
 
 interface PerformanceData {
   period: string;
@@ -19,38 +21,15 @@ const performanceData: Array<PerformanceData> = [
 
 interface MetricCard {
   title: string;
-  discretionary: string | number;
-  mandate: string | number;
-  assisted: string | number;
+  discretionary: string | number | { value: string };
+  mandate: string | number | { value: string };
+  assisted: string | number | { value: string };
   unit: string;
   higherIsBetter: boolean;
 }
 
-const metricsData: Array<MetricCard> = [
-  {
-    title: 'Performance annualisée',
-    discretionary: '9.8%',
-    mandate: '11.2%',
-    assisted: '10.5%',
-    unit: '%',
-    higherIsBetter: true
-  },
-  {
-    title: 'Volatilité annualisée',
-    discretionary: '15.2%',
-    mandate: '12.8%',
-    assisted: '14.1%',
-    unit: '%',
-    higherIsBetter: false
-  },
-  {
-    title: 'Ratio Sharpe',
-    discretionary: '0.64',
-    mandate: '0.87',
-    assisted: '0.74',
-    unit: '',
-    higherIsBetter: true
-  },
+// Static metrics data (for non-animated values)
+const staticMetricsData: Array<MetricCard> = [
   {
     title: 'Temps de réaction',
     discretionary: '< 1h',
@@ -58,29 +37,102 @@ const metricsData: Array<MetricCard> = [
     assisted: '< 2h',
     unit: '',
     higherIsBetter: true
-  },
-  {
-    title: 'Frais totaux',
-    discretionary: '0.40%',
-    mandate: '0.95%',
-    assisted: '0.65%',
-    unit: '%',
-    higherIsBetter: false
-  },
-  {
-    title: 'Satisfaction client',
-    discretionary: '4.6/5',
-    mandate: '4.8/5',
-    assisted: '4.7/5',
-    unit: '/5',
-    higherIsBetter: true
   }
 ];
 
 export const PerformanceComparison: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
+  const [countersTriggered, setCountersTriggered] = useState(false);
 
-  const formatValue = (value: string | number, unit: string) => {
+  // Counter animations for metrics
+  const perfDiscretionaryCounter = useCounter("9.8%", { startOnMount: false, trigger: countersTriggered });
+  const perfMandateCounter = useCounter("11.2%", { startOnMount: false, trigger: countersTriggered });
+  const perfAssistedCounter = useCounter("10.5%", { startOnMount: false, trigger: countersTriggered });
+
+  const volDiscretionaryCounter = useCounter("15.2%", { startOnMount: false, trigger: countersTriggered });
+  const volMandateCounter = useCounter("12.8%", { startOnMount: false, trigger: countersTriggered });
+  const volAssistedCounter = useCounter("14.1%", { startOnMount: false, trigger: countersTriggered });
+
+  const sharpeDiscretionaryCounter = useCounter("0.64", { startOnMount: false, trigger: countersTriggered });
+  const sharpeMandateCounter = useCounter("0.87", { startOnMount: false, trigger: countersTriggered });
+  const sharpeAssistedCounter = useCounter("0.74", { startOnMount: false, trigger: countersTriggered });
+
+  const feesDiscretionaryCounter = useCounter("0.40%", { startOnMount: false, trigger: countersTriggered });
+  const feesMandateCounter = useCounter("0.95%", { startOnMount: false, trigger: countersTriggered });
+  const feesAssistedCounter = useCounter("0.65%", { startOnMount: false, trigger: countersTriggered });
+
+  const satDiscretionaryCounter = useCounter("4.6/5", { startOnMount: false, trigger: countersTriggered });
+  const satMandateCounter = useCounter("4.8/5", { startOnMount: false, trigger: countersTriggered });
+  const satAssistedCounter = useCounter("4.7/5", { startOnMount: false, trigger: countersTriggered });
+
+  // Trigger counters when section is revealed
+  useEffect(() => {
+    if (sectionRef.current && !countersTriggered) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setCountersTriggered(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(sectionRef.current);
+      return () => observer.disconnect();
+    }
+  }, [sectionRef, countersTriggered]);
+
+  // Create animated metrics data
+  const metricsData = [
+    {
+      title: 'Performance annualisée',
+      discretionary: perfDiscretionaryCounter,
+      mandate: perfMandateCounter,
+      assisted: perfAssistedCounter,
+      unit: '%',
+      higherIsBetter: true
+    },
+    {
+      title: 'Volatilité annualisée',
+      discretionary: volDiscretionaryCounter,
+      mandate: volMandateCounter,
+      assisted: volAssistedCounter,
+      unit: '%',
+      higherIsBetter: false
+    },
+    {
+      title: 'Ratio Sharpe',
+      discretionary: sharpeDiscretionaryCounter,
+      mandate: sharpeMandateCounter,
+      assisted: sharpeAssistedCounter,
+      unit: '',
+      higherIsBetter: true
+    },
+    ...staticMetricsData,
+    {
+      title: 'Frais totaux',
+      discretionary: feesDiscretionaryCounter,
+      mandate: feesMandateCounter,
+      assisted: feesAssistedCounter,
+      unit: '%',
+      higherIsBetter: false
+    },
+    {
+      title: 'Satisfaction client',
+      discretionary: satDiscretionaryCounter,
+      mandate: satMandateCounter,
+      assisted: satAssistedCounter,
+      unit: '/5',
+      higherIsBetter: true
+    }
+  ];
+
+  const formatValue = (value: string | number | { value: string }, unit: string) => {
+    // Handle counter objects
+    if (typeof value === 'object' && value && 'value' in value) {
+      return value.value;
+    }
+
     if (typeof value === 'string') {
       return value;
     }
@@ -89,7 +141,18 @@ export const PerformanceComparison: React.FC = () => {
 
   const getBestValue = (card: MetricCard) => {
     const values = [card.discretionary, card.mandate, card.assisted];
-    const numericValues = values.map(v => typeof v === 'string' ? parseFloat(v.replace(/[^\d.-]/g, '')) || 0 : v);
+    const numericValues = values.map(v => {
+      // Handle counter objects
+      if (typeof v === 'object' && v && 'value' in v) {
+        return parseFloat(v.value.replace(/[^\d.-]/g, '')) || 0;
+      }
+      // Handle strings
+      if (typeof v === 'string') {
+        return parseFloat(v.replace(/[^\d.-]/g, '')) || 0;
+      }
+      // Handle numbers
+      return v;
+    });
 
     if (card.higherIsBetter) {
       const max = Math.max(...numericValues);

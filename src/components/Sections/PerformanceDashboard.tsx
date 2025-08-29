@@ -1,7 +1,8 @@
 /* eslint-disable sort-imports */
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useReveal } from "../Hooks/useReveal";
+import { useCounter } from "../Hooks/useCounter";
 
 type TimeRange = "YTD" | "1Y" | "3Y";
 
@@ -9,6 +10,7 @@ export const PerformanceDashboard: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const gridRef = useReveal<HTMLDivElement>();
   const [range, setRange] = useState<TimeRange>("YTD");
+  const [countersTriggered, setCountersTriggered] = useState(false);
 
   const mockedData = useMemo(() => {
     // Very lightweight mocked series for portfolio vs benchmark
@@ -41,6 +43,31 @@ export const PerformanceDashboard: React.FC = () => {
       { label: "Surperf. vs BRVM", value: "+2.3%", positive: true },
     ];
   }, []);
+
+  // Counter animations for KPIs
+  const ytdCounter = useCounter(kpis[0].value, { startOnMount: false, trigger: countersTriggered });
+  const cagrCounter = useCounter(kpis[1].value, { startOnMount: false, trigger: countersTriggered });
+  const volatilityCounter = useCounter(kpis[2].value, { startOnMount: false, trigger: countersTriggered });
+  const sharpeCounter = useCounter(kpis[3].value, { startOnMount: false, trigger: countersTriggered });
+  const aumCounter = useCounter(kpis[4].value, { startOnMount: false, trigger: countersTriggered });
+  const outperCounter = useCounter(kpis[5].value, { startOnMount: false, trigger: countersTriggered });
+
+  // Trigger counters when section is revealed
+  useEffect(() => {
+    if (sectionRef.current && !countersTriggered) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setCountersTriggered(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.3 }
+      );
+      observer.observe(sectionRef.current);
+      return () => observer.disconnect();
+    }
+  }, [sectionRef, countersTriggered]);
 
   const allocation = [
     { label: "Actions", value: 58 },
@@ -89,19 +116,25 @@ export const PerformanceDashboard: React.FC = () => {
         <div ref={gridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12">
           {/* KPIs */}
           <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
-            {kpis.map((k, i) => (
-              <div key={i} className="glass-card-dark glass-card-hover">
-                <div className="text-secondary-dark text-xs mb-2">{k.label}</div>
-                <div className="font-display text-lg flex items-center gap-2">
-                  {k.positive ? (
-                    <FaArrowUp className="text-emerald-400" />
-                  ) : (
-                    <FaArrowDown className="text-amber-400" />
-                  )}
-                  <span className="text-[var(--pure-white)]">{k.value}</span>
+            {kpis.map((k, i) => {
+              // Get the corresponding counter based on index
+              const counters = [ytdCounter, cagrCounter, volatilityCounter, sharpeCounter, aumCounter, outperCounter];
+              const counter = counters[i];
+
+              return (
+                <div key={i} className="glass-card-dark glass-card-hover">
+                  <div className="text-secondary-dark text-xs mb-2">{k.label}</div>
+                  <div className="font-display text-lg flex items-center gap-2">
+                    {k.positive ? (
+                      <FaArrowUp className="text-emerald-400" />
+                    ) : (
+                      <FaArrowDown className="text-amber-400" />
+                    )}
+                    <span className="text-[var(--pure-white)]">{counter.value}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Allocation */}

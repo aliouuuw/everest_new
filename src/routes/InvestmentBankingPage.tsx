@@ -2,6 +2,7 @@ import { FiAward, FiClipboard, FiLayers, FiSend, FiTarget, FiTrendingUp, FiUsers
 
 import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
+import { StatsSection } from '../components/Sections/StatsSection'
 
 export const InvestmentBankingPage = () => {
   const heroRef = useReveal<HTMLElement>()
@@ -22,36 +23,22 @@ export const InvestmentBankingPage = () => {
           </div>
         </section>
 
-        {/* Success Metrics & Expertise */}
-        <section className="py-14 sm:py-18 lg:py-20 bg-gradient-to-br from-[var(--gold-light)]/5 to-transparent">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-3xl mx-auto">
-              <span className="kicker text-gradient-gold">Notre expertise</span>
-              <h2 className="luxury-heading mt-3">Des opérations complexes menées avec succès</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mt-12">
-              {[
-                { value: '18+', label: 'Projets structurés', icon: FiLayers },
-                { value: '8Mds', label: 'XOF conseillés', icon: FiTrendingUp },
-                { value: '12', label: 'Experts spécialisés', icon: FiUsers },
-                { value: '100%', label: 'Projets livrés', icon: FiAward }
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="relative inline-flex items-center justify-center mb-4">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                        <stat.icon className="text-base md:text-lg" />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                  </div>
-                  <div className="numeric-tabular text-3xl font-display text-[var(--night)] mb-1">{stat.value}</div>
-                  <div className="text-sm md:text-base text-secondary">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+        <StatsSection
+          title="Des opérations complexes menées avec succès"
+          kicker="Notre expertise"
+          background="gradient"
+          columns={4}
+          stats={[
+            { value: "18", suffix: '+', label: 'Projets structurés', icon: FiLayers, animateWithUnits: false },
+            { value: "8Mds", label: 'XOF conseillés', icon: FiTrendingUp, animateWithUnits: true },
+            { value: "12", label: 'Experts spécialisés', icon: FiUsers, animateWithUnits: false },
+            { value: "100%", label: 'Projets livrés', icon: FiAward, animateWithUnits: true }
+          ]}
+        />
 
-            {/* Case Studies */}
+        {/* Case Studies */}
+        <section className="py-14 sm:py-18 lg:py-20">
+          <div className="mx-auto max-w-6xl px-6">
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
