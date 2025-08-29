@@ -10,7 +10,6 @@ import {
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 import { registerServiceWorker } from './utils/serviceWorker'
-import { swUpdateManager } from './utils/swUpdate'
 
 import App from './App.tsx'
 import { Layout } from './components/Layout.tsx'
