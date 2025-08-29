@@ -174,7 +174,7 @@ export const HeroSection: React.FC = () => {
 
       {/* License information - bottom left */}
       <div className="absolute bottom-8 left-8 text-xs text-[var(--night-80)] opacity-60 z-10">
-        <span>Licenciée CREPMF SGI/DA/2016/60</span>
+        <span>Agrément n° SGI /DA/2016/60</span>
       </div>
 
       {/* Minimal scroll indicator */}
