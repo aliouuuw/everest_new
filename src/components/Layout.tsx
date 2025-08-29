@@ -4,7 +4,8 @@ import { Footer } from './Footer'
 import { BRVMTicker } from './Header/BRVMTicker'
 import { WhatsAppButton } from './WhatsAppButton'
 import { LenisWrapper } from './LenisWrapper'
-import { Component, ErrorInfo, ReactNode } from 'react'
+import { Component } from 'react'
+import type { ErrorInfo, ReactNode } from 'react'
 
 // Error Boundary Component
 class ErrorBoundary extends Component<
