@@ -1,6 +1,4 @@
-import { FiAward, FiClipboard, FiLayers, FiSend, FiTarget, FiTrendingUp, FiUsers } from 'react-icons/fi'
-
-import { CTA } from '../components/Sections/CTA'
+import { FiAward, FiClipboard, FiLayers, FiSend, FiTrendingUp, FiUsers } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
 import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
 import { StatsSection } from '../components/Sections/StatsSection'

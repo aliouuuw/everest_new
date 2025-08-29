@@ -1,7 +1,5 @@
 import { FiHeadphones, FiHelpCircle, FiMessageCircle, FiPhone, FiSliders, FiUserCheck } from 'react-icons/fi'
 import { FaLightbulb } from 'react-icons/fa'
-
-import { CTA } from '../components/Sections/CTA'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
 import { PerformanceComparison } from '../components/Sections/PerformanceComparison'

@@ -1,6 +1,4 @@
-import React from 'react'
 import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
-import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
 import { StatsSection } from '../components/Sections/StatsSection'
 

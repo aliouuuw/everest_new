@@ -1,6 +1,4 @@
 import { FiAward, FiClipboard, FiShield, FiSliders, FiTarget, FiTrendingUp, FiUsers } from 'react-icons/fi'
-
-import { CTA } from '../components/Sections/CTA'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
 import { PerformanceComparison } from '../components/Sections/PerformanceComparison'

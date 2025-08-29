@@ -93,6 +93,19 @@ export const InvestmentCalculator: React.FC = () => {
     calculateResults();
   }, [inputs]);
 
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'XOF',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const formatPercentage = (value: number) => {
+    return `${(value * 100).toFixed(1)}%`;
+  };
+
   // Counter animations for results
   const totalInvestedCounter = useCounter(formatCurrency(results.totalInvested), { startOnMount: false, trigger: countersTriggered });
   const totalFeesCounter = useCounter(formatCurrency(results.totalFees), { startOnMount: false, trigger: countersTriggered });
@@ -116,19 +129,6 @@ export const InvestmentCalculator: React.FC = () => {
       return () => observer.disconnect();
     }
   }, [sectionRef, countersTriggered, results.totalInvested]);
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'XOF',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const formatPercentage = (value: number) => {
-    return `${(value * 100).toFixed(1)}%`;
-  };
 
   const handleInputChange = (field: keyof CalculatorInputs, value: string | number) => {
     setInputs(prev => ({

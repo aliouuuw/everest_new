@@ -1,5 +1,4 @@
-import { FiAward, FiCheckCircle, FiClock, FiCompass, FiDollarSign, FiGrid, FiHeadphones, FiHelpCircle, FiMessageCircle, FiPhone, FiShield, FiSliders, FiTarget, FiTrendingUp, FiUserCheck, FiUsers } from 'react-icons/fi'
-import { FaLightbulb } from 'react-icons/fa'
+import { FiCheckCircle, FiCompass, FiHeadphones, FiHelpCircle, FiShield } from 'react-icons/fi'
 
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'

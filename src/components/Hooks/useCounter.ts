@@ -16,7 +16,6 @@ interface CounterResult {
 
 // Easing functions
 const easeOutCubic = (t: number): number => 1 - Math.pow(1 - t, 3);
-const easeOutQuad = (t: number): number => 1 - Math.pow(1 - t, 2);
 
 export function useCounter(
   targetValue: number | string,
@@ -31,7 +30,7 @@ export function useCounter(
 
 
 
-  const [currentValue, setCurrentValue] = useState<number>(0);
+  const [, setCurrentValue] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [formattedValue, setFormattedValue] = useState<string>('');
 
@@ -97,7 +96,6 @@ export function useCounter(
       // For currency, animate the numerical part and keep the format
       const currencyMatch = target.match(/^([\d,]+(?:\.\d+)?)\s*(M|Mds|K|B)?\s*(FCFA|F\s*CFA|XOF)?$/i);
       if (currencyMatch) {
-        const originalNum = parseFloat(currencyMatch[1].replace(/,/g, ''));
         // Handle both 'M' and 'Mds' as million multipliers for proper animation
         const multiplier = currencyMatch[2] === 'M' || currencyMatch[2] === 'Mds' ? 1000000 : currencyMatch[2] === 'K' ? 1000 : currencyMatch[2] === 'B' ? 1000000000 : 1;
 

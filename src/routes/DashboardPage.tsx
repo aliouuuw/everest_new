@@ -1,25 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import {
+  FaArrowUp,
   FaBell,
   FaChartLine,
   FaCloudDownloadAlt,
   FaCog,
+  FaDownload,
+  FaExclamationTriangle,
+  FaEye,
+  FaEyeSlash,
   FaFileInvoice,
   FaHome,
   FaListUl,
-  FaSearch,
-  FaUserShield,
-  FaSignOutAlt,
-  FaFilter,
-  FaDownload,
-  FaEye,
-  FaEyeSlash,
-  FaPlus,
   FaMinus,
-  FaArrowUp,
-  FaArrowDown,
-  FaExclamationTriangle
+  FaPlus,
+  FaSearch,
+  FaSignOutAlt,
+  FaUserShield
 } from "react-icons/fa"
 
 // Mock user data
@@ -88,7 +86,7 @@ export const DashboardPage = () => {
   const navigate = useNavigate()
   const [user] = useState(MOCK_USER)
   const [positions] = useState(MOCK_POSITIONS)
-  const [transactions, setTransactions] = useState(MOCK_TRANSACTIONS)
+  const [transactions, _setTransactions] = useState(MOCK_TRANSACTIONS)
   const [alerts] = useState(MOCK_ALERTS)
   const [activeView, setActiveView] = useState('dashboard')
   const [searchTerm, setSearchTerm] = useState('')
@@ -127,7 +125,6 @@ export const DashboardPage = () => {
 
   const totalPortfolioValue = positions.reduce((sum, pos) => sum + pos.value, 0) + user.balance
   const totalCash = user.balance
-  const totalInvestments = positions.reduce((sum, pos) => sum + pos.value, 0)
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('fr-FR').format(amount) + ' FCFA'

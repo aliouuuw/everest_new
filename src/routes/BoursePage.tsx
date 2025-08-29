@@ -368,7 +368,7 @@ export const BoursePage: React.FC = () => {
   const [trendingAssets] = useState<Array<TrendingAsset>>(MOCK_TRENDING_ASSETS)
   const [isLoading, setIsLoading] = useState(false)
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
-  const [sortBy, setSortBy] = useState<'rank' | 'price' | 'change' | 'marketCap'>('rank')
+  const [sortBy, _setSortBy] = useState<'rank' | 'price' | 'change' | 'marketCap'>('rank')
   const [filterBy, setFilterBy] = useState<'all' | 'gainers' | 'losers'>('all')
 
   // Animation refs
