@@ -103,7 +103,7 @@ export const PortalPage = () => {
         <section id="signup" ref={formSectionRef} className="reveal pb-14 sm:pb-18">
           <div className="mx-auto max-w-6xl px-6">
             <div ref={formCardRef} className="reveal-stagger group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full bg-gradient-to-br from-[var(--gold-metallic)]/20 via-[var(--gold-metallic)]/12 to-[var(--gold-metallic)]/3 blur-3xl" />
               <div className="flex items-start justify-between">
                 <div>
                   <div className="font-display text-xl">Accéder à votre espace</div>
@@ -123,7 +123,7 @@ export const PortalPage = () => {
                   aria-controls="panel-signin"
                   id="tab-signin"
                   onClick={() => setActiveTab('signin')}
-                  className={`px-4 py-2 rounded-md font-display text-sm transition-colors ${activeTab === 'signin' ? 'bg-[var(--pure-white)] text-[var(--night)]' : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'}`}
+                  className={`px-4 py-2 rounded-md font-display text-sm transition-all ${activeTab === 'signin' ? 'bg-[var(--gold-metallic)] text-white shadow-lg' : 'text-secondary hover:text-[var(--gold-dark)]'}`}
                 >
                   Connexion
                 </button>
@@ -134,7 +134,7 @@ export const PortalPage = () => {
                   aria-controls="panel-signup"
                   id="tab-signup"
                   onClick={() => setActiveTab('signup')}
-                  className={`px-4 py-2 rounded-md font-display text-sm transition-colors ${activeTab === 'signup' ? 'bg-[var(--pure-white)] text-[var(--night)]' : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'}`}
+                  className={`px-4 py-2 rounded-md font-display text-sm transition-all ${activeTab === 'signup' ? 'bg-[var(--gold-metallic)] text-white shadow-lg' : 'text-secondary hover:text-[var(--gold-dark)]'}`}
                 >
                   Inscription
                 </button>

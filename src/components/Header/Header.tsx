@@ -223,17 +223,10 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/portal"
-            className="group relative inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-gradient-to-r from-[#ca942f] via-[#e9d89c] to-[#ca942f] text-[#2c1810] rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 border border-[#b8860b]/30 hover:border-[#b8860b]/50 overflow-hidden"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-[var(--line-soft)] text-[#2c1810] rounded-lg transition-all duration-300 hover:bg-[#b8860b] hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105"
           >
-            {/* Metallic shine effect */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-            <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
-            
-            <div className="relative">
-              <FingerprintIcon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <span className="relative z-10 tracking-wide drop-shadow-sm">Accès Client</span>
+            <FingerprintIcon className="w-4 h-4 transition-transform duration-300 hover:scale-110" />
+            <span className="tracking-wide">Accès Client</span>
           </Link>
         </div>
 
@@ -335,18 +328,11 @@ export const Header: React.FC = () => {
             <div className="pt-4 border-t border-black/10">
               <Link
                 to="/portal"
-                className="group relative inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-gradient-to-r from-[#ca942f] via-[#e9d89c] to-[#ca942f] text-[#2c1810] rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 border border-[#b8860b]/30 hover:border-[#b8860b]/50 overflow-hidden w-full"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-[#d4af37] text-[#2c1810] rounded-lg transition-all duration-300 hover:bg-[#b8860b] hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {/* Metallic shine effect */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
-                
-                <div className="relative">
-                  <FingerprintIcon className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-                </div>
-                <span className="relative z-10 tracking-wide drop-shadow-sm">Accès Client</span>
+                <FingerprintIcon className="w-4 h-4 transition-transform duration-300 hover:scale-110" />
+                <span className="tracking-wide">Accès Client</span>
               </Link>
             </div>
           </div>
