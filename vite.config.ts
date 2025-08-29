@@ -55,15 +55,10 @@ export default defineConfig({
     // Enable source maps for production debugging
     sourcemap: false,
   },
-  // Configure dev server to handle client-side routing
+  // Configure dev server
   server: {
-    // @ts-ignore - historyApiFallback is passed to underlying server
-    historyApiFallback: {
-      index: '/index.html'
-    },
-    headers: {
-      'Content-Type': 'application/javascript',
-    }
+    port: 3000,
+    host: true,
   },
   // Optimize dependencies
   optimizeDeps: {
