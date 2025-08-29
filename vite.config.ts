@@ -61,6 +61,9 @@ export default defineConfig({
     historyApiFallback: {
       index: '/index.html'
     },
+    headers: {
+      'Content-Type': 'application/javascript',
+    }
   },
   // Optimize dependencies
   optimizeDeps: {
