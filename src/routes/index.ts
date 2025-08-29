@@ -5,10 +5,9 @@ export { CEOMessagePage } from './CEOMessagePage'
 export { CapitalMarketsPage } from './CapitalMarketsPage'
 export { InvestmentBankingPage } from './InvestmentBankingPage'
 export { ResearchAnalyticsPage } from './ResearchAnalyticsPage'
+export { ServicesPage } from './ServicesPage'
 export { DiscretionaryMgmtPage } from './DiscretionaryMgmtPage'
 export { MandateMgmtPage } from './MandateMgmtPage'
 export { AssistedMgmtPage } from './AssistedMgmtPage'
 export { BoursePage } from './BoursePage'
 export { PortalPage } from './PortalPage'
-
-

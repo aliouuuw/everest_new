@@ -9,6 +9,14 @@ interface ServiceFAQProps {
 const faqData = {
   discretionary: [
     {
+      question: "Quel est le minimum requis pour ouvrir un compte ?",
+      answer: "Un minimum de 50 millions FCFA est requis pour la gestion libre, tandis que la gestion assistée nécessite un minimum de 20 millions FCFA."
+    },
+    {
+      question: "Puis-je suivre mes investissements en temps réel ?",
+      answer: "Oui, notre portail client vous permet de suivre l'évolution de vos investissements en temps réel, avec des rapports détaillés disponibles à tout moment."
+    },
+    {
       question: "Qu'est-ce que la gestion libre exactement ?",
       answer: "La gestion libre vous permet de garder le contrôle total de vos décisions d'investissement. Vous définissez les objectifs, les contraintes et le niveau de risque, puis nous exécutons vos ordres sur la BRVM selon vos instructions. Vous restez maître de votre stratégie d'investissement."
     },
@@ -117,32 +125,6 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
     setOpenItems(newOpenItems);
   };
 
-  const getServiceTitle = () => {
-    switch (service) {
-      case 'discretionary':
-        return 'Gestion Libre';
-      case 'mandate':
-        return 'Gestion Sous-Mandat';
-      case 'assisted':
-        return 'Gestion Assistée';
-      default:
-        return '';
-    }
-  };
-
-  const getServiceDescription = () => {
-    switch (service) {
-      case 'discretionary':
-        return 'Questions fréquentes sur notre service de gestion libre';
-      case 'mandate':
-        return 'Questions fréquentes sur notre service de gestion sous-mandat';
-      case 'assisted':
-        return 'Questions fréquentes sur notre service de gestion assistée';
-      default:
-        return '';
-    }
-  };
-
   const faqs = faqData[service];
 
   return (
@@ -150,8 +132,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">FAQ</span>
-          <h2 className="luxury-heading mt-3">{getServiceTitle()}</h2>
-          <p className="luxury-subheading mt-5">{getServiceDescription()}</p>
+          <h2 className="luxury-heading mt-3">Questions fréquentes</h2>
         </div>
 
         <div className="space-y-4">

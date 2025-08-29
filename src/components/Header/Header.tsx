@@ -138,6 +138,7 @@ export const Header: React.FC = () => {
   ];
 
   const servicesItems: Array<DropdownItem> = [
+    { label: 'Tous nos services', href: '/services' },
     { label: 'Gestion libre', href: '/gestion-libre' },
     { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
     { label: 'Gestion assistée', href: '/gestion-assistee' },
@@ -180,14 +181,12 @@ export const Header: React.FC = () => {
             onClose={closeDropdownByName}
           />
           
-          <Dropdown
-            name="services"
-            title="Services"
-            items={servicesItems}
-            isOpen={openDropdown === 'services'}
-            onOpen={openDropdownByName}
-            onClose={closeDropdownByName}
-          />
+          <Link 
+            to="/services" 
+            className="transition-colors hover:text-[var(--gold-dark)]"
+          >
+            Services
+          </Link>
 
           <Link 
             to="/bourse" 
@@ -274,22 +273,14 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Services Section */}
-            <div>
-              <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Services</div>
-              <div className="space-y-2 pl-3">
-                {servicesItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.href}
-                    className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            {/* Services Link */}
+            <Link 
+              to="/services" 
+              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Services
+            </Link>
 
             {/* Bourse Link */}
             <Link 

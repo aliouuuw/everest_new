@@ -22,6 +22,7 @@ import { CEOMessagePage } from './routes/CEOMessagePage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
 import { ResearchAnalyticsPage } from './routes/ResearchAnalyticsPage'
+import { ServicesPage } from './routes/ServicesPage'
 import { DiscretionaryMgmtPage } from './routes/DiscretionaryMgmtPage'
 import { MandateMgmtPage } from './routes/MandateMgmtPage'
 import { AssistedMgmtPage } from './routes/AssistedMgmtPage'
@@ -80,22 +81,28 @@ const researchRoute = createRoute({
   component: ResearchAnalyticsPage,
 })
 
+const servicesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services',
+  component: ServicesPage,
+})
+
 const gestionLibreRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-libre',
-  component: DiscretionaryMgmtPage,
+  component: ServicesPage,
 })
 
 const gestionMandatRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-sous-mandat',
-  component: MandateMgmtPage,
+  component: ServicesPage,
 })
 
 const gestionAssisteeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-assistee',
-  component: AssistedMgmtPage,
+  component: ServicesPage,
 })
 
 const bourseRoute = createRoute({
@@ -119,6 +126,7 @@ const routeTree = rootRoute.addChildren([
   capitalMarketsRoute,
   ibRoute,
   researchRoute,
+  servicesRoute,
   gestionLibreRoute,
   gestionMandatRoute,
   gestionAssisteeRoute,

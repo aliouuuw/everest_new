@@ -179,13 +179,12 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
             </div>
 
             <div className="mt-6 pt-4 border-t border-[var(--gold-metallic)]/25">
-              <a
-                href={`/${service === 'discretionary' ? 'gestion-libre' :
-                       service === 'mandate' ? 'gestion-sous-mandat' : 'gestion-assistee'}`}
-                className="btn-secondary font-display tracking-wide w-full text-center"
+              <button
+                className="btn-secondary font-display tracking-wide w-full text-center opacity-50 cursor-not-allowed"
+                disabled
               >
-                En savoir plus
-              </a>
+                Service intégré
+              </button>
             </div>
           </div>
         ))}
@@ -241,33 +240,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <td className="p-4 border-t-2 border-[var(--gold-metallic)]/25">
-                <span className="font-display text-base">Action</span>
-              </td>
-              {['discretionary', 'mandate', 'assisted'].map((service) => (
-                <td
-                  key={service}
-                  className={`p-4 text-center border-t-2 border-[var(--gold-metallic)]/25 ${
-                    currentService === service ? 'bg-[var(--gold-light)]/10' : ''
-                  }`}
-                >
-                  <a
-                    href={`/${service === 'discretionary' ? 'gestion-libre' :
-                           service === 'mandate' ? 'gestion-sous-mandat' : 'gestion-assistee'}`}
-                    className={`inline-flex items-center justify-center px-4 py-2 rounded-lg font-display tracking-wide transition-all ${
-                      currentService === service
-                        ? 'btn-primary'
-                        : 'btn-secondary'
-                    }`}
-                  >
-                    {currentService === service ? 'Continuer' : 'Découvrir'}
-                  </a>
-                </td>
-              ))}
-            </tr>
-          </tfoot>
+
         </table>
       </div>
 
