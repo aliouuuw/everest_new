@@ -158,8 +158,8 @@ export const AboutPage = () => {
           columns={3}
           stats={[
             { value: "11", label: "ans d'existence", animateWithUnits: false },
-            { value: "500 Mds F CFA", label: "Levée de fonds (obligations, titres de capital, FCT)", animateWithUnits: true },
-            { value: "200 Mds F CFA", label: "Transactions au marché financier", animateWithUnits: true }
+            { value: "500 Mds F CFA", label: "Levée de fonds (obligations, titres de capital, FCT)", animateWithUnits: false },
+            { value: "200 Mds F CFA", label: "Transactions au marché financier", animateWithUnits: false }
           ]}
         />
 

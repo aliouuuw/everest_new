@@ -30,7 +30,7 @@ export const ResearchAnalyticsPage = () => {
           stats={[
             { value: "500", suffix: '+', label: 'Publications', icon: FiFileText, animateWithUnits: false },
             { value: "15", suffix: '+', label: 'Années d\'expérience', icon: FiTrendingUp, animateWithUnits: false },
-            { value: "98%", label: 'Précision prévisions', icon: FiBarChart, animateWithUnits: true },
+            { value: "98%", label: 'Précision prévisions', icon: FiBarChart, animateWithUnits: false },
             { value: "200", suffix: '+', label: 'Clients institutionnels', icon: FiUsers, animateWithUnits: false }
           ]}
         />

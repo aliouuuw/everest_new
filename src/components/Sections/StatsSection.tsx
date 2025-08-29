@@ -37,6 +37,31 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   const sectionRef = useReveal<HTMLElement>()
   const [countersTriggered, setCountersTriggered] = useState(false)
 
+  // Helper function to parse stat value and extract numeric part
+  const parseStatValue = (value: string) => {
+    // Match numeric part at the beginning, including decimals and commas
+    const numericMatch = value.match(/^([\d,]+(?:\.\d+)?)/)
+
+    if (numericMatch) {
+      const numericPart = numericMatch[1]
+      const remainingPart = value.slice(numericMatch[0].length).trim()
+
+      // Clean the numeric part (remove commas for animation)
+      const cleanNumeric = numericPart.replace(/,/g, '')
+
+      return {
+        numericValue: cleanNumeric,
+        unit: remainingPart
+      }
+    }
+
+    // Fallback: treat entire value as numeric if no match
+    return {
+      numericValue: value,
+      unit: ''
+    }
+  }
+
   // Create counter hooks for each stat
   const counters = stats.map((stat, index) => {
     if (stat.animateWithUnits) {
@@ -45,9 +70,8 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
       return useCounter(stat.value, { startOnMount: false, trigger: countersTriggered })
     } else {
       // Extract only the numeric part for animation
-      const numericMatch = stat.value.match(/^([\d,]+(?:\.\d+)?)/)
-      const numericValue = numericMatch ? numericMatch[1] : stat.value
-      console.log(`Stat ${index} (${stat.label}): animating number only - "${numericValue}" + suffix "${stat.suffix || ''}"`)
+      const { numericValue, unit } = parseStatValue(stat.value)
+      console.log(`Stat ${index} (${stat.label}): animating number only - "${numericValue}" + unit "${unit}" + suffix "${stat.suffix || ''}"`)
       return useCounter(numericValue, { startOnMount: false, trigger: countersTriggered })
     }
   })
@@ -116,9 +140,18 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
               <div className={`stat-card rounded-2xl p-6 ${!stat.icon ? 'text-center' : ''}`}>
                 <div className="text-3xl font-display">
                   {(() => {
-                    const displayValue = stat.animateWithUnits
-                      ? (counters[index]?.value || stat.value)
-                      : `${counters[index]?.value || stat.value}${stat.suffix || ''}`
+                    let displayValue: string
+
+                    if (stat.animateWithUnits) {
+                      // Animate the full value including units
+                      displayValue = counters[index]?.value || stat.value
+                    } else {
+                      // Parse the original value to get unit, then combine with animated number
+                      const { unit } = parseStatValue(stat.value)
+                      const animatedNumber = counters[index]?.value || parseStatValue(stat.value).numericValue
+                      displayValue = `${animatedNumber}${unit}${stat.suffix || ''}`
+                    }
+
                     console.log(`Stat ${index} (${stat.label}) final display: "${displayValue}"`)
                     return displayValue
                   })()}

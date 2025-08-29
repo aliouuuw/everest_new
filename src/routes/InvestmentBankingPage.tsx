@@ -30,9 +30,9 @@ export const InvestmentBankingPage = () => {
           columns={4}
           stats={[
             { value: "18", suffix: '+', label: 'Projets structurés', icon: FiLayers, animateWithUnits: false },
-            { value: "8Mds", label: 'XOF conseillés', icon: FiTrendingUp, animateWithUnits: true },
+            { value: "8Mds", label: 'XOF conseillés', icon: FiTrendingUp, animateWithUnits: false },
             { value: "12", label: 'Experts spécialisés', icon: FiUsers, animateWithUnits: false },
-            { value: "100%", label: 'Projets livrés', icon: FiAward, animateWithUnits: true }
+            { value: "100%", label: 'Projets livrés', icon: FiAward, animateWithUnits: false }
           ]}
         />
 

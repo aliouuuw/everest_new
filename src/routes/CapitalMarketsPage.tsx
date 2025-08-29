@@ -43,8 +43,8 @@ export const CapitalMarketsPage = () => {
           columns={4}
           stats={[
             { value: "25", suffix: '+', label: 'Opérations réussies', icon: FaChartLine, animateWithUnits: false },
-            { value: "15Mds", label: 'XOF levés', icon: FaHandshake, animateWithUnits: true },
-            { value: "95%", label: 'Taux de succès', icon: FaCheckCircle, animateWithUnits: true },
+            { value: "15Mds", label: 'XOF levés', icon: FaHandshake, animateWithUnits: false },
+            { value: "95%", label: 'Taux de succès', icon: FaCheckCircle, animateWithUnits: false },
             { value: "50", suffix: '+', label: 'Clients actifs', icon: FaUsers, animateWithUnits: false }
           ]}
         />
