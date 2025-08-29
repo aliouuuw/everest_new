@@ -1,5 +1,6 @@
 import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
+import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
 import { StatsSection } from '../components/Sections/StatsSection'
 
 export const AboutPage = () => {
@@ -21,7 +22,7 @@ export const AboutPage = () => {
   const philosophieGridRef = useReveal<HTMLDivElement>()
 
   const histoireRef = useReveal<HTMLElement>()
-  const histoireListRef = useReveal<HTMLUListElement>()
+  const histoireListRef = useGsapStepAnimation()
   const equipeRef = useReveal<HTMLElement>()
   const equipeGridRef = useReveal<HTMLDivElement>()
   const conformiteRef = useReveal<HTMLElement>()
@@ -167,7 +168,7 @@ export const AboutPage = () => {
             <h2 className="luxury-heading mb-6">Notre histoire</h2>
             <div className="relative">
               <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
-              <ul ref={histoireListRef} className="reveal-stagger space-y-8">
+              <ul ref={histoireListRef} className="space-y-8">
                 {timelineItems.map((item, index) => (
                   <li key={item.year} className="relative">
                     <div className={`flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''} sm:items-start sm:justify-between gap-4`}>
