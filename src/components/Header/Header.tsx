@@ -194,6 +194,13 @@ export const Header: React.FC = () => {
           >
             Bourse
           </Link>
+
+          <Link 
+            to="/simulateur" 
+            className="transition-colors hover:text-[var(--gold-dark)]"
+          >
+            Simulateur
+          </Link>
         </nav>
 
         {/* Connexion Button */}
@@ -289,6 +296,15 @@ export const Header: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Bourse
+            </Link>
+
+            {/* Simulateur Link */}
+            <Link 
+              to="/simulateur" 
+              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Simulateur
             </Link>
 
             {/* Connexion Button */}

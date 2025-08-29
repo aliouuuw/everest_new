@@ -111,7 +111,7 @@ export const PerformanceComparison: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">Performance</span>
           <h2 className="luxury-heading-dark mt-3">Comparaison des performances</h2>
-          <p className="luxury-subheading-dark mt-5">
+          <p className="luxury-subheading-dark mt-5 pt-8">
             Découvrez les résultats historiques et les métriques clés de nos différents services de gestion.
           </p>
         </div>
