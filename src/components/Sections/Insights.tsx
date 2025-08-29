@@ -106,7 +106,7 @@ export const Insights: React.FC = () => {
 
         <div className="mt-10 text-center">
           <a
-            href="#"
+            href="/publications"
             className="btn-secondary inline-flex items-center gap-2 font-display tracking-wide"
           >
             Voir toutes les publications

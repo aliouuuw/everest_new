@@ -1,4 +1,4 @@
-import { FiCompass, FiDollarSign, FiGrid, FiTrendingUp, FiCheckCircle, FiClock, FiShield } from 'react-icons/fi'
+import { FiCheckCircle, FiClock, FiCompass, FiDollarSign, FiGrid, FiShield, FiTrendingUp } from 'react-icons/fi'
 
 import { CTA } from '../components/Sections/CTA'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
@@ -30,7 +30,7 @@ export const DiscretionaryMgmtPage = () => {
           <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
-                <span className="kicker text-gradient-gold">Offres — Gestion libre</span>
+                <span className="kicker text-gradient-gold">Services — Gestion libre</span>
                 <h1 className="luxury-heading mt-3">Pilotez vos investissements en toute simplicité</h1>
                 <p className="luxury-subheading mt-5 leading-relaxed">Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">

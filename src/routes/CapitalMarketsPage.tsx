@@ -1,6 +1,5 @@
 import { FaAward, FaChartLine, FaCheckCircle, FaFileSignature, FaHandshake, FaRocket, FaStar, FaUsers } from 'react-icons/fa'
 
-import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
 
 export const CapitalMarketsPage = () => {
@@ -310,7 +309,6 @@ export const CapitalMarketsPage = () => {
         </section>
 
         <div id="contact" className="sr-only" />
-      <CTA scheme="ivory" primaryHref="mailto:contact@everest-finance.sn" primaryLabel="Écrire à un conseiller" secondaryHref="#processus" secondaryLabel="Voir le processus" />
   </div>
 )
 }

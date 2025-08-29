@@ -45,7 +45,7 @@ export const AboutPage = () => {
           </div>
 
           <div className="relative">
-            <div className="mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28">
+            <div className="mx-auto max-w-6xl px-6 py-34 md:py-32">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 {/* Left: Text */}
                 <div>

@@ -31,7 +31,7 @@ export const AssistedMgmtPage = () => {
           <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
-                <span className="kicker text-gradient-gold">Offres — Gestion assistée</span>
+                <span className="kicker text-gradient-gold">Services — Gestion assistée</span>
                 <h1 className="luxury-heading mt-3">Décider avec un conseiller à vos côtés</h1>
                 <p className="luxury-subheading mt-5 leading-relaxed">Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">

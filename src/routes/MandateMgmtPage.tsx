@@ -1,4 +1,4 @@
-import { FiClipboard, FiShield, FiSliders, FiTarget, FiTrendingUp, FiUsers, FiAward } from 'react-icons/fi'
+import { FiAward, FiClipboard, FiShield, FiSliders, FiTarget, FiTrendingUp, FiUsers } from 'react-icons/fi'
 
 import { CTA } from '../components/Sections/CTA'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
@@ -30,7 +30,7 @@ export const MandateMgmtPage = () => {
           <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
-                <span className="kicker text-gradient-gold">Offres — Gestion sous-mandat</span>
+                <span className="kicker text-gradient-gold">Services — Gestion sous-mandat</span>
                 <h1 className="luxury-heading mt-3">Déléguez l'exécution avec des règles claires</h1>
                 <p className="luxury-subheading mt-5 leading-relaxed">Nous gérons le portefeuille dans un cadre défini ensemble: objectifs mesurables, contraintes explicites et reporting transparent.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
