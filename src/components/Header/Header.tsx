@@ -1,7 +1,15 @@
 /* eslint-disable sort-imports */
 import { useState, useRef, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
-import { FaUser} from "react-icons/fa";
+// Fingerprint Icon Component
+const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
+  <img
+    src="/fingerprint-svgrepo-com.svg"
+    alt="Fingerprint"
+    className={className}
+    style={{ filter: 'brightness(0) invert(1)' }} // Make it white to match the text color
+  />
+);
 
 interface DropdownItem {
   label: string;
@@ -205,11 +213,11 @@ export const Header: React.FC = () => {
 
         {/* Connexion Button */}
         <div className="hidden lg:block">
-          <Link 
-            to="/portal" 
-            className="btn-primary font-display tracking-wide flex items-center gap-2"
+          <Link
+            to="/portal"
+            className="btn-primary-dark font-display tracking-wide flex items-center gap-2"
           >
-            <FaUser /> Accès Client
+            <FingerprintIcon /> Accès Client
           </Link>
         </div>
 
@@ -309,12 +317,12 @@ export const Header: React.FC = () => {
 
             {/* Connexion Button */}
             <div className="pt-4 border-t border-black/10">
-              <Link 
-                to="/portal" 
-                className="btn-primary font-display tracking-wide w-full text-center flex items-center justify-center gap-2"
+              <Link
+                to="/portal"
+                className="btn-primary-dark font-display tracking-wide w-full text-center flex items-center justify-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FaUser /> Accès Client
+                <FingerprintIcon /> Accès Client
               </Link>
             </div>
           </div>
