@@ -86,13 +86,13 @@ export const ServicesPage = () => {
         </section>
 
         {/* Services Overview */}
-        <section id="services" ref={servicesOverviewRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--white-smoke)]">
+        <section id="services" ref={servicesOverviewRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--night)] transition-colors duration-500">
           <div className="mx-auto max-w-6xl px-6">
             {/* Section Header */}
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="kicker text-gradient-gold">Nos approches</span>
-              <h2 className="luxury-heading mt-3">Choisissez votre niveau d'accompagnement</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">
+              <h2 className="luxury-heading-dark mt-3">Choisissez votre niveau d'accompagnement</h2>
+              <p className="luxury-subheading-dark mt-5 leading-relaxed">
                 Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur
                 et à vos objectifs sur la BRVM.
               </p>
@@ -101,159 +101,153 @@ export const ServicesPage = () => {
             {/* Services Grid */}
             <div ref={servicesGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mb-16">
               {/* Gestion Libre */}
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
+              <div className="glass-card-dark glass-card-hover">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--night-80)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--gold-dark)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
                     Niveau 1
                   </span>
-                  <div className="text-xs text-secondary">À partir de 100K F CFA</div>
+                  <div className="text-xs text-secondary-dark">À partir de 100K F CFA</div>
                 </div>
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiCompass />
                       </div>
                     </div>
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Gestion Libre</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.</p>
+                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Libre</div>
+                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.</p>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Décisions 100% indépendantes</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Décisions 100% indépendantes</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Exécution professionnelle</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Exécution professionnelle</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Frais réduits</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Frais réduits</span>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic)]/25">
+                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--night)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-dark)]">0,40% - 0,60%</span>
+                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display text-[var(--gold-light)]">0,40% - 0,60%</span>
                   </div>
-                  <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary font-display tracking-wide w-full">
+                  <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
                     Découvrir ce service
                   </a>
                 </div>
               </div>
 
               {/* Gestion Assistée */}
-              <div className="group relative overflow-hidden rounded-2xl border-2 border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/90 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover shadow-lg">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
+              <div className="glass-card-dark glass-card-hover border-2 border-[var(--gold-metallic)]/40">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--gold-dark)] bg-[var(--gold-light)]/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--gold-light)] bg-[var(--gold-dark)]/30 px-3 py-1 rounded-full">
                     Niveau 2
                   </span>
-                  <div className="text-xs text-secondary">À partir de 250K F CFA</div>
+                  <div className="text-xs text-secondary-dark">À partir de 250K F CFA</div>
                 </div>
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiHeadphones />
                       </div>
                     </div>
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Gestion Assistée</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Parfait équilibre entre autonomie et conseils d'experts.</p>
+                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Assistée</div>
+                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Parfait équilibre entre autonomie et conseils d'experts.</p>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Conseils personnalisés</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Conseils personnalisés</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Analyses et recommandations</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Analyses et recommandations</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Décisions finales vôtres</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Décisions finales vôtres</span>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic)]/25">
+                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--night)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-dark)]">0,60% - 0,80%</span>
+                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display text-[var(--gold-light)]">0,60% - 0,80%</span>
                   </div>
-                  <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary font-display tracking-wide w-full">
+                  <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary-dark font-display tracking-wide w-full">
                     Service recommandé
                   </a>
                 </div>
               </div>
 
               {/* Gestion Sous-Mandat */}
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
+              <div className="glass-card-dark glass-card-hover">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--night-80)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--gold-dark)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
                     Niveau 3
                   </span>
-                  <div className="text-xs text-secondary">À partir de 500K F CFA</div>
+                  <div className="text-xs text-secondary-dark">À partir de 500K F CFA</div>
                 </div>
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiShield />
                       </div>
                     </div>
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Gestion Sous-Mandat</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Pour ceux qui préfèrent déléguer la gestion à nos experts.</p>
+                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Sous-Mandat</div>
+                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Pour ceux qui préfèrent déléguer la gestion à nos experts.</p>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Gestion complète déléguée</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Gestion complète déléguée</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Reporting détaillé</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Reporting détaillé</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-green-600 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary">Suivi personnalisé</span>
+                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
+                    <span className="text-sm text-secondary-dark">Suivi personnalisé</span>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic)]/25">
+                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--night)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-dark)]">0,80% - 1,20%</span>
+                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display text-[var(--gold-light)]">0,80% - 1,20%</span>
                   </div>
-                  <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary font-display tracking-wide w-full">
+                  <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
                     En savoir plus
                   </a>
                 </div>
@@ -262,13 +256,13 @@ export const ServicesPage = () => {
 
             {/* Call to Action */}
             <div className="text-center">
-              <div className="inline-flex items-center gap-4 px-8 py-4 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--gold-metallic)]/25">
-                <FiHelpCircle className="text-[var(--gold-dark)] w-5 h-5" />
+              <div className="inline-flex items-center gap-4 px-8 py-4 glass-card-dark">
+                <FiHelpCircle className="text-[var(--gold-light)] w-5 h-5" />
                 <div className="text-left">
-                  <div className="font-display text-sm text-[var(--night)]">Besoin d'aide pour choisir ?</div>
-                  <div className="text-xs text-secondary">Nos conseillers vous guident gratuitement</div>
+                  <div className="font-display text-sm text-[var(--pure-white)]">Besoin d'aide pour choisir ?</div>
+                  <div className="text-xs text-secondary-dark">Nos conseillers vous guident gratuitement</div>
                 </div>
-                <a href="#contact" className="btn-secondary font-display tracking-wide text-sm">
+                <a href="#contact" className="btn-secondary-dark font-display tracking-wide text-sm">
                   Être conseillé
                 </a>
               </div>

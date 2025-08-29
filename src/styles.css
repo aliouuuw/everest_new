@@ -323,6 +323,37 @@ html {
   transition-duration: 100ms;
 }
 
+/* Dark Theme Button Styles for Services Page */
+.btn-primary-dark {
+  @apply px-7 py-3.5 bg-[var(--gold-dark)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--gold-light)] hover:text-[var(--night)] hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20 rounded-lg relative overflow-hidden cursor-pointer;
+  border: 0;
+  transform: translateY(0);
+}
+
+.btn-primary-dark:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary-dark:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
+.btn-secondary-dark {
+  @apply px-7 py-3.5 border border-[var(--gold-metallic)]/40 text-[var(--gold-light)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--gold-metallic)]/60 hover:bg-[var(--gold-metallic)]/10 hover:text-[var(--pure-white)] rounded-lg relative overflow-hidden cursor-pointer;
+  background: rgba(202, 148, 47, 0.05);
+  transform: translateY(0);
+}
+
+.btn-secondary-dark:hover {
+  transform: translateY(-1px);
+}
+
+.btn-secondary-dark:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
 /* Subtle gold-tinted focus rings and hover shadows */
 .btn-primary:focus-visible {
   outline: none;
@@ -334,12 +365,30 @@ html {
   box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic);
 }
 
+.btn-primary-dark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gold-metallic-30), 0 0 0 1px var(--gold-light);
+}
+
+.btn-secondary-dark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+}
+
 .btn-primary:hover {
   box-shadow: 0 8px 24px var(--gold-metallic-20);
 }
 
 .btn-secondary:hover {
   box-shadow: 0 8px 24px var(--gold-metallic-10);
+}
+
+.btn-primary-dark:hover {
+  box-shadow: 0 8px 24px var(--gold-metallic-30);
+}
+
+.btn-secondary-dark:hover {
+  box-shadow: 0 8px 24px var(--gold-metallic-20);
 }
 
 /* Card Styles */
