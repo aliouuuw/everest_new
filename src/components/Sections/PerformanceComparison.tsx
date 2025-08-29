@@ -106,62 +106,62 @@ export const PerformanceComparison: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--pure-white)]">
+    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--night)]">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">Performance</span>
-          <h2 className="luxury-heading mt-3">Comparaison des performances</h2>
-          <p className="luxury-subheading mt-5">
+          <h2 className="luxury-heading-dark mt-3">Comparaison des performances</h2>
+          <p className="luxury-subheading-dark mt-5">
             Découvrez les résultats historiques et les métriques clés de nos différents services de gestion.
           </p>
         </div>
 
         {/* Performance Chart */}
-        <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80 backdrop-blur-sm p-6 mb-12">
+        <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 mb-12 glass-card-dark">
           <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
           <div className="flex items-center gap-3 mb-6">
-            <FaChartLine className="text-xl text-[var(--gold-dark)]" />
-            <h3 className="font-display text-lg">Évolution des performances</h3>
+            <FaChartLine className="text-xl text-[var(--gold-light)]" />
+            <h3 className="font-display text-lg text-[var(--pure-white)]">Évolution des performances</h3>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b border-[var(--gold-metallic)]/25">
-                  <th className="text-left p-3 font-display text-sm">Période</th>
-                  <th className="text-center p-3 font-display text-sm">Gestion Libre</th>
-                  <th className="text-center p-3 font-display text-sm">Gestion Sous-Mandat</th>
-                  <th className="text-center p-3 font-display text-sm">Gestion Assistée</th>
-                  <th className="text-center p-3 font-display text-sm text-secondary">Benchmark*</th>
+                  <th className="text-left p-3 font-display text-sm text-[var(--pure-white)]">Période</th>
+                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Libre</th>
+                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Sous-Mandat</th>
+                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Assistée</th>
+                  <th className="text-center p-3 font-display text-sm text-secondary-dark">Benchmark*</th>
                 </tr>
               </thead>
               <tbody>
                 {performanceData.map((row, index) => (
-                  <tr key={row.period} className={index % 2 === 0 ? 'bg-[var(--pure-white)]/50' : ''}>
-                    <td className="p-3 font-medium text-[var(--night)]">{row.period}</td>
+                  <tr key={row.period} className={index % 2 === 0 ? 'bg-[var(--night-20)]/50' : ''}>
+                    <td className="p-3 font-medium text-[var(--pure-white)]">{row.period}</td>
                     <td className="p-3 text-center">
                       <span className={`font-display text-sm ${
-                        row.discretionary >= 0 ? 'text-green-600' : 'text-red-600'
+                        row.discretionary >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.discretionary >= 0 ? '+' : ''}{row.discretionary}%
                       </span>
                     </td>
                     <td className="p-3 text-center">
                       <span className={`font-display text-sm ${
-                        row.mandate >= 0 ? 'text-green-600' : 'text-red-600'
+                        row.mandate >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.mandate >= 0 ? '+' : ''}{row.mandate}%
                       </span>
                     </td>
                     <td className="p-3 text-center">
                       <span className={`font-display text-sm ${
-                        row.assisted >= 0 ? 'text-green-600' : 'text-red-600'
+                        row.assisted >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.assisted >= 0 ? '+' : ''}{row.assisted}%
                       </span>
                     </td>
-                    <td className="p-3 text-center text-secondary text-sm">
+                    <td className="p-3 text-center text-secondary-dark text-sm">
                       {row.benchmark >= 0 ? '+' : ''}{row.benchmark}%
                     </td>
                   </tr>
@@ -170,7 +170,7 @@ export const PerformanceComparison: React.FC = () => {
             </table>
           </div>
 
-          <div className="mt-4 text-xs text-secondary">
+          <div className="mt-4 text-xs text-secondary-dark">
             * Benchmark: Indice BRVM 10. Les performances passées ne préjugent pas des performances futures.
           </div>
         </div>
@@ -184,52 +184,52 @@ export const PerformanceComparison: React.FC = () => {
             return (
               <div
                 key={metric.title}
-                className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover"
+                className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 transition-all glass-card-dark glass-card-hover"
               >
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
-                <div className="font-display text-sm text-secondary mb-3">{metric.title}</div>
+                <div className="font-display text-sm text-secondary-dark mb-3">{metric.title}</div>
 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-[var(--night-80)]/80">Gestion Libre</span>
+                    <span className="text-xs text-secondary-dark">Gestion Libre</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'discretionary' ? 'text-[var(--gold-dark)] font-medium' : 'text-[var(--night)]'
+                      bestService === 'discretionary' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.discretionary, metric.unit)}
                       {bestService === 'discretionary' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-dark)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
                       )}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-[var(--night-80)]/80">Sous-Mandat</span>
+                    <span className="text-xs text-secondary-dark">Sous-Mandat</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'mandate' ? 'text-[var(--gold-dark)] font-medium' : 'text-[var(--night)]'
+                      bestService === 'mandate' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.mandate, metric.unit)}
                       {bestService === 'mandate' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-dark)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
                       )}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-[var(--night-80)]/80">Assistée</span>
+                    <span className="text-xs text-secondary-dark">Assistée</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'assisted' ? 'text-[var(--gold-dark)] font-medium' : 'text-[var(--night)]'
+                      bestService === 'assisted' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.assisted, metric.unit)}
                       {bestService === 'assisted' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-dark)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
                       )}
                     </span>
                   </div>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-[var(--gold-metallic)]/25">
-                  <div className="flex items-center gap-1 text-xs text-[var(--gold-dark)]">
+                  <div className="flex items-center gap-1 text-xs text-[var(--gold-light)]">
                     <FiTarget size={10} />
                     <span className="capitalize">{bestService === 'discretionary' ? 'Libre' :
                       bestService === 'mandate' ? 'Sous-mandat' : 'Assistée'} recommandé</span>
@@ -241,11 +241,11 @@ export const PerformanceComparison: React.FC = () => {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-12 p-4 bg-[var(--gold-light)]/20 rounded-xl border border-[var(--gold-metallic)]/25">
+        <div className="mt-12 p-4 bg-[var(--night)]/90 rounded-xl border border-[var(--gold-metallic)]/25 glass-card-dark">
           <div className="flex items-start gap-3">
-            <FiTrendingUp className="text-[var(--gold-dark)] mt-0.5 flex-shrink-0" />
-            <div className="text-sm text-secondary">
-              <p className="font-medium text-[var(--night)] mb-1">Note importante:</p>
+            <FiTrendingUp className="text-[var(--gold-light)] mt-0.5 flex-shrink-0" />
+            <div className="text-sm text-secondary-dark">
+              <p className="font-medium text-[var(--pure-white)] mb-1">Note importante:</p>
               <p>Les performances passées ne constituent pas une garantie de résultats futurs. L'investissement en bourse comporte des risques, y compris celui de perdre tout ou partie du capital investi. Ces données sont présentées à titre informatif.</p>
             </div>
           </div>
