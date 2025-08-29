@@ -356,7 +356,7 @@ export const BoursePage: React.FC = () => {
         scheme="ivory"
         primaryHref="/portal"
         primaryLabel="Ouvrir un compte"
-        secondaryHref="/newsroom"
+        secondaryHref="/publications"
         secondaryLabel="Voir nos analyses"
       />
     </div>

@@ -19,7 +19,7 @@ export const Footer = () => {
             <div className="font-display mb-3">Liens</div>
             <ul className="text-sm text-secondary space-y-2">
               <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#about">À propos</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#newsroom">Newsroom</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#publications">Publications</a></li>
               <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#faq">Abécédaire / FAQ</a></li>
               <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#performance">Performance</a></li>
               <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#portal-preview">Portail client</a></li>

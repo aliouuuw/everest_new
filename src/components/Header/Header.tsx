@@ -126,7 +126,7 @@ export const Header: React.FC = () => {
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
-    { label: 'Newsroom', href: '/newsroom' },
+    { label: 'Publications', href: '/publications' },
     { label: 'Abécédaire / FAQ', href: '/faq' },
     { label: 'Mot du DG', href: '/mot-dg' },
   ];

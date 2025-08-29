@@ -76,7 +76,7 @@ export const ResearchAnalyticsPage = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
                   <a href="#contact" className="btn-primary font-display tracking-wide">Demander une analyse personnalisée</a>
-                  <a href="/newsroom" className="btn-secondary font-display tracking-wide">Découvrir nos publications</a>
+                  <a href="/publications" className="btn-secondary font-display tracking-wide">Découvrir nos publications</a>
                 </div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
@@ -256,7 +256,7 @@ export const ResearchAnalyticsPage = () => {
                   </div>
                 </div>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                <a href="/newsroom" className="mt-3 text-xs md:text-sm text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Voir les dernières notes <span>→</span></a>
+                <a href="/publications" className="mt-3 text-xs md:text-sm text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Voir les dernières notes <span>→</span></a>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
@@ -280,7 +280,7 @@ export const ResearchAnalyticsPage = () => {
                   </div>
                 </div>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                <a href="/newsroom" className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Explorer les études <span>→</span></a>
+                <a href="/publications" className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 inline-flex items-center gap-1">Explorer les études <span>→</span></a>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
@@ -380,13 +380,13 @@ export const ResearchAnalyticsPage = () => {
           </div>
         </section>
 
-        {/* CTA — contact primary, newsroom secondary */}
+        {/* CTA — contact primary, publications secondary */}
         <div id="contact" className="sr-only" />
       <CTA
         scheme="ivory"
         primaryHref="mailto:contact@everest-finance.sn"
         primaryLabel="Écrire à un analyste"
-        secondaryHref="/newsroom"
+        secondaryHref="/publications"
         secondaryLabel="Voir nos publications"
       />
     </div>
