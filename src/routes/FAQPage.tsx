@@ -91,7 +91,7 @@ export const FAQPage = () => {
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">Abécédaire & FAQ</span>
             <h1 className="luxury-heading mt-3">Comprendre nos services</h1>
-            <p className="luxury-subheading mt-5">Questions fréquentes et définitions clés pour mieux décider.</p>
+            <p className="luxury-subheading mt-5 pt-8">Questions fréquentes et définitions clés pour mieux décider.</p>
           </div>
         </section>
 

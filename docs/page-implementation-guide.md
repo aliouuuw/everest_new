@@ -30,7 +30,7 @@ export const SomePage = () => {
           <div className="mx-auto max-w-6xl px-6">
             <span className="kicker text-gradient-gold">Section Eyebrow</span>
             <h1 className="luxury-heading mt-3">Page headline</h1>
-            <p className="luxury-subheading mt-5">Concise subheading explaining the page.</p>
+            <p className="luxury-subheading mt-5 pt-8">Concise subheading explaining the page.</p>
           </div>
         </section>
 
@@ -73,7 +73,7 @@ Choose one per page.
       <div>
         <span className="kicker text-gradient-gold">Eyebrow</span>
         <h1 className="luxury-heading mt-3">Headline</h1>
-        <p className="luxury-subheading mt-5">Subheading text.</p>
+        <p className="luxury-subheading mt-5 pt-8">Subheading text.</p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <a href="#target-1" className="btn-primary font-display tracking-wide">Primary CTA</a>
           <a href="#target-2" className="btn-secondary font-display tracking-wide">Secondary CTA</a>
@@ -97,7 +97,7 @@ Choose one per page.
   <div className="mx-auto max-w-6xl px-6 text-center">
     <span className="kicker text-gradient-gold">Eyebrow</span>
     <h1 className="luxury-heading mt-3">Headline</h1>
-    <p className="luxury-subheading mt-5">Short description of the section.</p>
+    <p className="luxury-subheading mt-5 pt-8">Short description of the section.</p>
   </div>
 </section>
 ```

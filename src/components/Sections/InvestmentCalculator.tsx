@@ -143,7 +143,7 @@ export const InvestmentCalculator: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">Outil de simulation</span>
           <h2 className="luxury-heading mt-3">Calculez vos projections</h2>
-          <p className="luxury-subheading mt-5">
+          <p className="luxury-subheading mt-5 pt-8">
             Estimez le potentiel de vos investissements avec nos différents services de gestion
           </p>
         </div>

@@ -11,7 +11,7 @@ export const SimulateurPage: React.FC = () => {
             <h1 className="luxury-heading mt-3">
               Simulateur d'investissement
             </h1>
-            <p className="luxury-subheading mt-5">
+            <p className="luxury-subheading mt-5 pt-8">
               Calculez vos projections financières et explorez le potentiel de vos investissements 
               avec nos différents services de gestion de portefeuille.
             </p>

@@ -51,7 +51,7 @@ export const AboutPage = () => {
                 <div>
                   <span className="kicker text-gradient-gold">À propos</span>
                   <h1 className="luxury-heading mt-3">Des idées et des valeurs au service de vos ambitions</h1>
-                  <p className="luxury-subheading mt-5">
+                  <p className="luxury-subheading mt-5 pt-8">
                     Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client pour créer de la valeur durable sur la BRVM.
                   </p>
 

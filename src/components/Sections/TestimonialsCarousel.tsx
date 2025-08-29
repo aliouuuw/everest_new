@@ -183,7 +183,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">{title}</span>
           <h2 className="luxury-heading mt-3">Ils nous font confiance</h2>
-          <p className="luxury-subheading mt-5">{subtitle}</p>
+          <p className="luxury-subheading mt-5 pt-8">{subtitle}</p>
         </div>
 
         <div className="relative">

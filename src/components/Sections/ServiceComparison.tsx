@@ -141,7 +141,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
       <div className="text-center max-w-2xl mx-auto mb-8">
         <span className="kicker text-gradient-gold">Comparaison des services</span>
         <h2 className="luxury-heading mt-3">Choisissez le service qui vous convient</h2>
-        <p className="luxury-subheading mt-5">
+        <p className="luxury-subheading mt-5 pt-8">
           Comparez nos trois offres pour trouver celle qui correspond à votre style d'investissement et à vos besoins.
         </p>
       </div>

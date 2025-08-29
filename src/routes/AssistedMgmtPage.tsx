@@ -195,7 +195,7 @@ export const AssistedMgmtPage = () => {
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Équipe</span>
               <h2 className="luxury-heading mt-3">Rencontrez nos conseillers</h2>
-              <p className="luxury-subheading mt-5">Des experts passionnés à votre service pour vous accompagner dans vos décisions d'investissement.</p>
+              <p className="luxury-subheading mt-5 pt-8">Des experts passionnés à votre service pour vous accompagner dans vos décisions d'investissement.</p>
             </div>
             <div ref={advisorsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
               {[
