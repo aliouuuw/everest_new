@@ -12,12 +12,12 @@ export const CEOMessagePage = () => {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <span className="kicker text-gradient-gold">Mot du Directeur Général</span>
           <h1 className="luxury-heading mt-3">Construire la confiance, créer la valeur</h1>
-          <p className="luxury-subheading mt-5 pt-5">Lettre ouverte aux clients, partenaires et collaborateurs.</p>
+          <p className="luxury-subheading mt-5 pt-8">Lettre ouverte aux clients, partenaires et collaborateurs.</p>
         </div>
       </section>
 
       {/* Lettre du DG */}
-      <section id="message" className="py-8">
+      <section id="message">
         <div className="mx-auto max-w-4xl px-6">
           <div className="relative">
             {/* Decorative elements */}
@@ -27,6 +27,17 @@ export const CEOMessagePage = () => {
             {/* Main content card */}
             <div className="relative bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-2xl p-8 sm:p-12 shadow-sm">
               <article className="prose prose-neutral max-w-none">
+                {/* Avatar */}
+                <div className="flex justify-center mb-8">
+                  <div className="relative">
+                    <img 
+                      src="/Khady-diouf.png" 
+                      alt="Khady Diouf - Directrice Générale" 
+                      className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[var(--gold-metallic)]/20 shadow-lg"
+                    />
+                  </div>
+                </div>
+
                 {/* Salutation */}
                 <p className="text-secondary leading-relaxed text-lg font-medium">
                   Chères clientes, chers clients, partenaires et collaboratrices/collaborateurs,
