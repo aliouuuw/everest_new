@@ -12,112 +12,12 @@ export const InvestmentBankingPage = () => {
 
   return (
     <div>
-        {/* Hero — Split pattern with capabilities */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
-          </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <span className="kicker text-gradient-gold">Offres — Ingénierie financière</span>
-                <h1 className="luxury-heading mt-3">L'excellence dans la conception d'opérations financières complexes</h1>
-                <p className="luxury-subheading mt-5 pt-8 leading-relaxed">Nous concevons des solutions de financement sur mesure et les exécutons avec la plus haute rigueur. De l'idée à la réalisation, votre succès est notre priorité.</p>
-
-                {/* Key Differentiators */}
-                <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FiTarget className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Solutions sur mesure</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FiTrendingUp className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Optimisation fiscale</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FiAward className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Expertise réglementaire</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FiUsers className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Équipe dédiée</span>
-                  </div>
-                </div>
-
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#contact" className="btn-primary font-display tracking-wide">Demander une étude personnalisée</a>
-                  <a href="#processus" className="btn-secondary font-display tracking-wide">Découvrir notre approche</a>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
-                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
-                  <div className="absolute inset-0 grid grid-cols-3 gap-3 p-6">
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiLayers className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                      </div>
-                      <div className="text-xs font-display">Structuration</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiClipboard className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                      </div>
-                      <div className="text-xs font-display">Conseil</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--gold-metallic)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiSend className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                      </div>
-                      <div className="text-xs font-display">Placement</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {/* Hero — Consistent layout */}
+        <section ref={heroRef} className="reveal relative overflow-hidden bg-[var(--night)]">
+          <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-24 lg:py-32">
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="kicker text-gradient-gold">Offres — Ingénierie financière</span>
+              <h1 className="luxury-heading-dark mt-3">L'excellence dans la conception d'opérations financières complexes</h1>
             </div>
           </div>
         </section>

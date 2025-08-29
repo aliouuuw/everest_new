@@ -13,83 +13,21 @@ export const CapitalMarketsPage = () => {
 
   return (
   <div>
-        {/* Hero — Split pattern */}
+        {/* Hero — Vignette with background image */}
         <section ref={heroRef} className="reveal relative overflow-hidden">
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+          <div className="absolute inset-0">
+            <img 
+              src="/bg-mc.jpg" 
+              alt="Marché des capitaux" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold-dark)]/20 to-[var(--night)]/80" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
+          <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-24 lg:py-32">
+                          <div className="text-center max-w-3xl mx-auto">
                 <span className="kicker text-gradient-gold">Offres — Marché des capitaux</span>
-                <h1 className="luxury-heading mt-3">Votre partenaire privilégié pour réussir sur les marchés financiers</h1>
-                <p className="luxury-subheading mt-5 pt-8 leading-relaxed">De l’ingénierie à l’exécution, nous accompagnons les émetteurs et investisseurs sur le primaire et le secondaire, avec exigence et transparence. Plus de 15 ans d'expérience sur la BRVM.</p>
-
-                {/* Key Value Points */}
-                <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FaAward className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Expertise reconnue</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FaUsers className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Réseau étendu</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FaRocket className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Exécution rapide</span>
-                  </div>
-                  <div className="group flex items-center gap-3">
-                    <div className="relative shrink-0">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                        <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
-                          <FaStar className="text-base md:text-lg" />
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
-                    </div>
-                    <span className="text-sm md:text-base font-medium">Taux de succès 95%</span>
-                  </div>
-                </div>
-
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#contact" className="btn-primary font-display tracking-wide">Demander une consultation gratuite</a>
-                  <a href="#processus" className="btn-secondary font-display tracking-wide">Découvrir notre processus</a>
-                </div>
+                <h1 className="luxury-heading-dark mt-3">Votre partenaire privilégié pour réussir sur les marchés financiers</h1>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
-                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80 grid place-content-center text-secondary">
-                  <div className="flex flex-col items-center gap-3">
-                    <FaChartLine className="text-3xl" />
-                    <div className="font-display">Flux primaire & secondaire</div>
-                    <div className="text-xs text-secondary">Obligations • Actions • Titres de créance</div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 

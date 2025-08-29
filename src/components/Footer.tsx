@@ -2,8 +2,8 @@ import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'reac
 
 export const Footer = () => {
   return (
-    <footer className="mt-24 mb-10" style={{ background: 'linear-gradient(180deg, var(--pure-white) 0%, var(--white-smoke) 10%, var(--white-smoke) 90%)' }}>
-      <div className="mx-auto max-w-6xl px-5 py-8">
+    <footer className="mb-10" style={{ background: 'var(--white-smoke)' }}>
+      <div className="mx-auto max-w-6xl px-5">
         <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
@@ -56,11 +56,6 @@ export const Footer = () => {
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mt-8 text-secondary text-sm">
-          <div>© {new Date().getFullYear()} Everest Finance SGI — Dakar, Sénégal</div>
-          <div>CREPMF: SGI/DA/2016/60</div>
         </div>
       </div>
     </footer>

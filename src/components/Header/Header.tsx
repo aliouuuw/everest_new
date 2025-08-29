@@ -8,7 +8,6 @@ const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
-    style={{ color: '#2c1810' }}
   >
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.97-4.659.97-7.132A8 8 0 0012 4a8 8 0 00-8 8c0 2.473.325 4.866.97 7.132M9 12a2 2 0 104 0m-4 0a2 2 0 104 0" />
   </svg>
@@ -162,7 +161,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-20">
-      <div className="mx-auto max-w-6xl px-4 py-1 mt-5 rounded-xl flex items-center justify-between bg-white/70 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
+      <div className="mx-auto max-w-5xl px-8 py-1 mt-5 rounded-xl flex items-center justify-between bg-white/90 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
         {/* Logo */}
         <div className="flex items-center gap-3">
           <Link to="/" className="transition-opacity hover:opacity-80">
@@ -223,9 +222,9 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/portal"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-[var(--line-soft)] text-[#2c1810] rounded-lg transition-all duration-300 hover:bg-[#b8860b] hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105"
+            className="btn-primary inline-flex items-center gap-2.5 font-display tracking-wide"
           >
-            <FingerprintIcon className="w-4 h-4 transition-transform duration-300 hover:scale-110" />
+            <FingerprintIcon className="w-4 h-4 text-white transition-transform duration-300 hover:scale-110" />
             <span className="tracking-wide">Accès Client</span>
           </Link>
         </div>
@@ -328,10 +327,10 @@ export const Header: React.FC = () => {
             <div className="pt-4 border-t border-black/10">
               <Link
                 to="/portal"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-medium bg-[#d4af37] text-[#2c1810] rounded-lg transition-all duration-300 hover:bg-[#b8860b] hover:shadow-lg hover:shadow-[#d4af37]/30 hover:scale-105 w-full"
+                className="btn-primary inline-flex items-center justify-center gap-2.5 w-full font-display tracking-wide"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-4 h-4 transition-transform duration-300 hover:scale-110" />
+                <FingerprintIcon className="w-4 h-4 text-white transition-transform duration-300 hover:scale-110" />
                 <span className="tracking-wide">Accès Client</span>
               </Link>
             </div>
