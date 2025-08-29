@@ -2,6 +2,7 @@ import { FiAward, FiClipboard, FiLayers, FiSend, FiTarget, FiTrendingUp, FiUsers
 
 import { CTA } from '../components/Sections/CTA'
 import { useReveal } from '../components/Hooks/useReveal'
+import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
 import { StatsSection } from '../components/Sections/StatsSection'
 
 export const InvestmentBankingPage = () => {
@@ -9,7 +10,7 @@ export const InvestmentBankingPage = () => {
   const capsSectionRef = useReveal<HTMLElement>()
   const capsGridRef = useReveal<HTMLDivElement>()
   const processSectionRef = useReveal<HTMLElement>()
-  const processListRef = useReveal<HTMLUListElement>()
+  const processListRef = useGsapStepAnimation()
 
   return (
     <div>
@@ -30,9 +31,9 @@ export const InvestmentBankingPage = () => {
           columns={4}
           stats={[
             { value: "18", suffix: '+', label: 'Projets structurés', icon: FiLayers, animateWithUnits: false },
-            { value: "8Mds", label: 'XOF conseillés', icon: FiTrendingUp, animateWithUnits: false },
+            { value: "8Mds", label: 'XOF conseillés', icon: FiTrendingUp, animateWithUnits: true },
             { value: "12", label: 'Experts spécialisés', icon: FiUsers, animateWithUnits: false },
-            { value: "100%", label: 'Projets livrés', icon: FiAward, animateWithUnits: false }
+            { value: "100%", label: 'Projets livrés', icon: FiAward, animateWithUnits: true }
           ]}
         />
 
@@ -170,7 +171,7 @@ export const InvestmentBankingPage = () => {
             </div>
             <div className="relative mt-12">
               <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
-              <ul ref={processListRef} className="reveal-stagger space-y-8">
+              <ul ref={processListRef} className="space-y-8">
                 {[
                   {
                     step: '01',

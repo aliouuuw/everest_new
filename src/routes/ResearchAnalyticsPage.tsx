@@ -1,6 +1,7 @@
 import { FiBarChart, FiFileText, FiSearch, FiTrendingUp, FiUsers } from 'react-icons/fi'
 
 import { useReveal } from '../components/Hooks/useReveal'
+import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
 import { StatsSection } from '../components/Sections/StatsSection'
 
 export const ResearchAnalyticsPage = () => {
@@ -8,7 +9,7 @@ export const ResearchAnalyticsPage = () => {
   const capsSectionRef = useReveal<HTMLElement>()
   const capsGridRef = useReveal<HTMLDivElement>()
   const methodSectionRef = useReveal<HTMLElement>()
-  const methodListRef = useReveal<HTMLUListElement>()
+  const methodListRef = useGsapStepAnimation()
 
   return (
     <div>
@@ -205,7 +206,7 @@ export const ResearchAnalyticsPage = () => {
             </div>
             <div className="relative mt-12">
               <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
-              <ul ref={methodListRef} className="reveal-stagger space-y-8">
+              <ul ref={methodListRef} className="space-y-8">
                 {[
                   {
                     step: '01',
