@@ -128,6 +128,25 @@ const dashboardRoute = createRoute({
   component: DashboardPage,
 })
 
+const notFoundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '*',
+  component: () => (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Page Not Found</h1>
+        <p className="text-gray-600 mb-4">The page you're looking for doesn't exist.</p>
+        <button
+          onClick={() => window.history.back()}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Go Back
+        </button>
+      </div>
+    </div>
+  ),
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
@@ -145,6 +164,7 @@ const routeTree = rootRoute.addChildren([
   simulateurRoute,
   portalRoute,
   dashboardRoute,
+  notFoundRoute,
 ])
 
 const router = createRouter({
@@ -164,16 +184,78 @@ declare module '@tanstack/react-router' {
 }
 
 const rootElement = document.getElementById('app')
-if (rootElement && !rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
-  root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
-  )
+if (rootElement) {
+  try {
+    // Show loading state
+    rootElement.innerHTML = `
+      <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #f8f9fa;
+      ">
+        <div style="text-align: center;">
+          <div style="
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+          "></div>
+          <p style="color: #6b7280; margin: 0;">Loading Everest Finance...</p>
+        </div>
+      </div>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    `
+    
+    const root = ReactDOM.createRoot(rootElement)
+    root.render(
+      <StrictMode>
+        <RouterProvider router={router} />
+      </StrictMode>,
+    )
 
-  // Register service worker for caching
-  registerServiceWorker()
+    // Register service worker for caching
+    registerServiceWorker()
+    
+    console.log('✅ App initialized successfully')
+  } catch (error) {
+    console.error('❌ Failed to initialize app:', error)
+    // Show error state
+    rootElement.innerHTML = `
+      <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #f8f9fa;
+      ">
+        <div style="text-align: center;">
+          <h2 style="color: #dc2626; margin-bottom: 16px;">Failed to load app</h2>
+          <button onclick="window.location.reload()" style="
+            padding: 8px 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          ">Retry</button>
+        </div>
+      </div>
+    `
+  }
+} else {
+  console.error('❌ Root element not found')
 }
 
 // If you want to start measuring performance in your app, pass a function
