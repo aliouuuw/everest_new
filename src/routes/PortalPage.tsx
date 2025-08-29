@@ -9,7 +9,7 @@ export const PortalPage = () => {
   const formCardRef = useReveal<HTMLDivElement>()
   const benefitsSectionRef = useReveal<HTMLElement>()
   const benefitsGridRef = useReveal<HTMLDivElement>()
-  const [activeTab, setActiveTab] = useState<'signup' | 'signin'>('signup')
+  const [activeTab, setActiveTab] = useState<'signup' | 'signin'>('signin')
 
   return (
     <div>
@@ -42,17 +42,6 @@ export const PortalPage = () => {
                 <button
                   type="button"
                   role="tab"
-                  aria-selected={activeTab === 'signup'}
-                  aria-controls="panel-signup"
-                  id="tab-signup"
-                  onClick={() => setActiveTab('signup')}
-                  className={`px-4 py-2 rounded-md font-display text-sm transition-colors ${activeTab === 'signup' ? 'bg-[var(--pure-white)] text-[var(--night)]' : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'}`}
-                >
-                  Inscription
-                </button>
-                <button
-                  type="button"
-                  role="tab"
                   aria-selected={activeTab === 'signin'}
                   aria-controls="panel-signin"
                   id="tab-signin"
@@ -60,6 +49,17 @@ export const PortalPage = () => {
                   className={`px-4 py-2 rounded-md font-display text-sm transition-colors ${activeTab === 'signin' ? 'bg-[var(--pure-white)] text-[var(--night)]' : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'}`}
                 >
                   Connexion
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === 'signup'}
+                  aria-controls="panel-signup"
+                  id="tab-signup"
+                  onClick={() => setActiveTab('signup')}
+                  className={`px-4 py-2 rounded-md font-display text-sm transition-colors ${activeTab === 'signup' ? 'bg-[var(--pure-white)] text-[var(--night)]' : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'}`}
+                >
+                  Inscription
                 </button>
               </div>
 
