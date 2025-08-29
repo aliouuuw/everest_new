@@ -189,17 +189,17 @@ export const Header: React.FC = () => {
           </Link>
 
           <Link 
-            to="/bourse" 
-            className="transition-colors hover:text-[var(--gold-dark)]"
-          >
-            Bourse
-          </Link>
-
-          <Link 
             to="/simulateur" 
             className="transition-colors hover:text-[var(--gold-dark)]"
           >
             Simulateur
+          </Link>
+
+          <Link 
+            to="/bourse" 
+            className="transition-colors hover:text-[var(--gold-dark)]"
+          >
+            Bourse
           </Link>
         </nav>
 
@@ -289,15 +289,6 @@ export const Header: React.FC = () => {
               Services
             </Link>
 
-            {/* Bourse Link */}
-            <Link 
-              to="/bourse" 
-              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Bourse
-            </Link>
-
             {/* Simulateur Link */}
             <Link 
               to="/simulateur" 
@@ -305,6 +296,15 @@ export const Header: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Simulateur
+            </Link>
+
+            {/* Bourse Link */}
+            <Link 
+              to="/bourse" 
+              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Bourse
             </Link>
 
             {/* Connexion Button */}
