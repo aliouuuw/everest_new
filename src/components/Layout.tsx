@@ -1,10 +1,11 @@
+import { Component } from 'react'
 import { Outlet, useLocation } from '@tanstack/react-router'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { BRVMTicker } from './Header/BRVMTicker'
 import { WhatsAppButton } from './WhatsAppButton'
 import { LenisWrapper } from './LenisWrapper'
-import { Component } from 'react'
+import { SWUpdateNotification } from './SWUpdateNotification'
 import type { ErrorInfo, ReactNode } from 'react'
 
 // Error Boundary Component
@@ -79,6 +80,9 @@ export const Layout = () => {
 
           {/* Floating WhatsApp Button - Hide on dashboard */}
           {!hideExtras && <WhatsAppButton />}
+
+          {/* Service Worker Update Notification */}
+          <SWUpdateNotification />
         </div>
       </LenisWrapper>
     </ErrorBoundary>

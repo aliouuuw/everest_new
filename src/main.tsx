@@ -10,6 +10,7 @@ import {
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 import { registerServiceWorker } from './utils/serviceWorker'
+import { swUpdateManager } from './utils/swUpdate'
 
 import App from './App.tsx'
 import { Layout } from './components/Layout.tsx'
@@ -225,12 +226,14 @@ if (rootElement) {
     )
 
     // Register service worker for caching
-    registerServiceWorker()
+    registerServiceWorker().catch(error => {
+      console.warn('⚠️ Service worker registration failed, but app will continue:', error)
+    })
     
     console.log('✅ App initialized successfully')
   } catch (error) {
     console.error('❌ Failed to initialize app:', error)
-    // Show error state
+    // Show error state with retry button
     rootElement.innerHTML = `
       <div style="
         display: flex;
@@ -242,6 +245,45 @@ if (rootElement) {
       ">
         <div style="text-align: center;">
           <h2 style="color: #dc2626; margin-bottom: 16px;">Failed to load app</h2>
+          <p style="color: #6b7280; margin-bottom: 16px;">Please try refreshing the page</p>
+          <div style="display: flex; gap: 12px; justify-content: center;">
+            <button onclick="window.location.reload()" style="
+              padding: 8px 16px;
+              background: #3b82f6;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            ">Refresh</button>
+            <button onclick="window.location.href='/'" style="
+              padding: 8px 16px;
+              background: #6b7280;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            ">Go to Home</button>
+          </div>
+        </div>
+      </div>
+    `
+  }
+} else {
+  console.error('❌ Root element not found')
+  // If root element is not found, try to create it
+  document.body.innerHTML = `
+    <div id="app">
+      <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #f8f9fa;
+      ">
+        <div style="text-align: center;">
+          <h2 style="color: #dc2626; margin-bottom: 16px;">Application Error</h2>
+          <p style="color: #6b7280; margin-bottom: 16px;">The application container is missing. Please refresh the page.</p>
           <button onclick="window.location.reload()" style="
             padding: 8px 16px;
             background: #3b82f6;
@@ -249,13 +291,11 @@ if (rootElement) {
             border: none;
             border-radius: 4px;
             cursor: pointer;
-          ">Retry</button>
+          ">Refresh Page</button>
         </div>
       </div>
-    `
-  }
-} else {
-  console.error('❌ Root element not found')
+    </div>
+  `
 }
 
 // If you want to start measuring performance in your app, pass a function

@@ -49,6 +49,42 @@ self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests
   if (!event.request.url.startsWith(self.location.origin)) return;
 
+  // For navigation requests (HTML pages), always fetch from network first
+  // This ensures we get the latest JavaScript chunks for TanStack Router
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request).then((response) => {
+        // Cache the successful response
+        if (response.ok) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
+        }
+        return response;
+      }).catch(() => {
+        // Network failed, fall back to cache
+        return caches.match(event.request).then((cachedResponse) => {
+          return cachedResponse || caches.match('/index.html');
+        });
+      })
+    );
+    return;
+  }
+
+  // Check for updates and notify clients
+  if (event.request.url.includes('/sw.js')) {
+    // When the service worker itself is requested, check for updates
+    event.waitUntil(
+      self.clients.matchAll().then((clientList) => {
+        clientList.forEach((client) => {
+          client.postMessage({ type: 'UPDATE_AVAILABLE' });
+        });
+      })
+    );
+  }
+
+  // For other requests (JS, CSS, images), try cache first
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
