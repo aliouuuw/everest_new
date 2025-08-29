@@ -28,6 +28,7 @@ import { MandateMgmtPage } from './routes/MandateMgmtPage'
 import { AssistedMgmtPage } from './routes/AssistedMgmtPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
+import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
 
 const rootRoute = createRootRoute({
@@ -124,6 +125,12 @@ const portalRoute = createRoute({
   component: PortalPage,
 })
 
+const dashboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/dashboard',
+  component: DashboardPage,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
@@ -140,6 +147,7 @@ const routeTree = rootRoute.addChildren([
   bourseRoute,
   simulateurRoute,
   portalRoute,
+  dashboardRoute,
 ])
 
 const router = createRouter({

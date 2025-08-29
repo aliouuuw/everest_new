@@ -1,6 +1,6 @@
 /* eslint-disable sort-imports */
 import { useState, useRef, useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 // Fingerprint Icon Component
 const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
   <svg
@@ -93,9 +93,19 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
 };
 
 export const Header: React.FC = () => {
+  const location = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Check if user is authenticated and on dashboard
+  const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
+  const isOnDashboard = location.pathname === '/dashboard';
+
+  // Hide header if authenticated and on dashboard
+  if (isAuthenticated && isOnDashboard) {
+    return null;
+  }
 
   const openDropdownByName = (dropdownName: string) => {
     if (closeTimeoutRef.current) {
@@ -148,12 +158,7 @@ export const Header: React.FC = () => {
     { label: 'Recherche et analyses', href: '/recherche-analyses' },
   ];
 
-  const servicesItems: Array<DropdownItem> = [
-    { label: 'Tous nos services', href: '/services' },
-    { label: 'Gestion libre', href: '/gestion-libre' },
-    { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
-    { label: 'Gestion assistée', href: '/gestion-assistee' },
-  ];
+
 
   return (
     <header className="fixed top-0 left-0 right-0 z-20">
