@@ -6,6 +6,7 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
+import { ConvexProvider, ConvexReactClient } from 'convex/react'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
@@ -13,7 +14,6 @@ import { registerServiceWorker } from './utils/serviceWorker'
 
 import App from './App.tsx'
 import { Layout } from './components/Layout.tsx'
-
 // Import route components - they'll be code-split by Vite automatically
 import { AboutPage } from './routes/AboutPage'
 import { PublicationsPage } from './routes/PublicationsPage'
@@ -27,6 +27,10 @@ import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
+
+// Initialize ConvexDB client
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
+
 
 const rootRoute = createRootRoute({
   component: Layout,
@@ -220,7 +224,9 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <StrictMode>
-        <RouterProvider router={router} />
+        <ConvexProvider client={convex}>
+          <RouterProvider router={router} />
+        </ConvexProvider>
       </StrictMode>,
     )
 
