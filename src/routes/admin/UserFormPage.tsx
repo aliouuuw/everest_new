@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from '@tanstack/react-router';
-import { UserForm } from '@/components/CMS/Admin';
+import UserForm from '@/components/CMS/Admin/UserForm';
 
 const UserFormPage: React.FC = () => {
   const { userId } = useParams({ from: '/admin/users/$userId' });

@@ -1,34 +1,63 @@
 import React, { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import { FaEdit, FaEye, FaFilter, FaPlus, FaSearch, FaTrash } from 'react-icons/fa';
-import { useDeletePublication, usePublications } from '@/hooks/useCMS';
-import { formatDate } from '@/utils/cms/helpers';
+import { useDeletePublication, usePublications, useUpdatePublication } from '@/hooks/useCMS';
+import { LoadingSpinner } from '@/components/CMS/Shared';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
-import LoadingSpinner from '@/components/CMS/Shared/LoadingSpinner';
+import { formatDate } from '@/utils/cms/helpers';
 
 const PublicationsPage: React.FC = () => {
-  const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [categoryFilter, setCategoryFilter] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [showFilters, setShowFilters] = useState<boolean>(false);
-
-  // Fetch publications with filters
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [showFilters, setShowFilters] = useState(false);
+  
   const publications = usePublications({
-    status: statusFilter !== 'all' ? statusFilter as any : undefined,
+    status: statusFilter !== 'all' ? statusFilter as "draft" | "published" | "archived" : undefined,
     category: categoryFilter !== 'all' ? categoryFilter : undefined,
     limit: 50,
   });
-
   const deletePublication = useDeletePublication();
+  const updatePublication = useUpdatePublication();
 
-  const handleDelete = async (id: string, title: string) => {
-    if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
+  // Filter publications based on search and filters
+  const filteredPublications = publications?.page?.filter((pub: any) => {
+    const matchesSearch = pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         pub.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || pub.status === statusFilter;
+    const matchesCategory = categoryFilter === 'all' || pub.category === categoryFilter;
+    
+    return matchesSearch && matchesStatus && matchesCategory;
+  }) || [];
+
+  const handleNewPublication = () => {
+    navigate({ to: '/admin/publications/new' });
+  };
+
+  const handleEditPublication = (publicationId: string) => {
+    navigate({ to: `/admin/publications/${publicationId}` });
+  };
+
+  const handleDeletePublication = async (publicationId: string) => {
+    if (window.confirm('Are you sure you want to delete this publication? This action cannot be undone.')) {
       try {
-        await deletePublication({ id: id as any });
-        // Success handled by ConvexDB optimistic updates
+        await deletePublication({ id: publicationId as any });
       } catch (error) {
         console.error('Failed to delete publication:', error);
-        alert('Failed to delete publication. Please try again.');
       }
+    }
+  };
+
+  const handleStatusToggle = async (publicationId: string, currentStatus: string) => {
+    const newStatus = currentStatus === 'published' ? 'draft' : 'published';
+    try {
+      await updatePublication({ 
+        id: publicationId as any, 
+        status: newStatus as "draft" | "published" | "archived" 
+      });
+    } catch (error) {
+      console.error('Failed to update publication status:', error);
     }
   };
 
@@ -46,14 +75,9 @@ const PublicationsPage: React.FC = () => {
     return cat ? cat.label : category;
   };
 
-  const filteredPublications = publications?.page?.filter((pub: any) =>
-    pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    pub.description.toLowerCase().includes(searchQuery.toLowerCase())
-  ) ?? [];
-
-  if (!publications?.page) {
+  if (!publications) {
     return (
-      <div className="p-8">
+      <div className="flex justify-center items-center h-64">
         <LoadingSpinner size="lg" />
       </div>
     );
@@ -68,7 +92,7 @@ const PublicationsPage: React.FC = () => {
           <p className="text-gray-600 mt-2">Manage your content publications</p>
         </div>
         <button
-          onClick={() => window.location.href = '/admin/publications/new'}
+          onClick={handleNewPublication}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           <FaPlus className="text-sm" />
@@ -160,7 +184,7 @@ const PublicationsPage: React.FC = () => {
                 : 'Get started by creating your first publication.'}
             </p>
             <button
-              onClick={() => window.location.href = '/admin/publications/new'}
+              onClick={handleNewPublication}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-colors"
             >
               <FaPlus className="text-sm" />
@@ -223,21 +247,21 @@ const PublicationsPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2">
                         <button
-                          onClick={() => window.location.href = `/publications/${publication.slug}`}
+                          onClick={() => navigate({ to: `/publications/${publication.slug}` })}
                           className="text-gray-600 hover:text-gray-900 p-1"
                           title="View"
                         >
                           <FaEye className="text-sm" />
                         </button>
                         <button
-                          onClick={() => window.location.href = `/admin/publications/${publication._id}`}
+                          onClick={() => handleEditPublication(publication._id)}
                           className="text-blue-600 hover:text-blue-900 p-1"
                           title="Edit"
                         >
                           <FaEdit className="text-sm" />
                         </button>
                         <button
-                          onClick={() => handleDelete(publication._id, publication.title)}
+                          onClick={() => handleDeletePublication(publication._id)}
                           className="text-red-600 hover:text-red-900 p-1"
                           title="Delete"
                         >

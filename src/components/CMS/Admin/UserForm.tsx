@@ -32,9 +32,9 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
   useEffect(() => {
     if (existingUser && userId && userId !== 'new') {
       setFormData({
-        name: existingUser.name,
+        name: existingUser.name ?? '',
         email: existingUser.email,
-        role: existingUser.role,
+        role: existingUser.role ?? 'viewer',
       });
     }
   }, [existingUser, userId]);
@@ -97,9 +97,6 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
     }
   };
 
-  // Temporarily disable auth checks for testing
-  // TODO: Re-enable authentication checks once auth flow is working
-  /*
   if (currentUser === undefined) {
     return (
       <div className="flex justify-center py-12">
@@ -116,7 +113,6 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
       </div>
     );
   }
-  */
 
   // Show loading only when fetching an existing user
   if (userId && userId !== 'new' && !existingUser) {

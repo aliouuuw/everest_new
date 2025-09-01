@@ -112,9 +112,7 @@ export const createPublication = mutation({
     featured: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user } = await requireEditor(ctx);
+    const { user } = await requireEditor(ctx);
 
     const now = Date.now();
 
@@ -126,7 +124,7 @@ export const createPublication = mutation({
 
     return await ctx.db.insert("publications", {
       ...args,
-      authorId: 'temp-user-id', // TODO: Use proper user ID when auth is working
+      authorId: user._id,
       slug,
       status: "draft",
       mediaIds: [],
@@ -151,9 +149,7 @@ export const updatePublication = mutation({
     status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
   },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user } = await requireEditor(ctx);
+    const { user } = await requireEditor(ctx);
 
     const { id, ...updates } = args;
 
@@ -195,9 +191,7 @@ export const updatePublication = mutation({
 export const deletePublication = mutation({
   args: { id: v.id("publications") },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user } = await requireEditor(ctx);
+    const { user } = await requireEditor(ctx);
 
     // Get publication to clean up media references
     const publication = await ctx.db.get(args.id);

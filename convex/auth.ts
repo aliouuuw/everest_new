@@ -1,16 +1,122 @@
-import { ConvexError, v  } from "convex/values";
+import { v } from "convex/values";
+import { Password } from "@convex-dev/auth/providers/Password";
+import { convexAuth } from "@convex-dev/auth/server";
 import { mutation, query } from "./_generated/server";
+
+export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
+  providers: [Password],
+});
+
+// Store function to handle user creation and updates
+export const storeUser = mutation({
+  args: {
+    email: v.string(),
+    name: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    // Check if user already exists
+    const existingUser = await ctx.db
+      .query("users")
+      .filter(q => q.eq(q.field("email"), identity.email))
+      .first();
+
+    if (existingUser) {
+      // Update existing user
+      await ctx.db.patch(existingUser._id, {
+        name: args.name,
+        lastLogin: Date.now(),
+      });
+      return existingUser._id;
+    }
+
+    // Create new user with required fields
+    const userId = await ctx.db.insert("users", {
+      email: args.email,
+      name: args.name,
+      role: "admin", // Default role for new users
+      createdAt: Date.now(),
+      lastLogin: Date.now(),
+    });
+
+    return userId;
+  },
+});
+
+// Function to ensure user has all required fields after Convex Auth creates them
+export const ensureUserProfile = mutation({
+  args: {},
+  handler: async (ctx) => {
+    try {
+      const identity = await ctx.auth.getUserIdentity();
+      console.log('ensureUserProfile: identity check', { hasIdentity: !!identity, email: identity?.email });
+      
+      if (!identity) {
+        throw new Error("Not authenticated");
+      }
+
+      // Find the user that Convex Auth created
+      let user = await ctx.db
+        .query("users")
+        .filter(q => q.eq(q.field("email"), identity.email))
+        .first();
+
+      console.log('ensureUserProfile: user lookup', { foundUser: !!user, userEmail: user?.email });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // Ensure all required fields are set
+      const updates: any = {};
+      
+      if (!user.createdAt) {
+        updates.createdAt = Date.now();
+      }
+      
+      if (!user.lastLogin) {
+        updates.lastLogin = Date.now();
+      }
+      
+      // Set name if not provided (use email prefix)
+      if (!user.name && identity.email) {
+        updates.name = identity.email.split('@')[0];
+      }
+      
+      // Set role if not provided (default to admin for now)
+      if (!user.role) {
+        updates.role = "admin";
+      }
+
+      console.log('ensureUserProfile: updates needed', { updatesCount: Object.keys(updates).length, updates });
+
+      // Update user if needed
+      if (Object.keys(updates).length > 0) {
+        await ctx.db.patch(user._id, updates);
+        user = await ctx.db.get(user._id);
+        console.log('ensureUserProfile: user updated', { userId: user?._id });
+      }
+
+      return user;
+    } catch (error) {
+      console.error('ensureUserProfile error:', error);
+      throw error;
+    }
+  },
+});
 
 // Get current authenticated user
 export const getCurrentUser = query({
   args: {},
   handler: async (ctx) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    /*
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
-      throw new ConvexError("Not authenticated");
+      // Return null instead of throwing error for unauthenticated users
+      return null;
     }
 
     // Get user from our users table
@@ -20,20 +126,18 @@ export const getCurrentUser = query({
       .first();
 
     if (!user) {
-      throw new ConvexError("User not found");
+      // Return null instead of throwing error for users not in our database
+      return null;
+    }
+
+    // Check if user has all required fields
+    if (!user.createdAt || !user.lastLogin) {
+      // User is missing required fields, but we can't call mutations from queries
+      // The client should call ensureUserProfile after getting the user
+      console.warn('User missing required fields:', user);
     }
 
     return user;
-    */
-
-    // Return mock user for testing
-    return {
-      _id: "mock-user-id",
-      name: "Test User",
-      email: "test@example.com",
-      role: "admin",
-      createdAt: Date.now(),
-    };
   },
 });
 
@@ -44,12 +148,9 @@ export const createUserOnLogin = mutation({
     name: v.string(),
   },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    /*
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
-      throw new ConvexError("Not authenticated");
+      return null; // Return null instead of throwing error
     }
 
     // Check if user already exists
@@ -66,18 +167,7 @@ export const createUserOnLogin = mutation({
     const userId = await ctx.db.insert("users", {
       email: args.email,
       name: args.name,
-      role: "viewer",
-      createdAt: Date.now(),
-    });
-
-    return await ctx.db.get(userId);
-    */
-
-    // Create mock user for testing
-    const userId = await ctx.db.insert("users", {
-      email: args.email,
-      name: args.name,
-      role: "viewer",
+      role: "admin",
       createdAt: Date.now(),
     });
 
@@ -89,7 +179,7 @@ export const createUserOnLogin = mutation({
 export const requireAdmin = async (ctx: any) => {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
-    throw new ConvexError("Not authenticated");
+    return null; // Return null instead of throwing error
   }
 
   const user = await ctx.db
@@ -98,7 +188,7 @@ export const requireAdmin = async (ctx: any) => {
     .first();
 
   if (!user || user.role !== "admin") {
-    throw new ConvexError("Admin access required");
+    return null; // Return null instead of throwing error
   }
 
   return { user, identity };
@@ -108,7 +198,7 @@ export const requireAdmin = async (ctx: any) => {
 export const requireEditor = async (ctx: any) => {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
-    throw new ConvexError("Not authenticated");
+    return null; // Return null instead of throwing error
   }
 
   const user = await ctx.db
@@ -116,8 +206,8 @@ export const requireEditor = async (ctx: any) => {
     .filter((q: { eq: (arg0: any, arg1: any) => any; field: (arg0: string) => any; }) => q.eq(q.field("email"), identity.email))
     .first();
 
-  if (!user || !["admin", "editor"].includes(user.role)) {
-    throw new ConvexError("Editor access required");
+  if (!["admin", "editor"].includes(user.role)) {
+    return null; // Return null instead of throwing error
   }
 
   return { user, identity };
@@ -127,7 +217,7 @@ export const requireEditor = async (ctx: any) => {
 export const requireViewer = async (ctx: any) => {
   const identity = await ctx.auth.getUserIdentity();
   if (!identity) {
-    throw new ConvexError("Not authenticated");
+    return null; // Return null instead of throwing error
   }
 
   const user = await ctx.db
@@ -136,7 +226,7 @@ export const requireViewer = async (ctx: any) => {
     .first();
 
   if (!user) {
-    throw new ConvexError("User not found");
+    return null; // Return null instead of throwing error
   }
 
   return { user, identity };

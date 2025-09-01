@@ -38,9 +38,6 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
   const createPublication = useCreatePublication();
   const updatePublication = useUpdatePublication();
 
-  // Temporarily disable auth checks for testing
-  // TODO: Re-enable authentication checks once auth flow is working
-  /*
   if (currentUser === undefined) {
     return (
       <div className="flex justify-center py-12">
@@ -66,7 +63,6 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
       </div>
     );
   }
-  */
 
   useEffect(() => {
     if (existingPublication && publicationId) {

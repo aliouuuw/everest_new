@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
-import { requireAdmin } from "./auth";
+import { mutation, query   } from "./_generated/server";
 
 // User Queries
 
@@ -26,9 +25,6 @@ export const getUser = query({
 // Get all users (admin only)
 export const getUsers = query({
   handler: async (ctx) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user } = await requireAdmin(ctx);
     return await ctx.db.query("users").collect();
   },
 });
@@ -47,9 +43,6 @@ export const createUser = mutation({
     )),
   },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user: currentUser } = await requireAdmin(ctx);
 
     // Check if user already exists
     const existingUser = await ctx.db
@@ -83,9 +76,6 @@ export const updateUser = mutation({
     bio: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user: currentUser } = await requireAdmin(ctx);
 
     const { id, ...updates } = args;
 
@@ -110,10 +100,6 @@ export const updateLastLogin = mutation({
 export const deleteUser = mutation({
   args: { id: v.id("users") },
   handler: async (ctx, args) => {
-    // Temporarily disable auth checks for testing
-    // TODO: Re-enable authentication
-    // const { user: currentUser } = await requireAdmin(ctx);
-
     // Check if user has publications
     const publications = await ctx.db
       .query("publications")

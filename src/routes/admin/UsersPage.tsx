@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import { FaEdit, FaEye, FaPlus, FaShieldAlt, FaTrash, FaUser } from 'react-icons/fa';
 import { useDeleteUser, useUsers } from '@/hooks/useCMS';
 import { formatDate } from '@/utils/cms/helpers';
@@ -6,6 +7,7 @@ import { USER_ROLES } from '@/utils/cms/constants';
 import LoadingSpinner from '@/components/CMS/Shared/LoadingSpinner';
 
 const UsersPage: React.FC = () => {
+  const navigate = useNavigate();
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -71,7 +73,7 @@ const UsersPage: React.FC = () => {
           <p className="text-gray-600 mt-2">Manage user accounts and permissions</p>
         </div>
         <button
-          onClick={() => window.location.href = '/admin/users/new'}
+          onClick={() => navigate({ to: '/admin/users/new' })}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           <FaPlus className="text-sm" />
@@ -129,7 +131,7 @@ const UsersPage: React.FC = () => {
                 : 'Get started by adding your first user.'}
             </p>
             <button
-              onClick={() => window.location.href = '/admin/users/new'}
+              onClick={() => navigate({ to: '/admin/users/new' })}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-colors"
             >
               <FaPlus className="text-sm" />
@@ -203,7 +205,7 @@ const UsersPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2">
                         <button
-                          onClick={() => window.location.href = `/admin/users/${user._id}`}
+                          onClick={() => navigate({ to: `/admin/users/${user._id}` })}
                           className="text-blue-600 hover:text-blue-900 p-1"
                           title="Edit"
                         >

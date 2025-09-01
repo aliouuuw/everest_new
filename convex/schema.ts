@@ -1,7 +1,9 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { authTables } from "@convex-dev/auth/server";
 
 export default defineSchema({
+  ...authTables,
   // Publications Table
   publications: defineTable({
     // Content
@@ -36,8 +38,8 @@ export default defineSchema({
     featured: v.boolean(),
     readingTime: v.optional(v.number()),
     publishedAt: v.optional(v.number()),
-    createdAt: v.number(),
-    updatedAt: v.number(),
+    createdAt: v.optional(v.number()), // Made optional for consistency
+    updatedAt: v.optional(v.number()), // Made optional for consistency
 
     // SEO
     seoTitle: v.optional(v.string()),
@@ -76,7 +78,7 @@ export default defineSchema({
     uploadedBy: v.id("users"),
 
     // Timestamps
-    createdAt: v.number(),
+    createdAt: v.optional(v.number()), // Made optional for consistency
   })
     .index("by_publication", ["publicationId"])
     .index("by_type", ["fileType"])
@@ -86,14 +88,14 @@ export default defineSchema({
   users: defineTable({
     // Authentication
     email: v.string(),
-    name: v.string(),
+    name: v.optional(v.string()),
 
     // Authorization
-    role: v.union(
+    role: v.optional(v.union(
       v.literal("admin"),
       v.literal("editor"),
       v.literal("viewer")
-    ),
+    )),
 
     // Profile
     avatar: v.optional(v.string()),
@@ -101,7 +103,7 @@ export default defineSchema({
 
     // Activity
     lastLogin: v.optional(v.number()),
-    createdAt: v.number(),
+    createdAt: v.optional(v.number()), // Made optional for Convex Auth compatibility
   })
     .index("by_email", ["email"]),
 

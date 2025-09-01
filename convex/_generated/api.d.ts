@@ -16,6 +16,7 @@ import type {
 import type * as api_uploadthing from "../api/uploadthing.js";
 import type * as auth from "../auth.js";
 import type * as categories from "../categories.js";
+import type * as http from "../http.js";
 import type * as media from "../media.js";
 import type * as publications from "../publications.js";
 import type * as uploadthing from "../uploadthing.js";
@@ -33,6 +34,7 @@ declare const fullApi: ApiFromModules<{
   "api/uploadthing": typeof api_uploadthing;
   auth: typeof auth;
   categories: typeof categories;
+  http: typeof http;
   media: typeof media;
   publications: typeof publications;
   uploadthing: typeof uploadthing;

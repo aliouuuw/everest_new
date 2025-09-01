@@ -30,8 +30,8 @@ import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
 
 // Admin CMS routes
-import { AdminLayout } from './components/CMS/Admin'
-import { MediaPage as AdminMediaPage, PublicationFormPage as AdminPublicationFormPage, PublicationsPage as AdminPublicationsPage, SettingsPage as AdminSettingsPage, UserFormPage as AdminUserFormPage, UsersPage as AdminUsersPage } from './routes/admin'
+import { AdminLayout } from './components/CMS/Admin';
+import { DashboardPage as AdminDashboardPage, MediaPage as AdminMediaPage, PublicationFormPage as AdminPublicationFormPage, PublicationsPage as AdminPublicationsPage, SettingsPage as AdminSettingsPage, SigninPage as AdminSigninPage, UserFormPage as AdminUserFormPage, UsersPage as AdminUsersPage } from './routes/admin'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
@@ -138,10 +138,26 @@ const dashboardRoute = createRoute({
 })
 
 // Admin routes
+const adminSigninRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/admin/signin',
+  component: AdminSigninPage,
+  beforeLoad: async () => {
+    // This will be handled by the SigninPage component
+    // The route will still render but the component will handle auth redirects
+    return {};
+  },
+})
+
 const adminLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin',
   component: AdminLayout,
+  beforeLoad: async () => {
+    // This will be handled by the ProtectedAdminRoute component
+    // The route will still render but the component will handle auth
+    return {};
+  },
 })
 
 const adminPublicationsRoute = createRoute({
@@ -153,6 +169,12 @@ const adminPublicationsRoute = createRoute({
 const adminPublicationFormRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/publications/$publicationId',
+  component: AdminPublicationFormPage,
+})
+
+const adminNewPublicationRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/publications/new',
   component: AdminPublicationFormPage,
 })
 
@@ -168,6 +190,12 @@ const adminUserFormRoute = createRoute({
   component: AdminUserFormPage,
 })
 
+const adminNewUserRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/users/new',
+  component: AdminUserFormPage,
+})
+
 const adminMediaRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/media',
@@ -178,6 +206,12 @@ const adminSettingsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/settings',
   component: AdminSettingsPage,
+})
+
+const adminDashboardRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/dashboard',
+  component: AdminDashboardPage,
 })
 
 const notFoundRoute = createRoute({
@@ -217,13 +251,17 @@ const routeTree = rootRoute.addChildren([
   portalRoute,
   dashboardRoute,
   // Admin routes
+  adminSigninRoute,
   adminLayoutRoute.addChildren([
     adminPublicationsRoute,
     adminPublicationFormRoute,
+    adminNewPublicationRoute,
     adminUsersRoute,
     adminUserFormRoute,
+    adminNewUserRoute,
     adminMediaRoute,
     adminSettingsRoute,
+    adminDashboardRoute,
   ]),
   notFoundRoute,
 ])
@@ -281,9 +319,11 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <StrictMode>
-        <ConvexAuthProvider client={convex}>
-          <RouterProvider router={router} />
-        </ConvexAuthProvider>
+        <ConvexProvider client={convex}>
+          <ConvexAuthProvider client={convex}>
+            <RouterProvider router={router} />
+          </ConvexAuthProvider>
+        </ConvexProvider>
       </StrictMode>,
     )
 
