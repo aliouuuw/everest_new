@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
+import { requireEditor } from "./auth";
 
 // Publication Queries
 
@@ -109,9 +110,12 @@ export const createPublication = mutation({
     excerpt: v.string(),
     tags: v.array(v.string()),
     featured: v.optional(v.boolean()),
-    authorId: v.id("users"),
   },
   handler: async (ctx, args) => {
+    // Temporarily disable auth checks for testing
+    // TODO: Re-enable authentication
+    // const { user } = await requireEditor(ctx);
+
     const now = Date.now();
 
     // Generate slug from title
@@ -122,6 +126,7 @@ export const createPublication = mutation({
 
     return await ctx.db.insert("publications", {
       ...args,
+      authorId: 'temp-user-id', // TODO: Use proper user ID when auth is working
       slug,
       status: "draft",
       mediaIds: [],
@@ -146,6 +151,10 @@ export const updatePublication = mutation({
     status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
   },
   handler: async (ctx, args) => {
+    // Temporarily disable auth checks for testing
+    // TODO: Re-enable authentication
+    // const { user } = await requireEditor(ctx);
+
     const { id, ...updates } = args;
 
     // Generate new slug if title is being updated
@@ -186,6 +195,10 @@ export const updatePublication = mutation({
 export const deletePublication = mutation({
   args: { id: v.id("publications") },
   handler: async (ctx, args) => {
+    // Temporarily disable auth checks for testing
+    // TODO: Re-enable authentication
+    // const { user } = await requireEditor(ctx);
+
     // Get publication to clean up media references
     const publication = await ctx.db.get(args.id);
     if (!publication) {

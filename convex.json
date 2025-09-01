@@ -1,7 +1,13 @@
 {
-  "functions": "convex/",
-  "generateCommonJSApi": false,
   "node": {
     "polyfill": true
+  },
+  "auth": {
+    "providers": [
+      {
+        "domain": "everest-finance.convex.cloud",
+        "applicationID": "convex"
+      }
+    ]
   }
 }

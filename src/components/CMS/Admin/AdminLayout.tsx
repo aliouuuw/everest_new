@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from '@tanstack/react-router';
-import { FaNewspaper, FaImages, FaUsers, FaCog } from 'react-icons/fa';
+import { FaCog, FaImages, FaNewspaper, FaUsers } from 'react-icons/fa';
 
 const AdminLayout: React.FC = () => {
   return (
