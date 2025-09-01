@@ -6,7 +6,8 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
+import { ConvexReactClient } from 'convex/react'
+import { ConvexAuthProvider } from '@convex-dev/auth/react'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
@@ -232,9 +233,9 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <StrictMode>
-        <ConvexProvider client={convex}>
+        <ConvexAuthProvider client={convex}>
           <RouterProvider router={router} />
-        </ConvexProvider>
+        </ConvexAuthProvider>
       </StrictMode>,
     )
 
