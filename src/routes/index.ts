@@ -12,3 +12,5 @@ export { AssistedMgmtPage } from './AssistedMgmtPage'
 export { BoursePage } from './BoursePage'
 export { PortalPage } from './PortalPage'
 export { SimulateurPage } from './SimulateurPage'
+
+export { AdminDashboard } from './admin/AdminDashboard'
