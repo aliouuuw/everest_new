@@ -29,6 +29,7 @@ import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
+import { AuthPage } from './routes/AuthPage'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
@@ -140,6 +141,12 @@ const adminDashboardRoute = createRoute({
   component: AdminDashboard,
 })
 
+const authRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/auth',
+  component: AuthPage,
+})
+
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
@@ -177,6 +184,7 @@ const routeTree = rootRoute.addChildren([
   portalRoute,
   dashboardRoute,
   adminDashboardRoute,
+  authRoute,
   notFoundRoute,
 ])
 
