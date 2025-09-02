@@ -2,12 +2,11 @@
 // This will be used for webhook handling from Uploadthing
 
 import { action } from "../_generated/server";
-import { api } from "../_generated/api";
 
 // Webhook handler for Uploadthing file uploads
 export const uploadthingWebhook = action({
   args: {},
-  handler: async (ctx, args) => {
+  handler: (_ctx, _args) => {
     // This will handle webhook callbacks from Uploadthing
     // For now, we'll implement basic functionality
     console.log("Uploadthing webhook received");

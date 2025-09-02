@@ -11,7 +11,7 @@ interface PublicationFormData {
   description: string;
   content: string;
   excerpt: string;
-  category: string;
+  category: 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses';
   tags: Array<string>;
   featured: boolean;
   status: 'draft' | 'published' | 'archived';
@@ -105,7 +105,7 @@ export const PublicationForm = () => {
         content: publication.content,
         excerpt: publication.excerpt,
         category: publication.category,
-        tags: publication.tags || [],
+        tags: publication.tags,
         featured: publication.featured || false,
         status: publication.status,
         seoTitle: publication.seoTitle || '',
@@ -129,9 +129,7 @@ export const PublicationForm = () => {
     if (!formData.excerpt.trim()) {
       newErrors.excerpt = 'Excerpt is required';
     }
-    if (!formData.category) {
-      newErrors.category = 'Category is required';
-    }
+    // Category is always set to a default value, so no validation needed
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -329,7 +327,7 @@ export const PublicationForm = () => {
               <select
                 id="category"
                 value={formData.category}
-                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses' }))}
                 className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
                   errors.category ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}

@@ -43,7 +43,7 @@ export const seedTestUsers = mutation({
 
       if (!existingUser) {
         // Create user
-        const userId = await ctx.db.insert("users", {
+        await ctx.db.insert("users", {
           email: userData.email,
           name: userData.name,
           role: userData.role,

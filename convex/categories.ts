@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 // Category Queries
 
@@ -105,9 +105,12 @@ export const deleteCategory = mutation({
   args: { id: v.id("categories") },
   handler: async (ctx, args) => {
     // Check if category has publications
+    const category = await ctx.db.get(args.id);
+    if (!category) return args.id;
+    
     const publications = await ctx.db
       .query("publications")
-      .filter(q => q.eq(q.field("category"), args.id))
+      .filter(q => q.eq(q.field("category"), category.slug))
       .collect();
 
     if (publications.length > 0) {

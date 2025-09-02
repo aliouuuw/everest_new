@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaSave, FaCog, FaDatabase, FaShieldAlt, FaGlobe, FaPalette } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaCog, FaDatabase, FaGlobe, FaPalette, FaSave, FaShieldAlt } from 'react-icons/fa';
 
 export const Settings = () => {
   const [activeTab, setActiveTab] = useState('general');
