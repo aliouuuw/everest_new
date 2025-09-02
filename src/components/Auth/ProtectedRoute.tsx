@@ -1,4 +1,4 @@
-import { useAuthActions } from '@convex-dev/auth/react'
+import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useConvexAuth, useQuery } from 'convex/react'
 import { api } from '../../../convex/_generated/api'
@@ -10,31 +10,28 @@ interface ProtectedRouteProps {
   redirectTo?: string
 }
 
-interface User {
-  _id: string
-  email: string
-  name: string
-  role: 'admin' | 'editor' | 'viewer' | 'client'
-  avatar?: string
-  bio?: string
-  lastLogin?: number
-  createdAt: number
-}
+
 
 export function ProtectedRoute({ 
   children, 
   requiredRole, 
   redirectTo = '/auth' 
 }: ProtectedRouteProps) {
-  const { signOut } = useAuthActions()
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useConvexAuth()
   
   // Fetch current user data using the correct API path
   const user = useQuery(api.api.users.getCurrentUser, isAuthenticated ? {} : "skip")
 
-  // Handle loading state
-  if (isLoading || user === undefined) {
+  // Handle redirect for unauthenticated users
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate({ to: redirectTo })
+    }
+  }, [isLoading, isAuthenticated, navigate, redirectTo])
+
+  // Show loading while checking auth state
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -45,14 +42,25 @@ export function ProtectedRoute({
     )
   }
 
-  // Redirect to login if not authenticated
+  // If not authenticated, show redirect message briefly
   if (!isAuthenticated) {
-    navigate({ to: redirectTo })
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
           <p className="mt-2 text-sm text-[var(--night-80)]/80">Redirection vers la connexion...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show loading while fetching user data
+  if (user === undefined) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[var(--night-80)]/80">Chargement des données utilisateur...</p>
         </div>
       </div>
     )

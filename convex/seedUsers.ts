@@ -7,25 +7,25 @@ export const seedTestUsers = mutation({
     // Test users with different roles
     const testUsers = [
       {
-        email: "admin@everest.com",
+        email: "admin@company.com",
         name: "Admin User",
         role: "admin" as const,
         password: "admin123"
       },
       {
-        email: "editor@everest.com",
+        email: "editor@company.com",
         name: "Editor User",
         role: "editor" as const,
         password: "editor123"
       },
       {
-        email: "client@everest.com",
+        email: "client@company.com",
         name: "Client User",
         role: "client" as const,
         password: "client123"
       },
       {
-        email: "viewer@everest.com",
+        email: "viewer@company.com",
         name: "Viewer User",
         role: "viewer" as const,
         password: "viewer123"
