@@ -1,462 +1,340 @@
-# Implementation Roadmap
+# CMS Implementation Roadmap
 
-## 📅 Development Phases
+## 📋 Overview
 
-### Phase 1: Foundation Setup (Week 1)
+This roadmap outlines the development phases for implementing the lightweight CMS system for Everest Finance. The project has made significant progress but has critical gaps that need immediate attention.
 
-#### 🎯 Objectives
-- Set up development environment
-- Install and configure core dependencies
-- Create basic project structure
-- Establish development workflow
+## 🚨 Current Status: 90% Complete with Critical Gaps
 
-#### 📋 Tasks
+**Overall Progress**: The CMS is nearly complete with a fully functional admin interface, authentication system, and content management capabilities. However, **file uploads are completely non-functional** due to placeholder Uploadthing integration.
 
-##### Day 1: Environment Setup
-- [ ] Install Bun package manager
-- [ ] Update `package.json` with CMS dependencies
-- [ ] Configure environment variables
-- [ ] Set up development scripts
+**Critical Blockers**: 
+- ❌ File uploads cannot work (Uploadthing integration broken)
+- ❌ Media management interface is non-functional
+- ❌ Users cannot add images/documents to publications
 
-##### Day 2: ConvexDB Setup
-- [ ] Create ConvexDB account and project
-- [ ] Initialize ConvexDB in project
-- [ ] Create basic schema files
-- [ ] Test ConvexDB connection
+## 📊 Phase Status Overview
 
-##### Day 3: Uploadthing Setup
-- [ ] Create Uploadthing account
-- [ ] Configure Uploadthing project
-- [ ] Set up file upload routes
-- [ ] Test file upload functionality
+| Phase | Status | Completion | Critical Issues |
+|-------|--------|------------|-----------------|
+| **Phase 1: Foundation** | ✅ COMPLETED | 100% | None |
+| **Phase 2: Core Database & API** | ✅ COMPLETED | 100% | None |
+| **Phase 3: Admin Interface** | ✅ COMPLETED | 100% | None |
+| **Phase 4: File Upload Integration** | ❌ CRITICAL GAP | 0% | **BLOCKING PRODUCTION** |
+| **Phase 5: Public Interface** | 🔄 PARTIALLY COMPLETED | 70% | File display broken |
+| **Phase 6: Testing & Optimization** | 🔄 PLANNED | 0% | Cannot test without uploads |
 
-##### Day 4: Project Structure
-- [ ] Create CMS component directories
-- [ ] Set up routing for admin interface
-- [ ] Create basic layout components
-- [ ] Establish component patterns
+## 📋 Phase 1: Foundation Setup - COMPLETED ✅
 
-##### Day 5: Development Workflow
-- [ ] Configure hot reload
-- [ ] Set up linting and formatting
-- [ ] Create development scripts
-- [ ] Test complete setup
+**Duration**: Completed
+**Status**: 100% Complete
+**Priority**: High
 
-#### ✅ Deliverables
-- [ ] Working development environment
-- [ ] ConvexDB project initialized
-- [ ] Uploadthing configured
-- [ ] Basic project structure
-- [ ] Development workflow established
+### ✅ Completed Tasks
+- [x] Project structure and dependencies setup
+- [x] ConvexDB project initialization
+- [x] React app integration with ConvexDB
+- [x] Development environment configuration
+- [x] Package.json scripts and build tools
+- [x] TypeScript configuration and ESLint setup
 
----
+### 🎯 Key Deliverables
+- Complete project structure with proper organization
+- Development workflow with concurrent ConvexDB + React servers
+- Build optimization and performance monitoring
+- Code quality tools (ESLint, Prettier, TypeScript)
 
-### Phase 2: Core Database & API (Week 2) - COMPLETED ✅
+### 📝 Lessons Learned
+- Using `npm run cms:dev` for concurrent development is highly efficient
+- Proper TypeScript configuration with ConvexDB provides excellent type safety
+- Code quality tools should be set up early in the project
 
-#### 🎯 Objectives
-- Implement complete database schema
-- Create API functions for CRUD operations
-- Set up authentication and authorization
-- Implement data validation
+## 📋 Phase 2: Core Database & API - COMPLETED ✅
 
-#### 📋 Tasks
+**Duration**: Completed
+**Status**: 100% Complete
+**Priority**: High
 
-##### Week 2.1: Database Schema - COMPLETED ✅
-- ✅ Implement publications table
-- ✅ Implement media table
-- ✅ Implement users table
-- ✅ Create database indexes
-- ✅ Test schema with sample data
+### ✅ Completed Tasks
+- [x] Complete database schema design (4 tables)
+- [x] ConvexDB API functions implementation
+- [x] Authentication system with role-based access control
+- [x] User management with 4 roles (admin, editor, viewer, client)
+- [x] Protected routes and authorization middleware
+- [x] Real-time data synchronization
 
-##### Week 2.2: API Functions - COMPLETED ✅
-- ✅ Create publication CRUD functions
-- ✅ Create media management functions
-- ✅ Implement search functionality
-- ✅ Add data validation
-- ✅ Test API functions
+### 🎯 Key Deliverables
+- **Database Schema**: publications, media, users, categories tables
+- **API Layer**: Full CRUD operations with search and filtering
+- **Authentication**: Convex Auth with custom role management
+- **Security**: Role-based access control for all admin functions
 
-##### Week 2.3: Authentication - COMPLETED ✅
-- ✅ Set up ConvexDB authentication
-- ✅ Implement user roles (admin, editor, viewer, client)
-- ✅ Create login/logout functionality
-- ✅ Add authorization checks
-- ✅ Implement role-based navigation
-- ✅ Set up protected routes
+### 📝 Lessons Learned
+- ConvexDB's real-time features eliminate complex state management needs
+- Role-based authentication provides robust security with minimal complexity
+- Full-text search at database level provides optimal performance
+- Automatic role-based navigation significantly improves user experience
 
-##### Week 2.4: Data Relationships - COMPLETED ✅
-- ✅ Link publications to media
-- ✅ Implement category system
-- ✅ Create tag system
-- ✅ Test relationships
+## 📋 Phase 3: Admin Interface - COMPLETED ✅
 
-#### ✅ Deliverables
-- ✅ Complete database schema
-- ✅ Working API functions
-- ✅ Complete authentication system with role-based access control
-- ✅ Data relationships established
-- ✅ Protected routes and authorization middleware
-- ✅ Automatic role-based navigation after authentication
+**Duration**: Completed
+**Status**: 100% Complete
+**Priority**: High
 
----
+### ✅ Completed Tasks
+- [x] Complete admin interface for content management
+- [x] Publication creation/editing forms with rich text editor
+- [x] User management interface with role assignment
+- [x] Media management interface (UI only - functionality broken)
+- [x] Settings and configuration pages
+- [x] Admin layout with sidebar navigation
+- [x] Form validation and error handling
 
-### Phase 3: Admin Interface (Week 3) - FOUNDATION READY 🟡
+### 🎯 Key Deliverables
+- **Admin Dashboard**: Complete overview with statistics and quick actions
+- **Publication Management**: Full CRUD operations with rich text editing
+- **User Management**: Role assignment and user administration
+- **Media Management**: File organization interface (non-functional)
+- **Settings**: System configuration and preferences
 
-#### Current Status
-- ✅ Admin layout component created
-- ✅ Basic component structure established
-- ✅ Routing foundation in place
-- ✅ Authentication and authorization system complete
-- 🔄 Publication management forms needed
-- 🔄 Media upload interface needed
-- 🔄 Rich text editor integration needed
+### 📝 Lessons Learned
+- Clean, intuitive admin interfaces significantly improve content management efficiency
+- Comprehensive form handling with error states is crucial for admin interfaces
+- Rich text editor integration provides professional content creation experience
+- Intuitive sidebar navigation with active state management improves usability
 
-#### Week 3.1: Admin Layout - COMPLETED ✅
-- ✅ Admin layout component with navigation
-- ✅ Responsive sidebar design
-- ✅ Route structure established
+## 📋 Phase 4: File Upload Integration - CRITICAL GAP ❌
 
-#### Week 3.2: Publication Management - READY TO BUILD 🟡
-- 🔄 Publication list view
-- 🔄 Create/edit forms with validation
-- 🔄 Rich text editor integration
-- 🔄 Status management workflow
+**Duration**: **IMMEDIATE PRIORITY**
+**Status**: 0% Complete - **BLOCKING PRODUCTION**
+**Priority**: **CRITICAL**
 
-#### Week 3.3: Media Management - READY TO BUILD 🟡
-- 🔄 File upload integration with Uploadthing
-- 🔄 Media gallery interface
-- 🔄 Image optimization and resizing
-- 🔄 Media metadata management
+### ❌ Current State: Complete Failure
+- **Uploadthing Integration**: Only placeholder configuration exists
+- **File Uploads**: Completely non-functional
+- **Media Management**: Interface exists but cannot handle files
+- **Impact**: Users cannot add images/documents to publications
 
-#### Week 3.4: User Management - READY TO BUILD 🟡
-- ✅ User authentication and role system implemented
-- 🔄 User management interface
-- 🔄 Role management system
-- 🔄 Permission controls
+### 🚨 Critical Issues Identified
+1. **`convex/uploadthing.ts`** - Placeholder configuration only
+2. **`src/utils/uploadthing.ts`** - Placeholder utilities only  
+3. **`convex/api/uploadthing.ts`** - Missing webhook handler
+4. **Environment Configuration** - May be incomplete
 
-#### 🎯 Objectives
-- Build comprehensive admin interface
-- Implement content management features
-- Create media upload interface
-- Add user management
+### 🎯 Required Deliverables
+- [ ] Functional Uploadthing server configuration
+- [ ] Webhook handlers for file processing
+- [ ] Frontend upload components connected to working backend
+- [ ] End-to-end file upload flow testing
+- [ ] Media library integration with publications
 
-#### 📋 Tasks
+### 📋 Implementation Tasks
 
-##### Week 3.1: Admin Layout - COMPLETED ✅
-- ✅ Create admin layout component
-- ✅ Implement navigation
-- ✅ Add responsive design
-- ✅ Create admin routing
+#### 4.1 Uploadthing Server Setup (CRITICAL)
+- [ ] Install and configure Uploadthing server package
+- [ ] Set up file router configuration
+- [ ] Configure file size limits and type restrictions
+- [ ] Set up webhook endpoints for file processing
 
-##### Week 3.2: Publication Management
-- [ ] Create publication list view
-- [ ] Implement create/edit forms
-- [ ] Add rich text editor
-- [ ] Implement status management
+#### 4.2 ConvexDB Integration (CRITICAL)
+- [ ] Implement webhook handlers in `convex/api/uploadthing.ts`
+- [ ] Connect file uploads to media table
+- [ ] Implement file metadata storage
+- [ ] Add file deletion and cleanup
 
-##### Week 3.3: Media Management
-- [ ] Create media upload component
-- [ ] Implement media gallery
-- [ ] Add file management
-- [ ] Create media editor
+#### 4.3 Frontend Integration (CRITICAL)
+- [ ] Replace placeholder upload components with functional ones
+- [ ] Connect upload forms to working backend
+- [ ] Implement file preview and management
+- [ ] Add drag-and-drop file upload support
 
-##### Week 3.4: User Management
-- [ ] Create user management interface
-- [ ] Implement role management
-- [ ] Add user permissions
-- [ ] Test user workflows
+#### 4.4 Testing & Validation (CRITICAL)
+- [ ] Test file upload flow end-to-end
+- [ ] Verify file storage and retrieval
+- [ ] Test file deletion and cleanup
+- [ ] Validate file type and size restrictions
 
-#### ✅ Deliverables
-- ✅ Complete admin interface foundation
-- 🔄 Publication management system
-- 🔄 Media management system
-- 🔄 User management system
+### ⏱️ Estimated Timeline
+- **Critical Path**: 2-3 days for basic functionality
+- **Full Implementation**: 1 week for robust file handling
+- **Testing & Polish**: 2-3 days for production readiness
 
----
+### 🚨 Risk Assessment
+- **High Risk**: File uploads are core CMS functionality
+- **Impact**: CMS cannot be used for content creation without file support
+- **Mitigation**: Focus all resources on this phase before proceeding
 
-### Phase 4: Public Interface (Week 4)
+## 📋 Phase 5: Public Interface Completion - PARTIALLY COMPLETED 🔄
 
-#### 🎯 Objectives
-- Update public pages to use CMS data
-- Implement content display components
-- Add search and filtering
-- Optimize for performance
+**Duration**: 1-2 weeks (after Phase 4)
+**Status**: 70% Complete
+**Priority**: Medium
 
-#### 📋 Tasks
+### ✅ Completed Tasks
+- [x] Publications listing page with search and filtering
+- [x] Individual publication display pages
+- [x] Category-based navigation
+- [x] Responsive design and animations
+- [x] Basic content display
 
-##### Week 4.1: Update Existing Components
-- [ ] Modify Insights component
-- [ ] Update PublicationsPage
-- [ ] Create individual publication pages
-- [ ] Test existing functionality
+### 🔄 Remaining Tasks
+- [ ] Connect CMS data to existing public pages
+- [ ] Implement advanced search and filtering
+- [ ] Add category navigation and breadcrumbs
+- [ ] Optimize performance and SEO
+- [ ] Add social sharing and engagement features
 
-##### Week 4.2: New Public Features
-- [ ] Implement search functionality
-- [ ] Add category filtering
-- [ ] Create tag filtering
-- [ ] Add pagination
+### 🎯 Key Deliverables
+- **Enhanced Search**: Advanced filtering and search capabilities
+- **Navigation**: Improved category and breadcrumb navigation
+- **Performance**: Optimized loading and rendering
+- **SEO**: Meta tags, structured data, and performance optimization
 
-##### Week 4.3: Performance Optimization
-- [ ] Implement lazy loading
-- [ ] Add image optimization
-- [ ] Optimize database queries
-- [ ] Test loading performance
+### 📝 Dependencies
+- **Phase 4 must be completed first** - file uploads are required for media content
+- **Content creation workflow** must be functional before public interface optimization
 
-##### Week 4.4: Content Features
-- [ ] Add reading time calculation
-- [ ] Implement social sharing
-- [ ] Add related publications
-- [ ] Create RSS feed
+## 📋 Phase 6: Testing & Optimization - PLANNED 🔄
 
-#### ✅ Deliverables
-- [ ] Updated public interface
-- [ ] Search and filtering
-- [ ] Performance optimized
-- [ ] Enhanced content features
+**Duration**: 1-2 weeks (after Phase 5)
+**Status**: 0% Complete
+**Priority**: Medium
 
----
-
-### Phase 5: Testing & Deployment (Week 5)
-
-#### 🎯 Objectives
-- Comprehensive testing
-- Production deployment
-- Performance monitoring
-- Documentation
-
-#### 📋 Tasks
-
-##### Week 5.1: Testing
-- [ ] Unit tests for components
-- [ ] Integration tests for API
-- [ ] End-to-end tests
-- [ ] Performance testing
-
-##### Week 5.2: Deployment Setup
-- [ ] Configure production environment
-- [ ] Set up CI/CD pipeline
-- [ ] Configure monitoring
-- [ ] Create deployment scripts
-
-##### Week 5.3: Production Testing
-- [ ] Test in production environment
-- [ ] Performance monitoring
-- [ ] Error tracking
+### 🎯 Planned Tasks
+- [ ] Comprehensive testing of all CMS functionality
+- [ ] Performance optimization and monitoring
+- [ ] Security testing and vulnerability assessment
 - [ ] User acceptance testing
+- [ ] Documentation and training materials
 
-##### Week 5.4: Documentation & Training
-- [ ] Create user documentation
-- [ ] Admin interface guide
-- [ ] API documentation
-- [ ] Training materials
+### 🎯 Key Deliverables
+- **Test Coverage**: 90%+ for core components
+- **Performance Metrics**: Page load times, database query optimization
+- **Security Report**: Vulnerability assessment and mitigation
+- **User Training**: Admin user guides and best practices
 
-#### ✅ Deliverables
-- [ ] Comprehensive test suite
-- [ ] Production deployment
-- [ ] Monitoring setup
-- [ ] Complete documentation
+## 🚨 Critical Action Items
 
----
+### IMMEDIATE (This Week)
+1. **Fix Uploadthing Integration** ❌ CRITICAL
+   - Allocate 100% of development resources
+   - Implement actual server configuration
+   - Set up webhook handlers
+   - Test basic file upload flow
 
-## 📊 Timeline Summary
+2. **Verify Environment Configuration**
+   - Ensure all API keys are set correctly
+   - Test ConvexDB connection
+   - Verify Uploadthing account setup
 
-| Phase | Duration | Key Deliverables | Status |
-|-------|----------|------------------|--------|
-| **Foundation Setup** | Week 1 | Dev environment, basic setup | ✅ Completed |
-| **Core Database & API** | Week 2 | Schema, API functions, auth | ✅ Completed |
-| **Admin Interface** | Week 3 | Admin UI, content management | 🟡 Foundation Ready |
-| **Public Interface** | Week 4 | Updated public pages, features | Planned |
-| **Testing & Deployment** | Week 5 | Tests, production deployment | Planned |
+### HIGH PRIORITY (Next 2 Weeks)
+1. **Complete Media Management**
+   - Connect file uploads to publications
+   - Implement media library interface
+   - Add file optimization and CDN delivery
 
-### 📋 Phase 2 Progress Update - COMPLETED ✅
+2. **End-to-End Testing**
+   - Test complete publication workflow
+   - Verify file upload integration
+   - Test admin user management
 
-#### Week 2.1: Database Schema - COMPLETED ✅
-- ✅ Complete ConvexDB schema with 4 tables
-- ✅ Database indexes and search optimization
-- ✅ Data relationships established
+### MEDIUM PRIORITY (Next Month)
+1. **Public Interface Optimization**
+   - Advanced search and filtering
+   - Performance optimization
+   - SEO improvements
 
-#### Week 2.2: API Functions - COMPLETED ✅
-- ✅ Publication CRUD operations
-- ✅ Media management functions
-- ✅ Search and filtering functionality
-- ✅ Data validation helpers
+2. **Testing & Documentation**
+   - Comprehensive testing
+   - User training materials
+   - Performance monitoring
 
-#### Week 2.3: Authentication - COMPLETED ✅
-- ✅ Complete authentication system with Convex Auth
-- ✅ User roles and permissions (admin, editor, viewer, client)
-- ✅ Login/logout flow implementation
-- ✅ Role-based navigation after authentication
-- ✅ Protected routes with authorization middleware
+## 📊 Resource Allocation
 
-#### Week 2.4: Integration - COMPLETED ✅
-- ✅ ConvexDB React provider setup
-- ✅ Uploadthing configuration
-- ✅ Environment variables configured
-- ✅ Development workflow established
-- ✅ Authentication state management
-- ✅ Role-based access control
+### Current Sprint (100% Focus on Phase 4)
+- **Developer 1**: Uploadthing server setup and ConvexDB integration
+- **Developer 2**: Frontend upload component integration
+- **QA**: File upload flow testing
 
-**Total Duration:** 5 weeks
-**Total Effort:** ~100-120 hours
+### Next Sprint (Phase 5)
+- **Developer 1**: Public interface optimization
+- **Developer 2**: Advanced features and performance
+- **QA**: End-to-end testing
 
----
+### Final Sprint (Phase 6)
+- **Developer 1**: Testing and bug fixes
+- **Developer 2**: Documentation and training
+- **QA**: User acceptance testing
 
-## 🎯 Current Implementation Status
+## 🎯 Success Metrics
 
-### ✅ COMPLETED (Phase 1 + Phase 2)
-- **Database Schema**: Complete with 4 tables and relationships
-- **API Functions**: Full CRUD operations with search and filtering
-- **Component Architecture**: Admin, Public, Shared components
-- **External Integrations**: ConvexDB and Uploadthing configured
-- **Development Environment**: Complete setup with scripts and workflow
-- **Authentication System**: Complete with role-based access control
-- **User Management**: 4 user roles with automatic assignment
-- **Security**: Protected routes and authorization middleware
-- **Navigation**: Automatic role-based routing after authentication
+### Phase 4 Success Criteria
+- [ ] File uploads work end-to-end
+- [ ] Media can be attached to publications
+- [ ] File management interface is functional
+- [ ] No critical errors in file operations
 
-### 🟡 IN PROGRESS (Phase 3: Admin Interface)
-- **Admin Interface**: Foundation ready, needs content management features
-- **Content Management**: Publication CRUD forms and rich text editor
-- **Media Management**: Upload interface and gallery
-- **User Management**: Role management interface
-
-### 📋 READY FOR DEVELOPMENT (Phase 3)
-- **Publication Management**: Forms and validation
-- **Media Management**: Upload interface and gallery
-- **User Management**: Role-based access controls
-
-### 🎯 Immediate Next Steps
-1. **Build Admin Interface** (3-4 days)
-   - Publication CRUD forms
-   - Rich text editor integration
-   - Media upload interface
-
-2. **Content Management System** (2-3 days)
-   - Connect forms to API functions
-   - Implement file uploads
-   - Add validation and error handling
-
-3. **User Role Management** (1-2 days)
-   - Admin panel for managing user roles
-   - Role assignment interface
-   - User activity monitoring
-
----
-
-## 📈 Progress Metrics
-
-| Metric | Target | Current | Status |
-|--------|--------|---------|--------|
-| Database Tables | 4 | 4 | ✅ Complete |
-| API Functions | 15+ | 15+ | ✅ Complete |
-| React Components | 10+ | 12 | ✅ Complete |
-| External Services | 2 | 2 | ✅ Complete |
-| Authentication | Complete | Complete | ✅ Complete |
-| Admin Features | 8 | 3 | 🟡 Foundation |
-| User Roles | 4 | 4 | ✅ Complete |
-| Protected Routes | Complete | Complete | ✅ Complete |
-
----
-
-## 🔄 Dependencies & Blockers
-
-### External Dependencies
-- ✅ ConvexDB account and setup (COMPLETED)
-- ✅ Uploadthing account and configuration (COMPLETED)
-- Domain and hosting setup
-- SSL certificate (if not provided)
-
-### Internal Dependencies
-- Access to production environment
-- Content migration plan
-- User training schedule
-- Backup and recovery procedures
-
-### Risk Mitigation
-- Start with development environment testing
-- Create comprehensive test suite
-- Implement gradual rollout
-- Prepare rollback procedures
-
----
-
-## 📈 Success Metrics
-
-### Technical Metrics
-- [ ] All tests passing
-- [ ] Performance benchmarks met
-- [ ] Security requirements satisfied
-- [ ] Code coverage > 80%
-
-### Business Metrics
-- [ ] Admin can create/edit publications
-- [ ] Public pages load content correctly
+### Overall Project Success Criteria
+- [ ] CMS is fully functional for content creation
 - [ ] File uploads work reliably
-- [ ] Search functionality works
+- [ ] Admin interface is intuitive and efficient
+- [ ] Public pages display content correctly
+- [ ] Performance meets requirements
+- [ ] Security requirements are met
 
-### Quality Metrics
-- [ ] No critical bugs in production
-- [ ] User interface is intuitive
-- [ ] Documentation is complete
-- [ ] Maintenance procedures documented
+## 📝 Risk Mitigation
+
+### High-Risk Items
+1. **Uploadthing Integration Failure**
+   - **Mitigation**: Focus all resources on this phase
+   - **Fallback**: Consider alternative file storage solutions
+   - **Timeline**: Must be resolved before any other development
+
+2. **Environment Configuration Issues**
+   - **Mitigation**: Verify all API keys and connections
+   - **Testing**: Test each service individually
+   - **Documentation**: Clear setup instructions
+
+### Medium-Risk Items
+1. **Performance Issues**
+   - **Mitigation**: Implement proper loading states and optimization
+   - **Monitoring**: Add performance tracking early
+   - **Testing**: Load testing with realistic data
+
+2. **User Experience Problems**
+   - **Mitigation**: User testing and feedback collection
+   - **Iteration**: Rapid prototyping and improvement
+   - **Documentation**: Clear user guides and training
+
+## 🔄 Iteration Plan
+
+### Weekly Reviews
+- **Monday**: Progress review and blocker identification
+- **Wednesday**: Mid-week status check
+- **Friday**: Sprint review and planning
+
+### Bi-weekly Sprints
+- **Sprint 1**: Complete Phase 4 (File Uploads)
+- **Sprint 2**: Complete Phase 5 (Public Interface)
+- **Sprint 3**: Complete Phase 6 (Testing & Optimization)
+
+### Monthly Milestones
+- **Month 1**: Fully functional CMS with file uploads
+- **Month 2**: Optimized public interface
+- **Month 3**: Production-ready with comprehensive testing
+
+## 📞 Support & Escalation
+
+### Technical Issues
+- **Developer Support**: Team collaboration and code review
+- **External Resources**: ConvexDB and Uploadthing documentation
+- **Community**: React and CMS development communities
+
+### Project Management
+- **Weekly Reviews**: Progress tracking and blocker resolution
+- **Escalation Path**: Immediate escalation for Phase 4 blockers
+- **Resource Allocation**: Flexible resource allocation for critical issues
 
 ---
 
-## 💰 Budget Considerations
-
-### Development Costs
-- Developer time: 100-120 hours
-- External services: ~$50/month (Uploadthing + ConvexDB)
-- Testing tools: Minimal (Jest included)
-
-### Operational Costs
-- Uploadthing: $20/month (2GB storage plan)
-- ConvexDB: $10-20/month (depending on usage)
-- Total: ~$30-40/month
-
-### Scaling Costs
-- Additional storage: $0.20/GB (Uploadthing)
-- Additional bandwidth: $2/GB (Uploadthing)
-- Database scaling: Automatic with ConvexDB
-
----
-
-## 📞 Support & Communication
-
-### Weekly Checkpoints
-- Monday: Sprint planning and review
-- Wednesday: Mid-week progress check
-- Friday: End-of-week review and next steps
-
-### Communication Channels
-- Daily standups (15 minutes)
-- Slack/Teams for quick questions
-- Email for formal updates
-- Weekly status reports
-
-### Escalation Procedures
-- Technical blockers: Immediate discussion
-- Schedule delays: Project manager notification
-- Quality issues: Code review and testing
-- Scope changes: Change request process
-
----
-
-## 🔄 Change Management
-
-### Scope Changes
-- All change requests documented
-- Impact assessment required
-- Approval from project sponsor
-- Timeline adjustment as needed
-
-### Quality Gates
-- Code review required for all changes
-- Testing required before deployment
-- Performance testing for major features
-- Security review for authentication changes
-
-### Risk Management
-- Regular risk assessment
-- Mitigation plans for high-risk items
-- Contingency plans for critical path items
-- Regular status updates to stakeholders
+**⚠️ CRITICAL NOTE**: Phase 4 (File Upload Integration) is the only blocker preventing CMS production use. All other phases are either complete or can proceed once file uploads are functional. Focus 100% of development effort on resolving this critical gap.

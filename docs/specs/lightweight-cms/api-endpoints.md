@@ -1,538 +1,855 @@
 # API Endpoints Specification
 
-## 🔌 ConvexDB API Functions
+## 📋 Overview
 
-### Overview
-The API layer consists of ConvexDB queries and mutations that handle all data operations. The API is designed to be minimal and focused on the CMS requirements.
+This document outlines the API endpoints for the Everest Finance CMS system. The API is built on ConvexDB and provides real-time data synchronization with comprehensive CRUD operations.
 
-## 📊 Publications API
+## 🚨 Current Status: 90% Complete with Critical Gaps
 
-### Queries
+**API Status**: The core API is fully functional with complete CRUD operations for publications, users, media, and categories. However, **file upload endpoints are completely non-functional** due to placeholder Uploadthing integration.
 
-#### `getPublications`
-**Purpose:** Retrieve publications with filtering and pagination
+**Critical Issues**:
+- ❌ File upload endpoints return errors or don't exist
+- ❌ Media management API cannot handle actual file uploads
+- ❌ Webhook handlers for file processing are missing
+
+## 🏗️ Architecture Overview
+
+### Technology Stack
+- **Backend**: ConvexDB (real-time database)
+- **API Layer**: ConvexDB functions with TypeScript
+- **Authentication**: Convex Auth with role-based access control
+- **File Storage**: Uploadthing (currently non-functional)
+- **Real-time**: WebSocket connections via ConvexDB
+
+### API Structure
+```
+convex/
+├── publications.ts     # ✅ Complete publication CRUD
+├── users.ts           # ✅ Complete user management
+├── media.ts           # ✅ Complete media metadata API
+├── categories.ts      # ✅ Complete category management
+├── auth.ts            # ✅ Authentication utilities
+├── uploadthing.ts     # ❌ Placeholder configuration only
+└── api/
+    └── uploadthing.ts # ❌ Missing webhook handler
+```
+
+## 📊 API Endpoints Status
+
+| Category | Endpoints | Status | Critical Issues |
+|----------|-----------|--------|-----------------|
+| **Publications** | 6 endpoints | ✅ Complete | None |
+| **Users** | 7 endpoints | ✅ Complete | None |
+| **Media** | 6 endpoints | ✅ Complete | File uploads broken |
+| **Categories** | 6 endpoints | ✅ Complete | None |
+| **Authentication** | 4 endpoints | ✅ Complete | None |
+| **File Uploads** | 0 endpoints | ❌ Missing | **BLOCKING PRODUCTION** |
+
+## 📚 Publications API
+
+### ✅ Complete Implementation
+
+#### Get Publications
 ```typescript
+// GET /api/publications/getPublications
 export const getPublications = query({
   args: {
-    status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
-    category: v.optional(v.string()),
-    limit: v.optional(v.number()),
-    offset: v.optional(v.number()),
-    featured: v.optional(v.boolean()),
-    authorId: v.optional(v.id("users")),
+    status?: "draft" | "published" | "archived";
+    category?: string;
+    limit?: number;
+    offset?: number;
+    featured?: boolean;
   },
-  handler: async (ctx, args) => {
-    // Implementation with proper filtering and sorting
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-**Response:**
+**Features**:
+- ✅ Status filtering (draft, published, archived)
+- ✅ Category filtering
+- ✅ Pagination support
+- ✅ Featured content filtering
+- ✅ Real-time updates
+
+#### Get Publication by ID
 ```typescript
-{
-  publications: Publication[];
-  total: number;
-  hasMore: boolean;
-}
+// GET /api/publications/getPublicationById
+export const getPublicationById = query({
+  args: { id: v.id("publications") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
 ```
 
-#### `getPublicationBySlug`
-**Purpose:** Get a single publication by slug
+**Features**:
+- ✅ Full publication data retrieval
+- ✅ Associated media files
+- ✅ Author information
+- ✅ Error handling for missing publications
+
+#### Get Publication by Slug
 ```typescript
+// GET /api/publications/getPublicationBySlug
 export const getPublicationBySlug = query({
   args: { slug: v.string() },
-  handler: async (ctx, args) => {
-    // Return publication with related media
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-**Response:**
-```typescript
-{
-  publication: Publication;
-  media: Media[];
-  author: User;
-}
-```
+**Features**:
+- ✅ SEO-friendly URL support
+- ✅ Complete publication data
+- ✅ Media and author information
+- ✅ Used by public pages
 
-#### `searchPublications`
-**Purpose:** Full-text search across publications
+#### Search Publications
 ```typescript
+// GET /api/publications/searchPublications
 export const searchPublications = query({
-  args: {
-    query: v.string(),
-    category: v.optional(v.string()),
-    status: v.optional(v.string()),
-    limit: v.optional(v.number()),
+  args: { 
+    query: v.string();
+    category?: string;
   },
-  handler: async (ctx, args) => {
-    // Full-text search implementation
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-### Mutations
+**Features**:
+- ✅ Full-text search in titles and content
+- ✅ Category-based filtering
+- ✅ Search index optimization
+- ✅ Real-time search results
 
-#### `createPublication`
-**Purpose:** Create a new publication
+#### Create Publication
 ```typescript
+// POST /api/publications/createPublication
 export const createPublication = mutation({
   args: {
-    title: v.string(),
-    description: v.string(),
-    content: v.string(),
-    category: v.string(),
-    excerpt: v.string(),
-    tags: v.array(v.string()),
-    featured: v.optional(v.boolean()),
-    seoTitle: v.optional(v.string()),
-    seoDescription: v.optional(v.string()),
+    title: v.string();
+    slug: v.string();
+    description: v.string();
+    content: v.string();
+    excerpt: v.string();
+    category: v.union(/* category types */);
+    status: v.union("draft" | "published" | "archived");
+    featured: v.boolean();
+    tags: v.array(v.string());
+    authorId: v.id("users");
   },
-  handler: async (ctx, args) => {
-    // Create publication with proper validation
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-**Response:**
-```typescript
-{
-  id: Id<"publications">;
-  slug: string;
-}
-```
+**Features**:
+- ✅ Complete validation
+- ✅ Author assignment
+- ✅ Automatic timestamps
+- ✅ Role-based access control (admin/editor only)
 
-#### `updatePublication`
-**Purpose:** Update an existing publication
+#### Update Publication
 ```typescript
+// PUT /api/publications/updatePublication
 export const updatePublication = mutation({
   args: {
-    id: v.id("publications"),
-    title: v.optional(v.string()),
-    description: v.optional(v.string()),
-    content: v.optional(v.string()),
-    category: v.optional(v.string()),
-    excerpt: v.optional(v.string()),
-    tags: v.optional(v.array(v.string())),
-    featured: v.optional(v.boolean()),
-    status: v.optional(v.string()),
-    seoTitle: v.optional(v.string()),
-    seoDescription: v.optional(v.string()),
+    id: v.id("publications");
+    /* All publication fields optional for updates */
   },
-  handler: async (ctx, args) => {
-    // Update publication with validation
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-## 📸 Media API
+**Features**:
+- ✅ Partial updates supported
+- ✅ Validation and error handling
+- ✅ Role-based access control
+- ✅ Automatic timestamp updates
 
-### Queries
-
-#### `getPublicationMedia`
-**Purpose:** Get all media files for a publication
+#### Delete Publication
 ```typescript
-export const getPublicationMedia = query({
-  args: { publicationId: v.id("publications") },
-  handler: async (ctx, args) => {
-    // Return media with optimized URLs
-  },
+// DELETE /api/publications/deletePublication
+export const deletePublication = mutation({
+  args: { id: v.id("publications") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-**Response:**
-```typescript
-{
-  media: Array<{
-    id: Id<"media">;
-    fileName: string;
-    fileType: string;
-    displayUrl: string;    // Optimized URL
-    thumbnailUrl: string;  // Thumbnail URL
-    alt?: string;
-    caption?: string;
-    order: number;
-  }>;
-}
-```
-
-#### `getMediaStats`
-**Purpose:** Get media usage statistics
-```typescript
-export const getMediaStats = query({
-  args: {},
-  handler: async (ctx, args) => {
-    // Return storage and usage statistics
-  },
-});
-```
-
-### Mutations
-
-#### `linkMediaToPublication`
-**Purpose:** Link uploaded media to a publication
-```typescript
-export const linkMediaToPublication = mutation({
-  args: {
-    publicationId: v.id("publications"),
-    uploadthingKey: v.string(),
-    uploadthingUrl: v.string(),
-    fileName: v.string(),
-    fileType: v.string(),
-    fileSize: v.number(),
-    alt: v.optional(v.string()),
-    caption: v.optional(v.string()),
-    tags: v.optional(v.array(v.string())),
-  },
-  handler: async (ctx, args) => {
-    // Create media record and link to publication
-  },
-});
-```
-
-#### `updateMediaMetadata`
-**Purpose:** Update media metadata
-```typescript
-export const updateMediaMetadata = mutation({
-  args: {
-    id: v.id("media"),
-    alt: v.optional(v.string()),
-    caption: v.optional(v.string()),
-    tags: v.optional(v.array(v.string())),
-    order: v.optional(v.number()),
-  },
-  handler: async (ctx, args) => {
-    // Update media metadata only
-  },
-});
-```
+**Features**:
+- ✅ Soft delete support
+- ✅ Associated media cleanup
+- ✅ Role-based access control
+- ✅ Confirmation required
 
 ## 👥 Users API
 
-### Queries
+### ✅ Complete Implementation
 
-#### `getCurrentUser`
-**Purpose:** Get current authenticated user
+#### Get Current User
 ```typescript
+// GET /api/users/getCurrentUser
 export const getCurrentUser = query({
   args: {},
-  handler: async (ctx, args) => {
-    // Return current user information
-  },
+  handler: async (ctx) => { /* Implementation complete */ }
 });
 ```
 
-#### `getUsers`
-**Purpose:** Get users (admin only)
+**Features**:
+- ✅ Authentication state integration
+- ✅ Complete user profile data
+- ✅ Role and permission information
+- ✅ Used by protected routes
+
+#### Get User by Email
 ```typescript
+// GET /api/users/getUserByEmail
+export const getUserByEmail = query({
+  args: { email: v.string() },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Email-based user lookup
+- ✅ Authentication integration
+- ✅ Error handling for missing users
+
+#### Get User by ID
+```typescript
+// GET /api/users/getUser
+export const getUser = query({
+  args: { id: v.id("users") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ ID-based user retrieval
+- ✅ Complete user data
+- ✅ Error handling
+
+#### Get All Users (Admin Only)
+```typescript
+// GET /api/users/getUsers
 export const getUsers = query({
+  handler: async (ctx) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Complete user list
+- ✅ Admin-only access
+- ✅ Real-time updates
+
+#### Create User
+```typescript
+// POST /api/users/createUser
+export const createUser = mutation({
   args: {
-    role: v.optional(v.string()),
-    limit: v.optional(v.number()),
+    email: v.string();
+    name: v.string();
+    role?: v.union("admin" | "editor" | "viewer" | "client");
   },
-  handler: async (ctx, args) => {
-    // Return users with role filtering
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-### Mutations
+**Features**:
+- ✅ Email validation
+- ✅ Role assignment (defaults to "client")
+- ✅ Duplicate email prevention
+- ✅ Automatic timestamps
 
-#### `updateUserProfile`
-**Purpose:** Update user profile
+#### Update User
 ```typescript
-export const updateUserProfile = mutation({
+// PUT /api/users/updateUser
+export const updateUser = mutation({
   args: {
-    name: v.optional(v.string()),
-    bio: v.optional(v.string()),
-    avatar: v.optional(v.string()),
+    id: v.id("users");
+    /* All user fields optional for updates */
   },
-  handler: async (ctx, args) => {
-    // Update user profile information
-  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-## 📈 Analytics API
+**Features**:
+- ✅ Partial updates supported
+- ✅ Role modification
+- ✅ Profile updates
+- ✅ Validation and error handling
 
-### Queries
-
-#### `getPublicationStats`
-**Purpose:** Get publication statistics
+#### Update Last Login
 ```typescript
-export const getPublicationStats = query({
-  args: {
-    publicationId: v.optional(v.id("publications")),
-    period: v.optional(v.string()), // "day", "week", "month"
-  },
-  handler: async (ctx, args) => {
-    // Return publication statistics
-  },
+// PUT /api/users/updateLastLogin
+export const updateLastLogin = mutation({
+  args: { id: v.id("users") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-#### `getContentAnalytics`
-**Purpose:** Get content analytics
+**Features**:
+- ✅ Automatic login tracking
+- ✅ Authentication integration
+- ✅ Performance optimized
+
+#### Delete User
 ```typescript
-export const getContentAnalytics = query({
-  args: {
-    startDate: v.number(),
-    endDate: v.number(),
-  },
-  handler: async (ctx, args) => {
-    // Return content analytics data
-  },
+// DELETE /api/users/deleteUser
+export const deleteUser = mutation({
+  args: { id: v.id("users") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
 });
 ```
 
-## 🔒 Authentication & Authorization
+**Features**:
+- ✅ User removal
+- ✅ Associated data cleanup
+- ✅ Admin-only access
+- ✅ Confirmation required
 
-### Middleware Functions
+## 🖼️ Media API
 
-#### `requireAuth`
-**Purpose:** Require authenticated user
+### ✅ Complete Implementation (Metadata Only)
+
+#### Get All Media
 ```typescript
-export const requireAuth = async (ctx: MutationContext) => {
-  const userId = await ctx.auth.getUserIdentity();
-  if (!userId) {
-    throw new Error("Authentication required");
-  }
-  return userId;
-};
-```
-
-#### `requireRole`
-**Purpose:** Require specific user role
-```typescript
-export const requireRole = async (ctx: MutationContext, requiredRole: string) => {
-  const userId = await requireAuth(ctx);
-  const user = await ctx.db.get(userId.subject as Id<"users">);
-
-  if (!user || user.role !== requiredRole) {
-    throw new Error(`Role ${requiredRole} required`);
-  }
-
-  return user;
-};
-```
-
-## 📊 Real-time Subscriptions
-
-### Publication Updates
-```typescript
-// Subscribe to publication changes
-export const watchPublications = query({
-  args: { status: v.optional(v.string()) },
-  handler: async (ctx, args) => {
-    // Return real-time publication updates
-  },
+// GET /api/media/getMedia
+export const getMedia = query({
+  handler: async (ctx) => { /* Implementation complete */ }
 });
 ```
 
-### Media Updates
+**Features**:
+- ✅ Complete media list
+- ✅ Metadata retrieval
+- ✅ Real-time updates
+- ⚠️ **No file content** (only metadata)
+
+#### Get Publication Media
 ```typescript
-// Subscribe to media changes for a publication
-export const watchPublicationMedia = query({
+// GET /api/media/getPublicationMedia
+export const getPublicationMedia = query({
   args: { publicationId: v.id("publications") },
-  handler: async (ctx, args) => {
-    // Return real-time media updates
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Publication-specific media
+- ✅ Ordered display support
+- ✅ Metadata and relationships
+- ⚠️ **No file content** (only metadata)
+
+#### Get Media by Type
+```typescript
+// GET /api/media/getMediaByType
+export const getMediaByType = query({
+  args: { fileType: v.string() },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Type-based filtering
+- ✅ Performance optimized
+- ✅ Real-time updates
+- ⚠️ **No file content** (only metadata)
+
+#### Link Media to Publication
+```typescript
+// POST /api/media/linkMediaToPublication
+export const linkMediaToPublication = mutation({
+  args: {
+    uploadthingKey: v.string();
+    uploadthingUrl: v.string();
+    fileName: v.string();
+    fileType: v.string();
+    fileSize: v.number();
+    publicationId: v.id("publications");
+    uploadedBy: v.id("users");
+    /* Optional metadata fields */
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Media linking
+- ✅ Metadata storage
+- ✅ Relationship management
+- ⚠️ **No actual file upload** (manual linking only)
+
+#### Update Media
+```typescript
+// PUT /api/media/updateMedia
+export const updateMedia = mutation({
+  args: {
+    id: v.id("media");
+    /* All media fields optional for updates */
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Metadata updates
+- ✅ Relationship management
+- ✅ Validation and error handling
+
+#### Delete Media
+```typescript
+// DELETE /api/media/deleteMedia
+export const deleteMedia = mutation({
+  args: { id: v.id("media") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Media removal
+- ✅ Relationship cleanup
+- ✅ Confirmation required
+
+#### Update Media Order
+```typescript
+// PUT /api/media/updateMediaOrder
+export const updateMediaOrder = mutation({
+  args: {
+    mediaIds: v.array(v.id("media"));
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Order management
+- ✅ Batch updates
+- ✅ Performance optimized
+
+## 🏷️ Categories API
+
+### ✅ Complete Implementation
+
+#### Get All Categories
+```typescript
+// GET /api/categories/getCategories
+export const getCategories = query({
+  handler: async (ctx) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Complete category list
+- ✅ Ordered display
+- ✅ Active status filtering
+- ✅ Real-time updates
+
+#### Get Category by Slug
+```typescript
+// GET /api/categories/getCategoryBySlug
+export const getCategoryBySlug = query({
+  args: { slug: v.string() },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Slug-based lookup
+- ✅ Complete category data
+- ✅ Error handling
+
+#### Create Category
+```typescript
+// POST /api/categories/createCategory
+export const createCategory = mutation({
+  args: {
+    slug: v.string();
+    name: v.string();
+    description?: v.string();
+    color?: v.string();
+    icon?: v.string();
+    order: v.number();
+    parentId?: v.id("categories");
+    isActive: v.boolean();
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Complete validation
+- ✅ Hierarchical support
+- ✅ Visual customization
+- ✅ Order management
+
+#### Update Category
+```typescript
+// PUT /api/categories/updateCategory
+export const updateCategory = mutation({
+  args: {
+    id: v.id("categories");
+    /* All category fields optional for updates */
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Partial updates
+- ✅ Validation
+- ✅ Error handling
+
+#### Delete Category
+```typescript
+// DELETE /api/categories/deleteCategory
+export const deleteCategory = mutation({
+  args: { id: v.id("categories") },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Category removal
+- ✅ Relationship cleanup
+- ✅ Confirmation required
+
+#### Update Category Order
+```typescript
+// PUT /api/categories/updateCategoryOrder
+export const updateCategoryOrder = mutation({
+  args: {
+    categoryIds: v.array(v.id("categories"));
+  },
+  handler: async (ctx, args) => { /* Implementation complete */ }
+});
+```
+
+**Features**:
+- ✅ Order management
+- ✅ Batch updates
+- ✅ Performance optimized
+
+## 🔐 Authentication API
+
+### ✅ Complete Implementation
+
+#### Authentication Provider
+```typescript
+// Configured in convex/auth.ts
+export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
+  providers: [Password],
+  callbacks: {
+    async createOrUpdateUser(ctx, args) { /* Implementation complete */ }
   },
 });
 ```
 
-## 🚨 Error Handling
+**Features**:
+- ✅ Password-based authentication
+- ✅ User creation/update callbacks
+- ✅ Role assignment (default: "client")
+- ✅ Session management
 
-### Error Types
+#### Sign In
 ```typescript
-export class CMSError extends Error {
-  constructor(
-    message: string,
-    public code: string,
-    public statusCode: number = 500
-  ) {
-    super(message);
-    this.name = "CMSError";
-  }
-}
-
-export const ERROR_CODES = {
-  UNAUTHORIZED: "UNAUTHORIZED",
-  FORBIDDEN: "FORBIDDEN",
-  NOT_FOUND: "NOT_FOUND",
-  VALIDATION_ERROR: "VALIDATION_ERROR",
-  UPLOAD_ERROR: "UPLOAD_ERROR",
-} as const;
+// POST /api/auth/signIn
+export const signIn = auth.signIn;
 ```
 
-### Error Responses
+**Features**:
+- ✅ Email/password authentication
+- ✅ Role-based navigation
+- ✅ Session establishment
+- ✅ Error handling
+
+#### Sign Out
 ```typescript
-{
-  error: {
-    code: string;
-    message: string;
-    details?: any;
-  }
-}
+// POST /api/auth/signOut
+export const signOut = auth.signOut;
 ```
 
-## 🔧 Utility Functions
+**Features**:
+- ✅ Session termination
+- ✅ State cleanup
+- ✅ Navigation to auth page
 
-### Slug Generation
+#### Authentication State
 ```typescript
-export const generateSlug = (title: string): string => {
-  return title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-};
+// GET /api/auth/isAuthenticated
+export const isAuthenticated = auth.isAuthenticated;
 ```
 
-### Reading Time Calculation
+**Features**:
+- ✅ Authentication status
+- ✅ Real-time updates
+- ✅ Protected route integration
+
+## 🚨 Critical Gap: File Upload API
+
+### ❌ Missing Implementation
+
+#### Current State
+The file upload system is completely non-functional with only placeholder configurations:
+
+1. **`convex/uploadthing.ts`** - Placeholder configuration only
+2. **`src/utils/uploadthing.ts`** - Placeholder utilities only
+3. **`convex/api/uploadthing.ts`** - Missing webhook handler
+
+#### Required Endpoints
+
+##### File Upload Router
 ```typescript
-export const calculateReadingTime = (content: string): number => {
-  const wordsPerMinute = 200;
-  const wordCount = content.split(/\s+/).length;
-  return Math.ceil(wordCount / wordsPerMinute);
-};
-```
-
-## 📊 Rate Limiting
-
-### API Limits
-- Publication creation: 10 per hour per user
-- Media uploads: 50 per hour per user
-- Search queries: 100 per hour per user
-- Admin operations: Unlimited for admin users
-
-### Implementation
-```typescript
-export const checkRateLimit = async (
-  ctx: MutationContext,
-  operation: string,
-  limit: number,
-  windowMs: number
-) => {
-  // Rate limiting implementation
-};
-```
-
-## 🔍 Validation Schemas
-
-### Publication Validation
-```typescript
-import { z } from "zod";
-
-export const publicationSchema = z.object({
-  title: z.string().min(1).max(200),
-  description: z.string().min(1).max(500),
-  content: z.string().min(1),
-  category: z.enum([
-    "revues-hebdo",
-    "revues-mensuelles",
-    "teaser-dividende",
-    "marches",
-    "analyses"
-  ]),
-  excerpt: z.string().max(300).optional(),
-  tags: z.array(z.string()).max(10),
-  featured: z.boolean().optional(),
-  seoTitle: z.string().max(60).optional(),
-  seoDescription: z.string().max(160).optional(),
+// MISSING: convex/uploadthing.ts
+export const uploadRouter = createUploadthing({
+  f: {
+    publicationImage: {
+      image: { maxFileSize: "4MB" };
+    },
+    mediaFile: {
+      image: { maxFileSize: "4MB" };
+      video: { maxFileSize: "16MB" };
+      "application/pdf": { maxFileSize: "8MB" };
+    },
+  },
 });
 ```
 
-### Media Validation
+##### Webhook Handler
 ```typescript
-export const mediaSchema = z.object({
-  fileName: z.string().min(1).max(255),
-  fileType: z.enum(["image", "video", "document"]),
-  fileSize: z.number().max(50 * 1024 * 1024), // 50MB
-  alt: z.string().max(255).optional(),
-  caption: z.string().max(500).optional(),
-  tags: z.array(z.string()).max(10).optional(),
+// MISSING: convex/api/uploadthing.ts
+export const handleUploadthingWebhook = httpAction({
+  handler: async (ctx, request) => {
+    // Handle file upload completion
+    // Update media table
+    // Trigger notifications
+  },
 });
 ```
 
-## 📈 Monitoring & Logging
-
-### Request Logging
+##### File Upload Components
 ```typescript
-export const logRequest = async (
-  ctx: MutationContext,
-  operation: string,
-  data: any
-) => {
-  console.log(`[${new Date().toISOString()}] ${operation}`, {
-    userId: ctx.auth.getUserIdentity(),
-    data,
+// MISSING: Functional upload components
+export const UploadButton = generateUploadButton<OurFileRouter>();
+export const UploadDropzone = generateUploadDropzone<OurFileRouter>();
+export const { useUploadThing, uploadFiles } = generateReactHelpers<OurFileRouter>();
+```
+
+## 📊 API Performance & Optimization
+
+### ✅ Implemented Optimizations
+
+#### Database Indexes
+- **Publications**: slug, category, status, author, featured
+- **Media**: publication, type, uploader
+- **Users**: email
+- **Categories**: slug, order
+
+#### Search Optimization
+- **Full-text search** on publication titles
+- **Filtered search** by status and category
+- **Real-time updates** via ConvexDB subscriptions
+
+#### Query Optimization
+- **Pagination** for large datasets
+- **Selective field loading** for performance
+- **Relationship preloading** for complex queries
+
+### 🔄 Planned Optimizations
+
+#### File Upload Performance
+- **Chunked uploads** for large files
+- **Image optimization** and resizing
+- **CDN delivery** optimization
+- **Upload progress** tracking
+
+#### Caching Strategy
+- **Query result caching** for static data
+- **Media URL caching** for performance
+- **User session caching** for authentication
+
+## 🔒 Security & Access Control
+
+### ✅ Implemented Security
+
+#### Role-Based Access Control
+- **Admin**: Full system access
+- **Editor**: Content management only
+- **Viewer**: Read-only access
+- **Client**: Limited access
+
+#### API Security
+- **Authentication required** for all mutations
+- **Role validation** for sensitive operations
+- **Input validation** and sanitization
+- **Error message sanitization**
+
+#### Protected Routes
+- **Admin routes** require admin/editor role
+- **Client routes** require authentication
+- **Public routes** accessible to all
+
+### 🔄 Planned Security Enhancements
+
+#### File Upload Security
+- **File type validation** and scanning
+- **Virus scanning** for uploaded files
+- **File size limits** and quotas
+- **Access control** for file downloads
+
+## 📝 Error Handling & Validation
+
+### ✅ Implemented Error Handling
+
+#### API Error Responses
+- **Validation errors** with field-specific messages
+- **Authentication errors** with proper HTTP status
+- **Permission errors** with role requirements
+- **Database errors** with user-friendly messages
+
+#### Input Validation
+- **Type validation** using ConvexDB schemas
+- **Required field validation** for mutations
+- **Format validation** for emails, URLs, etc.
+- **Business rule validation** for complex operations
+
+### 🔄 Planned Error Handling
+
+#### File Upload Errors
+- **Upload failure** handling and retry
+- **File type rejection** with user feedback
+- **Size limit exceeded** with clear messaging
+- **Network error** handling and recovery
+
+## 🧪 Testing Strategy
+
+### ✅ Current Testing
+
+#### API Testing
+- **ConvexDB function testing** in development
+- **Manual API testing** via admin interface
+- **Real-time functionality** testing
+- **Authentication flow** testing
+
+### 🔄 Planned Testing
+
+#### Comprehensive Testing
+- **Unit tests** for all API functions
+- **Integration tests** for complete workflows
+- **End-to-end tests** for user scenarios
+- **Performance tests** for large datasets
+- **Security tests** for access control
+
+## 🚀 Deployment & Production
+
+### ✅ Development Environment
+
+#### Local Development
+- **ConvexDB dev server** with `npm run convex:dev`
+- **React dev server** with `npm run dev`
+- **Concurrent development** with `npm run cms:dev`
+- **Hot reload** for both frontend and backend
+
+### 🔄 Production Deployment
+
+#### Production Setup
+- **ConvexDB deployment** with `npm run convex:deploy`
+- **Environment configuration** for production
+- **File upload configuration** for production
+- **Performance monitoring** and logging
+
+## 📊 API Usage Examples
+
+### Frontend Integration
+
+#### Using Publications API
+```typescript
+import { useQuery, useMutation } from 'convex/react';
+import { api } from '../convex/_generated/api';
+
+// Get publications
+const publications = useQuery(api.publications.getPublications, {
+  status: 'published',
+  limit: 10
+});
+
+// Create publication
+const createPublication = useMutation(api.publications.createPublication);
+const handleCreate = async (data) => {
+  await createPublication(data);
+};
+```
+
+#### Using Media API
+```typescript
+// Get publication media
+const media = useQuery(api.media.getPublicationMedia, {
+  publicationId: publicationId
+});
+
+// Link media to publication
+const linkMedia = useMutation(api.media.linkMediaToPublication);
+const handleLink = async (fileData) => {
+  await linkMedia({
+    ...fileData,
+    publicationId: publicationId,
+    uploadedBy: currentUser._id
   });
 };
 ```
 
-### Performance Monitoring
-```typescript
-export const measurePerformance = async <T>(
-  operation: string,
-  fn: () => Promise<T>
-): Promise<T> => {
-  const start = Date.now();
-  try {
-    const result = await fn();
-    const duration = Date.now() - start;
-    console.log(`${operation} completed in ${duration}ms`);
-    return result;
-  } catch (error) {
-    const duration = Date.now() - start;
-    console.error(`${operation} failed after ${duration}ms:`, error);
-    throw error;
-  }
-};
-```
+## 🎯 Next Steps
 
-## 🚀 API Versioning
+### IMMEDIATE PRIORITY (This Week)
+1. **Implement File Upload API** ❌ CRITICAL
+   - Set up Uploadthing server configuration
+   - Create webhook handlers
+   - Test file upload flow
 
-### Version Strategy
-- API functions include version in name when breaking changes occur
-- Backward compatibility maintained for 6 months
-- Deprecation warnings sent to clients
-- Migration guides provided
+2. **Verify API Functionality**
+   - Test all existing endpoints
+   - Verify authentication and authorization
+   - Check real-time functionality
 
-### Version Examples
-```typescript
-// Current version
-export const getPublications = query({...});
+### HIGH PRIORITY (Next 2 Weeks)
+1. **Complete File Upload Integration**
+   - Connect uploads to media API
+   - Implement file management
+   - Add upload progress tracking
 
-// Future version
-export const getPublicationsV2 = query({...});
+2. **API Testing & Documentation**
+   - Comprehensive endpoint testing
+   - API documentation updates
+   - Performance optimization
 
-// Deprecated (with warning)
-export const getPublicationsV1 = query({...});
-```
+## 📞 Support & Troubleshooting
 
-## 📚 API Documentation
+### Common Issues
 
-### OpenAPI Specification
-```yaml
-openapi: 3.0.3
-info:
-  title: Everest Finance CMS API
-  version: 1.0.0
-  description: Content Management System API
+#### Authentication Problems
+- **Check environment variables** for ConvexDB URL
+- **Verify user roles** are properly assigned
+- **Check protected route** configuration
 
-servers:
-  - url: https://convex.cloud
-    description: ConvexDB API
+#### Real-time Issues
+- **Verify ConvexDB connection** is active
+- **Check subscription** setup in components
+- **Monitor network** connectivity
 
-paths:
-  /publications:
-    get:
-      summary: Get publications
-      # ... detailed API documentation
-```
+#### File Upload Issues
+- **Uploadthing integration** is currently broken
+- **Focus development** on fixing this critical gap
+- **Test with placeholder** data until resolved
 
-### SDK Generation
-- TypeScript types automatically generated from ConvexDB
-- API client libraries for different platforms
-- Documentation automatically updated from code comments
+### Getting Help
+
+#### Development Support
+- **ConvexDB documentation** for API functions
+- **Uploadthing documentation** for file handling
+- **React community** for frontend integration
+
+#### Project Support
+- **Team collaboration** for technical issues
+- **Code review** for implementation guidance
+- **Documentation updates** for API changes
+
+---
+
+**⚠️ CRITICAL NOTE**: The API is 90% complete and fully functional for content management. However, file uploads are completely broken due to missing Uploadthing integration. This is the only blocker preventing production use of the CMS. Focus 100% of development effort on implementing the missing file upload endpoints.
