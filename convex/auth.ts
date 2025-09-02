@@ -17,7 +17,7 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
       const userId = await ctx.db.insert("users", {
         email: profile.email as string,
         name: (profile.name as string) || (profile.email as string).split('@')[0], // Use email prefix as fallback name
-        role: "viewer", // Default role
+        role: "client", // Default role for regular users
         createdAt: Date.now(),
       });
       

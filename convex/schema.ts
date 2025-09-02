@@ -94,7 +94,8 @@ export default defineSchema({
     role: v.union(
       v.literal("admin"),
       v.literal("editor"),
-      v.literal("viewer")
+      v.literal("viewer"),
+      v.literal("client")
     ),
 
     // Profile

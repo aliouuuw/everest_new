@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 
 interface ProtectedRouteProps {
   children: ReactNode
-  requiredRole?: 'admin' | 'editor' | 'viewer'
+  requiredRole?: 'admin' | 'editor' | 'viewer' | 'client'
   redirectTo?: string
 }
 
@@ -14,7 +14,7 @@ interface User {
   _id: string
   email: string
   name: string
-  role: 'admin' | 'editor' | 'viewer'
+  role: 'admin' | 'editor' | 'viewer' | 'client'
   avatar?: string
   bio?: string
   lastLogin?: number

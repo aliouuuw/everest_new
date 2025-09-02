@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuthActions } from '@convex-dev/auth/react'
 import { FiShield } from 'react-icons/fi'
 import { useNavigate } from '@tanstack/react-router'
+import { useAuth } from './useAuth'
 
 export function SignupForm() {
   const { signIn } = useAuthActions()
   const navigate = useNavigate()
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +17,15 @@ export function SignupForm() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Handle navigation after successful sign up
+  useEffect(() => {
+    if (isAuthenticated && user && !authLoading) {
+      // New users are assigned 'client' role by default
+      // Navigate to client dashboard
+      navigate({ to: '/dashboard' })
+    }
+  }, [isAuthenticated, user, authLoading, navigate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,9 +54,7 @@ export function SignupForm() {
         password: formData.password,
         flow: 'signUp'
       })
-      
-      // Redirect to dashboard after successful signup
-      navigate({ to: '/dashboard' })
+      // Navigation will be handled by the useEffect hook
     } catch (err) {
       setError('Une erreur est survenue lors de l\'inscription')
       console.error('Signup error:', err)
