@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useAuthActions } from '@convex-dev/auth/react'
+import { useState } from 'react'
 import { FiLock, FiMail } from 'react-icons/fi'
 import { useNavigate } from '@tanstack/react-router'
 import { useAuth } from './useAuth'
 
 export function SigninForm() {
-  const { signIn } = useAuthActions()
   const navigate = useNavigate()
-  const { user, isAuthenticated, isLoading: authLoading } = useAuth()
+  const { signIn, isTransitioning, user, isAuthenticated } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,33 +14,49 @@ export function SigninForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Handle role-based navigation when authentication state changes
-  useEffect(() => {
-    // Only navigate if we're authenticated and have user data
-    if (isAuthenticated && user && !authLoading) {
-      // Navigate based on user role
-      if (user.role === 'admin' || user.role === 'editor') {
-        navigate({ to: '/admin' })
-      } else {
-        // Client or viewer role
-        navigate({ to: '/dashboard' })
-      }
-    }
-  }, [isAuthenticated, user, authLoading, navigate])
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
 
     try {
-      await signIn('password', {
+      const result = await signIn('password', {
         email: formData.email,
         password: formData.password,
         rememberMe: formData.rememberMe,
         flow: 'signIn'
       })
-      // The useEffect will handle navigation once auth state updates
+
+      if (result.success) {
+        // Wait a bit for user data to load
+        await new Promise(resolve => setTimeout(resolve, 300))
+        
+        // Navigate based on role
+        const currentUser: any = await new Promise(resolve => {
+          const checkUser = setInterval(() => {
+            if (user && user.role) {
+              clearInterval(checkUser)
+              resolve(user)
+            }
+          }, 100)
+          // Timeout after 3 seconds
+          setTimeout(() => {
+            clearInterval(checkUser)
+            resolve(user)
+          }, 3000)
+        })
+
+        if (currentUser && currentUser.role) {
+          if (currentUser.role === 'admin' || currentUser.role === 'editor') {
+            navigate({ to: '/admin', replace: true })
+          } else {
+            navigate({ to: '/dashboard', replace: true })
+          }
+        } else {
+          // Fallback navigation
+          navigate({ to: '/admin', replace: true })
+        }
+      }
     } catch (err) {
       setError('Email ou mot de passe incorrect')
       console.error('Signin error:', err)
@@ -117,10 +131,10 @@ export function SigninForm() {
           </label>
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || isTransitioning}
             className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? 'Connexion...' : 'Se connecter'}
+            {isLoading || isTransitioning ? 'Connexion...' : 'Se connecter'}
           </button>
         </div>
         <div className="text-xs text-[var(--night-80)]/80 inline-flex items-center gap-2">

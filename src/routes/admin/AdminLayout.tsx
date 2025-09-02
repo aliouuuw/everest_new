@@ -4,21 +4,27 @@ import { FaBars, FaCog, FaImages, FaNewspaper, FaSignOutAlt, FaTachometerAlt, Fa
 import { useAuth } from '../../components/Auth/useAuth';
 
 const AdminLayout: React.FC = () => {
-  const { signOut } = useAuth();
+  const { signOut, isTransitioning } = useAuth();
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const handleLogout = async () => {
+    setIsSigningOut(true);
     try {
-      await signOut();
-      // Give a small delay to allow auth state to update
-      setTimeout(() => {
-        navigate({ to: '/auth' });
-      }, 100);
+      const result = await signOut();
+      
+      // Wait a moment for state to clear
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Navigate to auth page
+      navigate({ to: '/auth', replace: true });
     } catch (error) {
-      console.warn('Signout error (non-critical):', error);
-      // Navigate immediately if there's an error
-      navigate({ to: '/auth' });
+      console.warn('Signout error:', error);
+      // Still navigate even if there's an error
+      navigate({ to: '/auth', replace: true });
+    } finally {
+      setIsSigningOut(false);
     }
   };
 
@@ -51,10 +57,11 @@ const AdminLayout: React.FC = () => {
               </Link>
               <button
                 onClick={handleLogout}
-                className="btn-primary font-display tracking-wide"
+                disabled={isSigningOut || isTransitioning}
+                className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <FaSignOutAlt className="mr-2" />
-                Sign Out
+                {isSigningOut || isTransitioning ? 'Signing Out...' : 'Sign Out'}
               </button>
             </nav>
           </div>

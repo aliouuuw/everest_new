@@ -1,52 +1,90 @@
-import { useConvexAuth, useQuery } from 'convex/react'
-import { useAuthActions } from '@convex-dev/auth/react'
-import { api } from '../../../convex/_generated/api'
+import { useConvexAuth, useQuery } from 'convex/react';
+import { useAuthActions } from '@convex-dev/auth/react';
+import { useNavigate } from '@tanstack/react-router';
+import { useCallback, useEffect, useState } from 'react';
+import { api } from '../../../convex/_generated/api';
 
-export interface User {
-  _id: string
-  email: string
-  name: string
-  role: 'admin' | 'editor' | 'viewer' | 'client'
-  avatar?: string
-  bio?: string
-  lastLogin?: number
-  createdAt: number
-}
-
-export interface AuthState {
-  user: User | null | undefined
-  isLoading: boolean
-  signOut: () => Promise<void>
-  isAuthenticated: boolean
-}
-
-export function useAuth(): AuthState {
-  const { signOut: convexSignOut } = useAuthActions()
-  const { isAuthenticated: convexIsAuthenticated, isLoading: convexIsLoading } = useConvexAuth()
+export const useAuth = () => {
+  const { isAuthenticated, isLoading: convexLoading } = useConvexAuth();
+  const { signIn: convexSignIn, signOut: convexSignOut } = useAuthActions();
+  const navigate = useNavigate();
+  const [isTransitioning, setIsTransitioning] = useState(false);
   
-  // Only query for user data if authenticated, with error handling
-  const user = useQuery(
-    api.users.getCurrentUser,
-    convexIsAuthenticated ? {} : "skip"
-  )
+  // Query user data only when authenticated
+  const user = useQuery(api.users.getCurrentUser, isAuthenticated ? {} : "skip");
   
-  const signOut = async () => {
+  // Combined loading state
+  const isLoading = convexLoading || isTransitioning || (isAuthenticated && user === undefined);
+
+  // Enhanced sign in with proper state management
+  const signIn = useCallback(async (provider: string, params: any) => {
+    setIsTransitioning(true);
     try {
-      await convexSignOut()
+      await convexSignIn(provider, params);
+      
+      // Wait for auth state to stabilize
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      return { success: true };
     } catch (error) {
-      console.warn('Convex signout error (non-critical):', error)
-      // Don't re-throw the error - just log it and continue
-      // The user should still be considered signed out even if there's a backend error
+      console.error('Sign in error:', error);
+      throw error;
+    } finally {
+      setIsTransitioning(false);
     }
-  }
+  }, [convexSignIn]);
 
-  // Handle loading state more carefully to prevent errors during signout
-  const isLoading = convexIsLoading || (convexIsAuthenticated && user === undefined)
+  // Enhanced sign out with proper state management
+  const signOut = useCallback(async () => {
+    setIsTransitioning(true);
+    try {
+      await convexSignOut();
+      
+      // Wait for auth state to clear
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Clear any cached data
+      window.localStorage.removeItem('convex-auth-token');
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Sign out error:', error);
+      // Continue with navigation even if sign out fails
+      return { success: false };
+    } finally {
+      setIsTransitioning(false);
+    }
+  }, [convexSignOut]);
+
+  // Handle navigation after auth state changes
+  const navigateBasedOnRole = useCallback(() => {
+    if (!isAuthenticated || !user) return;
+
+    const currentPath = window.location.pathname;
+    
+    // If user is on auth page and is authenticated, redirect based on role
+    if (currentPath === '/auth') {
+      if (user.role === 'admin' || user.role === 'editor') {
+        navigate({ to: '/admin', replace: true });
+      } else {
+        navigate({ to: '/dashboard', replace: true });
+      }
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  // Watch for auth state changes and navigate accordingly
+  useEffect(() => {
+    if (!isLoading) {
+      navigateBasedOnRole();
+    }
+  }, [isLoading, navigateBasedOnRole]);
 
   return {
-    user: user as User | null | undefined,
+    user,
+    isAuthenticated,
     isLoading,
+    signIn,
     signOut,
-    isAuthenticated: convexIsAuthenticated
-  }
-}
+    isTransitioning
+  };
+};
