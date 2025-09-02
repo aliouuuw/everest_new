@@ -12,7 +12,7 @@ const AdminLayout: React.FC = () => {
   const handleLogout = async () => {
     setIsSigningOut(true);
     try {
-      const result = await signOut();
+      await signOut();
       
       // Wait a moment for state to clear
       await new Promise(resolve => setTimeout(resolve, 300));

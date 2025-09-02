@@ -5,7 +5,7 @@ import { useAuth } from './useAuth'
 
 export function SigninForm() {
   const navigate = useNavigate()
-  const { signIn, isTransitioning, user, isAuthenticated } = useAuth()
+  const { signIn, isTransitioning, user } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
