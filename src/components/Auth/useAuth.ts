@@ -58,24 +58,45 @@ export const useAuth = () => {
 
   // Handle navigation after auth state changes
   const navigateBasedOnRole = useCallback(() => {
-    if (!isAuthenticated || !user) return;
+    if (!isAuthenticated || !user || isTransitioning) return;
 
     const currentPath = window.location.pathname;
     
     // If user is on auth page and is authenticated, redirect based on role
     if (currentPath === '/auth') {
-      if (user.role === 'admin' || user.role === 'editor') {
-        navigate({ to: '/admin', replace: true });
-      } else {
-        navigate({ to: '/dashboard', replace: true });
+      try {
+        if (user.role === 'admin' || user.role === 'editor') {
+          navigate({ to: '/admin', replace: true });
+        } else {
+          navigate({ to: '/dashboard', replace: true });
+        }
+      } catch (error) {
+        console.warn('Navigation error during role-based redirect:', error);
+        // Fallback: try navigation after a short delay
+        setTimeout(() => {
+          try {
+            if (user.role === 'admin' || user.role === 'editor') {
+              window.location.href = '/admin';
+            } else {
+              window.location.href = '/dashboard';
+            }
+          } catch (fallbackError) {
+            console.error('Fallback navigation also failed:', fallbackError);
+          }
+        }, 100);
       }
     }
-  }, [isAuthenticated, user, navigate]);
+  }, [isAuthenticated, user, navigate, isTransitioning]);
 
   // Watch for auth state changes and navigate accordingly
   useEffect(() => {
     if (!isLoading) {
-      navigateBasedOnRole();
+      // Add a small delay to ensure state has stabilized
+      const timeoutId = setTimeout(() => {
+        navigateBasedOnRole();
+      }, 100);
+      
+      return () => clearTimeout(timeoutId);
     }
   }, [isLoading, navigateBasedOnRole]);
 
