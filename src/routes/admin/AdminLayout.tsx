@@ -13,33 +13,40 @@ const AdminLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--white-smoke)]">
       {/* Admin Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-4">
-              <h1 className="text-2xl font-bold text-gray-900">CMS Admin</h1>
+      <header className="bg-[var(--pure-white)]/80 backdrop-blur-sm border-b border-[var(--gold-metallic)]/20 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-[var(--gold-metallic)] to-[var(--gold-dark)] rounded-xl flex items-center justify-center">
+                  <FaCog className="text-white text-lg" />
+                </div>
+                <h1 className="text-2xl font-display font-semibold text-[var(--night)]">CMS Admin</h1>
+              </div>
               {user && (
-                <span className="text-sm text-gray-600">
-                  Logged in as: <span className="font-medium">{user.name}</span>
-                  <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
+                <div className="flex items-center space-x-3">
+                  <span className="text-sm text-[var(--night-80)]">
+                    Logged in as: <span className="font-medium text-[var(--night)]">{user.name}</span>
+                  </span>
+                  <span className="px-3 py-1 text-xs font-medium bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] rounded-full border border-[var(--gold-metallic)]/20">
                     {user.role}
                   </span>
-                </span>
+                </div>
               )}
             </div>
             <nav className="flex items-center space-x-4">
               <Link
                 to="/"
-                className="flex items-center text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="flex items-center text-[var(--night-80)] hover:text-[var(--night)] px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[var(--white-smoke)]"
               >
                 <FaHome className="mr-2" />
                 Back to Site
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex items-center text-red-600 hover:text-red-800 px-3 py-2 rounded-md text-sm font-medium"
+                className="flex items-center text-[var(--error-red)] hover:text-red-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-red-50"
               >
                 <FaSignOutAlt className="mr-2" />
                 Logout
@@ -51,57 +58,77 @@ const AdminLayout: React.FC = () => {
 
       <div className="flex">
         {/* Sidebar */}
-        <nav className="w-64 bg-white shadow-sm min-h-screen">
-          <div className="p-6">
-            <ul className="space-y-2">
+        <nav className="w-72 bg-[var(--pure-white)]/80 backdrop-blur-sm border-r border-[var(--gold-metallic)]/20 shadow-sm min-h-screen">
+          <div className="p-8">
+            <ul className="space-y-3">
               <li>
                 <Link
                   to="/admin"
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                  activeProps={{ className: 'bg-blue-50 text-blue-700' }}
+                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-200 group"
+                  activeProps={{ 
+                    className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20' 
+                  }}
                 >
-                  <FaHome className="mr-3" />
-                  Dashboard
+                  <div className="p-2 bg-[var(--gold-metallic-10)] group-hover:bg-[var(--gold-metallic-20)] rounded-lg transition-colors">
+                    <FaHome className="text-[var(--gold-dark)]" />
+                  </div>
+                  <span className="ml-3 font-medium">Dashboard</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/admin/publications"
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                  activeProps={{ className: 'bg-blue-50 text-blue-700' }}
+                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-200 group"
+                  activeProps={{ 
+                    className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20' 
+                  }}
                 >
-                  <FaNewspaper className="mr-3" />
-                  Publications
+                  <div className="p-2 bg-[var(--gold-metallic-10)] group-hover:bg-[var(--gold-metallic-20)] rounded-lg transition-colors">
+                    <FaNewspaper className="text-[var(--gold-dark)]" />
+                  </div>
+                  <span className="ml-3 font-medium">Publications</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/admin/media"
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                  activeProps={{ className: 'bg-blue-50 text-blue-700' }}
+                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-200 group"
+                  activeProps={{ 
+                    className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20' 
+                  }}
                 >
-                  <FaImages className="mr-3" />
-                  Media
+                  <div className="p-2 bg-[var(--gold-metallic-10)] group-hover:bg-[var(--gold-metallic-20)] rounded-lg transition-colors">
+                    <FaImages className="text-[var(--gold-metallic)]" />
+                  </div>
+                  <span className="ml-3 font-medium">Media</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/admin/users"
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                  activeProps={{ className: 'bg-blue-50 text-blue-700' }}
+                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-200 group"
+                  activeProps={{ 
+                    className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20' 
+                  }}
                 >
-                  <FaUsers className="mr-3" />
-                  Users
+                  <div className="p-2 bg-[var(--gold-metallic-10)] group-hover:bg-[var(--gold-metallic-20)] rounded-lg transition-colors">
+                    <FaUsers className="text-[var(--gold-dark)]" />
+                  </div>
+                  <span className="ml-3 font-medium">Users</span>
                 </Link>
               </li>
               <li>
                 <Link
                   to="/admin/settings"
-                  className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-                  activeProps={{ className: 'bg-blue-50 text-blue-700' }}
+                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-200 group"
+                  activeProps={{ 
+                    className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20' 
+                  }}
                 >
-                  <FaCog className="mr-3" />
-                  Settings
+                  <div className="p-2 bg-[var(--gold-metallic-10)] group-hover:bg-[var(--gold-metallic-20)] rounded-lg transition-colors">
+                    <FaCog className="text-[var(--gold-dark)]" />
+                  </div>
+                  <span className="ml-3 font-medium">Settings</span>
                 </Link>
               </li>
             </ul>

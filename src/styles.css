@@ -295,7 +295,7 @@ html {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-black/10 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-black/10 rounded-lg relative overflow-hidden cursor-pointer;
   border: 0;
   transform: translateY(0);
 }

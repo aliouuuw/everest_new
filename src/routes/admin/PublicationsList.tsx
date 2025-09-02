@@ -35,14 +35,14 @@ export const PublicationsList = () => {
 
   const getStatusBadge = (status: string) => {
     const statusConfig: Record<string, { color: string; label: string }> = {
-      draft: { color: 'bg-yellow-100 text-yellow-800', label: 'Draft' },
-      published: { color: 'bg-green-100 text-green-800', label: 'Published' },
-      archived: { color: 'bg-gray-100 text-gray-800', label: 'Archived' },
+      draft: { color: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border-[var(--gold-metallic)]/20', label: 'Draft' },
+      published: { color: 'bg-[var(--success-green)]/10 text-[var(--success-green)] border-[var(--success-green)]/20', label: 'Published' },
+      archived: { color: 'bg-[var(--night)]/10 text-[var(--night)] border-[var(--night)]/20', label: 'Archived' },
     };
     
     const config = statusConfig[status] ?? statusConfig.draft;
     return (
-      <span className={`px-2 py-1 text-xs font-medium rounded-full ${config.color}`}>
+      <span className={`px-3 py-1 text-xs font-medium rounded-full border ${config.color}`}>
         {config.label}
       </span>
     );
@@ -50,32 +50,32 @@ export const PublicationsList = () => {
 
   const getCategoryBadge = (category: string) => {
     const categoryConfig: Record<string, { color: string; label: string }> = {
-      'revues-hebdo': { color: 'bg-blue-100 text-blue-800', label: 'Weekly Reviews' },
-      'revues-mensuelles': { color: 'bg-purple-100 text-purple-800', label: 'Monthly Reviews' },
-      'teaser-dividende': { color: 'bg-green-100 text-green-800', label: 'Dividend Teaser' },
-      'marches': { color: 'bg-orange-100 text-orange-800', label: 'Markets' },
-      'analyses': { color: 'bg-red-100 text-red-800', label: 'Analyses' },
+      'revues-hebdo': { color: 'bg-blue-100 text-blue-800 border-blue-200', label: 'Weekly Reviews' },
+      'revues-mensuelles': { color: 'bg-purple-100 text-purple-800 border-purple-200', label: 'Monthly Reviews' },
+      'teaser-dividende': { color: 'bg-[var(--success-green)]/10 text-[var(--success-green)] border-[var(--success-green)]/20', label: 'Dividend Teaser' },
+      'marches': { color: 'bg-orange-100 text-orange-800 border-orange-200', label: 'Markets' },
+      'analyses': { color: 'bg-red-100 text-red-800 border-red-200', label: 'Analyses' },
     };
     
-    const config = categoryConfig[category] ?? { color: 'bg-gray-100 text-gray-800', label: category };
+    const config = categoryConfig[category] ?? { color: 'bg-[var(--night)]/10 text-[var(--night)] border-[var(--night)]/20', label: category };
     return (
-      <span className={`px-2 py-1 text-xs font-medium rounded-full ${config.color}`}>
+      <span className={`px-3 py-1 text-xs font-medium rounded-full border ${config.color}`}>
         {config.label}
       </span>
     );
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-gray-200 pb-4">
+      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Publications</h1>
-          <p className="text-gray-600 mt-2">Manage your publications and blog posts</p>
+          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Publications</h1>
+          <p className="text-[var(--night-80)] mt-3 text-lg">Manage your publications and blog posts</p>
         </div>
         <Link
           to="/admin/publications/new"
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="btn-primary"
         >
           <FaPlus className="mr-2" />
           New Publication
@@ -83,17 +83,17 @@ export const PublicationsList = () => {
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="stat-card">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Search */}
           <div className="relative">
-            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--night-80)]" />
             <input
               type="text"
               placeholder="Search publications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-12 pr-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
             />
           </div>
 
@@ -101,7 +101,7 @@ export const PublicationsList = () => {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Statuses</option>
             <option value="draft">Draft</option>
@@ -113,7 +113,7 @@ export const PublicationsList = () => {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Categories</option>
             <option value="revues-hebdo">Weekly Reviews</option>
@@ -126,44 +126,44 @@ export const PublicationsList = () => {
       </div>
 
       {/* Publications Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">
+      <div className="stat-card">
+        <div className="px-6 py-4 border-b border-[var(--gold-metallic)]/20">
+          <h2 className="text-xl font-display font-semibold text-[var(--night)]">
             Publications ({filteredPublications.length})
           </h2>
         </div>
         
         {filteredPublications.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-[var(--gold-metallic)]/20">
+              <thead className="bg-[var(--gold-metallic)]/5">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
                     Title
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
                     Category
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
                     Created
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-[var(--pure-white)]/30 divide-y divide-[var(--gold-metallic)]/20">
                 {filteredPublications.map((publication) => (
-                  <tr key={publication._id} className="hover:bg-gray-50">
+                  <tr key={publication._id} className="hover:bg-[var(--gold-metallic)]/5 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-display font-medium text-[var(--night)]">
                           {publication.title}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-[var(--night-80)]">
                           {publication.description.substring(0, 100)}...
                         </div>
                       </div>
@@ -174,29 +174,32 @@ export const PublicationsList = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {getStatusBadge(publication.status)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
                       {new Date(publication.createdAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-2">
+                      <div className="flex space-x-3">
                         <a
                           href={`/publications/${publication.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-[var(--gold-metallic)] hover:text-[var(--gold-dark)] transition-colors p-2 hover:bg-[var(--gold-metallic-10)] rounded-lg"
+                          title="View"
                         >
                           <FaEye className="inline" />
                         </a>
                         <Link
                           to="/admin/publications/$id/edit"
                           params={{ id: publication._id }}
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-[var(--night)] hover:text-[var(--night-80)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
+                          title="Edit"
                         >
                           <FaEdit className="inline" />
                         </Link>
                         <button
                           onClick={() => handleDelete(publication._id)}
-                          className="text-red-600 hover:text-red-900"
+                          className="text-[var(--error-red)] hover:text-red-700 transition-colors p-2 hover:bg-red-50 rounded-lg"
+                          title="Delete"
                         >
                           <FaTrash className="inline" />
                         </button>
@@ -208,19 +211,19 @@ export const PublicationsList = () => {
             </table>
           </div>
         ) : (
-          <div className="text-center py-12">
-            <FaSearch className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-sm font-medium text-gray-900">No publications found</h3>
-            <p className="mt-1 text-sm text-gray-500">
+          <div className="text-center py-16">
+            <FaSearch className="mx-auto h-16 w-16 text-[var(--gold-metallic)]/30" />
+            <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No publications found</h3>
+            <p className="mt-2 text-[var(--night-80)]">
               {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
                 ? 'Try adjusting your search or filters.'
                 : 'Get started by creating a new publication.'}
             </p>
             {!searchQuery && statusFilter === 'all' && categoryFilter === 'all' && (
-              <div className="mt-6">
+              <div className="mt-8">
                 <Link
                   to="/admin/publications/new"
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="btn-primary"
                 >
                   <FaPlus className="mr-2" />
                   New Publication

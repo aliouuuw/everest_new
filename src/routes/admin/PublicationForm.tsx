@@ -145,35 +145,35 @@ export const PublicationForm = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-gray-200 pb-4">
+      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">
             {isEditing ? 'Edit Publication' : 'New Publication'}
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-[var(--night-80)] mt-3 text-lg">
             {isEditing ? 'Update your publication details' : 'Create a new publication or blog post'}
           </p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex space-x-4">
           <button
             onClick={() => navigate({ to: '/admin/publications' })}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            className="btn-secondary"
           >
             <FaTimes className="mr-2" />
             Cancel
           </button>
           <button
             onClick={() => setFormData(prev => ({ ...prev, status: 'draft' }))}
-            className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+            className="px-6 py-3 bg-[var(--night)] text-white rounded-xl hover:bg-[var(--night-80)] transition-colors border border-[var(--night)]/20"
           >
             <FaEyeSlash className="mr-2" />
             Save as Draft
           </button>
           <button
             onClick={() => setFormData(prev => ({ ...prev, status: 'published' }))}
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="btn-primary"
           >
             <FaEye className="mr-2" />
             Publish
@@ -182,13 +182,13 @@ export const PublicationForm = () => {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Title */}
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="title" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Title *
               </label>
               <input
@@ -196,17 +196,17 @@ export const PublicationForm = () => {
                 id="title"
                 value={formData.title}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.title ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.title ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}
                 placeholder="Enter publication title"
               />
-              {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title}</p>}
+              {errors.title && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.title}</p>}
             </div>
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="description" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Description *
               </label>
               <textarea
@@ -214,17 +214,17 @@ export const PublicationForm = () => {
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 rows={3}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.description ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.description ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}
                 placeholder="Brief description of the publication"
               />
-              {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description}</p>}
+              {errors.description && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.description}</p>}
             </div>
 
             {/* Content */}
             <div>
-              <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="content" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Content *
               </label>
               <textarea
@@ -232,20 +232,20 @@ export const PublicationForm = () => {
                 value={formData.content}
                 onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
                 rows={15}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm ${
-                  errors.content ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors font-mono text-sm ${
+                  errors.content ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}
                 placeholder="Write your publication content here..."
               />
-              {errors.content && <p className="mt-1 text-sm text-red-600">{errors.content}</p>}
-              <p className="mt-1 text-sm text-gray-500">
+              {errors.content && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.content}</p>}
+              <p className="mt-2 text-sm text-[var(--night-80)]">
                 {formData.content.length} characters
               </p>
             </div>
 
             {/* Excerpt */}
             <div>
-              <label htmlFor="excerpt" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="excerpt" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Excerpt *
               </label>
               <textarea
@@ -253,12 +253,12 @@ export const PublicationForm = () => {
                 value={formData.excerpt}
                 onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
                 rows={3}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.excerpt ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.excerpt ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}
                 placeholder="Short excerpt for previews"
               />
-              {errors.excerpt && <p className="mt-1 text-sm text-red-600">{errors.excerpt}</p>}
+              {errors.excerpt && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.excerpt}</p>}
             </div>
           </div>
 
@@ -266,15 +266,15 @@ export const PublicationForm = () => {
           <div className="space-y-6">
             {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="category" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Category *
               </label>
               <select
                 id="category"
                 value={formData.category}
                 onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.category ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.category ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
                 }`}
               >
                 <option value="revues-hebdo">Weekly Reviews</option>
@@ -283,19 +283,19 @@ export const PublicationForm = () => {
                 <option value="marches">Markets</option>
                 <option value="analyses">Analyses</option>
               </select>
-              {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+              {errors.category && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.category}</p>}
             </div>
 
             {/* Status */}
             <div>
-              <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="status" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Status
               </label>
               <select
                 id="status"
                 value={formData.status}
                 onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as any }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -310,31 +310,31 @@ export const PublicationForm = () => {
                 id="featured"
                 checked={formData.featured}
                 onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
               />
-              <label htmlFor="featured" className="ml-2 block text-sm text-gray-700">
+              <label htmlFor="featured" className="ml-3 block text-sm text-[var(--night)]">
                 Featured Publication
               </label>
             </div>
 
             {/* Tags */}
             <div>
-              <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tags" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Tags
               </label>
-              <div className="flex space-x-2 mb-2">
+              <div className="flex space-x-3 mb-3">
                 <input
                   type="text"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Add a tag"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="flex-1 px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
                 />
                 <button
                   type="button"
                   onClick={handleAddTag}
-                  className="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  className="px-4 py-3 bg-[var(--night)] text-white rounded-xl hover:bg-[var(--night-80)] transition-colors border border-[var(--night)]/20"
                 >
                   Add
                 </button>
@@ -343,13 +343,13 @@ export const PublicationForm = () => {
                 {formData.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                    className="inline-flex items-center px-3 py-1 bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] text-sm rounded-full border border-[var(--gold-metallic)]/20"
                   >
                     {tag}
                     <button
                       type="button"
                       onClick={() => handleRemoveTag(tag)}
-                      className="ml-1 text-blue-600 hover:text-blue-800"
+                      className="ml-2 text-[var(--gold-dark)] hover:text-[var(--gold-metallic)] transition-colors"
                     >
                       ×
                     </button>
@@ -359,12 +359,12 @@ export const PublicationForm = () => {
             </div>
 
             {/* SEO */}
-            <div className="border-t pt-4">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">SEO Settings</h3>
+            <div className="border-t border-[var(--gold-metallic)]/20 pt-6">
+              <h3 className="text-lg font-display font-medium text-[var(--night)] mb-6">SEO Settings</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <label htmlFor="seoTitle" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="seoTitle" className="block text-sm font-medium text-[var(--night)] mb-3">
                     SEO Title
                   </label>
                   <input
@@ -372,13 +372,13 @@ export const PublicationForm = () => {
                     id="seoTitle"
                     value={formData.seoTitle}
                     onChange={(e) => setFormData(prev => ({ ...prev, seoTitle: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
                     placeholder="SEO optimized title"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="seoDescription" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="seoDescription" className="block text-sm font-medium text-[var(--night)] mb-3">
                     SEO Description
                   </label>
                   <textarea
@@ -386,7 +386,7 @@ export const PublicationForm = () => {
                     value={formData.seoDescription}
                     onChange={(e) => setFormData(prev => ({ ...prev, seoDescription: e.target.value }))}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
                     placeholder="SEO meta description"
                   />
                 </div>
@@ -396,18 +396,18 @@ export const PublicationForm = () => {
         </div>
 
         {/* Form Actions */}
-        <div className="flex justify-end space-x-3 pt-6 border-t">
+        <div className="flex justify-end space-x-4 pt-8 border-t border-[var(--gold-metallic)]/20">
           <button
             type="button"
             onClick={() => navigate({ to: '/admin/publications' })}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            className="btn-secondary"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="btn-primary disabled:opacity-50"
           >
             <FaSave className="mr-2" />
             {isSubmitting ? 'Saving...' : (isEditing ? 'Update Publication' : 'Create Publication')}
