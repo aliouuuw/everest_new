@@ -3,6 +3,16 @@ import { query, mutation } from "./_generated/server";
 
 // Media Queries
 
+// Get all media
+export const getMedia = query({
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("media")
+      .order("desc") // Newest first
+      .collect();
+  },
+});
+
 // Get media for a publication
 export const getPublicationMedia = query({
   args: { publicationId: v.id("publications") },

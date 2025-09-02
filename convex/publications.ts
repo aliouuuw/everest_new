@@ -36,6 +36,33 @@ export const getPublications = query({
   },
 });
 
+// Get publication by ID
+export const getPublicationById = query({
+  args: { id: v.id("publications") },
+  handler: async (ctx, args) => {
+    const publication = await ctx.db.get(args.id);
+
+    if (!publication) {
+      return null;
+    }
+
+    // Get associated media
+    const media = await ctx.db
+      .query("media")
+      .filter(q => q.eq(q.field("publicationId"), publication._id))
+      .collect();
+
+    // Get author info
+    const author = await ctx.db.get(publication.authorId);
+
+    return {
+      ...publication,
+      media,
+      author: author ? { name: author.name, avatar: author.avatar } : null,
+    };
+  },
+});
+
 // Get publication by slug
 export const getPublicationBySlug = query({
   args: { slug: v.string() },

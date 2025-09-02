@@ -28,7 +28,13 @@ import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
+import AdminLayout from './components/CMS/Admin/AdminLayout'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
+import { PublicationsList } from './routes/admin/PublicationsList'
+import { PublicationForm } from './routes/admin/PublicationForm'
+import { MediaManagement } from './routes/admin/MediaManagement'
+import { UserManagement } from './routes/admin/UserManagement'
+import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 
 // Initialize ConvexDB client
@@ -135,10 +141,52 @@ const dashboardRoute = createRoute({
   component: DashboardPage,
 })
 
+const adminLayoutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/admin',
+  component: AdminLayout,
+})
+
 const adminDashboardRoute = createRoute({
-  getParentRoute: () => rootRoute,  
-  path: '/admin/dashboard',
+  getParentRoute: () => adminLayoutRoute,
+  path: '/',
   component: AdminDashboard,
+})
+
+const adminPublicationsRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/publications',
+  component: PublicationsList,
+})
+
+const adminNewPublicationRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/publications/new',
+  component: PublicationForm,
+})
+
+const adminEditPublicationRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/publications/$id/edit',
+  component: PublicationForm,
+})
+
+const adminMediaRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/media',
+  component: MediaManagement,
+})
+
+const adminUsersRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/users',
+  component: UserManagement,
+})
+
+const adminSettingsRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/settings',
+  component: Settings,
 })
 
 const authRoute = createRoute({
@@ -183,7 +231,15 @@ const routeTree = rootRoute.addChildren([
   simulateurRoute,
   portalRoute,
   dashboardRoute,
-  adminDashboardRoute,
+  adminLayoutRoute.addChildren([
+    adminDashboardRoute,
+    adminPublicationsRoute,
+    adminNewPublicationRoute,
+    adminEditPublicationRoute,
+    adminMediaRoute,
+    adminUsersRoute,
+    adminSettingsRoute,
+  ]),
   authRoute,
   notFoundRoute,
 ])

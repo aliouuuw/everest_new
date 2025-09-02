@@ -113,7 +113,7 @@ const DashboardPageContent = () => {
         navigate({ to: '/auth' })
       } else if (authUser && (authUser.role === 'admin' || authUser.role === 'editor')) {
         // Redirect admin/editor users to admin dashboard
-        navigate({ to: '/admin/dashboard' })
+        navigate({ to: '/admin' })
       }
     }
   }, [authLoading, isAuthenticated, authUser, navigate])

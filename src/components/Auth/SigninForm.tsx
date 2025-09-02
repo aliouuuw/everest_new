@@ -22,7 +22,7 @@ export function SigninForm() {
     if (isAuthenticated && user && !authLoading) {
       // Navigate based on user role
       if (user.role === 'admin' || user.role === 'editor') {
-        navigate({ to: '/admin/dashboard' })
+        navigate({ to: '/admin' })
       } else {
         // Client or viewer role
         navigate({ to: '/dashboard' })

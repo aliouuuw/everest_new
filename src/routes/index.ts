@@ -16,3 +16,8 @@ export { AuthPage } from './AuthPage'
 export { DashboardPage } from './DashboardPage'
 
 export { AdminDashboard } from './admin/AdminDashboard'
+export { PublicationsList } from './admin/PublicationsList'
+export { PublicationForm } from './admin/PublicationForm'
+export { MediaManagement } from './admin/MediaManagement'
+export { UserManagement } from './admin/UserManagement'
+export { Settings } from './admin/Settings'
