@@ -18,6 +18,7 @@ import { Layout } from './components/Layout.tsx'
 // Import route components - they'll be code-split by Vite automatically
 import { AboutPage } from './routes/AboutPage'
 import { PublicationsPage } from './routes/PublicationsPage'
+import { PublicationPage } from './routes/PublicationPage'
 import { FAQPage } from './routes/FAQPage'
 import { CEOMessagePage } from './routes/CEOMessagePage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
@@ -61,6 +62,12 @@ const publicationsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications',
   component: PublicationsPage,
+})
+
+const publicationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/publications/$slug',
+  component: PublicationPage,
 })
 
 const faqRoute = createRoute({
@@ -218,6 +225,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   publicationsRoute,
+  publicationRoute,
   faqRoute,
   ceoRoute,
   capitalMarketsRoute,

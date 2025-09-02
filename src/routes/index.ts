@@ -1,5 +1,6 @@
 export { AboutPage } from './AboutPage'
 export { PublicationsPage } from './PublicationsPage'
+export { PublicationPage } from './PublicationPage'
 export { FAQPage } from './FAQPage'
 export { CEOMessagePage } from './CEOMessagePage'
 export { CapitalMarketsPage } from './CapitalMarketsPage'

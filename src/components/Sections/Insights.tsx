@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { useQuery } from "convex/react";
 import { useReveal } from "../Hooks/useReveal";
+import { api } from "../../../convex/_generated/api";
 
 type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
 
@@ -29,14 +31,31 @@ export const Insights: React.FC = () => {
 
   const [activeCategory, setActiveCategory] = useState<PublicationCategory | typeof ALL_LABEL>(ALL_LABEL);
 
-  const items: Array<PublicationItem> = [
-    { title: "Revue hebdomadaire - Semaine 25", desc: "Point sur les marchés et perspectives de la semaine.", href: "#", category: "revues-hebdo", date: "2025-06-22" },
-    { title: "Teaser dividende - SONATEL", desc: "Analyse des perspectives de dividende pour SONATEL.", href: "#", category: "teaser-dividende", date: "2025-06-18" },
-    { title: "Marchés - Point BRVM", desc: "Indices, volumes et tendances clés du marché.", href: "#", category: "marches", date: "2025-06-15" },
-    { title: "Analyse - Secteur bancaire", desc: "Étude approfondie du secteur bancaire ouest-africain.", href: "#", category: "analyses", date: "2025-06-12" },
-    { title: "Revue mensuelle - Juin 2025", desc: "Synthèse mensuelle des performances et tendances.", href: "#", category: "revues-mensuelles", date: "2025-06-10" },
-    { title: "Teaser dividende - NSIA", desc: "Évaluation des perspectives de dividende pour NSIA.", href: "#", category: "teaser-dividende", date: "2025-06-05" },
-  ];
+  // Fetch publications from Convex
+  const publications = useQuery(api.publications.getPublications, { 
+    limit: 6, // Show only 6 publications in insights section
+    status: 'published' // Only show published publications
+  });
+
+  // Transform Convex data to match our component's expected format
+  const items: Array<PublicationItem> = useMemo(() => {
+    if (!publications?.page) return []
+    
+    // Sort by featured first, then by creation date (newest first)
+    const sortedPublications = [...publications.page].sort((a, b) => {
+      if (a.featured && !b.featured) return -1
+      if (!a.featured && b.featured) return 1
+      return b.createdAt - a.createdAt
+    })
+    
+    return sortedPublications.map(pub => ({
+      title: pub.title,
+      desc: pub.description,
+      href: `/publications/${pub.slug}`,
+      category: pub.category as PublicationCategory,
+      date: new Date(pub.createdAt).toISOString().split('T')[0] // Convert timestamp to date string
+    }))
+  }, [publications]);
 
   const categories: Array<PublicationCategory | typeof ALL_LABEL> = useMemo(
     () => [ALL_LABEL, "revues-hebdo", "revues-mensuelles", "teaser-dividende", "marches", "analyses"],
@@ -74,8 +93,26 @@ export const Insights: React.FC = () => {
           })}
         </div>
 
-        <div ref={listRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-          {filtered.map((it) => (
+        {publications === undefined ? (
+          // Loading state
+          <div className="text-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto mb-4"></div>
+            <p className="text-[var(--night-80)]">Chargement des publications...</p>
+          </div>
+        ) : filtered.length === 0 ? (
+          // Empty state
+          <div className="text-center py-16">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--gold-metallic-10)] flex items-center justify-center">
+              <svg className="w-8 h-8 text-[var(--gold-metallic)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-medium text-[var(--night)] mb-2">Aucune publication trouvée</h3>
+            <p className="text-[var(--night-80)]">Aucune publication ne correspond aux critères sélectionnés.</p>
+          </div>
+        ) : (
+          <div ref={listRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+            {filtered.map((it) => (
             <a key={`${it.title}-${it.date}`} href={it.href} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-[var(--gold-light)]/30 group-hover:bg-white/70 block">
               {/* Background blur effect */}
               <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
@@ -95,9 +132,20 @@ export const Insights: React.FC = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-3">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--gold-light)]/10 text-[var(--gold-dark)] border border-[var(--gold-light)]/20">
-                    {CATEGORY_LABELS[it.category]}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--gold-light)]/10 text-[var(--gold-dark)] border border-[var(--gold-light)]/20">
+                      {CATEGORY_LABELS[it.category]}
+                    </span>
+                    {/* Featured indicator */}
+                    {publications.page.find(pub => 
+                      pub.title === it.title && 
+                      new Date(pub.createdAt).toISOString().split('T')[0] === it.date
+                    )?.featured && (
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30">
+                        ⭐ En vedette
+                      </span>
+                    )}
+                  </div>
                   <time className="text-xs text-secondary font-medium" dateTime={it.date}>
                     {new Date(it.date).toLocaleDateString('fr-FR', {
                       day: 'numeric',
@@ -130,7 +178,8 @@ export const Insights: React.FC = () => {
               </div>
             </a>
           ))}
-        </div>
+          </div>
+        )}
 
         <div className="mt-10 text-center">
           <a

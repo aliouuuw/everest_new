@@ -136,6 +136,9 @@ export const createPublication = mutation({
     excerpt: v.string(),
     tags: v.array(v.string()),
     featured: v.optional(v.boolean()),
+    status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
+    seoTitle: v.optional(v.string()),
+    seoDescription: v.optional(v.string()),
     authorId: v.id("users"),
   },
   handler: async (ctx, args) => {
@@ -150,7 +153,7 @@ export const createPublication = mutation({
     return await ctx.db.insert("publications", {
       ...args,
       slug,
-      status: "draft",
+      status: args.status || "draft", // Use provided status or default to draft
       mediaIds: [],
       readingTime: Math.ceil(args.content.split(' ').length / 200), // Rough estimate
       createdAt: now,
@@ -171,6 +174,8 @@ export const updatePublication = mutation({
     tags: v.optional(v.array(v.string())),
     featured: v.optional(v.boolean()),
     status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
+    seoTitle: v.optional(v.string()),
+    seoDescription: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { id, ...updates } = args;

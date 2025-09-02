@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from '@tanstack/react-router';
+import { useNavigate, useParams, useRouter } from '@tanstack/react-router';
 import { FaEye, FaEyeSlash, FaSave, FaTimes } from 'react-icons/fa';
 import { useMutation, useQuery } from 'convex/react';
+import { useAuth } from '../../components/Auth/useAuth';
 import { api } from '../../../convex/_generated/api';
 import type { Id } from '../../../convex/_generated/dataModel';
 
@@ -20,8 +21,55 @@ interface PublicationFormData {
 
 export const PublicationForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams({ from: '/admin/publications/$id/edit' });
-  const isEditing = Boolean(id);
+  const router = useRouter();
+  const currentRoute = router.state.location.pathname;
+  const isEditing = currentRoute.includes('/edit');
+  const { user, isLoading: authLoading } = useAuth();
+  
+  // Only try to get params if we're editing
+  let id: Id<"publications"> | undefined;
+  if (isEditing) {
+    try {
+      const params = useParams({ from: '/admin/publications/$id/edit' });
+      id = params.id as Id<"publications">;
+    } catch (error) {
+      console.warn('Could not get publication ID from params:', error);
+      id = undefined;
+    }
+  } else {
+    // We're creating a new publication, no ID needed
+    id = undefined;
+  }
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[var(--night-80)]/80">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error if user is not authenticated
+  if (!user || !user._id) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h1>
+          <p className="text-gray-600 mb-4">You must be logged in to create or edit publications.</p>
+          <button
+            onClick={() => navigate({ to: '/auth' })}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Go to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const [formData, setFormData] = useState<PublicationFormData>({
     title: '',
@@ -96,18 +144,27 @@ export const PublicationForm = () => {
       return;
     }
 
+    // Check if user is authenticated
+    if (!user._id) {
+      alert('You must be logged in to create or edit publications');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       if (isEditing && id) {
         await updatePublication({
-          id: id as Id<"publications">,
+          id: id,
           ...formData,
         });
       } else {
+        if (!user._id) {
+          throw new Error('User not authenticated');
+        }
         await createPublication({
           ...formData,
-          authorId: 'temp-author-id' as Id<"users">, // This should come from auth context
+          authorId: user._id as Id<"users">,
         });
       }
 
@@ -159,14 +216,14 @@ export const PublicationForm = () => {
         <div className="flex space-x-4">
           <button
             onClick={() => navigate({ to: '/admin/publications' })}
-            className="btn-secondary"
+            className="btn-secondary "
           >
             <FaTimes className="mr-2" />
             Cancel
           </button>
           <button
             onClick={() => setFormData(prev => ({ ...prev, status: 'draft' }))}
-            className="px-6 py-3 bg-[var(--night)] text-white rounded-xl hover:bg-[var(--night-80)] transition-colors border border-[var(--night)]/20"
+            className="btn-primary"
           >
             <FaEyeSlash className="mr-2" />
             Save as Draft

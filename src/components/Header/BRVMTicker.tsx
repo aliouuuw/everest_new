@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from '@tanstack/react-router';
 import { FaArrowDown, FaArrowUp, FaMinus } from 'react-icons/fa';
 
 interface StockData {
@@ -21,9 +22,18 @@ const mockBRVMData: Array<StockData> = [
 ];
 
 export const BRVMTicker: React.FC = () => {
+  const location = useLocation();
   const [currentData, setCurrentData] = useState<Array<StockData>>(mockBRVMData);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  // Check if user is in admin portal
+  const isInAdminPortal = location.pathname.startsWith('/admin');
+  
+  // Hide ticker if in admin portal
+  if (isInAdminPortal) {
+    return null;
+  }
 
   useEffect(() => {
     // Show ticker after scrolling down from hero
