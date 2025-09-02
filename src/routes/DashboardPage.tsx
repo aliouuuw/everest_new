@@ -119,8 +119,15 @@ const DashboardPageContent = () => {
   }, [authLoading, isAuthenticated, authUser, navigate])
 
   const handleLogout = async () => {
-    await authSignOut()
-    navigate({ to: '/auth' })
+    try {
+      await authSignOut()
+    } catch (error) {
+      console.warn('Signout error (non-critical):', error)
+      // Continue with logout even if there's an error
+    } finally {
+      // Always navigate to auth page, regardless of signout success/failure
+      navigate({ to: '/auth' })
+    }
   }
 
   const filteredTransactions = transactions.filter(t => {

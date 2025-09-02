@@ -9,8 +9,17 @@ const AdminLayout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const handleLogout = async () => {
-    await signOut();
-    navigate({ to: '/auth' });
+    try {
+      await signOut();
+      // Give a small delay to allow auth state to update
+      setTimeout(() => {
+        navigate({ to: '/auth' });
+      }, 100);
+    } catch (error) {
+      console.warn('Signout error (non-critical):', error);
+      // Navigate immediately if there's an error
+      navigate({ to: '/auth' });
+    }
   };
 
   const toggleSidebar = () => {

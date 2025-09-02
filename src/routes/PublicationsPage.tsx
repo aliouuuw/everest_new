@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { useReveal } from '../components/Hooks/useReveal'
 import { useQuery } from 'convex/react'
+import { useReveal } from '../components/Hooks/useReveal'
 import { api } from '../../convex/_generated/api'
 
 type PublicationCategory = 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses'
@@ -29,26 +29,13 @@ export const PublicationsPage = () => {
     status: 'published' // Only show published publications
   })
 
-  // Transform Convex data to match our component's expected format
-  const items: Array<PublicationItem> = useMemo(() => {
-    if (!publications?.page) return []
-    
-    return publications.page.map(pub => ({
-      title: pub.title,
-      desc: pub.description,
-      href: `/publications/${pub.slug}`,
-      category: pub.category as PublicationCategory,
-      date: new Date(pub.createdAt).toISOString().split('T')[0] // Convert timestamp to date string
-    }))
-  }, [publications])
-
   const categories: Array<PublicationCategory | typeof ALL_LABEL> = useMemo(
     () => [ALL_LABEL, 'revues-hebdo', 'revues-mensuelles', 'teaser-dividende', 'marches', 'analyses'],
     []
   )
 
   const filtered = useMemo(() => {
-    if (!publications) return []
+    if (!publications?.page) return []
 
     let filteredItems = [...publications.page]
 
@@ -57,7 +44,7 @@ export const PublicationsPage = () => {
       filteredItems = filteredItems.filter(pub =>
         pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         pub.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pub.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+        (pub.excerpt && pub.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
       )
     }
 
@@ -141,7 +128,7 @@ export const PublicationsPage = () => {
               <div ref={listRef} className="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((item, index) => (
                 <article key={index} className="group">
-                  <a href={item.href} className="block">
+                  <a href={`/publications/${item.slug}`} className="block">
                     <div className="relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-[var(--gold-light)]/30 group-hover:bg-white/70">
                       {/* Background blur effect */}
                       <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
@@ -165,21 +152,18 @@ export const PublicationsPage = () => {
                               {CATEGORY_LABELS[item.category]}
                             </span>
                             {/* Featured indicator */}
-                            {publications?.page.find(pub => 
-                              pub.title === item.title && 
-                              new Date(pub.createdAt).toISOString().split('T')[0] === item.date
-                            )?.featured && (
+                            {item.featured && (
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30">
                                 ⭐ En vedette
                               </span>
                             )}
                           </div>
-                          <time className="text-xs text-secondary font-medium" dateTime={item.date}>
-                            {new Date(item.date).toLocaleDateString('fr-FR', {
+                          <time className="text-xs text-secondary font-medium" dateTime={item.createdAt ? new Date(item.createdAt).toISOString().split('T')[0] : ''}>
+                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('fr-FR', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
-                            })}
+                            }) : 'Date non disponible'}
                           </time>
                         </div>
                         
@@ -188,7 +172,7 @@ export const PublicationsPage = () => {
                         </h3>
                         
                         <p className="text-secondary text-sm leading-relaxed mb-4">
-                          {item.desc}
+                          {item.description}
                         </p>
 
                         {/* Divider */}

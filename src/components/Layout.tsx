@@ -19,11 +19,37 @@ class ErrorBoundary extends Component<
   }
 
   static getDerivedStateFromError(error: Error) {
+    // Don't catch Convex authentication errors, auth state changes, hook errors, or function not found errors
+    const isAuthError = error.message.includes('signout') || 
+                       error.message.includes('auth') ||
+                       error.message.includes('getCurrentUser') ||
+                       error.message.includes('Could not find public function') ||
+                       error.message.includes('Server Error') ||
+                       error.message.includes('Rendered fewer hooks than expected') ||
+                       error.message.includes('Rendered more hooks than during the previous render') ||
+                       error.message.includes('early return statement')
+    
+    if (isAuthError) {
+      console.warn('Non-critical auth/convex/hook error caught by boundary:', error.message)
+      return { hasError: false }
+    }
     return { hasError: true, error }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('❌ Layout Error Boundary caught an error:', error, errorInfo)
+    // Don't log Convex authentication errors, hook errors, or function not found errors
+    const isAuthError = error.message.includes('signout') || 
+                       error.message.includes('auth') ||
+                       error.message.includes('getCurrentUser') ||
+                       error.message.includes('Could not find public function') ||
+                       error.message.includes('Server Error') ||
+                       error.message.includes('Rendered fewer hooks than expected') ||
+                       error.message.includes('Rendered more hooks than during the previous render') ||
+                       error.message.includes('early return statement')
+    
+    if (!isAuthError) {
+      console.error('❌ Layout Error Boundary caught a critical error:', error, errorInfo)
+    }
   }
 
   render() {

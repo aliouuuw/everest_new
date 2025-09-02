@@ -96,7 +96,7 @@ export default defineSchema({
       v.literal("editor"),
       v.literal("viewer"),
       v.literal("client")
-    ),
+    )),
 
     // Profile
     avatar: v.optional(v.string()),

@@ -175,7 +175,7 @@ export const PublicationsList = () => {
                       {getStatusBadge(publication.status)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
-                      {new Date(publication.createdAt).toLocaleDateString()}
+                      {publication.createdAt ? new Date(publication.createdAt).toLocaleDateString() : 'Date non disponible'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-3">

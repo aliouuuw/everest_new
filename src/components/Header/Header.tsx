@@ -97,18 +97,6 @@ export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Check if user is authenticated and on dashboard
-  const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
-  const isOnDashboard = location.pathname === '/dashboard';
-  
-  // Check if user is in admin portal
-  const isInAdminPortal = location.pathname.startsWith('/admin');
-
-  // Hide header if authenticated and on dashboard, or if in admin portal
-  if ((isAuthenticated && isOnDashboard) || isInAdminPortal) {
-    return null;
-  }
-
   const openDropdownByName = (dropdownName: string) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -147,6 +135,16 @@ export const Header: React.FC = () => {
     };
   }, [openDropdown]);
 
+  // Check if user is authenticated and on dashboard
+  const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
+  const isOnDashboard = location.pathname === '/dashboard';
+  
+  // Check if user is in admin portal
+  const isInAdminPortal = location.pathname.startsWith('/admin');
+
+  // Hide header if authenticated and on dashboard, or if in admin portal
+  const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminPortal;
+
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
     { label: 'Publications', href: '/publications' },
@@ -160,7 +158,10 @@ export const Header: React.FC = () => {
     { label: 'Recherche et analyses', href: '/recherche-analyses' },
   ];
 
-
+  // Return null without violating hooks rules
+  if (shouldHideHeader) {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-20">

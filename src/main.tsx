@@ -38,10 +38,6 @@ import { UserManagement } from './routes/admin/UserManagement'
 import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 
-// Admin CMS routes
-import { AdminLayout } from './components/CMS/Admin';
-import { DashboardPage as AdminDashboardPage, MediaPage as AdminMediaPage, PublicationFormPage as AdminPublicationFormPage, PublicationsPage as AdminPublicationsPage, SettingsPage as AdminSettingsPage, SigninPage as AdminSigninPage, UserFormPage as AdminUserFormPage, UsersPage as AdminUsersPage } from './routes/admin'
-
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
 

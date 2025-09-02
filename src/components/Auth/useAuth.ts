@@ -24,19 +24,28 @@ export function useAuth(): AuthState {
   const { signOut: convexSignOut } = useAuthActions()
   const { isAuthenticated: convexIsAuthenticated, isLoading: convexIsLoading } = useConvexAuth()
   
-  // Only query for user data if authenticated
+  // Only query for user data if authenticated, with error handling
   const user = useQuery(
-    api.api.users.getCurrentUser,
+    api.users.getCurrentUser,
     convexIsAuthenticated ? {} : "skip"
   )
   
   const signOut = async () => {
-    await convexSignOut()
+    try {
+      await convexSignOut()
+    } catch (error) {
+      console.warn('Convex signout error (non-critical):', error)
+      // Don't re-throw the error - just log it and continue
+      // The user should still be considered signed out even if there's a backend error
+    }
   }
+
+  // Handle loading state more carefully to prevent errors during signout
+  const isLoading = convexIsLoading || (convexIsAuthenticated && user === undefined)
 
   return {
     user: user as User | null | undefined,
-    isLoading: convexIsLoading || (convexIsAuthenticated && user === undefined),
+    isLoading,
     signOut,
     isAuthenticated: convexIsAuthenticated
   }

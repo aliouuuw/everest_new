@@ -134,7 +134,7 @@ export const PublicationPage = () => {
           <div className="flex flex-wrap items-center gap-6 text-[var(--night-60)] text-sm">
             <div className="flex items-center gap-2">
               <FaCalendar className="text-[var(--gold-metallic)]" />
-              <span>{formatDate(publication.createdAt)}</span>
+              <span>{publication.createdAt ? formatDate(publication.createdAt) : 'Date non disponible'}</span>
             </div>
             {publication.author && (
               <div className="flex items-center gap-2">

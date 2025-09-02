@@ -21,7 +21,7 @@ export function ProtectedRoute({
   const { isAuthenticated, isLoading } = useConvexAuth()
   
   // Fetch current user data using the correct API path
-  const user = useQuery(api.api.users.getCurrentUser, isAuthenticated ? {} : "skip")
+  const user = useQuery(api.users.getCurrentUser, isAuthenticated ? {} : "skip")
 
   // Handle redirect for unauthenticated users
   useEffect(() => {
@@ -30,9 +30,12 @@ export function ProtectedRoute({
     }
   }, [isLoading, isAuthenticated, navigate, redirectTo])
 
-  // Show loading while checking auth state
+  // Determine what to render based on state
+  let content: ReactNode
+
   if (isLoading) {
-    return (
+    // Show loading while checking auth state
+    content = (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
@@ -40,11 +43,9 @@ export function ProtectedRoute({
         </div>
       </div>
     )
-  }
-
-  // If not authenticated, show redirect message briefly
-  if (!isAuthenticated) {
-    return (
+  } else if (!isAuthenticated) {
+    // If not authenticated, show redirect message briefly
+    content = (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
@@ -52,11 +53,9 @@ export function ProtectedRoute({
         </div>
       </div>
     )
-  }
-
-  // Show loading while fetching user data
-  if (user === undefined) {
-    return (
+  } else if (user === undefined) {
+    // Show loading while fetching user data
+    content = (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
@@ -64,42 +63,44 @@ export function ProtectedRoute({
         </div>
       </div>
     )
-  }
+  } else {
+    // Check if user has required role
+    const hasRequiredRole = requiredRole ? user?.role === requiredRole : true
 
-  // Check if user has required role
-  const hasRequiredRole = requiredRole ? user?.role === requiredRole : true
-
-  // Show access denied if role is required but user doesn't have it
-  if (requiredRole && !hasRequiredRole) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center max-w-md mx-auto p-6">
-          <div className="text-6xl mb-4">🔒</div>
-          <h1 className="text-2xl font-bold text-[var(--night)] mb-2">Accès Refusé</h1>
-          <p className="text-[var(--night-80)]/80 mb-6">
-            Vous n'avez pas les permissions nécessaires pour accéder à cette page.
-            <br />
-            <span className="text-sm">Rôle requis: {requiredRole} | Votre rôle: {user?.role || 'non défini'}</span>
-          </p>
-          <div className="space-y-3">
-            <button
-              onClick={() => navigate({ to: '/' })}
-              className="w-full px-4 py-2 bg-[var(--gold-metallic)] text-[var(--night)] rounded-lg hover:bg-[var(--gold-metallic-80)] transition-colors"
-            >
-              Retour à l'accueil
-            </button>
-            <button
-              onClick={() => navigate({ to: '/auth' })}
-              className="w-full px-4 py-2 border border-[var(--gold-metallic)] text-[var(--night-80)] rounded-lg hover:bg-[var(--gold-metallic-10)] transition-colors"
-            >
-              Se connecter avec un autre compte
-            </button>
+    if (requiredRole && !hasRequiredRole) {
+      // Show access denied if role is required but user doesn't have it
+      content = (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="text-center max-w-md mx-auto p-6">
+            <div className="text-6xl mb-4">🔒</div>
+            <h1 className="text-2xl font-bold text-[var(--night)] mb-2">Accès Refusé</h1>
+            <p className="text-[var(--night-80)]/80 mb-6">
+              Vous n'avez pas les permissions nécessaires pour accéder à cette page.
+              <br />
+              <span className="text-sm">Rôle requis: {requiredRole} | Votre rôle: {user?.role || 'non défini'}</span>
+            </p>
+            <div className="space-y-3">
+              <button
+                onClick={() => navigate({ to: '/' })}
+                className="w-full px-4 py-2 bg-[var(--gold-metallic)] text-[var(--night)] rounded-lg hover:bg-[var(--gold-metallic-80)] transition-colors"
+              >
+                Retour à l'accueil
+              </button>
+              <button
+                onClick={() => navigate({ to: '/auth' })}
+                className="w-full px-4 py-2 border border-[var(--gold-metallic)] text-[var(--night-80)] rounded-lg hover:bg-[var(--gold-metallic-10)] transition-colors"
+              >
+                Se connecter avec un autre compte
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      // Render children if authenticated and has required role
+      content = <>{children}</>
+    }
   }
 
-  // Render children if authenticated and has required role
-  return <>{children}</>
+  return content
 }

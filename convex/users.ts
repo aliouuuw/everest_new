@@ -1,7 +1,40 @@
 import { v } from "convex/values";
-import { mutation, query   } from "./_generated/server";
+import { getAuthUserId } from "@convex-dev/auth/server";
+import { mutation, query } from "./_generated/server";
 
 // User Queries
+
+// Get current authenticated user
+export const getCurrentUser = query({
+  args: {},
+  handler: async (ctx) => {
+    try {
+      const userId = await getAuthUserId(ctx);
+      if (!userId) {
+        return null;
+      }
+
+      const user = await ctx.db.get(userId);
+      if (!user) {
+        return null;
+      }
+
+      return {
+        _id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        avatar: user.avatar,
+        bio: user.bio,
+        lastLogin: user.lastLogin,
+        createdAt: user.createdAt,
+      };
+    } catch (error) {
+      console.error("Error getting current user:", error);
+      return null;
+    }
+  },
+});
 
 // Get user by email
 export const getUserByEmail = query({

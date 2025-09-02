@@ -45,7 +45,7 @@ export const Insights: React.FC = () => {
     const sortedPublications = [...publications.page].sort((a, b) => {
       if (a.featured && !b.featured) return -1
       if (!a.featured && b.featured) return 1
-      return b.createdAt - a.createdAt
+      return (b.createdAt || 0) - (a.createdAt || 0)
     })
     
     return sortedPublications.map(pub => ({
@@ -53,7 +53,7 @@ export const Insights: React.FC = () => {
       desc: pub.description,
       href: `/publications/${pub.slug}`,
       category: pub.category as PublicationCategory,
-      date: new Date(pub.createdAt).toISOString().split('T')[0] // Convert timestamp to date string
+      date: new Date(pub.createdAt || 0).toISOString().split('T')[0] // Convert timestamp to date string
     }))
   }, [publications]);
 
@@ -139,7 +139,7 @@ export const Insights: React.FC = () => {
                     {/* Featured indicator */}
                     {publications.page.find(pub => 
                       pub.title === it.title && 
-                      new Date(pub.createdAt).toISOString().split('T')[0] === it.date
+                      new Date(pub.createdAt || 0).toISOString().split('T')[0] === it.date
                     )?.featured && (
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30">
                         ⭐ En vedette

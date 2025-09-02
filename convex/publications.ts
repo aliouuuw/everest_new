@@ -1,6 +1,25 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
+// Helper function to require editor permissions
+const requireEditor = async (ctx: any) => {
+  const identity = await ctx.auth.getUserIdentity();
+  if (!identity) {
+    throw new Error("Unauthorized");
+  }
+  
+  const user = await ctx.db
+    .query("users")
+    .filter((q: any) => q.eq(q.field("email"), identity.email))
+    .first();
+    
+  if (!user || (user.role !== "admin" && user.role !== "editor")) {
+    throw new Error("Insufficient permissions");
+  }
+  
+  return { user };
+};
+
 // Publication Queries
 
 // Get all publications with filters
