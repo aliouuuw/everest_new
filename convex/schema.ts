@@ -1,7 +1,7 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { authTables } from "@convex-dev/auth/server";
-
+ 
 export default defineSchema({
   ...authTables,
   // Publications Table
@@ -94,8 +94,9 @@ export default defineSchema({
     role: v.optional(v.union(
       v.literal("admin"),
       v.literal("editor"),
-      v.literal("viewer")
-    )),
+      v.literal("viewer"),
+      v.literal("client")
+    ),
 
     // Profile
     avatar: v.optional(v.string()),

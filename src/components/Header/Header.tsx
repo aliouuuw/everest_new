@@ -100,9 +100,12 @@ export const Header: React.FC = () => {
   // Check if user is authenticated and on dashboard
   const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
   const isOnDashboard = location.pathname === '/dashboard';
+  
+  // Check if user is in admin portal
+  const isInAdminPortal = location.pathname.startsWith('/admin');
 
-  // Hide header if authenticated and on dashboard
-  if (isAuthenticated && isOnDashboard) {
+  // Hide header if authenticated and on dashboard, or if in admin portal
+  if ((isAuthenticated && isOnDashboard) || isInAdminPortal) {
     return null;
   }
 

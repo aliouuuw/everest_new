@@ -6,7 +6,7 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
+import { ConvexReactClient } from 'convex/react'
 import { ConvexAuthProvider } from '@convex-dev/auth/react'
 
 import './styles.css'
@@ -18,6 +18,7 @@ import { Layout } from './components/Layout.tsx'
 // Import route components - they'll be code-split by Vite automatically
 import { AboutPage } from './routes/AboutPage'
 import { PublicationsPage } from './routes/PublicationsPage'
+import { PublicationPage } from './routes/PublicationPage'
 import { FAQPage } from './routes/FAQPage'
 import { CEOMessagePage } from './routes/CEOMessagePage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
@@ -28,6 +29,14 @@ import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
+import AdminLayout from './routes/admin/AdminLayout.tsx'
+import { AdminDashboard } from './routes/admin/AdminDashboard'
+import { PublicationsList } from './routes/admin/PublicationsList'
+import { PublicationForm } from './routes/admin/PublicationForm'
+import { MediaManagement } from './routes/admin/MediaManagement'
+import { UserManagement } from './routes/admin/UserManagement'
+import { Settings } from './routes/admin/Settings'
+import { AuthPage } from './routes/AuthPage'
 
 // Admin CMS routes
 import { AdminLayout } from './components/CMS/Admin';
@@ -57,6 +66,12 @@ const publicationsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications',
   component: PublicationsPage,
+})
+
+const publicationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/publications/$slug',
+  component: PublicationPage,
 })
 
 const faqRoute = createRoute({
@@ -137,81 +152,58 @@ const dashboardRoute = createRoute({
   component: DashboardPage,
 })
 
-// Admin routes
-const adminSigninRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/admin/signin',
-  component: AdminSigninPage,
-  beforeLoad: async () => {
-    // This will be handled by the SigninPage component
-    // The route will still render but the component will handle auth redirects
-    return {};
-  },
-})
-
 const adminLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin',
   component: AdminLayout,
-  beforeLoad: async () => {
-    // This will be handled by the ProtectedAdminRoute component
-    // The route will still render but the component will handle auth
-    return {};
-  },
+})
+
+const adminDashboardRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/',
+  component: AdminDashboard,
 })
 
 const adminPublicationsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/publications',
-  component: AdminPublicationsPage,
-})
-
-const adminPublicationFormRoute = createRoute({
-  getParentRoute: () => adminLayoutRoute,
-  path: '/publications/$publicationId',
-  component: AdminPublicationFormPage,
+  component: PublicationsList,
 })
 
 const adminNewPublicationRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/publications/new',
-  component: AdminPublicationFormPage,
+  component: PublicationForm,
 })
 
-const adminUsersRoute = createRoute({
+const adminEditPublicationRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
-  path: '/users',
-  component: AdminUsersPage,
-})
-
-const adminUserFormRoute = createRoute({
-  getParentRoute: () => adminLayoutRoute,
-  path: '/users/$userId',
-  component: AdminUserFormPage,
-})
-
-const adminNewUserRoute = createRoute({
-  getParentRoute: () => adminLayoutRoute,
-  path: '/users/new',
-  component: AdminUserFormPage,
+  path: '/publications/$id/edit',
+  component: PublicationForm,
 })
 
 const adminMediaRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/media',
-  component: AdminMediaPage,
+  component: MediaManagement,
+})
+
+const adminUsersRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/users',
+  component: UserManagement,
 })
 
 const adminSettingsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/settings',
-  component: AdminSettingsPage,
+  component: Settings,
 })
 
-const adminDashboardRoute = createRoute({
-  getParentRoute: () => adminLayoutRoute,
-  path: '/dashboard',
-  component: AdminDashboardPage,
+const authRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/auth',
+  component: AuthPage,
 })
 
 const notFoundRoute = createRoute({
@@ -237,6 +229,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   publicationsRoute,
+  publicationRoute,
   faqRoute,
   ceoRoute,
   capitalMarketsRoute,
@@ -250,19 +243,16 @@ const routeTree = rootRoute.addChildren([
   simulateurRoute,
   portalRoute,
   dashboardRoute,
-  // Admin routes
-  adminSigninRoute,
   adminLayoutRoute.addChildren([
-    adminPublicationsRoute,
-    adminPublicationFormRoute,
-    adminNewPublicationRoute,
-    adminUsersRoute,
-    adminUserFormRoute,
-    adminNewUserRoute,
-    adminMediaRoute,
-    adminSettingsRoute,
     adminDashboardRoute,
+    adminPublicationsRoute,
+    adminNewPublicationRoute,
+    adminEditPublicationRoute,
+    adminMediaRoute,
+    adminUsersRoute,
+    adminSettingsRoute,
   ]),
+  authRoute,
   notFoundRoute,
 ])
 
@@ -319,11 +309,9 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <StrictMode>
-        <ConvexProvider client={convex}>
-          <ConvexAuthProvider client={convex}>
-            <RouterProvider router={router} />
-          </ConvexAuthProvider>
-        </ConvexProvider>
+        <ConvexAuthProvider client={convex}>
+          <RouterProvider router={router} />
+        </ConvexAuthProvider>
       </StrictMode>,
     )
 

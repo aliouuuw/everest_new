@@ -1,6 +1,17 @@
+import { useLocation } from '@tanstack/react-router';
 import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'react-icons/fa';
 
 export const Footer = () => {
+  const location = useLocation();
+  
+  // Check if user is in admin portal
+  const isInAdminPortal = location.pathname.startsWith('/admin');
+  
+  // Hide footer if in admin portal
+  if (isInAdminPortal) {
+    return null;
+  }
+
   return (
     <footer className="mb-10" style={{ background: 'var(--white-smoke)' }}>
       <div className="mx-auto max-w-6xl px-5">

@@ -1,0 +1,133 @@
+import { useEffect, useState } from 'react'
+import { useAuthActions } from '@convex-dev/auth/react'
+import { FiLock, FiMail } from 'react-icons/fi'
+import { useNavigate } from '@tanstack/react-router'
+import { useAuth } from './useAuth'
+
+export function SigninForm() {
+  const { signIn } = useAuthActions()
+  const navigate = useNavigate()
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth()
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  // Handle role-based navigation when authentication state changes
+  useEffect(() => {
+    // Only navigate if we're authenticated and have user data
+    if (isAuthenticated && user && !authLoading) {
+      // Navigate based on user role
+      if (user.role === 'admin' || user.role === 'editor') {
+        navigate({ to: '/admin' })
+      } else {
+        // Client or viewer role
+        navigate({ to: '/dashboard' })
+      }
+    }
+  }, [isAuthenticated, user, authLoading, navigate])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError('')
+
+    try {
+      await signIn('password', {
+        email: formData.email,
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+        flow: 'signIn'
+      })
+      // The useEffect will handle navigation once auth state updates
+    } catch (err) {
+      setError('Email ou mot de passe incorrect')
+      console.error('Signin error:', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }))
+  }
+
+  return (
+    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="font-display text-xl">Accéder à votre espace</div>
+          <p className="text-secondary text-sm mt-1">Connectez-vous à votre portail client.</p>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--night-80)]/80">
+          <FiLock /> Sécurisé
+        </div>
+      </div>
+
+      {/* Formulaire de connexion */}
+      <form onSubmit={handleSubmit} className="mt-6 space-y-5" noValidate>
+        {error && (
+          <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+            {error}
+          </div>
+        )}
+        <div>
+          <label htmlFor="email-login" className="text-xs font-medium text-[var(--night-80)]/80">Email</label>
+          <input
+            id="email-login"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            placeholder="Entrez votre email"
+          />
+        </div>
+        <div>
+          <label htmlFor="password-login" className="text-xs font-medium text-[var(--night-80)]/80">Mot de passe</label>
+          <input
+            id="password-login"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            required
+            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            placeholder="Entrez votre mot de passe"
+          />
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <label className="inline-flex items-center gap-2 text-xs text-[var(--night-80)]/80">
+            <input
+              type="checkbox"
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleInputChange}
+              className="accent-[var(--gold-dark)]"
+            />
+            Se souvenir de moi
+          </label>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? 'Connexion...' : 'Se connecter'}
+          </button>
+        </div>
+        <div className="text-xs text-[var(--night-80)]/80 inline-flex items-center gap-2">
+          <FiMail className="opacity-70" />
+          <a className="underline hover:text-[var(--gold-metallic)]" href="#">Mot de passe oublié ?</a>
+        </div>
+      </form>
+    </div>
+  )
+}

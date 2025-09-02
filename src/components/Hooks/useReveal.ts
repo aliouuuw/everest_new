@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface RevealOptions extends IntersectionObserverInit {
   lenis?: any; // Lenis instance for enhanced scroll synchronization
@@ -12,10 +12,16 @@ export function useReveal<T extends HTMLElement>(
 ) {
   const ref = useRef<T | null>(null);
   const hasTriggeredRef = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || !isMounted) return;
 
     const {
       lenis,
@@ -26,7 +32,10 @@ export function useReveal<T extends HTMLElement>(
       ...observerOptions
     } = options;
 
-    if (lenis) {
+    // Reset the triggered state when the effect runs (e.g., on route change)
+    hasTriggeredRef.current = false;
+
+    if (lenis && typeof lenis.on === 'function') {
       // Enhanced Lenis-based scroll reveal
       const triggerReveal = () => {
         if (hasTriggeredRef.current && once) return;
@@ -49,35 +58,15 @@ export function useReveal<T extends HTMLElement>(
         }
       };
 
-      // Check if lenis is ready before adding listeners
-      if (typeof lenis.on === 'function') {
-        lenis.on('scroll', triggerReveal);
-        // Trigger once initially
-        triggerReveal();
+      lenis.on('scroll', triggerReveal);
+      // Trigger once initially
+      triggerReveal();
 
-        return () => {
-          if (typeof lenis.off === 'function') {
-            lenis.off('scroll', triggerReveal);
-          }
-        };
-      } else {
-        // Fallback to Intersection Observer if lenis isn't ready
-        const observer = new IntersectionObserver((entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              node.classList.add(activeClass);
-              if (once) {
-                observer.unobserve(entry.target);
-              }
-            } else if (!once) {
-              node.classList.remove(activeClass);
-            }
-          }
-        }, { rootMargin, threshold, ...observerOptions });
-
-        observer.observe(node);
-        return () => observer.disconnect();
-      }
+      return () => {
+        if (typeof lenis.off === 'function') {
+          lenis.off('scroll', triggerReveal);
+        }
+      };
     } else {
       // Fallback to Intersection Observer
       const observer = new IntersectionObserver((entries) => {
@@ -96,7 +85,7 @@ export function useReveal<T extends HTMLElement>(
       observer.observe(node);
       return () => observer.disconnect();
     }
-  }, [options, activeClass]);
+  }, [options, activeClass, isMounted]);
 
   return ref;
 }

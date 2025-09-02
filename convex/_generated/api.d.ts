@@ -14,11 +14,13 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as api_uploadthing from "../api/uploadthing.js";
+import type * as api_users from "../api/users.js";
 import type * as auth from "../auth.js";
 import type * as categories from "../categories.js";
 import type * as http from "../http.js";
 import type * as media from "../media.js";
 import type * as publications from "../publications.js";
+import type * as seedUsers from "../seedUsers.js";
 import type * as uploadthing from "../uploadthing.js";
 import type * as users from "../users.js";
 
@@ -32,11 +34,13 @@ import type * as users from "../users.js";
  */
 declare const fullApi: ApiFromModules<{
   "api/uploadthing": typeof api_uploadthing;
+  "api/users": typeof api_users;
   auth: typeof auth;
   categories: typeof categories;
   http: typeof http;
   media: typeof media;
   publications: typeof publications;
+  seedUsers: typeof seedUsers;
   uploadthing: typeof uploadthing;
   users: typeof users;
 }>;

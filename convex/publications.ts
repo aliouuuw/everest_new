@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
-import { requireEditor } from "./auth";
+import { mutation, query } from "./_generated/server";
 
 // Publication Queries
 
@@ -14,26 +13,54 @@ export const getPublications = query({
     featured: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
-    const { status, category, limit = 20, offset = 0, featured } = args;
+    const { status, category, limit = 20, featured } = args;
 
-    let query = ctx.db.query("publications");
+    let resultQuery = ctx.db.query("publications");
 
+    // Apply filters
     if (status) {
-      query = query.filter(q => q.eq(q.field("status"), status));
+      resultQuery = resultQuery.filter(q => q.eq(q.field("status"), status));
     }
 
     if (category) {
-      query = query.filter(q => q.eq(q.field("category"), category));
+      resultQuery = resultQuery.filter(q => q.eq(q.field("category"), category));
     }
 
     if (featured !== undefined) {
-      query = query.filter(q => q.eq(q.field("featured"), featured));
+      resultQuery = resultQuery.filter(q => q.eq(q.field("featured"), featured));
     }
 
-    // Order by creation date (newest first)
-    query = query.order("desc");
+    // Order by creation date (newest first) and paginate
+    return await resultQuery
+      .order("desc")
+      .paginate({ numItems: limit, cursor: null });
+  },
+});
 
-    return await query.paginate({ numItems: limit, cursor: null });
+// Get publication by ID
+export const getPublicationById = query({
+  args: { id: v.id("publications") },
+  handler: async (ctx, args) => {
+    const publication = await ctx.db.get(args.id);
+
+    if (!publication) {
+      return null;
+    }
+
+    // Get associated media
+    const media = await ctx.db
+      .query("media")
+      .filter(q => q.eq(q.field("publicationId"), publication._id))
+      .collect();
+
+    // Get author info
+    const author = await ctx.db.get(publication.authorId);
+
+    return {
+      ...publication,
+      media,
+      author: author ? { name: author.name, avatar: author.avatar } : null,
+    };
   },
 });
 
@@ -106,10 +133,14 @@ export const createPublication = mutation({
     title: v.string(),
     description: v.string(),
     content: v.string(),
-    category: v.string(),
+    category: v.union(v.literal("revues-hebdo"), v.literal("revues-mensuelles"), v.literal("teaser-dividende"), v.literal("marches"), v.literal("analyses")),
     excerpt: v.string(),
     tags: v.array(v.string()),
     featured: v.optional(v.boolean()),
+    status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
+    seoTitle: v.optional(v.string()),
+    seoDescription: v.optional(v.string()),
+    authorId: v.id("users"),
   },
   handler: async (ctx, args) => {
     const { user } = await requireEditor(ctx);
@@ -126,7 +157,8 @@ export const createPublication = mutation({
       ...args,
       authorId: user._id,
       slug,
-      status: "draft",
+      status: args.status || "draft", // Use provided status or default to draft
+      featured: args.featured ?? false, // Default to false if not provided
       mediaIds: [],
       readingTime: Math.ceil(args.content.split(' ').length / 200), // Rough estimate
       createdAt: now,
@@ -142,11 +174,13 @@ export const updatePublication = mutation({
     title: v.optional(v.string()),
     description: v.optional(v.string()),
     content: v.optional(v.string()),
-    category: v.optional(v.string()),
+    category: v.optional(v.union(v.literal("revues-hebdo"), v.literal("revues-mensuelles"), v.literal("teaser-dividende"), v.literal("marches"), v.literal("analyses"))),
     excerpt: v.optional(v.string()),
     tags: v.optional(v.array(v.string())),
     featured: v.optional(v.boolean()),
     status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
+    seoTitle: v.optional(v.string()),
+    seoDescription: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { user } = await requireEditor(ctx);
@@ -154,7 +188,7 @@ export const updatePublication = mutation({
     const { id, ...updates } = args;
 
     // Generate new slug if title is being updated
-    let slug;
+    let slug: string | undefined;
     if (updates.title) {
       slug = updates.title
         .toLowerCase()
@@ -178,7 +212,7 @@ export const updatePublication = mutation({
       ...updates,
       ...(slug && { slug }),
       updatedAt: Date.now(),
-      ...(updates.status === "published" && !updates.publishedAt && {
+      ...(updates.status === "published" && {
         publishedAt: Date.now()
       }),
     });

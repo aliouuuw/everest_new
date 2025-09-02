@@ -1,9 +1,6 @@
-// Admin Routes Export
-export { default as DashboardPage } from './DashboardPage';
-export { default as PublicationsPage } from './PublicationsPage';
-export { default as PublicationFormPage } from './PublicationFormPage';
-export { default as UsersPage } from './UsersPage';
-export { default as UserFormPage } from './UserFormPage';
-export { default as MediaPage } from './MediaPage';
-export { default as SettingsPage } from './SettingsPage';
-export { default as SigninPage } from './SigninPage';
+export { AdminDashboard } from './AdminDashboard';
+export { PublicationsList } from './PublicationsList';
+export { PublicationForm } from './PublicationForm';
+export { MediaManagement } from './MediaManagement';
+export { UserManagement } from './UserManagement';
+export { Settings } from './Settings';

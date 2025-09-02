@@ -1,6 +1,17 @@
+import { useLocation } from '@tanstack/react-router';
 import { FaWhatsapp } from 'react-icons/fa';
 
 export const WhatsAppButton: React.FC = () => {
+  const location = useLocation();
+  
+  // Check if user is in admin portal
+  const isInAdminPortal = location.pathname.startsWith('/admin');
+  
+  // Hide WhatsApp button if in admin portal
+  if (isInAdminPortal) {
+    return null;
+  }
+
   const handleClick = () => {
     // Replace with actual WhatsApp number
     const phoneNumber = '+221000000000';

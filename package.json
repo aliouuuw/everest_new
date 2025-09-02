@@ -19,6 +19,7 @@
     "cms:dev": "concurrently \"npm run convex:dev\" \"npm run dev\""
   },
   "dependencies": {
+    "@auth/core": "0.37.0",
     "@convex-dev/auth": "^0.0.88",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.2.2",

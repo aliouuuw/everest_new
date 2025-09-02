@@ -19,6 +19,8 @@ import {
   FaSignOutAlt,
   FaUserShield
 } from "react-icons/fa"
+import { useAuth } from '../components/Auth/useAuth'
+import { ProtectedRoute } from '../components/Auth/ProtectedRoute'
 
 // Mock user data
 const MOCK_USER = {
@@ -82,8 +84,9 @@ const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: strin
   );
 };
 
-export const DashboardPage = () => {
+const DashboardPageContent = () => {
   const navigate = useNavigate()
+  const { user: authUser, isAuthenticated, signOut: authSignOut, isLoading: authLoading } = useAuth()
   const [user] = useState(MOCK_USER)
   const [positions] = useState(MOCK_POSITIONS)
   const [transactions, _setTransactions] = useState(MOCK_TRANSACTIONS)
@@ -103,17 +106,21 @@ export const DashboardPage = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Check authentication
+  // Check authentication and role
   useEffect(() => {
-    const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true'
-    if (!isAuthenticated) {
-      navigate({ to: '/portal' })
+    if (!authLoading) {
+      if (!isAuthenticated) {
+        navigate({ to: '/auth' })
+      } else if (authUser && (authUser.role === 'admin' || authUser.role === 'editor')) {
+        // Redirect admin/editor users to admin dashboard
+        navigate({ to: '/admin' })
+      }
     }
-  }, [navigate])
+  }, [authLoading, isAuthenticated, authUser, navigate])
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('isAuthenticated')
-    navigate({ to: '/portal' })
+  const handleLogout = async () => {
+    await authSignOut()
+    navigate({ to: '/auth' })
   }
 
   const filteredTransactions = transactions.filter(t => {
@@ -385,6 +392,18 @@ export const DashboardPage = () => {
     </div>
   )
 
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
+          <p className="mt-4 text-secondary">Chargement...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
       {/* App chrome */}
@@ -398,7 +417,7 @@ export const DashboardPage = () => {
             <FaSearch className="text-secondary" />
             <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
           </div>
-          <div className="text-xs text-secondary">Bienvenue, {user.name}</div>
+          <div className="text-xs text-secondary">Bienvenue, {authUser?.name || user.name}</div>
           <button
             onClick={() => setShowBalance(!showBalance)}
             className="p-2 hover:bg-[var(--night)]/5 rounded-lg"
@@ -560,5 +579,13 @@ export const DashboardPage = () => {
         </div>
       </div>
     </div>
+  )
+}
+
+export const DashboardPage = () => {
+  return (
+    <ProtectedRoute requiredRole="client">
+      <DashboardPageContent />
+    </ProtectedRoute>
   )
 }

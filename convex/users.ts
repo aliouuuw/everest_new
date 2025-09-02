@@ -39,7 +39,8 @@ export const createUser = mutation({
     role: v.optional(v.union(
       v.literal("admin"),
       v.literal("editor"),
-      v.literal("viewer")
+      v.literal("viewer"),
+      v.literal("client")
     )),
   },
   handler: async (ctx, args) => {
@@ -56,7 +57,7 @@ export const createUser = mutation({
 
     return await ctx.db.insert("users", {
       ...args,
-      role: args.role || "viewer",
+      role: args.role || "client",
       createdAt: Date.now(),
     });
   },
@@ -70,7 +71,8 @@ export const updateUser = mutation({
     role: v.optional(v.union(
       v.literal("admin"),
       v.literal("editor"),
-      v.literal("viewer")
+      v.literal("viewer"),
+      v.literal("client")
     )),
     avatar: v.optional(v.string()),
     bio: v.optional(v.string()),
