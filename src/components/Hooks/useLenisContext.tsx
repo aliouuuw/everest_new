@@ -64,7 +64,26 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({
     };
     requestAnimationFrame(raf);
 
+    // Listen for route changes to reset scroll position
+    const handleRouteChange = () => {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+    };
+
+    // Add route change listener
+    window.addEventListener('popstate', handleRouteChange);
+    
+    // Also listen for custom route change events if using a router
+    const handleCustomRouteChange = () => {
+      handleRouteChange();
+    };
+    
+    window.addEventListener('routeChange', handleCustomRouteChange);
+
     return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('routeChange', handleCustomRouteChange);
       lenisRef.current?.destroy();
       lenisRef.current = null;
       setIsReady(false);

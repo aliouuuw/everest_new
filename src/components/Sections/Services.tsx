@@ -1,6 +1,6 @@
 import { FaCalculator, FaFileAlt, FaUsers } from "react-icons/fa";
-import { useReveal } from "../Hooks/useReveal";
-import { useLenisContext } from "../Hooks/useLenisContext.tsx";
+import { useLocation } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import type { IconType } from "react-icons";
 
 type Service = {
@@ -62,18 +62,60 @@ const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc, href }) => {
 };
 
 export const Services: React.FC = () => {
-  const { lenis, isReady } = useLenisContext();
-  const sectionRef = useReveal<HTMLElement>({
-    lenis: isReady ? lenis : undefined,
-    triggerOffset: -50
-  });
-  const gridRef = useReveal<HTMLDivElement>({
-    lenis: isReady ? lenis : undefined,
-    triggerOffset: -30
-  });
+  const location = useLocation();
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Simple Intersection Observer for reveal effects
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+    const gridElement = gridRef.current;
+    
+    if (!sectionElement || !gridElement) return;
+
+    // Remove any existing classes
+    sectionElement.classList.remove('in');
+    gridElement.classList.remove('in');
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    const gridObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    sectionObserver.observe(sectionElement);
+    gridObserver.observe(gridElement);
+
+    return () => {
+      sectionObserver.disconnect();
+      gridObserver.disconnect();
+    };
+  }, [location.pathname]);
 
   return (
-    <section ref={sectionRef} className="reveal py-24 relative overflow-hidden" id="services">
+    <section 
+      key={`services-${location.pathname}`}
+      ref={sectionRef} 
+      className="reveal py-24 relative overflow-hidden" 
+      id="services"
+    >      
       {/* Background image */}
       <div 
         className="absolute inset-0 opacity-20"

@@ -33,7 +33,7 @@ export const Insights: React.FC = () => {
 
   // Fetch publications from Convex
   const publications = useQuery(api.publications.getPublications, { 
-    limit: 6, // Show only 6 publications in insights section
+    limit: 3, // Show only 6 publications in insights section
     status: 'published' // Only show published publications
   });
 
