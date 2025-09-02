@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@tanstack/react-router';
-import { FaCog, FaImages, FaNewspaper, FaUsers, FaChartLine, FaCog as FaSettings } from 'react-icons/fa';
+import { FaCog, FaImages, FaNewspaper, FaUsers } from 'react-icons/fa';
 
 const AdminDashboardPage: React.FC = () => {
   const adminModules = [
@@ -28,7 +28,7 @@ const AdminDashboardPage: React.FC = () => {
     {
       title: 'Settings',
       description: 'Configure system preferences',
-      icon: FaSettings,
+      icon: FaCog,
       href: '/admin/settings',
       color: 'bg-gray-500',
     },

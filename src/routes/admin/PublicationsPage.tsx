@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { FaEdit, FaEye, FaFilter, FaPlus, FaSearch, FaTrash } from 'react-icons/fa';
-import { useDeletePublication, usePublications, useUpdatePublication } from '@/hooks/useCMS';
-import { LoadingSpinner } from '@/components/CMS/Shared';
+import { useDeletePublication, usePublications } from '@/hooks/useCMS';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
 import { formatDate } from '@/utils/cms/helpers';
+import { LoadingSpinner } from '@/components/CMS/Shared';
 
 const PublicationsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,10 +19,9 @@ const PublicationsPage: React.FC = () => {
     limit: 50,
   });
   const deletePublication = useDeletePublication();
-  const updatePublication = useUpdatePublication();
 
   // Filter publications based on search and filters
-  const filteredPublications = publications?.page?.filter((pub: any) => {
+  const filteredPublications = publications?.page.filter((pub: any) => {
     const matchesSearch = pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          pub.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || pub.status === statusFilter;
@@ -46,18 +45,6 @@ const PublicationsPage: React.FC = () => {
       } catch (error) {
         console.error('Failed to delete publication:', error);
       }
-    }
-  };
-
-  const handleStatusToggle = async (publicationId: string, currentStatus: string) => {
-    const newStatus = currentStatus === 'published' ? 'draft' : 'published';
-    try {
-      await updatePublication({ 
-        id: publicationId as any, 
-        status: newStatus as "draft" | "published" | "archived" 
-      });
-    } catch (error) {
-      console.error('Failed to update publication status:', error);
     }
   };
 

@@ -35,6 +35,7 @@ import { PublicationsList } from './routes/admin/PublicationsList'
 import { PublicationForm } from './routes/admin/PublicationForm'
 import { MediaManagement } from './routes/admin/MediaManagement'
 import { UserManagement } from './routes/admin/UserManagement'
+import UserFormPage from './routes/admin/UserFormPage'
 import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 
@@ -190,6 +191,18 @@ const adminUsersRoute = createRoute({
   component: UserManagement,
 })
 
+const adminNewUserRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/users/new',
+  component: UserFormPage,
+})
+
+const adminEditUserRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/users/$userId',
+  component: UserFormPage,
+})
+
 const adminSettingsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/settings',
@@ -246,6 +259,8 @@ const routeTree = rootRoute.addChildren([
     adminEditPublicationRoute,
     adminMediaRoute,
     adminUsersRoute,
+    adminNewUserRoute,
+    adminEditUserRoute,
     adminSettingsRoute,
   ]),
   authRoute,

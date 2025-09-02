@@ -27,7 +27,7 @@ export const UserManagement = () => {
   const deleteUser = useMutation(api.users.deleteUser);
 
   const filteredUsers = users?.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    const matchesSearch = (user.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
                          user.email.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = roleFilter === 'all' || user.role === roleFilter;
     
@@ -206,8 +206,8 @@ export const UserManagement = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        {getRoleIcon(user.role)}
-                        <span className="ml-3">{getRoleBadge(user.role)}</span>
+                        {user.role && getRoleIcon(user.role)}
+                        <span className="ml-3">{user.role && getRoleBadge(user.role)}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
@@ -216,12 +216,12 @@ export const UserManagement = () => {
                         : 'Never'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
-                      {new Date(user.createdAt).toLocaleDateString()}
+                      {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Unknown'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-3">
                         <button
-                          onClick={() => setEditingUser(user)}
+                          onClick={() => setEditingUser(user as User)}
                           className="text-[var(--night)] hover:text-[var(--night-80)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
                           title="Edit"
                         >

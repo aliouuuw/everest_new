@@ -3,10 +3,10 @@ import { useParams } from '@tanstack/react-router';
 import PublicationForm from '@/components/CMS/Admin/PublicationForm';
 
 const PublicationFormPage: React.FC = () => {
-  const { publicationId } = useParams({ from: '/admin/publications/$publicationId' });
+  const { id } = useParams({ from: '/admin/publications/$id/edit' });
 
-  // If publicationId is 'new', treat it as creating a new publication
-  const actualPublicationId = publicationId === 'new' ? undefined : publicationId;
+  // If id is 'new', treat it as creating a new publication
+  const actualPublicationId = id === 'new' ? undefined : id;
 
   return <PublicationForm publicationId={actualPublicationId} />;
 };

@@ -4,7 +4,7 @@ import { FaEdit, FaEye, FaPlus, FaShieldAlt, FaTrash, FaUser } from 'react-icons
 import { useDeleteUser, useUsers } from '@/hooks/useCMS';
 import { formatDate } from '@/utils/cms/helpers';
 import { USER_ROLES } from '@/utils/cms/constants';
-import LoadingSpinner from '@/components/CMS/Shared/LoadingSpinner';
+import { LoadingSpinner } from '@/components/CMS/Shared';
 
 const UsersPage: React.FC = () => {
   const navigate = useNavigate();

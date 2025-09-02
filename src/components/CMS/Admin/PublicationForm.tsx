@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { FaPlus, FaSave, FaTimes } from 'react-icons/fa';
-import { ErrorMessage, LoadingSpinner, RichTextEditor } from '../Shared';
+import { ErrorMessage, LoadingSpinner, RichTextEditor } from '@/components/CMS/Shared';
 import { useCreatePublication, usePublication, useUpdatePublication } from '@/hooks/useCMS';
 import { useCurrentUser } from '@/hooks/useAuth';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
@@ -26,6 +26,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
     status: 'draft' as PublicationStatus,
     featured: false,
     tags: [] as Array<string>,
+    authorId: currentUser ? currentUser._id : '',
   });
 
   const [currentTag, setCurrentTag] = useState('');
@@ -75,9 +76,10 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
         status: existingPublication.status,
         featured: existingPublication.featured,
         tags: existingPublication.tags,
+        authorId: existingPublication.authorId || currentUser._id,
       });
     }
-  }, [existingPublication, publicationId]);
+  }, [existingPublication, publicationId, currentUser]);
 
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -153,6 +155,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
         // Create new publication
         const result = await createPublication({
           ...formData,
+          authorId: currentUser._id,
         });
         publicationId = result;
       }

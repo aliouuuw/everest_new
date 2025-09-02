@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { FaSave, FaTimes } from 'react-icons/fa';
+import { ErrorMessage, LoadingSpinner } from '../Shared';
 import { useCreateUser, useUpdateUser, useUser } from '@/hooks/useCMS';
 import { useCurrentUser } from '@/hooks/useAuth';
 import { USER_ROLES } from '@/utils/cms/constants';
-import { ErrorMessage, LoadingSpinner } from '@/components/CMS/Shared';
 
 interface UserFormProps {
   userId?: string;
@@ -31,10 +31,12 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
 
   useEffect(() => {
     if (existingUser && userId && userId !== 'new') {
+      // Filter out 'client' role and default to 'viewer'
+      const role = existingUser.role === 'client' ? 'viewer' : existingUser.role;
       setFormData({
         name: existingUser.name ?? '',
         email: existingUser.email,
-        role: existingUser.role ?? 'viewer',
+        role: role ?? 'viewer',
       });
     }
   }, [existingUser, userId]);

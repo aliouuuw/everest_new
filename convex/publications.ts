@@ -162,7 +162,7 @@ export const createPublication = mutation({
     authorId: v.id("users"),
   },
   handler: async (ctx, args) => {
-    const { user } = await requireEditor(ctx);
+    await requireEditor(ctx);
 
     const now = Date.now();
 
@@ -174,7 +174,7 @@ export const createPublication = mutation({
 
     return await ctx.db.insert("publications", {
       ...args,
-      authorId: user._id,
+      authorId: args.authorId,
       slug,
       status: args.status || "draft", // Use provided status or default to draft
       featured: args.featured ?? false, // Default to false if not provided
@@ -202,7 +202,7 @@ export const updatePublication = mutation({
     seoDescription: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const { user } = await requireEditor(ctx);
+    await requireEditor(ctx);
 
     const { id, ...updates } = args;
 
@@ -244,7 +244,7 @@ export const updatePublication = mutation({
 export const deletePublication = mutation({
   args: { id: v.id("publications") },
   handler: async (ctx, args) => {
-    const { user } = await requireEditor(ctx);
+    await requireEditor(ctx);
 
     // Get publication to clean up media references
     const publication = await ctx.db.get(args.id);

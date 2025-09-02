@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { LoadingSpinner } from '../Shared';
+import { LoadingSpinner } from '@/components/CMS/Shared';
 import { useCurrentUser } from '@/hooks/useAuth';
 
 interface ProtectedAdminRouteProps {
@@ -19,13 +19,13 @@ export const ProtectedAdminRoute: React.FC<ProtectedAdminRouteProps> = ({ childr
 
     if (!currentUser) {
       // User is not authenticated, redirect to signin
-      navigate({ to: '/admin/signin', replace: true });
+      navigate({ to: '/auth', replace: true });
       return;
     }
 
     if (currentUser.role !== 'admin') {
       // User is not an admin, redirect to signin
-      navigate({ to: '/admin/signin', replace: true });
+      navigate({ to: '/auth', replace: true });
       return;
     }
   }, [currentUser, navigate]);

@@ -3,7 +3,7 @@ import { FaFile, FaFilter, FaImage, FaPlus, FaSearch, FaTrash, FaVideo } from 'r
 import { useDeleteMedia, useMediaByType } from '@/hooks/useCMS';
 import { formatDate, formatFileSize } from '@/utils/cms/helpers';
 import { MEDIA_TYPES } from '@/utils/cms/constants';
-import LoadingSpinner from '@/components/CMS/Shared/LoadingSpinner';
+import { LoadingSpinner } from '@/components/CMS/Shared';
 
 const MediaPage: React.FC = () => {
   const [typeFilter, setTypeFilter] = useState<string>('all');
