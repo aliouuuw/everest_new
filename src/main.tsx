@@ -29,7 +29,7 @@ import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
 import { SimulateurPage } from './routes/SimulateurPage'
-import AdminLayout from './routes/admin/AdminLayout.tsx'
+import ProtectedAdminLayout from './routes/admin/ProtectedAdminLayout.tsx'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
 import { PublicationsList } from './routes/admin/PublicationsList'
 import { PublicationForm } from './routes/admin/PublicationForm'
@@ -152,7 +152,7 @@ const dashboardRoute = createRoute({
 const adminLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/admin',
-  component: AdminLayout,
+  component: ProtectedAdminLayout,
 })
 
 const adminDashboardRoute = createRoute({
