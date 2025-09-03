@@ -90,6 +90,19 @@ export const PublicationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Function to get text content without HTML tags
+  const getTextContent = (html: string): string => {
+    // Create a temporary div element to parse HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || '';
+  };
+
+  // Get character count without HTML tags
+  const getCharacterCount = (content: string): number => {
+    return getTextContent(content).length;
+  };
+
   // Image upload handler for the rich text editor
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
@@ -302,7 +315,7 @@ export const PublicationForm = () => {
               />
               {errors.content && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.content}</p>}
               <p className="mt-2 text-sm text-[var(--night-80)]">
-                {formData.content.length} characters
+                {getCharacterCount(formData.content)} characters
               </p>
             </div>
 
