@@ -1,8 +1,9 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
+import Underline from '@tiptap/extension-underline';
 import { Table }  from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
@@ -49,6 +50,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           levels: [1, 2, 3, 4, 5, 6]
         }
       }),
+      Underline,
       Image.configure({
         HTMLAttributes: {
           class: 'max-w-full h-auto rounded-lg shadow-md mx-auto my-4'
@@ -150,12 +152,20 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
     editor.chain().focus().unsetLink().run();
   }, [editor]);
 
+  // Update editor content when value prop changes (for editing existing publications)
+  useEffect(() => {
+    if (value !== editor.getHTML()) {
+      editor.commands.setContent(value);
+    }
+  }, [editor, value]);
+
   // Enhanced toolbar with more formatting options
   const Toolbar = () => (
     <div className="bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-2 items-center">
       {/* Undo/Redo */}
       <div className="flex gap-1 mr-2">
         <button
+          type="button"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().undo()}
           className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -164,6 +174,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           <FaUndo className="w-4 h-4" />
         </button>
         <button
+          type="button"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().redo()}
           className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -177,6 +188,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Text Formatting */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('bold') ? 'bg-gray-200' : ''}`}
         title="Bold"
@@ -184,6 +196,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaBold className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('italic') ? 'bg-gray-200' : ''}`}
         title="Italic"
@@ -191,6 +204,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaItalic className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('underline') ? 'bg-gray-200' : ''}`}
         title="Underline"
@@ -198,6 +212,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaUnderline className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('strike') ? 'bg-gray-200' : ''}`}
         title="Strikethrough"
@@ -205,6 +220,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaStrikethrough className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleCode().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('code') ? 'bg-gray-200' : ''}`}
         title="Code"
@@ -246,6 +262,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Lists */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('bulletList') ? 'bg-gray-200' : ''}`}
         title="Bullet List"
@@ -253,6 +270,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaListUl className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('orderedList') ? 'bg-gray-200' : ''}`}
         title="Numbered List"
@@ -264,6 +282,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Quote */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('blockquote') ? 'bg-gray-200' : ''}`}
         title="Quote"
@@ -275,6 +294,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Links */}
       <button
+        type="button"
         onClick={setLink}
         className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('link') ? 'bg-gray-200' : ''}`}
         title="Insert Link"
@@ -282,6 +302,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <FaLink className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={unsetLink}
         disabled={!editor.isActive('link')}
         className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -294,6 +315,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Media */}
       <button
+        type="button"
         onClick={() => fileInputRef.current?.click()}
         className="p-2 hover:bg-gray-200 rounded transition-colors"
         title="Insert Image"
@@ -313,6 +335,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       {/* Tables */}
       <button
+        type="button"
         onClick={insertTable}
         className="p-2 hover:bg-gray-200 rounded transition-colors"
         title="Insert Table"
@@ -326,6 +349,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           <div className="w-px h-6 bg-gray-300" />
           <div className="flex gap-1">
             <button
+              type="button"
               onClick={addColumnBefore}
               className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Column Before"
@@ -333,6 +357,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               +Col
             </button>
             <button
+              type="button"
               onClick={addColumnAfter}
               className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Column After"
@@ -340,6 +365,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               Col+
             </button>
             <button
+              type="button"
               onClick={deleteColumn}
               className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Column"
@@ -347,6 +373,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               -Col
             </button>
             <button
+              type="button"
               onClick={addRowBefore}
               className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Row Before"
@@ -354,6 +381,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               +Row
             </button>
             <button
+              type="button"
               onClick={addRowAfter}
               className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Row After"
@@ -361,6 +389,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               Row+
             </button>
             <button
+              type="button"
               onClick={deleteRow}
               className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Row"
@@ -368,6 +397,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
               -Row
             </button>
             <button
+              type="button"
               onClick={deleteTable}
               className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Table"
@@ -434,13 +464,33 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           line-height: 1.6;
         }
 
-        .ProseMirror ul, .ProseMirror ol {
+        .ProseMirror ul {
           margin: 0.75rem 0;
           padding-left: 1.5rem;
+          list-style-type: disc;
+        }
+
+        .ProseMirror ol {
+          margin: 0.75rem 0;
+          padding-left: 1.5rem;
+          list-style-type: decimal;
+        }
+
+        .ProseMirror ul ul {
+          list-style-type: circle;
+        }
+
+        .ProseMirror ul ul ul {
+          list-style-type: square;
         }
 
         .ProseMirror li {
           margin: 0.25rem 0;
+          display: list-item;
+        }
+
+        .ProseMirror li p {
+          margin: 0;
         }
 
         .ProseMirror blockquote {

@@ -176,7 +176,7 @@ export const PublicationPage = () => {
             {/* Content */}
             <div className="bg-white rounded-2xl border border-[var(--gold-metallic)]/20 p-8 shadow-sm">
               <div 
-                className="text-[var(--night)] leading-relaxed"
+                className="text-[var(--night)] leading-relaxed publication-content"
                 dangerouslySetInnerHTML={{ __html: publication.content }}
               />
             </div>

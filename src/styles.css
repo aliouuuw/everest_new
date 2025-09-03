@@ -779,3 +779,208 @@ html {
   will-change: transform;
   transition: transform 0.1s ease-out;
 }
+
+/* Publication Content Styling - Matches EnhancedRichTextEditor */
+.publication-content {
+  /* Reset and base styles */
+  line-height: 1.6;
+  color: var(--night);
+}
+
+.publication-content h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem 0;
+  color: var(--night);
+  font-family: var(--font-display);
+}
+
+.publication-content h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.25rem 0 0.75rem 0;
+  color: var(--night-80);
+  font-family: var(--font-display);
+}
+
+.publication-content h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--night-80);
+  font-family: var(--font-display);
+}
+
+.publication-content h4,
+.publication-content h5,
+.publication-content h6 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0.75rem 0 0.5rem 0;
+  color: var(--night-80);
+  font-family: var(--font-display);
+}
+
+.publication-content p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  font-family: var(--font-primary);
+}
+
+.publication-content ul {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+  font-family: var(--font-primary);
+  list-style-type: disc;
+}
+
+.publication-content ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+  font-family: var(--font-primary);
+  list-style-type: decimal;
+}
+
+.publication-content ul ul {
+  list-style-type: circle;
+}
+
+.publication-content ul ul ul {
+  list-style-type: square;
+}
+
+.publication-content li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+  display: list-item;
+}
+
+.publication-content li p {
+  margin: 0;
+}
+
+.publication-content blockquote {
+  border-left: 4px solid var(--gold-metallic);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--night-80);
+  background-color: var(--gold-metallic-10);
+  padding: 1rem;
+  border-radius: 0.375rem;
+  font-family: var(--font-primary);
+}
+
+.publication-content a {
+  color: var(--gold-metallic);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.publication-content a:hover {
+  color: var(--gold-dark);
+}
+
+.publication-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  display: block;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.publication-content code {
+  background-color: var(--white-smoke);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--night);
+  border: 1px solid var(--timberwolf);
+}
+
+.publication-content pre {
+  background-color: var(--night);
+  color: var(--pure-white);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--night-20);
+}
+
+.publication-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+  border: none;
+}
+
+.publication-content table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+  border: 1px solid var(--timberwolf);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.publication-content th,
+.publication-content td {
+  border: 1px solid var(--timberwolf);
+  padding: 0.75rem;
+  text-align: left;
+  font-family: var(--font-primary);
+}
+
+.publication-content th {
+  background-color: var(--white-smoke);
+  font-weight: 600;
+  color: var(--night);
+}
+
+.publication-content td {
+  background-color: var(--pure-white);
+}
+
+.publication-content strong {
+  font-weight: 600;
+  color: var(--night);
+}
+
+.publication-content em {
+  font-style: italic;
+}
+
+.publication-content u {
+  text-decoration: underline;
+}
+
+.publication-content s {
+  text-decoration: line-through;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .publication-content h1 {
+    font-size: 1.75rem;
+  }
+  
+  .publication-content h2 {
+    font-size: 1.375rem;
+  }
+  
+  .publication-content h3 {
+    font-size: 1.125rem;
+  }
+  
+  .publication-content table {
+    font-size: 0.875rem;
+  }
+  
+  .publication-content th,
+  .publication-content td {
+    padding: 0.5rem;
+  }
+}
