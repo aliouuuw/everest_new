@@ -1,19 +1,19 @@
 import { v } from "convex/values";
+import { getAuthUserId } from "@convex-dev/auth/server";
 import { mutation, query } from "./_generated/server";
 
 // Helper function to require editor permissions
 const requireEditor = async (ctx: any) => {
-  const identity = await ctx.auth.getUserIdentity();
-  if (!identity) {
+  const userId = await getAuthUserId(ctx);
+  if (!userId) {
     throw new Error("Unauthorized");
   }
   
-  const user = await ctx.db
-    .query("users")
-    .filter((q: any) => q.eq(q.field("email"), identity.email))
-    .first();
+  // Get the user from the database
+  const user = await ctx.db.get(userId);
     
   if (!user || (user.role !== "admin" && user.role !== "editor")) {
+    console.log("user", user);
     throw new Error("Insufficient permissions");
   }
   

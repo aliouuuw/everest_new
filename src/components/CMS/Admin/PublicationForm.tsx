@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { FaPlus, FaSave, FaTimes } from 'react-icons/fa';
-import { ErrorMessage, LoadingSpinner, RichTextEditor } from '@/components/CMS/Shared';
+import { ErrorMessage, LoadingSpinner } from '@/components/CMS/Shared';
+import EnhancedRichTextEditor from '@/components/CMS/Shared/EnhancedRichTextEditor';
 import { useCreatePublication, usePublication, useUpdatePublication } from '@/hooks/useCMS';
 import { useCurrentUser } from '@/hooks/useAuth';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
+import { uploadPublicationImage } from '@/utils/uploadthing';
 
 type PublicationCategory = 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses';
 type PublicationStatus = 'draft' | 'published' | 'archived';
@@ -95,6 +97,16 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
       content,
       excerpt: prev.excerpt || content.replace(/<[^>]*>/g, '').substring(0, 200) + '...'
     }));
+  };
+
+  const handleImageUpload = async (file: File): Promise<string> => {
+    try {
+      const result = await uploadPublicationImage(file);
+      return result.url;
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      throw new Error('Failed to upload image. Please try again.');
+    }
   };
 
   const addTag = () => {
@@ -358,9 +370,10 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Content *
             </label>
-            <RichTextEditor
+            <EnhancedRichTextEditor
               value={formData.content}
               onChange={handleContentChange}
+              onImageUpload={handleImageUpload}
               placeholder="Write your publication content here..."
             />
             {errors.content && (

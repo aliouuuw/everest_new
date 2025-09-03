@@ -4,6 +4,8 @@ import { FaEye, FaEyeSlash, FaSave, FaTimes } from 'react-icons/fa';
 import { useMutation, useQuery } from 'convex/react';
 import { useAuth } from '../../components/Auth/useAuth';
 import { api } from '../../../convex/_generated/api';
+import EnhancedRichTextEditor from '../../components/CMS/Shared/EnhancedRichTextEditor';
+import { uploadPublicationImage } from '../../utils/uploadthing';
 import type { Id } from '../../../convex/_generated/dataModel';
 
 interface PublicationFormData {
@@ -87,6 +89,17 @@ export const PublicationForm = () => {
   const [tagInput, setTagInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Image upload handler for the rich text editor
+  const handleImageUpload = async (file: File): Promise<string> => {
+    try {
+      const result = await uploadPublicationImage(file);
+      return result.url;
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      throw new Error('Failed to upload image. Please try again.');
+    }
+  };
 
   // Fetch publication data if editing
   const publication = useQuery(
@@ -282,15 +295,10 @@ export const PublicationForm = () => {
               <label htmlFor="content" className="block text-sm font-medium text-[var(--night)] mb-3">
                 Content *
               </label>
-              <textarea
-                id="content"
+              <EnhancedRichTextEditor
                 value={formData.content}
-                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                rows={15}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors font-mono text-sm ${
-                  errors.content ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
-                }`}
-                placeholder="Write your publication content here..."
+                onChange={(content: string) => setFormData(prev => ({ ...prev, content }))}
+                onImageUpload={handleImageUpload}
               />
               {errors.content && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.content}</p>}
               <p className="mt-2 text-sm text-[var(--night-80)]">
