@@ -31,3 +31,11 @@ export const useUpdatePublication = () => {
 export const useDeletePublication = () => {
   return useMutation(api.publications.deletePublication);
 };
+
+export const useAddAttachmentToPublication = () => {
+  return useMutation(api.publications.addAttachmentToPublication);
+};
+
+export const useRemoveAttachmentFromPublication = () => {
+  return useMutation(api.publications.removeAttachmentFromPublication);
+};

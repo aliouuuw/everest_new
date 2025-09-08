@@ -33,36 +33,58 @@ export const seedTestUsers = mutation({
     ];
 
     const results = [];
-    
+
     for (const userData of testUsers) {
-      // Check if user already exists
-      const existingUser = await ctx.db
-        .query("users")
-        .filter(q => q.eq(q.field("email"), userData.email))
-        .first();
+      try {
+        // Check if user already exists
+        const existingUser = await ctx.db
+          .query("users")
+          .filter(q => q.eq(q.field("email"), userData.email))
+          .first();
 
-      if (!existingUser) {
-        // Create user
-        await ctx.db.insert("users", {
+        if (!existingUser) {
+          // Create user record only (auth account will be created through signup flow)
+          const userId = await ctx.db.insert("users", {
+            email: userData.email,
+            name: userData.name,
+            role: userData.role,
+            createdAt: Date.now(),
+          });
+
+          console.log(`Created ${userData.role} user: ${userData.email}`);
+          results.push({
+            email: userData.email,
+            role: userData.role,
+            created: true,
+            userId: userId,
+            password: userData.password,
+            note: "User created. Use signup flow with these credentials to create auth account."
+          });
+        } else {
+          console.log(`User already exists: ${userData.email}`);
+          results.push({
+            email: userData.email,
+            role: userData.role,
+            created: false,
+            userId: existingUser._id,
+            note: "User already exists in database"
+          });
+        }
+      } catch (error) {
+        console.error(`Error creating user ${userData.email}:`, error);
+        results.push({
           email: userData.email,
-          name: userData.name,
           role: userData.role,
-          createdAt: Date.now(),
+          created: false,
+          error: error instanceof Error ? error.message : "Unknown error"
         });
-
-        // Note: In production, you would need to properly hash passwords
-        // This is just for testing purposes
-        console.log(`Created ${userData.role} user: ${userData.email}`);
-        results.push({ email: userData.email, role: userData.role, created: true });
-      } else {
-        console.log(`User already exists: ${userData.email}`);
-        results.push({ email: userData.email, role: userData.role, created: false });
       }
     }
 
     return {
-      message: "Seed users process completed",
-      results
+      message: "Seed users created. Use the signup flow with the provided credentials to create authentication accounts.",
+      results,
+      instructions: "To complete setup: 1) Go to /auth page, 2) Use signup form with the email/password combinations above, 3) The system will link the existing user record with the new auth account."
     };
   },
 });

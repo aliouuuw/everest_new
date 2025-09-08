@@ -20,7 +20,7 @@ import {
   FaUserShield
 } from "react-icons/fa"
 import { useAuth } from '../components/Auth/useAuth'
-import { ProtectedRoute } from '../components/Auth/ProtectedRoute'
+import { ProtectedRoute } from '@/components/Auth/ProtectedRoute'
 
 // Mock user data
 const MOCK_USER = {
@@ -86,7 +86,7 @@ const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: strin
 
 const DashboardPageContent = () => {
   const navigate = useNavigate()
-  const { user: authUser, isAuthenticated, signOut: authSignOut, isLoading: authLoading } = useAuth()
+  const { user: authUser, signOut: authSignOut, isLoading: authLoading } = useAuth()
   const [user] = useState(MOCK_USER)
   const [positions] = useState(MOCK_POSITIONS)
   const [transactions, _setTransactions] = useState(MOCK_TRANSACTIONS)
@@ -106,17 +106,7 @@ const DashboardPageContent = () => {
     return () => clearInterval(interval)
   }, [])
 
-  // Check authentication and role
-  useEffect(() => {
-    if (!authLoading) {
-      if (!isAuthenticated) {
-        navigate({ to: '/auth' })
-      } else if (authUser && (authUser.role === 'admin' || authUser.role === 'editor')) {
-        // Redirect admin/editor users to admin dashboard
-        navigate({ to: '/admin' })
-      }
-    }
-  }, [authLoading, isAuthenticated, authUser, navigate])
+  // Authentication is now handled by ProtectedRoute component
 
   const handleLogout = async () => {
     try {
@@ -591,7 +581,7 @@ const DashboardPageContent = () => {
 
 export const DashboardPage = () => {
   return (
-    <ProtectedRoute requiredRole="client">
+    <ProtectedRoute requiredRole="client"> 
       <DashboardPageContent />
     </ProtectedRoute>
   )

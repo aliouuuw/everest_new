@@ -293,7 +293,7 @@ export const ClientPortalPreview: React.FC = () => {
         </div>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/portal" className="btn-primary font-display">Accès Client</a>
+          <a href="/auth" className="btn-primary font-display">Accès Client</a>
           <a href="#contact" className="btn-secondary font-display">Demander une démo</a>
         </div>
       </div>

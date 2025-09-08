@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { FiLock, FiMail } from 'react-icons/fi'
-import { useNavigate } from '@tanstack/react-router'
 import { useAuth } from './useAuth'
 
 export function SigninForm() {
-  const navigate = useNavigate()
-  const { signIn, isTransitioning, user } = useAuth()
+  const { signIn, isTransitioning } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,43 +18,12 @@ export function SigninForm() {
     setError('')
 
     try {
-      const result = await signIn('password', {
+      await signIn('password', {
         email: formData.email,
         password: formData.password,
         rememberMe: formData.rememberMe,
         flow: 'signIn'
       })
-
-      if (result.success) {
-        // Wait a bit for user data to load
-        await new Promise(resolve => setTimeout(resolve, 300))
-        
-        // Navigate based on role
-        const currentUser: any = await new Promise(resolve => {
-          const checkUser = setInterval(() => {
-            if (user && user.role) {
-              clearInterval(checkUser)
-              resolve(user)
-            }
-          }, 100)
-          // Timeout after 3 seconds
-          setTimeout(() => {
-            clearInterval(checkUser)
-            resolve(user)
-          }, 3000)
-        })
-
-        if (currentUser && currentUser.role) {
-          if (currentUser.role === 'admin' || currentUser.role === 'editor') {
-            navigate({ to: '/admin', replace: true })
-          } else {
-            navigate({ to: '/dashboard', replace: true })
-          }
-        } else {
-          // Fallback navigation
-          navigate({ to: '/admin', replace: true })
-        }
-      }
     } catch (err) {
       setError('Email ou mot de passe incorrect')
       console.error('Signin error:', err)

@@ -22,6 +22,16 @@ export const uploadPublicationImage = async (file: File): Promise<{ url: string;
   }
 };
 
+export const uploadPublicationAttachment = async (file: File): Promise<{ url: string; fileId: string }> => {
+  try {
+    const [res] = await uploadFiles("mediaFile", { files: [file] });
+    return { url: res.url, fileId: res.key };
+  } catch (error) {
+    console.error("Publication attachment upload failed:", error);
+    throw error;
+  }
+};
+
 export const uploadMediaFile = async (file: File): Promise<{ url: string; fileId: string }> => {
   try {
     const [res] = await uploadFiles("mediaFile", { files: [file] });

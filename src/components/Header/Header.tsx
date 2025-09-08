@@ -140,10 +140,10 @@ export const Header: React.FC = () => {
   const isOnDashboard = location.pathname === '/dashboard';
   
   // Check if user is in admin portal
-  const isInAdminPortal = location.pathname.startsWith('/admin');
+  const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   // Hide header if authenticated and on dashboard, or if in admin portal
-  const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminPortal;
+  const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
@@ -225,7 +225,7 @@ export const Header: React.FC = () => {
         {/* Connexion Button */}
         <div className="hidden lg:block">
           <Link
-            to="/portal"
+            to="/auth"
             className="btn-primary inline-flex items-center gap-2.5 font-display tracking-wide"
           >
             <FingerprintIcon className="w-4 h-4 text-white transition-transform duration-300 hover:scale-110" />
@@ -330,7 +330,7 @@ export const Header: React.FC = () => {
             {/* Connexion Button */}
             <div className="pt-4 border-t border-black/10">
               <Link
-                to="/portal"
+                to="/auth"
                 className="btn-primary inline-flex items-center justify-center gap-2.5 w-full font-display tracking-wide"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

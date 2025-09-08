@@ -32,6 +32,7 @@ export default defineSchema({
     // Relationships
     authorId: v.id("users"),
     mediaIds: v.array(v.id("media")), // Linked media files
+    attachmentIds: v.array(v.id("media")), // Downloadable attachments
 
     // Metadata
     tags: v.array(v.string()),

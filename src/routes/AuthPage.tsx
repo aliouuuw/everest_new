@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { FiStar, FiTrendingUp, FiZap } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
 import { SigninForm } from '../components/Auth/SigninForm'
-import { SignupForm } from '../components/Auth/SignupForm'
 
 export const AuthPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const formSectionRef = useReveal<HTMLElement>()
   const benefitsSectionRef = useReveal<HTMLElement>()
   const benefitsGridRef = useReveal<HTMLDivElement>()
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin')
+  // const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin')
 
   return (
     <div>
@@ -18,13 +16,14 @@ export const AuthPage = () => {
         <div className="mx-auto max-w-6xl px-6 text-center">
           <span className="kicker text-gradient-gold">Accès Client</span>
           <h1 className="luxury-heading mt-3">
-            {authMode === 'signin' ? 'Connectez-vous à votre espace' : 'Créez votre compte en toute sécurité'}
+            {/* {authMode === 'signin' ? 'Connectez-vous à votre espace' : 'Créez votre compte en toute sécurité'} */}
+            Connectez-vous à votre espace
           </h1>
           <p className="luxury-subheading mt-5 pt-5">
-            {authMode === 'signin' 
+            {/* {authMode === 'signin' 
               ? 'Un accès simple et sécurisé à votre portefeuille et vos documents.' 
-              : 'Rejoignez notre plateforme de gestion financière sécurisée.'
-            }
+              : 'Rejoignez notre plateforme de gestion financière sécurisée.' */}
+            Un accès simple et sécurisé à votre portefeuille et vos documents.
           </p>
         </div>
       </section>
@@ -33,7 +32,7 @@ export const AuthPage = () => {
       <section id="auth" ref={formSectionRef} className="reveal pb-14 sm:pb-18">
         <div className="mx-auto max-w-2xl px-6">
           {/* Mode switcher */}
-          <div className="flex justify-center mb-8">
+          {/* <div className="flex justify-center mb-8">
             <div className="inline-flex rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-1">
               <button
                 onClick={() => setAuthMode('signin')}
@@ -56,10 +55,10 @@ export const AuthPage = () => {
                 S'inscrire
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Auth form */}
-          {authMode === 'signin' ? <SigninForm /> : <SignupForm />}
+          <SigninForm />
         </div>
       </section>
 

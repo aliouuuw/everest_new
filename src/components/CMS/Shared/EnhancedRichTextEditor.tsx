@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -42,6 +42,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
   readOnly = false
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -92,9 +93,8 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
     editable: !readOnly
   });
 
-  const handleImageUpload = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && onImageUpload) {
+  const handleImageUpload = useCallback(async (file: File) => {
+    if (onImageUpload) {
       try {
         const imageUrl = await onImageUpload(file);
         editor.chain().focus().setImage({ src: imageUrl }).run();
@@ -103,11 +103,40 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         // You could add a toast notification here
       }
     }
+  }, [onImageUpload, editor]);
+
+  const handleFileInputChange = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      await handleImageUpload(file);
+    }
     // Reset the input
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-  }, [onImageUpload, editor]);
+  }, [handleImageUpload]);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  }, []);
+
+  const handleDrop = useCallback(async (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    
+    for (const file of imageFiles) {
+      await handleImageUpload(file);
+    }
+  }, [handleImageUpload]);
 
   const insertTable = useCallback(() => {
     editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
@@ -328,7 +357,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         type="file"
         accept="image/*"
         className="hidden"
-        onChange={handleImageUpload}
+        onChange={handleFileInputChange}
       />
 
       <div className="w-px h-6 bg-gray-300" />
@@ -413,7 +442,21 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
   return (
     <div className={`border border-gray-300 rounded-lg overflow-hidden ${className}`}>
       {!readOnly && <Toolbar />}
-      <EditorContent editor={editor} />
+      <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        className={`relative ${isDragOver ? 'bg-blue-50 border-2 border-dashed border-blue-300' : ''}`}
+      >
+        <EditorContent editor={editor} />
+        {isDragOver && (
+          <div className="absolute inset-0 flex items-center justify-center bg-blue-50 bg-opacity-90 pointer-events-none">
+            <div className="text-blue-600 text-lg font-medium">
+              Drop image here to insert
+            </div>
+          </div>
+        )}
+      </div>
       
       {/* Enhanced styling for the editor content */}
       <style>{`

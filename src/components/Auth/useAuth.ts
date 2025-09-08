@@ -62,28 +62,37 @@ export const useAuth = () => {
 
     const currentPath = window.location.pathname;
     
-    // If user is on auth page and is authenticated, redirect based on role
-    if (currentPath === '/auth') {
+    // Only redirect if user is on auth page or root
+    if (currentPath === '/auth' || currentPath === '/') {
       try {
-        if (user.role === 'admin' || user.role === 'editor') {
-          navigate({ to: '/admin', replace: true });
-        } else {
-          navigate({ to: '/dashboard', replace: true });
-        }
+        // Add a small delay to ensure user data is fully loaded
+        setTimeout(() => {
+          if (user.role === 'admin' || user.role === 'editor') {
+            navigate({ to: '/admin', replace: true });
+          } else if (user.role === 'client') {
+            navigate({ to: '/dashboard', replace: true });
+          } else {
+            // For any other role or if role is undefined, redirect to home
+            console.log('User role undefined or unknown, redirecting to home');
+            navigate({ to: '/', replace: true });
+          }
+        }, 200);
       } catch (error) {
         console.warn('Navigation error during role-based redirect:', error);
-        // Fallback: try navigation after a short delay
+        // Fallback: try direct navigation
         setTimeout(() => {
           try {
             if (user.role === 'admin' || user.role === 'editor') {
               window.location.href = '/admin';
-            } else {
+            } else if (user.role === 'client') {
               window.location.href = '/dashboard';
+            } else {
+              window.location.href = '/';
             }
           } catch (fallbackError) {
             console.error('Fallback navigation also failed:', fallbackError);
           }
-        }, 100);
+        }, 300);
       }
     }
   }, [isAuthenticated, user, navigate, isTransitioning]);

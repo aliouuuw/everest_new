@@ -38,13 +38,6 @@ const MediaLibrary: React.FC = () => {
     }
   };
 
-  const getFileTypeFromMime = (mimeType: string): string => {
-    if (mimeType.startsWith('image/')) return 'image';
-    if (mimeType.startsWith('video/')) return 'video';
-    if (mimeType.includes('pdf')) return 'document';
-    if (mimeType.includes('word') || mimeType.includes('document')) return 'document';
-    return 'file';
-  };
 
   const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return '0 Bytes';

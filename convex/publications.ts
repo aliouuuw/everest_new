@@ -72,12 +72,21 @@ export const getPublicationById = query({
       .filter(q => q.eq(q.field("publicationId"), publication._id))
       .collect();
 
+    // Get associated attachments
+    const attachments = await Promise.all(
+      publication.attachmentIds.map(async (id) => {
+        const media = await ctx.db.get(id);
+        return media;
+      })
+    ).then(media => media.filter(Boolean));
+
     // Get author info
     const author = await ctx.db.get(publication.authorId);
 
     return {
       ...publication,
       media,
+      attachments,
       author: author ? { name: author.name, avatar: author.avatar } : null,
     };
   },
@@ -102,12 +111,23 @@ export const getPublicationBySlug = query({
       .filter(q => q.eq(q.field("publicationId"), publication._id))
       .collect();
 
+    // Get associated attachments
+    const attachments = publication.attachmentIds.length > 0
+      ? await Promise.all(
+          publication.attachmentIds.map(async (id) => {
+            const media = await ctx.db.get(id);
+            return media;
+          })
+        ).then(media => media.filter(Boolean))
+      : [];
+
     // Get author info
     const author = await ctx.db.get(publication.authorId);
 
     return {
       ...publication,
       media,
+      attachments,
       author: author ? { name: author.name, avatar: author.avatar } : null,
     };
   },
@@ -160,6 +180,7 @@ export const createPublication = mutation({
     seoTitle: v.optional(v.string()),
     seoDescription: v.optional(v.string()),
     authorId: v.id("users"),
+    attachmentIds: v.optional(v.array(v.id("media"))),
   },
   handler: async (ctx, args) => {
     await requireEditor(ctx);
@@ -179,6 +200,7 @@ export const createPublication = mutation({
       status: args.status || "draft", // Use provided status or default to draft
       featured: args.featured ?? false, // Default to false if not provided
       mediaIds: [],
+      attachmentIds: args.attachmentIds || [],
       readingTime: Math.ceil(args.content.split(' ').length / 200), // Rough estimate
       createdAt: now,
       updatedAt: now,
@@ -200,6 +222,7 @@ export const updatePublication = mutation({
     status: v.optional(v.union(v.literal("draft"), v.literal("published"), v.literal("archived"))),
     seoTitle: v.optional(v.string()),
     seoDescription: v.optional(v.string()),
+    attachmentIds: v.optional(v.array(v.id("media"))),
   },
   handler: async (ctx, args) => {
     await requireEditor(ctx);
@@ -259,7 +282,79 @@ export const deletePublication = mutation({
       }
     }
 
+    // Remove attachment associations
+    if (publication.attachmentIds.length > 0) {
+      for (const attachmentId of publication.attachmentIds) {
+        await ctx.db.delete(attachmentId);
+      }
+    }
+
     await ctx.db.delete(args.id);
     return args.id;
+  },
+});
+
+// Add attachment to publication
+export const addAttachmentToPublication = mutation({
+  args: {
+    publicationId: v.id("publications"),
+    uploadthingKey: v.string(),
+    uploadthingUrl: v.string(),
+    fileName: v.string(),
+    fileType: v.string(),
+    fileSize: v.number(),
+    uploadedBy: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    await requireEditor(ctx);
+
+    const { publicationId, ...attachmentData } = args;
+
+    // Create media record for attachment
+    const attachmentId = await ctx.db.insert("media", {
+      ...attachmentData,
+      publicationId,
+      order: 0,
+      tags: [],
+      createdAt: Date.now(),
+    });
+
+    // Add attachment to publication
+    const publication = await ctx.db.get(publicationId);
+    if (publication) {
+      await ctx.db.patch(publicationId, {
+        attachmentIds: [...publication.attachmentIds, attachmentId],
+        updatedAt: Date.now(),
+      });
+    }
+
+    return attachmentId;
+  },
+});
+
+// Remove attachment from publication
+export const removeAttachmentFromPublication = mutation({
+  args: {
+    publicationId: v.id("publications"),
+    attachmentId: v.id("media"),
+  },
+  handler: async (ctx, args) => {
+    await requireEditor(ctx);
+
+    const { publicationId, attachmentId } = args;
+
+    // Remove attachment from publication
+    const publication = await ctx.db.get(publicationId);
+    if (publication) {
+      await ctx.db.patch(publicationId, {
+        attachmentIds: publication.attachmentIds.filter(id => id !== attachmentId),
+        updatedAt: Date.now(),
+      });
+    }
+
+    // Delete the attachment media record
+    await ctx.db.delete(attachmentId);
+
+    return attachmentId;
   },
 });

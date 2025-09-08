@@ -28,12 +28,7 @@ export const BRVMTicker: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   // Check if user is in admin portal
-  const isInAdminPortal = location.pathname.startsWith('/admin');
-  
-  // Hide ticker if in admin portal
-  if (isInAdminPortal) {
-    return null;
-  }
+  const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   useEffect(() => {
     // Show ticker after scrolling down from hero
@@ -72,6 +67,11 @@ export const BRVMTicker: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Hide ticker if in admin portal
+  if (isInAdminorClientPortal) {
+    return null;
+  }
 
   const handlePause = () => setIsPaused(true);
   const handleResume = () => setIsPaused(false);

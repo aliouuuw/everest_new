@@ -63,9 +63,36 @@ export function ProtectedRoute({
         </div>
       </div>
     )
+  } else if (user === null) {
+    // User is authenticated but user data couldn't be found - this is an error state
+    content = (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-6xl mb-4">❌</div>
+          <h1 className="text-2xl font-bold text-[var(--night)] mb-2">Erreur de chargement</h1>
+          <p className="text-[var(--night-80)]/80 mb-6">
+            Impossible de charger vos données utilisateur.
+            <br />
+            Veuillez vous reconnecter.
+          </p>
+          <button
+            onClick={() => navigate({ to: '/auth' })}
+            className="w-full px-4 py-2 bg-[var(--gold-metallic)] text-[var(--night)] rounded-lg hover:bg-[var(--gold-metallic-80)] transition-colors"
+          >
+            Se reconnecter
+          </button>
+        </div>
+      </div>
+    )
   } else {
-    // Check if user has required role
-    const hasRequiredRole = requiredRole ? user?.role === requiredRole : true
+    // User data is loaded, now check role
+    console.log('ProtectedRoute Debug:', { 
+      requiredRole, 
+      userRole: user.role, 
+      userEmail: user.email,
+      hasRequiredRole: requiredRole ? (user.role || 'client') === requiredRole : true 
+    })
+    const hasRequiredRole = requiredRole ? (user.role || 'client') === requiredRole : true
 
     if (requiredRole && !hasRequiredRole) {
       // Show access denied if role is required but user doesn't have it
@@ -77,7 +104,7 @@ export function ProtectedRoute({
             <p className="text-[var(--night-80)]/80 mb-6">
               Vous n'avez pas les permissions nécessaires pour accéder à cette page.
               <br />
-              <span className="text-sm">Rôle requis: {requiredRole} | Votre rôle: {user?.role || 'non défini'}</span>
+              <span className="text-sm">Rôle requis: {requiredRole} | Votre rôle: {user.role || 'non défini'}</span>
             </p>
             <div className="space-y-3">
               <button
