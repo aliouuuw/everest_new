@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useNavigate } from '@tanstack/react-router';
-import { FaBars, FaCog, FaImages, FaNewspaper, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { Outlet, useNavigate } from '@tanstack/react-router';
+import { FaBars, FaCog, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 import { useAuth } from '../../components/Auth/useAuth';
 
 const AdminLayout: React.FC = () => {
@@ -8,6 +8,15 @@ const AdminLayout: React.FC = () => {
   const navigate = useNavigate();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [activeView, setActiveView] = useState('dashboard');
+
+  const navigationItems = [
+    { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: activeView === 'dashboard' },
+    { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: activeView === 'publications' },
+    { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: activeView === 'media' },
+    { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: activeView === 'users' },
+    { icon: <FaCog />, label: "Settings", id: 'settings', href: '/admin/settings', active: activeView === 'settings' },
+  ];
 
   const handleLogout = async () => {
     setIsSigningOut(true);
@@ -33,109 +42,75 @@ const AdminLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] text-[var(--night)]">
-      {/* Admin Header */}
-      <header className="glassmorphism sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={toggleSidebar}
-                className="p-2 rounded-lg hover:bg-[var(--gold-metallic-10)] transition-colors duration-200"
-                aria-label="Toggle sidebar"
-              >
-                <FaBars className="text-lg text-[var(--night-80)]" />
-              </button>
-              <h1 className="text-2xl font-display font-semibold text-[var(--night)]">CMS Admin</h1>
-            </div>
-            <nav className="flex space-x-4">
-              <Link
-                to="/"
-                className="btn-secondary font-display tracking-wide"
-              >
-                ← Back to Site
-              </Link>
-              <button
-                onClick={handleLogout}
-                disabled={isSigningOut || isTransitioning}
-                className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <FaSignOutAlt className="mr-2" />
-                {isSigningOut || isTransitioning ? 'Signing Out...' : 'Sign Out'}
-              </button>
-            </nav>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)] text-[var(--night)]">
+      {/* App Chrome Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--night)]/10 bg-white/80 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={toggleSidebar}
+            className="lg:hidden p-2 hover:bg-[var(--night)]/5 rounded-lg transition-colors"
+            aria-label="Toggle sidebar"
+          >
+            <FaBars className="text-lg text-[var(--night-80)]" />
+          </button>
+          <img src="/logo-everest.png" alt="Everest" className="h-6" />
+          <div className="text-sm font-display">CMS Admin</div>
         </div>
-      </header>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <nav className={`min-h-screen p-6 transition-all duration-300 ease-in-out ${
-          isSidebarCollapsed ? 'w-0 overflow-hidden' : 'w-64'
-        }`}>
-          <div className={`stat-card h-full transition-opacity duration-200 ${
-            isSidebarCollapsed ? 'opacity-0' : 'opacity-100'
-          }`}>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  to="/admin"
-                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-300 font-medium"
-                  activeProps={{ className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] font-semibold' }}
-                  activeOptions={{ exact: true }}
-                >
-                  <FaTachometerAlt className="mr-3 text-lg" />
-                  Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/admin/publications"
-                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-300 font-medium"
-                  activeProps={{ className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] font-semibold' }}
-                >
-                  <FaNewspaper className="mr-3 text-lg" />
-                  Publications
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/admin/media"
-                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-300 font-medium"
-                  activeProps={{ className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] font-semibold' }}
-                >
-                  <FaImages className="mr-3 text-lg" />
-                  Media
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/admin/users"
-                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-300 font-medium"
-                  activeProps={{ className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] font-semibold' }}
-                >
-                  <FaUsers className="mr-3 text-lg" />
-                  Users
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/admin/settings"
-                  className="flex items-center px-4 py-3 text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)] rounded-xl transition-all duration-300 font-medium"
-                  activeProps={{ className: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] font-semibold' }}
-                >
-                  <FaCog className="mr-3 text-lg" />
-                  Settings
-                </Link>
-              </li>
-            </ul>
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
+            <FaSearch className="text-secondary" />
+            <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
           </div>
-        </nav>
+          <div className="text-xs text-secondary">Administrateur</div>
+          <button
+            onClick={handleLogout}
+            disabled={isSigningOut || isTransitioning}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-secondary hover:text-[var(--night)] hover:bg-[var(--night)]/5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <FaSignOutAlt />
+            Déconnexion
+          </button>
+        </div>
+      </div>
+
+
+      <div className="grid grid-cols-12 min-h-[calc(100vh-73px)]">
+        {/* Sidebar */}
+        <aside className={`col-span-12 lg:col-span-2 xl:col-span-2 border-r border-[var(--night)]/10 bg-white/50 p-4 ${
+          isSidebarCollapsed ? 'hidden lg:block' : ''
+        }`}>
+            <nav className="space-y-1">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveView(item.id);
+                    navigate({ to: item.href });
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+                    item.active
+                      ? 'bg-[var(--night)] text-[var(--pure-white)]'
+                      : 'hover:bg-[var(--white-smoke)] text-secondary hover:text-[var(--night)]'
+                  }`}
+                >
+                  <span className="opacity-80">{item.icon}</span>
+                  <span className="text-sm">{item.label}</span>
+                </button>
+              ))}
+            </nav>
+
+          {/* System Status Card */}
+          <div className="mt-8 p-4 rounded-lg bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20">
+            <div className="text-xs text-secondary mb-1">System Status</div>
+            <div className="font-display text-sm text-[var(--night)]">Online</div>
+            <div className="text-xs text-secondary mt-1">All systems operational</div>
+          </div>
+        </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <div className="col-span-12 lg:col-span-10 p-4 sm:p-6 lg:p-8">
           <Outlet />
-        </main>
+        </div>
       </div>
     </div>
   );
