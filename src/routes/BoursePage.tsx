@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FiBarChart, FiEye, FiRefreshCw, FiStar, FiTrendingUp } from 'react-icons/fi'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 import { useReveal } from '../components/Hooks/useReveal'
+import { LoadingSpinner } from '@/components/CMS/Shared'
 
 // Types for better type safety
 interface CryptoAsset {
@@ -356,11 +357,6 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
   )
 }
 
-const LoadingSpinner: React.FC = () => (
-  <div className="flex items-center justify-center py-8">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)]"></div>
-  </div>
-)
 
 export const BoursePage: React.FC = () => {
   const [cryptoAssets, setCryptoAssets] = useState<Array<CryptoAsset>>(MOCK_CRYPTO_ASSETS)
