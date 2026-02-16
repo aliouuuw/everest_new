@@ -168,12 +168,12 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
   ];
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--pure-white)]">
+    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--night)] transition-colors duration-500">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">Outil de simulation</span>
-          <h2 className="luxury-heading mt-3">Calculez vos projections</h2>
-          <p className="luxury-subheading mt-5 pt-8">
+          <h2 className="luxury-heading-dark mt-3">Calculez vos projections</h2>
+          <p className="luxury-subheading-dark mt-5 pt-8">
             Estimez le potentiel de vos investissements avec nos différents services de gestion
           </p>
         </div>
@@ -181,13 +181,13 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         {/* Tab Navigation */}
         {!calculatorOnly && (
           <div className="flex justify-center mb-8">
-            <div className="bg-[var(--white-smoke)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-xl p-1">
+            <div className="bg-[var(--night-20)] backdrop-blur-sm border border-[var(--gold-metallic-20)] rounded-xl p-1">
               <button
                 onClick={() => setActiveTab('calculator')}
                 className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
                   activeTab === 'calculator'
-                    ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
-                    : 'text-secondary hover:text-[var(--gold-dark)]'
+                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
+                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
                 }`}
               >
                 Calculateur
@@ -196,8 +196,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 onClick={() => setActiveTab('comparison')}
                 className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
                   activeTab === 'comparison'
-                    ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
-                    : 'text-secondary hover:text-[var(--gold-dark)]'
+                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
+                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
                 }`}
               >
                 Comparaison
@@ -210,17 +210,17 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Calculator Inputs */}
             <div className="space-y-6">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80 backdrop-blur-sm p-6">
+              <div className="glass-card-dark p-6">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
                 <div className="flex items-center gap-3 mb-6">
-                  <FaCalculator className="text-xl text-[var(--gold-dark)]" />
-                  <h3 className="font-display text-lg">Paramètres d'investissement</h3>
+                  <FaCalculator className="text-xl text-[var(--gold-light)]" />
+                  <h3 className="font-display text-lg text-[var(--pure-white)]">Paramètres d'investissement</h3>
                 </div>
 
                 {/* Service Selection */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-secondary mb-3">
+                  <label className="block text-sm font-medium text-secondary-dark mb-3">
                     Service de gestion
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -230,12 +230,12 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                         onClick={() => handleInputChange('service', service.service)}
                         className={`p-3 rounded-xl border-2 text-left transition-all ${
                           inputs.service === service.service
-                            ? 'border-[var(--gold-metallic)] bg-[var(--gold-light)]/10'
-                            : 'border-[var(--gold-metallic)]/25 hover:border-[var(--gold-metallic)]/50'
+                            ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
+                            : 'border-[var(--gold-metallic-20)] hover:border-[var(--gold-metallic)]/50'
                         }`}
                       >
-                        <div className="font-display text-sm mb-1">{service.title}</div>
-                        <div className="text-xs text-secondary">{service.fee} frais/an</div>
+                        <div className="font-display text-sm mb-1 text-[var(--pure-white)]">{service.title}</div>
+                        <div className="text-xs text-secondary-dark">{service.fee} frais/an</div>
                       </button>
                     ))}
                   </div>
@@ -244,35 +244,35 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 {/* Input Fields */}
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-secondary mb-2">
+                    <label className="block text-sm font-medium text-secondary-dark mb-2">
                       Investissement initial (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.initialAmount}
                       onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic)]/25 rounded-lg focus:border-[var(--gold-metallic)] focus:outline-none"
+                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
                       min="100000"
                       step="50000"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary mb-2">
+                    <label className="block text-sm font-medium text-secondary-dark mb-2">
                       Versement mensuel (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.monthlyContribution}
                       onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic)]/25 rounded-lg focus:border-[var(--gold-metallic)] focus:outline-none"
+                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
                       min="0"
                       step="5000"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary mb-2">
+                    <label className="block text-sm font-medium text-secondary-dark mb-2">
                       Horizon d'investissement (années)
                     </label>
                     <input
@@ -283,7 +283,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
                       className="w-full accent-[var(--gold-metallic)]"
                     />
-                    <div className="flex justify-between text-xs text-secondary mt-1">
+                    <div className="flex justify-between text-xs text-secondary-dark mt-1">
                       <span>1 an</span>
                       <span className="font-medium">{inputs.timeHorizon} ans</span>
                       <span>20 ans</span>
@@ -291,7 +291,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary mb-2">
+                    <label className="block text-sm font-medium text-secondary-dark mb-2">
                       Rendement annuel attendu
                     </label>
                     <div className="grid grid-cols-3 gap-2">
@@ -301,8 +301,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                           onClick={() => handleInputChange('expectedReturn', value)}
                           className={`px-3 py-2 rounded-lg border text-sm transition-all ${
                             inputs.expectedReturn === value
-                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-light)]/10 text-[var(--gold-dark)]'
-                              : 'border-[var(--gold-metallic)]/25 hover:border-[var(--gold-metallic)]/50'
+                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10 text-[var(--gold-light)]'
+                              : 'border-[var(--gold-metallic-20)] text-secondary-dark hover:border-[var(--gold-metallic)]/50'
                           }`}
                         >
                           {key === 'conservative' && 'Conservateur'}
@@ -320,45 +320,45 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
 
             {/* Results */}
             <div className="space-y-6">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80 backdrop-blur-sm p-6">
+              <div className="glass-card-dark p-6">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
                 <div className="flex items-center gap-3 mb-6">
-                  <FiTrendingUp className="text-xl text-[var(--gold-dark)]" />
-                  <h3 className="font-display text-lg">Projections estimées</h3>
+                  <FiTrendingUp className="text-xl text-[var(--gold-light)]" />
+                  <h3 className="font-display text-lg text-[var(--pure-white)]">Projections estimées</h3>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic)]/25">
-                    <span className="text-secondary">Total investi</span>
-                    <span className="font-display text-lg">{totalInvestedCounter.value}</span>
+                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
+                    <span className="text-secondary-dark">Total investi</span>
+                    <span className="font-display text-lg text-[var(--pure-white)]">{totalInvestedCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic)]/25">
-                    <span className="text-secondary">Frais estimés ({serviceFees[inputs.service].min}%)</span>
-                    <span className="font-display text-lg text-red-600">-{totalFeesCounter.value}</span>
+                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
+                    <span className="text-secondary-dark">Frais estimés ({serviceFees[inputs.service].min}%)</span>
+                    <span className="font-display text-lg text-red-400">-{totalFeesCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-3 border-b-2 border-[var(--gold-metallic)]/25">
-                    <span className="text-secondary">Valeur projetée</span>
-                    <span className="font-display text-xl text-green-600">{projectedValueCounter.value}</span>
+                  <div className="flex justify-between items-center py-3 border-b-2 border-[var(--gold-metallic-20)]">
+                    <span className="text-secondary-dark">Valeur projetée</span>
+                    <span className="font-display text-xl text-emerald-400">{projectedValueCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-secondary">Gain net estimé</span>
+                    <span className="text-secondary-dark">Gain net estimé</span>
                     <span className={`font-display text-lg ${
-                      results.netReturn >= 0 ? 'text-green-600' : 'text-red-600'
+                      results.netReturn >= 0 ? 'text-emerald-400' : 'text-red-400'
                     }`}>
                       {netReturnCounter.value}
                     </span>
                   </div>
 
-                  <div className="mt-6 p-4 bg-[var(--gold-light)]/20 rounded-lg">
+                  <div className="mt-6 p-4 bg-[var(--gold-metallic)]/10 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
-                      <FaChartLine className="text-[var(--gold-dark)]" />
-                      <span className="font-display text-sm">Rendement annuel moyen estimé</span>
+                      <FaChartLine className="text-[var(--gold-light)]" />
+                      <span className="font-display text-sm text-[var(--pure-white)]">Rendement annuel moyen estimé</span>
                     </div>
-                    <div className="text-2xl font-display text-[var(--gold-dark)]">
+                    <div className="text-2xl font-display text-[var(--gold-light)]">
                       {avgReturnCounter.value}
                     </div>
                   </div>
@@ -366,7 +366,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               </div>
 
               <div className="text-center">
-                <p className="text-xs text-secondary mb-4">
+                <p className="text-xs text-secondary-dark mb-4">
                   * Ces projections sont estimatives et ne constituent pas une garantie de performance.
                   Les marchés financiers comportent des risques.
                 </p>
@@ -387,21 +387,21 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 key={service.service}
                 className={`group relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
                   inputs.service === service.service
-                    ? 'border-[var(--gold-metallic)] bg-[var(--gold-light)]/10'
-                    : 'border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm'
+                    ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
+                    : 'border-[var(--gold-metallic-20)] bg-[var(--night-20)] backdrop-blur-sm'
                 }`}
               >
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
-                <div className="font-display text-lg mb-3">{service.title}</div>
+                <div className="font-display text-lg mb-3 text-[var(--pure-white)]">{service.title}</div>
 
-                <div className="text-2xl font-display text-[var(--gold-dark)] mb-4">
+                <div className="text-2xl font-display text-[var(--gold-light)] mb-4">
                   {service.fee}
                 </div>
 
                 <ul className="space-y-2 mb-6">
                   {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-secondary">
+                    <li key={index} className="flex items-center gap-2 text-sm text-secondary-dark">
                       <div className="w-1.5 h-1.5 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
                       {feature}
                     </li>
