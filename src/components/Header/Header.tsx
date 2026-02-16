@@ -152,7 +152,7 @@ export const Header: React.FC = () => {
     { label: 'Mot du DG', href: '/mot-dg' },
   ];
 
-  const offresItems: Array<DropdownItem> = [
+  const servicesItems: Array<DropdownItem> = [
     { label: 'Marché des capitaux', href: '/marche-capitaux' },
     { label: 'Ingénieurie financière', href: '/ingenieurie-financiere' },
     { label: 'Recherche et analyses', href: '/recherche-analyses' },
@@ -192,26 +192,19 @@ export const Header: React.FC = () => {
           />
           
           <Dropdown
-            name="offres"
-            title="Offres"
-            items={offresItems}
-            isOpen={openDropdown === 'offres'}
+            name="services"
+            title="Services"
+            items={servicesItems}
+            isOpen={openDropdown === 'services'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
-          
+
           <Link 
             to="/services" 
             className="transition-colors hover:text-[var(--gold-dark)]"
           >
-            Services
-          </Link>
-
-          <Link 
-            to="/simulateur" 
-            className="transition-colors hover:text-[var(--gold-dark)]"
-          >
-            Simulateur
+            Offres
           </Link>
 
           <Link 
@@ -283,11 +276,11 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Offres Section */}
+            {/* Services Section */}
             <div>
-              <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Offres</div>
+              <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Services</div>
               <div className="space-y-2 pl-3">
-                {offresItems.map((item, index) => (
+                {servicesItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.href}
@@ -300,22 +293,13 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Services Link */}
+            {/* Offres Link */}
             <Link 
               to="/services" 
               className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Services
-            </Link>
-
-            {/* Simulateur Link */}
-            <Link 
-              to="/simulateur" 
-              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Simulateur
+              Offres
             </Link>
 
             {/* Bourse Link */}

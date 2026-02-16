@@ -1,5 +1,6 @@
 import { HeroSection } from './components/Hero';
-import { CTA, ClientPortalPreview, Insights, MountainTransition, PerformanceDashboard, Services, ValueProps } from './components/Sections';
+import { CTA, ClientPortalPreview, Insights, MountainTransition, Services, ValueProps } from './components/Sections';
+import { InvestmentCalculator } from './components/Sections/InvestmentCalculator';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Services />
       <Insights />
       <MountainTransition />
-      <PerformanceDashboard />
+      <InvestmentCalculator calculatorOnly />
       <ClientPortalPreview />
       <CTA scheme="metallic" secondaryHref="/gestion-libre" secondaryLabel="Découvrir nos services" />
     </>

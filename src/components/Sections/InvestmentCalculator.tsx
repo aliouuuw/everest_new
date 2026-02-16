@@ -32,7 +32,11 @@ const expectedReturns = {
   aggressive: 0.12    // 12%
 };
 
-export const InvestmentCalculator: React.FC = () => {
+interface InvestmentCalculatorProps {
+  calculatorOnly?: boolean;
+}
+
+export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calculatorOnly = false }) => {
   const sectionRef = useReveal<HTMLElement>();
 
   const [inputs, setInputs] = useState<CalculatorInputs>({
@@ -175,32 +179,34 @@ export const InvestmentCalculator: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-[var(--white-smoke)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-xl p-1">
-            <button
-              onClick={() => setActiveTab('calculator')}
-              className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
-                activeTab === 'calculator'
-                  ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
-                  : 'text-secondary hover:text-[var(--gold-dark)]'
-              }`}
-            >
-              Calculateur
-            </button>
-            <button
-              onClick={() => setActiveTab('comparison')}
-              className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
-                activeTab === 'comparison'
-                  ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
-                  : 'text-secondary hover:text-[var(--gold-dark)]'
-              }`}
-            >
-              Comparaison
-            </button>
+        {!calculatorOnly && (
+          <div className="flex justify-center mb-8">
+            <div className="bg-[var(--white-smoke)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-xl p-1">
+              <button
+                onClick={() => setActiveTab('calculator')}
+                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
+                  activeTab === 'calculator'
+                    ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
+                    : 'text-secondary hover:text-[var(--gold-dark)]'
+                }`}
+              >
+                Calculateur
+              </button>
+              <button
+                onClick={() => setActiveTab('comparison')}
+                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
+                  activeTab === 'comparison'
+                    ? 'bg-[var(--gold-metallic)] text-white shadow-lg'
+                    : 'text-secondary hover:text-[var(--gold-dark)]'
+                }`}
+              >
+                Comparaison
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {activeTab === 'calculator' ? (
+        {(calculatorOnly || activeTab === 'calculator') ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Calculator Inputs */}
             <div className="space-y-6">

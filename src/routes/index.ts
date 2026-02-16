@@ -12,7 +12,7 @@ export { MandateMgmtPage } from './MandateMgmtPage'
 export { AssistedMgmtPage } from './AssistedMgmtPage'
 export { BoursePage } from './BoursePage'
 export { PortalPage } from './PortalPage'
-export { SimulateurPage } from './SimulateurPage'
+// SimulateurPage deprecated - calculator moved to landing page
 export { AuthPage } from './AuthPage'
 export { DashboardPage } from './DashboardPage'
 

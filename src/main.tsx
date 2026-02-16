@@ -28,7 +28,8 @@ import { ServicesPage } from './routes/ServicesPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
-import { SimulateurPage } from './routes/SimulateurPage'
+// SimulateurPage deprecated - calculator moved to landing page
+// import { SimulateurPage } from './routes/SimulateurPage'
 import ProtectedAdminLayout from './routes/admin/ProtectedAdminLayout.tsx'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
 import { PublicationsList } from './routes/admin/PublicationsList'
@@ -131,10 +132,14 @@ const bourseRoute = createRoute({
   component: BoursePage,
 })
 
+// Simulateur route deprecated - redirects to home
 const simulateurRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/simulateur',
-  component: SimulateurPage,
+  component: () => {
+    window.location.href = '/';
+    return null;
+  },
 })
 
 const portalRoute = createRoute({
