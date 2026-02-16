@@ -5,3 +5,4 @@ export { MountainTransition } from './MountainTransition';
 export { CTA } from './CTA';
 export { InvestmentCalculator } from './InvestmentCalculator';
 export { ClientPortalPreview } from './ClientPortalPreview';
+export { DepartmentPage } from './DepartmentPage';
