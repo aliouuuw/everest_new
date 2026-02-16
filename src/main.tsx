@@ -20,7 +20,8 @@ import { AboutPage } from './routes/AboutPage'
 import { PublicationsPage } from './routes/PublicationsPage'
 import { PublicationPage } from './routes/PublicationPage'
 import { FAQPage } from './routes/FAQPage'
-import { CEOMessagePage } from './routes/CEOMessagePage'
+// CEOMessagePage deprecated
+// import { CEOMessagePage } from './routes/CEOMessagePage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
 import { ResearchAnalyticsPage } from './routes/ResearchAnalyticsPage'
@@ -78,10 +79,14 @@ const faqRoute = createRoute({
   component: FAQPage,
 })
 
+// CEO Message route deprecated - redirects to home
 const ceoRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/mot-dg',
-  component: CEOMessagePage,
+  component: () => {
+    window.location.href = '/';
+    return null;
+  },
 })
 
 const capitalMarketsRoute = createRoute({

@@ -149,7 +149,6 @@ export const Header: React.FC = () => {
     { label: 'À propos', href: '/about' },
     { label: 'Publications', href: '/publications' },
     { label: 'Abécédaire / FAQ', href: '/faq' },
-    { label: 'Mot du DG', href: '/mot-dg' },
   ];
 
   const servicesItems: Array<DropdownItem> = [

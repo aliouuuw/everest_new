@@ -2,7 +2,7 @@ export { AboutPage } from './AboutPage'
 export { PublicationsPage } from './PublicationsPage'
 export { PublicationPage } from './PublicationPage'
 export { FAQPage } from './FAQPage'
-export { CEOMessagePage } from './CEOMessagePage'
+// CEOMessagePage deprecated
 export { CapitalMarketsPage } from './CapitalMarketsPage'
 export { InvestmentBankingPage } from './InvestmentBankingPage'
 export { ResearchAnalyticsPage } from './ResearchAnalyticsPage'
