@@ -115,10 +115,10 @@ export const getPublicationBySlug = query({
     const attachments = publication.attachmentIds.length > 0
       ? await Promise.all(
           publication.attachmentIds.map(async (id) => {
-            const media = await ctx.db.get(id);
-            return media;
+            const attachment = await ctx.db.get(id);
+            return attachment;
           })
-        ).then(media => media.filter(Boolean))
+        ).then(results => results.filter(Boolean))
       : [];
 
     // Get author info
@@ -298,11 +298,12 @@ export const deletePublication = mutation({
 export const addAttachmentToPublication = mutation({
   args: {
     publicationId: v.id("publications"),
-    uploadthingKey: v.string(),
-    uploadthingUrl: v.string(),
+    cloudflareId: v.string(),
+    cloudflareUrl: v.string(),
     fileName: v.string(),
     fileType: v.string(),
     fileSize: v.number(),
+    mimeType: v.string(),
     uploadedBy: v.id("users"),
   },
   handler: async (ctx, args) => {

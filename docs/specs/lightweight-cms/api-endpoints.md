@@ -19,7 +19,7 @@ This document outlines the API endpoints for the Everest Finance CMS system. The
 - **Backend**: ConvexDB (real-time database)
 - **API Layer**: ConvexDB functions with TypeScript
 - **Authentication**: Convex Auth with role-based access control
-- **File Storage**: Uploadthing (currently non-functional)
+- **File Storage**: Cloudflare R2 + Images API
 - **Real-time**: WebSocket connections via ConvexDB
 
 ### API Structure
@@ -30,9 +30,9 @@ convex/
 ├── media.ts           # ✅ Complete media metadata API
 ├── categories.ts      # ✅ Complete category management
 ├── auth.ts            # ✅ Authentication utilities
-├── uploadthing.ts     # ❌ Placeholder configuration only
+├── cloudflare.ts      # ✅ Cloudflare R2/Images integration
 └── api/
-    └── uploadthing.ts # ❌ Missing webhook handler
+    └── cloudflare.ts  # ✅ Cloudflare upload handlers
 ```
 
 ## 📊 API Endpoints Status
@@ -41,10 +41,10 @@ convex/
 |----------|-----------|--------|-----------------|
 | **Publications** | 6 endpoints | ✅ Complete | None |
 | **Users** | 7 endpoints | ✅ Complete | None |
-| **Media** | 6 endpoints | ✅ Complete | File uploads broken |
+| **Media** | 6 endpoints | ✅ Complete | None |
 | **Categories** | 6 endpoints | ✅ Complete | None |
 | **Authentication** | 4 endpoints | ✅ Complete | None |
-| **File Uploads** | 0 endpoints | ❌ Missing | **BLOCKING PRODUCTION** |
+| **File Uploads** | 4 endpoints | ✅ Complete | None |
 
 ## 📚 Publications API
 
@@ -582,54 +582,61 @@ export const isAuthenticated = auth.isAuthenticated;
 - ✅ Real-time updates
 - ✅ Protected route integration
 
-## 🚨 Critical Gap: File Upload API
+## ✅ File Upload API (Cloudflare Integration)
 
-### ❌ Missing Implementation
+### ✅ Complete Implementation
 
 #### Current State
-The file upload system is completely non-functional with only placeholder configurations:
+The file upload system is fully functional using Cloudflare R2 and Images API:
 
-1. **`convex/uploadthing.ts`** - Placeholder configuration only
-2. **`src/utils/uploadthing.ts`** - Placeholder utilities only
-3. **`convex/api/uploadthing.ts`** - Missing webhook handler
+1. **`convex/cloudflare.ts`** - Complete Cloudflare integration
+2. **`src/utils/cloudflare.ts`** - Upload utilities and helpers
+3. **`convex/api/cloudflare.ts`** - Upload handlers and processing
 
-#### Required Endpoints
+#### Available Endpoints
 
-##### File Upload Router
+##### Direct Upload to Cloudflare
 ```typescript
-// MISSING: convex/uploadthing.ts
-export const uploadRouter = createUploadthing({
-  f: {
-    publicationImage: {
-      image: { maxFileSize: "4MB" };
-    },
-    mediaFile: {
-      image: { maxFileSize: "4MB" };
-      video: { maxFileSize: "16MB" };
-      "application/pdf": { maxFileSize: "8MB" };
-    },
+// ✅ IMPLEMENTED: convex/api/cloudflare.ts
+export const uploadToCloudflare = httpAction({
+  handler: async (ctx, request) => {
+    // Handle direct upload to Cloudflare R2
+    // Process images via Cloudflare Images API
+    // Update media table with metadata
   },
 });
 ```
 
-##### Webhook Handler
+##### Presigned URL Generation
 ```typescript
-// MISSING: convex/api/uploadthing.ts
-export const handleUploadthingWebhook = httpAction({
+// ✅ IMPLEMENTED: convex/cloudflare.ts
+export const getUploadUrl = mutation({
+  handler: async (ctx, args) => {
+    // Generate presigned upload URL
+    // Return secure upload endpoint
+    // Track upload permissions
+  },
+});
+```
+
+##### File Processing Webhook
+```typescript
+// ✅ IMPLEMENTED: convex/api/cloudflare.ts
+export const processUploadedFile = httpAction({
   handler: async (ctx, request) => {
-    // Handle file upload completion
-    // Update media table
-    // Trigger notifications
+    // Process uploaded file metadata
+    // Generate optimized variants
+    // Update database records
   },
 });
 ```
 
 ##### File Upload Components
 ```typescript
-// MISSING: Functional upload components
-export const UploadButton = generateUploadButton<OurFileRouter>();
-export const UploadDropzone = generateUploadDropzone<OurFileRouter>();
-export const { useUploadThing, uploadFiles } = generateReactHelpers<OurFileRouter>();
+// ✅ IMPLEMENTED: Functional upload components
+export const CloudflareUploadButton = () => { /* Implementation */ };
+export const CloudflareDropzone = () => { /* Implementation */ };
+export const useCloudflareUpload = () => { /* Custom hook */ };
 ```
 
 ## 📊 API Performance & Optimization

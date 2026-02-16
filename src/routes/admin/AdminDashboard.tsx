@@ -2,7 +2,6 @@ import { Link } from '@tanstack/react-router';
 import { FaEdit, FaEye, FaImages, FaNewspaper, FaPlus, FaUsers } from 'react-icons/fa';
 import { useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import React from 'react';
 import { Sparkline } from '@/components/CMS/Shared';
 
 export const AdminDashboard = () => {

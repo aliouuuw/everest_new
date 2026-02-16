@@ -6,7 +6,7 @@ import EnhancedRichTextEditor from '@/components/CMS/Shared/EnhancedRichTextEdit
 import { useCreatePublication, usePublication, useUpdatePublication } from '@/hooks/useCMS';
 import { useCurrentUser } from '@/hooks/useAuth';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
-import { uploadPublicationAttachment, uploadPublicationImage } from '@/utils/uploadthing';
+import { uploadMediaFile, uploadPublicationImage } from '@/utils/cloudflare';
 
 type PublicationCategory = 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses';
 type PublicationStatus = 'draft' | 'published' | 'archived';
@@ -92,7 +92,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
           fileName: att.fileName,
           fileSize: att.fileSize,
           fileType: att.fileType,
-          url: att.uploadthingUrl,
+          url: att.cloudflareUrl,
         }));
       setAttachments(validAttachments);
     }
@@ -126,9 +126,9 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
 
   const handleAttachmentUpload = async (file: File) => {
     try {
-      const result = await uploadPublicationAttachment(file);
+      const result = await uploadMediaFile(file);
       const newAttachment = {
-        id: result.fileId,
+        id: result.id,
         fileName: file.name,
         fileSize: file.size,
         fileType: file.type,
@@ -137,7 +137,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
       setAttachments(prev => [...prev, newAttachment]);
       setFormData(prev => ({
         ...prev,
-        attachmentIds: [...prev.attachmentIds, result.fileId as any],
+        attachmentIds: [...prev.attachmentIds, result.id as any],
       }));
     } catch (error) {
       console.error('Attachment upload failed:', error);

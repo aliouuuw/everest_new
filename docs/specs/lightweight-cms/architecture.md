@@ -39,14 +39,14 @@ The CMS follows a modern, lightweight architecture optimized for content managem
   - User permissions
   - Search indexing
 
-### 3. File Storage (`uploadthing/`)
+### 3. File Storage (`cloudflare/`)
 - **Purpose**: Handle file uploads and CDN delivery
-- **Technology**: Uploadthing
+- **Technology**: Cloudflare R2 + Images API
 - **Responsibilities**:
   - File storage and optimization
-  - CDN delivery
-  - Automatic image resizing
-  - File management
+  - Global CDN delivery
+  - Automatic image resizing and variants
+  - File management and transformations
 
 ### 4. Public Interface (`src/routes/`)
 - **Purpose**: Display content to website visitors
@@ -70,10 +70,11 @@ The CMS follows a modern, lightweight architecture optimized for content managem
 
 ### File Upload Flow
 1. User selects files in admin interface
-2. Files uploaded directly to Uploadthing
-3. Uploadthing returns file URLs and metadata
-4. Minimal metadata stored in ConvexDB (relationships only)
-5. Files immediately available via CDN
+2. Frontend requests presigned upload URL from ConvexDB
+3. Files uploaded directly to Cloudflare R2
+4. Images processed via Cloudflare Images API
+5. Metadata stored in ConvexDB (relationships and variants)
+6. Files immediately available via global CDN
 
 ## 🔒 Security Considerations
 
@@ -83,10 +84,10 @@ The CMS follows a modern, lightweight architecture optimized for content managem
 - Role-based permissions (admin, editor, viewer)
 
 ### File Security
-- Uploadthing handles file validation
-- File type restrictions
-- Size limits enforced
-- Private files via signed URLs (future)
+- Cloudflare handles file validation and scanning
+- File type restrictions enforced
+- Size limits and rate limiting
+- Private files via signed URLs and access tokens
 
 ### Data Validation
 - ConvexDB schema validation

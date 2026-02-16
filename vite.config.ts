@@ -59,6 +59,16 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    // Enable HMR
+    hmr: {
+      overlay: true,
+    },
+    // Watch options for better file detection
+    watch: {
+      usePolling: true,
+      // Ignore node_modules to improve performance
+      ignored: ['**/node_modules/**', '**/.git/**'],
+    },
   },
   // Optimize dependencies
   optimizeDeps: {

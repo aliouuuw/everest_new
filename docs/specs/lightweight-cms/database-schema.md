@@ -3,7 +3,7 @@
 ## 🗄️ ConvexDB Schema Design
 
 ### Overview
-The database schema is designed to be minimal and focused, storing only essential metadata and relationships while leveraging Uploadthing for file storage.
+The database schema is designed to be minimal and focused, storing only essential metadata and relationships while leveraging Cloudflare R2 and Images API for file storage.
 
 ## 📋 Tables
 
@@ -66,14 +66,21 @@ publications: defineTable({
 
 ```typescript
 media: defineTable({
-  // Uploadthing References
-  uploadthingKey: v.string(),     // Unique file identifier
-  uploadthingUrl: v.string(),     // Direct CDN URL
+  // Cloudflare References
+  cloudflareId: v.string(),       // Unique file identifier in R2/Images
+  cloudflareUrl: v.string(),      // Direct CDN URL
+  variants: v.optional(v.object({
+    thumbnail: v.string(),        // Thumbnail variant URL
+    medium: v.string(),           // Medium size variant URL
+    large: v.string(),            // Large size variant URL
+    webp: v.string(),            // WebP optimized variant URL
+  })),
 
-  // Essential File Info (from Uploadthing)
+  // Essential File Info (from Cloudflare)
   fileName: v.string(),
   fileType: v.string(),           // "image", "video", "document"
   fileSize: v.number(),
+  mimeType: v.string(),           // Full MIME type
 
   // Custom Metadata (what we add)
   alt: v.optional(v.string()),
@@ -91,6 +98,7 @@ media: defineTable({
 .index("by_publication", ["publicationId"])
 .index("by_type", ["fileType"])
 .index("by_uploader", ["uploadedBy"])
+.index("by_cloudflare_id", ["cloudflareId"])
 ```
 
 ### 3. Users Table
@@ -254,11 +262,18 @@ export const deletePublication = mutation({
 export const linkMediaToPublication = mutation({
   args: {
     publicationId: v.id("publications"),
-    uploadthingKey: v.string(),
-    uploadthingUrl: v.string(),
+    cloudflareId: v.string(),
+    cloudflareUrl: v.string(),
     fileName: v.string(),
     fileType: v.string(),
     fileSize: v.number(),
+    mimeType: v.string(),
+    variants: v.optional(v.object({
+      thumbnail: v.string(),
+      medium: v.string(),
+      large: v.string(),
+      webp: v.string(),
+    })),
     alt: v.optional(v.string()),
     caption: v.optional(v.string()),
     tags: v.optional(v.array(v.string())),

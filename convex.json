@@ -9,5 +9,13 @@
         "applicationID": "convex"
       }
     ]
+  },
+  "http": {
+    "routes": {
+      "/api/cloudflare/upload": "api/cloudflare:uploadToCloudflare",
+      "/api/cloudflare/webhook": "api/cloudflare:cloudflareImagesWebhook",
+      "/api/cloudflare/delete": "api/cloudflare:deleteFile",
+      "/api/cloudflare/stats": "api/cloudflare:getUsageStats"
+    }
   }
 }

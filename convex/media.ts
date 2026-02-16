@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 // Media Queries
 
@@ -47,12 +47,19 @@ export const getMediaByType = query({
 // Link uploaded file to publication
 export const linkMediaToPublication = mutation({
   args: {
-    publicationId: v.id("publications"),
-    uploadthingKey: v.string(),
-    uploadthingUrl: v.string(),
+    publicationId: v.optional(v.id("publications")),
+    cloudflareId: v.string(),
+    cloudflareUrl: v.string(),
     fileName: v.string(),
     fileType: v.string(),
     fileSize: v.number(),
+    mimeType: v.string(),
+    variants: v.optional(v.object({
+      thumbnail: v.string(),
+      medium: v.string(),
+      large: v.string(),
+      webp: v.string(),
+    })),
     alt: v.optional(v.string()),
     caption: v.optional(v.string()),
     tags: v.optional(v.array(v.string())),
@@ -70,13 +77,15 @@ export const linkMediaToPublication = mutation({
       createdAt: Date.now(),
     });
 
-    // Link media to publication
-    const publication = await ctx.db.get(publicationId);
-    if (publication) {
-      await ctx.db.patch(publicationId, {
-        mediaIds: [...publication.mediaIds, mediaId],
-        updatedAt: Date.now(),
-      });
+    // Link media to publication (if specified)
+    if (publicationId) {
+      const publication = await ctx.db.get(publicationId);
+      if (publication) {
+        await ctx.db.patch(publicationId, {
+          mediaIds: [...publication.mediaIds, mediaId],
+          updatedAt: Date.now(),
+        });
+      }
     }
 
     return mediaId;
@@ -109,13 +118,15 @@ export const deleteMedia = mutation({
       throw new Error("Media not found");
     }
 
-    // Remove from publication's media list
-    const publication = await ctx.db.get(media.publicationId);
-    if (publication) {
-      await ctx.db.patch(media.publicationId, {
-        mediaIds: publication.mediaIds.filter(id => id !== args.id),
-        updatedAt: Date.now(),
-      });
+    // Remove from publication's media list (if linked to a publication)
+    if (media.publicationId) {
+      const publication = await ctx.db.get(media.publicationId);
+      if (publication) {
+        await ctx.db.patch(media.publicationId, {
+          mediaIds: publication.mediaIds.filter(id => id !== args.id),
+          updatedAt: Date.now(),
+        });
+      }
     }
 
     await ctx.db.delete(args.id);

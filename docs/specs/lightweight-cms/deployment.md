@@ -9,8 +9,8 @@ The CMS deployment follows a modern, scalable architecture optimized for perform
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Vercel        │────│   ConvexDB      │────│  Uploadthing    │
-│   (Frontend)    │    │   (Backend)     │    │  (Storage/CDN)  │
+│   Vercel        │────│   ConvexDB      │────│  Cloudflare     │
+│   (Frontend)    │    │   (Backend)     │    │  R2 + Images    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          └───────────────────────┼───────────────────────┘
@@ -27,19 +27,19 @@ The CMS deployment follows a modern, scalable architecture optimized for perform
 **Purpose:** Local development and testing
 **URL:** `http://localhost:3000`
 **Database:** ConvexDB development instance
-**Storage:** Uploadthing development environment
+**Storage:** Cloudflare R2 development bucket
 
 ### 2. Staging Environment
 **Purpose:** Integration testing and QA
 **URL:** `https://everest-finance-staging.vercel.app`
 **Database:** ConvexDB staging instance
-**Storage:** Uploadthing staging environment
+**Storage:** Cloudflare R2 staging bucket
 
 ### 3. Production Environment
 **Purpose:** Live application
 **URL:** `https://everest-finance.vercel.app`
 **Database:** ConvexDB production instance
-**Storage:** Uploadthing production environment
+**Storage:** Cloudflare R2 production bucket
 
 ## 🔧 Vercel Configuration
 
@@ -115,18 +115,27 @@ The CMS deployment follows a modern, scalable architecture optimized for perform
 ```bash
 # .env.local (local development)
 VITE_CONVEX_URL=your_convex_dev_url
-UPLOADTHING_SECRET=sk_live_dev_...
-UPLOADTHING_APP_ID=dev_app_id
+CLOUDFLARE_R2_ACCESS_KEY_ID=your_r2_access_key
+CLOUDFLARE_R2_SECRET_ACCESS_KEY=your_r2_secret_key
+CLOUDFLARE_R2_BUCKET_NAME=everest-cms-dev
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+CLOUDFLARE_IMAGES_API_TOKEN=your_images_api_token
 
 # .env.staging (staging environment)
 VITE_CONVEX_URL=your_convex_staging_url
-UPLOADTHING_SECRET=sk_live_staging_...
-UPLOADTHING_APP_ID=staging_app_id
+CLOUDFLARE_R2_ACCESS_KEY_ID=your_r2_access_key
+CLOUDFLARE_R2_SECRET_ACCESS_KEY=your_r2_secret_key
+CLOUDFLARE_R2_BUCKET_NAME=everest-cms-staging
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+CLOUDFLARE_IMAGES_API_TOKEN=your_images_api_token
 
 # .env.production (production environment)
 VITE_CONVEX_URL=your_convex_prod_url
-UPLOADTHING_SECRET=sk_live_prod_...
-UPLOADTHING_APP_ID=prod_app_id
+CLOUDFLARE_R2_ACCESS_KEY_ID=your_r2_access_key
+CLOUDFLARE_R2_SECRET_ACCESS_KEY=your_r2_secret_key
+CLOUDFLARE_R2_BUCKET_NAME=everest-cms-prod
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+CLOUDFLARE_IMAGES_API_TOKEN=your_images_api_token
 ```
 
 ## 🗄️ ConvexDB Deployment
@@ -477,7 +486,8 @@ bun run restore:backup
 ### Current Costs (Estimated)
 - **Vercel:** $0-20/month (hobby plan)
 - **ConvexDB:** $0-10/month (free tier + usage)
-- **Uploadthing:** $0-20/month (free tier + usage)
+- **Cloudflare R2:** $0-15/month (10GB free, then $0.015/GB)
+- **Cloudflare Images:** $0-5/month (100k transformations free)
 - **Total:** $0-50/month
 
 ### Cost Monitoring

@@ -59,14 +59,21 @@ export default defineSchema({
 
   // Media Table (Minimal Metadata Only)
   media: defineTable({
-    // Uploadthing References
-    uploadthingKey: v.string(),     // Unique file identifier
-    uploadthingUrl: v.string(),     // Direct CDN URL
+    // Cloudflare References
+    cloudflareId: v.string(),       // Unique file identifier in R2/Images
+    cloudflareUrl: v.string(),      // Direct CDN URL
+    variants: v.optional(v.object({
+      thumbnail: v.string(),        // Thumbnail variant URL
+      medium: v.string(),           // Medium size variant URL
+      large: v.string(),            // Large size variant URL
+      webp: v.string(),            // WebP optimized variant URL
+    })),
 
-    // Essential File Info (from Uploadthing)
+    // Essential File Info (from Cloudflare)
     fileName: v.string(),
     fileType: v.string(),           // "image", "video", "document"
     fileSize: v.number(),
+    mimeType: v.string(),           // Full MIME type
 
     // Custom Metadata (what we add)
     alt: v.optional(v.string()),
@@ -75,15 +82,59 @@ export default defineSchema({
     order: v.number(),              // Display order in publication
 
     // Relationships
-    publicationId: v.id("publications"),
+    publicationId: v.optional(v.id("publications")), // Optional for standalone media
     uploadedBy: v.id("users"),
+
+    // Deletion tracking
+    deletedAt: v.optional(v.number()),
+    deletedBy: v.optional(v.id("users")),
 
     // Timestamps
     createdAt: v.optional(v.number()), // Made optional for consistency
   })
     .index("by_publication", ["publicationId"])
     .index("by_type", ["fileType"])
-    .index("by_uploader", ["uploadedBy"]),
+    .index("by_uploader", ["uploadedBy"])
+    .index("by_cloudflare_id", ["cloudflareId"]),
+
+  // Upload Sessions Table (for tracking uploads)
+  uploadSessions: defineTable({
+    // File information
+    fileKey: v.string(),
+    fileName: v.string(),
+    fileType: v.string(),
+    contentType: v.string(),
+
+    // Upload status
+    status: v.union(
+      v.literal("pending"),
+      v.literal("completed"),
+      v.literal("failed")
+    ),
+
+    // Cloudflare data (populated after upload)
+    cloudflareId: v.optional(v.string()),
+    cloudflareUrl: v.optional(v.string()),
+    fileSize: v.optional(v.number()),
+    variants: v.optional(v.object({
+      thumbnail: v.string(),
+      medium: v.string(),
+      large: v.string(),
+      webp: v.string(),
+    })),
+
+    // Relationships
+    publicationId: v.optional(v.id("publications")),
+    uploadedBy: v.id("users"),
+
+    // Timestamps
+    createdAt: v.number(),
+    completedAt: v.optional(v.number()),
+    failedAt: v.optional(v.number()),
+  })
+    .index("by_status", ["status"])
+    .index("by_uploader", ["uploadedBy"])
+    .index("by_file_key", ["fileKey"]),
 
   // Users Table
   users: defineTable({
