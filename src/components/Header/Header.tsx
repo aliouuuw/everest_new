@@ -214,16 +214,8 @@ export const Header: React.FC = () => {
           </Link>
         </nav>
 
-        {/* Connexion Buttons */}
-        <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="https://everest-account-opening.vercel.app/new-home"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary inline-flex items-center gap-2 font-display tracking-wide text-sm"
-          >
-            <span>Ouvrir un compte</span>
-          </a>
+        {/* Connexion Button */}
+        <div className="hidden lg:block">
           <Link
             to="/auth"
             className="btn-primary inline-flex items-center gap-2.5 font-display tracking-wide"
@@ -318,17 +310,8 @@ export const Header: React.FC = () => {
               Bourse
             </Link>
 
-            {/* Connexion Buttons */}
-            <div className="pt-4 border-t border-black/10 space-y-3">
-              <a
-                href="https://everest-account-opening.vercel.app/new-home"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary inline-flex items-center justify-center gap-2.5 w-full font-display tracking-wide"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span className="tracking-wide">Ouvrir un compte</span>
-              </a>
+            {/* Connexion Button */}
+            <div className="pt-4 border-t border-black/10">
               <Link
                 to="/auth"
                 className="btn-primary inline-flex items-center justify-center gap-2.5 w-full font-display tracking-wide"

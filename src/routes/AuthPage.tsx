@@ -59,6 +59,21 @@ export const AuthPage = () => {
 
           {/* Auth form */}
           <SigninForm />
+
+          {/* Account opening prompt */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-secondary">
+              Pas encore client ?{' '}
+              <a
+                href="https://everest-account-opening.vercel.app/new-home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--gold-dark)] hover:text-[var(--gold-metallic)] font-medium transition-colors underline underline-offset-2"
+              >
+                Ouvrir un compte
+              </a>
+            </p>
+          </div>
         </div>
       </section>
 
