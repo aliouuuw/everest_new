@@ -168,73 +168,73 @@ export const departmentsData: DepartmentsData = {
         "Notre méthodologie s'articule autour de quatre étapes structurées : diagnostic et cadrage stratégique avec analyse des objectifs et contraintes du client, structuration et documentation avec modélisation financière et préparation réglementaire, placement et fixation des conditions via un roadshow ciblé et la constitution du livre d'ordres, puis clôture et suivi post-opération. Chaque phase est jalonnée de livrables précis et de points de validation avec le client."
     },
     {
-      department_name: "Recherche & Analyses",
-      slug: "recherche-analyses",
+      department_name: "Gestion Sous Mandat",
+      slug: "gestion-sous-mandat",
       presentation:
-        "Le département Recherche & Analyses d'Everest Finance produit des études et analyses indépendantes sur les marchés financiers de la zone UEMOA. Nos publications couvrent l'évolution des indices BRVM, les dynamiques sectorielles et les valorisations d'entreprises, offrant aux investisseurs institutionnels et particuliers les éléments nécessaires à une prise de décision éclairée.",
+        "Le département Gestion Sous Mandat d'Everest Finance pilote des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque sur les marchés de la zone UEMOA.",
       missions: [
-        "Produire des notes de marché hebdomadaires et mensuelles sur la BRVM",
-        "Réaliser des études sectorielles approfondies avec recommandations d'investissement",
-        "Conduire des analyses sur mesure (valorisations, due diligences, études de faisabilité)",
-        "Fournir un suivi macroéconomique de la zone UEMOA",
-        "Alimenter les équipes internes et les clients en données fiables et actionnables"
+        "Définir le profil d'investissement adapté aux objectifs et contraintes de chaque client",
+        "Structurer des mandats de gestion (Prudent, Équilibré, Dynamique)",
+        "Piloter les portefeuilles dans le temps avec discipline et rigueur",
+        "Gérer les risques et assurer la conformité réglementaire",
+        "Fournir un reporting régulier et transparent"
       ],
       operations_selected: [
-        "Notes et revues de marché (hebdomadaires, mensuelles)",
-        "Études sectorielles (banques, télécoms, immobilier, énergie)",
-        "Valorisations d'entreprises (DCF, comparables, sum-of-the-parts)",
-        "Analyses sur mesure pour comités d'investissement",
-        "Suivi macroéconomique et veille réglementaire UEMOA"
+        "Placements collectifs sur la BRVM",
+        "Programmes d'épargne ciblés",
+        "Gestion de portefeuilles sous mandat pour institutionnels",
+        "Gestion de portefeuilles pour HNWI (High Net Worth Individuals)",
+        "Gestion de trésorerie d'entreprises"
       ],
       expertise_solutions: [
         {
           solution_number: 1,
-          name: "Notes & revues de marché",
+          name: "Mandat Prudent",
           description:
-            "Publications régulières sur l'évolution des indices BRVM, les volumes de transactions, les flux sur le marché primaire et l'analyse des valorisations.",
+            "Allocation conservatrice privilégiant les obligations d'État et corporate de qualité, avec une exposition actions limitée. Objectif de préservation du capital avec rendement régulier.",
           target_audience: [
-            "Investisseurs institutionnels",
-            "Gérants de portefeuille",
-            "Directions financières"
+            "Investisseurs institutionnels à faible tolérance au risque",
+            "Fonds de pension",
+            "Particuliers proches de la retraite"
           ],
           client_problem:
-            "Disposer d'une vision synthétique et actualisée de l'état du marché financier régional pour orienter les décisions d'investissement.",
+            "Préserver le capital tout en générant un rendement supérieur aux placements monétaires classiques.",
           value_proposition:
-            "Des publications concises, rigoureuses et régulières qui permettent un suivi efficace du marché sans mobiliser de ressources internes dédiées."
+            "Une gestion prudente et disciplinée qui privilégie la sécurité du capital avec des rendements prévisibles et réguliers."
         },
         {
           solution_number: 2,
-          name: "Études sectorielles approfondies",
+          name: "Mandat Équilibré",
           description:
-            "Analyses fondamentales complètes avec benchmarks sectoriels, évaluation des tendances et recommandations d'investissement par secteur économique.",
+            "Allocation mixte combinant obligations (60%) et actions (40%) pour un équilibre entre croissance et stabilité. Diversification sectorielle et géographique au sein de l'UEMOA.",
           target_audience: [
-            "Fonds d'investissement",
-            "Banques et compagnies d'assurance",
-            "Investisseurs étrangers intéressés par l'UEMOA"
+            "Investisseurs institutionnels à horizon moyen terme",
+            "Entreprises gérant leur trésorerie excédentaire",
+            "Particuliers fortunés"
           ],
           client_problem:
-            "Comprendre les dynamiques sectorielles et identifier les opportunités d'investissement dans un marché où l'information publique reste limitée.",
+            "Obtenir une croissance du capital à moyen terme tout en maîtrisant la volatilité.",
           value_proposition:
-            "Une recherche indépendante qui combine données quantitatives et analyse qualitative pour fournir une vision complète de chaque secteur."
+            "Un équilibre optimal entre performance et maîtrise du risque, avec une allocation dynamique ajustée aux conditions de marché."
         },
         {
           solution_number: 3,
-          name: "Analyses sur mesure",
+          name: "Mandat Dynamique",
           description:
-            "Études personnalisées pour comités d'investissement, due diligences financières, valorisations d'entreprises et analyses de marché spécifiques.",
+            "Allocation orientée croissance avec exposition actions majoritaire (70-80%). Sélection active de valeurs à fort potentiel sur la BRVM et gestion opportuniste.",
           target_audience: [
-            "Comités d'investissement",
-            "Acquéreurs potentiels",
-            "Conseils d'administration"
+            "Investisseurs à horizon long terme",
+            "Family offices",
+            "Fonds d'investissement"
           ],
           client_problem:
-            "Obtenir une analyse indépendante et approfondie sur un sujet précis pour étayer une décision d'investissement ou de cession.",
+            "Maximiser la croissance du capital sur le long terme en acceptant une volatilité plus élevée.",
           value_proposition:
-            "Des analyses sur mesure réalisées par des analystes expérimentés, avec une méthodologie transparente et des conclusions actionnables."
+            "Une gestion active et opportuniste qui vise à surperformer l'indice BRVM Composite grâce à une sélection rigoureuse de titres et un timing de marché discipliné."
         }
       ],
       approach_methodology:
-        "Notre processus de recherche suit quatre étapes : définition du périmètre et validation des hypothèses avec le client, collecte et traitement des données primaires et secondaires, analyse quantitative et qualitative approfondie (modélisation DCF, comparables, analyse de sensibilité), puis synthèse et formulation de recommandations stratégiques. Chaque livrable fait l'objet d'une revue interne avant diffusion pour garantir la qualité et l'objectivité de nos conclusions."
+        "Notre méthodologie de gestion sous mandat repose sur quatre piliers : définition du profil d'investissement avec analyse des objectifs, contraintes et tolérance au risque du client, construction du portefeuille avec allocation stratégique et sélection de titres selon des critères fondamentaux rigoureux, pilotage actif avec rééquilibrage périodique et ajustements tactiques en fonction des conditions de marché, et reporting transparent avec suivi de performance, analyse d'attribution et communication régulière. Cette approche structurée garantit l'alignement permanent entre le mandat et les objectifs du client."
     }
   ]
 }

@@ -5,7 +5,6 @@ export { FAQPage } from './FAQPage'
 // CEOMessagePage deprecated
 export { CapitalMarketsPage } from './CapitalMarketsPage'
 export { InvestmentBankingPage } from './InvestmentBankingPage'
-export { ResearchAnalyticsPage } from './ResearchAnalyticsPage'
 export { ServicesPage } from './ServicesPage'
 export { DiscretionaryMgmtPage } from './DiscretionaryMgmtPage'
 export { MandateMgmtPage } from './MandateMgmtPage'

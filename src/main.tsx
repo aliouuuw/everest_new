@@ -24,7 +24,7 @@ import { FAQPage } from './routes/FAQPage'
 // import { CEOMessagePage } from './routes/CEOMessagePage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
-import { ResearchAnalyticsPage } from './routes/ResearchAnalyticsPage'
+import { MandateMgmtPage } from './routes/MandateMgmtPage'
 import { ServicesPage } from './routes/ServicesPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
@@ -101,10 +101,10 @@ const ibRoute = createRoute({
   component: InvestmentBankingPage,
 })
 
-const researchRoute = createRoute({
+const mandateRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/recherche-analyses',
-  component: ResearchAnalyticsPage,
+  path: '/gestion-sous-mandat',
+  component: MandateMgmtPage,
 })
 
 const servicesRoute = createRoute({
@@ -253,7 +253,7 @@ const routeTree = rootRoute.addChildren([
   ceoRoute,
   capitalMarketsRoute,
   ibRoute,
-  researchRoute,
+  mandateRoute,
   servicesRoute,
   gestionLibreRoute,
   gestionMandatRoute,
