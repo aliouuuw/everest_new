@@ -4,6 +4,7 @@
 export interface Metric {
   value: string
   label: string
+  suffix?: string
 }
 
 export interface MethodStep {
@@ -15,6 +16,16 @@ export interface Allocation {
   name: string
   value: number
   color: string
+}
+
+export interface Differentiator {
+  title: string
+  description: string
+}
+
+export interface TargetPersona {
+  label: string
+  description: string
 }
 
 export interface ExpertiseSolution {
@@ -30,14 +41,20 @@ export interface ExpertiseSolution {
 export interface Department {
   department_name: string
   slug: string
+  hero_headline: string
+  hero_subtitle: string
   presentation: string
   metrics?: Metric[]
+  differentiators: Differentiator[]
+  target_personas: TargetPersona[]
   missions: string[]
   operations_selected: string[]
   expertise_solutions: ExpertiseSolution[]
   approach_methodology: string
   method_steps?: MethodStep[]
   hero_background?: string
+  cta_text: string
+  cta_subtitle: string
 }
 
 export interface DepartmentsData {
@@ -52,12 +69,24 @@ export const departmentsData: DepartmentsData = {
       department_name: "Marché des Capitaux",
       slug: "marche-capitaux",
       hero_background: "/bg-mc.jpg",
+      hero_headline: "Levez des capitaux. Accélérez votre croissance.",
+      hero_subtitle: "Accédez au marché financier régional avec un partenaire qui a structuré et placé plus de 25 opérations avec un taux de couverture de 100%.",
       presentation:
-        "Financez votre croissance avec le département Marché des Capitaux d'Everest Finance. Nous accompagnons les émetteurs publics et privés dans leurs opérations de levée de fonds sur le marché financier régional de l'UEMOA. Fort d'une expertise reconnue en structuration, placement et suivi post-marché, notre équipe intervient sur l'ensemble du cycle de financement pour garantir le succès de chaque opération.",
+        "Nous accompagnons les émetteurs publics et privés dans leurs opérations de levée de fonds sur le marché financier régional de l'UEMOA. De la structuration au suivi post-marché, notre équipe intervient sur l'ensemble du cycle de financement pour garantir le succès de chaque opération.",
       metrics: [
         { value: "+25", label: "Opérations réussies" },
-        { value: "UEMOA", label: "Couverture régionale" },
+        { value: "8", label: "Pays couverts", suffix: "UEMOA" },
         { value: "100%", label: "Taux de placement" }
+      ],
+      differentiators: [
+        { title: "Réseau investisseurs étendu", description: "Accès privilégié aux institutionnels, fonds de pension et family offices de la zone UEMOA." },
+        { title: "Track record éprouvé", description: "Plus de 25 opérations réussies avec un taux de couverture intégrale sur chaque émission." },
+        { title: "Accompagnement de bout en bout", description: "De l'analyse initiale au suivi post-marché, un interlocuteur unique pour chaque étape." }
+      ],
+      target_personas: [
+        { label: "Entreprises & Groupes", description: "Financez votre expansion via le marché obligataire ou une introduction en bourse." },
+        { label: "États & Collectivités", description: "Structurez vos emprunts publics avec un placement optimal auprès des investisseurs." },
+        { label: "Institutions Financières", description: "Renforcez vos fonds propres ou refinancez vos engagements sur le marché." }
       ],
       missions: [
         "Structurer des émissions obligataires et actions adaptées aux besoins des émetteurs",
@@ -126,17 +155,31 @@ export const departmentsData: DepartmentsData = {
         { title: "Structuration et Documentation", description: "Montage financier et juridique, rédaction des notes d'information et obtention des visas réglementaires (CREPMF)." },
         { title: "Placement et Bookbuilding", description: "Roadshow investisseurs, constitution du livre d'ordres et allocation optimale des titres." },
         { title: "Règlement et Suivi", description: "Dénouement financier, cotation à la BRVM (si applicable) et reporting post-opération régulier." }
-      ]
+      ],
+      cta_text: "Discutons de votre prochaine opération",
+      cta_subtitle: "Nos experts en marché des capitaux sont prêts à structurer votre levée de fonds."
     },
     {
       department_name: "Ingénierie Financière",
       slug: "ingenieurie-financiere",
+      hero_headline: "Structurez. Optimisez. Transformez.",
+      hero_subtitle: "Des solutions de financement sur mesure pour les opérations complexes qui dépassent les schémas classiques du crédit bancaire.",
       presentation:
-        "Optimisez votre structure financière avec Everest Finance. Notre équipe d'ingénierie financière conçoit et exécute des opérations complexes pour les entreprises, institutions et investisseurs de la zone UEMOA. Nous combinons expertise technique et connaissance approfondie du marché régional pour proposer des solutions sur mesure.",
+        "Notre équipe d'ingénierie financière conçoit et exécute des opérations complexes pour les entreprises, institutions et investisseurs de la zone UEMOA. Nous combinons expertise technique et connaissance approfondie du marché régional pour proposer des solutions sur mesure.",
       metrics: [
-        { value: "Sur mesure", label: "Solutions structurées" },
-        { value: "Indépendant", label: "Conseil stratégique" },
-        { value: "Global", label: "Accompagnement" }
+        { value: "360°", label: "Approche intégrée" },
+        { value: "100%", label: "Conseil indépendant" },
+        { value: "UEMOA", label: "Expertise régionale" }
+      ],
+      differentiators: [
+        { title: "Conseil indépendant", description: "Aucun conflit d'intérêt — nos recommandations servent uniquement les objectifs de nos clients." },
+        { title: "Modélisation avancée", description: "Des modèles financiers rigoureux pour évaluer chaque scénario et optimiser la structure." },
+        { title: "Expertise réglementaire", description: "Maîtrise du cadre juridique et fiscal UEMOA pour sécuriser chaque opération." }
+      ],
+      target_personas: [
+        { label: "Entreprises en croissance", description: "Structurez des financements innovants pour accélérer votre développement." },
+        { label: "Dirigeants & Actionnaires", description: "Prenez des décisions stratégiques éclairées avec un conseil objectif et indépendant." },
+        { label: "Investisseurs institutionnels", description: "Accédez à des opportunités structurées avec une analyse de risque approfondie." }
       ],
       missions: [
         "Concevoir des montages financiers adaptés aux objectifs stratégiques des clients",
@@ -206,17 +249,31 @@ export const departmentsData: DepartmentsData = {
         { title: "Structuration et Documentation", description: "Montage juridique et financier détaillé, rédaction des mémorandums et term sheets." },
         { title: "Marketing et Négociation", description: "Approche des contreparties cibles, gestion des data rooms et négociation des conditions." },
         { title: "Closing et Suivi", description: "Finalisation des accords juridiques, transfert des fonds et accompagnement post-opération." }
-      ]
+      ],
+      cta_text: "Parlons de votre projet",
+      cta_subtitle: "Nos experts en ingénierie financière étudient votre situation et proposent la structure optimale."
     },
     {
       department_name: "Gestion Sous Mandat",
       slug: "gestion-sous-mandat",
+      hero_headline: "Votre patrimoine. Notre expertise. Vos objectifs.",
+      hero_subtitle: "Confiez la gestion de vos actifs à une équipe qui aligne chaque décision d'investissement sur vos objectifs personnels.",
       presentation:
-        "Déléguez la gestion de votre patrimoine à nos experts. Le département Gestion Sous Mandat d'Everest Finance pilote des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque.",
+        "Nous pilotons des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque.",
       metrics: [
-        { value: "3 Profils", label: "Mandats adaptés" },
-        { value: "Actif", label: "Pilotage continu" },
-        { value: "Transparent", label: "Reporting" }
+        { value: "3", label: "Profils de mandat" },
+        { value: "24/7", label: "Suivi des marchés" },
+        { value: "100%", label: "Reporting transparent" }
+      ],
+      differentiators: [
+        { title: "Gestion personnalisée", description: "Chaque portefeuille est construit sur mesure selon votre profil de risque et vos objectifs." },
+        { title: "Pilotage actif", description: "Rééquilibrage continu et ajustements tactiques en fonction des conditions de marché." },
+        { title: "Transparence totale", description: "Reporting détaillé, analyse d'attribution et réunions de suivi régulières." }
+      ],
+      target_personas: [
+        { label: "Investisseurs institutionnels", description: "Optimisez la performance de vos réserves avec une gestion disciplinée et conforme." },
+        { label: "Particuliers fortunés", description: "Déléguez la gestion de votre patrimoine à des experts dédiés." },
+        { label: "Entreprises", description: "Faites fructifier votre trésorerie excédentaire avec un mandat adapté." }
       ],
       missions: [
         "Définir le profil d'investissement adapté aux objectifs et contraintes de chaque client",
@@ -296,7 +353,9 @@ export const departmentsData: DepartmentsData = {
         { title: "Construction du Portefeuille", description: "Allocation d'actifs stratégique et sélection rigoureuse des titres (actions et obligations)." },
         { title: "Pilotage Actif", description: "Suivi continu des marchés, ajustements tactiques et rééquilibrage périodique du portefeuille." },
         { title: "Reporting Transparent", description: "Relevés détaillés de performance, analyse d'attribution et réunions de suivi régulières." }
-      ]
+      ],
+      cta_text: "Découvrez le mandat adapté à vos objectifs",
+      cta_subtitle: "Nos gestionnaires de portefeuille analysent votre profil et construisent une allocation sur mesure."
     }
   ]
 }
