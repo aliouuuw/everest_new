@@ -257,7 +257,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Gestion Sous Mandat",
       slug: "gestion-sous-mandat",
-      hero_background: "/background-sol.jpg",
+      hero_background: "/value_props.jpg",
       hero_headline: "Votre patrimoine. Notre expertise. Vos objectifs.",
       hero_subtitle: "Confiez la gestion de vos actifs à une équipe qui aligne chaque décision d'investissement sur vos objectifs personnels.",
       presentation:
