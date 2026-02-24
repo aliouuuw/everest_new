@@ -68,7 +68,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Marché des Capitaux",
       slug: "marche-capitaux",
-      hero_background: "/bg-mc.jpg",
+      hero_background: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1920&q=80",
       hero_headline: "Levez des capitaux. Accélérez votre croissance.",
       hero_subtitle: "Accédez au marché financier régional avec un partenaire qui a structuré et placé plus de 25 opérations avec un taux de couverture de 100%.",
       presentation:
@@ -162,7 +162,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Ingénierie Financière",
       slug: "ingenieurie-financiere",
-      hero_background: "/value_props.jpg",
+      hero_background: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80",
       hero_headline: "Structurez. Optimisez. Transformez.",
       hero_subtitle: "Des solutions de financement sur mesure pour les opérations complexes qui dépassent les schémas classiques du crédit bancaire.",
       presentation:
@@ -257,7 +257,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Gestion Sous Mandat",
       slug: "gestion-sous-mandat",
-      hero_background: "/background-sol.jpg",
+      hero_background: "https://images.unsplash.com/photo-1624363287831-0439f3d0a2a2?auto=format&fit=crop&w=1920&q=80",
       hero_headline: "Votre patrimoine. Notre expertise. Vos objectifs.",
       hero_subtitle: "Confiez la gestion de vos actifs à une équipe qui aligne chaque décision d'investissement sur vos objectifs personnels.",
       presentation:
