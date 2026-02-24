@@ -1,6 +1,22 @@
 // Department data structure following the unified JSON schema
 // for Everest Finance's 3 main departments
 
+export interface Metric {
+  value: string
+  label: string
+}
+
+export interface MethodStep {
+  title: string
+  description: string
+}
+
+export interface Allocation {
+  name: string
+  value: number
+  color: string
+}
+
 export interface ExpertiseSolution {
   solution_number: number
   name: string
@@ -8,16 +24,19 @@ export interface ExpertiseSolution {
   target_audience: string[]
   client_problem: string
   value_proposition: string
+  allocation?: Allocation[]
 }
 
 export interface Department {
   department_name: string
   slug: string
   presentation: string
+  metrics?: Metric[]
   missions: string[]
   operations_selected: string[]
   expertise_solutions: ExpertiseSolution[]
   approach_methodology: string
+  method_steps?: MethodStep[]
   hero_background?: string
 }
 
@@ -34,7 +53,12 @@ export const departmentsData: DepartmentsData = {
       slug: "marche-capitaux",
       hero_background: "/bg-mc.jpg",
       presentation:
-        "Le département Marché des Capitaux d'Everest Finance accompagne les émetteurs publics et privés dans leurs opérations de levée de fonds sur le marché financier régional de l'UEMOA. Fort d'une expertise reconnue en structuration, placement et suivi post-marché, notre équipe intervient sur l'ensemble du cycle de financement pour garantir le succès de chaque opération.",
+        "Financez votre croissance avec le département Marché des Capitaux d'Everest Finance. Nous accompagnons les émetteurs publics et privés dans leurs opérations de levée de fonds sur le marché financier régional de l'UEMOA. Fort d'une expertise reconnue en structuration, placement et suivi post-marché, notre équipe intervient sur l'ensemble du cycle de financement pour garantir le succès de chaque opération.",
+      metrics: [
+        { value: "+25", label: "Opérations réussies" },
+        { value: "UEMOA", label: "Couverture régionale" },
+        { value: "100%", label: "Taux de placement" }
+      ],
       missions: [
         "Structurer des émissions obligataires et actions adaptées aux besoins des émetteurs",
         "Assurer le placement auprès d'investisseurs institutionnels et particuliers qualifiés",
@@ -96,13 +120,24 @@ export const departmentsData: DepartmentsData = {
         }
       ],
       approach_methodology:
-        "Notre approche repose sur un processus en quatre phases : diagnostic et cadrage stratégique, structuration et documentation réglementaire, placement et constitution du livre d'ordres, puis règlement-livraison et suivi post-opération. Chaque étape fait l'objet d'un reporting détaillé et d'une validation conjointe avec le client. Cette méthodologie, éprouvée sur plus de vingt-cinq opérations, garantit rigueur, transparence et respect des délais."
+        "Notre approche repose sur un processus en quatre phases : diagnostic et cadrage stratégique, structuration et documentation réglementaire, placement et constitution du livre d'ordres, puis règlement-livraison et suivi post-opération. Chaque étape fait l'objet d'un reporting détaillé et d'une validation conjointe avec le client. Cette méthodologie, éprouvée sur plus de vingt-cinq opérations, garantit rigueur, transparence et respect des délais.",
+      method_steps: [
+        { title: "Diagnostic et Cadrage", description: "Analyse des besoins de financement, structuration préliminaire et définition du calendrier de l'opération." },
+        { title: "Structuration et Documentation", description: "Montage financier et juridique, rédaction des notes d'information et obtention des visas réglementaires (CREPMF)." },
+        { title: "Placement et Bookbuilding", description: "Roadshow investisseurs, constitution du livre d'ordres et allocation optimale des titres." },
+        { title: "Règlement et Suivi", description: "Dénouement financier, cotation à la BRVM (si applicable) et reporting post-opération régulier." }
+      ]
     },
     {
       department_name: "Ingénierie Financière",
       slug: "ingenieurie-financiere",
       presentation:
-        "Le département Ingénierie Financière d'Everest Finance conçoit et exécute des opérations financières complexes pour les entreprises, institutions et investisseurs de la zone UEMOA. Notre équipe combine expertise technique et connaissance approfondie du marché régional pour proposer des solutions de financement et de restructuration sur mesure.",
+        "Optimisez votre structure financière avec Everest Finance. Notre équipe d'ingénierie financière conçoit et exécute des opérations complexes pour les entreprises, institutions et investisseurs de la zone UEMOA. Nous combinons expertise technique et connaissance approfondie du marché régional pour proposer des solutions sur mesure.",
+      metrics: [
+        { value: "Sur mesure", label: "Solutions structurées" },
+        { value: "Indépendant", label: "Conseil stratégique" },
+        { value: "Global", label: "Accompagnement" }
+      ],
       missions: [
         "Concevoir des montages financiers adaptés aux objectifs stratégiques des clients",
         "Structurer des opérations de levée de fonds (dette, fonds propres, instruments hybrides)",
@@ -165,13 +200,24 @@ export const departmentsData: DepartmentsData = {
         }
       ],
       approach_methodology:
-        "Notre méthodologie s'articule autour de quatre étapes structurées : diagnostic et cadrage stratégique avec analyse des objectifs et contraintes du client, structuration et documentation avec modélisation financière et préparation réglementaire, placement et fixation des conditions via un roadshow ciblé et la constitution du livre d'ordres, puis clôture et suivi post-opération. Chaque phase est jalonnée de livrables précis et de points de validation avec le client."
+        "Notre méthodologie s'articule autour de quatre étapes structurées : diagnostic et cadrage stratégique avec analyse des objectifs et contraintes du client, structuration et documentation avec modélisation financière et préparation réglementaire, placement et fixation des conditions via un roadshow ciblé et la constitution du livre d'ordres, puis clôture et suivi post-opération. Chaque phase est jalonnée de livrables précis et de points de validation avec le client.",
+      method_steps: [
+        { title: "Diagnostic et Stratégie", description: "Analyse approfondie des objectifs, modélisation financière initiale et définition de la stratégie optimale." },
+        { title: "Structuration et Documentation", description: "Montage juridique et financier détaillé, rédaction des mémorandums et term sheets." },
+        { title: "Marketing et Négociation", description: "Approche des contreparties cibles, gestion des data rooms et négociation des conditions." },
+        { title: "Closing et Suivi", description: "Finalisation des accords juridiques, transfert des fonds et accompagnement post-opération." }
+      ]
     },
     {
       department_name: "Gestion Sous Mandat",
       slug: "gestion-sous-mandat",
       presentation:
-        "Le département Gestion Sous Mandat d'Everest Finance pilote des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque sur les marchés de la zone UEMOA.",
+        "Déléguez la gestion de votre patrimoine à nos experts. Le département Gestion Sous Mandat d'Everest Finance pilote des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque.",
+      metrics: [
+        { value: "3 Profils", label: "Mandats adaptés" },
+        { value: "Actif", label: "Pilotage continu" },
+        { value: "Transparent", label: "Reporting" }
+      ],
       missions: [
         "Définir le profil d'investissement adapté aux objectifs et contraintes de chaque client",
         "Structurer des mandats de gestion (Prudent, Équilibré, Dynamique)",
@@ -200,7 +246,12 @@ export const departmentsData: DepartmentsData = {
           client_problem:
             "Préserver le capital tout en générant un rendement supérieur aux placements monétaires classiques.",
           value_proposition:
-            "Une gestion prudente et disciplinée qui privilégie la sécurité du capital avec des rendements prévisibles et réguliers."
+            "Une gestion prudente et disciplinée qui privilégie la sécurité du capital avec des rendements prévisibles et réguliers.",
+          allocation: [
+            { name: "Obligations (État & Corporate)", value: 85, color: "#1e3a8a" },
+            { name: "Monétaire", value: 10, color: "#94a3b8" },
+            { name: "Actions", value: 5, color: "#c6a87c" }
+          ]
         },
         {
           solution_number: 2,
@@ -230,11 +281,22 @@ export const departmentsData: DepartmentsData = {
           client_problem:
             "Maximiser la croissance du capital sur le long terme en acceptant une volatilité plus élevée.",
           value_proposition:
-            "Une gestion active et opportuniste qui vise à surperformer l'indice BRVM Composite grâce à une sélection rigoureuse de titres et un timing de marché discipliné."
+            "Une gestion active et opportuniste qui vise à surperformer l'indice BRVM Composite grâce à une sélection rigoureuse de titres et un timing de marché discipliné.",
+          allocation: [
+            { name: "Actions", value: 80, color: "#c6a87c" },
+            { name: "Obligations", value: 15, color: "#1e3a8a" },
+            { name: "Monétaire", value: 5, color: "#94a3b8" }
+          ]
         }
       ],
       approach_methodology:
-        "Notre méthodologie de gestion sous mandat repose sur quatre piliers : définition du profil d'investissement avec analyse des objectifs, contraintes et tolérance au risque du client, construction du portefeuille avec allocation stratégique et sélection de titres selon des critères fondamentaux rigoureux, pilotage actif avec rééquilibrage périodique et ajustements tactiques en fonction des conditions de marché, et reporting transparent avec suivi de performance, analyse d'attribution et communication régulière. Cette approche structurée garantit l'alignement permanent entre le mandat et les objectifs du client."
+        "Notre méthodologie de gestion sous mandat repose sur quatre piliers : définition du profil d'investissement avec analyse des objectifs, contraintes et tolérance au risque du client, construction du portefeuille avec allocation stratégique et sélection de titres selon des critères fondamentaux rigoureux, pilotage actif avec rééquilibrage périodique et ajustements tactiques en fonction des conditions de marché, et reporting transparent avec suivi de performance, analyse d'attribution et communication régulière. Cette approche structurée garantit l'alignement permanent entre le mandat et les objectifs du client.",
+      method_steps: [
+        { title: "Profil d'Investissement", description: "Évaluation de la tolérance au risque, de l'horizon de placement et des objectifs de rendement." },
+        { title: "Construction du Portefeuille", description: "Allocation d'actifs stratégique et sélection rigoureuse des titres (actions et obligations)." },
+        { title: "Pilotage Actif", description: "Suivi continu des marchés, ajustements tactiques et rééquilibrage périodique du portefeuille." },
+        { title: "Reporting Transparent", description: "Relevés détaillés de performance, analyse d'attribution et réunions de suivi régulières." }
+      ]
     }
   ]
 }
