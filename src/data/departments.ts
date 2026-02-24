@@ -162,6 +162,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Ingénierie Financière",
       slug: "ingenieurie-financiere",
+      hero_background: "/value_props.jpg",
       hero_headline: "Structurez. Optimisez. Transformez.",
       hero_subtitle: "Des solutions de financement sur mesure pour les opérations complexes qui dépassent les schémas classiques du crédit bancaire.",
       presentation:
@@ -256,6 +257,7 @@ export const departmentsData: DepartmentsData = {
     {
       department_name: "Gestion Sous Mandat",
       slug: "gestion-sous-mandat",
+      hero_background: "/background-sol.jpg",
       hero_headline: "Votre patrimoine. Notre expertise. Vos objectifs.",
       hero_subtitle: "Confiez la gestion de vos actifs à une équipe qui aligne chaque décision d'investissement sur vos objectifs personnels.",
       presentation:

@@ -46,9 +46,9 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <img
               src={hero_background}
               alt={department_name}
-              className="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply"
+              className="w-full h-full object-cover opacity-60 contrast-125"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
         )}
