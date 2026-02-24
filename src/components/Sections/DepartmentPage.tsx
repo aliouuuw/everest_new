@@ -379,7 +379,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-secondary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
+              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
                 Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>
