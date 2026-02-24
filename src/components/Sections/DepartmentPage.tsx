@@ -1,4 +1,4 @@
-import { FiArrowRight, FiCheck, FiTarget } from 'react-icons/fi'
+import { FiTarget, FiArrowRight } from 'react-icons/fi'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useState } from 'react'
 import { useReveal } from '../Hooks/useReveal'
@@ -48,37 +48,40 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 alt={department_name}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--gold-dark)]/20 to-[var(--night)]/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[var(--night)]/60 via-[var(--night)]/40 to-[var(--night)]/90" />
             </div>
-            <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-24 lg:py-32">
-              <div className="text-center max-w-3xl mx-auto">
-                <span className="kicker text-gradient-gold">
-                  Offres — {department_name}
+            <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 lg:py-40">
+              <div className="text-center max-w-4xl mx-auto">
+                <span className="kicker text-gradient-gold tracking-[0.2em] text-sm">
+                  OFFRES — {department_name.toUpperCase()}
                 </span>
-                <h1 className="luxury-heading-dark mt-3">
+                <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white mt-6 leading-[1.1] drop-shadow-lg">
                   {positioningStatement}
                 </h1>
-                <div className="mt-8 flex justify-center">
-                  <a href="#solutions" className="btn-primary">
-                    Découvrir nos solutions
+                <div className="mt-12 flex justify-center">
+                  <a href="#solutions" className="btn-primary overflow-hidden relative group">
+                    <span className="relative z-10">Découvrir nos solutions</span>
+                    <div className="absolute inset-0 bg-[var(--gold-light)] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
                   </a>
                 </div>
               </div>
             </div>
           </>
         ) : (
-          <div className="bg-[var(--night)]">
-            <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-24 lg:py-32">
-              <div className="text-center max-w-3xl mx-auto">
-                <span className="kicker text-gradient-gold">
-                  Offres — {department_name}
+          <div className="bg-[var(--night)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--gold-metallic)]/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
+            <div className="relative mx-auto max-w-6xl px-6 py-24 md:py-32 lg:py-40">
+              <div className="text-center max-w-4xl mx-auto">
+                <span className="kicker text-gradient-gold tracking-[0.2em] text-sm">
+                  OFFRES — {department_name.toUpperCase()}
                 </span>
-                <h1 className="luxury-heading-dark mt-3">
+                <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white mt-6 leading-[1.1] drop-shadow-lg">
                   {positioningStatement}
                 </h1>
-                <div className="mt-8 flex justify-center">
-                  <a href="#solutions" className="btn-primary">
-                    Découvrir nos solutions
+                <div className="mt-12 flex justify-center">
+                  <a href="#solutions" className="btn-primary overflow-hidden relative group">
+                    <span className="relative z-10">Découvrir nos solutions</span>
+                    <div className="absolute inset-0 bg-[var(--gold-light)] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
                   </a>
                 </div>
               </div>
@@ -89,15 +92,16 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
 
       {/* ─── 2. Metrics Banner ─── */}
       {metrics && metrics.length > 0 && (
-        <section ref={metricsRef} className="reveal -mt-12 relative z-10">
+        <section ref={metricsRef} className="reveal -mt-16 relative z-20">
           <div className="mx-auto max-w-5xl px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-[var(--pure-white)]/90 backdrop-blur-xl rounded-2xl border border-[var(--gold-metallic)]/20 shadow-2xl p-8 transform transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(198,168,124,0.3)]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 bg-[var(--pure-white)]/95 backdrop-blur-2xl rounded-sm border border-[var(--gold-metallic)]/30 shadow-[0_30px_60px_-15px_rgba(10,15,28,0.1)]">
               {metrics.map((metric, i) => (
-                <div key={i} className="group text-center md:border-r last:border-0 border-[var(--gold-metallic)]/10 px-4 transition-transform duration-300 hover:-translate-y-1">
-                  <div className="font-display text-4xl md:text-5xl text-[var(--gold-dark)] group-hover:scale-110 transition-transform duration-500 ease-out">
+                <div key={i} className="group relative text-center py-10 px-6 md:border-r last:border-0 border-[var(--gold-metallic)]/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--gold-metallic)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="relative z-10 font-display text-4xl md:text-5xl text-[var(--gold-dark)] group-hover:scale-105 transition-transform duration-700 ease-out">
                     {metric.value}
                   </div>
-                  <div className="text-sm font-medium tracking-wider text-[var(--night-80)] uppercase mt-3 group-hover:text-[var(--gold-dark)] transition-colors duration-300">
+                  <div className="relative z-10 text-xs font-bold tracking-[0.15em] text-[var(--night-80)] uppercase mt-4 group-hover:text-[var(--night)] transition-colors duration-500">
                     {metric.label}
                   </div>
                 </div>
@@ -111,15 +115,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {presentation && (
         <section
           ref={aboutRef}
-          className="reveal py-14 sm:py-18 lg:py-24"
+          className="reveal py-20 sm:py-28 lg:py-32 relative"
         >
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="max-w-3xl mx-auto text-center">
-              <span className="kicker text-gradient-gold">Présentation</span>
-              <h2 className="luxury-heading mt-3">
-                À propos du département
-              </h2>
-              <p className="luxury-subheading mt-8 leading-relaxed">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-[var(--gold-metallic)]/50 to-transparent" />
+          <div className="mx-auto max-w-4xl px-6">
+            <div className="text-center">
+              <span className="text-xs font-bold tracking-[0.2em] text-[var(--gold-dark)] uppercase">Présentation</span>
+              <p className="font-display text-2xl md:text-3xl lg:text-4xl leading-relaxed text-[var(--night)] mt-10">
                 {presentation}
               </p>
             </div>
@@ -131,27 +133,25 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {missions.length > 0 && (
         <section
           ref={missionsRef}
-          className="reveal py-14 sm:py-18 lg:py-24 bg-gradient-to-b from-[var(--white-smoke)] to-transparent"
+          className="reveal py-20 sm:py-28 lg:py-32 bg-[var(--white-smoke)] relative"
         >
           <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Ce que nous faisons</span>
-              <h2 className="luxury-heading mt-3">
+            <div className="max-w-2xl">
+              <span className="text-xs font-bold tracking-[0.2em] text-[var(--gold-dark)] uppercase">Ce que nous faisons</span>
+              <h2 className="font-display text-3xl md:text-5xl text-[var(--night)] mt-4">
                 Nos missions
               </h2>
             </div>
-            <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
               {missions.map((mission, i) => (
                 <div
                   key={i}
-                  className="group flex items-start gap-5 rounded-2xl border border-[var(--gold-metallic)]/15 bg-[var(--pure-white)]/80 backdrop-blur-sm p-8 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:border-[var(--gold-metallic)]/40"
+                  className="group relative pl-8 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-[var(--gold-metallic)]/30 hover:before:bg-[var(--gold-dark)] transition-all duration-500"
                 >
-                  <div className="shrink-0 mt-0.5">
-                    <div className="w-12 h-12 rounded-full bg-[var(--gold-light)]/20 border border-[var(--gold-metallic)]/20 flex items-center justify-center text-[var(--night)] group-hover:bg-[var(--gold-metallic)]/20 group-hover:scale-110 transition-all duration-500">
-                      <FiCheck className="text-xl text-[var(--gold-dark)]" />
-                    </div>
+                  <div className="text-xs font-bold tracking-[0.15em] text-[var(--gold-dark)] mb-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    0{i + 1}
                   </div>
-                  <p className="text-base leading-relaxed text-[var(--night-80)] group-hover:text-[var(--night)] transition-colors duration-300">
+                  <p className="text-lg md:text-xl leading-relaxed text-[var(--night-80)] group-hover:text-[var(--night)] transition-colors duration-500">
                     {mission}
                   </p>
                 </div>
