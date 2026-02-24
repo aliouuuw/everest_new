@@ -58,18 +58,22 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="md:col-span-8">
               <div className="flex items-center gap-4 mb-12">
                 <div className="w-12 h-px bg-[var(--gold-dark)]" />
-                <span className="kicker text-gradient-gold">{department_name}</span>
+                <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--gold-dark)]">
+                  {department_name}
+                </span>
               </div>
-              <h1 className="luxury-heading">{hero_headline}</h1>
+              <h1 className="font-display text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                {hero_headline}
+              </h1>
             </div>
             
             <div className="md:col-span-4 pb-4">
-              <p className="luxury-subheading border-l border-[var(--gold-metallic)] pl-6">
+              <p className="text-lg md:text-xl leading-relaxed text-[var(--night-80)] font-light mb-10 border-l border-[var(--gold-metallic)] pl-6">
                 {hero_subtitle}
               </p>
-              <a href="#solutions" className="group inline-flex items-center gap-4 text-xs font-bold tracking-[0.2em] uppercase transition-all">
-                <span className="border-b border-[var(--night)] pb-1 group-hover:border-[var(--gold-metallic)] group-hover:text-[var(--gold-dark)] transition-colors">Découvrir les solutions</span>
-                <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform group-hover:text-[var(--gold-dark)]" />
+              <a href="#solutions" className="btn-secondary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                <span>Découvrir les solutions</span>
+                <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
               </a>
             </div>
           </div>
@@ -375,7 +379,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-primary font-display tracking-wide">
+              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
                 Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>
