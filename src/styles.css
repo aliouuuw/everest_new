@@ -61,7 +61,7 @@ body {
 
 /* Lenis smooth scroll styles */
 html {
-  scroll-behavior: auto; /* Disable native scroll behavior for Lenis */
+  scroll-behavior: smooth; /* Enable native smooth scroll behavior */
 }
 
 /* Ensure Lenis works with all scrollable containers */
