@@ -71,7 +71,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               <p className="text-lg md:text-xl leading-relaxed text-[var(--night-80)] font-light mb-10 border-l border-[var(--gold-metallic)] pl-6">
                 {hero_subtitle}
               </p>
-              <a href="#solutions" className="btn-secondary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+              <a href="#solutions" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
                 <span>Découvrir les solutions</span>
                 <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
               </a>
@@ -379,7 +379,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
+              <a href="/contact" className="btn-secondary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
                 Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>
