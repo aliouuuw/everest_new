@@ -41,12 +41,11 @@ export const Footer = () => {
           <div>
             <div className="font-display mb-3">Offres & services</div>
             <ul className="text-sm text-secondary space-y-2">
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#marche-capitaux">Marché des capitaux</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#ingenieurie-financiere">Ingénieurie financière</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#recherche-analyses">Recherche et analyses</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#gestion-libre">Gestion libre</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#gestion-sous-mandat">Gestion sous-mandat</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#gestion-assistee">Gestion assistée</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/marche-capitaux">Marché des capitaux</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/ingenieurie-financiere">Ingénierie financière</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-sous-mandat">Gestion sous-mandat</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-libre">Gestion libre</a></li>
+              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-assistee">Gestion assistée</a></li>
             </ul>
           </div>
 
