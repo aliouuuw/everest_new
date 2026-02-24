@@ -119,12 +119,6 @@ const gestionLibreRoute = createRoute({
   component: ServicesPage,
 })
 
-const gestionMandatRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/gestion-sous-mandat',
-  component: ServicesPage,
-})
-
 const gestionAssisteeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-assistee',
@@ -256,7 +250,6 @@ const routeTree = rootRoute.addChildren([
   mandateRoute,
   servicesRoute,
   gestionLibreRoute,
-  gestionMandatRoute,
   gestionAssisteeRoute,
   bourseRoute,
   simulateurRoute,
