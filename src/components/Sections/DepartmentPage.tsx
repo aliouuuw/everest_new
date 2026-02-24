@@ -161,16 +161,16 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         </section>
       )}
 
-      {/* ─── 5. Areas of Intervention (Animated Bento Grid) ─── */}
+      {/* ─── 5. Areas of Intervention (Interactive List) ─── */}
       {operations_selected.length > 0 && (
         <section
           ref={operationsRef}
           className="reveal py-14 sm:py-18 lg:py-24 relative overflow-hidden"
         >
           {/* Subtle background decoration */}
-          <div className="absolute top-1/2 left-0 w-full h-[500px] bg-[var(--gold-metallic)]/5 blur-[100px] rounded-full -translate-y-1/2 pointer-events-none" />
+          <div className="absolute top-1/2 right-0 w-full h-[500px] bg-[var(--gold-metallic)]/5 blur-[120px] rounded-full -translate-y-1/2 pointer-events-none translate-x-1/4" />
           
-          <div className="relative mx-auto max-w-6xl px-6">
+          <div className="relative mx-auto max-w-4xl px-6">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="kicker text-gradient-gold">
                 Domaines d'intervention
@@ -180,58 +180,34 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               </h2>
             </div>
             
-            {/* Bento Grid layout */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px]">
-              {operations_selected.map((operation, i) => {
-                // Make the first item span 2 columns and 2 rows if there are enough items
-                const isFeatured = i === 0 && operations_selected.length > 3
-                return (
-                  <div
-                    key={i}
-                    className={`group relative overflow-hidden rounded-3xl border border-[var(--gold-metallic)]/20 bg-[var(--pure-white)]/90 backdrop-blur-xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 flex flex-col justify-end ${
-                      isFeatured ? 'md:col-span-2 md:row-span-2' : ''
-                    }`}
-                  >
-                    {/* Animated background glows */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent to-[var(--gold-metallic)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="pointer-events-none absolute -top-24 -right-24 w-64 h-64 rounded-full bg-[var(--gold-metallic)]/10 blur-3xl group-hover:bg-[var(--gold-metallic)]/25 group-hover:scale-150 transition-all duration-1000 ease-out" />
-                    
-                    {/* Abstract Data/Chart Graphics (Unique per card based on modulo) */}
-                    <div className="absolute top-8 right-8 opacity-30 group-hover:opacity-100 transition-opacity duration-700">
-                      {i % 3 === 0 && (
-                        <div className="w-20 h-20 border-2 border-[var(--gold-metallic)]/30 rounded-full group-hover:scale-150 group-hover:rotate-[135deg] transition-all duration-1000 border-dashed flex items-center justify-center">
-                           <div className="w-10 h-10 border border-[var(--gold-metallic)]/50 rounded-full" />
-                        </div>
-                      )}
-                      {i % 3 === 1 && (
-                        <div className="w-16 h-16 grid grid-cols-3 gap-1.5 group-hover:rotate-90 transition-all duration-1000">
-                          {[...Array(9)].map((_, j) => (
-                            <div key={j} className="bg-[var(--gold-metallic)]/40 rounded-full group-hover:bg-[var(--gold-metallic)] transition-colors duration-500" style={{ transitionDelay: `${j * 40}ms` }} />
-                          ))}
-                        </div>
-                      )}
-                      {i % 3 === 2 && (
-                        <div className="flex gap-2 h-16 items-end">
-                          {[40, 70, 100, 60].map((h, j) => (
-                            <div key={j} className="w-2.5 bg-[var(--gold-metallic)]/30 rounded-t-sm transition-all duration-500 group-hover:bg-[var(--gold-dark)]" style={{ height: `${h}%`, transitionDelay: `${j * 100}ms` }} />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="relative z-10 mt-auto">
-                      <div className="mb-6 inline-flex w-14 h-14 rounded-2xl bg-[var(--gold-light)]/30 border border-[var(--gold-metallic)]/20 items-center justify-center group-hover:bg-[var(--gold-metallic)]/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                        <FiTarget className="text-2xl text-[var(--gold-dark)]" />
-                      </div>
-                      <h3 className={`font-display text-[var(--night)] leading-tight transition-transform duration-500 group-hover:translate-x-2 ${isFeatured ? 'text-3xl max-w-md' : 'text-xl'}`}>
-                        {operation}
-                      </h3>
-                      {/* Animated bottom line indicator */}
-                      <div className="h-0.5 w-0 bg-[var(--gold-dark)] mt-5 group-hover:w-16 transition-all duration-700 ease-out" />
-                    </div>
+            {/* Interactive Vertical List layout */}
+            <div className="flex flex-col border-t border-[var(--gold-metallic)]/20">
+              {operations_selected.map((operation, i) => (
+                <div
+                  key={i}
+                  className="group relative flex items-center gap-6 md:gap-10 py-8 border-b border-[var(--gold-metallic)]/20 transition-all duration-500 overflow-hidden"
+                >
+                  {/* Hover Background Layer */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold-light)]/0 via-[var(--gold-light)]/5 to-[var(--gold-light)]/0 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out" />
+                  
+                  {/* Index / Number */}
+                  <div className="relative z-10 shrink-0 text-3xl md:text-5xl font-display text-[var(--gold-metallic)]/30 group-hover:text-[var(--gold-dark)] transition-colors duration-500 min-w-[3rem] md:min-w-[4rem]">
+                    {String(i + 1).padStart(2, '0')}
                   </div>
-                )
-              })}
+
+                  {/* Icon */}
+                  <div className="relative z-10 shrink-0 hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-[var(--gold-metallic)]/20 text-[var(--gold-dark)] opacity-50 group-hover:opacity-100 group-hover:bg-[var(--gold-light)]/20 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                    <FiTarget className="text-xl" />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 flex-grow pr-8">
+                    <h3 className="font-display text-xl md:text-2xl lg:text-3xl text-[var(--night)] group-hover:text-[var(--gold-dark)] transition-colors duration-500 leading-tight md:leading-snug">
+                      {operation}
+                    </h3>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
