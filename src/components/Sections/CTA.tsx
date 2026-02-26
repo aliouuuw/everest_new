@@ -19,11 +19,11 @@ export const CTA: React.FC<{
       id="contact"
       style={{ background: 'var(--night)' }}
     >
-      {/* Centered gold radial glow */}
+      {/* Centered multi-color radial glow incorporating mauve and jaune-or */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-60"
         style={{
-          background: 'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(202,148,47,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 50% at 50% 50%, var(--mauve-10) 0%, rgba(202,148,47,0.05) 40%, transparent 80%)',
         }}
       />
 
@@ -52,10 +52,10 @@ export const CTA: React.FC<{
             </em>
           </h2>
 
-          {/* Gold rule */}
+          {/* Dual-tone rule (mauve to jaune-or) */}
           <div
-            className="h-[1px] w-16 mx-auto mt-8 mb-8"
-            style={{ background: 'linear-gradient(90deg, transparent, var(--jaune-or), transparent)' }}
+            className="h-[1px] w-24 mx-auto mt-8 mb-8"
+            style={{ background: 'linear-gradient(90deg, transparent, var(--mauve), var(--jaune-or), transparent)' }}
           />
 
           <p

@@ -83,11 +83,11 @@ export const Services: React.FC = () => {
       id="services"
       style={{ background: 'var(--night)' }}
     >
-      {/* Subtle radial glow */}
+      {/* Subtle dual radial glow (mauve and jaune-or) */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-70"
         style={{
-          background: 'radial-gradient(ellipse 50% 50% at 50% 0%, rgba(202,148,47,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 60% at 30% 0%, var(--mauve-10) 0%, rgba(202,148,47,0.05) 40%, transparent 80%)',
         }}
       />
 

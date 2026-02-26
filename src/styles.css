@@ -18,7 +18,7 @@
   --night-60: rgba(10, 10, 10, 0.6);
   --night-20: rgba(10, 10, 10, 0.2);
   --night-10: rgba(10, 10, 10, 0.1);
-  --jaune-or-light: var(--jaune-or-light);
+  --jaune-or-light: rgba(202, 148, 47, 0.4);
   --jaune-or-30: rgba(202, 148, 47, 0.3);
   --jaune-or-20: rgba(202, 148, 47, 0.2);
   --jaune-or-10: rgba(202, 148, 47, 0.1);
@@ -26,7 +26,7 @@
   --mauve-10: rgba(70, 29, 76, 0.1);
   
   /* Typography - Modern Dynamic Luxury */
-  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Fraunces', 'Georgia', serif;
   
   /* Backgrounds */
