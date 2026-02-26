@@ -59,8 +59,8 @@ export const HeroSectionMountain: React.FC = () => {
         />
         {/* Bottom fade for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--night)] via-[var(--night)]/60 to-transparent pointer-events-none" />
-        {/* Left editorial fade */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--night)]/70 via-transparent to-transparent pointer-events-none" />
+        {/* Left editorial fade with subtle mauve hint */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--night)]/80 via-[var(--mauve-10)]/30 to-transparent pointer-events-none" />
         {/* Film grain overlay */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
