@@ -33,30 +33,32 @@ const services: Array<Service> = [
 
 const ServiceCard: React.FC<Service> = ({ icon: Icon, title, desc, href }) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/20 bg-[var(--night)]/60 backdrop-blur-md p-8 transition-all glass-card-hover flex flex-col h-full">
       {/* Decorative gold glow */}
-      <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+      <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic)]/10 blur-3xl group-hover:bg-[var(--gold-metallic)]/20 transition-all duration-700" />
+      
+      {/* Subtle border gradient */}
+      <div className="absolute inset-0 rounded-2xl border border-white/5 group-hover:border-[var(--gold-metallic)]/30 transition-colors duration-500" pointer-events-none />
 
-      <div className="flex items-start gap-5">
+      <div className="flex flex-col flex-grow relative z-10">
         {/* Icon badge */}
-        <div className="w-20 h-20 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center shrink-0">
-          <div className="w-14 h-14 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-2xl transition-transform duration-300 group-hover:scale-110">
-            <Icon />
-          </div>
+        <div className="w-16 h-16 mb-6 rounded-2xl bg-gradient-to-br from-[var(--night)] to-[#1a1d24] border border-[var(--gold-metallic)]/30 shadow-[0_0_15px_rgba(202,148,47,0.1)] flex items-center justify-center shrink-0 group-hover:shadow-[0_0_25px_rgba(202,148,47,0.2)] transition-shadow duration-500">
+          <Icon className="text-2xl text-[var(--gold-metallic)] transition-transform duration-500 group-hover:scale-110" />
         </div>
 
         <div>
-          <div className="font-display text-lg mb-1">{title}</div>
-          <p className="text-secondary text-sm">{desc}</p>
+          <div className="font-display text-xl mb-3 text-white tracking-wide">{title}</div>
+          <p className="text-secondary-dark text-base leading-relaxed">{desc}</p>
         </div>
       </div>
 
       {/* Subtle divider and affordance */}
-      <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-      <a href={href} className="mt-3 text-xs text-[var(--night-80)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-200 cursor-pointer inline-flex items-center gap-1 group/link">
-        En savoir plus
-        <span className="text-[var(--night-80)]/60 group-hover/link:text-[var(--gold-metallic)] transition-colors duration-200">→</span>
-      </a>
+      <div className="mt-8 pt-6 border-t border-[var(--gold-metallic)]/10 relative z-10">
+        <a href={href} className="text-sm font-medium tracking-wider uppercase text-[var(--gold-metallic)]/80 hover:text-[var(--gold-metallic)] transition-colors duration-300 inline-flex items-center gap-2 group/link">
+          En savoir plus
+          <span className="transform group-hover/link:translate-x-1 transition-transform duration-300">→</span>
+        </a>
+      </div>
     </div>
   );
 };
@@ -113,29 +115,35 @@ export const Services: React.FC = () => {
     <section 
       key={`services-${location.pathname}`}
       ref={sectionRef} 
-      className="reveal py-24 relative overflow-hidden" 
+      className="reveal py-32 relative overflow-hidden bg-[var(--night)] border-t border-white/5" 
       id="services"
     >      
-      {/* Background image */}
+      {/* Background cinematic texture */}
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10 mix-blend-overlay"
         style={{
           backgroundImage: 'url(/background-sol.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'no-repeat',
+          filter: 'grayscale(100%) contrast(120%)'
         }}
       />
       
+      {/* Cinematic lighting gradients */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--gold-metallic)]/20 to-transparent" />
+      <div className="absolute top-1/2 left-0 w-full h-full bg-gradient-to-b from-transparent to-[var(--night)]" />
+      <div className="absolute -left-1/4 top-1/4 w-1/2 h-1/2 bg-[var(--gold-metallic)]/5 blur-[150px] rounded-full pointer-events-none" />
+      
       {/* Content overlay */}
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="kicker text-gradient-gold">Nos offres</span>
-          <h2 className="luxury-heading mt-3">Solutions pour chaque profil investisseur</h2>
-          <p className="luxury-subheading mt-5 pt-10">De la structuration d'opérations aux portefeuilles délégués, nous couvrons l'essentiel du cycle d'investissement.</p>
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em]">NOS EXPERTISES</span>
+          <h2 className="luxury-heading-dark mt-4 mb-6">Des solutions sur-mesure pour chaque profil d'investisseur</h2>
+          <p className="luxury-subheading-dark text-lg">De la structuration d'opérations complexes à la gestion de portefeuilles, nous couvrons l'intégralité du cycle de création de valeur sur les marchés de capitaux.</p>
         </div>
 
-        <div ref={gridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div ref={gridRef} className="reveal-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
           {services.map((s) => (
             <ServiceCard key={s.title} {...s} href={s.href} />
           ))}

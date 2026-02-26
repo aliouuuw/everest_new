@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 // Lightweight inline sparkline (no external libs)
-const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: string }> = ({ points, stroke = "#B68D40", fill = "rgba(182,141,64,0.15)" }) => {
+const Sparkline: React.FC<{ points: Array<number>; stroke?: string; fill?: string }> = ({ points, stroke = "#CA942F", fill = "rgba(202,148,47,0.15)" }) => {
   const width = 120;
   const height = 36;
   const max = Math.max(...points);
@@ -81,37 +81,40 @@ export const ClientPortalPreview: React.FC = () => {
   }, [sectionRef, countersTriggered]);
 
   return (
-    <section ref={sectionRef} id="portal-preview" className="reveal py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={sectionRef} id="portal-preview" className="reveal py-24 bg-[var(--night)] relative overflow-hidden">
+      {/* Background cinematic elements */}
+      <div className="absolute top-1/4 right-0 w-1/3 h-1/2 bg-[var(--gold-metallic)]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="kicker text-gradient-gold">Aperçu du portail client</span>
-          <h2 className="luxury-heading mt-3">Un portail pensé pour la gestion patrimoniale</h2>
-          <p className="luxury-subheading mt-5 pt-8">Démonstration réaliste d’interface. Les données ci‑dessous sont fictives mais représentatives.</p>
+          <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em] uppercase">Aperçu du portail client</span>
+          <h2 className="luxury-heading-dark mt-4">Un portail pensé pour la gestion patrimoniale</h2>
+          <p className="luxury-subheading-dark mt-5 pt-4">Démonstration réaliste d’interface. Les données ci‑dessous sont fictives mais représentatives de notre environnement sécurisé.</p>
         </div>
 
         {/* App window */}
-        <div className="mt-12 stat-card overflow-hidden p-0">
+        <div className="mt-16 rounded-2xl overflow-hidden border border-white/10 bg-[var(--night)]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] shadow-[var(--gold-metallic)]/5">
           {/* App chrome */}
-          <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--night)]/10 bg-[var(--white-smoke)]/60">
-            <div className="flex items-center gap-1.5">
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-300" />
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-yellow-300" />
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-green-300" />
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+            <div className="flex items-center gap-2">
+              <span className="inline-block w-3 h-3 rounded-full bg-red-500/80 border border-red-500/50" />
+              <span className="inline-block w-3 h-3 rounded-full bg-yellow-500/80 border border-yellow-500/50" />
+              <span className="inline-block w-3 h-3 rounded-full bg-green-500/80 border border-green-500/50" />
             </div>
-            <div className="flex items-center gap-3">
-              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                <FaSearch className="text-secondary" />
-                <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 border border-white/10">
+                <FaSearch className="text-white/40 text-xs" />
+                <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm text-white outline-none placeholder:text-white/40 w-48" />
               </div>
-              <div className="text-xs text-secondary">client.everest-finance.sn</div>
-              <img src="/logo-everest.png" alt="Everest" className="h-5" />
+              <div className="text-xs text-white/40 font-mono">client.everest-finance.sn</div>
             </div>
           </div>
 
           <div className="grid grid-cols-12">
             {/* Sidebar */}
-            <aside className="col-span-3 lg:col-span-2 border-r border-[var(--night)]/10 bg-[var(--white-smoke)]/50 p-3">
-              <div className="font-display text-sm mb-3">Navigation</div>
+            <aside className="col-span-3 lg:col-span-2 border-r border-white/10 bg-black/20 p-4">
+              <div className="font-display text-xs text-white/40 uppercase tracking-widest mb-4">Navigation</div>
               <nav className="space-y-1 text-sm">
                 {[
                   { icon: <FaHome />, label: "Tableau de bord", active: true },
@@ -124,54 +127,55 @@ export const ClientPortalPreview: React.FC = () => {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-default ${
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-default transition-colors ${
                       item.active
-                        ? 'bg-[var(--night)] text-[var(--pure-white)]'
-                        : 'hover:bg-[var(--white-smoke)] text-secondary'
+                        ? 'bg-[var(--gold-metallic)]/10 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/20'
+                        : 'hover:bg-white/5 text-white/60 hover:text-white'
                     }`}
                   >
-                    <span className="opacity-80">{item.icon}</span>
-                    <span>{item.label}</span>
+                    <span className={item.active ? 'opacity-100' : 'opacity-60'}>{item.icon}</span>
+                    <span className="font-medium">{item.label}</span>
                   </div>
                 ))}
               </nav>
 
-              <div className="mt-6 p-3 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                <div className="text-xs text-secondary">Solde espèces</div>
+              <div className="mt-8 p-4 rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--gold-metallic)]/10 rounded-full blur-xl" />
+                <div className="text-xs text-white/60 mb-1 relative z-10">Solde espèces</div>
                 {/* eslint-disable-next-line no-irregular-whitespace */}
-                <div className="font-display text-lg">{cashBalanceCounter.value}</div>
+                <div className="font-mono text-lg text-white font-medium relative z-10">{cashBalanceCounter.value}</div>
               </div>
             </aside>
 
             {/* Content */}
-            <div className="col-span-9 lg:col-span-10 p-4">
+            <div className="col-span-9 lg:col-span-10 p-6 bg-gradient-to-br from-transparent to-black/40">
               {/* Header row */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="font-display">Tableau de bord</div>
-                <div className="flex items-center gap-3 text-xs text-secondary">
-                  <div>Compte: 00012345</div>
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--white-smoke)] border border-[var(--night)]/10">
-                    <FaBell className="opacity-70" />
-                    <span>3</span>
+              <div className="flex items-center justify-between mb-6">
+                <div className="font-display text-xl text-white">Tableau de bord</div>
+                <div className="flex items-center gap-4 text-sm text-white/60">
+                  <div className="font-mono">Compte: 00012345</div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20 text-[var(--gold-light)]">
+                    <FaBell className="text-xs" />
+                    <span className="font-medium text-xs">3</span>
                   </div>
                 </div>
               </div>
 
               {/* KPI cards */}
-              <div className="reveal-stagger grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="reveal-stagger grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
                   { label: "Valeur totale", counter: totalValueCounter, delta: "+1,2%", trend: [92, 95, 93, 98, 105, 110, 124] },
                   { label: "Perf. YTD", counter: ytdPerfCounter, delta: "+0,3%", trend: [2, 3, 2, 4, 5, 7, 8.6] },
                   { label: "Liquidités", counter: liquidityCounter, delta: "=", trend: [7, 7.5, 8, 8.6, 9, 9.3, 9.3] },
                   { label: "Risque", value: "Modéré", delta: "Stable", trend: [60, 58, 59, 57, 58, 58, 58] },
                 ].map((k, i) => (
-                  <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10">
-                    <div className="text-secondary text-xs">{k.label}</div>
+                  <div key={i} className="rounded-xl p-5 bg-white/5 border border-white/10 hover:border-[var(--gold-metallic)]/30 transition-colors group">
+                    <div className="text-white/60 text-xs mb-1 uppercase tracking-wider">{k.label}</div>
                     <div className="flex items-end justify-between mt-1">
-                      <div className="font-display text-lg">{k.counter ? k.counter.value : k.value}</div>
-                      <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
+                      <div className="font-display text-2xl text-white group-hover:text-[var(--gold-light)] transition-colors">{k.counter ? k.counter.value : k.value}</div>
+                      <div className={`text-[10px] px-2 py-0.5 rounded font-mono ${k.delta.startsWith('+') ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : k.delta === '=' ? 'bg-white/10 text-white/60 border border-white/20' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>{k.delta}</div>
                     </div>
-                    <div className="mt-2 opacity-80">
+                    <div className="mt-4 opacity-70 group-hover:opacity-100 transition-opacity">
                       <Sparkline points={k.trend} />
                     </div>
                   </div>
@@ -179,23 +183,23 @@ export const ClientPortalPreview: React.FC = () => {
               </div>
 
               {/* Main grid */}
-              <div className="mt-5 grid grid-cols-1 xl:grid-cols-3 gap-4">
+              <div className="mt-6 grid grid-cols-1 xl:grid-cols-3 gap-6">
                 {/* Positions table */}
-                <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-display">Positions</div>
-                    <div className="text-xs text-secondary">Mise à jour: il y a 5 min</div>
+                <div className="xl:col-span-2 rounded-xl p-5 border border-white/10 bg-white/5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="text-base font-display text-white">Positions</div>
+                    <div className="text-xs text-white/40">Mise à jour: il y a 5 min</div>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="text-left text-secondary">
-                          <th className="py-2">Titre</th>
-                          <th className="py-2">Qté</th>
-                          <th className="py-2">Prix moy.</th>
-                          <th className="py-2">Valeur</th>
-                          <th className="py-2">Perf.</th>
-                          <th className="py-2">Alloc.</th>
+                        <tr className="text-left text-white/50 border-b border-white/10">
+                          <th className="py-3 font-medium">Titre</th>
+                          <th className="py-3 font-medium">Qté</th>
+                          <th className="py-3 font-medium">Prix moy.</th>
+                          <th className="py-3 font-medium">Valeur</th>
+                          <th className="py-3 font-medium">Perf.</th>
+                          <th className="py-3 font-medium">Alloc.</th>
                         </tr>
                       </thead>
                       <tbody className="align-top">
@@ -205,15 +209,15 @@ export const ClientPortalPreview: React.FC = () => {
                           { t: 'PALMCI', q: 300, pm: '6 000', valueCounter: palmciValueCounter, perfCounter: palmciPerfCounter, a: 18 },
                           { t: 'OAT SN 2028 6.2%', q: 40, pm: '100 000', valueCounter: oatValueCounter, perfCounter: oatPerfCounter, a: 27 },
                         ].map((row, i) => (
-                          <tr key={i} className="border-t border-[var(--night)]/10">
-                            <td className="py-2 font-medium">{row.t}</td>
-                            <td className="py-2">{row.q}</td>
-                            <td className="py-2">{row.pm}</td>
-                            <td className="py-2">{row.valueCounter.value} FCFA</td>
-                            <td className={`py-2 ${row.perfCounter.value.startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.perfCounter.value}</td>
-                            <td className="py-2">
-                              <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
-                                <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--gold-metallic)' }} />
+                          <tr key={i} className="border-b border-white/5 last:border-0">
+                            <td className="py-3 font-medium text-white">{row.t}</td>
+                            <td className="py-3 text-white/80 font-mono">{row.q}</td>
+                            <td className="py-3 text-white/80 font-mono">{row.pm}</td>
+                            <td className="py-3 text-white font-mono">{row.valueCounter.value}</td>
+                            <td className={`py-3 font-mono font-medium ${row.perfCounter.value.startsWith('-') ? 'text-red-400' : 'text-emerald-400'}`}>{row.perfCounter.value}</td>
+                            <td className="py-3">
+                              <div className="w-20 h-1.5 rounded-full bg-white/10 mt-2">
+                                <div className="h-1.5 rounded-full" style={{ width: `${row.a}%`, background: 'var(--gold-metallic)' }} />
                               </div>
                             </td>
                           </tr>
@@ -224,41 +228,45 @@ export const ClientPortalPreview: React.FC = () => {
                 </div>
 
                 {/* Allocation donut + activity */}
-                <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-                  <div className="text-sm font-display mb-3">Répartition</div>
-                  <div className="flex items-center gap-4">
-                    <div className="relative w-28 h-28 shrink-0 rounded-full"
+                <div className="rounded-xl p-5 border border-white/10 bg-white/5 flex flex-col">
+                  <div className="text-base font-display text-white mb-6">Répartition</div>
+                  <div className="flex flex-col items-center gap-6 flex-grow justify-center">
+                    <div className="relative w-36 h-36 shrink-0 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(202,148,47,0.1)]"
                          style={{
-                           background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
-                           mask: 'radial-gradient(circle 20px at center, transparent 20px, black 21px)'
+                           background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(202,148,47,0.4) 58% 92%, rgba(202,148,47,0.15) 92% 100%)',
+                           mask: 'radial-gradient(circle 50px at center, transparent 50px, black 51px)',
+                           WebkitMask: 'radial-gradient(circle 50px at center, transparent 50px, black 51px)'
                          }}
-                    />
-                    <div className="text-sm">
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: {stocksAllocCounter.value}</div>
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: {bondsAllocCounter.value}</div>
-                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: {cashAllocCounter.value}</div>
+                    >
+                      <div className="absolute inset-0 rounded-full border-4 border-black/20" />
+                    </div>
+                    <div className="text-sm w-full space-y-3">
+                      <div className="flex items-center justify-between"><div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> <span className="text-white/80">Actions</span></div> <span className="font-mono text-white">{stocksAllocCounter.value}</span></div>
+                      <div className="flex items-center justify-between"><div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> <span className="text-white/80">Obligations</span></div> <span className="font-mono text-white">{bondsAllocCounter.value}</span></div>
+                      <div className="flex items-center justify-between"><div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/15" /> <span className="text-white/80">Monétaire</span></div> <span className="font-mono text-white">{cashAllocCounter.value}</span></div>
                     </div>
                   </div>
-                  <div className="mt-4 text-xs text-secondary">Profil de risque: Modéré • Devise: FCFA</div>
                 </div>
               </div>
 
               {/* Transactions */}
-              <div className="mt-4 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm font-display">Dernières transactions</div>
-                  <a href="#" className="text-xs text-secondary hover:underline">Voir tout</a>
+              <div className="mt-6 rounded-xl p-5 border border-white/10 bg-white/5">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-base font-display text-white">Dernières transactions</div>
+                  <a href="#" className="text-xs text-[var(--gold-metallic)] hover:text-[var(--gold-light)] uppercase tracking-wider font-medium flex items-center gap-1 group">
+                    Voir tout <span className="transform transition-transform group-hover:translate-x-1">→</span>
+                  </a>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-left text-secondary">
-                        <th className="py-2">Date</th>
-                        <th className="py-2">Type</th>
-                        <th className="py-2">Instrument</th>
-                        <th className="py-2">Qté</th>
-                        <th className="py-2">Prix / Montant</th>
-                        <th className="py-2">Statut</th>
+                      <tr className="text-left text-white/50 border-b border-white/10">
+                        <th className="py-3 font-medium">Date</th>
+                        <th className="py-3 font-medium">Type</th>
+                        <th className="py-3 font-medium">Instrument</th>
+                        <th className="py-3 font-medium">Qté</th>
+                        <th className="py-3 font-medium">Prix / Montant</th>
+                        <th className="py-3 font-medium">Statut</th>
                       </tr>
                     </thead>
                     <tbody className="align-top">
@@ -267,17 +275,17 @@ export const ClientPortalPreview: React.FC = () => {
                         { d: '10/07', ty: 'Vente', ins: 'PALMCI', q: 300, px: '6 250', st: 'Partielle' },
                         { d: '05/07', ty: 'Coupon', ins: 'OAT SN 6.2%', q: '-', px: '249 600', st: 'Réglée' },
                       ].map((t, i) => (
-                        <tr key={i} className="border-t border-[var(--night)]/10">
-                          <td className="py-2">{t.d}</td>
-                          <td className="py-2">{t.ty}</td>
-                          <td className="py-2">{t.ins}</td>
-                          <td className="py-2">{t.q}</td>
-                          <td className="py-2">{t.px} {t.ty === 'Coupon' ? 'FCFA' : ''}</td>
-                          <td className="py-2">
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[10px] ${
-                              t.st === 'Exécutée' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                              t.st === 'Partielle' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                              'bg-[var(--white-smoke)] text-secondary border-[var(--night)]/10'
+                        <tr key={i} className="border-b border-white/5 last:border-0 text-white/80">
+                          <td className="py-3 font-mono">{t.d}</td>
+                          <td className="py-3 font-medium">{t.ty}</td>
+                          <td className="py-3 text-white">{t.ins}</td>
+                          <td className="py-3 font-mono">{t.q}</td>
+                          <td className="py-3 font-mono">{t.px} {t.ty === 'Coupon' ? 'FCFA' : ''}</td>
+                          <td className="py-3">
+                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full border text-[10px] font-medium tracking-wide uppercase ${
+                              t.st === 'Exécutée' || t.st === 'Réglée' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+                              t.st === 'Partielle' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                              'bg-white/5 text-white/60 border-white/10'
                             }`}>
                               {t.st}
                             </span>
@@ -292,9 +300,9 @@ export const ClientPortalPreview: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/auth" className="btn-primary font-display">Accès Client</a>
-          <a href="#contact" className="btn-secondary font-display">Demander une démo</a>
+        <div className="mt-12 flex flex-col sm:flex-row gap-5 justify-center">
+          <a href="/auth" className="btn-primary-dark font-display px-8">Accès Espace Client</a>
+          <a href="#contact" className="btn-secondary-dark font-display px-8">Demander une démo</a>
         </div>
       </div>
     </section>

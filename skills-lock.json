@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "webgl-expert": {
+      "source": "ronnycoding/.claude",
+      "sourceType": "github",
+      "computedHash": "4e73011c4f7422c369c8c0d89f99340e0bcf37f4379d78767ebf333cda87853a"
+    }
+  }
+}

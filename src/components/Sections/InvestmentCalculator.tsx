@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiTrendingUp } from 'react-icons/fi';
-import { FaCalculator, FaChartLine } from 'react-icons/fa';
+import { FaCalculator } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -168,36 +168,39 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
   ];
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--night)] transition-colors duration-500">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">Outil de simulation</span>
-          <h2 className="luxury-heading-dark mt-3">Calculez vos projections</h2>
-          <p className="luxury-subheading-dark mt-5 pt-8">
-            Estimez le potentiel de vos investissements avec nos différents services de gestion
+    <section ref={sectionRef} className="reveal py-24 bg-[var(--night)] relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(202,148,47,0.05)_0%,rgba(15,17,21,0)_70%)]" />
+      
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em] uppercase">Outil de simulation</span>
+          <h2 className="luxury-heading-dark mt-4">Calculez vos projections</h2>
+          <p className="luxury-subheading-dark mt-4">
+            Estimez le potentiel de vos investissements avec nos différents services de gestion. Une vision claire pour des décisions éclairées.
           </p>
         </div>
 
         {/* Tab Navigation */}
         {!calculatorOnly && (
-          <div className="flex justify-center mb-8">
-            <div className="bg-[var(--night-20)] backdrop-blur-sm border border-[var(--gold-metallic-20)] rounded-xl p-1">
+          <div className="flex justify-center mb-12">
+            <div className="bg-[var(--night)] border border-white/10 rounded-full p-1.5 flex gap-2">
               <button
                 onClick={() => setActiveTab('calculator')}
-                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
+                className={`px-8 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
                   activeTab === 'calculator'
-                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
-                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
+                    ? 'bg-[var(--gold-metallic)] text-[var(--night)] shadow-[0_0_15px_rgba(202,148,47,0.3)]'
+                    : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
                 Calculateur
               </button>
               <button
                 onClick={() => setActiveTab('comparison')}
-                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
+                className={`px-8 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
                   activeTab === 'comparison'
-                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
-                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
+                    ? 'bg-[var(--gold-metallic)] text-[var(--night)] shadow-[0_0_15px_rgba(202,148,47,0.3)]'
+                    : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
                 Comparaison
@@ -207,73 +210,87 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         )}
 
         {(calculatorOnly || activeTab === 'calculator') ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Calculator Inputs */}
-            <div className="space-y-6">
-              <div className="glass-card-dark p-6">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div className="lg:col-span-7 space-y-6">
+              <div className="glass-card-dark bg-[var(--night)]/50 border-white/5 p-8 rounded-3xl relative overflow-hidden h-full">
+                <div className="pointer-events-none absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[var(--gold-metallic)]/5 blur-3xl" />
 
-                <div className="flex items-center gap-3 mb-6">
-                  <FaCalculator className="text-xl text-[var(--gold-light)]" />
-                  <h3 className="font-display text-lg text-[var(--pure-white)]">Paramètres d'investissement</h3>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--night)] to-[#1a1d24] border border-[var(--gold-metallic)]/30 flex items-center justify-center shadow-inner">
+                    <FaCalculator className="text-xl text-[var(--gold-metallic)]" />
+                  </div>
+                  <h3 className="font-display text-2xl text-white">Paramètres</h3>
                 </div>
 
                 {/* Service Selection */}
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-secondary-dark mb-3">
-                    Service de gestion
+                <div className="mb-8">
+                  <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide">
+                    SERVICE DE GESTION
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {serviceComparison.map((service) => (
                       <button
                         key={service.service}
                         onClick={() => handleInputChange('service', service.service)}
-                        className={`p-3 rounded-xl border-2 text-left transition-all ${
+                        className={`p-4 rounded-2xl border transition-all duration-300 text-left relative overflow-hidden ${
                           inputs.service === service.service
-                            ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
-                            : 'border-[var(--gold-metallic-20)] hover:border-[var(--gold-metallic)]/50'
+                            ? 'border-[var(--gold-metallic)]/50 bg-[var(--gold-metallic)]/10 shadow-[0_0_15px_rgba(202,148,47,0.1)]'
+                            : 'border-white/10 bg-white/5 hover:border-[var(--gold-metallic)]/30 hover:bg-white/10'
                         }`}
                       >
-                        <div className="font-display text-sm mb-1 text-[var(--pure-white)]">{service.title}</div>
-                        <div className="text-xs text-secondary-dark">{service.fee} frais/an</div>
+                        {inputs.service === service.service && (
+                          <div className="absolute top-0 right-0 w-8 h-8 bg-[var(--gold-metallic)] rounded-bl-2xl -mt-2 -mr-2" />
+                        )}
+                        <div className={`font-display text-sm mb-1 ${inputs.service === service.service ? 'text-[var(--gold-metallic)]' : 'text-white'}`}>{service.title}</div>
+                        <div className="text-xs text-white/50">{service.fee} frais/an</div>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Input Fields */}
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
-                      Investissement initial (F CFA)
-                    </label>
-                    <input
-                      type="number"
-                      value={inputs.initialAmount}
-                      onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
-                      min="100000"
-                      step="50000"
-                    />
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium text-white/60 mb-3 tracking-wide">
+                        INVESTISSEMENT INITIAL
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={inputs.initialAmount}
+                          onChange={(e) => handleInputChange('initialAmount', e.target.value)}
+                          className="w-full px-4 py-3 bg-[var(--night)] border border-white/10 rounded-xl text-white focus:border-[var(--gold-metallic)]/50 focus:ring-1 focus:ring-[var(--gold-metallic)]/50 focus:outline-none transition-colors font-mono text-lg"
+                          min="100000"
+                          step="50000"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm font-medium">FCFA</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-white/60 mb-3 tracking-wide">
+                        VERSEMENT MENSUEL
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={inputs.monthlyContribution}
+                          onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
+                          className="w-full px-4 py-3 bg-[var(--night)] border border-white/10 rounded-xl text-white focus:border-[var(--gold-metallic)]/50 focus:ring-1 focus:ring-[var(--gold-metallic)]/50 focus:outline-none transition-colors font-mono text-lg"
+                          min="0"
+                          step="5000"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm font-medium">FCFA</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
-                      Versement mensuel (F CFA)
-                    </label>
-                    <input
-                      type="number"
-                      value={inputs.monthlyContribution}
-                      onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
-                      min="0"
-                      step="5000"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
-                      Horizon d'investissement (années)
+                    <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide flex justify-between">
+                      <span>HORIZON D'INVESTISSEMENT</span>
+                      <span className="text-[var(--gold-metallic)] font-bold">{inputs.timeHorizon} ans</span>
                     </label>
                     <input
                       type="range"
@@ -281,35 +298,37 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       max="20"
                       value={inputs.timeHorizon}
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
-                      className="w-full accent-[var(--gold-metallic)]"
+                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[var(--gold-metallic)]"
                     />
-                    <div className="flex justify-between text-xs text-secondary-dark mt-1">
+                    <div className="flex justify-between text-xs text-white/40 mt-3 font-medium">
                       <span>1 an</span>
-                      <span className="font-medium">{inputs.timeHorizon} ans</span>
                       <span>20 ans</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
-                      Rendement annuel attendu
+                    <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide">
+                      PROFIL DE RENDEMENT
                     </label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-3">
                       {Object.entries(expectedReturns).map(([key, value]) => (
                         <button
                           key={key}
                           onClick={() => handleInputChange('expectedReturn', value)}
-                          className={`px-3 py-2 rounded-lg border text-sm transition-all ${
+                          className={`px-4 py-3 rounded-xl border transition-all duration-300 text-center ${
                             inputs.expectedReturn === value
-                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10 text-[var(--gold-light)]'
-                              : 'border-[var(--gold-metallic-20)] text-secondary-dark hover:border-[var(--gold-metallic)]/50'
+                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10 text-[var(--gold-metallic)]'
+                              : 'border-white/10 text-white/60 hover:border-[var(--gold-metallic)]/30 hover:text-white bg-white/5'
                           }`}
                         >
-                          {key === 'conservative' && 'Conservateur'}
-                          {key === 'moderate' && 'Modéré'}
-                          {key === 'aggressive' && 'Dynamique'}
-                          <br />
-                          <span className="text-xs">{formatPercentage(value)}</span>
+                          <div className="font-medium text-sm mb-1">
+                            {key === 'conservative' && 'Conservateur'}
+                            {key === 'moderate' && 'Modéré'}
+                            {key === 'aggressive' && 'Dynamique'}
+                          </div>
+                          <div className={`text-xs font-mono ${inputs.expectedReturn === value ? 'text-[var(--gold-metallic)]' : 'text-white/40'}`}>
+                            {formatPercentage(value)}
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -319,63 +338,71 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             </div>
 
             {/* Results */}
-            <div className="space-y-6">
-              <div className="glass-card-dark p-6">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div className="lg:col-span-5 space-y-6">
+              <div className="glass-card-dark bg-gradient-to-br from-[var(--night)] to-[#14161c] border-[var(--gold-metallic)]/20 p-8 rounded-3xl relative overflow-hidden h-full flex flex-col">
+                <div className="pointer-events-none absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[var(--gold-metallic)]/10 blur-3xl" />
+                <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--gold-metallic)]/40 to-transparent" />
 
-                <div className="flex items-center gap-3 mb-6">
-                  <FiTrendingUp className="text-xl text-[var(--gold-light)]" />
-                  <h3 className="font-display text-lg text-[var(--pure-white)]">Projections estimées</h3>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/30 flex items-center justify-center">
+                    <FiTrendingUp className="text-xl text-[var(--gold-metallic)]" />
+                  </div>
+                  <h3 className="font-display text-2xl text-white">Résultats</h3>
                 </div>
 
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Total investi</span>
-                    <span className="font-display text-lg text-[var(--pure-white)]">{totalInvestedCounter.value}</span>
+                <div className="space-y-6 flex-grow">
+                  {/* Highlighted Main Result */}
+                  <div className="p-6 bg-[var(--night)] border border-[var(--gold-metallic)]/30 rounded-2xl shadow-[0_0_20px_rgba(202,148,47,0.05)] text-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[var(--gold-metallic)]/5 to-transparent pointer-events-none" />
+                    <span className="block text-xs font-bold tracking-widest text-[var(--gold-metallic)] uppercase mb-2">Capital estimé</span>
+                    <span className="block font-display text-4xl text-white tracking-tight">{projectedValueCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Frais estimés ({serviceFees[inputs.service].min}%)</span>
-                    <span className="font-display text-lg text-red-400">-{totalFeesCounter.value}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3 border-b-2 border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Valeur projetée</span>
-                    <span className="font-display text-xl text-emerald-400">{projectedValueCounter.value}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-secondary-dark">Gain net estimé</span>
-                    <span className={`font-display text-lg ${
-                      results.netReturn >= 0 ? 'text-emerald-400' : 'text-red-400'
-                    }`}>
-                      {netReturnCounter.value}
-                    </span>
-                  </div>
-
-                  <div className="mt-6 p-4 bg-[var(--gold-metallic)]/10 rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FaChartLine className="text-[var(--gold-light)]" />
-                      <span className="font-display text-sm text-[var(--pure-white)]">Rendement annuel moyen estimé</span>
+                  <div className="space-y-4 px-2">
+                    <div className="flex justify-between items-center py-3 border-b border-white/5">
+                      <span className="text-white/60 text-sm">Total investi</span>
+                      <span className="font-mono font-medium text-white">{totalInvestedCounter.value}</span>
                     </div>
-                    <div className="text-2xl font-display text-[var(--gold-light)]">
-                      {avgReturnCounter.value}
+
+                    <div className="flex justify-between items-center py-3 border-b border-white/5">
+                      <span className="text-white/60 text-sm flex items-center gap-2">
+                        Frais estimés
+                        <span className="px-2 py-0.5 rounded text-[10px] bg-white/5 text-white/40">{serviceFees[inputs.service].min}%/an</span>
+                      </span>
+                      <span className="font-mono font-medium text-white/50">-{totalFeesCounter.value}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-white/60 text-sm font-medium">Gain net projeté</span>
+                      <span className={`font-mono font-bold ${
+                        results.netReturn >= 0 ? 'text-[var(--gold-metallic)]' : 'text-red-400'
+                      }`}>
+                        +{netReturnCounter.value}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center py-3 border-t border-white/5 mt-2 pt-4">
+                      <span className="text-white/60 text-sm">Rendement annuel moyen</span>
+                      <span className="font-mono font-medium text-[var(--gold-light)]">{avgReturnCounter.value}</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="text-center">
-                <p className="text-xs text-secondary-dark mb-4">
-                  * Ces projections sont estimatives et ne constituent pas une garantie de performance.
-                  Les marchés financiers comportent des risques.
-                </p>
-                <a
-                  href="#contact"
-                  className="btn-primary font-display tracking-wide"
-                >
-                  Obtenir un conseil personnalisé
-                </a>
+                <div className="mt-8 pt-6 border-t border-white/5">
+                  <p className="text-[11px] text-white/40 leading-relaxed mb-6 text-justify">
+                    * Les performances passées ne préjugent pas des performances futures. 
+                    Ces projections sont données à titre purement indicatif et ne constituent pas un engagement contractuel.
+                  </p>
+                  <a
+                    href="#contact"
+                    className="btn-primary-dark w-full justify-center group"
+                  >
+                    Demander une étude personnalisée
+                    <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -385,25 +412,34 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             {serviceComparison.map((service) => (
               <div
                 key={service.service}
-                className={`group relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
+                className={`group relative overflow-hidden rounded-3xl border p-8 transition-all duration-500 flex flex-col ${
                   inputs.service === service.service
-                    ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
-                    : 'border-[var(--gold-metallic-20)] bg-[var(--night-20)] backdrop-blur-sm'
+                    ? 'border-[var(--gold-metallic)]/50 bg-[var(--night)] shadow-[0_10px_30px_-15px_rgba(202,148,47,0.3)]'
+                    : 'border-white/10 bg-[var(--night)] hover:border-[var(--gold-metallic)]/30'
                 }`}
               >
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                {inputs.service === service.service && (
+                  <div className="absolute inset-0 bg-gradient-to-b from-[var(--gold-metallic)]/5 to-transparent pointer-events-none" />
+                )}
+                
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic)]/5 blur-3xl group-hover:bg-[var(--gold-metallic)]/10 transition-colors" />
 
-                <div className="font-display text-lg mb-3 text-[var(--pure-white)]">{service.title}</div>
+                <div className="font-display text-2xl mb-4 text-white relative z-10">{service.title}</div>
 
-                <div className="text-2xl font-display text-[var(--gold-light)] mb-4">
-                  {service.fee}
+                <div className="mb-8 relative z-10">
+                  <div className="text-3xl font-display text-[var(--gold-metallic)] mb-1">
+                    {service.fee}
+                  </div>
+                  <div className="text-xs text-white/50 uppercase tracking-widest">Frais annuels</div>
                 </div>
 
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-4 mb-10 flex-grow relative z-10">
                   {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-secondary-dark">
-                      <div className="w-1.5 h-1.5 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
-                      {feature}
+                    <li key={index} className="flex items-start gap-3 text-sm text-white/70">
+                      <svg className="w-5 h-5 text-[var(--gold-metallic)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="pt-0.5">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -413,13 +449,13 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     handleInputChange('service', service.service);
                     setActiveTab('calculator');
                   }}
-                  className={`w-full py-2 px-4 rounded-lg font-display text-sm transition-all ${
+                  className={`w-full py-3 px-6 rounded-xl font-medium tracking-wide text-sm transition-all relative z-10 ${
                     inputs.service === service.service
-                      ? 'btn-primary'
-                      : 'btn-secondary'
+                      ? 'bg-[var(--gold-metallic)] text-[var(--night)]'
+                      : 'bg-white/5 text-white hover:bg-[var(--gold-metallic)]/20 hover:text-[var(--gold-metallic)]'
                   }`}
                 >
-                  {inputs.service === service.service ? 'Sélectionné' : 'Essayer'}
+                  {inputs.service === service.service ? 'Sélectionné' : 'Choisir ce service'}
                 </button>
               </div>
             ))}

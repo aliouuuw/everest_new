@@ -70,7 +70,10 @@ Colors palette:
 /* CSS HEX */
 --white-smoke: #f5f5f5ff;
 --timberwolf: #dcdad2ff;
---gold-metallic: #e4bd61ff;
+/* --gold-metallic: #e4bd61ff; */ -> change to Jaune or
+--jaune-or: #ca942f;
+/* added mauve */
+--mauve: #461D4C;
 --night: #0a0a0aff;
 
 /* CSS HSL */

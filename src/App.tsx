@@ -13,7 +13,7 @@ function App() {
       <MountainTransition />
       <InvestmentCalculator calculatorOnly />
       <ClientPortalPreview />
-      <CTA scheme="metallic" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
+      <CTA secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
     </>
   );
 }
