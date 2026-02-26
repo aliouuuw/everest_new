@@ -1,6 +1,10 @@
 import { useReveal } from "../Hooks/useReveal";
+import { FiArrowRight } from "react-icons/fi";
+
+type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
 export const CTA: React.FC<{
+  scheme?: CtaScheme;
   primaryHref?: string;
   primaryLabel?: string;
   secondaryHref?: string;
@@ -9,38 +13,89 @@ export const CTA: React.FC<{
   const sectionRef = useReveal<HTMLElement>();
 
   return (
-    <section ref={sectionRef} className="reveal py-24 bg-[var(--night)] relative overflow-hidden" id="contact">
-      {/* Background cinematic elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[var(--gold-metallic)]/5 to-transparent pointer-events-none" />
-      <div className="absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-[var(--gold-metallic)]/5 blur-[150px] rounded-full pointer-events-none" />
+    <section
+      ref={sectionRef}
+      className="reveal relative py-28 md:py-36 overflow-hidden"
+      id="contact"
+      style={{ background: 'var(--night)' }}
+    >
+      {/* Centered gold radial glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(202,148,47,0.08) 0%, transparent 70%)',
+        }}
+      />
 
-      <div className="mx-auto max-w-6xl px-6 relative z-10">
-        <div className="rounded-3xl relative overflow-hidden p-10 sm:p-16 transition-all border border-[var(--gold-metallic)]/20 bg-gradient-to-br from-[var(--night)] to-[#14161c] shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-10">
-          
-          {/* Metallic shine effects */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-150%] animate-[shimmer_8s_infinite]" />
-          <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--gold-metallic)]/30 to-transparent" />
-          
-          {/* Decorative gold glow */}
-          <div className="pointer-events-none absolute -top-20 -left-20 w-64 h-64 rounded-full bg-[var(--gold-metallic)]/10 blur-[80px]" />
-          
-          <div className="relative z-10 text-left max-w-xl">
-            <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em] uppercase">Prise de contact</span>
-            <h3 className="font-display text-3xl sm:text-4xl mt-4 text-white leading-tight">
-              Prêts à franchir un cap dans votre gestion patrimoniale ?
-            </h3>
-            <p className="text-white/60 mt-4 text-lg">
-              Échangeons autour de vos objectifs d'investissement et découvrez comment notre expertise peut vous accompagner vers les sommets.
-            </p>
-          </div>
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+        <div className="max-w-3xl mx-auto text-center">
+          <span
+            className="block text-[10px] tracking-[0.3em] uppercase mb-6"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+          >
+            Prise de contact
+          </span>
 
-          <div className="relative z-10 flex flex-col sm:flex-row gap-4 shrink-0 w-full md:w-auto">
-            <a href={primaryHref} className="btn-primary-dark font-display text-center justify-center w-full sm:w-auto">
-              {primaryLabel}
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)',
+              lineHeight: 1.0,
+              letterSpacing: '-0.01em',
+              color: 'var(--pure-white)',
+            }}
+          >
+            Prêts à franchir{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--gold-metallic)' }}>
+              un cap ?
+            </em>
+          </h2>
+
+          {/* Gold rule */}
+          <div
+            className="h-[1px] w-16 mx-auto mt-8 mb-8"
+            style={{ background: 'linear-gradient(90deg, transparent, var(--gold-metallic), transparent)' }}
+          />
+
+          <p
+            className="max-w-xl mx-auto mb-12"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 300,
+              fontSize: 'clamp(0.95rem, 1.4vw, 1.05rem)',
+              lineHeight: 1.75,
+              color: 'rgba(255,255,255,0.5)',
+            }}
+          >
+            Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
+            <a
+              href={primaryHref}
+              className="group inline-flex items-center gap-3 px-7 py-3.5 border border-[var(--gold-metallic)]/40 transition-all duration-500 hover:border-[var(--gold-metallic)] hover:bg-[var(--gold-metallic)]/10"
+            >
+              <span
+                className="text-[11px] tracking-[0.15em] uppercase"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+              >
+                {primaryLabel}
+              </span>
+              <FiArrowRight className="text-sm text-[var(--gold-metallic)] group-hover:translate-x-0.5 transition-transform duration-500" />
             </a>
             {secondaryHref && (
-              <a href={secondaryHref} className="btn-secondary-dark font-display text-center justify-center w-full sm:w-auto">
-                {secondaryLabel}
+              <a
+                href={secondaryHref}
+                className="group inline-flex items-center gap-4"
+              >
+                <span
+                  className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}
+                >
+                  {secondaryLabel}
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                </span>
               </a>
             )}
           </div>

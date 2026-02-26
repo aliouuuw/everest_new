@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=General+Sans:ital,wght@0,200..800;1,200..800&family=Fraunces:opsz,wght@9..144,200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -28,9 +28,18 @@
   --gold-metallic-10: rgba(199, 164, 105, 0.1);
   
   /* Typography */
-  --font-primary: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  /* Prefer a single, modern sans for a cleaner tech tone */
-  --font-display: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-primary: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  
+  /* Refined Palette - Gold Sculpture */
+  --gold-warm: #d4a853;
+  --gold-pale: #f2e8d0;
+  --cream: #faf6ef;
+  --charcoal: #1a1a1f;
+  --charcoal-light: #28282f;
+  --night-60: rgba(15, 17, 21, 0.6);
+  --gold-metallic-30: rgba(202, 148, 47, 0.3);
   
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -171,9 +180,9 @@ html {
 /* Typography Classes */
 .heading-display {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 /* Brand lockup for header */
@@ -188,10 +197,10 @@ html {
 .kicker {
   font-family: var(--font-primary);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-weight: 600;
+  letter-spacing: 0.25em;
+  font-weight: 500;
   line-height: 1.3;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 /* Alignment for financial numerals */
@@ -202,8 +211,8 @@ html {
 
 .heading-primary {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 500;
+  line-height: 1.15;
 }
 
 .text-primary {
@@ -230,9 +239,9 @@ html {
 /* Enhanced typography for luxury feel */
 .font-display {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
 }
 
 .font-primary {
@@ -244,40 +253,40 @@ html {
 /* Luxury text treatments */
 .luxury-heading {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.25rem, 6vw, 4.25rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
   color: var(--night);
 }
 
 .luxury-subheading {
   font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
-  line-height: 1.7;
-  color: var(--night-80);
-  max-width: 42rem;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--night-60);
+  max-width: 38rem;
   margin: 0 auto;
 }
 
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.25rem, 6vw, 4.25rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
   color: var(--pure-white);
 }
 
 .luxury-subheading-dark {
   font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 42rem;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 38rem;
   margin: 0 auto;
 }
 
@@ -469,15 +478,15 @@ html {
 .hero-title {
   font-family: var(--font-display);
   font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
 }
 
 .hero-subtitle {
   font-family: var(--font-primary);
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--night-80);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--night-60);
 }
 
 /* Advanced Animations */

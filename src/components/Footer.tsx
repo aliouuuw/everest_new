@@ -1,71 +1,138 @@
 import { useLocation } from '@tanstack/react-router';
-import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 export const Footer = () => {
   const location = useLocation();
-  
-  // Check if user is in admin portal
+
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
-  
-  // Hide footer if in admin portal
+
   if (isInAdminorClientPortal) {
     return null;
   }
 
+  const linkStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-primary)',
+    fontWeight: 300,
+    fontSize: '0.8rem',
+    lineHeight: 2.2,
+    color: 'rgba(255,255,255,0.4)',
+    transition: 'color 0.3s',
+  };
+
+  const headingStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-primary)',
+    fontWeight: 500,
+    fontSize: '0.7rem',
+    letterSpacing: '0.15em',
+    textTransform: 'uppercase',
+    color: 'var(--gold-metallic)',
+    marginBottom: '1.25rem',
+  };
+
   return (
-    <footer className="mb-10" style={{ background: 'var(--white-smoke)' }}>
-      <div className="mx-auto max-w-6xl px-5">
-        <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto" />
-              <span className="font-display">Everest Finance SGI</span>
+            <div className="flex items-center gap-3 mb-5">
+              <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto" style={{ filter: 'brightness(1.2)' }} />
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.1rem', color: 'var(--pure-white)' }}>
+                Everest Finance
+              </span>
             </div>
-            <p className="text-secondary text-sm">Des idées et des valeurs au service de vos ambitions.</p>
+            <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.85rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.35)' }}>
+              Des idées et des valeurs au service de vos ambitions.
+            </p>
+            <div className="flex items-center gap-3 mt-6">
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--gold-metallic)]/40 hover:text-[var(--gold-metallic)]"
+                style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+              >
+                <FaLinkedin className="text-sm" />
+              </a>
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--gold-metallic)]/40 hover:text-[var(--gold-metallic)]"
+                style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+              >
+                <FaTwitter className="text-sm" />
+              </a>
+            </div>
           </div>
 
           {/* Links */}
           <div>
-            <div className="font-display mb-3">Liens</div>
-            <ul className="text-sm text-secondary space-y-2">
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#about">À propos</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#publications">Publications</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#faq">Abécédaire / FAQ</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#performance">Performance</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="#portal-preview">Portail client</a></li>
+            <div style={headingStyle}>Liens</div>
+            <ul>
+              {[
+                { label: 'À propos', href: '#about' },
+                { label: 'Publications', href: '#publications' },
+                { label: 'Abécédaire / FAQ', href: '#faq' },
+                { label: 'Performance', href: '#performance' },
+                { label: 'Portail client', href: '#portal-preview' },
+              ].map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--gold-metallic)]">{l.label}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Offres & services */}
+          {/* Offres */}
           <div>
-            <div className="font-display mb-3">Offres & services</div>
-            <ul className="text-sm text-secondary space-y-2">
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/marche-capitaux">Marché des capitaux</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/ingenieurie-financiere">Ingénierie financière</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-sous-mandat">Gestion sous-mandat</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-libre">Gestion libre</a></li>
-              <li><a className="hover:text-[var(--gold-dark)] transition-colors" href="/gestion-assistee">Gestion assistée</a></li>
+            <div style={headingStyle}>Offres & services</div>
+            <ul>
+              {[
+                { label: 'Marché des capitaux', href: '/marche-capitaux' },
+                { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
+                { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
+                { label: 'Gestion libre', href: '/gestion-libre' },
+                { label: 'Gestion assistée', href: '/gestion-assistee' },
+              ].map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--gold-metallic)]">{l.label}</a>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <div className="font-display mb-3">Contact</div>
-            <ul className="text-sm text-secondary space-y-2">
-              <li className="flex items-start gap-2"><FaMapMarkerAlt className="mt-0.5" /> 18 Boulevard de la République, Dakar, Sénégal</li>
-              <li className="flex items-center gap-2"><FaEnvelope /> <a className="hover:text-[var(--gold-dark)] transition-colors" href="mailto:contact@everest-finance.sn">contact@everest-finance.sn</a></li>
-              <li className="flex items-center gap-2"><FaPhone /> <a className="hover:text-[var(--gold-dark)] transition-colors" href="tel:+221000000000">+221 00 000 00 00</a></li>
+            <div style={headingStyle}>Contact</div>
+            <ul className="space-y-3">
+              <li style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.8rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.4)' }}>
+                18 Boulevard de la République,<br />Dakar, Sénégal
+              </li>
+              <li>
+                <a href="mailto:contact@everest-finance.sn" style={linkStyle} className="hover:!text-[var(--gold-metallic)]">
+                  contact@everest-finance.sn
+                </a>
+              </li>
+              <li>
+                <a href="tel:+221000000000" style={linkStyle} className="hover:!text-[var(--gold-metallic)]">
+                  +221 00 000 00 00
+                </a>
+              </li>
             </ul>
-            <div className="flex items-center gap-3 mt-4">
-              <a href="#" aria-label="LinkedIn" className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-[var(--night)]/10 hover:border-[var(--gold-dark)]/40 text-secondary hover:text-[var(--gold-dark)] transition-colors">
-                <FaLinkedin />
-              </a>
-              <a href="#" aria-label="Twitter" className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-[var(--night)]/10 hover:border-[var(--gold-dark)]/40 text-secondary hover:text-[var(--gold-dark)] transition-colors">
-                <FaTwitter />
-              </a>
-            </div>
           </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+        >
+          <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)' }}>
+            &copy; {new Date().getFullYear()} Everest Finance SGI — Agrément CREPMF SGI/DA/2016/60
+          </span>
+          <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'rgba(255,255,255,0.2)' }}>
+            Tous droits réservés
+          </span>
         </div>
       </div>
     </footer>

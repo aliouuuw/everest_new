@@ -1,79 +1,147 @@
-import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
 import { useReveal } from "../Hooks/useReveal";
-import type { IconType } from "react-icons";
 
 type Feature = {
-  icon: IconType;
+  number: string;
   title: string;
   description: string;
 };
 
-const FeatureItem: React.FC<Feature> = ({ icon: Icon, title, description }) => {
-  return (
-    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/20 bg-[var(--night)]/90 backdrop-blur-sm p-6 transition-all card-hover-dark flex items-start gap-5">
-      {/* Decorative gold glow */}
-      <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 rounded-full bg-[var(--gold-metallic)]/10 blur-2xl" />
-      <div className="relative shrink-0">
-        {/* Outer subtle disc */}
-        <div className="w-24 h-24 rounded-full bg-[var(--night)] border border-[var(--gold-metallic)]/30 shadow-[0_0_15px_rgba(202,148,47,0.1)] grid place-content-center">
-          {/* Inner badge for icon */}
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--night)] to-[#1a1d24] border border-[var(--gold-metallic)]/40 grid place-content-center text-[var(--gold-metallic)] text-3xl transition-transform duration-300 group-hover:scale-110 shadow-inner">
-            <Icon />
-          </div>
-        </div>
-        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic)]/20 scale-110 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500" />
-      </div>
-
-      <div>
-        <div className="font-display text-lg mb-1 text-white">{title}</div>
-        <div className="text-secondary-dark text-sm">{description}</div>
-      </div>
-    </div>
-  );
-};
+const features: Array<Feature> = [
+  { number: "01", title: "Sécurité", description: "Conformité réglementaire rigoureuse et garde sécurisée de vos actifs sous agrément CREPMF." },
+  { number: "02", title: "Accompagnement", description: "Un conseiller dédié, une écoute permanente et une transparence totale sur chaque opération." },
+  { number: "03", title: "Performance", description: "Allocation stratégique, exécution précise et recherche indépendante au service de vos rendements." },
+];
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const listRef = useReveal<HTMLDivElement>();
 
-  const features: Array<Feature> = [
-    { icon: FaShieldAlt, title: "Sécurité", description: "Conformité et garde des actifs en toute transparence." },
-    { icon: FaHandshake, title: "Accompagnement", description: "Conseil dédié, objectif et sur-mesure." },
-    { icon: FaChartLine, title: "Performance", description: "Allocation optimale et exécution précise." },
-  ];
-
   return (
-    <section ref={sectionRef} className="reveal py-24 bg-[var(--night)] relative">
-      {/* Cinematic subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-[var(--gold-metallic)]/5 blur-[120px] pointer-events-none" />
-      
-      <div className="mx-auto max-w-6xl px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Text */}
-          <div>
-            <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em]">POURQUOI EVEREST FINANCE</span>
-            <h2 className="luxury-heading-dark mt-4 mb-6">L'excellence au service de vos ambitions.</h2>
-            <p className="luxury-subheading-dark text-lg text-white/60">Nous allions discipline de marché, ingénierie financière de pointe et accompagnement personnalisé pour créer une valeur durable dans un environnement complexe.</p>
-          </div>
+    <section
+      ref={sectionRef}
+      className="reveal relative py-28 md:py-36"
+      style={{ background: 'var(--cream)' }}
+    >
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
-          {/* Visual side */}
-          <div className="relative w-full h-[360px] rounded-2xl overflow-hidden border border-[var(--gold-metallic)]/20 bg-black">
-            <img 
-              src="/value_props.jpg" 
-              alt="Salle de conférence moderne avec table de réunion" 
-              className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
+        {/* Editorial two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+
+          {/* Left — heading & image */}
+          <div className="lg:col-span-5">
+            <span
+              className="block text-[10px] tracking-[0.3em] uppercase mb-5"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+            >
+              Pourquoi Everest Finance
+            </span>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 400,
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
+                lineHeight: 1.0,
+                letterSpacing: '-0.01em',
+                color: 'var(--night)',
+              }}
+            >
+              Exécution rigoureuse,{' '}
+              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-dark)' }}>
+                confiance durable.
+              </em>
+            </h2>
+
+            {/* Gold rule */}
+            <div
+              className="h-[1px] w-16 mt-8 mb-8"
+              style={{ background: 'linear-gradient(90deg, var(--gold-metallic), transparent)' }}
             />
-            {/* Cinematic overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--night)] via-transparent to-[var(--night)]/50" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--night)]/80 to-transparent" />
-          </div>
-        </div>
 
-        {/* Features strip spanning full width */}
-        <div ref={listRef} className="reveal-stagger mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature) => (
-            <FeatureItem key={feature.title} {...feature} />
-          ))}
+            <p
+              className="max-w-sm"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 300,
+                fontSize: '0.95rem',
+                lineHeight: 1.8,
+                color: 'var(--night-60)',
+              }}
+            >
+              Nous allions discipline de marché, ingénierie financière et accompagnement client
+              pour créer de la valeur sur le long terme.
+            </p>
+
+            {/* Image */}
+            <div className="mt-10 relative w-full h-[280px] lg:h-[340px] overflow-hidden">
+              <img
+                src="/value_props.jpg"
+                alt="Salle de conférence moderne"
+                className="w-full h-full object-cover"
+                style={{ filter: 'saturate(0.85) contrast(1.05)' }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(to top, var(--cream) 0%, transparent 40%)' }}
+              />
+            </div>
+          </div>
+
+          {/* Right — feature cards */}
+          <div ref={listRef} className="reveal-stagger lg:col-span-7 flex flex-col gap-0 lg:pt-20">
+            {features.map((f, i) => (
+              <div
+                key={f.title}
+                className="group py-8 md:py-10 flex items-start gap-6 md:gap-10"
+                style={{
+                  borderTop: i === 0 ? '1px solid var(--timberwolf)' : 'none',
+                  borderBottom: '1px solid var(--timberwolf)',
+                }}
+              >
+                {/* Number */}
+                <span
+                  className="shrink-0 mt-1"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 300,
+                    fontSize: '2rem',
+                    lineHeight: 1,
+                    color: 'var(--gold-metallic)',
+                    opacity: 0.5,
+                  }}
+                >
+                  {f.number}
+                </span>
+
+                <div>
+                  <h3
+                    className="mb-2"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 500,
+                      fontSize: '1.5rem',
+                      lineHeight: 1.15,
+                      color: 'var(--night)',
+                    }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 300,
+                      fontSize: '0.9rem',
+                      lineHeight: 1.75,
+                      color: 'var(--night-60)',
+                      maxWidth: '28rem',
+                    }}
+                  >
+                    {f.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

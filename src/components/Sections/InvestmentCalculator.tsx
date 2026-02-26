@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FiTrendingUp } from 'react-icons/fi';
-import { FaCalculator } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -168,82 +166,112 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
   ];
 
   return (
-    <section ref={sectionRef} className="reveal py-24 bg-[var(--night)] relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(202,148,47,0.05)_0%,rgba(15,17,21,0)_70%)]" />
-      
-      <div className="mx-auto max-w-6xl px-6 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="kicker text-[var(--gold-metallic)] tracking-[0.3em] uppercase">Outil de simulation</span>
-          <h2 className="luxury-heading-dark mt-4">Calculez vos projections</h2>
-          <p className="luxury-subheading-dark mt-4">
-            Estimez le potentiel de vos investissements avec nos différents services de gestion. Une vision claire pour des décisions éclairées.
-          </p>
+    <section
+      ref={sectionRef}
+      className="reveal relative py-28 md:py-36 overflow-hidden"
+      style={{ background: 'var(--night)' }}
+    >
+      {/* Subtle top gold glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 40% 30% at 70% 0%, rgba(202,148,47,0.05) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+        {/* Header */}
+        <div className="max-w-xl mb-14">
+          <span
+            className="block text-[10px] tracking-[0.3em] uppercase mb-5"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+          >
+            Outil de simulation
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 400,
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
+              lineHeight: 1.0,
+              letterSpacing: '-0.01em',
+              color: 'var(--pure-white)',
+            }}
+          >
+            Calculez vos{' '}
+            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-metallic)' }}>
+              projections.
+            </em>
+          </h2>
         </div>
 
         {/* Tab Navigation */}
         {!calculatorOnly && (
-          <div className="flex justify-center mb-12">
-            <div className="bg-[var(--night)] border border-white/10 rounded-full p-1.5 flex gap-2">
-              <button
-                onClick={() => setActiveTab('calculator')}
-                className={`px-8 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
-                  activeTab === 'calculator'
-                    ? 'bg-[var(--gold-metallic)] text-[var(--night)] shadow-[0_0_15px_rgba(202,148,47,0.3)]'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                Calculateur
-              </button>
-              <button
-                onClick={() => setActiveTab('comparison')}
-                className={`px-8 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
-                  activeTab === 'comparison'
-                    ? 'bg-[var(--gold-metallic)] text-[var(--night)] shadow-[0_0_15px_rgba(202,148,47,0.3)]'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                Comparaison
-              </button>
-            </div>
+          <div className="flex gap-6 mb-12 border-b border-white/[0.06]">
+            <button
+              onClick={() => setActiveTab('calculator')}
+              className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: activeTab === 'calculator' ? 500 : 300,
+                color: activeTab === 'calculator' ? 'var(--gold-metallic)' : 'rgba(255,255,255,0.4)',
+                borderBottom: activeTab === 'calculator' ? '1px solid var(--gold-metallic)' : '1px solid transparent',
+              }}
+            >
+              Calculateur
+            </button>
+            <button
+              onClick={() => setActiveTab('comparison')}
+              className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: activeTab === 'comparison' ? 500 : 300,
+                color: activeTab === 'comparison' ? 'var(--gold-metallic)' : 'rgba(255,255,255,0.4)',
+                borderBottom: activeTab === 'comparison' ? '1px solid var(--gold-metallic)' : '1px solid transparent',
+              }}
+            >
+              Comparaison
+            </button>
           </div>
         )}
 
         {(calculatorOnly || activeTab === 'calculator') ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Calculator Inputs */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="glass-card-dark bg-[var(--night)]/50 border-white/5 p-8 rounded-3xl relative overflow-hidden h-full">
-                <div className="pointer-events-none absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[var(--gold-metallic)]/5 blur-3xl" />
-
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--night)] to-[#1a1d24] border border-[var(--gold-metallic)]/30 flex items-center justify-center shadow-inner">
-                    <FaCalculator className="text-xl text-[var(--gold-metallic)]" />
-                  </div>
-                  <h3 className="font-display text-2xl text-white">Paramètres</h3>
-                </div>
+            <div>
+              <div className="p-8 border border-white/[0.06] bg-white/[0.02]">
+                <h3
+                  className="mb-8"
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
+                >
+                  Paramètres d'investissement
+                </h3>
 
                 {/* Service Selection */}
                 <div className="mb-8">
-                  <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide">
-                    SERVICE DE GESTION
+                  <label
+                    className="block mb-4"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.4)' }}
+                  >
+                    Service de gestion
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-3 gap-3">
                     {serviceComparison.map((service) => (
                       <button
                         key={service.service}
                         onClick={() => handleInputChange('service', service.service)}
-                        className={`p-4 rounded-2xl border transition-all duration-300 text-left relative overflow-hidden ${
-                          inputs.service === service.service
-                            ? 'border-[var(--gold-metallic)]/50 bg-[var(--gold-metallic)]/10 shadow-[0_0_15px_rgba(202,148,47,0.1)]'
-                            : 'border-white/10 bg-white/5 hover:border-[var(--gold-metallic)]/30 hover:bg-white/10'
-                        }`}
+                        className="p-4 text-left transition-all duration-300"
+                        style={{
+                          border: inputs.service === service.service ? '1px solid var(--gold-metallic)' : '1px solid rgba(255,255,255,0.06)',
+                          background: inputs.service === service.service ? 'rgba(202,148,47,0.08)' : 'transparent',
+                        }}
                       >
-                        {inputs.service === service.service && (
-                          <div className="absolute top-0 right-0 w-8 h-8 bg-[var(--gold-metallic)] rounded-bl-2xl -mt-2 -mr-2" />
-                        )}
-                        <div className={`font-display text-sm mb-1 ${inputs.service === service.service ? 'text-[var(--gold-metallic)]' : 'text-white'}`}>{service.title}</div>
-                        <div className="text-xs text-white/50">{service.fee} frais/an</div>
+                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '0.95rem', color: 'var(--pure-white)', marginBottom: '0.25rem' }}>
+                          {service.title}
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
+                          {service.fee} /an
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -251,46 +279,48 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
 
                 {/* Input Fields */}
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-white/60 mb-3 tracking-wide">
-                        INVESTISSEMENT INITIAL
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={inputs.initialAmount}
-                          onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                          className="w-full px-4 py-3 bg-[var(--night)] border border-white/10 rounded-xl text-white focus:border-[var(--gold-metallic)]/50 focus:ring-1 focus:ring-[var(--gold-metallic)]/50 focus:outline-none transition-colors font-mono text-lg"
-                          min="100000"
-                          step="50000"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm font-medium">FCFA</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-white/60 mb-3 tracking-wide">
-                        VERSEMENT MENSUEL
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="number"
-                          value={inputs.monthlyContribution}
-                          onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                          className="w-full px-4 py-3 bg-[var(--night)] border border-white/10 rounded-xl text-white focus:border-[var(--gold-metallic)]/50 focus:ring-1 focus:ring-[var(--gold-metallic)]/50 focus:outline-none transition-colors font-mono text-lg"
-                          min="0"
-                          step="5000"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 text-sm font-medium">FCFA</span>
-                      </div>
-                    </div>
+                  <div>
+                    <label
+                      className="block mb-2"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.4)' }}
+                    >
+                      Investissement initial (F CFA)
+                    </label>
+                    <input
+                      type="number"
+                      value={inputs.initialAmount}
+                      onChange={(e) => handleInputChange('initialAmount', e.target.value)}
+                      className="w-full px-4 py-3 border border-white/[0.08] bg-transparent text-white focus:border-[var(--gold-metallic)] focus:outline-none transition-colors"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.95rem' }}
+                      min="100000"
+                      step="50000"
+                    />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide flex justify-between">
-                      <span>HORIZON D'INVESTISSEMENT</span>
-                      <span className="text-[var(--gold-metallic)] font-bold">{inputs.timeHorizon} ans</span>
+                    <label
+                      className="block mb-2"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.4)' }}
+                    >
+                      Versement mensuel (F CFA)
+                    </label>
+                    <input
+                      type="number"
+                      value={inputs.monthlyContribution}
+                      onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
+                      className="w-full px-4 py-3 border border-white/[0.08] bg-transparent text-white focus:border-[var(--gold-metallic)] focus:outline-none transition-colors"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.95rem' }}
+                      min="0"
+                      step="5000"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="block mb-2"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.4)' }}
+                    >
+                      Horizon d'investissement (années)
                     </label>
                     <input
                       type="range"
@@ -298,35 +328,39 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       max="20"
                       value={inputs.timeHorizon}
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
-                      className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[var(--gold-metallic)]"
+                      className="w-full accent-[var(--gold-metallic)]"
                     />
-                    <div className="flex justify-between text-xs text-white/40 mt-3 font-medium">
-                      <span>1 an</span>
-                      <span>20 ans</span>
+                    <div className="flex justify-between mt-2">
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>1 an</span>
+                      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1rem', color: 'var(--gold-metallic)' }}>{inputs.timeHorizon} ans</span>
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>20 ans</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-white/60 mb-4 tracking-wide">
-                      PROFIL DE RENDEMENT
+                    <label
+                      className="block mb-3"
+                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.4)' }}
+                    >
+                      Rendement annuel attendu
                     </label>
                     <div className="grid grid-cols-3 gap-3">
                       {Object.entries(expectedReturns).map(([key, value]) => (
                         <button
                           key={key}
                           onClick={() => handleInputChange('expectedReturn', value)}
-                          className={`px-4 py-3 rounded-xl border transition-all duration-300 text-center ${
-                            inputs.expectedReturn === value
-                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10 text-[var(--gold-metallic)]'
-                              : 'border-white/10 text-white/60 hover:border-[var(--gold-metallic)]/30 hover:text-white bg-white/5'
-                          }`}
+                          className="p-3 text-center transition-all duration-300"
+                          style={{
+                            border: inputs.expectedReturn === value ? '1px solid var(--gold-metallic)' : '1px solid rgba(255,255,255,0.06)',
+                            background: inputs.expectedReturn === value ? 'rgba(202,148,47,0.08)' : 'transparent',
+                          }}
                         >
-                          <div className="font-medium text-sm mb-1">
+                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.8rem', color: inputs.expectedReturn === value ? 'var(--gold-metallic)' : 'rgba(255,255,255,0.6)', marginBottom: '0.15rem' }}>
                             {key === 'conservative' && 'Conservateur'}
                             {key === 'moderate' && 'Modéré'}
                             {key === 'aggressive' && 'Dynamique'}
                           </div>
-                          <div className={`text-xs font-mono ${inputs.expectedReturn === value ? 'text-[var(--gold-metallic)]' : 'text-white/40'}`}>
+                          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--gold-metallic)' : 'rgba(255,255,255,0.4)' }}>
                             {formatPercentage(value)}
                           </div>
                         </button>
@@ -338,125 +372,125 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             </div>
 
             {/* Results */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="glass-card-dark bg-gradient-to-br from-[var(--night)] to-[#14161c] border-[var(--gold-metallic)]/20 p-8 rounded-3xl relative overflow-hidden h-full flex flex-col">
-                <div className="pointer-events-none absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[var(--gold-metallic)]/10 blur-3xl" />
-                <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--gold-metallic)]/40 to-transparent" />
+            <div>
+              <div className="p-8 border border-white/[0.06] bg-white/[0.02]">
+                <h3
+                  className="mb-8"
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
+                >
+                  Projections estimées
+                </h3>
 
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/30 flex items-center justify-center">
-                    <FiTrendingUp className="text-xl text-[var(--gold-metallic)]" />
-                  </div>
-                  <h3 className="font-display text-2xl text-white">Résultats</h3>
-                </div>
-
-                <div className="space-y-6 flex-grow">
-                  {/* Highlighted Main Result */}
-                  <div className="p-6 bg-[var(--night)] border border-[var(--gold-metallic)]/30 rounded-2xl shadow-[0_0_20px_rgba(202,148,47,0.05)] text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-[var(--gold-metallic)]/5 to-transparent pointer-events-none" />
-                    <span className="block text-xs font-bold tracking-widest text-[var(--gold-metallic)] uppercase mb-2">Capital estimé</span>
-                    <span className="block font-display text-4xl text-white tracking-tight">{projectedValueCounter.value}</span>
+                <div className="space-y-0">
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>Total investi</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: 'var(--pure-white)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
-                  <div className="space-y-4 px-2">
-                    <div className="flex justify-between items-center py-3 border-b border-white/5">
-                      <span className="text-white/60 text-sm">Total investi</span>
-                      <span className="font-mono font-medium text-white">{totalInvestedCounter.value}</span>
-                    </div>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>
+                      Frais estimés ({serviceFees[inputs.service].min}%)
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
+                  </div>
 
-                    <div className="flex justify-between items-center py-3 border-b border-white/5">
-                      <span className="text-white/60 text-sm flex items-center gap-2">
-                        Frais estimés
-                        <span className="px-2 py-0.5 rounded text-[10px] bg-white/5 text-white/40">{serviceFees[inputs.service].min}%/an</span>
-                      </span>
-                      <span className="font-mono font-medium text-white/50">-{totalFeesCounter.value}</span>
-                    </div>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '2px solid rgba(202,148,47,0.2)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>Valeur projetée</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.5rem', color: '#34d399' }}>{projectedValueCounter.value}</span>
+                  </div>
 
-                    <div className="flex justify-between items-center py-3">
-                      <span className="text-white/60 text-sm font-medium">Gain net projeté</span>
-                      <span className={`font-mono font-bold ${
-                        results.netReturn >= 0 ? 'text-[var(--gold-metallic)]' : 'text-red-400'
-                      }`}>
-                        +{netReturnCounter.value}
-                      </span>
-                    </div>
-
-                    <div className="flex justify-between items-center py-3 border-t border-white/5 mt-2 pt-4">
-                      <span className="text-white/60 text-sm">Rendement annuel moyen</span>
-                      <span className="font-mono font-medium text-[var(--gold-light)]">{avgReturnCounter.value}</span>
-                    </div>
+                  <div className="flex justify-between items-center py-5">
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>Gain net estimé</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#34d399' : '#ef4444' }}>
+                      {netReturnCounter.value}
+                    </span>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-white/5">
-                  <p className="text-[11px] text-white/40 leading-relaxed mb-6 text-justify">
-                    * Les performances passées ne préjugent pas des performances futures. 
-                    Ces projections sont données à titre purement indicatif et ne constituent pas un engagement contractuel.
-                  </p>
-                  <a
-                    href="#contact"
-                    className="btn-primary-dark w-full justify-center group"
+                {/* Avg return highlight */}
+                <div className="mt-8 p-6" style={{ background: 'rgba(202,148,47,0.06)', border: '1px solid rgba(202,148,47,0.12)' }}>
+                  <span
+                    className="block mb-2"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--gold-metallic)' }}
                   >
-                    Demander une étude personnalisée
-                    <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </a>
+                    Rendement annuel moyen estimé
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '2.5rem', color: 'var(--gold-metallic)' }}>
+                    {avgReturnCounter.value}
+                  </span>
                 </div>
+              </div>
+
+              {/* Disclaimer + CTA */}
+              <div className="mt-8">
+                <p
+                  className="mb-6"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.3)' }}
+                >
+                  * Ces projections sont estimatives et ne constituent pas une garantie de performance.
+                  Les marchés financiers comportent des risques.
+                </p>
+                <a
+                  href="#contact"
+                  className="group inline-flex items-center gap-4"
+                >
+                  <span
+                    className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                  >
+                    Obtenir un conseil personnalisé
+                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                  </span>
+                </a>
               </div>
             </div>
           </div>
         ) : (
           /* Comparison Tab */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {serviceComparison.map((service) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+            {serviceComparison.map((service, i) => (
               <div
                 key={service.service}
-                className={`group relative overflow-hidden rounded-3xl border p-8 transition-all duration-500 flex flex-col ${
-                  inputs.service === service.service
-                    ? 'border-[var(--gold-metallic)]/50 bg-[var(--night)] shadow-[0_10px_30px_-15px_rgba(202,148,47,0.3)]'
-                    : 'border-white/10 bg-[var(--night)] hover:border-[var(--gold-metallic)]/30'
-                }`}
+                className="p-8 flex flex-col transition-colors duration-300 hover:bg-white/[0.02] cursor-pointer"
+                onClick={() => {
+                  handleInputChange('service', service.service);
+                  setActiveTab('calculator');
+                }}
+                style={{
+                  borderTop: '1px solid rgba(255,255,255,0.06)',
+                  borderRight: i < serviceComparison.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  background: inputs.service === service.service ? 'rgba(202,148,47,0.04)' : 'transparent',
+                }}
               >
-                {inputs.service === service.service && (
-                  <div className="absolute inset-0 bg-gradient-to-b from-[var(--gold-metallic)]/5 to-transparent pointer-events-none" />
-                )}
-                
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic)]/5 blur-3xl group-hover:bg-[var(--gold-metallic)]/10 transition-colors" />
-
-                <div className="font-display text-2xl mb-4 text-white relative z-10">{service.title}</div>
-
-                <div className="mb-8 relative z-10">
-                  <div className="text-3xl font-display text-[var(--gold-metallic)] mb-1">
-                    {service.fee}
-                  </div>
-                  <div className="text-xs text-white/50 uppercase tracking-widest">Frais annuels</div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.4rem', color: 'var(--pure-white)', marginBottom: '0.75rem' }}>
+                  {service.title}
+                </div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '1.8rem', color: 'var(--gold-metallic)', marginBottom: '1.5rem' }}>
+                  {service.fee}
                 </div>
 
-                <ul className="space-y-4 mb-10 flex-grow relative z-10">
+                <ul className="space-y-3 mb-8 flex-grow">
                   {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-3 text-sm text-white/70">
-                      <svg className="w-5 h-5 text-[var(--gold-metallic)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="pt-0.5">{feature}</span>
+                    <li key={index} className="flex items-center gap-3">
+                      <span className="w-1 h-1 rounded-full bg-[var(--gold-metallic)] flex-shrink-0" />
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)' }}>
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => {
-                    handleInputChange('service', service.service);
-                    setActiveTab('calculator');
+                <span
+                  className="text-[11px] tracking-[0.15em] uppercase"
+                  style={{
+                    fontFamily: 'var(--font-primary)',
+                    fontWeight: 500,
+                    color: inputs.service === service.service ? 'var(--gold-metallic)' : 'rgba(255,255,255,0.4)',
                   }}
-                  className={`w-full py-3 px-6 rounded-xl font-medium tracking-wide text-sm transition-all relative z-10 ${
-                    inputs.service === service.service
-                      ? 'bg-[var(--gold-metallic)] text-[var(--night)]'
-                      : 'bg-white/5 text-white hover:bg-[var(--gold-metallic)]/20 hover:text-[var(--gold-metallic)]'
-                  }`}
                 >
-                  {inputs.service === service.service ? 'Sélectionné' : 'Choisir ce service'}
-                </button>
+                  {inputs.service === service.service ? 'Sélectionné' : 'Simuler →'}
+                </span>
               </div>
             ))}
           </div>
