@@ -178,7 +178,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <FiStar
         key={i}
         className={`w-4 h-4 ${
-          i < rating ? 'fill-[var(--gold-metallic)] text-[var(--gold-metallic)]' : 'text-gray-300'
+          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-gray-300'
         }`}
       />
     ));
@@ -216,14 +216,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-full shadow-lg hover:bg-[var(--gold-light)]/10 transition-all"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--jaune-or)]/25 rounded-full shadow-lg hover:bg-[var(--jaune-or-light)]/10 transition-all"
                 aria-label="Previous testimonials"
               >
                 <FiChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-full shadow-lg hover:bg-[var(--gold-light)]/10 transition-all"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--jaune-or)]/25 rounded-full shadow-lg hover:bg-[var(--jaune-or-light)]/10 transition-all"
                 aria-label="Next testimonials"
               >
                 <FiChevronRight className="w-5 h-5" />
@@ -245,14 +245,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                   key={testimonial.id}
                   className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3"
                 >
-                  <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover h-full">
-                    <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                  <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover h-full">
+                    <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
                     {/* Quote Icon */}
                     <div className="flex items-center justify-between mb-4">
-                      <FaQuoteLeft className="text-2xl text-[var(--gold-metallic)] opacity-60" />
+                      <FaQuoteLeft className="text-2xl text-[var(--jaune-or)] opacity-60" />
                       {testimonial.service !== 'all' && (
-                        <span className="text-xs bg-[var(--gold-light)]/20 text-[var(--gold-dark)] px-2 py-1 rounded-full">
+                        <span className="text-xs bg-[var(--jaune-or-light)]/20 text-[var(--jaune-or)] px-2 py-1 rounded-full">
                           {getServiceLabel(testimonial.service)}
                         </span>
                       )}
@@ -269,10 +269,10 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     </blockquote>
 
                     {/* Author */}
-                    <div className="border-t border-[var(--gold-metallic)]/25 pt-4">
+                    <div className="border-t border-[var(--jaune-or)]/25 pt-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[var(--gold-light)]/30 flex items-center justify-center">
-                          <span className="text-sm font-display text-[var(--gold-dark)]">
+                        <div className="w-10 h-10 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
+                          <span className="text-sm font-display text-[var(--jaune-or)]">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
@@ -301,8 +301,8 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                   onClick={() => setCurrentIndex(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
                     i === currentIndex
-                      ? 'bg-[var(--gold-metallic)] w-6'
-                      : 'bg-[var(--gold-metallic)]/30'
+                      ? 'bg-[var(--jaune-or)] w-6'
+                      : 'bg-[var(--jaune-or)]/30'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
@@ -313,19 +313,19 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
         {/* Trust Indicators */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--gold-metallic)]/25">
+          <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{clientsCounter.value}</div>
+              <div className="font-display text-xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
               <div className="text-xs text-secondary">Clients satisfaits</div>
             </div>
-            <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
+            <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{ratingCounter.value}</div>
+              <div className="font-display text-xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
               <div className="text-xs text-secondary">Note moyenne</div>
             </div>
-            <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
+            <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{satisfactionCounter.value}</div>
+              <div className="font-display text-xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
               <div className="text-xs text-secondary">Recommandation</div>
             </div>
           </div>

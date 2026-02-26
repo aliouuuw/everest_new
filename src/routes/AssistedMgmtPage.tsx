@@ -37,17 +37,17 @@ export const AssistedMgmtPage = () => {
                   <a href="#contact" className="btn-secondary font-display tracking-wide">Parler à un conseiller</a>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
-                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80 grid place-content-center">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
+                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--jaune-or-10)] blur-3xl" />
+                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/80 grid place-content-center">
                   <div className="flex items-center gap-3 text-secondary">
                     <div className="relative shrink-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                         <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
                           <FiHeadphones className="text-base md:text-lg" />
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
                     <div className="font-display">Accompagnement personnalisé</div>
                   </div>
@@ -71,20 +71,20 @@ export const AssistedMgmtPage = () => {
                 { step: '02', title: 'Recommandations', desc: 'Listes d\'actions ou obligations avec rationales et niveaux.', icon: FiSliders },
                 { step: '03', title: 'Décision & suivi', desc: 'Vous validez, nous exécutons et assurons le reporting.', icon: FiUserCheck },
               ].map((s) => (
-                <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                   <div className="flex items-start justify-between">
-                    <span className="text-xs font-medium tracking-wider text-[var(--night-80)]/80">Étape</span>
-                    <span className="numeric-tabular text-sm px-2 py-1 rounded-md border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/60">{s.step}</span>
+                    <span className="text-xs font-medium tracking-wider text-[rgba(10, 10, 10, 0.8)]/80">Étape</span>
+                    <span className="numeric-tabular text-sm px-2 py-1 rounded-md border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/60">{s.step}</span>
                   </div>
                   <div className="flex items-start gap-5 md:gap-6 mt-3">
                     <div className="relative shrink-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                         <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                           <s.icon />
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
                     <div>
                       <div className="font-display text-lg md:text-xl mb-1">{s.title}</div>
@@ -105,19 +105,19 @@ export const AssistedMgmtPage = () => {
               <h2 className="luxury-heading mt-3">Des moyens concrets pour décider</h2>
             </div>
             <div ref={toolsGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="font-display text-lg md:text-xl mb-1">Analyses & alertes</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Notes régulières, signaux de marché et alertes personnalisées pour ne rien manquer.</p>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)]/80">Accès aux publications et à un flux d'alertes</div>
+                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
+                <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80">Accès aux publications et à un flux d'alertes</div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="font-display text-lg md:text-xl mb-1">Échanges avec un conseiller</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Points de marché, simulations et idées d'allocation en direct avec votre interlocuteur.</p>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)]/80 flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
+                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
+                <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80 flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
               </div>
             </div>
           </div>
@@ -132,16 +132,16 @@ export const AssistedMgmtPage = () => {
               <p className="luxury-subheading mt-5 leading-relaxed">Gardez le contrôle de vos décisions tout en bénéficiant de l'expertise d'un conseiller.</p>
             </div>
             <div ref={benefitsGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="flex items-start gap-5 md:gap-6">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                       <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiUserCheck />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1">Décisions souveraines</div>
@@ -149,16 +149,16 @@ export const AssistedMgmtPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="flex items-start gap-5 md:gap-6">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                       <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FaLightbulb />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1">Expertise accessible</div>
@@ -166,16 +166,16 @@ export const AssistedMgmtPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="flex items-start gap-5 md:gap-6">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                       <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiPhone />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1">Support réactif</div>
@@ -219,32 +219,32 @@ export const AssistedMgmtPage = () => {
                   description: 'Accompagne les familles dans leur stratégie patrimoniale globale.'
                 },
               ].map((advisor) => (
-                <div key={advisor.name} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div key={advisor.name} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
                   {/* Avatar */}
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-[var(--gold-light)]/30 flex items-center justify-center">
-                      <span className="text-lg font-display text-[var(--gold-dark)]">
+                    <div className="w-16 h-16 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
+                      <span className="text-lg font-display text-[var(--jaune-or)]">
                         {advisor.name.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
                     <div>
                       <div className="font-display text-lg text-[var(--night)]">{advisor.name}</div>
                       <div className="text-sm text-secondary">{advisor.role}</div>
-                      <div className="text-xs text-[var(--gold-dark)] font-medium">{advisor.experience}</div>
+                      <div className="text-xs text-[var(--jaune-or)] font-medium">{advisor.experience}</div>
                     </div>
                   </div>
 
                   <p className="text-secondary text-sm mb-4">{advisor.description}</p>
 
-                  <div className="border-t border-[var(--gold-metallic)]/25 pt-4">
-                    <div className="text-xs text-[var(--night-80)]/80 font-medium mb-2">Spécialisations</div>
+                  <div className="border-t border-[var(--jaune-or)]/25 pt-4">
+                    <div className="text-xs text-[rgba(10, 10, 10, 0.8)]/80 font-medium mb-2">Spécialisations</div>
                     <div className="flex flex-wrap gap-1">
                       {advisor.specializations.map((spec) => (
                         <span
                           key={spec}
-                          className="text-xs bg-[var(--gold-light)]/20 text-[var(--gold-dark)] px-2 py-1 rounded-full"
+                          className="text-xs bg-[var(--jaune-or-light)]/20 text-[var(--jaune-or)] px-2 py-1 rounded-full"
                         >
                           {spec}
                         </span>

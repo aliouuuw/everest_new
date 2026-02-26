@@ -95,7 +95,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
 
   const backgroundClasses = {
     light: 'bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5',
-    gradient: 'bg-gradient-to-br from-[var(--gold-light)]/5 to-transparent'
+    gradient: 'bg-gradient-to-br from-[var(--jaune-or-light)]/5 to-transparent'
   }
 
   const gridClasses = {
@@ -128,12 +128,12 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
             <div key={index} className="text-center group">
               {stat.icon && (
                 <div className="relative inline-flex items-center justify-center mb-4">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
                     <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
                       <stat.icon className="text-base md:text-lg" />
                     </div>
                   </div>
-                  <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                  <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                 </div>
               )}
 

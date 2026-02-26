@@ -77,20 +77,20 @@ export const UserManagement = () => {
       case 'admin':
         return <FaUserShield className="text-[var(--error-red)]" />;
       case 'editor':
-        return <FaUserEdit className="text-[var(--gold-metallic)]" />;
+        return <FaUserEdit className="text-[var(--jaune-or)]" />;
       case 'viewer':
         return <FaUser className="text-[var(--success-green)]" />;
       case 'client':
         return <FaUserTie className="text-[var(--night)]" />;
       default:
-        return <FaUser className="text-[var(--night-80)]" />;
+        return <FaUser className="text-[rgba(10, 10, 10, 0.8)]" />;
     }
   };
 
   const getRoleBadge = (role: string) => {
     const roleConfig: Record<string, { color: string; label: string }> = {
       admin: { color: 'bg-[var(--error-red)]/10 text-[var(--error-red)] border-[var(--error-red)]/20', label: 'Admin' },
-      editor: { color: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border-[var(--gold-metallic)]/20', label: 'Editor' },
+      editor: { color: 'bg-[var(--jaune-or-10)] text-[var(--jaune-or)] border-[var(--jaune-or)]/20', label: 'Editor' },
       viewer: { color: 'bg-[var(--success-green)]/10 text-[var(--success-green)] border-[var(--success-green)]/20', label: 'Viewer' },
       client: { color: 'bg-[var(--night)]/10 text-[var(--night)] border-[var(--night)]/20', label: 'Client' },
     };
@@ -106,10 +106,10 @@ export const UserManagement = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
+      <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
           <h1 className="text-4xl font-display font-semibold text-[var(--night)]">User Management</h1>
-          <p className="text-[var(--night-80)] mt-3 text-lg">Manage users and their roles</p>
+          <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Manage users and their roles</p>
         </div>
         <button
           onClick={() => setShowCreateForm(true)}
@@ -125,13 +125,13 @@ export const UserManagement = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Search */}
           <div className="relative">
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--night-80)]" />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgba(10, 10, 10, 0.8)]" />
             <input
               type="text"
               placeholder="Search users..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+              className="w-full pl-12 pr-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
             />
           </div>
 
@@ -139,7 +139,7 @@ export const UserManagement = () => {
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+            className="px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Roles</option>
             <option value="admin">Admin</option>
@@ -152,7 +152,7 @@ export const UserManagement = () => {
 
       {/* Users Table */}
       <div className="stat-card">
-        <div className="px-6 py-4 border-b border-[var(--gold-metallic)]/20">
+        <div className="px-6 py-4 border-b border-[var(--jaune-or)]/20">
           <h2 className="text-xl font-display font-semibold text-[var(--night)]">
             Users ({filteredUsers.length})
           </h2>
@@ -160,47 +160,47 @@ export const UserManagement = () => {
         
         {filteredUsers.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[var(--gold-metallic)]/20">
-              <thead className="bg-[var(--gold-metallic)]/5">
+            <table className="min-w-full divide-y divide-[var(--jaune-or)]/20">
+              <thead className="bg-[var(--jaune-or)]/5">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     User
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Role
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Last Login
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Created
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-[var(--pure-white)]/30 divide-y divide-[var(--gold-metallic)]/20">
+              <tbody className="bg-[var(--pure-white)]/30 divide-y divide-[var(--jaune-or)]/20">
                 {filteredUsers.map((user) => (
-                  <tr key={user._id} className="hover:bg-[var(--gold-metallic)]/5 transition-colors">
+                  <tr key={user._id} className="hover:bg-[var(--jaune-or)]/5 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-12 w-12">
                           {user.avatar ? (
                             <img
-                              className="h-12 w-12 rounded-xl border border-[var(--gold-metallic)]/20"
+                              className="h-12 w-12 rounded-xl border border-[var(--jaune-or)]/20"
                               src={user.avatar}
                               alt={user.name}
                             />
                           ) : (
-                            <div className="h-12 w-12 rounded-xl bg-[var(--gold-metallic-10)] border border-[var(--gold-metallic)]/20 flex items-center justify-center">
-                              <FaUser className="text-[var(--gold-dark)]" />
+                            <div className="h-12 w-12 rounded-xl bg-[var(--jaune-or-10)] border border-[var(--jaune-or)]/20 flex items-center justify-center">
+                              <FaUser className="text-[var(--jaune-or)]" />
                             </div>
                           )}
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-display font-medium text-[var(--night)]">{user.name}</div>
-                          <div className="text-sm text-[var(--night-80)]">{user.email}</div>
+                          <div className="text-sm text-[rgba(10, 10, 10, 0.8)]">{user.email}</div>
                         </div>
                       </div>
                     </td>
@@ -210,19 +210,19 @@ export const UserManagement = () => {
                         <span className="ml-3">{user.role && getRoleBadge(user.role)}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[rgba(10, 10, 10, 0.8)]">
                       {user.lastLogin
                         ? new Date(user.lastLogin).toLocaleDateString()
                         : 'Never'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[rgba(10, 10, 10, 0.8)]">
                       {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Unknown'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-3">
                         <button
                           onClick={() => setEditingUser(user as User)}
-                          className="text-[var(--night)] hover:text-[var(--night-80)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
+                          className="text-[var(--night)] hover:text-[rgba(10, 10, 10, 0.8)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
                           title="Edit"
                         >
                           <FaEdit className="inline" />
@@ -243,9 +243,9 @@ export const UserManagement = () => {
           </div>
         ) : (
           <div className="text-center py-16">
-            <FaUser className="mx-auto h-16 w-16 text-[var(--gold-metallic)]/30" />
+            <FaUser className="mx-auto h-16 w-16 text-[var(--jaune-or)]/30" />
             <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No users found</h3>
-            <p className="mt-2 text-[var(--night-80)]">
+            <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
               {searchQuery || roleFilter !== 'all'
                 ? 'Try adjusting your search or filters.'
                 : 'Get started by adding your first user.'}
@@ -268,7 +268,7 @@ export const UserManagement = () => {
       {/* Create User Modal */}
       {showCreateForm && (
         <div className="fixed inset-0 bg-[var(--night)]/50 backdrop-blur-sm overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-8 border border-[var(--gold-metallic)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
+          <div className="relative top-20 mx-auto p-8 border border-[var(--jaune-or)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
             <div className="mt-3">
               <h3 className="text-xl font-display font-semibold text-[var(--night)] mb-6">Add New User</h3>
               <CreateUserForm
@@ -283,7 +283,7 @@ export const UserManagement = () => {
       {/* Edit User Modal */}
       {editingUser && (
         <div className="fixed inset-0 bg-[var(--night)]/50 backdrop-blur-sm overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-8 border border-[var(--gold-metallic)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
+          <div className="relative top-20 mx-auto p-8 border border-[var(--jaune-or)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
             <div className="mt-3">
               <h3 className="text-xl font-display font-semibold text-[var(--night)] mb-6">Edit User</h3>
               <EditUserForm
@@ -327,7 +327,7 @@ const CreateUserForm: React.FC<{
           required
           value={formData.email}
           onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -341,7 +341,7 @@ const CreateUserForm: React.FC<{
           required
           value={formData.name}
           onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -353,7 +353,7 @@ const CreateUserForm: React.FC<{
           id="role"
           value={formData.role}
           onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value }))}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="client">Client</option>
           <option value="viewer">Viewer</option>
@@ -410,7 +410,7 @@ const EditUserForm: React.FC<{
           required
           value={formData.name}
           onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -422,7 +422,7 @@ const EditUserForm: React.FC<{
           id="edit-role"
           value={formData.role}
           onChange={(e) => setFormData(prev => ({ ...prev, role: e.target.value as any }))}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="client">Client</option>
           <option value="viewer">Viewer</option>
@@ -440,7 +440,7 @@ const EditUserForm: React.FC<{
           value={formData.bio}
           onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
           rows={3}
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 

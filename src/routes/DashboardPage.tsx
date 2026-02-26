@@ -160,7 +160,7 @@ const DashboardPageContent = () => {
           <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <div className="text-secondary text-xs">{k.label}</div>
-              <div className="text-[var(--gold-metallic)]">{k.icon}</div>
+              <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
               <div className="font-display text-lg">{k.value}</div>
@@ -214,12 +214,12 @@ const DashboardPageContent = () => {
                     </td>
                     <td className="py-3">
                       <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
-                        <div className="h-1.5 rounded" style={{ width: `${pos.allocation}%`, background: 'var(--gold-metallic)' }} />
+                        <div className="h-1.5 rounded" style={{ width: `${pos.allocation}%`, background: 'var(--jaune-or)' }} />
                       </div>
                     </td>
                     <td className="py-3">
                       <div className="flex gap-1">
-                        <button className="p-1 text-[var(--gold-metallic)] hover:bg-[var(--gold-metallic)]/10 rounded">
+                        <button className="p-1 text-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10 rounded">
                           <FaPlus className="text-xs" />
                         </button>
                         <button className="p-1 text-red-600 hover:bg-red-50 rounded">
@@ -241,14 +241,14 @@ const DashboardPageContent = () => {
             <div className="flex items-center gap-4">
               <div className="relative w-28 h-28 shrink-0 rounded-full"
                    style={{
-                     background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
+                     background: 'conic-gradient(var(--jaune-or) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
                      mask: 'radial-gradient(circle 20px at center, transparent 20px, black 21px)'
                    }}
               />
               <div className="text-sm flex-1">
-                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: 58%</div>
-                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: 34%</div>
-                <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: 8%</div>
+                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]" /> Actions: 58%</div>
+                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/40" /> Obligations: 34%</div>
+                <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/20" /> Monétaire: 8%</div>
               </div>
             </div>
             <div className="mt-4 text-xs text-secondary">Profil de risque: {user.riskProfile} • Devise: FCFA</div>
@@ -292,13 +292,13 @@ const DashboardPageContent = () => {
               placeholder="Rechercher un instrument..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--gold-metallic)]/30 outline-none"
+              className="pl-10 pr-4 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
             />
           </div>
           <select
             value={transactionFilter}
             onChange={(e) => setTransactionFilter(e.target.value)}
-            className="px-3 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--gold-metallic)]/30 outline-none"
+            className="px-3 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
           >
             <option value="all">Tous les types</option>
             <option value="achat">Achats</option>
@@ -369,7 +369,7 @@ const DashboardPageContent = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
           <p className="mt-4 text-secondary">Chargement...</p>
         </div>
       </div>
@@ -426,7 +426,7 @@ const DashboardPageContent = () => {
             ))}
           </nav>
 
-          <div className="mt-8 p-4 rounded-lg bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20">
+          <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">Solde espèces</div>
             <div className="font-display text-lg">
               {showBalance ? formatCurrency(user.balance) : '••••••••'}
@@ -519,15 +519,15 @@ const DashboardPageContent = () => {
                   <h4 className="font-display mb-3">Notifications</h4>
                   <div className="space-y-3">
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" defaultChecked className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" defaultChecked className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Alertes de performance</span>
                     </label>
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" defaultChecked className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" defaultChecked className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Notifications de transactions</span>
                     </label>
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Rapports mensuels par email</span>
                     </label>
                   </div>

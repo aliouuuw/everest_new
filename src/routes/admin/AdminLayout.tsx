@@ -51,7 +51,7 @@ const AdminLayout: React.FC = () => {
             className="lg:hidden p-2 hover:bg-[var(--night)]/5 rounded-lg transition-colors"
             aria-label="Toggle sidebar"
           >
-            <FaBars className="text-lg text-[var(--night-80)]" />
+            <FaBars className="text-lg text-[rgba(10, 10, 10, 0.8)]" />
           </button>
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
           <div className="text-sm font-display">CMS Admin</div>
@@ -100,7 +100,7 @@ const AdminLayout: React.FC = () => {
             </nav>
 
           {/* System Status Card */}
-          <div className="mt-8 p-4 rounded-lg bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20">
+          <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">System Status</div>
             <div className="font-display text-sm text-[var(--night)]">Online</div>
             <div className="text-xs text-secondary mt-1">All systems operational</div>

@@ -35,15 +35,15 @@ export const ServicesPage = () => {
 
                 <div className="mt-8 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
                     <span className="text-secondary">Accompagnement personnalisé</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
                     <span className="text-secondary">Expertise reconnue sur la BRVM</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
                     <span className="text-secondary">Transparence et suivi continu</span>
                   </div>
                 </div>
@@ -54,29 +54,29 @@ export const ServicesPage = () => {
                 </div>
               </div>
 
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-8">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-8">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
                 <div className="text-center mb-6">
-                  <div className="text-3xl font-display text-[var(--gold-dark)] mb-2">500+</div>
+                  <div className="text-3xl font-display text-[var(--jaune-or)] mb-2">500+</div>
                   <div className="text-sm text-secondary">Clients satisfaits</div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-display text-[var(--gold-dark)] mb-1">4.9/5</div>
+                    <div className="text-2xl font-display text-[var(--jaune-or)] mb-1">4.9/5</div>
                     <div className="text-xs text-secondary">Note moyenne</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-display text-[var(--gold-dark)] mb-1">98%</div>
+                    <div className="text-2xl font-display text-[var(--jaune-or)] mb-1">98%</div>
                     <div className="text-xs text-secondary">Recommandation</div>
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-[var(--gold-metallic)]/25">
+                <div className="mt-6 pt-6 border-t border-[var(--jaune-or)]/25">
                   <div className="text-center">
                     <div className="text-sm font-display text-[var(--night)] mb-1">Montant minimum</div>
-                    <div className="text-lg font-display text-[var(--gold-dark)]">100 000 F CFA</div>
+                    <div className="text-lg font-display text-[var(--jaune-or)]">100 000 F CFA</div>
                   </div>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export const ServicesPage = () => {
               <div className="glass-card-dark glass-card-hover">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--gold-dark)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or)]/80 bg-[var(--jaune-or-light)]/20 px-3 py-1 rounded-full">
                     Niveau 1
                   </span>
                   <div className="text-xs text-secondary-dark">À partir de 100K F CFA</div>
@@ -111,12 +111,12 @@ export const ServicesPage = () => {
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiCompass />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Libre</div>
@@ -139,10 +139,10 @@ export const ServicesPage = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
+                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-light)]">0,40% - 0,60%</span>
+                    <span className="font-display text-[var(--jaune-or-light)]">0,40% - 0,60%</span>
                   </div>
                   <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
                     Découvrir ce service
@@ -151,10 +151,10 @@ export const ServicesPage = () => {
               </div>
 
               {/* Gestion Assistée */}
-              <div className="glass-card-dark glass-card-hover border-2 border-[var(--gold-metallic)]/40">
+              <div className="glass-card-dark glass-card-hover border-2 border-[var(--jaune-or)]/40">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--gold-light)] bg-[var(--gold-dark)]/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or-light)] bg-[var(--jaune-or)]/30 px-3 py-1 rounded-full">
                     Niveau 2
                   </span>
                   <div className="text-xs text-secondary-dark">À partir de 250K F CFA</div>
@@ -162,12 +162,12 @@ export const ServicesPage = () => {
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiHeadphones />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Assistée</div>
@@ -190,10 +190,10 @@ export const ServicesPage = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
+                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-light)]">0,60% - 0,80%</span>
+                    <span className="font-display text-[var(--jaune-or-light)]">0,60% - 0,80%</span>
                   </div>
                   <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary-dark font-display tracking-wide w-full">
                     Service recommandé
@@ -205,7 +205,7 @@ export const ServicesPage = () => {
               <div className="glass-card-dark glass-card-hover">
                 {/* Service Level Indicator */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--gold-dark)]/80 bg-[var(--gold-light)]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or)]/80 bg-[var(--jaune-or-light)]/20 px-3 py-1 rounded-full">
                     Niveau 3
                   </span>
                   <div className="text-xs text-secondary-dark">À partir de 500K F CFA</div>
@@ -213,12 +213,12 @@ export const ServicesPage = () => {
 
                 <div className="flex items-start gap-5 md:gap-6 mb-4">
                   <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--gold-metallic-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
                         <FiShield />
                       </div>
                     </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
                     <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Sous-Mandat</div>
@@ -241,10 +241,10 @@ export const ServicesPage = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--gold-metallic-20)]">
+                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--gold-light)]">0,80% - 1,20%</span>
+                    <span className="font-display text-[var(--jaune-or-light)]">0,80% - 1,20%</span>
                   </div>
                   <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
                     En savoir plus
@@ -256,7 +256,7 @@ export const ServicesPage = () => {
             {/* Call to Action */}
             <div className="text-center">
               <div className="inline-flex items-center gap-4 px-8 py-4 glass-card-dark">
-                <FiHelpCircle className="text-[var(--gold-light)] w-5 h-5" />
+                <FiHelpCircle className="text-[var(--jaune-or-light)] w-5 h-5" />
                 <div className="text-left">
                   <div className="font-display text-sm text-[var(--pure-white)]">Besoin d'aide pour choisir ?</div>
                   <div className="text-xs text-secondary-dark">Nos conseillers vous guident gratuitement</div>

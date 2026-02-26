@@ -41,13 +41,13 @@ export function SigninForm() {
   }
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
+    <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
       <div className="flex items-start justify-between">
         <div>
           <div className="font-display text-xl">Accéder à votre espace</div>
           <p className="text-secondary text-sm mt-1">Connectez-vous à votre portail client.</p>
         </div>
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--night-80)]/80">
+        <div className="hidden sm:flex items-center gap-2 text-xs text-[rgba(10, 10, 10, 0.8)]/80">
           <FiLock /> Sécurisé
         </div>
       </div>
@@ -60,7 +60,7 @@ export function SigninForm() {
           </div>
         )}
         <div>
-          <label htmlFor="email-login" className="text-xs font-medium text-[var(--night-80)]/80">Email</label>
+          <label htmlFor="email-login" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Email</label>
           <input
             id="email-login"
             type="email"
@@ -68,12 +68,12 @@ export function SigninForm() {
             value={formData.email}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Entrez votre email"
           />
         </div>
         <div>
-          <label htmlFor="password-login" className="text-xs font-medium text-[var(--night-80)]/80">Mot de passe</label>
+          <label htmlFor="password-login" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Mot de passe</label>
           <input
             id="password-login"
             type="password"
@@ -81,18 +81,18 @@ export function SigninForm() {
             value={formData.password}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Entrez votre mot de passe"
           />
         </div>
         <div className="flex items-center justify-between gap-3">
-          <label className="inline-flex items-center gap-2 text-xs text-[var(--night-80)]/80">
+          <label className="inline-flex items-center gap-2 text-xs text-[rgba(10, 10, 10, 0.8)]/80">
             <input
               type="checkbox"
               name="rememberMe"
               checked={formData.rememberMe}
               onChange={handleInputChange}
-              className="accent-[var(--gold-dark)]"
+              className="accent-[var(--jaune-or)]"
             />
             Se souvenir de moi
           </label>
@@ -104,9 +104,9 @@ export function SigninForm() {
             {isLoading || isTransitioning ? 'Connexion...' : 'Se connecter'}
           </button>
         </div>
-        <div className="text-xs text-[var(--night-80)]/80 inline-flex items-center gap-2">
+        <div className="text-xs text-[rgba(10, 10, 10, 0.8)]/80 inline-flex items-center gap-2">
           <FiMail className="opacity-70" />
-          <a className="underline hover:text-[var(--gold-metallic)]" href="#">Mot de passe oublié ?</a>
+          <a className="underline hover:text-[var(--jaune-or)]" href="#">Mot de passe oublié ?</a>
         </div>
       </form>
     </div>

@@ -31,7 +31,7 @@ export const ValueProps: React.FC = () => {
           <div className="lg:col-span-5">
             <span
               className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
             >
               Pourquoi Everest Finance
             </span>
@@ -46,7 +46,7 @@ export const ValueProps: React.FC = () => {
               }}
             >
               Exécution rigoureuse,{' '}
-              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-dark)' }}>
+              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
                 confiance durable.
               </em>
             </h2>
@@ -54,7 +54,7 @@ export const ValueProps: React.FC = () => {
             {/* Gold rule */}
             <div
               className="h-[1px] w-16 mt-8 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--gold-metallic), transparent)' }}
+              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
             />
 
             <p
@@ -105,7 +105,7 @@ export const ValueProps: React.FC = () => {
                     fontWeight: 300,
                     fontSize: '2rem',
                     lineHeight: 1,
-                    color: 'var(--gold-metallic)',
+                    color: 'var(--jaune-or)',
                     opacity: 0.5,
                   }}
                 >

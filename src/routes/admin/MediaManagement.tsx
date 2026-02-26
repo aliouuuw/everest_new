@@ -173,10 +173,10 @@ export const MediaManagement = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
+      <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
           <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Media Management</h1>
-          <p className="text-[var(--night-80)] mt-3 text-lg">Upload and manage media files</p>
+          <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Upload and manage media files</p>
         </div>
         <button 
           onClick={handleUploadClick}
@@ -201,13 +201,13 @@ export const MediaManagement = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Search */}
           <div className="relative">
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--night-80)]" />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgba(10, 10, 10, 0.8)]" />
             <input
               type="text"
               placeholder="Search media files..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+              className="w-full pl-12 pr-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
             />
           </div>
 
@@ -215,7 +215,7 @@ export const MediaManagement = () => {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+            className="px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Types</option>
             <option value="image">Images</option>
@@ -226,7 +226,7 @@ export const MediaManagement = () => {
           {/* Bulk Actions */}
           {selectedFiles.size > 0 && (
             <div className="flex items-center space-x-3">
-              <span className="text-sm text-[var(--night-80)]">
+              <span className="text-sm text-[rgba(10, 10, 10, 0.8)]">
                 {selectedFiles.size} selected
               </span>
               <button
@@ -243,7 +243,7 @@ export const MediaManagement = () => {
 
       {/* Media Grid */}
       <div className="stat-card">
-        <div className="px-6 py-4 border-b border-[var(--gold-metallic)]/20">
+        <div className="px-6 py-4 border-b border-[var(--jaune-or)]/20">
           <h2 className="text-xl font-display font-semibold text-[var(--night)]">
             Media Files ({filteredMedia.length})
           </h2>
@@ -255,8 +255,8 @@ export const MediaManagement = () => {
               {filteredMedia.map((item) => (
                 <div
                   key={item._id}
-                  className={`relative border border-[var(--gold-metallic)]/20 rounded-xl p-4 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10 transition-all duration-300 cursor-pointer bg-[var(--pure-white)]/50 hover:bg-[var(--pure-white)]/80 ${
-                    selectedFiles.has(item._id) ? 'ring-2 ring-[var(--gold-metallic)] bg-[var(--gold-metallic-10)]' : ''
+                  className={`relative border border-[var(--jaune-or)]/20 rounded-xl p-4 hover:shadow-lg hover:shadow-[var(--jaune-or)]/10 transition-all duration-300 cursor-pointer bg-[var(--pure-white)]/50 hover:bg-[var(--pure-white)]/80 ${
+                    selectedFiles.has(item._id) ? 'ring-2 ring-[var(--jaune-or)] bg-[var(--jaune-or-10)]' : ''
                   }`}
                   onClick={() => toggleFileSelection(item._id)}
                 >
@@ -265,7 +265,7 @@ export const MediaManagement = () => {
                     type="checkbox"
                     checked={selectedFiles.has(item._id)}
                     onChange={() => toggleFileSelection(item._id)}
-                    className="absolute top-3 left-3 h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+                    className="absolute top-3 left-3 h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
                     onClick={(e) => e.stopPropagation()}
                   />
 
@@ -278,7 +278,7 @@ export const MediaManagement = () => {
                       <img
                         src={item.cloudflareUrl}
                         alt={item.alt || item.fileName}
-                        className="w-full h-24 object-cover rounded-lg border border-[var(--gold-metallic)]/20"
+                        className="w-full h-24 object-cover rounded-lg border border-[var(--jaune-or)]/20"
                       />
                     )}
                   </div>
@@ -288,7 +288,7 @@ export const MediaManagement = () => {
                     <h3 className="text-sm font-display font-medium text-[var(--night)] truncate" title={item.fileName}>
                       {item.fileName}
                     </h3>
-                    <p className="text-xs text-[var(--night-80)] mt-2">
+                    <p className="text-xs text-[rgba(10, 10, 10, 0.8)] mt-2">
                       {formatFileSize(item.fileSize)}
                     </p>
                     <div className="mt-3">
@@ -302,7 +302,7 @@ export const MediaManagement = () => {
                       href={item.cloudflareUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-[var(--pure-white)] border border-[var(--gold-metallic)]/20 rounded-lg text-[var(--gold-metallic)] hover:text-[var(--gold-dark)] hover:bg-[var(--gold-metallic-10)] transition-colors"
+                      className="p-2 bg-[var(--pure-white)] border border-[var(--jaune-or)]/20 rounded-lg text-[var(--jaune-or)] hover:text-[var(--jaune-or)] hover:bg-[var(--jaune-or-10)] transition-colors"
                       onClick={(e) => e.stopPropagation()}
                       title="View"
                     >
@@ -311,7 +311,7 @@ export const MediaManagement = () => {
                     <a
                       href={item.cloudflareUrl}
                       download={item.fileName}
-                      className="p-2 bg-[var(--pure-white)] border border-[var(--gold-metallic)]/20 rounded-lg text-[var(--night)] hover:text-[var(--night-80)] hover:bg-[var(--night)]/10 transition-colors"
+                      className="p-2 bg-[var(--pure-white)] border border-[var(--jaune-or)]/20 rounded-lg text-[var(--night)] hover:text-[rgba(10, 10, 10, 0.8)] hover:bg-[var(--night)]/10 transition-colors"
                       onClick={(e) => e.stopPropagation()}
                       title="Download"
                     >
@@ -322,7 +322,7 @@ export const MediaManagement = () => {
                         e.stopPropagation();
                         handleDelete(item._id);
                       }}
-                      className="p-2 bg-[var(--pure-white)] border border-[var(--gold-metallic)]/20 rounded-lg text-[var(--error-red)] hover:text-red-700 hover:bg-red-50 transition-colors"
+                      className="p-2 bg-[var(--pure-white)] border border-[var(--jaune-or)]/20 rounded-lg text-[var(--error-red)] hover:text-red-700 hover:bg-red-50 transition-colors"
                       title="Delete"
                     >
                       <FaTrash className="w-3 h-3" />
@@ -334,9 +334,9 @@ export const MediaManagement = () => {
           </div>
         ) : (
           <div className="text-center py-16">
-            <FaUpload className="mx-auto h-16 w-16 text-[var(--gold-metallic)]/30" />
+            <FaUpload className="mx-auto h-16 w-16 text-[var(--jaune-or)]/30" />
             <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No media files found</h3>
-            <p className="mt-2 text-[var(--night-80)]">
+            <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
               {searchQuery || typeFilter !== 'all'
                 ? 'Try adjusting your search or filters.'
                 : 'Get started by uploading your first media file.'}
@@ -360,18 +360,18 @@ export const MediaManagement = () => {
       {/* Upload Area */}
       <div className="stat-card">
         <div 
-          className={`border-2 border-dashed border-[var(--gold-metallic)]/30 rounded-xl p-12 text-center bg-[var(--gold-metallic-10)]/20 transition-colors ${
-            isUploading ? 'opacity-50 pointer-events-none' : 'hover:border-[var(--gold-metallic)]/50 hover:bg-[var(--gold-metallic-10)]/30 cursor-pointer'
+          className={`border-2 border-dashed border-[var(--jaune-or)]/30 rounded-xl p-12 text-center bg-[var(--jaune-or-10)]/20 transition-colors ${
+            isUploading ? 'opacity-50 pointer-events-none' : 'hover:border-[var(--jaune-or)]/50 hover:bg-[var(--jaune-or-10)]/30 cursor-pointer'
           }`}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
           onClick={handleUploadClick}
         >
-          <FaUpload className={`mx-auto h-16 w-16 text-[var(--gold-metallic)]/40 ${isUploading ? 'animate-pulse' : ''}`} />
+          <FaUpload className={`mx-auto h-16 w-16 text-[var(--jaune-or)]/40 ${isUploading ? 'animate-pulse' : ''}`} />
           <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">
             {isUploading ? 'Uploading Files...' : 'Upload Media Files'}
           </h3>
-          <p className="mt-2 text-[var(--night-80)]">
+          <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
             {isUploading ? 'Please wait while files are being uploaded' : 'Drag and drop files here, or click to browse'}
           </p>
           {!isUploading && (
@@ -382,10 +382,10 @@ export const MediaManagement = () => {
               </button>
             </div>
           )}
-          <p className="mt-4 text-sm text-[var(--night-80)]">
+          <p className="mt-4 text-sm text-[rgba(10, 10, 10, 0.8)]">
             Supports: Images (JPG, PNG, GIF, WebP), Videos (MP4, WebM), Documents (PDF, DOC, DOCX)
           </p>
-          <p className="text-xs text-[var(--night-80)] mt-2">
+          <p className="text-xs text-[rgba(10, 10, 10, 0.8)] mt-2">
             Max file size: 16MB for media files, 4MB for images
           </p>
         </div>

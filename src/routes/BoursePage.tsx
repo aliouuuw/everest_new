@@ -261,7 +261,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
       <div className="grid grid-cols-12 gap-4 items-center">
         {/* Rank & Favorite */}
         <div className="col-span-1 flex items-center gap-2">
-          <button className="text-[var(--pure-white)] hover:text-[var(--gold-metallic)] transition-colors opacity-60 hover:opacity-100">
+          <button className="text-[var(--pure-white)] hover:text-[var(--jaune-or)] transition-colors opacity-60 hover:opacity-100">
             <FiStar className="w-4 h-4" />
           </button>
           <span className="text-secondary-dark font-mono text-sm">#{asset.rank}</span>
@@ -269,7 +269,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* Name & Symbol */}
         <div className="col-span-3 flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-light)] rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)] rounded-full flex items-center justify-center">
             <span className="text-[var(--night)] font-bold text-xs">{asset.symbol.slice(0, 3)}</span>
           </div>
           <div>
@@ -332,7 +332,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-center gap-2 mb-4">
-        <FiTrendingUp className="text-[var(--gold-metallic)] w-5 h-5" />
+        <FiTrendingUp className="text-[var(--jaune-or)] w-5 h-5" />
         <h3 className="font-display text-[var(--pure-white)] text-lg">En Tendance</h3>
       </div>
       <div className="space-y-3">
@@ -461,7 +461,7 @@ export const BoursePage: React.FC = () => {
             <button
               onClick={refreshData}
               disabled={isLoading}
-              className="flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--gold-metallic)]/10 hover:bg-[var(--gold-metallic)]/20 transition-colors disabled:opacity-50 border border-[var(--gold-metallic)]/20"
+              className="flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--jaune-or)]/10 hover:bg-[var(--jaune-or)]/20 transition-colors disabled:opacity-50 border border-[var(--jaune-or)]/20"
               aria-label="Actualiser les données"
             >
               <FiRefreshCw className={`w-4 h-4 text-[var(--pure-white)] ${isLoading ? 'animate-spin' : ''}`} />
@@ -499,7 +499,7 @@ export const BoursePage: React.FC = () => {
                         onClick={() => setFilterBy('all')}
                         className={`px-3 py-1 rounded text-sm font-medium transition-all ${
                           filterBy === 'all'
-                            ? 'bg-[var(--gold-metallic)] text-[var(--night)]'
+                            ? 'bg-[var(--jaune-or)] text-[var(--night)]'
                             : 'bg-[var(--night-20)] text-secondary-dark hover:bg-[var(--night-10)]'
                         }`}
                       >
@@ -568,7 +568,7 @@ export const BoursePage: React.FC = () => {
               {/* Market Insights */}
               <div className="glass-card-dark p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <FiBarChart className="text-[var(--gold-metallic)] w-5 h-5" />
+                  <FiBarChart className="text-[var(--jaune-or)] w-5 h-5" />
                   <h3 className="font-display text-[var(--pure-white)] text-lg">Analyse Marché</h3>
                 </div>
                 <div className="space-y-4 text-sm">
@@ -591,11 +591,11 @@ export const BoursePage: React.FC = () => {
               <div className="glass-card-dark p-6">
                 <h3 className="font-display text-[var(--pure-white)] text-lg mb-4">Actions Rapides</h3>
                 <div className="space-y-3">
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--gold-metallic)] hover:bg-[var(--gold-light)] text-[var(--night)] rounded-lg font-medium transition-colors">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--jaune-or)] hover:bg-[var(--jaune-or-light)] text-[var(--night)] rounded-lg font-medium transition-colors">
                     <FiEye className="w-4 h-4 text-[var(--night)]" />
                     Liste de Surveillance
                   </button>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--night-20)] hover:bg-[var(--night-10)] text-[var(--pure-white)] rounded-lg font-medium transition-colors border border-[var(--gold-metallic)]/20">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--night-20)] hover:bg-[var(--night-10)] text-[var(--pure-white)] rounded-lg font-medium transition-colors border border-[var(--jaune-or)]/20">
                     <FiBarChart className="w-4 h-4 text-[var(--pure-white)]" />
                     Portefeuille
                   </button>

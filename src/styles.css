@@ -1,45 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors - Classic White & Gold */
+  /* Brand Colors - Everest Finance Option 2 */
   --pure-white: #FFFFFF;
-  --white-smoke: #f5f5f7; /* A very light grey for subtle contrast */
-  --timberwolf: #e0e0e0; /* A slightly darker grey for borders */
+  --white-smoke: #f5f5f5;
+  --timberwolf: #dcdad2;
   --line-soft: #eeeeee;
-  /* Accent kept subtle for a minimalist, tech-forward feel */
-  --gold-metallic: #ca942f;
-  --gold-light: #e9e1cb;
-  --gold-dark: #ad7e28;
+  
+  /* Core Brand Palette */
   --jaune-or: #ca942f;
   --mauve: #461D4C;
-  --night: #0f1115; /* Deep, neutral ink */
-  --night-80: rgba(15, 17, 21, 0.8);
+  --night: #0a0a0a;
   
-  /* Extended Palette */
-  --success-green: #10b981;
-  --error-red: #ef4444;
+  /* Extended Opacity/Variations */
+  --night-80: rgba(10, 10, 10, 0.8);
+  --night-60: rgba(10, 10, 10, 0.6);
+  --night-20: rgba(10, 10, 10, 0.2);
+  --night-10: rgba(10, 10, 10, 0.1);
+  --jaune-or-light: var(--jaune-or-light);
+  --jaune-or-30: rgba(202, 148, 47, 0.3);
+  --jaune-or-20: rgba(202, 148, 47, 0.2);
+  --jaune-or-10: rgba(202, 148, 47, 0.1);
+  --mauve-30: rgba(70, 29, 76, 0.3);
+  --mauve-10: rgba(70, 29, 76, 0.1);
   
-  /* Opacity Variations */
-  --white-smoke-80: rgba(245, 245, 245, 0.8);
-  --night-10: rgba(15, 17, 21, 0.08);
-  --night-20: rgba(15, 17, 21, 0.16);
-  --gold-metallic-20: rgba(199, 164, 105, 0.2);
-  --gold-metallic-10: rgba(199, 164, 105, 0.1);
+  /* Typography - Modern Dynamic Luxury */
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', 'Georgia', serif;
   
-  /* Typography */
-  --font-primary: 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
-  
-  /* Refined Palette - Gold Sculpture */
-  --gold-warm: #d4a853;
-  --gold-pale: #f2e8d0;
+  /* Backgrounds */
   --cream: #faf6ef;
-  --charcoal: #1a1a1f;
-  --charcoal-light: #28282f;
-  --night-60: rgba(15, 17, 21, 0.6);
-  --gold-metallic-30: rgba(202, 148, 47, 0.3);
   
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -94,15 +85,15 @@ html {
 }
 
 @utility gradient-gold {
-  background: linear-gradient(120deg, var(--gold-light) 0%, var(--gold-metallic) 55%, var(--gold-dark) 100%);
+  background: linear-gradient(120deg, var(--jaune-or-light) 0%, var(--jaune-or) 55%, var(--jaune-or) 100%);
 }
 
 @utility gradient-gold-subtle {
-  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 75%);
+  background: linear-gradient(180deg, var(--jaune-or-10) 0%, transparent 75%);
 }
 
 @utility text-gradient-gold {
-  background: linear-gradient(135deg, var(--gold-metallic) 0%, var(--gold-dark) 100%);
+  background: linear-gradient(135deg, var(--jaune-or) 0%, var(--jaune-or) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -225,7 +216,7 @@ html {
   font-family: var(--font-primary);
   font-weight: 400;
   line-height: 1.5;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
 }
 
 /* Dark Mode Text Colors */
@@ -336,7 +327,7 @@ html {
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 bg-[var(--gold-dark)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--gold-light)] hover:text-[var(--night)] hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 bg-[var(--jaune-or)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--jaune-or-light)] hover:text-[var(--night)] hover:shadow-lg hover:shadow-[var(--jaune-or)]/20 rounded-lg relative overflow-hidden cursor-pointer;
   border: 0;
   transform: translateY(0);
 }
@@ -351,7 +342,7 @@ html {
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 border border-[var(--gold-metallic)]/40 text-[var(--gold-light)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--gold-metallic)]/60 hover:bg-[var(--gold-metallic)]/10 hover:text-[var(--pure-white)] rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 border border-[var(--jaune-or)]/40 text-[var(--jaune-or-light)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/10 hover:text-[var(--pure-white)] rounded-lg relative overflow-hidden cursor-pointer;
   background: rgba(202, 148, 47, 0.05);
   transform: translateY(0);
 }
@@ -368,43 +359,43 @@ html {
 /* Subtle gold-tinted focus rings and hover shadows */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--jaune-or-10), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-primary-dark:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-30), 0 0 0 1px var(--gold-light);
+  box-shadow: 0 0 0 3px var(--jaune-or-30), 0 0 0 1px var(--jaune-or-light);
 }
 
 .btn-secondary-dark:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-20);
+  box-shadow: 0 8px 24px var(--jaune-or-20);
 }
 
 .btn-secondary:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-10);
+  box-shadow: 0 8px 24px var(--jaune-or-10);
 }
 
 .btn-primary-dark:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-30);
+  box-shadow: 0 8px 24px var(--jaune-or-30);
 }
 
 .btn-secondary-dark:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-20);
+  box-shadow: 0 8px 24px var(--jaune-or-20);
 }
 
 /* Card Styles */
 .stat-card {
-  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10;
+  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--jaune-or)]/10;
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -412,7 +403,7 @@ html {
 
 /* Dark Mode Card Styles */
 .stat-card-dark {
-  @apply p-4 bg-[var(--night)]/90 backdrop-blur-sm border border-[var(--gold-metallic)]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20;
+  @apply p-4 bg-[var(--night)]/90 backdrop-blur-sm border border-[var(--jaune-or)]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--jaune-or)]/20;
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -587,11 +578,11 @@ html {
 
 /* Card hover micro-interactions */
 .card-hover { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
-.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--gold-metallic-10); }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--jaune-or-10); }
 
 /* Dark Mode Card hover micro-interactions */
 .card-hover-dark { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
-.card-hover-dark:hover { transform: translateY(-4px); box-shadow: 0 8px 20px var(--gold-metallic-10); }
+.card-hover-dark:hover { transform: translateY(-4px); box-shadow: 0 8px 20px var(--jaune-or-10); }
 
 /* Glassmorphic Card hover effects */
 .glass-card-hover {
@@ -810,7 +801,7 @@ html {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 1.25rem 0 0.75rem 0;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
   font-family: var(--font-display);
 }
 
@@ -818,7 +809,7 @@ html {
   font-size: 1.25rem;
   font-weight: bold;
   margin: 1rem 0 0.5rem 0;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
   font-family: var(--font-display);
 }
 
@@ -828,7 +819,7 @@ html {
   font-size: 1.125rem;
   font-weight: bold;
   margin: 0.75rem 0 0.5rem 0;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
   font-family: var(--font-display);
 }
 
@@ -871,25 +862,25 @@ html {
 }
 
 .publication-content blockquote {
-  border-left: 4px solid var(--gold-metallic);
+  border-left: 4px solid var(--jaune-or);
   padding-left: 1rem;
   margin: 1rem 0;
   font-style: italic;
-  color: var(--night-80);
-  background-color: var(--gold-metallic-10);
+  color: rgba(10, 10, 10, 0.8);
+  background-color: var(--jaune-or-10);
   padding: 1rem;
   border-radius: 0.375rem;
   font-family: var(--font-primary);
 }
 
 .publication-content a {
-  color: var(--gold-metallic);
+  color: var(--jaune-or);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .publication-content a:hover {
-  color: var(--gold-dark);
+  color: var(--jaune-or);
 }
 
 .publication-content img {

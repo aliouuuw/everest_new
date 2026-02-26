@@ -38,7 +38,7 @@ export const AdminDashboard = () => {
       description: 'Add a new publication or blog post',
       icon: FaPlus,
       href: '/admin/publications/new',
-      color: 'bg-[var(--gold-metallic)] hover:bg-[var(--gold-dark)]',
+      color: 'bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]',
     },
     {
       title: 'Manage Media',
@@ -52,16 +52,16 @@ export const AdminDashboard = () => {
       description: 'Manage user roles and permissions',
       icon: FaUsers,
       href: '/admin/users',
-      color: 'bg-[var(--night)] hover:bg-[var(--night-80)]',
+      color: 'bg-[var(--night)] hover:bg-[rgba(10, 10, 10, 0.8)]',
     },
   ];
 
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="border-b border-[var(--gold-metallic)]/10 pb-4 sm:pb-6">
+      <div className="border-b border-[var(--jaune-or)]/10 pb-4 sm:pb-6">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-[var(--night)]">Admin Dashboard</h1>
-        <p className="text-[var(--night-80)] mt-2 sm:mt-3 text-base sm:text-lg">Welcome to the CMS administration panel</p>
+        <p className="text-[rgba(10, 10, 10, 0.8)] mt-2 sm:mt-3 text-base sm:text-lg">Welcome to the CMS administration panel</p>
       </div>
 
       {/* Statistics Cards */}
@@ -99,7 +99,7 @@ export const AdminDashboard = () => {
           <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <div className="text-secondary text-xs">{k.label}</div>
-              <div className="text-[var(--gold-metallic)]">{k.icon}</div>
+              <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
               <div className="font-display text-lg">{k.value}</div>
@@ -122,7 +122,7 @@ export const AdminDashboard = () => {
               <Link
                 key={action.title}
                 to={action.href}
-                className="block p-3 sm:p-4 border border-[var(--gold-metallic)]/20 rounded-xl hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10 transition-all duration-300 hover:border-[var(--gold-metallic)]/30 bg-[var(--pure-white)]/50 hover:bg-white"
+                className="block p-3 sm:p-4 border border-[var(--jaune-or)]/20 rounded-xl hover:shadow-lg hover:shadow-[var(--jaune-or)]/10 transition-all duration-300 hover:border-[var(--jaune-or)]/30 bg-[var(--pure-white)]/50 hover:bg-white"
               >
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className={`p-2 sm:p-3 rounded-xl text-white ${action.color} transition-all duration-300 hover:shadow-lg`}>
@@ -130,7 +130,7 @@ export const AdminDashboard = () => {
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-display font-medium text-[var(--night)]">{action.title}</h3>
-                    <p className="text-[var(--night-80)] text-xs sm:text-sm">{action.description}</p>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] text-xs sm:text-sm">{action.description}</p>
                   </div>
                 </div>
               </Link>
@@ -144,10 +144,10 @@ export const AdminDashboard = () => {
           {publications?.page && publications.page.length > 0 ? (
             <div className="space-y-4">
               {publications.page.slice(0, 5).map((publication) => (
-                <div key={publication._id} className="flex items-center justify-between p-4 border border-[var(--gold-metallic)]/20 rounded-xl bg-[var(--pure-white)]/50 hover:border-[var(--gold-metallic)]/30 hover:shadow-md transition-all duration-300">
+                <div key={publication._id} className="flex items-center justify-between p-4 border border-[var(--jaune-or)]/20 rounded-xl bg-[var(--pure-white)]/50 hover:border-[var(--jaune-or)]/30 hover:shadow-md transition-all duration-300">
                   <div>
                     <h3 className="font-display font-medium text-[var(--night)]">{publication.title}</h3>
-                    <p className="text-sm text-[var(--night-80)]">
+                    <p className="text-sm text-[rgba(10, 10, 10, 0.8)]">
                       {publication.category} • {publication.status}
                     </p>
                   </div>
@@ -155,7 +155,7 @@ export const AdminDashboard = () => {
                     <Link
                       to="/admin/publications/$id/edit"
                       params={{ id: publication._id }}
-                      className="px-3 py-1 text-sm bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] rounded-lg hover:bg-[var(--gold-metallic-20)] border border-[var(--gold-metallic)]/20 transition-all duration-300 hover:shadow-sm"
+                      className="px-3 py-1 text-sm bg-[var(--jaune-or-10)] text-[var(--jaune-or)] rounded-lg hover:bg-[var(--jaune-or-20)] border border-[var(--jaune-or)]/20 transition-all duration-300 hover:shadow-sm"
                     >
                       Edit
                     </Link>
@@ -173,9 +173,9 @@ export const AdminDashboard = () => {
             </div>
           ) : (
             <div className="text-center py-12">
-              <FaNewspaper className="mx-auto h-12 w-12 text-[var(--gold-metallic)]/40" />
+              <FaNewspaper className="mx-auto h-12 w-12 text-[var(--jaune-or)]/40" />
               <h3 className="mt-4 text-lg font-display font-medium text-[var(--night)]">No publications yet</h3>
-              <p className="mt-2 text-[var(--night-80)]">Create your first publication to get started!</p>
+              <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">Create your first publication to get started!</p>
               <div className="mt-6">
                 <Link
                   to="/admin/publications/new"

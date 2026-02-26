@@ -79,7 +79,7 @@ export const PublicationsPage = () => {
                   placeholder="Rechercher des publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm focus:ring-2 focus:ring-[var(--gold-light)] focus:border-transparent text-center font-display"
+                  className="w-full px-4 py-3 rounded-full border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm focus:ring-2 focus:ring-[var(--jaune-or-light)] focus:border-transparent text-center font-display"
                 />
               </div>
 
@@ -110,34 +110,34 @@ export const PublicationsPage = () => {
             {publications === undefined ? (
               // Loading state
               <div className="text-center py-16">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto mb-4"></div>
-                <p className="text-[var(--night-80)]">Chargement des publications...</p>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto mb-4"></div>
+                <p className="text-[rgba(10, 10, 10, 0.8)]">Chargement des publications...</p>
               </div>
             ) : filtered.length === 0 ? (
               // Empty state
               <div className="text-center py-16">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--gold-metallic-10)] flex items-center justify-center">
-                  <svg className="w-8 h-8 text-[var(--gold-metallic)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--jaune-or-10)] flex items-center justify-center">
+                  <svg className="w-8 h-8 text-[var(--jaune-or)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
                 <h3 className="text-lg font-medium text-[var(--night)] mb-2">Aucune publication trouvée</h3>
-                <p className="text-[var(--night-80)]">Aucune publication ne correspond aux critères sélectionnés.</p>
+                <p className="text-[rgba(10, 10, 10, 0.8)]">Aucune publication ne correspond aux critères sélectionnés.</p>
               </div>
             ) : (
               <div ref={listRef} className="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((item, index) => (
                 <article key={index} className="group">
                   <a href={`/publications/${item.slug}`} className="block">
-                    <div className="relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-[var(--gold-light)]/30 group-hover:bg-white/70">
+                    <div className="relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-[var(--jaune-or-light)]/30 group-hover:bg-white/70">
                       {/* Background blur effect */}
-                      <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                      <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                       
                       {/* Cover image placeholder */}
-                      <div className="h-36 edge-media bg-gradient-to-br from-[var(--white-smoke)]/80 to-[var(--gold-light)]/20 flex items-center justify-center text-secondary mb-5 rounded-xl border border-[var(--gold-metallic)]/10">
+                      <div className="h-36 edge-media bg-gradient-to-br from-[var(--white-smoke)]/80 to-[var(--jaune-or-light)]/20 flex items-center justify-center text-secondary mb-5 rounded-xl border border-[var(--jaune-or)]/10">
                         <div className="text-center">
-                          <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-[var(--gold-light)]/20 flex items-center justify-center">
-                            <svg className="w-6 h-6 text-[var(--gold-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-[var(--jaune-or-light)]/20 flex items-center justify-center">
+                            <svg className="w-6 h-6 text-[var(--jaune-or)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                           </div>
@@ -148,12 +148,12 @@ export const PublicationsPage = () => {
                       <div className="relative z-10">
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-2">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--gold-light)]/10 text-[var(--gold-dark)] border border-[var(--gold-light)]/20">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--jaune-or-light)]/10 text-[var(--jaune-or)] border border-[var(--jaune-or-light)]/20">
                               {CATEGORY_LABELS[item.category]}
                             </span>
                             {/* Featured indicator */}
                             {item.featured && (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--jaune-or)]/20 text-[var(--jaune-or)] border border-[var(--jaune-or)]/30">
                                 ⭐ En vedette
                               </span>
                             )}
@@ -167,7 +167,7 @@ export const PublicationsPage = () => {
                           </time>
                         </div>
                         
-                        <h3 className="font-display text-lg font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--gold-dark)] transition-colors leading-tight">
+                        <h3 className="font-display text-lg font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--jaune-or)] transition-colors leading-tight">
                           {item.title}
                         </h3>
                         
@@ -176,14 +176,14 @@ export const PublicationsPage = () => {
                         </p>
 
                         {/* Divider */}
-                        <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent mb-4" />
+                        <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent mb-4" />
 
                         {/* Read more indicator */}
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-[var(--gold-dark)] group-hover:text-[var(--gold-dark)] transition-colors">
+                          <span className="text-xs font-medium text-[var(--jaune-or)] group-hover:text-[var(--jaune-or)] transition-colors">
                             Lire la suite
                           </span>
-                          <svg className="w-4 h-4 text-[var(--gold-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-[var(--jaune-or)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>

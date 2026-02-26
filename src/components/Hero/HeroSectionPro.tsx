@@ -90,7 +90,7 @@ export const HeroSectionPro: React.FC = () => {
         <div 
           className="hero-bg-element hero-ambient-gradient absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full blur-[120px] opacity-40 mix-blend-multiply"
           style={{
-            background: 'radial-gradient(circle, var(--gold-light) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, var(--jaune-or-light) 0%, transparent 70%)',
             backgroundSize: '200% 200%'
           }}
         />
@@ -114,14 +114,14 @@ export const HeroSectionPro: React.FC = () => {
           {/* Main Headline Area (Col 1-8) */}
           <div className="md:col-span-8 relative">
             <div className="hero-reveal flex items-center gap-4 mb-12">
-              <div className="hero-line w-12 h-px bg-[var(--gold-dark)]" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--gold-dark)]">
+              <div className="hero-line w-12 h-px bg-[var(--jaune-or)]" />
+              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
                 Société de Gestion et d'Intermédiation
               </span>
             </div>
             
             <h1 className="hero-reveal font-display text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.92] tracking-tight mb-8">
-              Élevez vos ambitions vers de nouveaux <i className="font-serif italic text-[var(--gold-dark)] pr-2">sommets.</i>
+              Élevez vos ambitions vers de nouveaux <i className="font-serif italic text-[var(--jaune-or)] pr-2">sommets.</i>
             </h1>
           </div>
           
@@ -133,7 +133,7 @@ export const HeroSectionPro: React.FC = () => {
               <div className="hero-line absolute left-0 top-0 w-px h-full bg-black/10" />
               
               <div className="pl-8 pt-8">
-                <p className="hero-reveal text-lg md:text-xl leading-relaxed text-[var(--night-80)] font-light mb-10">
+                <p className="hero-reveal text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10">
                   Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires 
                   et l'ingénierie financière structurée en Afrique de l'Ouest.
                 </p>
@@ -141,7 +141,7 @@ export const HeroSectionPro: React.FC = () => {
                 <div className="hero-reveal flex flex-col sm:flex-row gap-6">
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 bg-[var(--night)] text-white text-xs font-bold tracking-[0.2em] uppercase transition-all hover:bg-[var(--gold-dark)]"
+                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 bg-[var(--night)] text-white text-xs font-bold tracking-[0.2em] uppercase transition-all hover:bg-[var(--jaune-or)]"
                   >
                     <span>Nous contacter</span>
                     <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
@@ -149,7 +149,7 @@ export const HeroSectionPro: React.FC = () => {
                   
                   <button 
                     onClick={() => scrollToSection('services')}
-                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 border border-black/10 text-[var(--night)] text-xs font-bold tracking-[0.2em] uppercase transition-all hover:border-[var(--gold-metallic)]"
+                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 border border-black/10 text-[var(--night)] text-xs font-bold tracking-[0.2em] uppercase transition-all hover:border-[var(--jaune-or)]"
                   >
                     <span>Nos services</span>
                     <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
@@ -174,12 +174,12 @@ export const HeroSectionPro: React.FC = () => {
                   {stat.value}
                 </div>
                 {stat.suffix && (
-                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--gold-dark)] uppercase">
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">
                     {stat.suffix}
                   </div>
                 )}
               </div>
-              <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--night-80)] uppercase">
+              <div className="text-[10px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                 {stat.label}
               </div>
             </div>

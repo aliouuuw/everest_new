@@ -91,7 +91,7 @@ export const ClientPortalPreview: React.FC = () => {
         <div className="max-w-2xl mb-14">
           <span
             className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
           >
             Aperçu du portail client
           </span>
@@ -106,7 +106,7 @@ export const ClientPortalPreview: React.FC = () => {
             }}
           >
             Un portail pensé pour la{' '}
-            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-dark)' }}>
+            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               gestion patrimoniale.
             </em>
           </h2>
@@ -242,7 +242,7 @@ export const ClientPortalPreview: React.FC = () => {
                             <td className={`py-2 ${row.perfCounter.value.startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.perfCounter.value}</td>
                             <td className="py-2">
                               <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
-                                <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--gold-metallic)' }} />
+                                <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--jaune-or)' }} />
                               </div>
                             </td>
                           </tr>
@@ -258,14 +258,14 @@ export const ClientPortalPreview: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <div className="relative w-28 h-28 shrink-0 rounded-full"
                          style={{
-                           background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
+                           background: 'conic-gradient(var(--jaune-or) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
                            mask: 'radial-gradient(circle 20px at center, transparent 20px, black 21px)'
                          }}
                     />
                     <div className="text-sm">
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: {stocksAllocCounter.value}</div>
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: {bondsAllocCounter.value}</div>
-                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: {cashAllocCounter.value}</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]" /> Actions: {stocksAllocCounter.value}</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/40" /> Obligations: {bondsAllocCounter.value}</div>
+                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/20" /> Monétaire: {cashAllocCounter.value}</div>
                     </div>
                   </div>
                   <div className="mt-4 text-xs text-secondary">Profil de risque: Modéré • Devise: FCFA</div>
@@ -342,7 +342,7 @@ export const ClientPortalPreview: React.FC = () => {
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
             >
               Demander une démo
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
             </span>
           </a>
         </div>

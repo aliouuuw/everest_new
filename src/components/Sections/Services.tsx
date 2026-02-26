@@ -96,7 +96,7 @@ export const Services: React.FC = () => {
         <div className="max-w-2xl mb-16 md:mb-20">
           <span
             className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
           >
             Nos offres
           </span>
@@ -111,7 +111,7 @@ export const Services: React.FC = () => {
             }}
           >
             Solutions pour chaque{' '}
-            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-metallic)' }}>
+            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               profil investisseur.
             </em>
           </h2>
@@ -137,7 +137,7 @@ export const Services: React.FC = () => {
                   fontFamily: 'var(--font-display)',
                   fontWeight: 300,
                   fontSize: '1.1rem',
-                  color: 'var(--gold-metallic)',
+                  color: 'var(--jaune-or)',
                   opacity: 0.5,
                 }}
               >
@@ -175,7 +175,7 @@ export const Services: React.FC = () => {
 
               {/* Link affordance */}
               <span
-                className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--gold-metallic)] transition-colors duration-500"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-500"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}
               >
                 En savoir plus

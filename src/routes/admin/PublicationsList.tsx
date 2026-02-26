@@ -35,7 +35,7 @@ export const PublicationsList = () => {
 
   const getStatusBadge = (status: string) => {
     const statusConfig: Record<string, { color: string; label: string }> = {
-      draft: { color: 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border-[var(--gold-metallic)]/20', label: 'Draft' },
+      draft: { color: 'bg-[var(--jaune-or-10)] text-[var(--jaune-or)] border-[var(--jaune-or)]/20', label: 'Draft' },
       published: { color: 'bg-[var(--success-green)]/10 text-[var(--success-green)] border-[var(--success-green)]/20', label: 'Published' },
       archived: { color: 'bg-[var(--night)]/10 text-[var(--night)] border-[var(--night)]/20', label: 'Archived' },
     };
@@ -68,10 +68,10 @@ export const PublicationsList = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
+      <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
           <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Publications</h1>
-          <p className="text-[var(--night-80)] mt-3 text-lg">Manage your publications and blog posts</p>
+          <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Manage your publications and blog posts</p>
         </div>
         <Link
           to="/admin/publications/new"
@@ -87,13 +87,13 @@ export const PublicationsList = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Search */}
           <div className="relative">
-            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[var(--night-80)]" />
+            <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgba(10, 10, 10, 0.8)]" />
             <input
               type="text"
               placeholder="Search publications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+              className="w-full pl-12 pr-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
             />
           </div>
 
@@ -101,7 +101,7 @@ export const PublicationsList = () => {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+            className="px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Statuses</option>
             <option value="draft">Draft</option>
@@ -113,7 +113,7 @@ export const PublicationsList = () => {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+            className="px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
           >
             <option value="all">All Categories</option>
             <option value="revues-hebdo">Weekly Reviews</option>
@@ -127,7 +127,7 @@ export const PublicationsList = () => {
 
       {/* Publications Table */}
       <div className="stat-card">
-        <div className="px-6 py-4 border-b border-[var(--gold-metallic)]/20">
+        <div className="px-6 py-4 border-b border-[var(--jaune-or)]/20">
           <h2 className="text-xl font-display font-semibold text-[var(--night)]">
             Publications ({filteredPublications.length})
           </h2>
@@ -135,35 +135,35 @@ export const PublicationsList = () => {
         
         {filteredPublications.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-[var(--gold-metallic)]/20">
-              <thead className="bg-[var(--gold-metallic)]/5">
+            <table className="min-w-full divide-y divide-[var(--jaune-or)]/20">
+              <thead className="bg-[var(--jaune-or)]/5">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Title
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Category
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Created
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-[var(--night-80)] uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-medium text-[rgba(10, 10, 10, 0.8)] uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-[var(--pure-white)]/30 divide-y divide-[var(--gold-metallic)]/20">
+              <tbody className="bg-[var(--pure-white)]/30 divide-y divide-[var(--jaune-or)]/20">
                 {filteredPublications.map((publication) => (
-                  <tr key={publication._id} className="hover:bg-[var(--gold-metallic)]/5 transition-colors">
+                  <tr key={publication._id} className="hover:bg-[var(--jaune-or)]/5 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-display font-medium text-[var(--night)]">
                           {publication.title}
                         </div>
-                        <div className="text-sm text-[var(--night-80)]">
+                        <div className="text-sm text-[rgba(10, 10, 10, 0.8)]">
                           {publication.description.substring(0, 100)}...
                         </div>
                       </div>
@@ -174,7 +174,7 @@ export const PublicationsList = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {getStatusBadge(publication.status)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[var(--night-80)]">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[rgba(10, 10, 10, 0.8)]">
                       {publication.createdAt ? new Date(publication.createdAt).toLocaleDateString() : 'Date non disponible'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -183,7 +183,7 @@ export const PublicationsList = () => {
                           href={`/publications/${publication.slug}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[var(--gold-metallic)] hover:text-[var(--gold-dark)] transition-colors p-2 hover:bg-[var(--gold-metallic-10)] rounded-lg"
+                          className="text-[var(--jaune-or)] hover:text-[var(--jaune-or)] transition-colors p-2 hover:bg-[var(--jaune-or-10)] rounded-lg"
                           title="View"
                         >
                           <FaEye className="inline" />
@@ -191,7 +191,7 @@ export const PublicationsList = () => {
                         <Link
                           to="/admin/publications/$id/edit"
                           params={{ id: publication._id }}
-                          className="text-[var(--night)] hover:text-[var(--night-80)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
+                          className="text-[var(--night)] hover:text-[rgba(10, 10, 10, 0.8)] transition-colors p-2 hover:bg-[var(--night)]/10 rounded-lg"
                           title="Edit"
                         >
                           <FaEdit className="inline" />
@@ -212,9 +212,9 @@ export const PublicationsList = () => {
           </div>
         ) : (
           <div className="text-center py-16">
-            <FaSearch className="mx-auto h-16 w-16 text-[var(--gold-metallic)]/30" />
+            <FaSearch className="mx-auto h-16 w-16 text-[var(--jaune-or)]/30" />
             <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No publications found</h3>
-            <p className="mt-2 text-[var(--night-80)]">
+            <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
               {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
                 ? 'Try adjusting your search or filters.'
                 : 'Get started by creating a new publication.'}

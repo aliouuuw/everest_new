@@ -21,11 +21,11 @@ export const CEOMessagePage = () => {
         <div className="mx-auto max-w-4xl px-6">
           <div className="relative">
             {/* Decorative elements */}
-            <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-[var(--gold-metallic-10)] blur-3xl opacity-30" />
-            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-3xl opacity-20" />
+            <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-[var(--jaune-or-10)] blur-3xl opacity-30" />
+            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-3xl opacity-20" />
             
             {/* Main content card */}
-            <div className="relative bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-2xl p-8 sm:p-12 shadow-sm">
+            <div className="relative bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/25 rounded-2xl p-8 sm:p-12 shadow-sm">
               <article className="prose prose-neutral max-w-none">
                 {/* Avatar */}
                 <div className="flex justify-center mb-8">
@@ -33,7 +33,7 @@ export const CEOMessagePage = () => {
                     <img 
                       src="/Khady-diouf.png" 
                       alt="Khady Diouf - Directrice Générale" 
-                      className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[var(--gold-metallic)]/20 shadow-lg"
+                      className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[var(--jaune-or)]/20 shadow-lg"
                     />
                   </div>
                 </div>
@@ -67,7 +67,7 @@ export const CEOMessagePage = () => {
                 </div>
                 
                 {/* Signature section */}
-                <div className="mt-12 pt-8 border-t border-[var(--gold-metallic)]/20">
+                <div className="mt-12 pt-8 border-t border-[var(--jaune-or)]/20">
                   <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
                       <div className="font-display text-[var(--night)] text-lg">La Direction Générale</div>

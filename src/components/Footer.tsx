@@ -25,7 +25,7 @@ export const Footer = () => {
     fontSize: '0.7rem',
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: 'var(--gold-metallic)',
+    color: 'var(--jaune-or)',
     marginBottom: '1.25rem',
   };
 
@@ -49,7 +49,7 @@ export const Footer = () => {
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--gold-metallic)]/40 hover:text-[var(--gold-metallic)]"
+                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
                 style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
               >
                 <FaLinkedin className="text-sm" />
@@ -57,7 +57,7 @@ export const Footer = () => {
               <a
                 href="#"
                 aria-label="Twitter"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--gold-metallic)]/40 hover:text-[var(--gold-metallic)]"
+                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
                 style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
               >
                 <FaTwitter className="text-sm" />
@@ -77,7 +77,7 @@ export const Footer = () => {
                 { label: 'Portail client', href: '#portal-preview' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--gold-metallic)]">{l.label}</a>
+                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--jaune-or)]">{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -95,7 +95,7 @@ export const Footer = () => {
                 { label: 'Gestion assistée', href: '/gestion-assistee' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--gold-metallic)]">{l.label}</a>
+                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--jaune-or)]">{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -109,12 +109,12 @@ export const Footer = () => {
                 18 Boulevard de la République,<br />Dakar, Sénégal
               </li>
               <li>
-                <a href="mailto:contact@everest-finance.sn" style={linkStyle} className="hover:!text-[var(--gold-metallic)]">
+                <a href="mailto:contact@everest-finance.sn" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
                   contact@everest-finance.sn
                 </a>
               </li>
               <li>
-                <a href="tel:+221000000000" style={linkStyle} className="hover:!text-[var(--gold-metallic)]">
+                <a href="tel:+221000000000" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
                   +221 00 000 00 00
                 </a>
               </li>

@@ -88,8 +88,8 @@ export const BRVMTicker: React.FC = () => {
         <div className="flex items-center justify-between pb-2">
           {/* BRVM Label - visible on all screen sizes */}
           <div className="flex items-center gap-2 text-secondary">
-            <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
-            <span className="kicker text-[var(--gold-dark)] pr-2">BRVM</span>
+            <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full animate-pulse" aria-hidden="true"></div>
+            <span className="kicker text-[var(--jaune-or)] pr-2">BRVM</span>
           </div>
 
           {/* Desktop Ticker - hidden on mobile */}

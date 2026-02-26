@@ -139,20 +139,20 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm transition-all card-hover"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm transition-all card-hover"
             >
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-[var(--gold-light)]/5 transition-colors"
+                className="w-full p-6 text-left flex items-center justify-between hover:bg-[var(--jaune-or-light)]/5 transition-colors"
               >
                 <div className="flex items-start gap-4">
                   <div className="icon-badge text-[var(--night)] text-xl flex-shrink-0 mt-0.5">
                     <FiHelpCircle />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg text-[var(--night)] group-hover:text-[var(--gold-dark)] transition-colors">
+                    <h3 className="font-display text-lg text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors">
                       {faq.question}
                     </h3>
                   </div>
@@ -160,12 +160,12 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
                 <div className={`transform transition-transform duration-200 flex-shrink-0 ${
                   openItems.has(index) ? 'rotate-180' : ''
                 }`}>
-                  <FiChevronDown className="w-5 h-5 text-[var(--gold-dark)]" />
+                  <FiChevronDown className="w-5 h-5 text-[var(--jaune-or)]" />
                 </div>
               </button>
 
               {openItems.has(index) && (
-                <div className="px-6 pb-6 border-t border-[var(--gold-metallic)]/25">
+                <div className="px-6 pb-6 border-t border-[var(--jaune-or)]/25">
                   <div className="pt-4">
                     <p className="text-secondary leading-relaxed">{faq.answer}</p>
                   </div>
@@ -177,8 +177,8 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
 
         {/* Contact CTA */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-4 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--gold-metallic)]/25">
-            <FiHelpCircle className="text-[var(--gold-dark)]" />
+          <div className="inline-flex items-center gap-3 px-6 py-4 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
+            <FiHelpCircle className="text-[var(--jaune-or)]" />
             <div className="text-left">
               <div className="font-display text-sm text-[var(--night)]">Vous avez d'autres questions ?</div>
               <div className="text-xs text-secondary">Notre équipe est là pour vous accompagner</div>

@@ -35,7 +35,7 @@ export const HeroSectionMountain: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex items-end bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--gold-metallic)] selection:text-[var(--night)]"
+      className="relative min-h-[100svh] w-full flex items-end bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
     >
       {/* ─── Cinematic Video Background ─── */}
       <div className="hero-video-wrap absolute inset-0 w-full h-full z-0">
@@ -78,7 +78,7 @@ export const HeroSectionMountain: React.FC = () => {
           <div className="hero-kicker mb-8">
             <span
               className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--gold-metallic)' }}
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--jaune-or)' }}
             >
               Société de Gestion et d'Intermédiation — Dakar
             </span>
@@ -111,7 +111,7 @@ export const HeroSectionMountain: React.FC = () => {
                   fontSize: 'clamp(3rem, 9vw, 7.5rem)',
                   lineHeight: 0.95,
                   letterSpacing: '-0.02em',
-                  color: 'var(--gold-metallic)',
+                  color: 'var(--jaune-or)',
                 }}
               >
                 ambitions.
@@ -122,7 +122,7 @@ export const HeroSectionMountain: React.FC = () => {
           {/* Gold horizontal rule */}
           <div
             className="hero-rule h-[1px] w-24 md:w-40 mb-8"
-            style={{ background: 'linear-gradient(90deg, var(--gold-metallic), transparent)' }}
+            style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
           />
 
           {/* Subhead */}
@@ -151,10 +151,10 @@ export const HeroSectionMountain: React.FC = () => {
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.8)' }}
               >
                 Découvrir notre expertise
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
               </span>
-              <span className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[var(--gold-metallic)]/60 group-hover:bg-[var(--gold-metallic)]/10 transition-all duration-500">
-                <FiArrowRight className="text-base text-white/70 group-hover:text-[var(--gold-metallic)] group-hover:translate-x-0.5 transition-all duration-500" />
+              <span className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[var(--jaune-or)]/60 group-hover:bg-[var(--jaune-or)]/10 transition-all duration-500">
+                <FiArrowRight className="text-base text-white/70 group-hover:text-[var(--jaune-or)] group-hover:translate-x-0.5 transition-all duration-500" />
               </span>
             </a>
           </div>
@@ -186,11 +186,11 @@ export const HeroSectionMountain: React.FC = () => {
 
             {/* Metric 2 — Licence */}
             <div className="hero-metric py-7 md:px-12 border-b md:border-b-0 md:border-r border-white/[0.06] flex items-center gap-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold-metallic)] animate-pulse flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)] animate-pulse flex-shrink-0" />
               <div>
                 <span
                   className="block text-[9px] tracking-[0.2em] uppercase mb-0.5"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
                 >
                   Agrément CREPMF
                 </span>
@@ -209,7 +209,7 @@ export const HeroSectionMountain: React.FC = () => {
                 className="text-3xl lg:text-4xl"
                 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
               >
-                30<span style={{ color: 'var(--gold-metallic)' }}>+</span>
+                30<span style={{ color: 'var(--jaune-or)' }}>+</span>
               </span>
               <span
                 className="text-[9px] tracking-[0.2em] uppercase"

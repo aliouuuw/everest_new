@@ -25,9 +25,9 @@ export const Settings = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="border-b border-[var(--gold-metallic)]/20 pb-6">
+      <div className="border-b border-[var(--jaune-or)]/20 pb-6">
         <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Settings</h1>
-        <p className="text-[var(--night-80)] mt-3 text-lg">Configure system settings and preferences</p>
+        <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Configure system settings and preferences</p>
       </div>
 
       <div className="flex space-x-8">
@@ -42,8 +42,8 @@ export const Settings = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
                     activeTab === tab.id
-                      ? 'bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] border border-[var(--gold-metallic)]/20'
-                      : 'text-[var(--night-80)] hover:text-[var(--night)] hover:bg-[var(--gold-metallic-10)]'
+                      ? 'bg-[var(--jaune-or-10)] text-[var(--jaune-or)] border border-[var(--jaune-or)]/20'
+                      : 'text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)] hover:bg-[var(--jaune-or-10)]'
                   }`}
                 >
                   <Icon className="mr-3 h-5 w-5" />
@@ -75,7 +75,7 @@ export const Settings = () => {
             )}
 
             {/* Save Button */}
-            <div className="px-6 py-6 border-t border-[var(--gold-metallic)]/20 bg-[var(--gold-metallic-10)]/20 rounded-b-2xl">
+            <div className="px-6 py-6 border-t border-[var(--jaune-or)]/20 bg-[var(--jaune-or-10)]/20 rounded-b-2xl">
               <div className="flex justify-end">
                 <button
                   onClick={handleSave}
@@ -108,7 +108,7 @@ const GeneralSettings = () => (
           type="text"
           id="siteName"
           defaultValue="Everest Finance"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -120,7 +120,7 @@ const GeneralSettings = () => (
           id="siteDescription"
           rows={3}
           defaultValue="Leading financial services company providing investment management and advisory services"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -132,7 +132,7 @@ const GeneralSettings = () => (
           type="email"
           id="adminEmail"
           defaultValue="admin@everestfinance.com"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -143,7 +143,7 @@ const GeneralSettings = () => (
         <select
           id="timezone"
           defaultValue="UTC"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="UTC">UTC</option>
           <option value="America/New_York">Eastern Time</option>
@@ -162,9 +162,9 @@ const DatabaseSettings = () => (
     <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">Database Settings</h2>
     
     <div className="space-y-6">
-      <div className="bg-[var(--gold-metallic-10)] border border-[var(--gold-metallic)]/20 rounded-xl p-6">
-        <h3 className="text-sm font-medium text-[var(--gold-dark)] mb-2">ConvexDB Configuration</h3>
-        <p className="text-sm text-[var(--night-80)]">
+      <div className="bg-[var(--jaune-or-10)] border border-[var(--jaune-or)]/20 rounded-xl p-6">
+        <h3 className="text-sm font-medium text-[var(--jaune-or)] mb-2">ConvexDB Configuration</h3>
+        <p className="text-sm text-[rgba(10, 10, 10, 0.8)]">
           Your database is hosted on ConvexDB. Configuration is managed through environment variables.
         </p>
       </div>
@@ -176,7 +176,7 @@ const DatabaseSettings = () => (
         <select
           id="backupFrequency"
           defaultValue="daily"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="hourly">Hourly</option>
           <option value="daily">Daily</option>
@@ -192,7 +192,7 @@ const DatabaseSettings = () => (
         <select
           id="retentionPeriod"
           defaultValue="30"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="7">7 days</option>
           <option value="30">30 days</option>
@@ -220,7 +220,7 @@ const SecuritySettings = () => (
           defaultValue="60"
           min="15"
           max="480"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -234,7 +234,7 @@ const SecuritySettings = () => (
           defaultValue="5"
           min="3"
           max="10"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -248,7 +248,7 @@ const SecuritySettings = () => (
           defaultValue="30"
           min="15"
           max="1440"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -257,7 +257,7 @@ const SecuritySettings = () => (
           type="checkbox"
           id="require2FA"
           defaultChecked={false}
-          className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+          className="h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
         />
         <label htmlFor="require2FA" className="ml-3 block text-sm text-[var(--night)]">
           Require Two-Factor Authentication for Admin Users
@@ -269,7 +269,7 @@ const SecuritySettings = () => (
           type="checkbox"
           id="enableAuditLog"
           defaultChecked={true}
-          className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+          className="h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
         />
         <label htmlFor="enableAuditLog" className="ml-3 block text-sm text-[var(--night)]">
           Enable Audit Logging
@@ -292,7 +292,7 @@ const AppearanceSettings = () => (
         <select
           id="theme"
           defaultValue="light"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
@@ -308,7 +308,7 @@ const AppearanceSettings = () => (
           type="color"
           id="primaryColor"
           defaultValue="#ca942f"
-          className="h-12 w-24 border border-[var(--gold-metallic)]/20 rounded-xl"
+          className="h-12 w-24 border border-[var(--jaune-or)]/20 rounded-xl"
         />
       </div>
 
@@ -320,7 +320,7 @@ const AppearanceSettings = () => (
           type="url"
           id="logo"
           defaultValue="/logo-everest.png"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -332,7 +332,7 @@ const AppearanceSettings = () => (
           type="url"
           id="favicon"
           defaultValue="/favicon.ico"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
     </div>
@@ -347,7 +347,7 @@ const IntegrationsSettings = () => (
     <div className="space-y-6">
       <div className="bg-[var(--success-green)]/10 border border-[var(--success-green)]/20 rounded-xl p-6">
         <h3 className="text-sm font-medium text-[var(--success-green)] mb-2">Uploadthing Integration</h3>
-        <p className="text-sm text-[var(--night-80)]">
+        <p className="text-sm text-[rgba(10, 10, 10, 0.8)]">
           File uploads are handled by Uploadthing. Configuration is managed through environment variables.
         </p>
       </div>
@@ -360,7 +360,7 @@ const IntegrationsSettings = () => (
           type="text"
           id="analyticsId"
           placeholder="G-XXXXXXXXXX"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -372,7 +372,7 @@ const IntegrationsSettings = () => (
           type="text"
           id="recaptchaSiteKey"
           placeholder="6Lc...XXXX"
-          className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+          className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
         />
       </div>
 
@@ -381,7 +381,7 @@ const IntegrationsSettings = () => (
           type="checkbox"
           id="enableSocialLogin"
           defaultChecked={false}
-          className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+          className="h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
         />
         <label htmlFor="enableSocialLogin" className="ml-3 block text-sm text-[var(--night)]">
           Enable Social Login (Google, Facebook, etc.)
@@ -393,7 +393,7 @@ const IntegrationsSettings = () => (
           type="checkbox"
           id="enableEmailNotifications"
           defaultChecked={true}
-          className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+          className="h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
         />
         <label htmlFor="enableEmailNotifications" className="ml-3 block text-sm text-[var(--night)]">
           Enable Email Notifications

@@ -45,8 +45,8 @@ export const PublicationPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto mb-4"></div>
-          <p className="text-[var(--night-80)]">Chargement de la publication...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto mb-4"></div>
+          <p className="text-[rgba(10, 10, 10, 0.8)]">Chargement de la publication...</p>
         </div>
       </div>
     )
@@ -66,7 +66,7 @@ export const PublicationPage = () => {
           <p className="text-gray-600 mb-4">La publication que vous recherchez n'existe pas ou a été supprimée.</p>
           <button
             onClick={() => navigate({ to: '/publications' })}
-            className="px-4 py-2 bg-[var(--gold-metallic)] text-white rounded hover:bg-[var(--gold-dark)] transition-colors"
+            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded hover:bg-[var(--jaune-or)] transition-colors"
           >
             Retour aux publications
           </button>
@@ -97,12 +97,12 @@ export const PublicationPage = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal py-20 sm:py-28 bg-gradient-to-br from-[var(--white-smoke)]/50 to-[var(--gold-light)]/10">
+      <section ref={heroRef} className="reveal py-20 sm:py-28 bg-gradient-to-br from-[var(--white-smoke)]/50 to-[var(--jaune-or-light)]/10">
         <div className="mx-auto max-w-4xl px-6">
           {/* Back button */}
           <button
             onClick={() => navigate({ to: '/publications' })}
-            className="inline-flex items-center gap-2 text-[var(--night-80)] hover:text-[var(--night)] transition-colors mb-8 group"
+            className="inline-flex items-center gap-2 text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)] transition-colors mb-8 group"
           >
             <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
             Retour aux publications
@@ -110,11 +110,11 @@ export const PublicationPage = () => {
 
           {/* Category badge */}
           <div className="mb-6">
-            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-[var(--gold-light)]/10 text-[var(--gold-dark)] border border-[var(--gold-light)]/20">
+            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-[var(--jaune-or-light)]/10 text-[var(--jaune-or)] border border-[var(--jaune-or-light)]/20">
               {getCategoryLabel(publication.category)}
             </span>
             {publication.featured && (
-              <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30 ml-3">
+              <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-[var(--jaune-or)]/20 text-[var(--jaune-or)] border border-[var(--jaune-or)]/30 ml-3">
                 ⭐ En vedette
               </span>
             )}
@@ -126,25 +126,25 @@ export const PublicationPage = () => {
           </h1>
 
           {/* Description */}
-          <p className="text-xl text-[var(--night-80)] mb-8 leading-relaxed">
+          <p className="text-xl text-[rgba(10, 10, 10, 0.8)] mb-8 leading-relaxed">
             {publication.description}
           </p>
 
           {/* Meta information */}
           <div className="flex flex-wrap items-center gap-6 text-[var(--night-60)] text-sm">
             <div className="flex items-center gap-2">
-              <FaCalendar className="text-[var(--gold-metallic)]" />
+              <FaCalendar className="text-[var(--jaune-or)]" />
               <span>{publication.createdAt ? formatDate(publication.createdAt) : 'Date non disponible'}</span>
             </div>
             {publication.author && (
               <div className="flex items-center gap-2">
-                <FaUser className="text-[var(--gold-metallic)]" />
+                <FaUser className="text-[var(--jaune-or)]" />
                 <span>{publication.author.name}</span>
               </div>
             )}
             {publication.readingTime && (
               <div className="flex items-center gap-2">
-                <FaEye className="text-[var(--gold-metallic)]" />
+                <FaEye className="text-[var(--jaune-or)]" />
                 <span>{publication.readingTime} min de lecture</span>
               </div>
             )}
@@ -153,12 +153,12 @@ export const PublicationPage = () => {
           {/* Tags */}
           {publication.tags.length > 0 && (
             <div className="flex items-center gap-2 mt-6">
-              <FaTag className="text-[var(--gold-metallic)]" />
+              <FaTag className="text-[var(--jaune-or)]" />
               <div className="flex flex-wrap gap-2">
                 {publication.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] text-xs rounded-full border border-[var(--gold-metallic)]/20"
+                    className="px-3 py-1 bg-[var(--jaune-or-10)] text-[var(--jaune-or)] text-xs rounded-full border border-[var(--jaune-or)]/20"
                   >
                     {tag}
                   </span>
@@ -174,7 +174,7 @@ export const PublicationPage = () => {
         <div className="mx-auto max-w-4xl px-6">
           <div className="prose prose-lg max-w-none">
             {/* Content */}
-            <div className="bg-white rounded-2xl border border-[var(--gold-metallic)]/20 p-8 shadow-sm">
+            <div className="bg-white rounded-2xl border border-[var(--jaune-or)]/20 p-8 shadow-sm">
               <div 
                 className="text-[var(--night)] leading-relaxed publication-content"
                 dangerouslySetInnerHTML={{ __html: publication.content }}
@@ -185,7 +185,7 @@ export const PublicationPage = () => {
             <div className="mt-12 text-center">
               <button
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--gold-metallic)] text-white rounded-xl hover:bg-[var(--gold-dark)] transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--jaune-or)] text-white rounded-xl hover:bg-[var(--jaune-or)] transition-colors"
               >
                 <FaShare />
                 {isSharing ? 'Lien copié !' : 'Partager cette publication'}

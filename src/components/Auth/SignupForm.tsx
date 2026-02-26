@@ -72,13 +72,13 @@ export function SignupForm() {
   }
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
+    <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
       <div className="flex items-start justify-between">
         <div>
           <div className="font-display text-xl">Créer votre compte</div>
           <p className="text-secondary text-sm mt-1">Inscrivez-vous pour accéder à votre portail client.</p>
         </div>
-        <div className="hidden sm:flex items-center gap-2 text-xs text-[var(--night-80)]/80">
+        <div className="hidden sm:flex items-center gap-2 text-xs text-[rgba(10, 10, 10, 0.8)]/80">
           <FiShield /> Sécurisé
         </div>
       </div>
@@ -91,7 +91,7 @@ export function SignupForm() {
           </div>
         )}
         <div>
-          <label htmlFor="name" className="text-xs font-medium text-[var(--night-80)]/80">Nom complet</label>
+          <label htmlFor="name" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Nom complet</label>
           <input
             id="name"
             type="text"
@@ -99,12 +99,12 @@ export function SignupForm() {
             value={formData.name}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Entrez votre nom complet"
           />
         </div>
         <div>
-          <label htmlFor="email-signup" className="text-xs font-medium text-[var(--night-80)]/80">Email</label>
+          <label htmlFor="email-signup" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Email</label>
           <input
             id="email-signup"
             type="email"
@@ -112,12 +112,12 @@ export function SignupForm() {
             value={formData.email}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Entrez votre email"
           />
         </div>
         <div>
-          <label htmlFor="password-signup" className="text-xs font-medium text-[var(--night-80)]/80">Mot de passe</label>
+          <label htmlFor="password-signup" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Mot de passe</label>
           <input
             id="password-signup"
             type="password"
@@ -125,12 +125,12 @@ export function SignupForm() {
             value={formData.password}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Créez un mot de passe"
           />
         </div>
         <div>
-          <label htmlFor="confirm-password" className="text-xs font-medium text-[var(--night-80)]/80">Confirmer le mot de passe</label>
+          <label htmlFor="confirm-password" className="text-xs font-medium text-[rgba(10, 10, 10, 0.8)]/80">Confirmer le mot de passe</label>
           <input
             id="confirm-password"
             type="password"
@@ -138,7 +138,7 @@ export function SignupForm() {
             value={formData.confirmPassword}
             onChange={handleInputChange}
             required
-            className="mt-1 w-full rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--gold-metallic)]/30"
+            className="mt-1 w-full rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/90 px-3 py-2 outline-none focus:ring-2 focus:ring-[var(--jaune-or)]/30"
             placeholder="Confirmez votre mot de passe"
           />
         </div>
@@ -150,10 +150,10 @@ export function SignupForm() {
             checked={formData.agreeToTerms}
             onChange={handleInputChange}
             required
-            className="mt-1 accent-[var(--gold-dark)]"
+            className="mt-1 accent-[var(--jaune-or)]"
           />
-          <label htmlFor="agree-terms" className="text-xs text-[var(--night-80)]/80 leading-relaxed">
-            Je reconnais avoir lu et accepté les <a href="#" className="underline hover:text-[var(--gold-metallic)]">conditions d'utilisation</a> et la <a href="#" className="underline hover:text-[var(--gold-metallic)]">politique de confidentialité</a>
+          <label htmlFor="agree-terms" className="text-xs text-[rgba(10, 10, 10, 0.8)]/80 leading-relaxed">
+            Je reconnais avoir lu et accepté les <a href="#" className="underline hover:text-[var(--jaune-or)]">conditions d'utilisation</a> et la <a href="#" className="underline hover:text-[var(--jaune-or)]">politique de confidentialité</a>
           </label>
         </div>
         <button
@@ -163,12 +163,12 @@ export function SignupForm() {
         >
           {isLoading ? 'Création du compte...' : 'Créer mon compte'}
         </button>
-        <div className="text-center text-xs text-[var(--night-80)]/80">
+        <div className="text-center text-xs text-[rgba(10, 10, 10, 0.8)]/80">
           Vous avez déjà un compte ?{' '}
           <button
             type="button"
             onClick={() => navigate({ to: '/auth' })}
-            className="underline hover:text-[var(--gold-metallic)] font-medium"
+            className="underline hover:text-[var(--jaune-or)] font-medium"
           >
             Connectez-vous
           </button>

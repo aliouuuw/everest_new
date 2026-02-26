@@ -60,7 +60,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--gold-metallic)] group"
+        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] group"
         style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
         aria-expanded={isOpen}
       >
@@ -81,7 +81,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
             <Link
               key={index}
               to={item.href}
-              className="block px-5 py-2.5 text-[13px] transition-colors duration-200 hover:text-[var(--gold-metallic)] hover:bg-white/[0.03]"
+              className="block px-5 py-2.5 text-[13px] transition-colors duration-200 hover:text-[var(--jaune-or)] hover:bg-white/[0.03]"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
             >
               {item.label}
@@ -184,7 +184,7 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--gold-metallic)]"
+            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
           >
             Accueil
@@ -210,7 +210,7 @@ export const Header: React.FC = () => {
 
           <Link
             to="/services"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--gold-metallic)]"
+            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
           >
             Offres
@@ -218,7 +218,7 @@ export const Header: React.FC = () => {
 
           <Link
             to="/bourse"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--gold-metallic)]"
+            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
           >
             Bourse
@@ -229,12 +229,12 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--gold-metallic)]/30 rounded-sm transition-all duration-500 hover:border-[var(--gold-metallic)]/60 hover:bg-[var(--gold-metallic)]/5"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 rounded-sm transition-all duration-500 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5"
           >
-            <FingerprintIcon className="w-3.5 h-3.5 text-[var(--gold-metallic)] transition-transform duration-300 group-hover:scale-110" />
+            <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-110" />
             <span
               className="text-[11px] tracking-[0.15em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
             >
               Accès Client
             </span>
@@ -245,7 +245,7 @@ export const Header: React.FC = () => {
         <div className="lg:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="p-2 text-white/60 hover:text-[var(--gold-metallic)] transition-colors"
+            className="p-2 text-white/60 hover:text-[var(--jaune-or)] transition-colors"
             aria-label="Menu"
           >
             {isMobileMenuOpen ? (
@@ -267,7 +267,7 @@ export const Header: React.FC = () => {
           <div className="px-6 space-y-5">
             <Link
               to="/"
-              className="block text-sm transition-colors hover:text-[var(--gold-metallic)]"
+              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -277,7 +277,7 @@ export const Header: React.FC = () => {
             <div>
               <div
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
               >
                 Société
               </div>
@@ -286,7 +286,7 @@ export const Header: React.FC = () => {
                   <Link
                     key={index}
                     to={item.href}
-                    className="block text-sm transition-colors hover:text-[var(--gold-metallic)]"
+                    className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -299,7 +299,7 @@ export const Header: React.FC = () => {
             <div>
               <div
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
               >
                 Services
               </div>
@@ -308,7 +308,7 @@ export const Header: React.FC = () => {
                   <Link
                     key={index}
                     to={item.href}
-                    className="block text-sm transition-colors hover:text-[var(--gold-metallic)]"
+                    className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -320,7 +320,7 @@ export const Header: React.FC = () => {
 
             <Link
               to="/services"
-              className="block text-sm transition-colors hover:text-[var(--gold-metallic)]"
+              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -329,7 +329,7 @@ export const Header: React.FC = () => {
 
             <Link
               to="/bourse"
-              className="block text-sm transition-colors hover:text-[var(--gold-metallic)]"
+              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -339,13 +339,13 @@ export const Header: React.FC = () => {
             <div className="pt-4 border-t border-white/[0.06]">
               <Link
                 to="/auth"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--gold-metallic)]/30 w-full justify-center transition-all duration-300 hover:border-[var(--gold-metallic)]/60"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 w-full justify-center transition-all duration-300 hover:border-[var(--jaune-or)]/60"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-3.5 h-3.5 text-[var(--gold-metallic)]" />
+                <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)]" />
                 <span
                   className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
                 >
                   Accès Client
                 </span>

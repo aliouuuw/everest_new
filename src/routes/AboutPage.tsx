@@ -64,9 +64,9 @@ export const AboutPage = () => {
                 </div>
 
                 {/* Right: Visual card */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
-                  <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                  <div className="relative w-full h-[280px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
+                <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
+                  <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--jaune-or-10)] blur-3xl" />
+                  <div className="relative w-full h-[280px] rounded-xl overflow-hidden border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/80">
                     <div
                       className="absolute inset-0"
                       style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '24px 24px' }}
@@ -97,20 +97,20 @@ export const AboutPage = () => {
         <section ref={missionVisionRef} id="mission-vision" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
           <div className="mx-auto max-w-6xl px-6">
             <div ref={missionVisionGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="flex items-start gap-3">
-                  <FiTrendingUp className="text-[var(--gold-dark)] mt-1" />
+                  <FiTrendingUp className="text-[var(--jaune-or)] mt-1" />
                   <div>
                     <h2 className="font-display text-xl mb-2">Notre mission</h2>
                     <p className="text-secondary">Proposer des solutions d’investissement performantes et responsables, fondées sur la transparence, l’expertise et la proximité.</p>
                   </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="flex items-start gap-3">
-                  <FiGlobe className="text-[var(--gold-dark)] mt-1" />
+                  <FiGlobe className="text-[var(--jaune-or)] mt-1" />
                   <div>
                     <h2 className="font-display text-xl mb-2">Notre vision</h2>
                     <p className="text-secondary">Devenir un partenaire de référence en Afrique de l’Ouest pour la gestion de patrimoine et l’accès aux marchés financiers.</p>
@@ -126,8 +126,8 @@ export const AboutPage = () => {
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Philosophie d'investissement</h2>
             <div ref={philosophieGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <h3 className="font-display mb-3">Approche disciplinée</h3>
                 <p className="text-secondary mb-4">Processus d'analyse rigoureux combinant analyse fondamentale et technique pour identifier les opportunités sur la BRVM.</p>
                 <ul className="text-secondary text-sm space-y-1">
@@ -136,8 +136,8 @@ export const AboutPage = () => {
                   <li>• Analyse des conditions de marché</li>
                 </ul>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <h3 className="font-display mb-3">Gestion du risque</h3>
                 <p className="text-secondary mb-4">Framework de gestion des risques adapté aux spécificités du marché UEMOA et aux profils de nos clients.</p>
                 <ul className="text-secondary text-sm space-y-1">
@@ -172,14 +172,14 @@ export const AboutPage = () => {
                 {timelineItems.map((item, index) => (
                   <li key={item.year} className="relative">
                     <div className={`flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''} sm:items-start sm:justify-between gap-4`}>
-                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                        <div className="font-display text-[var(--gold-dark)]">{item.year}</div>
+                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 transition-all card-hover">
+                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
+                        <div className="font-display text-[var(--jaune-or)]">{item.year}</div>
                         <p className="text-secondary mt-1">{item.text}</p>
                       </div>
                       <div className="hidden sm:block sm:w-1/2" />
                     </div>
-                    <span className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-5 inline-block h-3 w-3 rounded-full bg-[var(--gold-dark)] shadow" />
+                    <span className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-5 inline-block h-3 w-3 rounded-full bg-[var(--jaune-or)] shadow" />
                   </li>
                 ))}
               </ul>
@@ -192,26 +192,26 @@ export const AboutPage = () => {
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Équipe dirigeante</h2>
             <div ref={equipeGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
                 <h3 className="font-display mb-3">Leadership expérimenté</h3>
                 <p className="text-secondary mb-4">Plus de 30 ans d'expérience cumulée dans les marchés financiers africains et l'intermédiation financière.</p>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <FiUsers className="text-[var(--gold-dark)] mt-1" />
+                    <FiUsers className="text-[var(--jaune-or)] mt-1" />
                     <div>
                       <div className="font-display text-sm">Direction Générale</div>
                       <p className="text-secondary text-xs">Vision stratégique et développement commercial</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <FiTrendingUp className="text-[var(--gold-dark)] mt-1" />
+                    <FiTrendingUp className="text-[var(--jaune-or)] mt-1" />
                     <div>
                       <div className="font-display text-sm">Direction des Marchés</div>
                       <p className="text-secondary text-xs">Recherche, analyse et exécution</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <FiShield className="text-[var(--gold-dark)] mt-1" />
+                    <FiShield className="text-[var(--jaune-or)] mt-1" />
                     <div>
                       <div className="font-display text-sm">Direction des Opérations</div>
                       <p className="text-secondary text-xs">Conformité, risques et middle office</p>
@@ -219,7 +219,7 @@ export const AboutPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
                 <h3 className="font-display mb-3">Expertise métier</h3>
                 <p className="text-secondary mb-4">Spécialistes reconnus des marchés BRVM et des enjeux d'investissement en Afrique de l'Ouest.</p>
                 <div className="grid grid-cols-2 gap-3 text-sm">
@@ -250,9 +250,9 @@ export const AboutPage = () => {
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Conformité & Réglementation</h2>
             <div ref={conformiteGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 p-6">
+              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/25 p-6">
                 <h3 className="font-display mb-3 flex items-center gap-2">
-                  <FiCheckCircle className="text-[var(--gold-dark)]" />
+                  <FiCheckCircle className="text-[var(--jaune-or)]" />
                   Cadre réglementaire
                 </h3>
                 <div className="space-y-3 text-sm">
@@ -274,28 +274,28 @@ export const AboutPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 p-6">
+              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/25 p-6">
                 <h3 className="font-display mb-3 flex items-center gap-2">
-                  <FiShield className="text-[var(--gold-dark)]" />
+                  <FiShield className="text-[var(--jaune-or)]" />
                   Contrôles & Sécurité
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
+                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
                     <div>
                       <div className="font-display text-sm">Ségrégation des actifs</div>
                       <p className="text-secondary text-xs">Comptes dédiés et dépositaire central BRVM</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
+                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
                     <div>
                       <div className="font-display text-sm">KYC/AML renforcé</div>
                       <p className="text-secondary text-xs">Procédures anti-blanchiment conformes CENTIF</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
+                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
                     <div>
                       <div className="font-display text-sm">Reporting réglementaire</div>
                       <p className="text-secondary text-xs">Déclarations périodiques CREPMF et BCEAO</p>

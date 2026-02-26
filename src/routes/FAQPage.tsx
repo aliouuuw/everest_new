@@ -101,8 +101,8 @@ export const FAQPage = () => {
             <h2 className="font-display text-lg mb-4">Questions fréquentes</h2>
             <div ref={qaRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {qas.map((item) => (
-                <div key={item.q} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div key={item.q} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                   <div className="font-display mb-2">{item.q}</div>
                   <div className="text-secondary text-sm">{item.a}</div>
                 </div>
@@ -123,7 +123,7 @@ export const FAQPage = () => {
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Rechercher un terme ou une définition..."
                   aria-label="Rechercher dans l’abécédaire"
-                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--night)]/15 bg-[var(--white-smoke)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--gold-metallic-20)]"
+                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--night)]/15 bg-[var(--white-smoke)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--jaune-or-20)]"
                 />
                 <button
                   type="button"
@@ -167,12 +167,12 @@ export const FAQPage = () => {
                 <div key={letter} id={`letter-${letter}`} className="scroll-mt-24">
                   <div className="flex items-baseline gap-3 mb-4">
                     <div className="font-display text-2xl">{letter}</div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {terms.map((g) => (
-                      <div key={g.term} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                      <div key={g.term} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                         <div className="font-display mb-1">{g.term}</div>
                         <div className="text-secondary text-sm">{g.def}</div>
                       </div>
@@ -187,7 +187,7 @@ export const FAQPage = () => {
         {/* Contact CTA */}
         <section className="py-14 sm:py-18">
           <div className="mx-auto max-w-6xl px-6 text-center">
-            <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
               <div className="text-secondary">Besoin d’aide supplémentaire ?</div>
               <a href="#contact" className="btn-primary font-display tracking-wide">Nous contacter</a>
             </div>

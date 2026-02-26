@@ -75,7 +75,7 @@ export const Insights: React.FC = () => {
           <div className="max-w-xl">
             <span
               className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
             >
               Publications
             </span>
@@ -90,7 +90,7 @@ export const Insights: React.FC = () => {
               }}
             >
               Restez informé{' '}
-              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--gold-dark)' }}>
+              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
                 des marchés.
               </em>
             </h2>
@@ -113,7 +113,7 @@ export const Insights: React.FC = () => {
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase' as const,
                     color: isActive ? 'var(--night)' : 'var(--night-60)',
-                    borderBottom: isActive ? '1px solid var(--gold-metallic)' : '1px solid transparent',
+                    borderBottom: isActive ? '1px solid var(--jaune-or)' : '1px solid transparent',
                   }}
                   aria-pressed={isActive}
                 >
@@ -128,7 +128,7 @@ export const Insights: React.FC = () => {
         {publications === undefined ? (
           <div className="text-center py-20">
             <div
-              className="w-8 h-8 border border-[var(--gold-metallic)]/30 border-t-[var(--gold-metallic)] rounded-full animate-spin mx-auto mb-4"
+              className="w-8 h-8 border border-[var(--jaune-or)]/30 border-t-[var(--jaune-or)] rounded-full animate-spin mx-auto mb-4"
             />
             <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'var(--night-60)' }}>
               Chargement des publications…
@@ -157,7 +157,7 @@ export const Insights: React.FC = () => {
                 <div className="flex items-center gap-3 mb-5">
                   <span
                     className="text-[10px] tracking-[0.15em] uppercase"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
                   >
                     {CATEGORY_LABELS[it.category]}
                   </span>
@@ -171,7 +171,7 @@ export const Insights: React.FC = () => {
 
                 {/* Title */}
                 <h3
-                  className="mb-3 group-hover:text-[var(--gold-dark)] transition-colors duration-300"
+                  className="mb-3 group-hover:text-[var(--jaune-or)] transition-colors duration-300"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontWeight: 500,
@@ -200,7 +200,7 @@ export const Insights: React.FC = () => {
 
                 {/* Read more */}
                 <span
-                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--gold-metallic)] transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300"
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
                 >
                   Lire
@@ -222,10 +222,10 @@ export const Insights: React.FC = () => {
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
             >
               Voir toutes les publications
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
             </span>
-            <span className="w-9 h-9 rounded-full border border-[var(--night)]/15 flex items-center justify-center group-hover:border-[var(--gold-metallic)]/50 transition-all duration-500">
-              <FiArrowRight className="text-sm text-[var(--night)]/60 group-hover:text-[var(--gold-metallic)] transition-colors duration-500" />
+            <span className="w-9 h-9 rounded-full border border-[var(--night)]/15 flex items-center justify-center group-hover:border-[var(--jaune-or)]/50 transition-all duration-500">
+              <FiArrowRight className="text-sm text-[var(--night)]/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
             </span>
           </a>
         </div>

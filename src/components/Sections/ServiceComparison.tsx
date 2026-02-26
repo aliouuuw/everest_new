@@ -103,7 +103,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
     }
     return (
       <span className={`text-sm font-medium ${
-        currentService === service ? 'text-[var(--gold-dark)]' : 'text-[var(--night)]'
+        currentService === service ? 'text-[var(--jaune-or)]' : 'text-[var(--night)]'
       }`}>
         {value}
       </span>
@@ -153,15 +153,15 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
             key={service}
             className={`relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
               currentService === service
-                ? 'border-[var(--gold-metallic)] bg-[var(--gold-light)]/10'
-                : 'border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm'
+                ? 'border-[var(--jaune-or)] bg-[var(--jaune-or-light)]/10'
+                : 'border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm'
             }`}
           >
             <div className="flex items-center gap-3 mb-4">
               {getServiceIcon(service)}
               <h3 className="font-display text-lg">{getServiceTitle(service)}</h3>
               {currentService === service && (
-                <span className="ml-auto text-xs bg-[var(--gold-metallic)] text-white px-2 py-1 rounded-full">
+                <span className="ml-auto text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
                   Votre choix
                 </span>
               )}
@@ -178,7 +178,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
               ))}
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[var(--gold-metallic)]/25">
+            <div className="mt-6 pt-4 border-t border-[var(--jaune-or)]/25">
               <button
                 className="btn-secondary font-display tracking-wide w-full text-center opacity-50 cursor-not-allowed"
                 disabled
@@ -195,21 +195,21 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="text-left p-4 font-display text-lg border-b border-[var(--gold-metallic)]/25">
+              <th className="text-left p-4 font-display text-lg border-b border-[var(--jaune-or)]/25">
                 Fonctionnalités
               </th>
               {['discretionary', 'mandate', 'assisted'].map((service) => (
                 <th
                   key={service}
-                  className={`p-4 text-center border-b border-[var(--gold-metallic)]/25 ${
-                    currentService === service ? 'bg-[var(--gold-light)]/10' : ''
+                  className={`p-4 text-center border-b border-[var(--jaune-or)]/25 ${
+                    currentService === service ? 'bg-[var(--jaune-or-light)]/10' : ''
                   }`}
                 >
                   <div className="flex flex-col items-center gap-2">
                     {getServiceIcon(service)}
                     <span className="font-display text-base">{getServiceTitle(service)}</span>
                     {currentService === service && (
-                      <span className="text-xs bg-[var(--gold-metallic)] text-white px-2 py-1 rounded-full">
+                      <span className="text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
                         Votre choix
                       </span>
                     )}
@@ -224,14 +224,14 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
                 key={feature.name}
                 className={index % 2 === 0 ? 'bg-[var(--white-smoke)]/50' : ''}
               >
-                <td className="p-4 font-medium text-[var(--night)] border-b border-[var(--gold-metallic)]/10">
+                <td className="p-4 font-medium text-[var(--night)] border-b border-[var(--jaune-or)]/10">
                   {feature.name}
                 </td>
                 {['discretionary', 'mandate', 'assisted'].map((service) => (
                   <td
                     key={service}
-                    className={`p-4 text-center border-b border-[var(--gold-metallic)]/10 ${
-                      currentService === service ? 'bg-[var(--gold-light)]/5' : ''
+                    className={`p-4 text-center border-b border-[var(--jaune-or)]/10 ${
+                      currentService === service ? 'bg-[var(--jaune-or-light)]/5' : ''
                     }`}
                   >
                     {renderFeatureValue((feature as any)[service], service)}
@@ -245,9 +245,9 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
       </div>
 
       {/* Legend */}
-      <div className="mt-8 p-4 bg-[var(--white-smoke)]/80 rounded-xl border border-[var(--gold-metallic)]/25">
+      <div className="mt-8 p-4 bg-[var(--white-smoke)]/80 rounded-xl border border-[var(--jaune-or)]/25">
         <div className="flex items-start gap-2">
-          <FiInfo className="text-[var(--gold-dark)] mt-0.5 flex-shrink-0" />
+          <FiInfo className="text-[var(--jaune-or)] mt-0.5 flex-shrink-0" />
           <div className="text-sm text-secondary">
             <p className="font-medium text-[var(--night)] mb-1">Note importante:</p>
             <p>Les frais indiqués sont des fourchettes approximatives. Le montant exact dépend de votre profil d'investissement et du montant géré. Contactez-nous pour un devis personnalisé.</p>
@@ -271,11 +271,11 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
             <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
-              <div className="sticky top-0 flex items-center justify-between p-6 border-b border-[var(--gold-metallic)]/25 bg-white/95 backdrop-blur-sm">
+              <div className="sticky top-0 flex items-center justify-between p-6 border-b border-[var(--jaune-or)]/25 bg-white/95 backdrop-blur-sm">
                 <h3 className="font-display text-xl">Comparaison des services</h3>
                 <button
                   onClick={handleModalToggle}
-                  className="p-2 hover:bg-[var(--gold-light)]/10 rounded-lg transition-colors"
+                  className="p-2 hover:bg-[var(--jaune-or-light)]/10 rounded-lg transition-colors"
                 >
                   <FiX className="text-xl" />
                 </button>

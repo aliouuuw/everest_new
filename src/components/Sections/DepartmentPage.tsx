@@ -38,7 +38,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   const [activeSolution, setActiveSolution] = useState(0)
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--gold-metallic)] selection:text-white">
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--jaune-or)] selection:text-white">
       {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
       <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
         {hero_background && (
@@ -57,8 +57,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-8">
               <div className="flex items-center gap-4 mb-12">
-                <div className="w-12 h-px bg-[var(--gold-dark)]" />
-                <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--gold-dark)]">
+                <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
                   {department_name}
                 </span>
               </div>
@@ -68,7 +68,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             </div>
             
             <div className="md:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-[var(--night-80)] font-light mb-10 border-l border-[var(--gold-metallic)] pl-6">
+              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
                 {hero_subtitle}
               </p>
               <a href="#solutions" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
@@ -92,10 +92,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       {metric.value}
                     </div>
                     {metric.suffix && (
-                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--gold-dark)] uppercase">{metric.suffix}</div>
+                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">{metric.suffix}</div>
                     )}
                   </div>
-                  <div className="text-[11px] font-bold tracking-[0.2em] text-[var(--night-80)] uppercase">
+                  <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                     {metric.label}
                   </div>
                 </div>
@@ -111,11 +111,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Audience cible</span>
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Audience cible</span>
                 <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
                   Conçu pour vos enjeux spécifiques.
                 </h2>
-                <p className="text-lg text-[var(--night-80)] leading-relaxed font-light">
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
                   {presentation}
                 </p>
               </div>
@@ -124,14 +124,14 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="border-t border-black/10">
                   {target_personas.map((persona, i) => (
                     <div key={i} className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                      <div className="font-display text-2xl text-[var(--gold-metallic)]/50 shrink-0">
+                      <div className="font-display text-2xl text-[var(--jaune-or)]/50 shrink-0">
                         {String(i + 1).padStart(2, '0')}.
                       </div>
                       <div>
-                        <h3 className="font-display text-2xl md:text-3xl mb-4 group-hover:text-[var(--gold-dark)] transition-colors">
+                        <h3 className="font-display text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
                           {persona.label}
                         </h3>
-                        <p className="text-[var(--night-80)] leading-relaxed text-lg font-light max-w-xl">
+                        <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
                           {persona.description}
                         </p>
                       </div>
@@ -151,7 +151,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-metallic)] uppercase block mb-8">La différence Everest</span>
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">La différence Everest</span>
                   <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
                     Notre engagement envers l'excellence.
                   </h2>
@@ -162,7 +162,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
                   {differentiators.map((diff, i) => (
                     <div key={i} className="relative">
-                      <div className="w-8 h-px bg-[var(--gold-metallic)] mb-8" />
+                      <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
                       <h3 className="font-display text-2xl md:text-3xl mb-4 text-white">
                         {diff.title}
                       </h3>
@@ -183,7 +183,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         <section id="solutions" ref={solutionsRef} className="reveal py-24 md:py-40 border-b border-black/10">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="mb-20 md:mb-32">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Nos solutions</span>
+              <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Nos solutions</span>
               <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-3xl">
                 Une expertise financière sur mesure.
               </h2>
@@ -198,10 +198,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       key={solution.solution_number}
                       onClick={() => setActiveSolution(i)}
                       className={`text-left py-6 border-b border-black/10 transition-colors group flex items-baseline gap-4 ${
-                        activeSolution === i ? 'text-[var(--night)]' : 'text-[var(--night-80)] hover:text-[var(--night)]'
+                        activeSolution === i ? 'text-[var(--night)]' : 'text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)]'
                       }`}
                     >
-                      <span className={`font-display text-sm ${activeSolution === i ? 'text-[var(--gold-dark)]' : 'text-black/30'}`}>
+                      <span className={`font-display text-sm ${activeSolution === i ? 'text-[var(--jaune-or)]' : 'text-black/30'}`}>
                         {String(solution.solution_number).padStart(2, '0')}
                       </span>
                       <h3 className="font-display text-xl md:text-2xl">
@@ -218,7 +218,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   <h3 className="font-display text-4xl md:text-5xl mb-8">
                     {expertise_solutions[activeSolution].name}
                   </h3>
-                  <p className="text-xl md:text-2xl leading-relaxed text-[var(--night-80)] font-light mb-16 max-w-3xl">
+                  <p className="text-xl md:text-2xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-16 max-w-3xl">
                     {expertise_solutions[activeSolution].description}
                   </p>
 
@@ -226,10 +226,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                     <div className="space-y-12">
                       {expertise_solutions[activeSolution].client_problem && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase mb-4">
                             L'enjeu
                           </div>
-                          <p className="text-[var(--night-80)] leading-relaxed text-lg font-light">
+                          <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light">
                             {expertise_solutions[activeSolution].client_problem}
                           </p>
                         </div>
@@ -237,7 +237,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       
                       {expertise_solutions[activeSolution].value_proposition && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase mb-4">
                             Notre réponse
                           </div>
                           <p className="text-[var(--night)] leading-relaxed text-lg font-medium">
@@ -305,12 +305,12 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Méthodologie</span>
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Méthodologie</span>
                 <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
                   Un processus rigoureux.
                 </h2>
                 {approach_methodology && !method_steps && (
-                  <p className="text-lg text-[var(--night-80)] leading-relaxed font-light">
+                  <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
                     {approach_methodology}
                   </p>
                 )}
@@ -321,13 +321,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                     {method_steps.map((step, i) => (
                       <div key={i} className="relative">
-                        <div className="font-display text-4xl text-[var(--gold-metallic)] mb-6">
+                        <div className="font-display text-4xl text-[var(--jaune-or)] mb-6">
                           {String(i + 1).padStart(2, '0')}.
                         </div>
                         <h3 className="font-display text-2xl mb-4 text-[var(--night)]">
                           {step.title}
                         </h3>
-                        <p className="text-[var(--night-80)] leading-relaxed font-light text-lg">
+                        <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
                           {step.description}
                         </p>
                       </div>
@@ -346,7 +346,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Interventions</span>
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Interventions</span>
                 <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
                   Périmètre d'action.
                 </h2>
@@ -355,7 +355,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <ul className="border-t border-black/10">
                   {operations_selected.map((operation, i) => (
                     <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-display text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
-                      <FiArrowRight className="text-[var(--gold-metallic)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <FiArrowRight className="text-[var(--jaune-or)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       {operation}
                     </li>
                   ))}

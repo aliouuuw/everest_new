@@ -4,7 +4,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[var(--gold-light)]/20 via-[var(--pure-white)] to-[var(--gold-light)]/10">
+      <section className="pt-32 pb-16 bg-gradient-to-br from-[var(--jaune-or-light)]/20 via-[var(--pure-white)] to-[var(--jaune-or-light)]/10">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center max-w-3xl mx-auto">
             <span className="kicker text-gradient-gold">Outil de simulation</span>
@@ -32,7 +32,7 @@ export const SimulateurPage: React.FC = () => {
               </h2>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                     <span className="text-white text-sm font-bold">1</span>
                   </div>
                   <div>
@@ -44,7 +44,7 @@ export const SimulateurPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                     <span className="text-white text-sm font-bold">2</span>
                   </div>
                   <div>
@@ -56,7 +56,7 @@ export const SimulateurPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                     <span className="text-white text-sm font-bold">3</span>
                   </div>
                   <div>
@@ -69,7 +69,7 @@ export const SimulateurPage: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-[var(--pure-white)] rounded-2xl p-8 border border-[var(--gold-metallic)]/25 flex flex-col">
+            <div className="bg-[var(--pure-white)] rounded-2xl p-8 border border-[var(--jaune-or)]/25 flex flex-col">
               <div className="flex-1">
                 <h3 className="font-display text-xl mb-4">Besoin d'un conseil personnalisé ?</h3>
                 <p className="text-secondary mb-6">
@@ -78,15 +78,15 @@ export const SimulateurPage: React.FC = () => {
                 </p>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full"></div>
                     <span className="text-sm">Analyse de votre profil de risque</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full"></div>
                     <span className="text-sm">Recommandations personnalisées</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
+                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full"></div>
                     <span className="text-sm">Accompagnement continu</span>
                   </div>
                 </div>

@@ -31,7 +31,7 @@ export const CTA: React.FC<{
         <div className="max-w-3xl mx-auto text-center">
           <span
             className="block text-[10px] tracking-[0.3em] uppercase mb-6"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
           >
             Prise de contact
           </span>
@@ -47,7 +47,7 @@ export const CTA: React.FC<{
             }}
           >
             Prêts à franchir{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--gold-metallic)' }}>
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               un cap ?
             </em>
           </h2>
@@ -55,7 +55,7 @@ export const CTA: React.FC<{
           {/* Gold rule */}
           <div
             className="h-[1px] w-16 mx-auto mt-8 mb-8"
-            style={{ background: 'linear-gradient(90deg, transparent, var(--gold-metallic), transparent)' }}
+            style={{ background: 'linear-gradient(90deg, transparent, var(--jaune-or), transparent)' }}
           />
 
           <p
@@ -74,15 +74,15 @@ export const CTA: React.FC<{
           <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
             <a
               href={primaryHref}
-              className="group inline-flex items-center gap-3 px-7 py-3.5 border border-[var(--gold-metallic)]/40 transition-all duration-500 hover:border-[var(--gold-metallic)] hover:bg-[var(--gold-metallic)]/10"
+              className="group inline-flex items-center gap-3 px-7 py-3.5 border border-[var(--jaune-or)]/40 transition-all duration-500 hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10"
             >
               <span
                 className="text-[11px] tracking-[0.15em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--gold-metallic)' }}
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
               >
                 {primaryLabel}
               </span>
-              <FiArrowRight className="text-sm text-[var(--gold-metallic)] group-hover:translate-x-0.5 transition-transform duration-500" />
+              <FiArrowRight className="text-sm text-[var(--jaune-or)] group-hover:translate-x-0.5 transition-transform duration-500" />
             </a>
             {secondaryHref && (
               <a
@@ -94,7 +94,7 @@ export const CTA: React.FC<{
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}
                 >
                   {secondaryLabel}
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--gold-metallic)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
                 </span>
               </a>
             )}

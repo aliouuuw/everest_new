@@ -180,18 +180,18 @@ export const PerformanceComparison: React.FC = () => {
         </div>
 
         {/* Performance Chart */}
-        <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 mb-12 glass-card-dark">
-          <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+        <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 mb-12 glass-card-dark">
+          <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
           <div className="flex items-center gap-3 mb-6">
-            <FaChartLine className="text-xl text-[var(--gold-light)]" />
+            <FaChartLine className="text-xl text-[var(--jaune-or-light)]" />
             <h3 className="font-display text-lg text-[var(--pure-white)]">Évolution des performances</h3>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full min-w-[600px]">
               <thead>
-                <tr className="border-b border-[var(--gold-metallic)]/25">
+                <tr className="border-b border-[var(--jaune-or)]/25">
                   <th className="text-left p-3 font-display text-sm text-[var(--pure-white)]">Période</th>
                   <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Libre</th>
                   <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Sous-Mandat</th>
@@ -247,9 +247,9 @@ export const PerformanceComparison: React.FC = () => {
             return (
               <div
                 key={metric.title}
-                className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 transition-all glass-card-dark glass-card-hover"
+                className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 transition-all glass-card-dark glass-card-hover"
               >
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
                 <div className="font-display text-sm text-secondary-dark mb-3">{metric.title}</div>
 
@@ -257,11 +257,11 @@ export const PerformanceComparison: React.FC = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Gestion Libre</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'discretionary' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
+                      bestService === 'discretionary' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.discretionary, metric.unit)}
                       {bestService === 'discretionary' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
                       )}
                     </span>
                   </div>
@@ -269,11 +269,11 @@ export const PerformanceComparison: React.FC = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Sous-Mandat</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'mandate' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
+                      bestService === 'mandate' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.mandate, metric.unit)}
                       {bestService === 'mandate' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
                       )}
                     </span>
                   </div>
@@ -281,18 +281,18 @@ export const PerformanceComparison: React.FC = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Assistée</span>
                     <span className={`font-display text-sm ${
-                      bestService === 'assisted' ? 'text-[var(--gold-light)] font-medium' : 'text-[var(--pure-white)]'
+                      bestService === 'assisted' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.assisted, metric.unit)}
                       {bestService === 'assisted' && (
-                        <FiTarget className="inline ml-1 text-[var(--gold-light)]" size={12} />
+                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
                       )}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[var(--gold-metallic)]/25">
-                  <div className="flex items-center gap-1 text-xs text-[var(--gold-light)]">
+                <div className="mt-4 pt-3 border-t border-[var(--jaune-or)]/25">
+                  <div className="flex items-center gap-1 text-xs text-[var(--jaune-or-light)]">
                     <FiTarget size={10} />
                     <span className="capitalize">{bestService === 'discretionary' ? 'Libre' :
                       bestService === 'mandate' ? 'Sous-mandat' : 'Assistée'} recommandé</span>
@@ -304,9 +304,9 @@ export const PerformanceComparison: React.FC = () => {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-12 p-4 bg-[var(--night)]/90 rounded-xl border border-[var(--gold-metallic)]/25 glass-card-dark">
+        <div className="mt-12 p-4 bg-[var(--night)]/90 rounded-xl border border-[var(--jaune-or)]/25 glass-card-dark">
           <div className="flex items-start gap-3">
-            <FiTrendingUp className="text-[var(--gold-light)] mt-0.5 flex-shrink-0" />
+            <FiTrendingUp className="text-[var(--jaune-or-light)] mt-0.5 flex-shrink-0" />
             <div className="text-sm text-secondary-dark">
               <p className="font-medium text-[var(--pure-white)] mb-1">Note importante:</p>
               <p>Les performances passées ne constituent pas une garantie de résultats futurs. L'investissement en bourse comporte des risques, y compris celui de perdre tout ou partie du capital investi. Ces données sont présentées à titre informatif.</p>

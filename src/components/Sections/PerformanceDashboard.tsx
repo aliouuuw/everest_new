@@ -145,7 +145,7 @@ export const PerformanceDashboard: React.FC = () => {
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-28 h-2.5 rounded-full bg-[var(--night-20)] overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-light)] rounded-full"
+                      className="h-full bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)] rounded-full"
                       style={{ width: `${a.value}%` }}
                     />
                   </div>
@@ -180,8 +180,8 @@ export const PerformanceDashboard: React.FC = () => {
                     onClick={() => setRange(r as TimeRange)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                       range === r
-                        ? "bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg"
-                        : "border border-[var(--gold-metallic-20)] text-[var(--pure-white)] hover:bg-[var(--night-20)] hover:border-[var(--gold-metallic)]"
+                        ? "bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or)] text-[var(--pure-white)] shadow-lg"
+                        : "border border-[var(--jaune-or-20)] text-[var(--pure-white)] hover:bg-[var(--night-20)] hover:border-[var(--jaune-or)]"
                     }`}
                     aria-pressed={range === r}
                   >
@@ -194,8 +194,8 @@ export const PerformanceDashboard: React.FC = () => {
               <svg viewBox="0 0 540 180" className="w-full h-48">
                 <defs>
                   <linearGradient id="gradPortfolioDark" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--gold-light)" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="var(--gold-metallic)" stopOpacity="0.4" />
+                    <stop offset="0%" stopColor="var(--jaune-or-light)" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="var(--jaune-or)" stopOpacity="0.4" />
                   </linearGradient>
                   <linearGradient id="gradBenchmarkDark" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#64748b" stopOpacity="0.8" />
@@ -206,7 +206,7 @@ export const PerformanceDashboard: React.FC = () => {
                 {/* Grid */}
                 <rect x="0" y="0" width="540" height="180" fill="transparent" />
                 {[...Array(6)].map((_, i) => (
-                  <line key={i} x1="0" x2="540" y1={i * 30} y2={i * 30} stroke="var(--gold-metallic-10)" />
+                  <line key={i} x1="0" x2="540" y1={i * 30} y2={i * 30} stroke="var(--jaune-or-10)" />
                 ))}
 
                 {/* Benchmark */}
@@ -217,7 +217,7 @@ export const PerformanceDashboard: React.FC = () => {
             </div>
             <div className="mt-2 flex items-center gap-4 text-xs text-secondary-dark">
               <div className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-full bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-light)]" />
+                <span className="inline-block w-3 h-3 rounded-full bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)]" />
                 <span className="text-[var(--pure-white)]">Portefeuille</span>
               </div>
               <div className="flex items-center gap-2">
