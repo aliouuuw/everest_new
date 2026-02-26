@@ -1,4 +1,4 @@
-import { HeroSection } from './components/Hero';
+import { HeroSectionMountain } from './components/Hero';
 import { CTA, ClientPortalPreview, Insights, MountainTransition, Services, ValueProps } from './components/Sections';
 import { InvestmentCalculator } from './components/Sections/InvestmentCalculator';
 
@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       {/* Hero Section - Full viewport background */}
-      <HeroSection />
+      <HeroSectionMountain />
       <ValueProps />
       <Services />
       <Insights />
