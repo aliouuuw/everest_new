@@ -60,7 +60,7 @@ export const AdminDashboard = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div className="border-b border-[var(--jaune-or)]/10 pb-4 sm:pb-6">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-[var(--night)]">Admin Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-display-aptos font-semibold text-[var(--night)]">Admin Dashboard</h1>
         <p className="text-[rgba(10, 10, 10, 0.8)] mt-2 sm:mt-3 text-base sm:text-lg">Welcome to the CMS administration panel</p>
       </div>
 
@@ -102,7 +102,7 @@ export const AdminDashboard = () => {
               <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
-              <div className="font-display text-lg">{k.value}</div>
+              <div className="font-display-aptos text-lg">{k.value}</div>
               <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
             </div>
             <div className="mt-2 opacity-80">
@@ -116,7 +116,7 @@ export const AdminDashboard = () => {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Quick Actions - Takes 2 columns on xl screens */}
         <div className="xl:col-span-2 rounded-xl p-4 sm:p-6 border border-[var(--night)]/10 bg-white/70">
-          <h2 className="text-lg sm:text-xl font-display font-semibold text-[var(--night)] mb-4 sm:mb-6">Quick Actions</h2>
+          <h2 className="text-lg sm:text-xl font-display-aptos font-semibold text-[var(--night)] mb-4 sm:mb-6">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {quickActions.map((action) => (
               <Link
@@ -129,7 +129,7 @@ export const AdminDashboard = () => {
                     <action.icon className="text-base sm:text-lg" />
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-display font-medium text-[var(--night)]">{action.title}</h3>
+                    <h3 className="text-base sm:text-lg font-display-aptos font-medium text-[var(--night)]">{action.title}</h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] text-xs sm:text-sm">{action.description}</p>
                   </div>
                 </div>
@@ -140,13 +140,13 @@ export const AdminDashboard = () => {
 
         {/* Recent Publications - Takes 1 column on xl screens */}
         <div className="rounded-xl p-4 sm:p-6 border border-[var(--night)]/10 bg-white/70">
-          <h2 className="text-lg sm:text-xl font-display font-semibold text-[var(--night)] mb-4 sm:mb-6">Recent Publications</h2>
+          <h2 className="text-lg sm:text-xl font-display-aptos font-semibold text-[var(--night)] mb-4 sm:mb-6">Recent Publications</h2>
           {publications?.page && publications.page.length > 0 ? (
             <div className="space-y-4">
               {publications.page.slice(0, 5).map((publication) => (
                 <div key={publication._id} className="flex items-center justify-between p-4 border border-[var(--jaune-or)]/20 rounded-xl bg-[var(--pure-white)]/50 hover:border-[var(--jaune-or)]/30 hover:shadow-md transition-all duration-300">
                   <div>
-                    <h3 className="font-display font-medium text-[var(--night)]">{publication.title}</h3>
+                    <h3 className="font-display-aptos font-medium text-[var(--night)]">{publication.title}</h3>
                     <p className="text-sm text-[rgba(10, 10, 10, 0.8)]">
                       {publication.category} • {publication.status}
                     </p>
@@ -174,7 +174,7 @@ export const AdminDashboard = () => {
           ) : (
             <div className="text-center py-12">
               <FaNewspaper className="mx-auto h-12 w-12 text-[var(--jaune-or)]/40" />
-              <h3 className="mt-4 text-lg font-display font-medium text-[var(--night)]">No publications yet</h3>
+              <h3 className="mt-4 text-lg font-display-aptos font-medium text-[var(--night)]">No publications yet</h3>
               <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">Create your first publication to get started!</p>
               <div className="mt-6">
                 <Link

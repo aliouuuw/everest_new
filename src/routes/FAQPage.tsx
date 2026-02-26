@@ -98,12 +98,12 @@ export const FAQPage = () => {
         {/* Q&A Section */}
         <section className="py-14 sm:py-18">
           <div className="mx-auto max-w-6xl px-6">
-            <h2 className="font-display text-lg mb-4">Questions fréquentes</h2>
+            <h2 className="font-display-aptos text-lg mb-4">Questions fréquentes</h2>
             <div ref={qaRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {qas.map((item) => (
                 <div key={item.q} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="font-display mb-2">{item.q}</div>
+                  <div className="font-display-aptos mb-2">{item.q}</div>
                   <div className="text-secondary text-sm">{item.a}</div>
                 </div>
               ))}
@@ -115,7 +115,7 @@ export const FAQPage = () => {
         <section className="py-14 sm:py-18">
           <div className="mx-auto max-w-6xl px-6">
             <div className="flex flex-col items-center text-center">
-              <h2 className="font-display text-lg mb-2">Abécédaire</h2>
+              <h2 className="font-display-aptos text-lg mb-2">Abécédaire</h2>
               <p className="text-secondary mb-6">Jargon et termes clés de nos métiers.</p>
               <div className="w-full max-w-2xl flex items-center gap-3">
                 <input
@@ -166,14 +166,14 @@ export const FAQPage = () => {
               {grouped.map(([letter, terms]) => (
                 <div key={letter} id={`letter-${letter}`} className="scroll-mt-24">
                   <div className="flex items-baseline gap-3 mb-4">
-                    <div className="font-display text-2xl">{letter}</div>
+                    <div className="font-display-aptos text-2xl">{letter}</div>
                     <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {terms.map((g) => (
                       <div key={g.term} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
                         <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                        <div className="font-display mb-1">{g.term}</div>
+                        <div className="font-display-aptos mb-1">{g.term}</div>
                         <div className="text-secondary text-sm">{g.def}</div>
                       </div>
                     ))}
@@ -189,7 +189,7 @@ export const FAQPage = () => {
           <div className="mx-auto max-w-6xl px-6 text-center">
             <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
               <div className="text-secondary">Besoin d’aide supplémentaire ?</div>
-              <a href="#contact" className="btn-primary font-display tracking-wide">Nous contacter</a>
+              <a href="#contact" className="btn-primary font-display-aptos tracking-wide">Nous contacter</a>
             </div>
           </div>
       </section>

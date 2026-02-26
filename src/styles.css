@@ -28,6 +28,7 @@
   /* Typography - Modern Dynamic Luxury */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, sans-serif;
   
   /* Backgrounds */
   --cream: #faf6ef;
@@ -243,7 +244,7 @@ html {
 
 /* Luxury text treatments */
 .luxury-heading {
-  font-family: var(--font-display);
+  font-family: var(--font-display-aptos);
   font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
@@ -263,7 +264,7 @@ html {
 
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
-  font-family: var(--font-display);
+  font-family: var(--font-display-aptos);
   font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;

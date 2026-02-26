@@ -104,7 +104,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -132,7 +132,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.map((stock) => (
                 <div key={`${stock.symbol}-duplicate`} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -171,7 +171,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.slice(0, 5).map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-2 whitespace-nowrap min-w-[120px] max-w-[150px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -211,7 +211,7 @@ export const BRVMTicker: React.FC = () => {
             >
               {currentData.slice(0, 4).map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-1.5 whitespace-nowrap min-w-[80px] max-w-[100px]">
-                  <span className="font-medium font-display truncate">{stock.symbol}</span>
+                  <span className="font-medium font-display-aptos truncate">{stock.symbol}</span>
                   <span className="opacity-80 numeric-tabular truncate">{stock.price.toLocaleString()}</span>
                   <span
                     className={`truncate ${

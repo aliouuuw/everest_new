@@ -219,7 +219,7 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div>
           <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Capitalisation</div>
-          <div className="font-display text-xl text-[var(--pure-white)] font-bold">
+          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
             {formatCurrency(stats.totalMarketCap)}
           </div>
           <div className="text-emerald-400 text-sm mt-1">
@@ -228,19 +228,19 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
         </div>
         <div>
           <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Volume 24h</div>
-          <div className="font-display text-xl text-[var(--pure-white)] font-bold">
+          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
             {formatCurrency(stats.totalVolume)}
           </div>
         </div>
         <div>
           <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Sociétés Cotées</div>
-          <div className="font-display text-xl text-[var(--pure-white)] font-bold">
+          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
             47
           </div>
         </div>
         <div>
           <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Indices BRVM</div>
-          <div className="font-display text-xl text-[var(--pure-white)] font-bold">
+          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
             BRVM 10
           </div>
         </div>
@@ -273,14 +273,14 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
             <span className="text-[var(--night)] font-bold text-xs">{asset.symbol.slice(0, 3)}</span>
           </div>
           <div>
-            <div className="font-display text-[var(--pure-white)] font-medium">{asset.name}</div>
+            <div className="font-display-aptos text-[var(--pure-white)] font-medium">{asset.name}</div>
             <div className="text-secondary-dark text-xs uppercase">{asset.symbol}</div>
           </div>
         </div>
 
         {/* Price */}
         <div className="col-span-2 text-right">
-          <div className="font-display text-[var(--pure-white)] font-medium">
+          <div className="font-display-aptos text-[var(--pure-white)] font-medium">
             {formatPrice(asset.price)}
           </div>
         </div>
@@ -310,7 +310,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* Market Cap */}
         <div className="col-span-2 text-right">
-          <div className="font-display text-[var(--pure-white)] font-medium">
+          <div className="font-display-aptos text-[var(--pure-white)] font-medium">
             {formatCurrency(asset.marketCap)}
           </div>
           <div className="text-secondary-dark text-xs">
@@ -333,7 +333,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
     >
       <div className="flex items-center gap-2 mb-4">
         <FiTrendingUp className="text-[var(--jaune-or)] w-5 h-5" />
-        <h3 className="font-display text-[var(--pure-white)] text-lg">En Tendance</h3>
+        <h3 className="font-display-aptos text-[var(--pure-white)] text-lg">En Tendance</h3>
       </div>
       <div className="space-y-3">
         {assets.map((asset, index) => (
@@ -341,7 +341,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
             <div className="flex items-center gap-3">
               <span className="text-secondary-dark font-mono text-sm">#{index + 1}</span>
               <div>
-                <div className="font-display text-[var(--pure-white)] text-sm font-medium">{asset.symbol}</div>
+                <div className="font-display-aptos text-[var(--pure-white)] text-sm font-medium">{asset.symbol}</div>
                 <div className="text-secondary-dark text-xs">{formatPrice(asset.price)}</div>
               </div>
             </div>
@@ -488,7 +488,7 @@ export const BoursePage: React.FC = () => {
                 {/* Header with controls */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                   <div>
-                    <h2 className="text-2xl font-display font-bold text-[var(--pure-white)]">Cours des Actions BRVM</h2>
+                    <h2 className="text-2xl font-display-aptos font-bold text-[var(--pure-white)]">Cours des Actions BRVM</h2>
                     <p className="text-secondary-dark mt-1">Données de marché temps réel pour les principales valeurs</p>
                   </div>
 
@@ -569,7 +569,7 @@ export const BoursePage: React.FC = () => {
               <div className="glass-card-dark p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <FiBarChart className="text-[var(--jaune-or)] w-5 h-5" />
-                  <h3 className="font-display text-[var(--pure-white)] text-lg">Analyse Marché</h3>
+                  <h3 className="font-display-aptos text-[var(--pure-white)] text-lg">Analyse Marché</h3>
                 </div>
                 <div className="space-y-4 text-sm">
                   <div className="flex justify-between items-center">
@@ -589,7 +589,7 @@ export const BoursePage: React.FC = () => {
 
               {/* Quick Actions */}
               <div className="glass-card-dark p-6">
-                <h3 className="font-display text-[var(--pure-white)] text-lg mb-4">Actions Rapides</h3>
+                <h3 className="font-display-aptos text-[var(--pure-white)] text-lg mb-4">Actions Rapides</h3>
                 <div className="space-y-3">
                   <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--jaune-or)] hover:bg-[var(--jaune-or-light)] text-[var(--night)] rounded-lg font-medium transition-colors">
                     <FiEye className="w-4 h-4 text-[var(--night)]" />

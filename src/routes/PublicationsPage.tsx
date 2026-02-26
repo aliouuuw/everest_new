@@ -79,7 +79,7 @@ export const PublicationsPage = () => {
                   placeholder="Rechercher des publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm focus:ring-2 focus:ring-[var(--jaune-or-light)] focus:border-transparent text-center font-display"
+                  className="w-full px-4 py-3 rounded-full border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm focus:ring-2 focus:ring-[var(--jaune-or-light)] focus:border-transparent text-center font-display-aptos"
                 />
               </div>
 
@@ -92,7 +92,7 @@ export const PublicationsPage = () => {
                       key={cat}
                       type="button"
                       onClick={() => setActiveCategory(cat)}
-                      className={`${isActive ? 'btn-primary' : 'btn-secondary'} inline-flex items-center justify-center text-xs px-4 py-2 rounded-full font-display tracking-wide`}
+                      className={`${isActive ? 'btn-primary' : 'btn-secondary'} inline-flex items-center justify-center text-xs px-4 py-2 rounded-full font-display-aptos tracking-wide`}
                       aria-pressed={isActive}
                     >
                       {CATEGORY_LABELS[cat]}
@@ -167,7 +167,7 @@ export const PublicationsPage = () => {
                           </time>
                         </div>
                         
-                        <h3 className="font-display text-lg font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--jaune-or)] transition-colors leading-tight">
+                        <h3 className="font-display-aptos text-lg font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--jaune-or)] transition-colors leading-tight">
                           {item.title}
                         </h3>
                         

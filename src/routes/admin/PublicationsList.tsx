@@ -70,7 +70,7 @@ export const PublicationsList = () => {
       {/* Page Header */}
       <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
-          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Publications</h1>
+          <h1 className="text-4xl font-display-aptos font-semibold text-[var(--night)]">Publications</h1>
           <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Manage your publications and blog posts</p>
         </div>
         <Link
@@ -128,7 +128,7 @@ export const PublicationsList = () => {
       {/* Publications Table */}
       <div className="stat-card">
         <div className="px-6 py-4 border-b border-[var(--jaune-or)]/20">
-          <h2 className="text-xl font-display font-semibold text-[var(--night)]">
+          <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)]">
             Publications ({filteredPublications.length})
           </h2>
         </div>
@@ -160,7 +160,7 @@ export const PublicationsList = () => {
                   <tr key={publication._id} className="hover:bg-[var(--jaune-or)]/5 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
-                        <div className="text-sm font-display font-medium text-[var(--night)]">
+                        <div className="text-sm font-display-aptos font-medium text-[var(--night)]">
                           {publication.title}
                         </div>
                         <div className="text-sm text-[rgba(10, 10, 10, 0.8)]">
@@ -213,7 +213,7 @@ export const PublicationsList = () => {
         ) : (
           <div className="text-center py-16">
             <FaSearch className="mx-auto h-16 w-16 text-[var(--jaune-or)]/30" />
-            <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No publications found</h3>
+            <h3 className="mt-4 text-xl font-display-aptos font-medium text-[var(--night)]">No publications found</h3>
             <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
               {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
                 ? 'Try adjusting your search or filters.'

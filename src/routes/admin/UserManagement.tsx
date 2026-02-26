@@ -108,7 +108,7 @@ export const UserManagement = () => {
       {/* Page Header */}
       <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
-          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">User Management</h1>
+          <h1 className="text-4xl font-display-aptos font-semibold text-[var(--night)]">User Management</h1>
           <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Manage users and their roles</p>
         </div>
         <button
@@ -153,7 +153,7 @@ export const UserManagement = () => {
       {/* Users Table */}
       <div className="stat-card">
         <div className="px-6 py-4 border-b border-[var(--jaune-or)]/20">
-          <h2 className="text-xl font-display font-semibold text-[var(--night)]">
+          <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)]">
             Users ({filteredUsers.length})
           </h2>
         </div>
@@ -199,7 +199,7 @@ export const UserManagement = () => {
                           )}
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-display font-medium text-[var(--night)]">{user.name}</div>
+                          <div className="text-sm font-display-aptos font-medium text-[var(--night)]">{user.name}</div>
                           <div className="text-sm text-[rgba(10, 10, 10, 0.8)]">{user.email}</div>
                         </div>
                       </div>
@@ -244,7 +244,7 @@ export const UserManagement = () => {
         ) : (
           <div className="text-center py-16">
             <FaUser className="mx-auto h-16 w-16 text-[var(--jaune-or)]/30" />
-            <h3 className="mt-4 text-xl font-display font-medium text-[var(--night)]">No users found</h3>
+            <h3 className="mt-4 text-xl font-display-aptos font-medium text-[var(--night)]">No users found</h3>
             <p className="mt-2 text-[rgba(10, 10, 10, 0.8)]">
               {searchQuery || roleFilter !== 'all'
                 ? 'Try adjusting your search or filters.'
@@ -270,7 +270,7 @@ export const UserManagement = () => {
         <div className="fixed inset-0 bg-[var(--night)]/50 backdrop-blur-sm overflow-y-auto h-full w-full z-50">
           <div className="relative top-20 mx-auto p-8 border border-[var(--jaune-or)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
             <div className="mt-3">
-              <h3 className="text-xl font-display font-semibold text-[var(--night)] mb-6">Add New User</h3>
+              <h3 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-6">Add New User</h3>
               <CreateUserForm
                 onSubmit={handleCreateUser}
                 onCancel={() => setShowCreateForm(false)}
@@ -285,7 +285,7 @@ export const UserManagement = () => {
         <div className="fixed inset-0 bg-[var(--night)]/50 backdrop-blur-sm overflow-y-auto h-full w-full z-50">
           <div className="relative top-20 mx-auto p-8 border border-[var(--jaune-or)]/20 w-96 shadow-2xl rounded-2xl bg-[var(--pure-white)]/95 backdrop-blur-sm">
             <div className="mt-3">
-              <h3 className="text-xl font-display font-semibold text-[var(--night)] mb-6">Edit User</h3>
+              <h3 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-6">Edit User</h3>
               <EditUserForm
                 user={editingUser}
                 onSubmit={(updates) => handleUpdateUser(editingUser._id, updates)}

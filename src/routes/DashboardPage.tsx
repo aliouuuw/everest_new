@@ -163,7 +163,7 @@ const DashboardPageContent = () => {
               <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
-              <div className="font-display text-lg">{k.value}</div>
+              <div className="font-display-aptos text-lg">{k.value}</div>
               <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
             </div>
             <div className="mt-2 opacity-80">
@@ -178,7 +178,7 @@ const DashboardPageContent = () => {
         {/* Positions table */}
         <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-sm font-display">Positions</div>
+            <div className="text-sm font-display-aptos">Positions</div>
             <div className="flex items-center gap-2">
               <button className="btn-secondary text-xs px-3 py-1">
                 <FaPlus className="inline mr-1" />
@@ -237,7 +237,7 @@ const DashboardPageContent = () => {
         {/* Allocation donut + alerts */}
         <div className="space-y-4">
           <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-            <div className="text-sm font-display mb-3">Répartition</div>
+            <div className="text-sm font-display-aptos mb-3">Répartition</div>
             <div className="flex items-center gap-4">
               <div className="relative w-28 h-28 shrink-0 rounded-full"
                    style={{
@@ -256,7 +256,7 @@ const DashboardPageContent = () => {
 
           {/* Recent alerts */}
           <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-            <div className="text-sm font-display mb-3">Alertes récentes</div>
+            <div className="text-sm font-display-aptos mb-3">Alertes récentes</div>
             <div className="space-y-2">
               {alerts.slice(0, 3).map((alert) => (
                 <div key={alert.id} className={`flex items-start gap-2 p-2 rounded text-xs ${
@@ -382,7 +382,7 @@ const DashboardPageContent = () => {
       <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--night)]/10 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
-          <div className="text-sm font-display">Portail Client</div>
+          <div className="text-sm font-display-aptos">Portail Client</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
@@ -428,7 +428,7 @@ const DashboardPageContent = () => {
 
           <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">Solde espèces</div>
-            <div className="font-display text-lg">
+            <div className="font-display-aptos text-lg">
               {showBalance ? formatCurrency(user.balance) : '••••••••'}
             </div>
             <div className="text-xs text-secondary mt-1">Compte: {user.account}</div>
@@ -439,7 +439,7 @@ const DashboardPageContent = () => {
         <div className="col-span-12 lg:col-span-10 p-6">
           {/* Header row */}
           <div className="flex items-center justify-between mb-6">
-            <div className="font-display text-xl">
+            <div className="font-display-aptos text-xl">
               {navigationItems.find(item => item.id === activeView)?.label || 'Tableau de bord'}
             </div>
             <div className="flex items-center gap-3 text-xs text-secondary">
@@ -458,7 +458,7 @@ const DashboardPageContent = () => {
           {activeView === 'reports' && (
             <div className="text-center py-12">
               <FaFileInvoice className="text-4xl text-secondary mx-auto mb-4" />
-              <h3 className="text-lg font-display mb-2">Relevés et rapports</h3>
+              <h3 className="text-lg font-display-aptos mb-2">Relevés et rapports</h3>
               <p className="text-secondary mb-6">Téléchargez vos relevés mensuels et rapports de performance.</p>
               <button className="btn-primary">
                 <FaDownload className="inline mr-2" />
@@ -469,7 +469,7 @@ const DashboardPageContent = () => {
           {activeView === 'downloads' && (
             <div className="text-center py-12">
               <FaCloudDownloadAlt className="text-4xl text-secondary mx-auto mb-4" />
-              <h3 className="text-lg font-display mb-2">Centre de téléchargement</h3>
+              <h3 className="text-lg font-display-aptos mb-2">Centre de téléchargement</h3>
               <p className="text-secondary mb-6">Accédez à tous vos documents et fichiers.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
                 <button className="btn-secondary p-4 text-left">
@@ -485,7 +485,7 @@ const DashboardPageContent = () => {
           )}
           {activeView === 'alerts' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-display mb-4">Centre de notifications</h3>
+              <h3 className="text-lg font-display-aptos mb-4">Centre de notifications</h3>
               {alerts.map((alert) => (
                 <div key={alert.id} className={`p-4 rounded-lg border ${
                   alert.type === 'warning' ? 'bg-amber-50 border-amber-200' :
@@ -513,10 +513,10 @@ const DashboardPageContent = () => {
           )}
           {activeView === 'settings' && (
             <div className="max-w-2xl">
-              <h3 className="text-lg font-display mb-6">Préférences</h3>
+              <h3 className="text-lg font-display-aptos mb-6">Préférences</h3>
               <div className="space-y-6">
                 <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                  <h4 className="font-display mb-3">Notifications</h4>
+                  <h4 className="font-display-aptos mb-3">Notifications</h4>
                   <div className="space-y-3">
                     <label className="flex items-center gap-3">
                       <input type="checkbox" defaultChecked className="accent-[var(--jaune-or)]" />
@@ -534,7 +534,7 @@ const DashboardPageContent = () => {
                 </div>
 
                 <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                  <h4 className="font-display mb-3">Sécurité</h4>
+                  <h4 className="font-display-aptos mb-3">Sécurité</h4>
                   <div className="space-y-3">
                     <button className="btn-secondary text-sm">
                       <FaUserShield className="inline mr-2" />

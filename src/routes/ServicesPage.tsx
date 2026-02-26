@@ -49,8 +49,8 @@ export const ServicesPage = () => {
                 </div>
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#services" className="btn-primary font-display tracking-wide">Explorer nos services</a>
-                  <a href="#contact" className="btn-secondary font-display tracking-wide">Parler à un conseiller</a>
+                  <a href="#services" className="btn-primary font-display-aptos tracking-wide">Explorer nos services</a>
+                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Parler à un conseiller</a>
                 </div>
               </div>
 
@@ -58,25 +58,25 @@ export const ServicesPage = () => {
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
                 <div className="text-center mb-6">
-                  <div className="text-3xl font-display text-[var(--jaune-or)] mb-2">500+</div>
+                  <div className="text-3xl font-display-aptos text-[var(--jaune-or)] mb-2">500+</div>
                   <div className="text-sm text-secondary">Clients satisfaits</div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-display text-[var(--jaune-or)] mb-1">4.9/5</div>
+                    <div className="text-2xl font-display-aptos text-[var(--jaune-or)] mb-1">4.9/5</div>
                     <div className="text-xs text-secondary">Note moyenne</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-display text-[var(--jaune-or)] mb-1">98%</div>
+                    <div className="text-2xl font-display-aptos text-[var(--jaune-or)] mb-1">98%</div>
                     <div className="text-xs text-secondary">Recommandation</div>
                   </div>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-[var(--jaune-or)]/25">
                   <div className="text-center">
-                    <div className="text-sm font-display text-[var(--night)] mb-1">Montant minimum</div>
-                    <div className="text-lg font-display text-[var(--jaune-or)]">100 000 F CFA</div>
+                    <div className="text-sm font-display-aptos text-[var(--night)] mb-1">Montant minimum</div>
+                    <div className="text-lg font-display-aptos text-[var(--jaune-or)]">100 000 F CFA</div>
                   </div>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export const ServicesPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Libre</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Libre</div>
                     <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.</p>
                   </div>
                 </div>
@@ -141,10 +141,10 @@ export const ServicesPage = () => {
 
                 <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--jaune-or-light)]">0,40% - 0,60%</span>
+                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,40% - 0,60%</span>
                   </div>
-                  <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
+                  <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary-dark font-display-aptos tracking-wide w-full">
                     Découvrir ce service
                   </a>
                 </div>
@@ -170,7 +170,7 @@ export const ServicesPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Assistée</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Assistée</div>
                     <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Parfait équilibre entre autonomie et conseils d'experts.</p>
                   </div>
                 </div>
@@ -192,10 +192,10 @@ export const ServicesPage = () => {
 
                 <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--jaune-or-light)]">0,60% - 0,80%</span>
+                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,60% - 0,80%</span>
                   </div>
-                  <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary-dark font-display tracking-wide w-full">
+                  <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary-dark font-display-aptos tracking-wide w-full">
                     Service recommandé
                   </a>
                 </div>
@@ -221,7 +221,7 @@ export const ServicesPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Sous-Mandat</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Sous-Mandat</div>
                     <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Pour ceux qui préfèrent déléguer la gestion à nos experts.</p>
                   </div>
                 </div>
@@ -243,10 +243,10 @@ export const ServicesPage = () => {
 
                 <div className="pt-4 border-t border-[var(--jaune-or-20)]">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display text-[var(--jaune-or-light)]">0,80% - 1,20%</span>
+                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
+                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,80% - 1,20%</span>
                   </div>
-                  <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary-dark font-display tracking-wide w-full">
+                  <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary-dark font-display-aptos tracking-wide w-full">
                     En savoir plus
                   </a>
                 </div>
@@ -258,10 +258,10 @@ export const ServicesPage = () => {
               <div className="inline-flex items-center gap-4 px-8 py-4 glass-card-dark">
                 <FiHelpCircle className="text-[var(--jaune-or-light)] w-5 h-5" />
                 <div className="text-left">
-                  <div className="font-display text-sm text-[var(--pure-white)]">Besoin d'aide pour choisir ?</div>
+                  <div className="font-display-aptos text-sm text-[var(--pure-white)]">Besoin d'aide pour choisir ?</div>
                   <div className="text-xs text-secondary-dark">Nos conseillers vous guident gratuitement</div>
                 </div>
-                <a href="#contact" className="btn-secondary-dark font-display tracking-wide text-sm">
+                <a href="#contact" className="btn-secondary-dark font-display-aptos tracking-wide text-sm">
                   Être conseillé
                 </a>
               </div>

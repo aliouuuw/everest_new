@@ -185,18 +185,18 @@ export const PerformanceComparison: React.FC = () => {
 
           <div className="flex items-center gap-3 mb-6">
             <FaChartLine className="text-xl text-[var(--jaune-or-light)]" />
-            <h3 className="font-display text-lg text-[var(--pure-white)]">Évolution des performances</h3>
+            <h3 className="font-display-aptos text-lg text-[var(--pure-white)]">Évolution des performances</h3>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full min-w-[600px]">
               <thead>
                 <tr className="border-b border-[var(--jaune-or)]/25">
-                  <th className="text-left p-3 font-display text-sm text-[var(--pure-white)]">Période</th>
-                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Libre</th>
-                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Sous-Mandat</th>
-                  <th className="text-center p-3 font-display text-sm text-[var(--pure-white)]">Gestion Assistée</th>
-                  <th className="text-center p-3 font-display text-sm text-secondary-dark">Benchmark*</th>
+                  <th className="text-left p-3 font-display-aptos text-sm text-[var(--pure-white)]">Période</th>
+                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Libre</th>
+                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Sous-Mandat</th>
+                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Assistée</th>
+                  <th className="text-center p-3 font-display-aptos text-sm text-secondary-dark">Benchmark*</th>
                 </tr>
               </thead>
               <tbody>
@@ -204,21 +204,21 @@ export const PerformanceComparison: React.FC = () => {
                   <tr key={row.period} className={index % 2 === 0 ? 'bg-[var(--night-20)]/50' : ''}>
                     <td className="p-3 font-medium text-[var(--pure-white)]">{row.period}</td>
                     <td className="p-3 text-center">
-                      <span className={`font-display text-sm ${
+                      <span className={`font-display-aptos text-sm ${
                         row.discretionary >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.discretionary >= 0 ? '+' : ''}{row.discretionary}%
                       </span>
                     </td>
                     <td className="p-3 text-center">
-                      <span className={`font-display text-sm ${
+                      <span className={`font-display-aptos text-sm ${
                         row.mandate >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.mandate >= 0 ? '+' : ''}{row.mandate}%
                       </span>
                     </td>
                     <td className="p-3 text-center">
-                      <span className={`font-display text-sm ${
+                      <span className={`font-display-aptos text-sm ${
                         row.assisted >= 0 ? 'text-emerald-400' : 'text-red-400'
                       }`}>
                         {row.assisted >= 0 ? '+' : ''}{row.assisted}%
@@ -251,12 +251,12 @@ export const PerformanceComparison: React.FC = () => {
               >
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
 
-                <div className="font-display text-sm text-secondary-dark mb-3">{metric.title}</div>
+                <div className="font-display-aptos text-sm text-secondary-dark mb-3">{metric.title}</div>
 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Gestion Libre</span>
-                    <span className={`font-display text-sm ${
+                    <span className={`font-display-aptos text-sm ${
                       bestService === 'discretionary' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.discretionary, metric.unit)}
@@ -268,7 +268,7 @@ export const PerformanceComparison: React.FC = () => {
 
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Sous-Mandat</span>
-                    <span className={`font-display text-sm ${
+                    <span className={`font-display-aptos text-sm ${
                       bestService === 'mandate' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.mandate, metric.unit)}
@@ -280,7 +280,7 @@ export const PerformanceComparison: React.FC = () => {
 
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-dark">Assistée</span>
-                    <span className={`font-display text-sm ${
+                    <span className={`font-display-aptos text-sm ${
                       bestService === 'assisted' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
                     }`}>
                       {formatValue(metric.assisted, metric.unit)}

@@ -22,6 +22,14 @@ export const ValueProps: React.FC = () => {
       className="reveal relative py-28 md:py-36"
       style={{ background: 'var(--cream)' }}
     >
+      {/* Subtle mauve ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{
+          background: 'radial-gradient(ellipse 50% 50% at 80% 50%, var(--mauve-10) 0%, transparent 70%)',
+        }}
+      />
+
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
         {/* Editorial two-column layout */}
@@ -37,7 +45,7 @@ export const ValueProps: React.FC = () => {
             </span>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: 'var(--font-display-aptos)',
                 fontWeight: 400,
                 fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
                 lineHeight: 1.0,
@@ -101,7 +109,7 @@ export const ValueProps: React.FC = () => {
                 <span
                   className="shrink-0 mt-1"
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: 'var(--font-display-aptos)',
                     fontWeight: 300,
                     fontSize: '2rem',
                     lineHeight: 1,
@@ -116,7 +124,7 @@ export const ValueProps: React.FC = () => {
                   <h3
                     className="mb-2"
                     style={{
-                      fontFamily: 'var(--font-display)',
+                      fontFamily: 'var(--font-display-aptos)',
                       fontWeight: 500,
                       fontSize: '1.5rem',
                       lineHeight: 1.15,

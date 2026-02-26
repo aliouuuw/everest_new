@@ -54,7 +54,7 @@ const AdminLayout: React.FC = () => {
             <FaBars className="text-lg text-[rgba(10, 10, 10, 0.8)]" />
           </button>
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
-          <div className="text-sm font-display">CMS Admin</div>
+          <div className="text-sm font-display-aptos">CMS Admin</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
@@ -102,7 +102,7 @@ const AdminLayout: React.FC = () => {
           {/* System Status Card */}
           <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">System Status</div>
-            <div className="font-display text-sm text-[var(--night)]">Online</div>
+            <div className="font-display-aptos text-sm text-[var(--night)]">Online</div>
             <div className="text-xs text-secondary mt-1">All systems operational</div>
           </div>
         </aside>

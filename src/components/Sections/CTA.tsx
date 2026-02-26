@@ -38,7 +38,7 @@ export const CTA: React.FC<{
 
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'var(--font-display-aptos)',
               fontWeight: 300,
               fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)',
               lineHeight: 1.0,

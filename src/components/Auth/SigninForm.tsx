@@ -44,7 +44,7 @@ export function SigninForm() {
     <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
       <div className="flex items-start justify-between">
         <div>
-          <div className="font-display text-xl">Accéder à votre espace</div>
+          <div className="font-display-aptos text-xl">Accéder à votre espace</div>
           <p className="text-secondary text-sm mt-1">Connectez-vous à votre portail client.</p>
         </div>
         <div className="hidden sm:flex items-center gap-2 text-xs text-[rgba(10, 10, 10, 0.8)]/80">
@@ -99,7 +99,7 @@ export function SigninForm() {
           <button
             type="submit"
             disabled={isLoading || isTransitioning}
-            className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary font-display-aptos tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading || isTransitioning ? 'Connexion...' : 'Se connecter'}
           </button>

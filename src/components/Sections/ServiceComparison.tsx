@@ -159,7 +159,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
           >
             <div className="flex items-center gap-3 mb-4">
               {getServiceIcon(service)}
-              <h3 className="font-display text-lg">{getServiceTitle(service)}</h3>
+              <h3 className="font-display-aptos text-lg">{getServiceTitle(service)}</h3>
               {currentService === service && (
                 <span className="ml-auto text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
                   Votre choix
@@ -180,7 +180,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
 
             <div className="mt-6 pt-4 border-t border-[var(--jaune-or)]/25">
               <button
-                className="btn-secondary font-display tracking-wide w-full text-center opacity-50 cursor-not-allowed"
+                className="btn-secondary font-display-aptos tracking-wide w-full text-center opacity-50 cursor-not-allowed"
                 disabled
               >
                 Service intégré
@@ -195,7 +195,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="text-left p-4 font-display text-lg border-b border-[var(--jaune-or)]/25">
+              <th className="text-left p-4 font-display-aptos text-lg border-b border-[var(--jaune-or)]/25">
                 Fonctionnalités
               </th>
               {['discretionary', 'mandate', 'assisted'].map((service) => (
@@ -207,7 +207,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
                 >
                   <div className="flex flex-col items-center gap-2">
                     {getServiceIcon(service)}
-                    <span className="font-display text-base">{getServiceTitle(service)}</span>
+                    <span className="font-display-aptos text-base">{getServiceTitle(service)}</span>
                     {currentService === service && (
                       <span className="text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
                         Votre choix
@@ -262,7 +262,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
       <>
         <button
           onClick={handleModalToggle}
-          className="btn-secondary font-display tracking-wide flex items-center gap-2"
+          className="btn-secondary font-display-aptos tracking-wide flex items-center gap-2"
         >
           <FiInfo className="text-sm" />
           Comparer les services
@@ -272,7 +272,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
             <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
               <div className="sticky top-0 flex items-center justify-between p-6 border-b border-[var(--jaune-or)]/25 bg-white/95 backdrop-blur-sm">
-                <h3 className="font-display text-xl">Comparaison des services</h3>
+                <h3 className="font-display-aptos text-xl">Comparaison des services</h3>
                 <button
                   onClick={handleModalToggle}
                   className="p-2 hover:bg-[var(--jaune-or-light)]/10 rounded-lg transition-colors"

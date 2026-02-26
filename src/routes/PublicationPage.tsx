@@ -121,7 +121,7 @@ export const PublicationPage = () => {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl font-display font-bold text-[var(--night)] mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-display-aptos font-bold text-[var(--night)] mb-6 leading-tight">
             {publication.title}
           </h1>
 

@@ -124,7 +124,7 @@ export const PerformanceDashboard: React.FC = () => {
               return (
                 <div key={i} className="glass-card-dark glass-card-hover">
                   <div className="text-secondary-dark text-xs mb-2">{k.label}</div>
-                  <div className="font-display text-lg flex items-center gap-2">
+                  <div className="font-display-aptos text-lg flex items-center gap-2">
                     {k.positive ? (
                       <FaArrowUp className="text-emerald-400" />
                     ) : (
@@ -139,7 +139,7 @@ export const PerformanceDashboard: React.FC = () => {
 
           {/* Allocation */}
           <div className="glass-card-dark">
-            <div className="font-display text-[var(--pure-white)] mb-4">Allocation d'actifs</div>
+            <div className="font-display-aptos text-[var(--pure-white)] mb-4">Allocation d'actifs</div>
             <div className="space-y-4">
               {allocation.map((a, i) => (
                 <div key={i} className="flex items-center gap-3">
@@ -150,7 +150,7 @@ export const PerformanceDashboard: React.FC = () => {
                     />
                   </div>
                   <div className="text-sm text-secondary-dark flex-1">{a.label}</div>
-                  <div className="font-display text-sm text-[var(--pure-white)]">{a.value}%</div>
+                  <div className="font-display-aptos text-sm text-[var(--pure-white)]">{a.value}%</div>
                 </div>
               ))}
             </div>
@@ -160,7 +160,7 @@ export const PerformanceDashboard: React.FC = () => {
                 {topHoldings.map((h, i) => (
                   <li key={i} className="flex justify-between text-sm">
                     <span className="text-secondary-dark">{h.name}</span>
-                    <span className="font-display text-[var(--pure-white)]">{h.weight}%</span>
+                    <span className="font-display-aptos text-[var(--pure-white)]">{h.weight}%</span>
                   </li>
                 ))}
               </ul>
@@ -172,7 +172,7 @@ export const PerformanceDashboard: React.FC = () => {
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="glass-card-dark lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <div className="font-display text-[var(--pure-white)]">Portefeuille vs BRVM</div>
+              <div className="font-display-aptos text-[var(--pure-white)]">Portefeuille vs BRVM</div>
               <div className="flex gap-2">
                 {["YTD", "1Y", "3Y"].map((r) => (
                   <button
@@ -229,7 +229,7 @@ export const PerformanceDashboard: React.FC = () => {
 
           {/* Notes */}
           <div className="glass-card-dark">
-            <div className="font-display text-[var(--pure-white)] mb-4">Notes méthodologiques</div>
+            <div className="font-display-aptos text-[var(--pure-white)] mb-4">Notes méthodologiques</div>
             <ul className="text-sm text-secondary-dark list-disc pl-5 space-y-3">
               <li className="text-[var(--pure-white)]/80">Données simulées pour démonstration visuelle uniquement.</li>
               <li className="text-[var(--pure-white)]/80">Benchmark utilisé: indice composite BRVM (approximation).</li>

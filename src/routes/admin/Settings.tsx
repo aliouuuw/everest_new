@@ -26,7 +26,7 @@ export const Settings = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div className="border-b border-[var(--jaune-or)]/20 pb-6">
-        <h1 className="text-4xl font-display font-semibold text-[var(--night)]">Settings</h1>
+        <h1 className="text-4xl font-display-aptos font-semibold text-[var(--night)]">Settings</h1>
         <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">Configure system settings and preferences</p>
       </div>
 
@@ -97,7 +97,7 @@ export const Settings = () => {
 // General Settings Tab
 const GeneralSettings = () => (
   <div className="p-8">
-    <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">General Settings</h2>
+    <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-8">General Settings</h2>
     
     <div className="space-y-6">
       <div>
@@ -159,7 +159,7 @@ const GeneralSettings = () => (
 // Database Settings Tab
 const DatabaseSettings = () => (
   <div className="p-8">
-    <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">Database Settings</h2>
+    <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-8">Database Settings</h2>
     
     <div className="space-y-6">
       <div className="bg-[var(--jaune-or-10)] border border-[var(--jaune-or)]/20 rounded-xl p-6">
@@ -207,7 +207,7 @@ const DatabaseSettings = () => (
 // Security Settings Tab
 const SecuritySettings = () => (
   <div className="p-8">
-    <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">Security Settings</h2>
+    <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-8">Security Settings</h2>
     
     <div className="space-y-6">
       <div>
@@ -282,7 +282,7 @@ const SecuritySettings = () => (
 // Appearance Settings Tab
 const AppearanceSettings = () => (
   <div className="p-8">
-    <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">Appearance Settings</h2>
+    <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-8">Appearance Settings</h2>
     
     <div className="space-y-6">
       <div>
@@ -342,7 +342,7 @@ const AppearanceSettings = () => (
 // Integrations Settings Tab
 const IntegrationsSettings = () => (
   <div className="p-8">
-    <h2 className="text-xl font-display font-semibold text-[var(--night)] mb-8">Integrations Settings</h2>
+    <h2 className="text-xl font-display-aptos font-semibold text-[var(--night)] mb-8">Integrations Settings</h2>
     
     <div className="space-y-6">
       <div className="bg-[var(--success-green)]/10 border border-[var(--success-green)]/20 rounded-xl p-6">

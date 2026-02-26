@@ -10,7 +10,7 @@ const MountainWireframe = lazy(() => import('./MountainWireframe').then(m => ({ 
 gsap.registerPlugin(ScrollTrigger);
 
 export const HeroSection: React.FC = () => {
-  const { lenis, scrollTo, isReady } = useLenisContext();
+  const { lenis, isReady } = useLenisContext();
   const heroRef = useRef<HTMLElement>(null);
   const kickerRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -137,7 +137,7 @@ export const HeroSection: React.FC = () => {
               onClick={() => {
                 const contactElement = document.getElementById('contact');
                 if (contactElement) {
-                  scrollTo(contactElement, { offset: -80 });
+                  contactElement.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
@@ -149,7 +149,7 @@ export const HeroSection: React.FC = () => {
               onClick={() => {
                 const servicesElement = document.getElementById('services');
                 if (servicesElement) {
-                  scrollTo(servicesElement, { offset: -80 });
+                  servicesElement.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >

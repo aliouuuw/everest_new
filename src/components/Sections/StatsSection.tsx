@@ -114,9 +114,16 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
     <section
       ref={sectionRef}
       id={id}
-      className={`reveal py-12 sm:py-16 ${columns === 4 ? 'lg:py-20' : ''} ${backgroundClasses[background]}`}
+      className={`reveal py-12 sm:py-16 ${columns === 4 ? 'lg:py-20' : ''} ${backgroundClasses[background]} relative`}
     >
-      <div className="mx-auto max-w-6xl px-6">
+      {/* Subtle mauve ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 60% 50% at 50% 50%, var(--mauve-10) 0%, transparent 70%)',
+        }}
+      />
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto">
           {kicker && <span className="kicker text-gradient-gold">{kicker}</span>}
           <h2 className="luxury-heading mt-3">{title}</h2>
@@ -138,7 +145,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
               )}
 
               <div className={`stat-card rounded-2xl p-6 ${!stat.icon ? 'text-center' : ''}`}>
-                <div className="text-3xl font-display">
+                <div className="text-3xl font-display-aptos">
                   {(() => {
                     let displayValue: string
 

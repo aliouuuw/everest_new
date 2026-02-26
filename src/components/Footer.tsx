@@ -30,15 +30,22 @@ export const Footer = () => {
   };
 
   return (
-    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20">
+    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,0.04)' }}>
+      {/* Subtle mauve ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
+        }}
+      />
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
 
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
               <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto" style={{ filter: 'brightness(1.2)' }} />
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.1rem', color: 'var(--pure-white)' }}>
+              <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.1rem', color: 'var(--pure-white)' }}>
                 Everest Finance
               </span>
             </div>

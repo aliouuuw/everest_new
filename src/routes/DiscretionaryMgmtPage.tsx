@@ -32,8 +32,8 @@ export const DiscretionaryMgmtPage = () => {
                 <h1 className="luxury-heading mt-3">Pilotez vos investissements en toute simplicité</h1>
                 <p className="luxury-subheading mt-5 leading-relaxed">Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#packs" className="btn-primary font-display tracking-wide">Découvrir les packs</a>
-                  <a href="#contact" className="btn-secondary font-display tracking-wide">Nous contacter</a>
+                  <a href="#packs" className="btn-primary font-display-aptos tracking-wide">Découvrir les packs</a>
+                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Nous contacter</a>
                 </div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
@@ -49,7 +49,7 @@ export const DiscretionaryMgmtPage = () => {
                         </div>
                         <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                       </div>
-                      <div className="text-xs font-display">Approche</div>
+                      <div className="text-xs font-display-aptos">Approche</div>
                     </div>
                     <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--jaune-or)]/25 flex flex-col items-center justify-center text-center p-4">
                       <div className="relative shrink-0 mb-2">
@@ -60,7 +60,7 @@ export const DiscretionaryMgmtPage = () => {
                         </div>
                         <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                       </div>
-                      <div className="text-xs font-display">Univers</div>
+                      <div className="text-xs font-display-aptos">Univers</div>
                     </div>
                     <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--jaune-or)]/25 flex flex-col items-center justify-center text-center p-4">
                       <div className="relative shrink-0 mb-2">
@@ -71,7 +71,7 @@ export const DiscretionaryMgmtPage = () => {
                         </div>
                         <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                       </div>
-                      <div className="text-xs font-display">Frais clairs</div>
+                      <div className="text-xs font-display-aptos">Frais clairs</div>
                     </div>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ export const DiscretionaryMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Approche</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Approche</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Vous fixez les objectifs, contraintes et limites; nous assurons l'exécution et le suivi.</p>
                   </div>
                 </div>
@@ -124,7 +124,7 @@ export const DiscretionaryMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Univers d'investissement</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Univers d'investissement</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Titres cotés BRVM et opérations primaires, avec filtres de qualité et liquidité.</p>
                   </div>
                 </div>
@@ -155,15 +155,15 @@ export const DiscretionaryMgmtPage = () => {
               ].map((p) => (
                 <div key={p.name} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="font-display text-lg md:text-xl">{p.name}</div>
+                  <div className="font-display-aptos text-lg md:text-xl">{p.name}</div>
                   <div className="mt-4 grid grid-cols-2 gap-4 numeric-tabular">
-                    <div className="stat-card"><div className="text-xs text-secondary">Frais dès</div><div className="font-display text-xl">{p.fee}</div></div>
-                    <div className="stat-card"><div className="text-xs text-secondary">Minimum</div><div className="font-display text-xl">{p.min}</div></div>
+                    <div className="stat-card"><div className="text-xs text-secondary">Frais dès</div><div className="font-display-aptos text-xl">{p.fee}</div></div>
+                    <div className="stat-card"><div className="text-xs text-secondary">Minimum</div><div className="font-display-aptos text-xl">{p.min}</div></div>
                   </div>
                   <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
                   <div className="mt-3 text-sm md:text-base text-[rgba(10, 10, 10, 0.8)]/80 flex items-center gap-2 leading-relaxed"><FiTrendingUp className="opacity-80" />{p.tools}</div>
                   <div className="text-secondary text-xs md:text-sm mt-1">{p.note}</div>
-                  <a href="#contact" className="mt-5 inline-flex items-center justify-center btn-secondary font-display tracking-wide">Ouvrir un compte</a>
+                  <a href="#contact" className="mt-5 inline-flex items-center justify-center btn-secondary font-display-aptos tracking-wide">Ouvrir un compte</a>
                 </div>
               ))}
             </div>
@@ -191,7 +191,7 @@ export const DiscretionaryMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Contrôle total</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Contrôle total</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Vous prenez toutes les décisions d'investissement selon vos critères.</p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export const DiscretionaryMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Réactivité</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Réactivité</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Exécution rapide de vos ordres sur la BRVM.</p>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export const DiscretionaryMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Transparence</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Transparence</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Frais clairs et reporting régulier de vos opérations.</p>
                   </div>
                 </div>
@@ -251,8 +251,8 @@ export const DiscretionaryMgmtPage = () => {
               ].map((s) => (
                 <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover text-center">
                   <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="numeric-tabular text-2xl font-display text-[var(--jaune-or)] mb-3">{s.step}</div>
-                  <div className="font-display text-lg mb-2">{s.title}</div>
+                  <div className="numeric-tabular text-2xl font-display-aptos text-[var(--jaune-or)] mb-3">{s.step}</div>
+                  <div className="font-display-aptos text-lg mb-2">{s.title}</div>
                   <p className="text-secondary text-sm">{s.desc}</p>
                 </div>
               ))}

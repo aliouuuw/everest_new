@@ -90,7 +90,7 @@ export const AuthPage = () => {
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiTrendingUp /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Suivi en temps réel</div>
+                  <div className="font-display-aptos text-lg mb-1">Suivi en temps réel</div>
                   <p className="text-secondary text-sm">Positions, performance et mouvements à jour.</p>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export const AuthPage = () => {
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiStar /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Documents centralisés</div>
+                  <div className="font-display-aptos text-lg mb-1">Documents centralisés</div>
                   <p className="text-secondary text-sm">Relevés, avis d'opérés et reporting en un endroit.</p>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export const AuthPage = () => {
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiZap /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Alertes personnalisées</div>
+                  <div className="font-display-aptos text-lg mb-1">Alertes personnalisées</div>
                   <p className="text-secondary text-sm">Notifications sur seuils, opérations et échéances.</p>
                 </div>
               </div>

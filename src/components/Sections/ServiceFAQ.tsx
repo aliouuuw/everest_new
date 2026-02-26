@@ -152,7 +152,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
                     <FiHelpCircle />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors">
+                    <h3 className="font-display-aptos text-lg text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors">
                       {faq.question}
                     </h3>
                   </div>
@@ -180,12 +180,12 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
           <div className="inline-flex items-center gap-3 px-6 py-4 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
             <FiHelpCircle className="text-[var(--jaune-or)]" />
             <div className="text-left">
-              <div className="font-display text-sm text-[var(--night)]">Vous avez d'autres questions ?</div>
+              <div className="font-display-aptos text-sm text-[var(--night)]">Vous avez d'autres questions ?</div>
               <div className="text-xs text-secondary">Notre équipe est là pour vous accompagner</div>
             </div>
             <a
               href="#contact"
-              className="btn-secondary font-display tracking-wide text-sm ml-4"
+              className="btn-secondary font-display-aptos tracking-wide text-sm ml-4"
             >
               Nous contacter
             </a>

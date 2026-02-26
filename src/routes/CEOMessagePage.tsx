@@ -70,7 +70,7 @@ export const CEOMessagePage = () => {
                 <div className="mt-12 pt-8 border-t border-[var(--jaune-or)]/20">
                   <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
-                      <div className="font-display text-[var(--night)] text-lg">La Direction Générale</div>
+                      <div className="font-display-aptos text-[var(--night)] text-lg">La Direction Générale</div>
                       <div className="text-secondary text-sm mt-1">Everest Finance SGI — Dakar</div>
                     </div>
                     <div className="text-xs text-secondary">

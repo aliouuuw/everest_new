@@ -102,7 +102,7 @@ export const Services: React.FC = () => {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'var(--font-display-aptos)',
               fontWeight: 400,
               fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
               lineHeight: 1.0,
@@ -134,7 +134,7 @@ export const Services: React.FC = () => {
               <span
                 className="mb-6"
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: 'var(--font-display-aptos)',
                   fontWeight: 300,
                   fontSize: '1.1rem',
                   color: 'var(--jaune-or)',
@@ -148,7 +148,7 @@ export const Services: React.FC = () => {
               <h3
                 className="mb-4"
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: 'var(--font-display-aptos)',
                   fontWeight: 500,
                   fontSize: '1.6rem',
                   lineHeight: 1.15,

@@ -230,7 +230,7 @@ export const PublicationForm = () => {
       {/* Page Header */}
       <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
-          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">
+          <h1 className="text-4xl font-display-aptos font-semibold text-[var(--night)]">
             {isEditing ? 'Edit Publication' : 'New Publication'}
           </h1>
           <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">
@@ -436,7 +436,7 @@ export const PublicationForm = () => {
 
             {/* SEO */}
             <div className="border-t border-[var(--jaune-or)]/20 pt-6">
-              <h3 className="text-lg font-display font-medium text-[var(--night)] mb-6">SEO Settings</h3>
+              <h3 className="text-lg font-display-aptos font-medium text-[var(--night)] mb-6">SEO Settings</h3>
               
               <div className="space-y-6">
                 <div>

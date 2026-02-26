@@ -36,7 +36,7 @@ export const SimulateurPage: React.FC = () => {
                     <span className="text-white text-sm font-bold">1</span>
                   </div>
                   <div>
-                    <h3 className="font-display text-lg mb-2">Projections réalistes</h3>
+                    <h3 className="font-display-aptos text-lg mb-2">Projections réalistes</h3>
                     <p className="text-secondary">
                       Basées sur des données historiques et des modèles financiers éprouvés
                     </p>
@@ -48,7 +48,7 @@ export const SimulateurPage: React.FC = () => {
                     <span className="text-white text-sm font-bold">2</span>
                   </div>
                   <div>
-                    <h3 className="font-display text-lg mb-2">Comparaison des services</h3>
+                    <h3 className="font-display-aptos text-lg mb-2">Comparaison des services</h3>
                     <p className="text-secondary">
                       Évaluez les différents niveaux de service et leurs impacts sur vos rendements
                     </p>
@@ -60,7 +60,7 @@ export const SimulateurPage: React.FC = () => {
                     <span className="text-white text-sm font-bold">3</span>
                   </div>
                   <div>
-                    <h3 className="font-display text-lg mb-2">Planification personnalisée</h3>
+                    <h3 className="font-display-aptos text-lg mb-2">Planification personnalisée</h3>
                     <p className="text-secondary">
                       Adaptez vos paramètres selon vos objectifs et votre profil de risque
                     </p>
@@ -71,7 +71,7 @@ export const SimulateurPage: React.FC = () => {
             
             <div className="bg-[var(--pure-white)] rounded-2xl p-8 border border-[var(--jaune-or)]/25 flex flex-col">
               <div className="flex-1">
-                <h3 className="font-display text-xl mb-4">Besoin d'un conseil personnalisé ?</h3>
+                <h3 className="font-display-aptos text-xl mb-4">Besoin d'un conseil personnalisé ?</h3>
                 <p className="text-secondary mb-6">
                   Nos experts en gestion de portefeuille sont disponibles pour vous accompagner 
                   dans la définition de votre stratégie d'investissement.
@@ -93,7 +93,7 @@ export const SimulateurPage: React.FC = () => {
               </div>
               <a
                 href="#contact"
-                className="btn-primary font-display tracking-wide w-full text-center"
+                className="btn-primary font-display-aptos tracking-wide w-full text-center"
               >
                 Prendre rendez-vous
               </a>

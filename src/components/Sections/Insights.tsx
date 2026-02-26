@@ -68,6 +68,14 @@ export const Insights: React.FC = () => {
       className="reveal relative py-28 md:py-36"
       style={{ background: 'var(--cream)' }}
     >
+      {/* Subtle mauve ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          background: 'radial-gradient(ellipse 60% 50% at 20% 30%, var(--mauve-10) 0%, transparent 60%)',
+        }}
+      />
+
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
         {/* Header row */}
@@ -81,7 +89,7 @@ export const Insights: React.FC = () => {
             </span>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: 'var(--font-display-aptos)',
                 fontWeight: 400,
                 fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
                 lineHeight: 1.0,
@@ -173,7 +181,7 @@ export const Insights: React.FC = () => {
                 <h3
                   className="mb-3 group-hover:text-[var(--jaune-or)] transition-colors duration-300"
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: 'var(--font-display-aptos)',
                     fontWeight: 500,
                     fontSize: '1.35rem',
                     lineHeight: 1.2,

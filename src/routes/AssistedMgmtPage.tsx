@@ -33,8 +33,8 @@ export const AssistedMgmtPage = () => {
                 <h1 className="luxury-heading mt-3">Décider avec un conseiller à vos côtés</h1>
                 <p className="luxury-subheading mt-5 leading-relaxed">Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#marche" className="btn-primary font-display tracking-wide">Comment ça marche</a>
-                  <a href="#contact" className="btn-secondary font-display tracking-wide">Parler à un conseiller</a>
+                  <a href="#marche" className="btn-primary font-display-aptos tracking-wide">Comment ça marche</a>
+                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Parler à un conseiller</a>
                 </div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
@@ -49,7 +49,7 @@ export const AssistedMgmtPage = () => {
                       </div>
                       <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
-                    <div className="font-display">Accompagnement personnalisé</div>
+                    <div className="font-display-aptos">Accompagnement personnalisé</div>
                   </div>
                 </div>
               </div>
@@ -87,7 +87,7 @@ export const AssistedMgmtPage = () => {
                       <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
                     <div>
-                      <div className="font-display text-lg md:text-xl mb-1">{s.title}</div>
+                      <div className="font-display-aptos text-lg md:text-xl mb-1">{s.title}</div>
                       <p className="text-secondary text-sm md:text-base leading-relaxed">{s.desc}</p>
                     </div>
                   </div>
@@ -107,14 +107,14 @@ export const AssistedMgmtPage = () => {
             <div ref={toolsGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mt-12">
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="font-display text-lg md:text-xl mb-1">Analyses & alertes</div>
+                <div className="font-display-aptos text-lg md:text-xl mb-1">Analyses & alertes</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Notes régulières, signaux de marché et alertes personnalisées pour ne rien manquer.</p>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
                 <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80">Accès aux publications et à un flux d'alertes</div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="font-display text-lg md:text-xl mb-1">Échanges avec un conseiller</div>
+                <div className="font-display-aptos text-lg md:text-xl mb-1">Échanges avec un conseiller</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Points de marché, simulations et idées d'allocation en direct avec votre interlocuteur.</p>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
                 <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80 flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
@@ -144,7 +144,7 @@ export const AssistedMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Décisions souveraines</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Décisions souveraines</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Vous validez chaque recommandation avant exécution.</p>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export const AssistedMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Expertise accessible</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Expertise accessible</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Conseils d'experts sans frais de gestion élevés.</p>
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export const AssistedMgmtPage = () => {
                     <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                   </div>
                   <div>
-                    <div className="font-display text-lg md:text-xl mb-1">Support réactif</div>
+                    <div className="font-display-aptos text-lg md:text-xl mb-1">Support réactif</div>
                     <p className="text-secondary text-sm md:text-base leading-relaxed">Échanges réguliers et assistance quand vous en avez besoin.</p>
                   </div>
                 </div>
@@ -225,12 +225,12 @@ export const AssistedMgmtPage = () => {
                   {/* Avatar */}
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-16 h-16 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
-                      <span className="text-lg font-display text-[var(--jaune-or)]">
+                      <span className="text-lg font-display-aptos text-[var(--jaune-or)]">
                         {advisor.name.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
                     <div>
-                      <div className="font-display text-lg text-[var(--night)]">{advisor.name}</div>
+                      <div className="font-display-aptos text-lg text-[var(--night)]">{advisor.name}</div>
                       <div className="text-sm text-secondary">{advisor.role}</div>
                       <div className="text-xs text-[var(--jaune-or)] font-medium">{advisor.experience}</div>
                     </div>

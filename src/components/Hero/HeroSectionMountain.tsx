@@ -172,7 +172,7 @@ export const HeroSectionMountain: React.FC = () => {
             <div className="hero-metric py-7 md:pr-12 border-b md:border-b-0 md:border-r border-white/[0.06] flex items-baseline gap-4">
               <span
                 className="text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-display)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
+                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
               >
                 08
               </span>
@@ -207,7 +207,7 @@ export const HeroSectionMountain: React.FC = () => {
             <div className="hero-metric py-7 md:pl-12 flex items-baseline gap-4">
               <span
                 className="text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-display)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
+                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
               >
                 30<span style={{ color: 'var(--jaune-or)' }}>+</span>
               </span>

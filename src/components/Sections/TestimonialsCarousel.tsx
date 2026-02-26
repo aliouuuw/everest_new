@@ -202,8 +202,15 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)] relative">
+      {/* Subtle mauve ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-25"
+        style={{
+          background: 'radial-gradient(ellipse 50% 50% at 80% 20%, var(--mauve-10) 0%, transparent 60%)',
+        }}
+      />
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="kicker text-gradient-gold">{title}</span>
           <h2 className="luxury-heading mt-3">Ils nous font confiance</h2>
@@ -272,12 +279,12 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     <div className="border-t border-[var(--jaune-or)]/25 pt-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
-                          <span className="text-sm font-display text-[var(--jaune-or)]">
+                          <span className="text-sm font-display-aptos text-[var(--jaune-or)]">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                         <div>
-                          <div className="font-display text-sm text-[var(--night)]">
+                          <div className="font-display-aptos text-sm text-[var(--night)]">
                             {testimonial.name}
                           </div>
                           <div className="text-xs text-secondary">
@@ -315,17 +322,17 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
+              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
               <div className="text-xs text-secondary">Clients satisfaits</div>
             </div>
             <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
+              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
               <div className="text-xs text-secondary">Note moyenne</div>
             </div>
             <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
             <div className="text-center">
-              <div className="font-display text-xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
+              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
               <div className="text-xs text-secondary">Recommandation</div>
             </div>
           </div>

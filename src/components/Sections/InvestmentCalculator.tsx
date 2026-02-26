@@ -190,7 +190,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'var(--font-display-aptos)',
               fontWeight: 400,
               fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
               lineHeight: 1.0,
@@ -242,7 +242,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               <div className="p-8 border border-white/[0.06] bg-white/[0.02]">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
+                  style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
                 >
                   Paramètres d'investissement
                 </h3>
@@ -266,7 +266,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                           background: inputs.service === service.service ? 'rgba(202,148,47,0.08)' : 'transparent',
                         }}
                       >
-                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '0.95rem', color: 'var(--pure-white)', marginBottom: '0.25rem' }}>
+                        <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '0.95rem', color: 'var(--pure-white)', marginBottom: '0.25rem' }}>
                           {service.title}
                         </div>
                         <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
@@ -332,7 +332,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     />
                     <div className="flex justify-between mt-2">
                       <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>1 an</span>
-                      <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1rem', color: 'var(--jaune-or)' }}>{inputs.timeHorizon} ans</span>
+                      <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1rem', color: 'var(--jaune-or)' }}>{inputs.timeHorizon} ans</span>
                       <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>20 ans</span>
                     </div>
                   </div>
@@ -360,7 +360,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                             {key === 'moderate' && 'Modéré'}
                             {key === 'aggressive' && 'Dynamique'}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--jaune-or)' : 'rgba(255,255,255,0.4)' }}>
+                          <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--jaune-or)' : 'rgba(255,255,255,0.4)' }}>
                             {formatPercentage(value)}
                           </div>
                         </button>
@@ -376,7 +376,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               <div className="p-8 border border-white/[0.06] bg-white/[0.02]">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
+                  style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--pure-white)' }}
                 >
                   Projections estimées
                 </h3>
@@ -384,24 +384,24 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 <div className="space-y-0">
                   <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>Total investi</span>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: 'var(--pure-white)' }}>{totalInvestedCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.2rem', color: 'var(--pure-white)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>
                       Frais estimés ({serviceFees[inputs.service].min}%)
                     </span>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-5" style={{ borderBottom: '2px solid rgba(202,148,47,0.2)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)' }}>Valeur projetée</span>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.5rem', color: '#34d399' }}>{projectedValueCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.5rem', color: '#34d399' }}>{projectedValueCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-5">
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>Gain net estimé</span>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#34d399' : '#ef4444' }}>
+                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#34d399' : '#ef4444' }}>
                       {netReturnCounter.value}
                     </span>
                   </div>
@@ -415,7 +415,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   >
                     Rendement annuel moyen estimé
                   </span>
-                  <span style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '2.5rem', color: 'var(--jaune-or)' }}>
+                  <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, fontSize: '2.5rem', color: 'var(--jaune-or)' }}>
                     {avgReturnCounter.value}
                   </span>
                 </div>
@@ -463,10 +463,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   background: inputs.service === service.service ? 'rgba(202,148,47,0.04)' : 'transparent',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.4rem', color: 'var(--pure-white)', marginBottom: '0.75rem' }}>
+                <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.4rem', color: 'var(--pure-white)', marginBottom: '0.75rem' }}>
                   {service.title}
                 </div>
-                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '1.8rem', color: 'var(--jaune-or)', marginBottom: '1.5rem' }}>
+                <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, fontSize: '1.8rem', color: 'var(--jaune-or)', marginBottom: '1.5rem' }}>
                   {service.fee}
                 </div>
 

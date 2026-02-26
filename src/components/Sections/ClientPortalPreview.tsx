@@ -97,7 +97,7 @@ export const ClientPortalPreview: React.FC = () => {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
+              fontFamily: 'var(--font-display-aptos)',
               fontWeight: 400,
               fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
               lineHeight: 1.0,
@@ -140,7 +140,7 @@ export const ClientPortalPreview: React.FC = () => {
           <div className="grid grid-cols-12">
             {/* Sidebar */}
             <aside className="col-span-3 lg:col-span-2 border-r border-[var(--night)]/10 bg-[var(--white-smoke)]/50 p-3">
-              <div className="font-display text-sm mb-3">Navigation</div>
+              <div className="font-display-aptos text-sm mb-3">Navigation</div>
               <nav className="space-y-1 text-sm">
                 {[
                   { icon: <FaHome />, label: "Tableau de bord", active: true },
@@ -168,7 +168,7 @@ export const ClientPortalPreview: React.FC = () => {
               <div className="mt-6 p-3 rounded-lg bg-white/70 border border-[var(--night)]/10">
                 <div className="text-xs text-secondary">Solde espèces</div>
                 {/* eslint-disable-next-line no-irregular-whitespace */}
-                <div className="font-display text-lg">{cashBalanceCounter.value}</div>
+                <div className="font-display-aptos text-lg">{cashBalanceCounter.value}</div>
               </div>
             </aside>
 
@@ -176,7 +176,7 @@ export const ClientPortalPreview: React.FC = () => {
             <div className="col-span-9 lg:col-span-10 p-4">
               {/* Header row */}
               <div className="flex items-center justify-between mb-4">
-                <div className="font-display">Tableau de bord</div>
+                <div className="font-display-aptos">Tableau de bord</div>
                 <div className="flex items-center gap-3 text-xs text-secondary">
                   <div>Compte: 00012345</div>
                   <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--white-smoke)] border border-[var(--night)]/10">
@@ -197,7 +197,7 @@ export const ClientPortalPreview: React.FC = () => {
                   <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10">
                     <div className="text-secondary text-xs">{k.label}</div>
                     <div className="flex items-end justify-between mt-1">
-                      <div className="font-display text-lg">{k.counter ? k.counter.value : k.value}</div>
+                      <div className="font-display-aptos text-lg">{k.counter ? k.counter.value : k.value}</div>
                       <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
                     </div>
                     <div className="mt-2 opacity-80">
@@ -212,7 +212,7 @@ export const ClientPortalPreview: React.FC = () => {
                 {/* Positions table */}
                 <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-display">Positions</div>
+                    <div className="text-sm font-display-aptos">Positions</div>
                     <div className="text-xs text-secondary">Mise à jour: il y a 5 min</div>
                   </div>
                   <div className="overflow-x-auto">
@@ -254,7 +254,7 @@ export const ClientPortalPreview: React.FC = () => {
 
                 {/* Allocation donut + activity */}
                 <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-                  <div className="text-sm font-display mb-3">Répartition</div>
+                  <div className="text-sm font-display-aptos mb-3">Répartition</div>
                   <div className="flex items-center gap-4">
                     <div className="relative w-28 h-28 shrink-0 rounded-full"
                          style={{
@@ -275,7 +275,7 @@ export const ClientPortalPreview: React.FC = () => {
               {/* Transactions */}
               <div className="mt-4 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm font-display">Dernières transactions</div>
+                  <div className="text-sm font-display-aptos">Dernières transactions</div>
                   <a href="#" className="text-xs text-secondary hover:underline">Voir tout</a>
                 </div>
                 <div className="overflow-x-auto">

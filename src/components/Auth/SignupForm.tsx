@@ -75,7 +75,7 @@ export function SignupForm() {
     <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
       <div className="flex items-start justify-between">
         <div>
-          <div className="font-display text-xl">Créer votre compte</div>
+          <div className="font-display-aptos text-xl">Créer votre compte</div>
           <p className="text-secondary text-sm mt-1">Inscrivez-vous pour accéder à votre portail client.</p>
         </div>
         <div className="hidden sm:flex items-center gap-2 text-xs text-[rgba(10, 10, 10, 0.8)]/80">
@@ -159,7 +159,7 @@ export function SignupForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="btn-primary font-display tracking-wide disabled:opacity-50 disabled:cursor-not-allowed w-full"
+          className="btn-primary font-display-aptos tracking-wide disabled:opacity-50 disabled:cursor-not-allowed w-full"
         >
           {isLoading ? 'Création du compte...' : 'Créer mon compte'}
         </button>

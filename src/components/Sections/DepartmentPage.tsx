@@ -62,7 +62,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   {department_name}
                 </span>
               </div>
-              <h1 className="font-display text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+              <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
                 {hero_headline}
               </h1>
             </div>
@@ -88,7 +88,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               {metrics.map((metric, i) => (
                 <div key={i} className={`py-16 md:py-24 ${i < metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-black/10' : ''} ${i === 1 ? 'md:px-16' : i === 2 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="flex items-baseline gap-2 mb-4">
-                    <div className="font-display text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
+                    <div className="font-display-aptos text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
                       {metric.value}
                     </div>
                     {metric.suffix && (
@@ -112,7 +112,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Audience cible</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
                   Conçu pour vos enjeux spécifiques.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -124,11 +124,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="border-t border-black/10">
                   {target_personas.map((persona, i) => (
                     <div key={i} className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                      <div className="font-display text-2xl text-[var(--jaune-or)]/50 shrink-0">
+                      <div className="font-display-aptos text-2xl text-[var(--jaune-or)]/50 shrink-0">
                         {String(i + 1).padStart(2, '0')}.
                       </div>
                       <div>
-                        <h3 className="font-display text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                        <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
                           {persona.label}
                         </h3>
                         <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -152,7 +152,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
                   <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">La différence Everest</span>
-                  <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
                     Notre engagement envers l'excellence.
                   </h2>
                 </div>
@@ -163,7 +163,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   {differentiators.map((diff, i) => (
                     <div key={i} className="relative">
                       <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
-                      <h3 className="font-display text-2xl md:text-3xl mb-4 text-white">
+                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
                         {diff.title}
                       </h3>
                       <p className="text-white/60 leading-relaxed font-light text-lg">
@@ -184,7 +184,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="mb-20 md:mb-32">
               <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Nos solutions</span>
-              <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+              <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] max-w-3xl">
                 Une expertise financière sur mesure.
               </h2>
             </div>
@@ -201,10 +201,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                         activeSolution === i ? 'text-[var(--night)]' : 'text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)]'
                       }`}
                     >
-                      <span className={`font-display text-sm ${activeSolution === i ? 'text-[var(--jaune-or)]' : 'text-black/30'}`}>
+                      <span className={`font-display-aptos text-sm ${activeSolution === i ? 'text-[var(--jaune-or)]' : 'text-black/30'}`}>
                         {String(solution.solution_number).padStart(2, '0')}
                       </span>
-                      <h3 className="font-display text-xl md:text-2xl">
+                      <h3 className="font-display-aptos text-xl md:text-2xl">
                         {solution.name}
                       </h3>
                     </button>
@@ -215,7 +215,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               {/* Stark Content Area */}
               <div className="lg:col-span-8">
                 <div className="min-h-[600px] animate-fadeIn">
-                  <h3 className="font-display text-4xl md:text-5xl mb-8">
+                  <h3 className="font-display-aptos text-4xl md:text-5xl mb-8">
                     {expertise_solutions[activeSolution].name}
                   </h3>
                   <p className="text-xl md:text-2xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-16 max-w-3xl">
@@ -285,7 +285,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                                 <span className="w-3 h-3 block" style={{ backgroundColor: item.color }} />
                                 {item.name}
                               </div>
-                              <span className="font-display">{item.value}%</span>
+                              <span className="font-display-aptos">{item.value}%</span>
                             </div>
                           ))}
                         </div>
@@ -306,7 +306,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Méthodologie</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
                   Un processus rigoureux.
                 </h2>
                 {approach_methodology && !method_steps && (
@@ -321,10 +321,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                     {method_steps.map((step, i) => (
                       <div key={i} className="relative">
-                        <div className="font-display text-4xl text-[var(--jaune-or)] mb-6">
+                        <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-6">
                           {String(i + 1).padStart(2, '0')}.
                         </div>
-                        <h3 className="font-display text-2xl mb-4 text-[var(--night)]">
+                        <h3 className="font-display-aptos text-2xl mb-4 text-[var(--night)]">
                           {step.title}
                         </h3>
                         <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -347,14 +347,14 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Interventions</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
                   Périmètre d'action.
                 </h2>
               </div>
               <div className="lg:col-span-7">
                 <ul className="border-t border-black/10">
                   {operations_selected.map((operation, i) => (
-                    <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-display text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
+                    <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-display-aptos text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
                       <FiArrowRight className="text-[var(--jaune-or)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       {operation}
                     </li>
@@ -371,7 +371,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-display text-5xl md:text-7xl leading-[1.05] mb-6">
+              <h2 className="font-display-aptos text-5xl md:text-7xl leading-[1.05] mb-6">
                 {cta_text}
               </h2>
               <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
