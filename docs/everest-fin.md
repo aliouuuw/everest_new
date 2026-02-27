@@ -66,6 +66,20 @@ Key Brand Pillars	Expertise, independence, ethical governance, innovative suppor
 Service Presentation	Financial services framed with sophistication and clarity
 Governance & Culture	Structural clarity, ethical charter, team collaboration
 Contact Layer	Clear, detailed contact info; developer credit subtly noted
+ 
+UI color usage rules (landing page)
+Gold (jaune-or) is the primary accent.
+Mauve is a secondary accent used for depth, background atmosphere, and subtle hover/border details.
+ 
+Hierarchy
+- Jaune-or: kickers, CTAs, primary emphasis in headlines (including italic emphasis)
+- Mauve: background glows (subtle), decorative gradients paired with gold, hover/border accents
+- Night/White-smoke/Cream: layout surfaces and primary text contrast
+- Timberwolf: dividers and subtle structural lines
+ 
+Opacity guidance (mauve)
+- Background glows: 0.15–0.25 (use tokens like --mauve-15, --mauve-20)
+- Structural accents: around 0.4 (use --mauve-40) when needed
 Colors palette:
 /* CSS HEX */
 --white-smoke: #f5f5f5ff;
@@ -75,6 +89,9 @@ Colors palette:
 /* added mauve */
 --mauve: #461D4C;
 --night: #0a0a0aff;
+ 
+Insights section categories
+- Keep only: Revues hebdo, Revues mensuelles
 
 /* CSS HSL */
 --white-smoke: hsla(0, 0%, 96%, 1);
