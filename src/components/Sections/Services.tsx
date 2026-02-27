@@ -67,12 +67,20 @@ export const Services: React.FC = () => {
       ref={sectionRef}
       className="reveal relative overflow-hidden"
       id="services"
-      style={{ background: 'var(--cream)' }}
+      style={{ background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)' }}
     >
+      {/* Subtle gold radial glow overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 60% 50% at 30% 20%, rgba(202,148,47,0.08) 0%, transparent 70%)',
+        }}
+      />
+
       {/* Header — full width, tight */}
       <div
-        className="px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-10 md:pb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-        style={{ borderBottom: '1px solid var(--timberwolf)' }}
+        className="relative z-10 px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-10 md:pb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
       >
         <div>
           <span
@@ -88,11 +96,11 @@ export const Services: React.FC = () => {
               fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
               lineHeight: 1.0,
               letterSpacing: '-0.02em',
-              color: 'var(--night)',
+              color: 'var(--pure-white)',
             }}
           >
             Solutions pour chaque{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--mauve)' }}>
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               profil.
             </em>
           </h2>
@@ -104,7 +112,7 @@ export const Services: React.FC = () => {
             fontWeight: 300,
             fontSize: '0.9rem',
             lineHeight: 1.75,
-            color: 'var(--night-60)',
+            color: 'rgba(255,255,255,0.6)',
           }}
         >
           Trois domaines d'expertise complémentaires pour couvrir l'ensemble
@@ -118,13 +126,13 @@ export const Services: React.FC = () => {
           <a
             key={s.title}
             href={s.href}
-            className="group flex items-stretch w-full transition-colors duration-500 hover:bg-[var(--gold-pale)]"
-            style={{ borderBottom: '1px solid var(--timberwolf)' }}
+            className="group flex items-stretch w-full transition-colors duration-500 hover:bg-white/[0.03]"
+            style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
           >
             {/* Oversized roman numeral — left column */}
             <div
               className="hidden md:flex items-center justify-center w-32 lg:w-44 shrink-0 transition-colors duration-500"
-              style={{ borderRight: '1px solid var(--timberwolf)' }}
+              style={{ borderRight: '1px solid rgba(255,255,255,0.08)' }}
             >
               <span
                 className="group-hover:opacity-100 transition-all duration-500"
@@ -146,14 +154,14 @@ export const Services: React.FC = () => {
             <div className="flex flex-col md:flex-row md:items-center flex-1 px-8 md:px-12 lg:px-16 py-10 md:py-12 gap-6 md:gap-16">
               {/* Title */}
               <h3
-                className="md:w-[38%] shrink-0 transition-colors duration-500 group-hover:text-[var(--mauve)]"
+                className="md:w-[38%] shrink-0 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
                 style={{
                   fontFamily: 'var(--font-display-aptos)',
                   fontWeight: 500,
                   fontSize: 'clamp(1.5rem, 2.8vw, 2.2rem)',
                   lineHeight: 1.1,
                   letterSpacing: '-0.01em',
-                  color: 'var(--night)',
+                  color: 'var(--pure-white)',
                 }}
               >
                 {s.title}
@@ -162,13 +170,13 @@ export const Services: React.FC = () => {
               {/* Description + tags */}
               <div className="flex-1">
                 <p
-                  className="mb-5 transition-colors duration-500 group-hover:text-[var(--night-80)]"
+                  className="mb-5 transition-colors duration-500 group-hover:text-[rgba(255,255,255,0.8)]"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 300,
                     fontSize: '0.9rem',
                     lineHeight: 1.75,
-                    color: 'var(--night-60)',
+                    color: 'rgba(255,255,255,0.5)',
                     maxWidth: '28rem',
                   }}
                 >
@@ -182,8 +190,8 @@ export const Services: React.FC = () => {
                       style={{
                         fontFamily: 'var(--font-primary)',
                         fontWeight: 400,
-                        color: 'var(--night-60)',
-                        border: '1px solid var(--timberwolf)',
+                        color: 'rgba(255,255,255,0.5)',
+                        border: '1px solid rgba(255,255,255,0.15)',
                       }}
                     >
                       {tag}
@@ -197,11 +205,11 @@ export const Services: React.FC = () => {
             <div className="hidden md:flex items-center justify-center w-20 lg:w-28 shrink-0">
               <span
                 className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 group-hover:border-[var(--jaune-or)] group-hover:bg-[var(--jaune-or)]/10"
-                style={{ borderColor: 'var(--timberwolf)' }}
+                style={{ borderColor: 'rgba(255,255,255,0.15)' }}
               >
                 <FiArrowUpRight
                   className="text-sm transition-all duration-500 group-hover:text-[var(--jaune-or)]"
-                  style={{ color: 'var(--night-60)' }}
+                  style={{ color: 'rgba(255,255,255,0.4)' }}
                 />
               </span>
             </div>

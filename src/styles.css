@@ -125,6 +125,22 @@ html {
   background: linear-gradient(90deg, var(--mauve) 0%, var(--jaune-or) 100%);
 }
 
+@utility gradient-gold-fade {
+  background: linear-gradient(90deg, var(--jaune-or) 0%, transparent 100%);
+}
+
+@utility gradient-mauve-night {
+  background: linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%);
+}
+
+@utility gradient-night-mauve-gold {
+  background: linear-gradient(180deg, var(--night) 0%, var(--mauve) 50%, rgba(202,148,47,0.15) 100%);
+}
+
+@utility gradient-gold-mauve-radial {
+  background: radial-gradient(ellipse at top, rgba(202,148,47,0.12) 0%, var(--mauve-10) 50%, transparent 100%);
+}
+
 .section-bg-mauve {
   background: linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%);
   color: var(--white-smoke);

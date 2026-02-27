@@ -24,9 +24,17 @@ export const ValueProps: React.FC = () => {
           className="relative lg:w-[42%] flex flex-col justify-between px-8 md:px-14 lg:px-16 pt-20 pb-16 lg:pt-28 lg:pb-24"
           style={{ background: 'var(--cream)' }}
         >
+          {/* Subtle mauve-to-gold gradient overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(70,29,76,0.04) 0%, transparent 50%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(202,148,47,0.06) 0%, transparent 60%)',
+            }}
+          />
+          
           {/* Vertical gold rule */}
           <div
-            className="absolute top-0 left-0 w-[2px] h-full"
+            className="absolute top-0 left-0 w-[2px] h-full z-10"
             style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 20%, var(--jaune-or) 80%, transparent)' }}
           />
 

@@ -171,11 +171,11 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
       className="reveal relative py-28 md:py-36 overflow-hidden"
       style={{ background: 'var(--pure-white)' }}
     >
-      {/* Subtle mauve atmosphere */}
+      {/* Mauve-to-gold gradient atmosphere */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 50% 40% at 70% 0%, var(--mauve-05) 0%, transparent 80%)',
+          background: 'radial-gradient(ellipse 50% 40% at 70% 0%, rgba(70,29,76,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 20% 100%, rgba(202,148,47,0.04) 0%, transparent 70%)',
         }}
       />
 

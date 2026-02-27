@@ -44,10 +44,18 @@ export const NewsSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-32"
+      className="reveal relative py-24 md:py-32 overflow-hidden"
       style={{ background: 'var(--cream)' }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+      {/* Subtle mauve gradient accent top-left */}
+      <div
+        className="absolute top-0 left-0 w-[40%] h-[30%] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.05) 0%, transparent 70%)',
+        }}
+      />
+      
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div className="max-w-xl">
