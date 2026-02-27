@@ -30,7 +30,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,0.04)' }}>
+    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       {/* Subtle mauve ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"

@@ -155,8 +155,15 @@ export const Header: React.FC = () => {
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
+  // Pages with light backgrounds need immediate dark backdrop for nav contrast
+  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/gestion-libre', '/gestion-assistee', '/faq', '/publications'];
+  const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
+
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
+
+  // Need backdrop immediately on light pages, or when scrolled
+  const needsBackdrop = isScrolled || isLightBackgroundPage;
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
@@ -176,7 +183,7 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[var(--night)]/90 backdrop-blur-xl shadow-lg shadow-black/10' : ''}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${needsBackdrop ? 'bg-[var(--night)]/90 backdrop-blur-xl shadow-lg shadow-black/10' : ''}`}>
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">

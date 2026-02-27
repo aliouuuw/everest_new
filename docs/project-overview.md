@@ -18,6 +18,12 @@ A minimalist yet bold landing page for Everest Finance SGI that embodies the com
 - **Dynamic Subtlety**: Orchestrated animations that enhance without overwhelming
 - **Professional Elegance**: Reflecting financial expertise and trustworthiness
 
+### UI / Layout
+- **Header**: Barre de navigation fixe (desktop + mobile) avec dropdowns.
+- **Contraste du Header**: Sur les pages à fond clair, le header applique un backdrop sombre automatiquement afin de garantir la lisibilité des menus.
+- **Footer**: Pied de page global.
+- **Séparateurs**: La bordure supérieure du footer utilise une teinte neutre (évite les lignes jaunes visibles entre sections).
+
 ### Visual Identity
 - **Primary Background**: White-smoke (#f5f5f5ff)
 - **Supporting Colors**: 
@@ -47,6 +53,16 @@ A minimalist yet bold landing page for Everest Finance SGI that embodies the com
 - **Data Integration**: BRVM stock feed via chosen backend
 - **Backend**: Convex, TanStack DB, or Supabase (TBD)
 - **Build Tool**: Vite with hot module replacement
+
+### Pages
+- **Accueil**: Landing page principale.
+- **À propos**: Présentation de la société.
+- **Publications**: Liste des publications.
+- **Publication**: Détail d'une publication.
+- **FAQ**: Questions fréquentes.
+- **Bourse**: Informations boursières.
+- **Actualités**: Page éditoriale "Centre de presse" (communiqués de presse, mises à jour, mentions dans les médias).
+  - **Mise en page**: Hero sombre + article à la une + flux d'articles + colonne latérale (newsletter + emplacements publicitaires).
 
 ## Brand Alignment
 
