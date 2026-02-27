@@ -88,9 +88,12 @@ export const FAQPage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--jaune-or)] selection:text-white">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="reveal relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh]">
-          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-[var(--white-smoke)]">
-            {/* Abstract geometric pattern instead of photo for FAQ */}
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80"
+              alt="Support client"
+              className="w-full h-full object-cover opacity-40"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
           </div>
           

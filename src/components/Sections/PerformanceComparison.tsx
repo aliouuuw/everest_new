@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FiTarget, FiTrendingUp } from 'react-icons/fi';
-import { FaChartLine } from 'react-icons/fa';
+import { FiTrendingUp } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -169,77 +168,69 @@ export const PerformanceComparison: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--night)]">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">Performance</span>
-          <h2 className="luxury-heading-dark mt-3">Comparaison des performances</h2>
-          <p className="luxury-subheading-dark mt-5 pt-8">
+    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)]">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="mb-20">
+          <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Performance</span>
+          <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-8">
+            Comparaison des performances.
+          </h2>
+          <p className="text-lg text-[rgba(10, 10, 10, 0.8)] font-light max-w-2xl">
             Découvrez les résultats historiques et les métriques clés de nos différents services de gestion.
           </p>
         </div>
 
-        {/* Performance Chart */}
-        <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 mb-12 glass-card-dark">
-          <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-
-          <div className="flex items-center gap-3 mb-6">
-            <FaChartLine className="text-xl text-[var(--jaune-or-light)]" />
-            <h3 className="font-display-aptos text-lg text-[var(--pure-white)]">Évolution des performances</h3>
+        {/* Performance Table */}
+        <div className="border border-black/10 mb-20">
+          <div className="p-6 border-b border-black/10">
+            <h3 className="font-display-aptos text-xl text-[var(--night)]">Évolution des performances</h3>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[600px]">
-              <thead>
-                <tr className="border-b border-[var(--jaune-or)]/25">
-                  <th className="text-left p-3 font-display-aptos text-sm text-[var(--pure-white)]">Période</th>
-                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Libre</th>
-                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Sous-Mandat</th>
-                  <th className="text-center p-3 font-display-aptos text-sm text-[var(--pure-white)]">Gestion Assistée</th>
-                  <th className="text-center p-3 font-display-aptos text-sm text-secondary-dark">Benchmark*</th>
-                </tr>
-              </thead>
-              <tbody>
-                {performanceData.map((row, index) => (
-                  <tr key={row.period} className={index % 2 === 0 ? 'bg-[var(--night-20)]/50' : ''}>
-                    <td className="p-3 font-medium text-[var(--pure-white)]">{row.period}</td>
-                    <td className="p-3 text-center">
-                      <span className={`font-display-aptos text-sm ${
-                        row.discretionary >= 0 ? 'text-emerald-400' : 'text-red-400'
-                      }`}>
-                        {row.discretionary >= 0 ? '+' : ''}{row.discretionary}%
-                      </span>
-                    </td>
-                    <td className="p-3 text-center">
-                      <span className={`font-display-aptos text-sm ${
-                        row.mandate >= 0 ? 'text-emerald-400' : 'text-red-400'
-                      }`}>
-                        {row.mandate >= 0 ? '+' : ''}{row.mandate}%
-                      </span>
-                    </td>
-                    <td className="p-3 text-center">
-                      <span className={`font-display-aptos text-sm ${
-                        row.assisted >= 0 ? 'text-emerald-400' : 'text-red-400'
-                      }`}>
-                        {row.assisted >= 0 ? '+' : ''}{row.assisted}%
-                      </span>
-                    </td>
-                    <td className="p-3 text-center text-secondary-dark text-sm">
-                      {row.benchmark >= 0 ? '+' : ''}{row.benchmark}%
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="min-w-[600px]">
+              {/* Table Header */}
+              <div className="grid grid-cols-5 border-b border-black/10 bg-[var(--white-smoke)]/30">
+                <div className="p-4 font-display-aptos text-sm text-[var(--night)]">Période</div>
+                <div className="p-4 font-display-aptos text-sm text-center text-[var(--night)]">Gestion Libre</div>
+                <div className="p-4 font-display-aptos text-sm text-center text-[var(--night)]">Gestion Sous-Mandat</div>
+                <div className="p-4 font-display-aptos text-sm text-center text-[var(--night)]">Gestion Assistée</div>
+                <div className="p-4 font-display-aptos text-sm text-center text-[rgba(10,10,10,0.5)]">Benchmark*</div>
+              </div>
+
+              {/* Table Body */}
+              {performanceData.map((row, index) => (
+                <div key={row.period} className={`grid grid-cols-5 border-b border-black/10 ${index % 2 === 0 ? 'bg-[var(--white-smoke)]/20' : ''}`}>
+                  <div className="p-4 font-medium text-[var(--night)]">{row.period}</div>
+                  <div className="p-4 text-center">
+                    <span className={`font-display-aptos text-sm ${row.discretionary >= 0 ? 'text-green-700' : 'text-red-600'}`}>
+                      {row.discretionary >= 0 ? '+' : ''}{row.discretionary}%
+                    </span>
+                  </div>
+                  <div className="p-4 text-center">
+                    <span className={`font-display-aptos text-sm ${row.mandate >= 0 ? 'text-green-700' : 'text-red-600'}`}>
+                      {row.mandate >= 0 ? '+' : ''}{row.mandate}%
+                    </span>
+                  </div>
+                  <div className="p-4 text-center">
+                    <span className={`font-display-aptos text-sm ${row.assisted >= 0 ? 'text-green-700' : 'text-red-600'}`}>
+                      {row.assisted >= 0 ? '+' : ''}{row.assisted}%
+                    </span>
+                  </div>
+                  <div className="p-4 text-center text-[rgba(10,10,10,0.5)] text-sm">
+                    {row.benchmark >= 0 ? '+' : ''}{row.benchmark}%
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-4 text-xs text-secondary-dark">
+          <div className="p-4 text-xs text-[rgba(10,10,10,0.5)] border-t border-black/10">
             * Benchmark: Indice BRVM 10. Les performances passées ne préjugent pas des performances futures.
           </div>
         </div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 border-t border-black/10 pt-16">
           {metricsData.map((metric) => {
             const bestIndex = getBestValue(metric);
             const bestService = getServiceName(bestIndex);
@@ -247,55 +238,43 @@ export const PerformanceComparison: React.FC = () => {
             return (
               <div
                 key={metric.title}
-                className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--night)]/90 backdrop-blur-sm p-6 transition-all glass-card-dark glass-card-hover"
+                className="relative"
               >
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
+                <div className="w-8 h-px bg-[var(--jaune-or)] mb-6" />
+                <h4 className="font-display-aptos text-lg text-[rgba(10,10,10,0.6)] mb-6">{metric.title}</h4>
 
-                <div className="font-display-aptos text-sm text-secondary-dark mb-3">{metric.title}</div>
-
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-secondary-dark">Gestion Libre</span>
-                    <span className={`font-display-aptos text-sm ${
-                      bestService === 'discretionary' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
+                    <span className="text-sm text-[rgba(10,10,10,0.8)]">Gestion Libre</span>
+                    <span className={`font-display-aptos text-lg ${
+                      bestService === 'discretionary' ? 'text-[var(--jaune-or)]' : 'text-[var(--night)]'
                     }`}>
                       {formatValue(metric.discretionary, metric.unit)}
-                      {bestService === 'discretionary' && (
-                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
-                      )}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-secondary-dark">Sous-Mandat</span>
-                    <span className={`font-display-aptos text-sm ${
-                      bestService === 'mandate' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
+                    <span className="text-sm text-[rgba(10,10,10,0.8)]">Sous-Mandat</span>
+                    <span className={`font-display-aptos text-lg ${
+                      bestService === 'mandate' ? 'text-[var(--jaune-or)]' : 'text-[var(--night)]'
                     }`}>
                       {formatValue(metric.mandate, metric.unit)}
-                      {bestService === 'mandate' && (
-                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
-                      )}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-secondary-dark">Assistée</span>
-                    <span className={`font-display-aptos text-sm ${
-                      bestService === 'assisted' ? 'text-[var(--jaune-or-light)] font-medium' : 'text-[var(--pure-white)]'
+                    <span className="text-sm text-[rgba(10,10,10,0.8)]">Assistée</span>
+                    <span className={`font-display-aptos text-lg ${
+                      bestService === 'assisted' ? 'text-[var(--jaune-or)]' : 'text-[var(--night)]'
                     }`}>
                       {formatValue(metric.assisted, metric.unit)}
-                      {bestService === 'assisted' && (
-                        <FiTarget className="inline ml-1 text-[var(--jaune-or-light)]" size={12} />
-                      )}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[var(--jaune-or)]/25">
-                  <div className="flex items-center gap-1 text-xs text-[var(--jaune-or-light)]">
-                    <FiTarget size={10} />
-                    <span className="capitalize">{bestService === 'discretionary' ? 'Libre' :
-                      bestService === 'mandate' ? 'Sous-mandat' : 'Assistée'} recommandé</span>
+                <div className="mt-6 pt-4 border-t border-black/10">
+                  <div className="text-xs text-[var(--jaune-or)] uppercase tracking-[0.2em]">
+                    <span className="capitalize">{bestService === 'discretionary' ? 'Libre' : bestService === 'mandate' ? 'Sous-mandat' : 'Assistée'} recommandé</span>
                   </div>
                 </div>
               </div>
@@ -304,12 +283,12 @@ export const PerformanceComparison: React.FC = () => {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-12 p-4 bg-[var(--night)]/90 rounded-xl border border-[var(--jaune-or)]/25 glass-card-dark">
+        <div className="mt-20 p-6 border border-black/10 bg-[var(--white-smoke)]/30">
           <div className="flex items-start gap-3">
-            <FiTrendingUp className="text-[var(--jaune-or-light)] mt-0.5 flex-shrink-0" />
-            <div className="text-sm text-secondary-dark">
-              <p className="font-medium text-[var(--pure-white)] mb-1">Note importante:</p>
-              <p>Les performances passées ne constituent pas une garantie de résultats futurs. L'investissement en bourse comporte des risques, y compris celui de perdre tout ou partie du capital investi. Ces données sont présentées à titre informatif.</p>
+            <FiTrendingUp className="text-[var(--jaune-or)] mt-0.5 flex-shrink-0" />
+            <div className="text-sm text-[rgba(10,10,10,0.8)]">
+              <p className="font-display-aptos text-[var(--night)] mb-2">Note importante:</p>
+              <p className="font-light">Les performances passées ne constituent pas une garantie de résultats futurs. L'investissement en bourse comporte des risques, y compris celui de perdre tout ou partie du capital investi. Ces données sont présentées à titre informatif.</p>
             </div>
           </div>
         </div>

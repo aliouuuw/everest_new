@@ -17,8 +17,12 @@ export const DiscretionaryMgmtPage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden bg-[var(--white-smoke)]">
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=1600&q=80"
+              alt="Gestion d'investissement"
+              className="w-full h-full object-cover opacity-40"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>

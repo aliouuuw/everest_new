@@ -9,8 +9,12 @@ export const CEOMessagePage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="reveal relative min-h-[60vh] flex items-end pb-20 pt-40 border-b border-black/10">
-          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-[var(--white-smoke)]">
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80"
+              alt="Leadership Everest Finance"
+              className="w-full h-full object-cover opacity-40"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
           </div>
 

@@ -128,67 +128,65 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
   const faqs = faqData[service];
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">FAQ</span>
-          <h2 className="luxury-heading mt-3">Questions fréquentes</h2>
-        </div>
+    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)]">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <div className="lg:col-span-4">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">FAQ</span>
+            <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+              Questions fréquentes.
+            </h2>
+            <p className="text-lg text-[rgba(10,10,10,0.8)] font-light mb-12">
+              Retrouvez les réponses aux questions les plus courantes.
+            </p>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm transition-all card-hover"
-            >
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
+            {/* Contact CTA */}
+            <div className="border border-black/10 p-6">
+              <div className="flex items-start gap-4">
+                <FiHelpCircle className="text-[var(--jaune-or)] mt-1 flex-shrink-0" />
+                <div>
+                  <div className="font-display-aptos text-base text-[var(--night)] mb-2">Vous avez d'autres questions ?</div>
+                  <div className="text-sm text-[rgba(10,10,10,0.6)] mb-4">Notre équipe est là pour vous accompagner</div>
+                  <a
+                    href="#contact"
+                    className="btn-primary text-[10px] font-bold tracking-[0.2em] uppercase"
+                  >
+                    Nous contacter
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <button
-                onClick={() => toggleItem(index)}
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-[var(--jaune-or-light)]/5 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="icon-badge text-[var(--night)] text-xl flex-shrink-0 mt-0.5">
-                    <FiHelpCircle />
-                  </div>
-                  <div>
-                    <h3 className="font-display-aptos text-lg text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors">
+          <div className="lg:col-span-8">
+            <div className="border-t border-black/10">
+              {faqs.map((faq, index) => (
+                <div
+                  key={index}
+                  className="border-b border-black/10"
+                >
+                  <button
+                    onClick={() => toggleItem(index)}
+                    className="w-full py-6 text-left flex items-center justify-between hover:text-[var(--jaune-or)] transition-colors group"
+                  >
+                    <h3 className="font-display-aptos text-xl text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors pr-8">
                       {faq.question}
                     </h3>
-                  </div>
-                </div>
-                <div className={`transform transition-transform duration-200 flex-shrink-0 ${
-                  openItems.has(index) ? 'rotate-180' : ''
-                }`}>
-                  <FiChevronDown className="w-5 h-5 text-[var(--jaune-or)]" />
-                </div>
-              </button>
+                    <div className={`transform transition-transform duration-200 flex-shrink-0 ${
+                      openItems.has(index) ? 'rotate-180' : ''
+                    }`}>
+                      <FiChevronDown className="w-5 h-5 text-[var(--jaune-or)]" />
+                    </div>
+                  </button>
 
-              {openItems.has(index) && (
-                <div className="px-6 pb-6 border-t border-[var(--jaune-or)]/25">
-                  <div className="pt-4">
-                    <p className="text-secondary leading-relaxed">{faq.answer}</p>
-                  </div>
+                  {openItems.has(index) && (
+                    <div className="pb-6">
+                      <p className="text-[rgba(10,10,10,0.8)] leading-relaxed font-light max-w-2xl">{faq.answer}</p>
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Contact CTA */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-4 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
-            <FiHelpCircle className="text-[var(--jaune-or)]" />
-            <div className="text-left">
-              <div className="font-display-aptos text-sm text-[var(--night)]">Vous avez d'autres questions ?</div>
-              <div className="text-xs text-secondary">Notre équipe est là pour vous accompagner</div>
-            </div>
-            <a
-              href="#contact"
-              className="btn-secondary font-display-aptos tracking-wide text-sm ml-4"
-            >
-              Nous contacter
-            </a>
           </div>
         </div>
       </div>

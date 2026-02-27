@@ -18,8 +18,12 @@ export const ServicesPage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden bg-[var(--white-smoke)]">
-            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"
+              alt="Services financiers"
+              className="w-full h-full object-cover opacity-40"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
@@ -55,10 +59,10 @@ export const ServicesPage = () => {
         <section id="services" ref={servicesOverviewRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-              <div className="lg:col-span-4">
+              <div className="lg:col-span-4 min-w-0">
                 <div className="sticky top-32">
                   <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Nos approches</span>
-                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  <h2 className="font-display-aptos text-4xl md:text-5xl leading-[1.05] mb-8 whitespace-normal break-words" style={{ hyphens: 'auto', wordBreak: 'break-word' }}>
                     Choisissez votre niveau d'accompagnement.
                   </h2>
                   <p className="text-white/60 leading-relaxed font-light text-lg mb-12">

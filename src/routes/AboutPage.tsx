@@ -24,7 +24,7 @@ export const AboutPage = () => {
         <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
           <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
             <img
-              src="/value_props.jpg"
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
               alt="Everest Finance Bureau"
               className="w-full h-full object-cover opacity-60 contrast-125"
             />

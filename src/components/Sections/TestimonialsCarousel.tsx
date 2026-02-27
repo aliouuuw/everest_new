@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
-import { FaQuoteLeft } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -202,35 +201,51 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)] relative">
-      {/* Subtle mauve ambient glow */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-25"
-        style={{
-          background: 'radial-gradient(ellipse 50% 50% at 80% 20%, var(--mauve-10) 0%, transparent 60%)',
-        }}
-      />
-      <div className="mx-auto max-w-6xl px-6 relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">{title}</span>
-          <h2 className="luxury-heading mt-3">Ils nous font confiance</h2>
-          <p className="luxury-subheading mt-5 pt-8">{subtitle}</p>
+    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white relative">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-16">
+          <div className="lg:col-span-5">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">{title}</span>
+            <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+              Ils nous font confiance.
+            </h2>
+            <p className="text-white/60 leading-relaxed font-light text-lg">
+              {subtitle}
+            </p>
+          </div>
+          <div className="lg:col-span-7">
+            {/* Trust Indicators */}
+            <div className="flex items-center gap-12 pt-8 border-t border-white/10">
+              <div>
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Clients satisfaits</div>
+              </div>
+              <div>
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Note moyenne</div>
+              </div>
+              <div>
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Recommandation</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative">
+        <div className="relative border-t border-white/10 pt-12">
           {/* Navigation Buttons */}
           {filteredTestimonials.length > itemsPerView && (
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--jaune-or)]/25 rounded-full shadow-lg hover:bg-[var(--jaune-or-light)]/10 transition-all"
+                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:border-[var(--jaune-or)] transition-all"
                 aria-label="Previous testimonials"
               >
                 <FiChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--jaune-or)]/25 rounded-full shadow-lg hover:bg-[var(--jaune-or-light)]/10 transition-all"
+                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:border-[var(--jaune-or)] transition-all"
                 aria-label="Next testimonials"
               >
                 <FiChevronRight className="w-5 h-5" />
@@ -252,42 +267,40 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                   key={testimonial.id}
                   className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3"
                 >
-                  <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover h-full">
-                    <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-
+                  <div className="group border border-white/10 p-8 h-full hover:border-[var(--jaune-or)]/50 transition-colors">
                     {/* Quote Icon */}
-                    <div className="flex items-center justify-between mb-4">
-                      <FaQuoteLeft className="text-2xl text-[var(--jaune-or)] opacity-60" />
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-8 h-px bg-[var(--jaune-or)]" />
                       {testimonial.service !== 'all' && (
-                        <span className="text-xs bg-[var(--jaune-or-light)]/20 text-[var(--jaune-or)] px-2 py-1 rounded-full">
+                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--jaune-or)]">
                           {getServiceLabel(testimonial.service)}
                         </span>
                       )}
                     </div>
 
                     {/* Rating */}
-                    <div className="flex items-center gap-1 mb-4">
+                    <div className="flex items-center gap-1 mb-6">
                       {renderStars(testimonial.rating)}
                     </div>
 
                     {/* Content */}
-                    <blockquote className="text-secondary text-sm leading-relaxed mb-6">
+                    <blockquote className="text-white/70 font-light leading-relaxed mb-8 text-lg">
                       "{testimonial.content}"
                     </blockquote>
 
                     {/* Author */}
-                    <div className="border-t border-[var(--jaune-or)]/25 pt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
-                          <span className="text-sm font-display-aptos text-[var(--jaune-or)]">
+                    <div className="border-t border-white/10 pt-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-white/5 flex items-center justify-center">
+                          <span className="text-lg font-display-aptos text-[var(--jaune-or)]">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                         <div>
-                          <div className="font-display-aptos text-sm text-[var(--night)]">
+                          <div className="font-display-aptos text-base text-white">
                             {testimonial.name}
                           </div>
-                          <div className="text-xs text-secondary">
+                          <div className="text-sm text-white/50">
                             {testimonial.role} • {testimonial.company}
                           </div>
                         </div>
@@ -301,41 +314,21 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
           {/* Dots Indicator */}
           {filteredTestimonials.length > itemsPerView && (
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-3 mt-12">
               {Array.from({ length: maxIndex + 1 }, (_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-1 transition-all ${
                     i === currentIndex
-                      ? 'bg-[var(--jaune-or)] w-6'
-                      : 'bg-[var(--jaune-or)]/30'
+                      ? 'bg-[var(--jaune-or)] w-8'
+                      : 'bg-white/30 w-4'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
             </div>
           )}
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--jaune-or)]/25">
-            <div className="text-center">
-              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
-              <div className="text-xs text-secondary">Clients satisfaits</div>
-            </div>
-            <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
-            <div className="text-center">
-              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
-              <div className="text-xs text-secondary">Note moyenne</div>
-            </div>
-            <div className="w-px h-8 bg-[var(--jaune-or)]/25" />
-            <div className="text-center">
-              <div className="font-display-aptos text-xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
-              <div className="text-xs text-secondary">Recommandation</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

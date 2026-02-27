@@ -137,120 +137,110 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   };
 
   const content = (
-    <div className={`${variant === 'modal' ? 'p-6' : 'mx-auto max-w-6xl px-6'}`}>
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <span className="kicker text-gradient-gold">Comparaison des services</span>
-        <h2 className="luxury-heading mt-3">Choisissez le service qui vous convient</h2>
-        <p className="luxury-subheading mt-5 pt-8">
-          Comparez nos trois offres pour trouver celle qui correspond à votre style d'investissement et à vos besoins.
-        </p>
+    <div className={`${variant === 'modal' ? 'p-6' : 'mx-auto max-w-[1600px] px-6 md:px-12'}`}>
+      <div className="mb-20">
+        <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Comparaison des services</span>
+        <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+          Choisissez le service qui vous convient.
+        </h2>
       </div>
 
       {/* Mobile Cards View */}
-      <div className="lg:hidden space-y-4">
+      <div className="lg:hidden space-y-8">
         {['discretionary', 'mandate', 'assisted'].map((service) => (
           <div
             key={service}
-            className={`relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
+            className={`border p-6 ${
               currentService === service
-                ? 'border-[var(--jaune-or)] bg-[var(--jaune-or-light)]/10'
-                : 'border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm'
+                ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)]/5'
+                : 'border-black/10'
             }`}
           >
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-6">
               {getServiceIcon(service)}
-              <h3 className="font-display-aptos text-lg">{getServiceTitle(service)}</h3>
+              <h3 className="font-display-aptos text-xl">{getServiceTitle(service)}</h3>
               {currentService === service && (
-                <span className="ml-auto text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
-                  Votre choix
+                <span className="ml-auto text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--night)] text-white px-3 py-1">
+                  Actif
                 </span>
               )}
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4 border-t border-black/10 pt-4">
               {serviceFeatures.slice(0, 6).map((feature) => (
                 <div key={feature.name} className="flex justify-between items-center py-2">
-                  <span className="text-sm text-secondary">{feature.name}</span>
+                  <span className="text-sm text-[rgba(10,10,10,0.6)]">{feature.name}</span>
                   <div className="flex items-center">
                     {renderFeatureValue((feature as any)[service], service)}
                   </div>
                 </div>
               ))}
             </div>
-
-            <div className="mt-6 pt-4 border-t border-[var(--jaune-or)]/25">
-              <button
-                className="btn-secondary font-display-aptos tracking-wide w-full text-center opacity-50 cursor-not-allowed"
-                disabled
-              >
-                Service intégré
-              </button>
-            </div>
           </div>
         ))}
       </div>
 
       {/* Desktop Table View */}
-      <div className="hidden lg:block overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-left p-4 font-display-aptos text-lg border-b border-[var(--jaune-or)]/25">
-                Fonctionnalités
-              </th>
+      <div className="hidden lg:block">
+        <div className="border-t border-black/10">
+          {/* Table Header */}
+          <div className="grid grid-cols-4 border-b border-black/10">
+            <div className="p-6 font-display-aptos text-lg text-[var(--night)]">
+              Fonctionnalités
+            </div>
+            {['discretionary', 'mandate', 'assisted'].map((service) => (
+              <div
+                key={service}
+                className={`p-6 text-center ${
+                  currentService === service ? 'bg-[var(--jaune-or)]/5' : ''
+                }`}
+              >
+                <div className="flex flex-col items-center gap-3">
+                  {getServiceIcon(service)}
+                  <span className="font-display-aptos text-base">{getServiceTitle(service)}</span>
+                  {currentService === service && (
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--night)] text-white px-3 py-1">
+                      Actif
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Table Body */}
+          {serviceFeatures.map((feature, index) => (
+            <div
+              key={feature.name}
+              className={`grid grid-cols-4 border-b border-black/10 ${
+                index % 2 === 0 ? 'bg-[var(--white-smoke)]/30' : ''
+              }`}
+            >
+              <div className="p-6 font-medium text-[var(--night)]">
+                {feature.name}
+              </div>
               {['discretionary', 'mandate', 'assisted'].map((service) => (
-                <th
+                <div
                   key={service}
-                  className={`p-4 text-center border-b border-[var(--jaune-or)]/25 ${
-                    currentService === service ? 'bg-[var(--jaune-or-light)]/10' : ''
+                  className={`p-6 text-center ${
+                    currentService === service ? 'bg-[var(--jaune-or)]/5' : ''
                   }`}
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    {getServiceIcon(service)}
-                    <span className="font-display-aptos text-base">{getServiceTitle(service)}</span>
-                    {currentService === service && (
-                      <span className="text-xs bg-[var(--jaune-or)] text-white px-2 py-1 rounded-full">
-                        Votre choix
-                      </span>
-                    )}
-                  </div>
-                </th>
+                  {renderFeatureValue((feature as any)[service], service)}
+                </div>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {serviceFeatures.map((feature, index) => (
-              <tr
-                key={feature.name}
-                className={index % 2 === 0 ? 'bg-[var(--white-smoke)]/50' : ''}
-              >
-                <td className="p-4 font-medium text-[var(--night)] border-b border-[var(--jaune-or)]/10">
-                  {feature.name}
-                </td>
-                {['discretionary', 'mandate', 'assisted'].map((service) => (
-                  <td
-                    key={service}
-                    className={`p-4 text-center border-b border-[var(--jaune-or)]/10 ${
-                      currentService === service ? 'bg-[var(--jaune-or-light)]/5' : ''
-                    }`}
-                  >
-                    {renderFeatureValue((feature as any)[service], service)}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-
-        </table>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Legend */}
-      <div className="mt-8 p-4 bg-[var(--white-smoke)]/80 rounded-xl border border-[var(--jaune-or)]/25">
-        <div className="flex items-start gap-2">
+      <div className="mt-12 p-6 border border-black/10 bg-[var(--white-smoke)]/30">
+        <div className="flex items-start gap-3">
           <FiInfo className="text-[var(--jaune-or)] mt-0.5 flex-shrink-0" />
-          <div className="text-sm text-secondary">
-            <p className="font-medium text-[var(--night)] mb-1">Note importante:</p>
-            <p>Les frais indiqués sont des fourchettes approximatives. Le montant exact dépend de votre profil d'investissement et du montant géré. Contactez-nous pour un devis personnalisé.</p>
+          <div className="text-sm text-[rgba(10,10,10,0.8)]">
+            <p className="font-display-aptos text-[var(--night)] mb-2">Note importante:</p>
+            <p className="font-light">Les frais indiqués sont des fourchettes approximatives. Le montant exact dépend de votre profil d'investissement et du montant géré. Contactez-nous pour un devis personnalisé.</p>
           </div>
         </div>
       </div>
@@ -289,7 +279,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--pure-white)]">
+    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)]">
       {content}
     </section>
   );

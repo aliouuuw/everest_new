@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { FiBarChart, FiEye, FiRefreshCw, FiStar, FiTrendingUp } from 'react-icons/fi'
+import { FiBarChart, FiEye, FiRefreshCw, FiStar } from 'react-icons/fi'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 import { useReveal } from '../components/Hooks/useReveal'
 import { LoadingSpinner } from '@/components/CMS/Shared'
@@ -213,34 +213,34 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
   return (
     <div
       ref={cardRef}
-      className="glass-card-dark glass-card-hover p-6"
+      className="border border-black/10 p-8"
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Capitalisation</div>
-          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Capitalisation</div>
+          <div className="font-display-aptos text-2xl text-[var(--night)]">
             {formatCurrency(stats.totalMarketCap)}
           </div>
-          <div className="text-emerald-400 text-sm mt-1">
+          <div className="text-green-700 text-sm mt-1">
             {formatPercent(stats.marketCapChange)}
           </div>
         </div>
         <div>
-          <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Volume 24h</div>
-          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Volume 24h</div>
+          <div className="font-display-aptos text-2xl text-[var(--night)]">
             {formatCurrency(stats.totalVolume)}
           </div>
         </div>
         <div>
-          <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Sociétés Cotées</div>
-          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Sociétés Cotées</div>
+          <div className="font-display-aptos text-2xl text-[var(--night)]">
             47
           </div>
         </div>
         <div>
-          <div className="text-secondary-dark text-xs uppercase tracking-wide mb-2">Indices BRVM</div>
-          <div className="font-display-aptos text-xl text-[var(--pure-white)] font-bold">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Indices BRVM</div>
+          <div className="font-display-aptos text-2xl text-[var(--night)]">
             BRVM 10
           </div>
         </div>
@@ -255,46 +255,46 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
   return (
     <div
       ref={rowRef}
-      className="glass-card-dark glass-card-hover p-4 hover:bg-[var(--night-20)] transition-all duration-200 cursor-pointer"
+      className="border-b border-black/10 py-4 hover:bg-[var(--white-smoke)]/30 transition-colors cursor-pointer"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="grid grid-cols-12 gap-4 items-center">
         {/* Rank & Favorite */}
         <div className="col-span-1 flex items-center gap-2">
-          <button className="text-[var(--pure-white)] hover:text-[var(--jaune-or)] transition-colors opacity-60 hover:opacity-100">
+          <button className="text-[var(--night)] hover:text-[var(--jaune-or)] transition-colors opacity-60 hover:opacity-100">
             <FiStar className="w-4 h-4" />
           </button>
-          <span className="text-secondary-dark font-mono text-sm">#{asset.rank}</span>
+          <span className="text-[rgba(10,10,10,0.5)] font-mono text-sm">#{asset.rank}</span>
         </div>
 
         {/* Name & Symbol */}
         <div className="col-span-3 flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)] rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-[var(--jaune-or)] flex items-center justify-center">
             <span className="text-[var(--night)] font-bold text-xs">{asset.symbol.slice(0, 3)}</span>
           </div>
           <div>
-            <div className="font-display-aptos text-[var(--pure-white)] font-medium">{asset.name}</div>
-            <div className="text-secondary-dark text-xs uppercase">{asset.symbol}</div>
+            <div className="font-display-aptos text-[var(--night)] font-medium">{asset.name}</div>
+            <div className="text-[rgba(10,10,10,0.5)] text-xs uppercase">{asset.symbol}</div>
           </div>
         </div>
 
         {/* Price */}
         <div className="col-span-2 text-right">
-          <div className="font-display-aptos text-[var(--pure-white)] font-medium">
+          <div className="font-display-aptos text-[var(--night)] font-medium">
             {formatPrice(asset.price)}
           </div>
         </div>
 
         {/* 24h Change */}
         <div className="col-span-2 text-right">
-          <div className={`inline-flex items-center gap-1 px-2 py-1 rounded text-sm font-medium ${
+          <div className={`inline-flex items-center gap-1 px-2 py-1 text-sm font-medium ${
             asset.changePercent24h >= 0
-              ? 'text-emerald-400 bg-emerald-400/10'
-              : 'text-red-400 bg-red-400/10'
+              ? 'text-green-700 bg-green-700/10'
+              : 'text-red-600 bg-red-600/10'
           }`}>
             {asset.changePercent24h >= 0 ?
-              <FaArrowUp className="w-3 h-3 text-emerald-400" /> :
-              <FaArrowDown className="w-3 h-3 text-red-400" />
+              <FaArrowUp className="w-3 h-3 text-green-700" /> :
+              <FaArrowDown className="w-3 h-3 text-red-600" />
             }
             {formatPercent(asset.changePercent24h)}
           </div>
@@ -302,7 +302,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* 24h High/Low */}
         <div className="col-span-2 text-right">
-          <div className="text-xs text-secondary-dark">
+          <div className="text-xs text-[rgba(10,10,10,0.5)]">
             <div>Max: {formatPrice(asset.high24h)}</div>
             <div>Min: {formatPrice(asset.low24h)}</div>
           </div>
@@ -310,10 +310,10 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* Market Cap */}
         <div className="col-span-2 text-right">
-          <div className="font-display-aptos text-[var(--pure-white)] font-medium">
+          <div className="font-display-aptos text-[var(--night)] font-medium">
             {formatCurrency(asset.marketCap)}
           </div>
-          <div className="text-secondary-dark text-xs">
+          <div className="text-[rgba(10,10,10,0.5)] text-xs">
             Vol: {formatCurrency(asset.volume24h)}
           </div>
         </div>
@@ -328,25 +328,25 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
   return (
     <div
       ref={cardRef}
-      className="glass-card-dark p-6"
+      className="border border-black/10 p-6"
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="flex items-center gap-2 mb-4">
-        <FiTrendingUp className="text-[var(--jaune-or)] w-5 h-5" />
-        <h3 className="font-display-aptos text-[var(--pure-white)] text-lg">En Tendance</h3>
+      <div className="flex items-center gap-2 mb-6">
+        <div className="w-8 h-px bg-[var(--jaune-or)]" />
+        <h3 className="font-display-aptos text-[var(--night)] text-lg">En Tendance</h3>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {assets.map((asset, index) => (
-          <div key={asset.symbol} className="flex items-center justify-between py-2">
+          <div key={asset.symbol} className="flex items-center justify-between py-2 border-b border-black/5 last:border-0">
             <div className="flex items-center gap-3">
-              <span className="text-secondary-dark font-mono text-sm">#{index + 1}</span>
+              <span className="text-[rgba(10,10,10,0.5)] font-mono text-sm">#{index + 1}</span>
               <div>
-                <div className="font-display-aptos text-[var(--pure-white)] text-sm font-medium">{asset.symbol}</div>
-                <div className="text-secondary-dark text-xs">{formatPrice(asset.price)}</div>
+                <div className="font-display-aptos text-[var(--night)] text-sm font-medium">{asset.symbol}</div>
+                <div className="text-[rgba(10,10,10,0.5)] text-xs">{formatPrice(asset.price)}</div>
               </div>
             </div>
             <div className={`text-sm font-medium ${
-              asset.changePercent >= 0 ? 'text-emerald-400' : 'text-red-400'
+              asset.changePercent >= 0 ? 'text-green-700' : 'text-red-600'
             }`}>
               {formatPercent(asset.changePercent)}
             </div>
@@ -435,61 +435,81 @@ export const BoursePage: React.FC = () => {
   }, [refreshData])
 
   return (
-    <div className="bg-[var(--night)] min-h-screen">
+    <div className="bg-[var(--pure-white)] min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal relative bg-gradient-to-b from-[var(--night)] to-[var(--night-20)]" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <span className="kicker text-gradient-gold">BRVM — Marché Actions</span>
-          <h1 className="luxury-heading-dark mt-3">Cours Actions Temps Réel</h1>
-          <p className="luxury-subheading-dark mt-5 leading-relaxed max-w-3xl mx-auto pt-8">
-            Données de marché en temps réel, cours et volumes de transaction BRVM.
-            Mise à jour toutes les 60 secondes avec les derniers mouvements.
-          </p>
-
-          {/* Market Status Indicator */}
-          <div className="flex items-center justify-center gap-6 mt-8 text-sm">
-            <div className="relative inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/20">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-40"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
-              </span>
-              <span className="text-emerald-400 font-semibold">Marché Ouvert</span>
+      <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10">
+        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80"
+            alt="Marché BRVM"
+            className="w-full h-full object-cover opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-8">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                  BRVM — Marché Actions
+                </span>
+              </div>
+              <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                Cours Actions Temps Réel.
+              </h1>
             </div>
-            <div className="text-secondary-dark">
-              Dernière mise à jour: {lastUpdated.toLocaleTimeString('fr-FR')}
+            <div className="lg:col-span-4 pb-4">
+              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-8 border-l border-[var(--jaune-or)] pl-6">
+                Données de marché en temps réel, cours et volumes de transaction BRVM.
+              </p>
+              {/* Market Status Indicator */}
+              <div className="flex items-center gap-4 text-sm">
+                <div className="relative inline-flex items-center gap-2 px-3 py-1.5 border border-green-700/20">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full bg-green-700 opacity-40"></span>
+                    <span className="relative inline-flex h-2.5 w-2.5 bg-green-700"></span>
+                  </span>
+                  <span className="text-green-700 font-semibold">Marché Ouvert</span>
+                </div>
+                <span className="text-[rgba(10,10,10,0.5)]">
+                  {lastUpdated.toLocaleTimeString('fr-FR')}
+                </span>
+                <button
+                  onClick={refreshData}
+                  disabled={isLoading}
+                  className="flex items-center gap-2 px-3 py-1 border border-black/10 hover:border-[var(--jaune-or)] transition-colors disabled:opacity-50"
+                  aria-label="Actualiser les données"
+                >
+                  <FiRefreshCw className={`w-4 h-4 text-[var(--night)] ${isLoading ? 'animate-spin' : ''}`} />
+                  <span className="text-xs font-medium text-[var(--night)]">Actualiser</span>
+                </button>
+              </div>
             </div>
-            <button
-              onClick={refreshData}
-              disabled={isLoading}
-              className="flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--jaune-or)]/10 hover:bg-[var(--jaune-or)]/20 transition-colors disabled:opacity-50 border border-[var(--jaune-or)]/20"
-              aria-label="Actualiser les données"
-            >
-              <FiRefreshCw className={`w-4 h-4 text-[var(--pure-white)] ${isLoading ? 'animate-spin' : ''}`} />
-              <span className="text-xs font-medium text-[var(--pure-white)]">Actualiser</span>
-            </button>
           </div>
         </div>
       </section>
 
       {/* Market Stats Overview */}
-      <section ref={statsSectionRef} className="reveal section-py-sm bg-[var(--night-20)] border-y border-[var(--night-20)]">
-        <div className="mx-auto max-w-6xl px-6">
+      <section ref={statsSectionRef} className="reveal py-12 border-b border-black/10">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <MarketStatsCard stats={marketStats} />
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="section-py">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <section className="py-24 md:py-40">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Main Asset List */}
             <div className="lg:col-span-3">
               <div ref={assetsSectionRef} className="reveal">
                 {/* Header with controls */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h2 className="text-2xl font-display-aptos font-bold text-[var(--pure-white)]">Cours des Actions BRVM</h2>
-                    <p className="text-secondary-dark mt-1">Données de marché temps réel pour les principales valeurs</p>
+                    <h2 className="font-display-aptos text-2xl text-[var(--night)]">Cours des Actions BRVM</h2>
+                    <p className="text-[rgba(10,10,10,0.5)] mt-1">Données de marché temps réel</p>
                   </div>
 
                   {/* Filter & Sort Controls */}
@@ -497,30 +517,30 @@ export const BoursePage: React.FC = () => {
                     <div className="flex gap-1">
                       <button
                         onClick={() => setFilterBy('all')}
-                        className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                        className={`px-3 py-1 text-sm font-medium transition-all border ${
                           filterBy === 'all'
-                            ? 'bg-[var(--jaune-or)] text-[var(--night)]'
-                            : 'bg-[var(--night-20)] text-secondary-dark hover:bg-[var(--night-10)]'
+                            ? 'bg-[var(--night)] text-white border-[var(--night)]'
+                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
                         }`}
                       >
                         Toutes
                       </button>
                       <button
                         onClick={() => setFilterBy('gainers')}
-                        className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                        className={`px-3 py-1 text-sm font-medium transition-all border ${
                           filterBy === 'gainers'
-                            ? 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30'
-                            : 'bg-[var(--night-20)] text-secondary-dark hover:bg-[var(--night-10)]'
+                            ? 'bg-green-700/10 text-green-700 border-green-700/30'
+                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
                         }`}
                       >
                         Gagnantes
                       </button>
                       <button
                         onClick={() => setFilterBy('losers')}
-                        className={`px-3 py-1 rounded text-sm font-medium transition-all ${
+                        className={`px-3 py-1 text-sm font-medium transition-all border ${
                           filterBy === 'losers'
-                            ? 'bg-red-400/20 text-red-400 border border-red-400/30'
-                            : 'bg-[var(--night-20)] text-secondary-dark hover:bg-[var(--night-10)]'
+                            ? 'bg-red-600/10 text-red-600 border-red-600/30'
+                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
                         }`}
                       >
                         Perdantes
@@ -530,8 +550,8 @@ export const BoursePage: React.FC = () => {
                 </div>
 
                 {/* Table Header */}
-                <div className="glass-card-dark p-4 mb-2">
-                  <div className="grid grid-cols-12 gap-4 text-xs font-medium text-secondary-dark uppercase tracking-wide">
+                <div className="border-t border-black/10 py-4 mb-0">
+                  <div className="grid grid-cols-12 gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)]">
                     <div className="col-span-1">#</div>
                     <div className="col-span-3">Société</div>
                     <div className="col-span-2 text-right">Cours</div>
@@ -545,7 +565,7 @@ export const BoursePage: React.FC = () => {
                 {isLoading ? (
                   <LoadingSpinner />
                 ) : (
-                  <div className="space-y-1">
+                  <div className="border-t border-black/10">
                     {filteredAssets.map((asset, index) => (
                       <CryptoAssetRow
                         key={asset.id}
@@ -559,44 +579,44 @@ export const BoursePage: React.FC = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* Trending */}
               <div ref={trendingSectionRef} className="reveal">
                 <TrendingCard assets={trendingAssets} />
               </div>
 
               {/* Market Insights */}
-              <div className="glass-card-dark p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <FiBarChart className="text-[var(--jaune-or)] w-5 h-5" />
-                  <h3 className="font-display-aptos text-[var(--pure-white)] text-lg">Analyse Marché</h3>
+              <div className="border border-black/10 p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-px bg-[var(--jaune-or)]" />
+                  <h3 className="font-display-aptos text-[var(--night)] text-lg">Analyse Marché</h3>
                 </div>
                 <div className="space-y-4 text-sm">
-                  <div className="flex justify-between items-center">
-                    <span className="text-secondary-dark">BRVM 10</span>
-                    <span className="text-emerald-400 font-medium">+2.45%</span>
+                  <div className="flex justify-between items-center py-2 border-b border-black/5">
+                    <span className="text-[rgba(10,10,10,0.6)]">BRVM 10</span>
+                    <span className="text-green-700 font-medium">+2.45%</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-secondary-dark">Volume Moyen</span>
-                    <span className="text-[var(--pure-white)]">1,8 Mds XOF</span>
+                  <div className="flex justify-between items-center py-2 border-b border-black/5">
+                    <span className="text-[rgba(10,10,10,0.6)]">Volume Moyen</span>
+                    <span className="text-[var(--night)]">1,8 Mds XOF</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-secondary-dark">Secteur Dominant</span>
-                    <span className="text-emerald-400">Banques</span>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-[rgba(10,10,10,0.6)]">Secteur Dominant</span>
+                    <span className="text-green-700">Banques</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Actions */}
-              <div className="glass-card-dark p-6">
-                <h3 className="font-display-aptos text-[var(--pure-white)] text-lg mb-4">Actions Rapides</h3>
+              <div className="border border-black/10 p-6">
+                <h3 className="font-display-aptos text-[var(--night)] text-lg mb-6">Actions Rapides</h3>
                 <div className="space-y-3">
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--jaune-or)] hover:bg-[var(--jaune-or-light)] text-[var(--night)] rounded-lg font-medium transition-colors">
-                    <FiEye className="w-4 h-4 text-[var(--night)]" />
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--jaune-or)] hover:bg-[var(--night)] text-[var(--night)] hover:text-white transition-colors font-medium">
+                    <FiEye className="w-4 h-4" />
                     Liste de Surveillance
                   </button>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--night-20)] hover:bg-[var(--night-10)] text-[var(--pure-white)] rounded-lg font-medium transition-colors border border-[var(--jaune-or)]/20">
-                    <FiBarChart className="w-4 h-4 text-[var(--pure-white)]" />
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-black/10 hover:border-[var(--jaune-or)] text-[var(--night)] transition-colors">
+                    <FiBarChart className="w-4 h-4" />
                     Portefeuille
                   </button>
                 </div>

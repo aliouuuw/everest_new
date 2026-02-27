@@ -156,7 +156,7 @@ export const Header: React.FC = () => {
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   // Pages with light backgrounds need immediate dark backdrop for nav contrast
-  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/gestion-libre', '/gestion-assistee', '/faq', '/publications'];
+  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
   const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
 
   // Hide header if authenticated and on dashboard, or if in admin portal
