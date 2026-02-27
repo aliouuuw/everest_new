@@ -163,7 +163,7 @@ export const HeroSectionMountain: React.FC = () => {
       </div>
 
       {/* ─── Metrics Bar ─── */}
-      <div className="absolute bottom-0 left-0 w-full z-20">
+      <div className="hidden bottom-0 left-0 w-full z-20">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
           <div
             className="border-t border-white/[0.06] grid grid-cols-1 md:grid-cols-3"
