@@ -44,6 +44,9 @@
   --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
   --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
+  /* Section Spacing Utilities */
+  --hero-py: clamp(7rem, 12vw, 9rem);
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -81,6 +84,14 @@ html {
 /* Prevent scroll restoration conflicts */
 html {
   scroll-restoration: manual;
+}
+
+.section-py {
+  @apply py-14 sm:py-18 lg:py-20;
+}
+
+.section-py-sm {
+  @apply py-12 sm:py-16;
 }
 
 /* Custom Utilities */
@@ -275,6 +286,15 @@ html {
   margin: 0 auto;
 }
 
+.luxury-subheading-left {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--night-60);
+  max-width: 38rem;
+}
+
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
   font-family: var(--font-display);
@@ -293,6 +313,15 @@ html {
   color: rgba(255, 255, 255, 0.6);
   max-width: 38rem;
   margin: 0 auto;
+}
+
+.luxury-subheading-dark-left {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 38rem;
 }
 
 /* Advanced Layout Utilities */

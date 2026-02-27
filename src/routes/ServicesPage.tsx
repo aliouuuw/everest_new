@@ -23,12 +23,12 @@ export const ServicesPage = () => {
           <div className="absolute inset-0" style={{ opacity: 0.06 }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
+          <div className="relative mx-auto max-w-6xl px-6" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
                 <span className="kicker text-gradient-gold">Services d'investissement</span>
                 <h1 className="luxury-heading mt-3">Votre partenaire pour investir sur la BRVM</h1>
-                <p className="luxury-subheading mt-5 leading-relaxed">
+                <p className="luxury-subheading-left mt-5 leading-relaxed">
                   Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style,
                   votre expérience et vos objectifs financiers.
                 </p>
@@ -85,7 +85,7 @@ export const ServicesPage = () => {
         </section>
 
         {/* Services Overview */}
-        <section id="services" ref={servicesOverviewRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--night)] transition-colors duration-500">
+        <section id="services" ref={servicesOverviewRef} className="reveal section-py bg-[var(--night)] transition-colors duration-500">
           <div className="mx-auto max-w-6xl px-6">
             {/* Section Header */}
             <div className="text-center max-w-3xl mx-auto mb-16">

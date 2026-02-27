@@ -437,7 +437,7 @@ export const BoursePage: React.FC = () => {
   return (
     <div className="bg-[var(--night)] min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal py-24 lg:py-28 relative bg-gradient-to-b from-[var(--night)] to-[var(--night-20)]">
+      <section ref={heroRef} className="reveal relative bg-gradient-to-b from-[var(--night)] to-[var(--night-20)]" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
         <div className="mx-auto max-w-6xl px-6 text-center">
           <span className="kicker text-gradient-gold">BRVM — Marché Actions</span>
           <h1 className="luxury-heading-dark mt-3">Cours Actions Temps Réel</h1>
@@ -472,14 +472,14 @@ export const BoursePage: React.FC = () => {
       </section>
 
       {/* Market Stats Overview */}
-      <section ref={statsSectionRef} className="reveal py-12 bg-[var(--night-20)] border-y border-[var(--night-20)]">
+      <section ref={statsSectionRef} className="reveal section-py-sm bg-[var(--night-20)] border-y border-[var(--night-20)]">
         <div className="mx-auto max-w-6xl px-6">
           <MarketStatsCard stats={marketStats} />
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-16">
+      <section className="section-py">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Main Asset List */}

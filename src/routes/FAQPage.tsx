@@ -87,7 +87,7 @@ export const FAQPage = () => {
   return (
     <div>
         {/* Hero: Compact Centered */}
-        <section ref={heroRef} className="reveal py-34 sm:py-28">
+        <section ref={heroRef} className="reveal" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
           <div className="mx-auto max-w-6xl px-6 text-center">
             <span className="kicker text-gradient-gold">Abécédaire & FAQ</span>
             <h1 className="luxury-heading mt-3">Comprendre nos services</h1>
@@ -96,7 +96,7 @@ export const FAQPage = () => {
         </section>
 
         {/* Q&A Section */}
-        <section className="py-14 sm:py-18">
+        <section className="section-py">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="font-display-aptos text-lg mb-4">Questions fréquentes</h2>
             <div ref={qaRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -112,7 +112,7 @@ export const FAQPage = () => {
         </section>
 
         {/* Abécédaire (Glossary) */}
-        <section className="py-14 sm:py-18">
+        <section className="section-py">
           <div className="mx-auto max-w-6xl px-6">
             <div className="flex flex-col items-center text-center">
               <h2 className="font-display-aptos text-lg mb-2">Abécédaire</h2>
@@ -185,7 +185,7 @@ export const FAQPage = () => {
         </section>
 
         {/* Contact CTA */}
-        <section className="py-14 sm:py-18">
+        <section className="section-py">
           <div className="mx-auto max-w-6xl px-6 text-center">
             <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
               <div className="text-secondary">Besoin d’aide supplémentaire ?</div>

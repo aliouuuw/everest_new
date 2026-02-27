@@ -10,22 +10,11 @@ export const Footer = () => {
     return null;
   }
 
-  const linkStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-primary)',
-    fontWeight: 300,
-    fontSize: '0.8rem',
-    lineHeight: 2.2,
-    color: 'rgba(255,255,255,0.4)',
+    const linkStyle: React.CSSProperties = {
     transition: 'color 0.3s',
   };
 
   const headingStyle: React.CSSProperties = {
-    fontFamily: 'var(--font-primary)',
-    fontWeight: 500,
-    fontSize: '0.7rem',
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    color: 'var(--jaune-or)',
     marginBottom: '1.25rem',
   };
 
@@ -38,18 +27,18 @@ export const Footer = () => {
           background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
         }}
       />
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20 relative z-10">
+      <div className="mx-auto max-w-6xl px-6 py-20 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
 
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto" style={{ filter: 'brightness(1.2)' }} />
-              <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.1rem', color: 'var(--pure-white)' }}>
+              <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto brightness-125" />
+              <span className="font-display-aptos text-[1.1rem] text-[var(--pure-white)]">
                 Everest Finance
               </span>
             </div>
-            <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.85rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.35)' }}>
+            <p className="text-secondary-dark text-[0.85rem] font-light leading-relaxed">
               Des idées et des valeurs au service de vos ambitions.
             </p>
             <div className="flex items-center gap-3 mt-6">
@@ -74,7 +63,7 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <div style={headingStyle}>Liens</div>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Liens</div>
             <ul>
               {[
                 { label: 'À propos', href: '#about' },
@@ -84,7 +73,7 @@ export const Footer = () => {
                 { label: 'Portail client', href: '#portal-preview' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--jaune-or)]">{l.label}</a>
+                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -92,7 +81,7 @@ export const Footer = () => {
 
           {/* Offres */}
           <div>
-            <div style={headingStyle}>Offres & services</div>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Offres & services</div>
             <ul>
               {[
                 { label: 'Marché des capitaux', href: '/marche-capitaux' },
@@ -102,7 +91,7 @@ export const Footer = () => {
                 { label: 'Gestion assistée', href: '/gestion-assistee' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="hover:!text-[var(--jaune-or)]">{l.label}</a>
+                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
                 </li>
               ))}
             </ul>
@@ -110,9 +99,9 @@ export const Footer = () => {
 
           {/* Contact */}
           <div>
-            <div style={headingStyle}>Contact</div>
-            <ul className="space-y-3">
-              <li style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.8rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.4)' }}>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Contact</div>
+            <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
+              <li>
                 18 Boulevard de la République,<br />Dakar, Sénégal
               </li>
               <li>
@@ -131,13 +120,12 @@ export const Footer = () => {
 
         {/* Bottom bar */}
         <div
-          className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}
+          className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[var(--pure-white)]/5 text-secondary-dark text-[0.7rem] font-light"
         >
-          <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)' }}>
+          <span className="opacity-70">
             &copy; {new Date().getFullYear()} Everest Finance SGI — Agrément CREPMF SGI/DA/2016/60
           </span>
-          <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'rgba(255,255,255,0.2)' }}>
+          <span className="opacity-60">
             Tous droits réservés
           </span>
         </div>

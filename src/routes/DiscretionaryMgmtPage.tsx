@@ -20,17 +20,17 @@ export const DiscretionaryMgmtPage = () => {
   return (
     <div>
         {/* Hero — Split pattern focused on approach */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
+        <section ref={heroRef} className="reveal relative overflow-hidden" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
           <div className="absolute inset-0 gradient-gold-subtle" />
           <div className="absolute inset-0" style={{ opacity: 0.06 }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
+          <div className="relative mx-auto max-w-6xl px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
-                <span className="kicker text-gradient-gold">Services — Gestion libre</span>
+                <span className="kicker text-gradient-gold">Services — Gestion sous-mandat</span>
                 <h1 className="luxury-heading mt-3">Pilotez vos investissements en toute simplicité</h1>
-                <p className="luxury-subheading mt-5 leading-relaxed">Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.</p>
+                <p className="luxury-subheading-left mt-5 leading-relaxed">Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
                   <a href="#packs" className="btn-primary font-display-aptos tracking-wide">Découvrir les packs</a>
                   <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Nous contacter</a>
@@ -81,7 +81,7 @@ export const DiscretionaryMgmtPage = () => {
         </section>
 
         {/* Approche & Univers d'investissement */}
-        <section ref={approachSectionRef} className="reveal py-14 sm:py-18 lg:py-20">
+        <section ref={approachSectionRef} className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Cadre</span>
@@ -140,7 +140,7 @@ export const DiscretionaryMgmtPage = () => {
         </section>
 
         {/* Packs */}
-        <section id="packs" ref={packsSectionRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--white-smoke)]">
+        <section id="packs" ref={packsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Packs</span>
@@ -171,7 +171,7 @@ export const DiscretionaryMgmtPage = () => {
         </section>
 
         {/* Avantages Clés */}
-        <section ref={advantagesSectionRef} className="reveal py-14 sm:py-18 lg:py-20">
+        <section ref={advantagesSectionRef} className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Avantages</span>
@@ -235,7 +235,7 @@ export const DiscretionaryMgmtPage = () => {
         </section>
 
         {/* Processus */}
-        <section ref={processSectionRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--white-smoke)]">
+        <section ref={processSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Processus</span>

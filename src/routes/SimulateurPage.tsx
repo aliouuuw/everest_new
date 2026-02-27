@@ -4,7 +4,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[var(--jaune-or-light)]/20 via-[var(--pure-white)] to-[var(--jaune-or-light)]/10">
+      <section className="bg-[var(--pure-white)]" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center max-w-3xl mx-auto">
             <span className="kicker text-gradient-gold">Outil de simulation</span>
@@ -23,7 +23,7 @@ export const SimulateurPage: React.FC = () => {
       <InvestmentCalculator />
 
       {/* Additional Information Section */}
-      <section className="py-16 bg-[var(--white-smoke)]/50">
+      <section className="section-py bg-[var(--white-smoke)]/50">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -33,7 +33,7 @@ export const SimulateurPage: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">1</span>
+                    <span className="text-[var(--pure-white)] text-sm font-bold">1</span>
                   </div>
                   <div>
                     <h3 className="font-display-aptos text-lg mb-2">Projections réalistes</h3>
@@ -45,7 +45,7 @@ export const SimulateurPage: React.FC = () => {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">2</span>
+                    <span className="text-[var(--pure-white)] text-sm font-bold">2</span>
                   </div>
                   <div>
                     <h3 className="font-display-aptos text-lg mb-2">Comparaison des services</h3>
@@ -57,7 +57,7 @@ export const SimulateurPage: React.FC = () => {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-[var(--jaune-or)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">3</span>
+                    <span className="text-[var(--pure-white)] text-sm font-bold">3</span>
                   </div>
                   <div>
                     <h3 className="font-display-aptos text-lg mb-2">Planification personnalisée</h3>

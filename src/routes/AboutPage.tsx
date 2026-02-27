@@ -46,14 +46,13 @@ export const AboutPage = () => {
             />
           </div>
 
-          <div className="relative">
-            <div className="mx-auto max-w-6xl px-6 py-34 md:py-32">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="relative mx-auto max-w-6xl px-6" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 {/* Left: Text */}
                 <div>
                   <span className="kicker text-gradient-gold">À propos</span>
                   <h1 className="luxury-heading mt-3">Des idées et des valeurs au service de vos ambitions</h1>
-                  <p className="luxury-subheading mt-5 pt-8">
+                  <p className="luxury-subheading-left mt-5 pt-8">
                     Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client pour créer de la valeur durable sur la BRVM.
                   </p>
 
@@ -88,13 +87,12 @@ export const AboutPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </section>
 
         {/* Mission & Vision */}
-        <section ref={missionVisionRef} id="mission-vision" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
+        <section ref={missionVisionRef} id="mission-vision" className="reveal section-py-sm bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
           <div className="mx-auto max-w-6xl px-6">
             <div ref={missionVisionGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
@@ -122,7 +120,7 @@ export const AboutPage = () => {
         </section>
 
         {/* Philosophie d'investissement */}
-        <section ref={philosophieRef} id="philosophie" className="reveal py-14 sm:py-18">
+        <section ref={philosophieRef} id="philosophie" className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Philosophie d'investissement</h2>
             <div ref={philosophieGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -163,7 +161,7 @@ export const AboutPage = () => {
         />
 
         {/* Histoire */}
-        <section ref={histoireRef} id="histoire" className="reveal py-14 sm:py-18">
+        <section ref={histoireRef} id="histoire" className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Notre histoire</h2>
             <div className="relative">
@@ -188,7 +186,7 @@ export const AboutPage = () => {
         </section>
 
         {/* Équipe dirigeante */}
-        <section ref={equipeRef} id="equipe" className="reveal py-14 sm:py-18">
+        <section ref={equipeRef} id="equipe" className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Équipe dirigeante</h2>
             <div ref={equipeGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -246,7 +244,7 @@ export const AboutPage = () => {
         </section>
 
         {/* Conformité & Réglementation */}
-        <section ref={conformiteRef} id="conformite" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
+        <section ref={conformiteRef} id="conformite" className="reveal section-py-sm bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="luxury-heading mb-6">Conformité & Réglementation</h2>
             <div ref={conformiteGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">

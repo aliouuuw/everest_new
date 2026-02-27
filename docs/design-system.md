@@ -2,195 +2,114 @@
 
 ## Foundations
 
-### Color Palette (Source of Truth)
+### Color Palette (Source of Truth: `src/styles.css`)
 ```css
-/* Brand Core Colors */
 :root {
+  /* Brand Core Colors */
   --pure-white: #FFFFFF;
   --white-smoke: #f5f5f5;      /* subtle background */
-  --timberwolf: #e0e0e0;       /* borders/dividers */
+  --timberwolf: #dcdad2;       /* borders/dividers */
   --line-soft: #eeeeee;        /* hairline dividers */
+  --cream: #faf6ef;            /* warmer alternate background */
 
-  --gold-metallic: #b7a47a;    /* brand accent */
-  --gold-light: #e9e1cb;       /* light accent */
-  --gold-dark: #8c7a52;        /* dark accent */
-
-  --night: #0f1115;            /* primary ink */
-  --night-80: rgba(15, 17, 21, 0.8);
-
-  /* Extended Palette */
-  --success-green: #10b981;
-  --error-red: #ef4444;
-
-  /* Opacity Variations */
-  --white-smoke-80: rgba(245, 245, 245, 0.8);
-  --night-10: rgba(15, 17, 21, 0.08);
-  --night-20: rgba(15, 17, 21, 0.16);
-  --gold-metallic-20: rgba(199, 164, 105, 0.2);
-  --gold-metallic-10: rgba(199, 164, 105, 0.1);
+  /* Brand Accents */
+  --jaune-or: #ca942f;         /* Primary brand accent */
+  --mauve: #461D4C;            /* Secondary brand accent */
+  
+  /* Ink / Text */
+  --night: #0a0a0a;            /* Primary ink */
+  --night-80: rgba(10, 10, 10, 0.8);
+  --night-60: rgba(10, 10, 10, 0.6);
+  --night-20: rgba(10, 10, 10, 0.2);
+  --night-10: rgba(10, 10, 10, 0.1);
 }
 ```
 
-- Backgrounds: `--pure-white` (base), `--white-smoke` (panels), `--night` (rare dark accents)
-- Text: `--night` primary, `--night-80` secondary
-- Accents: `--gold-metallic` family only for brand emphasis
+- Backgrounds: `--pure-white` (base), `--white-smoke` (panels), `--cream` (alternate), `--night` (dark sections)
+- Text: `--night` primary, `--night-80` secondary, `--night-60` tertiary
+- Accents: `--jaune-or` as primary action and highlight color; `--mauve` as secondary accent (tags, hover states, badges)
 
 ### Fonts
 ```css
 :root {
-  --font-primary: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-display: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 ```
 
-Tailwind is used for sizing/spacing; custom classes provide hierarchy and tone.
+- **Primary**: Clean sans-serif used for body text and ui elements.
+- **Display**: Elegant serif (`Fraunces`) used exclusively for large luxury headings.
+- **Display Aptos**: Medium-weight sans-serif for component headers and structural text.
 
-## Utilities
+## Typography
 
-### Glassmorphism
+### Semantic Classes
+```css
+/* Structural text */
+.kicker { text-transform: uppercase; letter-spacing: 0.25em; font-weight: 500; font-size: 0.65rem; font-family: var(--font-primary); }
+.numeric-tabular { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
+
+/* Large editorial headings */
+.luxury-heading { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 1.0; letter-spacing: -0.01em; color: var(--night); }
+.luxury-heading-dark { /* Same but for pure-white text on dark backgrounds */ }
+
+/* Subheadings for hero sections */
+.luxury-subheading { font-family: var(--font-primary); font-weight: 300; font-size: clamp(0.95rem, 1.5vw, 1.1rem); line-height: 1.75; color: var(--night-60); max-width: 38rem; margin: 0 auto; }
+.luxury-subheading-left { /* Left aligned variant */ }
+
+/* Body text */
+.text-primary { font-family: var(--font-primary); line-height: 1.6; }
+.text-secondary { font-family: var(--font-primary); line-height: 1.5; color: var(--night-80); }
+.text-secondary-dark { color: rgba(255, 255, 255, 0.7); }
+```
+
+## Utilities & Effects
+
+### Spacing & Layout
+- Vertical Section Padding: `.section-py` (`py-14 sm:py-18 lg:py-20`) for standard sections.
+- Smaller Section Padding: `.section-py-sm` (`py-12 sm:py-16`) for secondary strips.
+- Hero Top Padding: `--hero-py: clamp(7rem, 12vw, 9rem)` applied to hero wrappers via inline style.
+- Standard Container: `max-w-6xl mx-auto px-6`.
+
+### Glassmorphism & Materials
 ```css
 @utility glassmorphism {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px) saturate(120%);
   border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 ```
+
+- Light Cards: `.stat-card` - White/smoke backgrounds with subtle gold borders and hover lifts.
+- Dark Cards: `.glass-card-dark` - Night backgrounds with deep blur and subtle metallic borders.
 
 ### Brand Gradients
 ```css
-@utility gradient-gold {
-  background: linear-gradient(120deg, var(--gold-light) 0%, var(--gold-metallic) 55%, var(--gold-dark) 100%);
-}
-@utility gradient-gold-subtle {
-  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 75%);
-}
-@utility text-gradient-gold {
-  background: linear-gradient(135deg, var(--gold-metallic) 0%, var(--gold-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+@utility gradient-gold { background: linear-gradient(120deg, var(--jaune-or-light), var(--jaune-or)); }
+@utility gradient-gold-subtle { background: linear-gradient(180deg, var(--jaune-or-10) 0%, transparent 75%); }
+@utility text-gradient-gold { background: linear-gradient(135deg, var(--jaune-or) 0%, var(--jaune-or) 100%); background-clip: text; color: transparent; }
 ```
-
-### Animations
-```css
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-@keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-@keyframes slideInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
-@keyframes slideInFromLeft { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
-@keyframes slideInFromRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
-@keyframes tickerScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-
-.ticker-scroll { animation: tickerScroll 45s linear infinite; }
-.ticker-scroll-paused { animation: tickerScroll 45s linear infinite; animation-play-state: paused; }
-
-:root {
-  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
-  --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-```
-
-- Respect `prefers-reduced-motion`; long-running ambient animations are subtle.
-
-## Typography
-
-### Classes
-```css
-.kicker { text-transform: uppercase; letter-spacing: 0.18em; font-weight: 600; font-size: 0.7rem; }
-.heading-display { font-weight: 500; line-height: 1.08; letter-spacing: -0.02em; }
-.brand-heading { font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; }
-.numeric-tabular { font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
-
-.luxury-heading { font-weight: 300; font-size: clamp(2.25rem, 6vw, 4.25rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--night); }
-.luxury-subheading { font-weight: 400; font-size: clamp(0.95rem, 1.6vw, 1.125rem); line-height: 1.7; color: var(--night-80); max-width: 42rem; margin: 0 auto; }
-
-.text-primary { line-height: 1.6; }
-.text-secondary { line-height: 1.5; color: var(--night-80); }
-```
-
-### Usage
-- Kicker: small uppercase descriptor above headings
-- Luxury heading: hero headline tone
-- Numeric tabular: use for prices/index values
 
 ## Components
 
 ### Buttons
-- Primary: `.btn-primary` dark ink on light, subtle gold shimmer on hover
-- Secondary: `.btn-secondary` bordered, soft backgrounds on hover
+- **Primary**: `.btn-primary` (Dark ink bg, white text, hover lift)
+- **Secondary**: `.btn-secondary` (Bordered night, hover night bg)
+- **Dark Mode Primary**: `.btn-primary-dark` (Gold bg, white text)
+- **Dark Mode Secondary**: `.btn-secondary-dark` (Bordered gold, gold text)
 
-```html
-<button class="btn-primary font-display tracking-wide">Call to action</button>
-<button class="btn-secondary font-display tracking-wide">Secondary</button>
-```
+Focus states use accessible gold-tinted double ring shadows.
 
-Focus style uses gold-tinted shadows.
-```css
-.btn-primary:focus-visible { box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic); outline: none; }
-.btn-secondary:focus-visible { box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic); outline: none; }
-```
+## Animations
 
-### Cards
-```html
-<div class="stat-card">...</div>
-```
-- Light background with gold-tinted border and soft shadow on hover.
-
-### Header
-- Fixed, centered container with `glassmorphism`
-- Desktop: nav with hover dropdowns
-- Mobile: hamburger toggles a blurred panel menu
-
-### Hero
-- Background: subtle `gradient-gold-subtle` and animated `MountainWireframe`
-- Content: `kicker`, `luxury-heading`, `luxury-subheading`, primary/secondary buttons
-- Extras: bottom-left license text, centered minimal scroll indicator
-
-## Icons
-- Library: `react-icons` (Font Awesome glyphs)
-- Current usage: `FaUser` in header; expand as needed
-
-```bash
-npm install react-icons
-```
-
-```tsx
-import { FaUser } from 'react-icons/fa';
-```
-
-## Layout & Spacing
-- Tailwind handles spacing and breakpoints
-- Common container: `max-w-6xl mx-auto px-4/5/6`
-- Hero grid: single column on mobile, two columns on large screens
-
-## Responsive Behavior
-- Header nav hidden on `<lg`, mobile menu enabled
-- Hero is full viewport height across breakpoints
-
-## Accessibility
-- Focus: visible focus rings on interactive elements (gold-tinted shadows)
-- Motion: honor `prefers-reduced-motion`
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-```
-
-- Contrast: meet WCAG AA — text 4.5:1, large text 3:1, UI components 3:1
+- Sub-components use GSAP or CSS `transition-all duration-300` for hover effects.
+- Scroll reveal relies on `.reveal` and `.reveal-stagger` classes with defined easings.
+- Standard easing curve: `--ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);`
+- Reduced motion preferences are strictly respected via media queries.
 
 ## Implementation Notes
-- Tailwind v4 is used alongside custom utilities defined in `:root`
-- Tokens live in `src/styles.css` and should be the single source of truth
 
----
-
-Design System Version: 1.1  
-Last Updated: 2025-08-25  
-Maintained by: Design Team
+- Tailwind v4 is used alongside custom utilities defined in `styles.css`.
+- The single source of truth for all brand colors, typography logic, and complex component shadows is `src/styles.css`.
+- Do not use arbitrary Tailwind text colors for basic elements; stick to `var(--night)`, `var(--night-80)`, and `var(--pure-white)`.

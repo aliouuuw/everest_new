@@ -8,7 +8,7 @@ export const CEOMessagePage = () => {
   return (
   <div>
       {/* Hero: Compact Centered */}
-      <section ref={heroRef} className="reveal py-34 sm:py-28">
+      <section ref={heroRef} className="reveal" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
         <div className="mx-auto max-w-6xl px-6 text-center">
           <span className="kicker text-gradient-gold">Mot du Directeur Général</span>
           <h1 className="luxury-heading mt-3">Construire la confiance, créer la valeur</h1>
@@ -17,7 +17,7 @@ export const CEOMessagePage = () => {
       </section>
 
       {/* Lettre du DG */}
-      <section id="message">
+      <section id="message" className="section-py">
         <div className="mx-auto max-w-4xl px-6">
           <div className="relative">
             {/* Decorative elements */}

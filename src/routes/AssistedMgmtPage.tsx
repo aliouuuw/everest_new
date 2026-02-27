@@ -21,17 +21,17 @@ export const AssistedMgmtPage = () => {
   return (
     <div>
         {/* Hero — Split pattern with advisor angle */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
+        <section ref={heroRef} className="reveal relative overflow-hidden" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
           <div className="absolute inset-0 gradient-gold-subtle" />
           <div className="absolute inset-0" style={{ opacity: 0.06 }}>
             <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6 py-34 md:py-20 sm:py-28 lg:py-32">
+          <div className="relative mx-auto max-w-6xl px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
                 <span className="kicker text-gradient-gold">Services — Gestion assistée</span>
                 <h1 className="luxury-heading mt-3">Décider avec un conseiller à vos côtés</h1>
-                <p className="luxury-subheading mt-5 leading-relaxed">Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.</p>
+                <p className="luxury-subheading-left mt-5 leading-relaxed">Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.</p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
                   <a href="#marche" className="btn-primary font-display-aptos tracking-wide">Comment ça marche</a>
                   <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Parler à un conseiller</a>
@@ -58,7 +58,7 @@ export const AssistedMgmtPage = () => {
         </section>
 
         {/* Comment ça marche (3 steps) */}
-        <section id="marche" ref={stepsSectionRef} className="reveal py-14 sm:py-18 lg:py-20">
+        <section id="marche" ref={stepsSectionRef} className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Processus</span>
@@ -98,7 +98,7 @@ export const AssistedMgmtPage = () => {
         </section>
 
         {/* Outils & accompagnement (2 cards) */}
-        <section ref={toolsSectionRef} className="reveal py-14 sm:py-18 lg:py-20 bg-[var(--white-smoke)]">
+        <section ref={toolsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Outils & accompagnement</span>
@@ -110,21 +110,21 @@ export const AssistedMgmtPage = () => {
                 <div className="font-display-aptos text-lg md:text-xl mb-1">Analyses & alertes</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Notes régulières, signaux de marché et alertes personnalisées pour ne rien manquer.</p>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80">Accès aux publications et à un flux d'alertes</div>
+                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)]">Accès aux publications et à un flux d'alertes</div>
               </div>
               <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
                 <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
                 <div className="font-display-aptos text-lg md:text-xl mb-1">Échanges avec un conseiller</div>
                 <p className="text-secondary text-sm md:text-base leading-relaxed">Points de marché, simulations et idées d'allocation en direct avec votre interlocuteur.</p>
                 <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[rgba(10, 10, 10, 0.8)]/80 flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
+                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)] flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Avantages Clés */}
-        <section ref={benefitsSectionRef} className="reveal py-14 sm:py-18 lg:py-20">
+        <section ref={benefitsSectionRef} className="reveal section-py">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Avantages</span>
@@ -188,7 +188,7 @@ export const AssistedMgmtPage = () => {
         </section>
 
         {/* Nos Conseillers */}
-        <section ref={advisorsSectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
+        <section ref={advisorsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
           <div className="mx-auto max-w-6xl px-6">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Équipe</span>
@@ -239,7 +239,7 @@ export const AssistedMgmtPage = () => {
                   <p className="text-secondary text-sm mb-4">{advisor.description}</p>
 
                   <div className="border-t border-[var(--jaune-or)]/25 pt-4">
-                    <div className="text-xs text-[rgba(10, 10, 10, 0.8)]/80 font-medium mb-2">Spécialisations</div>
+                    <div className="text-xs text-[var(--night-80)] font-medium mb-2">Spécialisations</div>
                     <div className="flex flex-wrap gap-1">
                       {advisor.specializations.map((spec) => (
                         <span
