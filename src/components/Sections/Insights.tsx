@@ -4,7 +4,7 @@ import { useReveal } from "../Hooks/useReveal";
 import { api } from "../../../convex/_generated/api";
 import { FiArrowRight } from "react-icons/fi";
 
-type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
+type PublicationCategory = "revues-hebdo" | "revues-mensuelles";
 
 type PublicationItem = {
   title: string;
@@ -19,9 +19,6 @@ const CATEGORY_LABELS: Record<PublicationCategory | typeof ALL_LABEL, string> = 
   [ALL_LABEL]: "Tout",
   "revues-hebdo": "Revues hebdo",
   "revues-mensuelles": "Revues mensuelles",
-  "teaser-dividende": "Dividendes",
-  "marches": "Marchés",
-  "analyses": "Analyses",
 };
 
 export const Insights: React.FC = () => {
@@ -52,7 +49,7 @@ export const Insights: React.FC = () => {
   }, [publications]);
 
   const categories: Array<PublicationCategory | typeof ALL_LABEL> = useMemo(
-    () => [ALL_LABEL, "revues-hebdo", "revues-mensuelles", "teaser-dividende", "marches", "analyses"],
+    () => [ALL_LABEL, "revues-hebdo", "revues-mensuelles"],
     []
   );
 
