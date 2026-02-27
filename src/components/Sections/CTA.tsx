@@ -15,9 +15,24 @@ export const CTA: React.FC<{
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-36 overflow-hidden section-bg-mauve"
+      className="reveal relative py-24 md:py-36 overflow-hidden"
       id="contact"
+      style={{ background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 50%, #2a1025 100%)' }}
     >
+      {/* Dramatic gold-mauve gradient orbs */}
+      <div
+        className="absolute top-0 left-0 w-[60%] h-[80%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-30) 0%, var(--jaune-or-10) 30%, transparent 60%)' }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-[50%] h-[60%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-15) 0%, var(--mauve-10) 40%, transparent 60%)' }}
+      />
+      {/* Gradient noise texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+      />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
           
@@ -40,13 +55,19 @@ export const CTA: React.FC<{
               }}
             >
               Prêts à franchir{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              <em style={{ 
+                fontStyle: 'italic', 
+                background: 'linear-gradient(135deg, var(--jaune-or) 0%, #e8c96a 50%, var(--mauve) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
                 un cap ?
               </em>
             </h2>
             <div
-              className="h-[1px] w-24 mt-10 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
+              className="h-[2px] w-32 mt-10 mb-8"
+              style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
             />
             <p
               className="max-w-md"
@@ -66,7 +87,11 @@ export const CTA: React.FC<{
           <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
             <a
               href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 border border-[var(--jaune-or)]/40 transition-all duration-500 hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10"
+              className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 border transition-all duration-500 hover:shadow-[0_0_30px_rgba(202,148,47,0.3)]"
+              style={{ 
+                borderColor: 'rgba(202,148,47,0.4)',
+                background: 'linear-gradient(135deg, rgba(202,148,47,0.1) 0%, transparent 100%)'
+              }}
             >
               <span
                 className="text-[12px] tracking-[0.2em] uppercase"

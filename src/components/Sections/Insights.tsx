@@ -54,12 +54,23 @@ export const Insights: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative overflow-hidden"
-      style={{ background: 'var(--night)' }}
+      style={{ background: 'linear-gradient(180deg, var(--night) 0%, #0f0a10 100%)' }}
     >
-      {/* Subtle mauve atmosphere — top left */}
+      {/* Dual mauve-gold gradient atmosphere */}
       <div
-        className="absolute top-0 left-0 w-[45%] h-[60%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-20) 0%, transparent 65%)' }}
+        className="absolute top-0 left-0 w-[55%] h-[70%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-25) 0%, var(--mauve-10) 40%, transparent 70%)' }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-[40%] h-[50%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-10) 0%, transparent 60%)' }}
+      />
+      {/* Gradient orb accent */}
+      <div
+        className="absolute top-1/2 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 blur-3xl -translate-y-1/2"
+        style={{
+          background: 'radial-gradient(circle, var(--mauve-20) 0%, var(--jaune-or-05) 50%, transparent 70%)',
+        }}
       />
 
       {/* Section header strip */}
@@ -89,7 +100,13 @@ export const Insights: React.FC = () => {
             }}
           >
             Restez informé{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>des marchés.</em>
+            <em style={{ 
+              fontStyle: 'italic', 
+              background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>des marchés.</em>
           </span>
         </div>
 

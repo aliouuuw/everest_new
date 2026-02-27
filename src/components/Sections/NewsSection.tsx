@@ -45,17 +45,22 @@ export const NewsSection: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative py-24 md:py-32 overflow-hidden"
-      style={{ background: 'var(--cream)' }}
+      style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
     >
-      {/* Subtle mauve gradient accent top-left */}
+      {/* Subtle mauve-gold gradient atmosphere */}
       <div
-        className="absolute top-0 left-0 w-[40%] h-[30%] pointer-events-none"
+        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none opacity-30"
         style={{
-          background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at top right, var(--mauve-08) 0%, transparent 60%)',
         }}
       />
-      
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+      <div
+        className="absolute bottom-0 left-0 w-1/3 h-1/3 pointer-events-none opacity-20"
+        style={{
+          background: 'radial-gradient(ellipse at bottom left, var(--jaune-or-08) 0%, transparent 50%)',
+        }}
+      />
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div className="max-w-xl">
@@ -76,7 +81,13 @@ export const NewsSection: React.FC = () => {
               }}
             >
               Dernières{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--mauve)' }}>
+              <em style={{ 
+                fontStyle: 'italic', 
+                background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
                 informations.
               </em>
             </h2>

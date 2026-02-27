@@ -171,11 +171,18 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
       className="reveal relative py-28 md:py-36 overflow-hidden"
       style={{ background: 'var(--pure-white)' }}
     >
-      {/* Mauve-to-gold gradient atmosphere */}
+      {/* Dual mauve-gold gradient atmosphere */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 50% 40% at 70% 0%, rgba(70,29,76,0.06) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 20% 100%, rgba(202,148,47,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 50% at 20% 30%, var(--mauve-05) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 85% 70%, var(--jaune-or-05) 0%, transparent 50%)',
+        }}
+      />
+      {/* Gradient orb accent */}
+      <div
+        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full pointer-events-none opacity-20 blur-3xl"
+        style={{
+          background: 'radial-gradient(circle, var(--mauve-10) 0%, var(--jaune-or-05) 40%, transparent 70%)',
         }}
       />
 
@@ -199,7 +206,14 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             }}
           >
             Calculez vos{' '}
-            <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--mauve)' }}>
+            <em style={{ 
+              fontWeight: 300, 
+              fontStyle: 'italic', 
+              background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
               projections.
             </em>
           </h2>
@@ -407,10 +421,14 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   </div>
                 </div>
 
-                {/* Avg return highlight */}
-                <div className="mt-8 p-6 rounded-xl" style={{ background: 'var(--gold-pale)', border: '1px solid rgba(202,148,47,0.2)' }}>
+                {/* Avg return highlight with gradient */}
+                <div className="mt-8 p-6 rounded-xl relative overflow-hidden" style={{ background: 'var(--gold-pale)', border: '1px solid rgba(202,148,47,0.2)' }}>
+                  <div 
+                    className="absolute inset-0 opacity-30 pointer-events-none"
+                    style={{ background: 'linear-gradient(135deg, var(--jaune-or-20) 0%, var(--mauve-10) 100%)' }}
+                  />
                   <span
-                    className="block mb-2"
+                    className="block mb-2 relative z-10"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--jaune-or)' }}
                   >
                     Rendement annuel moyen estimé

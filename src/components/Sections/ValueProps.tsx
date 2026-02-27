@@ -14,28 +14,28 @@ export const ValueProps: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative overflow-hidden"
-      style={{ background: 'var(--white-smoke)' }}
+      style={{ background: 'linear-gradient(135deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
     >
+      {/* Subtle mauve atmosphere top-right */}
+      <div
+        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none opacity-40"
+        style={{
+          background: 'radial-gradient(ellipse at top right, var(--mauve-10) 0%, transparent 70%)',
+        }}
+      />
+
       {/* Full-bleed two-panel split — light themed */}
       <div className="flex flex-col lg:flex-row min-h-[80vh]">
 
         {/* LEFT PANEL — Cream, stat wall */}
         <div
           className="relative lg:w-[42%] flex flex-col justify-between px-8 md:px-14 lg:px-16 pt-20 pb-16 lg:pt-28 lg:pb-24"
-          style={{ background: 'var(--cream)' }}
+          style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--timberwolf)/30 100%)' }}
         >
-          {/* Subtle mauve-to-gold gradient overlay */}
+          {/* Vertical gold-to-mauve gradient rule */}
           <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse 80% 60% at 20% 80%, rgba(70,29,76,0.04) 0%, transparent 50%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(202,148,47,0.06) 0%, transparent 60%)',
-            }}
-          />
-          
-          {/* Vertical gold rule */}
-          <div
-            className="absolute top-0 left-0 w-[2px] h-full z-10"
-            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 20%, var(--jaune-or) 80%, transparent)' }}
+            className="absolute top-0 left-0 w-[3px] h-full"
+            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 30%, var(--mauve) 70%, transparent)' }}
           />
 
           <div>
@@ -51,8 +51,8 @@ export const ValueProps: React.FC = () => {
               {stats.map((s, i) => (
                 <div
                   key={s.label}
-                  className="py-8 lg:py-10 flex items-baseline gap-4"
-                  style={{ borderBottom: i < stats.length - 1 ? '1px solid var(--timberwolf)' : 'none' }}
+                  className="py-8 lg:py-10 flex items-baseline gap-4 group"
+                  style={{ borderBottom: i < stats.length - 1 ? '1px solid rgba(220, 218, 210, 0.5)' : 'none' }}
                 >
                   <span
                     style={{
@@ -61,7 +61,10 @@ export const ValueProps: React.FC = () => {
                       fontSize: 'clamp(4rem, 7vw, 6.5rem)',
                       lineHeight: 0.9,
                       letterSpacing: '-0.03em',
-                      color: 'var(--mauve)',
+                      background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                     }}
                   >
                     {s.value}
@@ -101,8 +104,8 @@ export const ValueProps: React.FC = () => {
           {/* Bottom credential strip */}
           <div className="mt-12 flex items-center gap-3">
             <span
-              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ background: 'var(--jaune-or)' }}
+              className="w-2 h-2 rounded-full flex-shrink-0"
+              style={{ background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)' }}
             />
             <span
               style={{
@@ -119,12 +122,26 @@ export const ValueProps: React.FC = () => {
           </div>
         </div>
 
-        {/* RIGHT PANEL — White-smoke, manifesto text */}
+        {/* Gradient divider between panels */}
+        <div 
+          className="hidden lg:block w-[1px] self-stretch"
+          style={{ background: 'linear-gradient(to bottom, transparent, var(--mauve-20) 50%, transparent)' }}
+        />
+
+        {/* RIGHT PANEL — White-smoke with mauve gradient accent */}
         <div
           ref={rightRef}
           className="reveal lg:w-[58%] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-20 lg:py-28 relative overflow-hidden"
           style={{ background: 'var(--white-smoke)' }}
         >
+          {/* Mauve-gold gradient orb */}
+          <div
+            className="absolute -top-20 -right-20 w-80 h-80 rounded-full pointer-events-none opacity-30 blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, var(--mauve-20) 0%, var(--jaune-or-10) 50%, transparent 70%)',
+            }}
+          />
+
           <div className="relative z-10 max-w-xl">
             {/* Oversized Fraunces quote/manifesto */}
             <h2
@@ -141,7 +158,10 @@ export const ValueProps: React.FC = () => {
               <em
                 style={{
                   fontStyle: 'italic',
-                  color: 'var(--mauve)',
+                  background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
                 }}
               >
                 confiance durable.
@@ -149,8 +169,8 @@ export const ValueProps: React.FC = () => {
             </h2>
 
             <div
-              className="my-10 h-[1px] w-16"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
+              className="my-10 h-[2px] w-24"
+              style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
             />
 
             <p
@@ -168,7 +188,7 @@ export const ValueProps: React.FC = () => {
               avec la rigueur d'une institution et la réactivité d'un partenaire dédié.
             </p>
 
-            {/* Three pillars — horizontal strip */}
+            {/* Three pillars — horizontal strip with gradient borders */}
             <div className="mt-14 grid grid-cols-3 gap-0">
               {[
                 { label: 'Sécurité', sub: 'Agrément CREPMF' },
@@ -178,14 +198,21 @@ export const ValueProps: React.FC = () => {
                 <div
                   key={p.label}
                   className="pr-6"
-                  style={{ borderLeft: i > 0 ? '1px solid var(--timberwolf)' : 'none', paddingLeft: i > 0 ? '1.5rem' : 0 }}
+                  style={{ 
+                    borderLeft: i > 0 ? '1px solid transparent' : 'none', 
+                    paddingLeft: i > 0 ? '1.5rem' : 0,
+                    background: i > 0 ? 'linear-gradient(to bottom, transparent, var(--timberwolf) 50%, transparent) 0 0 / 1px 100% no-repeat' : 'none'
+                  }}
                 >
                   <div
                     style={{
                       fontFamily: 'var(--font-display-aptos)',
                       fontWeight: 500,
                       fontSize: '0.95rem',
-                      color: 'var(--night)',
+                      background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       marginBottom: '0.3rem',
                     }}
                   >
