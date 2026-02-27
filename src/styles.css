@@ -22,13 +22,19 @@
   --jaune-or-30: rgba(202, 148, 47, 0.3);
   --jaune-or-20: rgba(202, 148, 47, 0.2);
   --jaune-or-10: rgba(202, 148, 47, 0.1);
+  --mauve-80: rgba(70, 29, 76, 0.8);
+  --mauve-60: rgba(70, 29, 76, 0.6);
+  --mauve-40: rgba(70, 29, 76, 0.4);
   --mauve-30: rgba(70, 29, 76, 0.3);
+  --mauve-20: rgba(70, 29, 76, 0.2);
+  --mauve-15: rgba(70, 29, 76, 0.15);
   --mauve-10: rgba(70, 29, 76, 0.1);
+  --mauve-05: rgba(70, 29, 76, 0.05);
   
   /* Typography - Modern Dynamic Luxury */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Fraunces', 'Georgia', serif;
-  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   
   /* Backgrounds */
   --cream: #faf6ef;
@@ -236,6 +242,13 @@ html {
   line-height: 1.1;
 }
 
+.font-display-aptos {
+  font-family: var(--font-display-aptos);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
 .font-primary {
   font-family: var(--font-primary);
   font-weight: 400;
@@ -244,7 +257,7 @@ html {
 
 /* Luxury text treatments */
 .luxury-heading {
-  font-family: var(--font-display-aptos);
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
@@ -264,7 +277,7 @@ html {
 
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
-  font-family: var(--font-display-aptos);
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;

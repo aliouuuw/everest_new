@@ -171,11 +171,11 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
       className="reveal relative py-28 md:py-36 overflow-hidden"
       style={{ background: 'var(--night)' }}
     >
-      {/* Subtle top gold glow */}
+      {/* Dual radial glow (mauve + jaune-or) */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 40% 30% at 70% 0%, rgba(202,148,47,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 50% 40% at 70% 0%, var(--mauve-20) 0%, rgba(202,148,47,0.06) 50%, transparent 80%)',
         }}
       />
 
@@ -408,7 +408,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 </div>
 
                 {/* Avg return highlight */}
-                <div className="mt-8 p-6" style={{ background: 'rgba(202,148,47,0.06)', border: '1px solid rgba(202,148,47,0.12)' }}>
+                <div className="mt-8 p-6" style={{ background: 'var(--mauve-05)', border: '1px solid var(--mauve-20)', borderLeft: '3px solid var(--mauve)' }}>
                   <span
                     className="block mb-2"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--jaune-or)' }}

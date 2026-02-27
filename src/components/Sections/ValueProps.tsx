@@ -22,14 +22,6 @@ export const ValueProps: React.FC = () => {
       className="reveal relative py-28 md:py-36"
       style={{ background: 'var(--cream)' }}
     >
-      {/* Subtle mauve ambient glow */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-50"
-        style={{
-          background: 'radial-gradient(ellipse 50% 50% at 80% 50%, var(--mauve-10) 0%, transparent 70%)',
-        }}
-      />
-
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
         {/* Editorial two-column layout */}
@@ -46,7 +38,7 @@ export const ValueProps: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-display-aptos)',
-                fontWeight: 400,
+                fontWeight: 500,
                 fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
                 lineHeight: 1.0,
                 letterSpacing: '-0.01em',
@@ -54,15 +46,15 @@ export const ValueProps: React.FC = () => {
               }}
             >
               Exécution rigoureuse,{' '}
-              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              <em style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
                 confiance durable.
               </em>
             </h2>
 
             {/* Gold rule */}
             <div
-              className="h-[1px] w-16 mt-8 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
+              className="h-[1px] w-20 mt-8 mb-8"
+              style={{ background: 'linear-gradient(90deg, var(--mauve), var(--jaune-or), transparent)' }}
             />
 
             <p
@@ -99,22 +91,25 @@ export const ValueProps: React.FC = () => {
             {features.map((f, i) => (
               <div
                 key={f.title}
-                className="group py-8 md:py-10 flex items-start gap-6 md:gap-10"
+                className="group py-8 md:py-10 flex items-start gap-6 md:gap-10 transition-all duration-300 hover:bg-[var(--mauve-05)]"
                 style={{
                   borderTop: i === 0 ? '1px solid var(--timberwolf)' : 'none',
                   borderBottom: '1px solid var(--timberwolf)',
+                  borderLeft: '3px solid transparent',
                 }}
+                onMouseEnter={(e) => e.currentTarget.style.borderLeftColor = 'var(--mauve)'}
+                onMouseLeave={(e) => e.currentTarget.style.borderLeftColor = 'transparent'}
               >
                 {/* Number */}
                 <span
                   className="shrink-0 mt-1"
                   style={{
-                    fontFamily: 'var(--font-display-aptos)',
+                    fontFamily: 'var(--font-display)',
                     fontWeight: 300,
                     fontSize: '2rem',
                     lineHeight: 1,
                     color: 'var(--jaune-or)',
-                    opacity: 0.5,
+                    opacity: 0.35,
                   }}
                 >
                   {f.number}
@@ -125,7 +120,7 @@ export const ValueProps: React.FC = () => {
                     className="mb-2"
                     style={{
                       fontFamily: 'var(--font-display-aptos)',
-                      fontWeight: 500,
+                      fontWeight: 600,
                       fontSize: '1.5rem',
                       lineHeight: 1.15,
                       color: 'var(--night)',

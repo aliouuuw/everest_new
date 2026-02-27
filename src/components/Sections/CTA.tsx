@@ -21,9 +21,9 @@ export const CTA: React.FC<{
     >
       {/* Centered multi-color radial glow incorporating mauve and jaune-or */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-60"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 60% 50% at 50% 50%, var(--mauve-10) 0%, rgba(202,148,47,0.05) 40%, transparent 80%)',
+          background: 'radial-gradient(ellipse 60% 50% at 50% 50%, var(--mauve-15) 0%, rgba(202,148,47,0.08) 40%, transparent 80%)',
         }}
       />
 

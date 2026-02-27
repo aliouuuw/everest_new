@@ -83,11 +83,11 @@ export const Services: React.FC = () => {
       id="services"
       style={{ background: 'var(--night)' }}
     >
-      {/* Subtle dual radial glow (mauve and jaune-or) */}
+      {/* Dual radial glow (mauve and jaune-or) */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-70"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 60% 60% at 30% 0%, var(--mauve-10) 0%, rgba(202,148,47,0.05) 40%, transparent 80%)',
+          background: 'radial-gradient(ellipse 70% 60% at 25% 0%, var(--mauve-15) 0%, rgba(202,148,47,0.08) 45%, transparent 80%)',
         }}
       />
 
@@ -123,22 +123,25 @@ export const Services: React.FC = () => {
             <a
               key={s.title}
               href={s.href}
-              className="group relative py-10 md:py-12 md:px-10 first:md:pl-0 last:md:pr-0 flex flex-col transition-colors duration-500 hover:bg-white/[0.02]"
+              className="group relative py-10 md:py-12 md:px-10 first:md:pl-0 last:md:pr-0 flex flex-col transition-all duration-500 hover:bg-white/[0.02] hover:border-l-[var(--mauve)]"
               style={{
                 borderTop: '1px solid rgba(255,255,255,0.06)',
                 borderRight: i < services.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
+                borderLeft: '2px solid transparent',
               }}
+              onMouseEnter={(e) => e.currentTarget.style.borderLeftColor = 'var(--mauve)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderLeftColor = 'transparent'}
             >
               {/* Roman numeral */}
               <span
                 className="mb-6"
                 style={{
-                  fontFamily: 'var(--font-display-aptos)',
+                  fontFamily: 'var(--font-display)',
                   fontWeight: 300,
                   fontSize: '1.1rem',
                   color: 'var(--jaune-or)',
-                  opacity: 0.5,
+                  opacity: 0.4,
                 }}
               >
                 {s.number}

@@ -155,8 +155,8 @@ export const ClientPortalPreview: React.FC = () => {
                     key={i}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-default ${
                       item.active
-                        ? 'bg-[var(--night)] text-[var(--pure-white)]'
-                        : 'hover:bg-[var(--white-smoke)] text-secondary'
+                        ? 'bg-[var(--night)] text-[var(--pure-white)] border-l-2 border-l-[var(--mauve)]'
+                        : 'hover:bg-[var(--white-smoke)] text-secondary border-l-2 border-l-transparent'
                     }`}
                   >
                     <span className="opacity-80">{item.icon}</span>

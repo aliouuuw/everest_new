@@ -68,14 +68,6 @@ export const Insights: React.FC = () => {
       className="reveal relative py-28 md:py-36"
       style={{ background: 'var(--cream)' }}
     >
-      {/* Subtle mauve ambient glow */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          background: 'radial-gradient(ellipse 60% 50% at 20% 30%, var(--mauve-10) 0%, transparent 60%)',
-        }}
-      />
-
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
         {/* Header row */}
@@ -90,7 +82,7 @@ export const Insights: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-display-aptos)',
-                fontWeight: 400,
+                fontWeight: 500,
                 fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
                 lineHeight: 1.0,
                 letterSpacing: '-0.01em',
@@ -98,7 +90,7 @@ export const Insights: React.FC = () => {
               }}
             >
               Restez informé{' '}
-              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              <em style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
                 des marchés.
               </em>
             </h2>
@@ -121,7 +113,7 @@ export const Insights: React.FC = () => {
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase' as const,
                     color: isActive ? 'var(--night)' : 'var(--night-60)',
-                    borderBottom: isActive ? '1px solid var(--jaune-or)' : '1px solid transparent',
+                    borderBottom: isActive ? '2px solid var(--mauve)' : '1px solid transparent',
                   }}
                   aria-pressed={isActive}
                 >
@@ -179,10 +171,10 @@ export const Insights: React.FC = () => {
 
                 {/* Title */}
                 <h3
-                  className="mb-3 group-hover:text-[var(--jaune-or)] transition-colors duration-300"
+                  className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300"
                   style={{
                     fontFamily: 'var(--font-display-aptos)',
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: '1.35rem',
                     lineHeight: 1.2,
                     color: 'var(--night)',
@@ -208,7 +200,7 @@ export const Insights: React.FC = () => {
 
                 {/* Read more */}
                 <span
-                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--mauve)] transition-colors duration-300"
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
                 >
                   Lire
