@@ -1,5 +1,4 @@
-import { FiHeadphones, FiHelpCircle, FiMessageCircle, FiPhone, FiSliders, FiUserCheck } from 'react-icons/fi'
-import { FaLightbulb } from 'react-icons/fa'
+import { FiArrowDown } from 'react-icons/fi'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
 import { PerformanceComparison } from '../components/Sections/PerformanceComparison'
@@ -10,268 +9,230 @@ import { useReveal } from '../components/Hooks/useReveal'
 export const AssistedMgmtPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const stepsSectionRef = useReveal<HTMLElement>()
-  const stepsGridRef = useReveal<HTMLDivElement>()
   const toolsSectionRef = useReveal<HTMLElement>()
-  const toolsGridRef = useReveal<HTMLDivElement>()
   const advisorsSectionRef = useReveal<HTMLElement>()
-  const advisorsGridRef = useReveal<HTMLDivElement>()
-  const benefitsSectionRef = useReveal<HTMLElement>()
-  const benefitsGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div>
-        {/* Hero — Split pattern with advisor angle */}
-        <section ref={heroRef} className="reveal relative overflow-hidden" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+    <div className="bg-[var(--pure-white)] text-[var(--night)]">
+        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
+        <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden bg-[var(--white-smoke)]">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <span className="kicker text-gradient-gold">Services — Gestion assistée</span>
-                <h1 className="luxury-heading mt-3">Décider avec un conseiller à vos côtés</h1>
-                <p className="luxury-subheading-left mt-5 leading-relaxed">Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.</p>
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#marche" className="btn-primary font-display-aptos tracking-wide">Comment ça marche</a>
-                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Parler à un conseiller</a>
+          
+          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+              <div className="md:col-span-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                    Services — Gestion assistée
+                  </span>
+                </div>
+                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                  Décider avec un conseiller à vos côtés.
+                </h1>
+              </div>
+              
+              <div className="md:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                  Vous gardez la main sur les décisions, nous apportons analyses, recommandations et suivi pour investir sereinement.
+                </p>
+                <a href="#marche" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                  <span>Comment ça marche</span>
+                  <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 2. Comment ça marche (Processus) — Editorial List ─── */}
+        <section id="marche" ref={stepsSectionRef} className="reveal py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Processus</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  Un cadre clair.
+                </h2>
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
+                  Un processus simple, pensé pour vous conseiller sans vous déposséder de la décision.
+                </p>
+              </div>
+              
+              <div className="lg:col-span-7">
+                <div className="border-t border-black/10">
+                  <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
+                    <div className="font-display-aptos text-2xl text-[var(--jaune-or)]/50 shrink-0">01.</div>
+                    <div>
+                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                        Diagnostic initial
+                      </h3>
+                      <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                        Besoins, objectifs, contraintes et horizon clarifiés.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
+                    <div className="font-display-aptos text-2xl text-[var(--jaune-or)]/50 shrink-0">02.</div>
+                    <div>
+                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                        Recommandations
+                      </h3>
+                      <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                        Listes d'actions ou obligations avec rationales et niveaux.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
+                    <div className="font-display-aptos text-2xl text-[var(--jaune-or)]/50 shrink-0">03.</div>
+                    <div>
+                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                        Décision & suivi
+                      </h3>
+                      <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                        Vous validez, nous exécutons et assurons le reporting.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
-                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--jaune-or-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/80 grid place-content-center">
-                  <div className="flex items-center gap-3 text-secondary">
-                    <div className="relative shrink-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                        <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                          <FiHeadphones className="text-base md:text-lg" />
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 3. Outils & Avantages — Dark Grid ─── */}
+        <section ref={toolsSectionRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Valeur ajoutée</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                    Le meilleur des deux mondes.
+                  </h2>
+                  <p className="text-white/60 leading-relaxed font-light text-lg">
+                    Gardez le contrôle de vos décisions tout en bénéficiant de l'expertise d'un conseiller.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Analyses & alertes
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Notes régulières, signaux de marché et alertes personnalisées pour ne rien manquer.
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Échanges avec un conseiller
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Points de marché, simulations et idées d'allocation en direct.
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Décisions souveraines
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Vous validez chaque recommandation avant exécution.
+                    </p>
+                  </div>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Expertise accessible
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Conseils d'experts sans frais de gestion élevés.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 4. Équipe — List Layout ─── */}
+        <section ref={advisorsSectionRef} className="reveal py-24 md:py-40 bg-[var(--white-smoke)] border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Équipe</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  Rencontrez nos conseillers.
+                </h2>
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
+                  Des experts passionnés à votre service pour vous accompagner dans vos décisions d'investissement.
+                </p>
+              </div>
+              <div className="lg:col-span-7">
+                <ul className="border-t border-black/10">
+                  <li className="py-10 border-b border-black/10">
+                    <div className="flex flex-col sm:flex-row gap-6">
+                      <div className="w-16 h-16 bg-[var(--night)] text-white flex items-center justify-center font-display-aptos text-xl shrink-0">MD</div>
+                      <div>
+                        <div className="font-display-aptos text-2xl mb-1 text-[var(--night)]">Marie-Louise Diop</div>
+                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase mb-4">Conseillère Senior • 12 ans d'expérience</div>
+                        <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed mb-4">Spécialiste des stratégies d'investissement à long terme pour les particuliers.</p>
+                        <div className="flex gap-2 text-xs">
+                          <span className="border border-black/20 px-2 py-1">Actions BRVM</span>
+                          <span className="border border-black/20 px-2 py-1">Retraite</span>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
-                    <div className="font-display-aptos">Accompagnement personnalisé</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Comment ça marche (3 steps) */}
-        <section id="marche" ref={stepsSectionRef} className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Processus</span>
-              <h2 className="luxury-heading mt-3">Comment ça marche</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Un cadre simple, pensé pour vous conseiller sans vous déposséder de la décision.</p>
-            </div>
-            <div ref={stepsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-12">
-              {[
-                { step: '01', title: 'Diagnostic initial', desc: 'Besoins, objectifs, contraintes et horizon clarifiés.', icon: FiHelpCircle },
-                { step: '02', title: 'Recommandations', desc: 'Listes d\'actions ou obligations avec rationales et niveaux.', icon: FiSliders },
-                { step: '03', title: 'Décision & suivi', desc: 'Vous validez, nous exécutons et assurons le reporting.', icon: FiUserCheck },
-              ].map((s) => (
-                <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="flex items-start justify-between">
-                    <span className="text-xs font-medium tracking-wider text-[rgba(10, 10, 10, 0.8)]/80">Étape</span>
-                    <span className="numeric-tabular text-sm px-2 py-1 rounded-md border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/60">{s.step}</span>
-                  </div>
-                  <div className="flex items-start gap-5 md:gap-6 mt-3">
-                    <div className="relative shrink-0">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                        <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                          <s.icon />
+                  </li>
+                  <li className="py-10 border-b border-black/10">
+                    <div className="flex flex-col sm:flex-row gap-6">
+                      <div className="w-16 h-16 bg-[var(--night)] text-white flex items-center justify-center font-display-aptos text-xl shrink-0">AF</div>
+                      <div>
+                        <div className="font-display-aptos text-2xl mb-1 text-[var(--night)]">Amadou Faye</div>
+                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase mb-4">Conseiller Principal • 15 ans d'expérience</div>
+                        <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed mb-4">Expert en analyse de marché et en construction de portefeuilles équilibrés.</p>
+                        <div className="flex gap-2 text-xs">
+                          <span className="border border-black/20 px-2 py-1">Analyse technique</span>
+                          <span className="border border-black/20 px-2 py-1">Diversification</span>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
                     </div>
-                    <div>
-                      <div className="font-display-aptos text-lg md:text-xl mb-1">{s.title}</div>
-                      <p className="text-secondary text-sm md:text-base leading-relaxed">{s.desc}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Outils & accompagnement (2 cards) */}
-        <section ref={toolsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Outils & accompagnement</span>
-              <h2 className="luxury-heading mt-3">Des moyens concrets pour décider</h2>
-            </div>
-            <div ref={toolsGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="font-display-aptos text-lg md:text-xl mb-1">Analyses & alertes</div>
-                <p className="text-secondary text-sm md:text-base leading-relaxed">Notes régulières, signaux de marché et alertes personnalisées pour ne rien manquer.</p>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)]">Accès aux publications et à un flux d'alertes</div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="font-display-aptos text-lg md:text-xl mb-1">Échanges avec un conseiller</div>
-                <p className="text-secondary text-sm md:text-base leading-relaxed">Points de marché, simulations et idées d'allocation en direct avec votre interlocuteur.</p>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <div className="mt-3 text-xs md:text-sm text-[var(--night-80)] flex items-center gap-2"><FiMessageCircle className="opacity-80" />Canaux: email, téléphone, visio</div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Avantages Clés */}
-        <section ref={benefitsSectionRef} className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Avantages</span>
-              <h2 className="luxury-heading mt-3">Le meilleur des deux mondes</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Gardez le contrôle de vos décisions tout en bénéficiant de l'expertise d'un conseiller.</p>
-            </div>
-            <div ref={benefitsGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiUserCheck />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Décisions souveraines</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Vous validez chaque recommandation avant exécution.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FaLightbulb />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Expertise accessible</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Conseils d'experts sans frais de gestion élevés.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiPhone />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Support réactif</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Échanges réguliers et assistance quand vous en avez besoin.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ─── Other Components (We'll wrap them in borders to fit the theme for now) ─── */}
+        <div className="border-b border-black/10">
+          <ServiceComparison currentService="assisted" />
+        </div>
 
-        {/* Nos Conseillers */}
-        <section ref={advisorsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Équipe</span>
-              <h2 className="luxury-heading mt-3">Rencontrez nos conseillers</h2>
-              <p className="luxury-subheading mt-5 pt-8">Des experts passionnés à votre service pour vous accompagner dans vos décisions d'investissement.</p>
-            </div>
-            <div ref={advisorsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-              {[
-                {
-                  name: 'Marie-Louise Diop',
-                  role: 'Conseillère Senior',
-                  experience: '12 ans d\'expérience',
-                  specializations: ['Actions BRVM', 'Stratégies défensives', 'Retraite'],
-                  description: 'Spécialiste des stratégies d\'investissement à long terme pour les particuliers.'
-                },
-                {
-                  name: 'Amadou Faye',
-                  role: 'Conseiller Principal',
-                  experience: '15 ans d\'expérience',
-                  specializations: ['Marchés émergents', 'Analyse technique', 'Diversification'],
-                  description: 'Expert en analyse de marché et en construction de portefeuilles équilibrés.'
-                },
-                {
-                  name: 'Fatima Sall',
-                  role: 'Conseillère Patrimoniale',
-                  experience: '10 ans d\'expérience',
-                  specializations: ['Immobilier', 'Private Equity', 'Succession'],
-                  description: 'Accompagne les familles dans leur stratégie patrimoniale globale.'
-                },
-              ].map((advisor) => (
-                <div key={advisor.name} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
+        <div className="border-b border-black/10">
+          <TestimonialsCarousel service="assisted" />
+        </div>
 
-                  {/* Avatar */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 rounded-full bg-[var(--jaune-or-light)]/30 flex items-center justify-center">
-                      <span className="text-lg font-display-aptos text-[var(--jaune-or)]">
-                        {advisor.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="font-display-aptos text-lg text-[var(--night)]">{advisor.name}</div>
-                      <div className="text-sm text-secondary">{advisor.role}</div>
-                      <div className="text-xs text-[var(--jaune-or)] font-medium">{advisor.experience}</div>
-                    </div>
-                  </div>
+        <div className="border-b border-black/10">
+          <PerformanceComparison />
+        </div>
 
-                  <p className="text-secondary text-sm mb-4">{advisor.description}</p>
+        <div className="border-b border-black/10">
+          <InvestmentCalculator />
+        </div>
 
-                  <div className="border-t border-[var(--jaune-or)]/25 pt-4">
-                    <div className="text-xs text-[var(--night-80)] font-medium mb-2">Spécialisations</div>
-                    <div className="flex flex-wrap gap-1">
-                      {advisor.specializations.map((spec) => (
-                        <span
-                          key={spec}
-                          className="text-xs bg-[var(--jaune-or-light)]/20 text-[var(--jaune-or)] px-2 py-1 rounded-full"
-                        >
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Service Comparison */}
-        <ServiceComparison currentService="assisted" />
-
-        {/* Testimonials */}
-        <TestimonialsCarousel service="assisted" />
-
-        {/* Performance Comparison */}
-        <PerformanceComparison />
-
-        {/* Investment Calculator */}
-        <InvestmentCalculator />
-
-        {/* FAQ */}
-        <ServiceFAQ service="assisted" />
-
+        <div>
+          <ServiceFAQ service="assisted" />
+        </div>
     </div>
   )
 }

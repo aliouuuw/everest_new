@@ -1,9 +1,15 @@
-import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
-import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
-import { StatsSection } from '../components/Sections/StatsSection'
 
 export const AboutPage = () => {
+  const heroRef = useReveal<HTMLElement>()
+  const missionRef = useReveal<HTMLElement>()
+  const philosophieRef = useReveal<HTMLElement>()
+  const metricsRef = useReveal<HTMLElement>()
+  const histoireRef = useReveal<HTMLElement>()
+  const equipeRef = useReveal<HTMLElement>()
+  const conformiteRef = useReveal<HTMLElement>()
+
   const timelineItems = [
     { year: '2013', text: "Création d'Everest Finance SGI à Dakar." },
     { year: '2016', text: 'Licence CREPMF SGI/DA/2016/60 obtenue.' },
@@ -12,292 +18,280 @@ export const AboutPage = () => {
     { year: '2024', text: 'Consolidation du leadership régional sur la BRVM.' },
   ]
 
-  // Sub-navigation removed from hero to create a cleaner, more distinctive intro
-
-  // Reveal refs to align interactions with home
-  const heroRef = useReveal<HTMLElement>()
-  const missionVisionRef = useReveal<HTMLElement>()
-  const missionVisionGridRef = useReveal<HTMLDivElement>()
-  const philosophieRef = useReveal<HTMLElement>()
-  const philosophieGridRef = useReveal<HTMLDivElement>()
-
-  const histoireRef = useReveal<HTMLElement>()
-  const histoireListRef = useGsapStepAnimation()
-  const equipeRef = useReveal<HTMLElement>()
-  const equipeGridRef = useReveal<HTMLDivElement>()
-  const conformiteRef = useReveal<HTMLElement>()
-  const conformiteGridRef = useReveal<HTMLDivElement>()
-
-
-
   return (
-    <div>
-        {/* Hero */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
-          {/* Background treatments */}
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
-                backgroundSize: '64px 64px'
-              }}
+    <div className="bg-[var(--pure-white)] text-[var(--night)]">
+        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
+        <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+            <img
+              src="/value_props.jpg"
+              alt="Everest Finance Bureau"
+              className="w-full h-full object-cover opacity-60 contrast-125"
             />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
+          
+          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+              <div className="md:col-span-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                    À propos
+                  </span>
+                </div>
+                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                  Des idées et des valeurs au service de vos ambitions
+                </h1>
+              </div>
+              
+              <div className="md:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                  Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client.
+                </p>
+                <a href="#mission" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                  <span>Notre mission</span>
+                  <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <div className="relative mx-auto max-w-6xl px-6" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                {/* Left: Text */}
-                <div>
-                  <span className="kicker text-gradient-gold">À propos</span>
-                  <h1 className="luxury-heading mt-3">Des idées et des valeurs au service de vos ambitions</h1>
-                  <p className="luxury-subheading-left mt-5 pt-8">
-                    Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client pour créer de la valeur durable sur la BRVM.
+        {/* ─── 2. Mission & Vision — Editorial List ─── */}
+        <section ref={missionRef} id="mission" className="reveal py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Notre raison d'être</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  Mission & Vision
+                </h2>
+              </div>
+              
+              <div className="lg:col-span-7">
+                <div className="border-t border-black/10">
+                  <div className="group py-10 border-b border-black/10">
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                      Notre mission
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                      Proposer des solutions d'investissement performantes et responsables, fondées sur la transparence, l'expertise et la proximité.
+                    </p>
+                  </div>
+                  <div className="group py-10 border-b border-black/10">
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 group-hover:text-[var(--jaune-or)] transition-colors">
+                      Notre vision
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                      Devenir un partenaire de référence en Afrique de l'Ouest pour la gestion de patrimoine et l'accès aux marchés financiers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 3. Philosophie — Stark Grid ─── */}
+        <section ref={philosophieRef} id="philosophie" className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Philosophie</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
+                    Notre approche d'investissement.
+                  </h2>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Approche disciplinée
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Processus d'analyse rigoureux combinant analyse fondamentale et technique.
+                    </p>
+                    <ul className="text-white/50 text-sm space-y-2">
+                      <li>• Due diligence approfondie</li>
+                      <li>• Évaluation sectorielle</li>
+                      <li>• Analyse de marché</li>
+                    </ul>
+                  </div>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-white">
+                      Gestion du risque
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-4">
+                      Framework adapté aux spécificités du marché UEMOA.
+                    </p>
+                    <ul className="text-white/50 text-sm space-y-2">
+                      <li>• Diversification sectorielle</li>
+                      <li>• Limites de concentration</li>
+                      <li>• Stress tests réguliers</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 4. Metrics — Stark & Engineered ─── */}
+        <section ref={metricsRef} className="reveal border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-3">
+              <div className="py-16 md:py-24 border-b md:border-b-0 md:border-r border-black/10 md:pr-16">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-display-aptos text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
+                    11
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">ans</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  D'existence
+                </div>
+              </div>
+              <div className="py-16 md:py-24 border-b md:border-b-0 md:border-r border-black/10 md:px-16">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-display-aptos text-5xl md:text-6xl tracking-tighter text-[var(--night)]">
+                    500
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  Levée de fonds
+                </div>
+              </div>
+              <div className="py-16 md:py-24 md:pl-16">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-display-aptos text-5xl md:text-6xl tracking-tighter text-[var(--night)]">
+                    200
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  Transactions marché
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 5. Histoire — Timeline ─── */}
+        <section ref={histoireRef} id="histoire" className="reveal py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Parcours</span>
+            <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-20">
+              Notre histoire
+            </h2>
+
+            <div className="border-t border-black/10">
+              {timelineItems.map((item) => (
+                <div key={item.year} className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
+                  <div className="font-display-aptos text-2xl text-[var(--jaune-or)]/50 shrink-0">
+                    {item.year}
+                  </div>
+                  <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-2xl group-hover:text-[var(--night)] transition-colors">
+                    {item.text}
                   </p>
-
-                  <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                    <a href="#mission-vision" className="btn-primary font-display-aptos tracking-wide">Notre mission</a>
-                    <a href="#histoire" className="btn-secondary font-display-aptos tracking-wide">Notre histoire</a>
-                  </div>
                 </div>
-
-                {/* Right: Visual card */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
-                  <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--jaune-or-10)] blur-3xl" />
-                  <div className="relative w-full h-[280px] rounded-xl overflow-hidden border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/80">
-                    <div
-                      className="absolute inset-0"
-                      style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '24px 24px' }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center text-secondary">Everest Finance SGI — Dakar</div>
-                  </div>
-                  <div className="mt-5 grid grid-cols-3 gap-3 text-center text-xs">
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display-aptos">2013</div>
-                      <div className="text-secondary">Création</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display-aptos">CREPMF</div>
-                      <div className="text-secondary">Licence</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display-aptos">BRVM</div>
-                      <div className="text-secondary">Marchés</div>
-                    </div>
-                  </div>
-                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Mission & Vision */}
-        <section ref={missionVisionRef} id="mission-vision" className="reveal section-py-sm bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
-          <div className="mx-auto max-w-6xl px-6">
-            <div ref={missionVisionGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-3">
-                  <FiTrendingUp className="text-[var(--jaune-or)] mt-1" />
-                  <div>
-                    <h2 className="font-display-aptos text-xl mb-2">Notre mission</h2>
-                    <p className="text-secondary">Proposer des solutions d’investissement performantes et responsables, fondées sur la transparence, l’expertise et la proximité.</p>
-                  </div>
-                </div>
+        {/* ─── 6. Équipe — Minimalist Grid ─── */}
+        <section ref={equipeRef} id="equipe" className="reveal py-24 md:py-40">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Leadership</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
+                  Équipe dirigeante
+                </h2>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-3">
-                  <FiGlobe className="text-[var(--jaune-or)] mt-1" />
-                  <div>
-                    <h2 className="font-display-aptos text-xl mb-2">Notre vision</h2>
-                    <p className="text-secondary">Devenir un partenaire de référence en Afrique de l’Ouest pour la gestion de patrimoine et l’accès aux marchés financiers.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Philosophie d'investissement */}
-        <section ref={philosophieRef} id="philosophie" className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Philosophie d'investissement</h2>
-            <div ref={philosophieGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <h3 className="font-display-aptos mb-3">Approche disciplinée</h3>
-                <p className="text-secondary mb-4">Processus d'analyse rigoureux combinant analyse fondamentale et technique pour identifier les opportunités sur la BRVM.</p>
-                <ul className="text-secondary text-sm space-y-1">
-                  <li>• Due diligence approfondie des émetteurs</li>
-                  <li>• Évaluation des fondamentaux sectoriels</li>
-                  <li>• Analyse des conditions de marché</li>
-                </ul>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <h3 className="font-display-aptos mb-3">Gestion du risque</h3>
-                <p className="text-secondary mb-4">Framework de gestion des risques adapté aux spécificités du marché UEMOA et aux profils de nos clients.</p>
-                <ul className="text-secondary text-sm space-y-1">
-                  <li>• Diversification sectorielle et géographique</li>
-                  <li>• Limites de concentration par émetteur</li>
-                  <li>• Stress tests et scénarios de marché</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <StatsSection
-          id="chiffres"
-          title="Chiffres clés"
-          background="light"
-          columns={3}
-          stats={[
-            { value: "11", label: "ans d'existence", animateWithUnits: false },
-            { value: "500 Mds F CFA", label: "Levée de fonds (obligations, titres de capital, FCT)", animateWithUnits: false },
-            { value: "200 Mds F CFA", label: "Transactions au marché financier", animateWithUnits: false }
-          ]}
-        />
-
-        {/* Histoire */}
-        <section ref={histoireRef} id="histoire" className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Notre histoire</h2>
-            <div className="relative">
-              <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
-              <ul ref={histoireListRef} className="space-y-8">
-                {timelineItems.map((item, index) => (
-                  <li key={item.year} className="relative">
-                    <div className={`flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''} sm:items-start sm:justify-between gap-4`}>
-                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                        <div className="font-display-aptos text-[var(--jaune-or)]">{item.year}</div>
-                        <p className="text-secondary mt-1">{item.text}</p>
-                      </div>
-                      <div className="hidden sm:block sm:w-1/2" />
-                    </div>
-                    <span className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-5 inline-block h-3 w-3 rounded-full bg-[var(--jaune-or)] shadow" />
+              <div className="lg:col-span-7">
+                <ul className="border-t border-black/10">
+                  <li className="py-8 border-b border-black/10">
+                    <div className="font-display-aptos text-xl md:text-2xl mb-2">Direction Générale</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Vision stratégique et développement commercial</p>
                   </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Équipe dirigeante */}
-        <section ref={equipeRef} id="equipe" className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Équipe dirigeante</h2>
-            <div ref={equipeGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <h3 className="font-display-aptos mb-3">Leadership expérimenté</h3>
-                <p className="text-secondary mb-4">Plus de 30 ans d'expérience cumulée dans les marchés financiers africains et l'intermédiation financière.</p>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <FiUsers className="text-[var(--jaune-or)] mt-1" />
-                    <div>
-                      <div className="font-display-aptos text-sm">Direction Générale</div>
-                      <p className="text-secondary text-xs">Vision stratégique et développement commercial</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FiTrendingUp className="text-[var(--jaune-or)] mt-1" />
-                    <div>
-                      <div className="font-display-aptos text-sm">Direction des Marchés</div>
-                      <p className="text-secondary text-xs">Recherche, analyse et exécution</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FiShield className="text-[var(--jaune-or)] mt-1" />
-                    <div>
-                      <div className="font-display-aptos text-sm">Direction des Opérations</div>
-                      <p className="text-secondary text-xs">Conformité, risques et middle office</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <h3 className="font-display-aptos mb-3">Expertise métier</h3>
-                <p className="text-secondary mb-4">Spécialistes reconnus des marchés BRVM et des enjeux d'investissement en Afrique de l'Ouest.</p>
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display-aptos">CFA</div>
-                    <div className="text-secondary text-xs">Certifications</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display-aptos">MBA</div>
-                    <div className="text-secondary text-xs">Finance</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display-aptos">15+</div>
-                    <div className="text-secondary text-xs">Ans BRVM</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display-aptos">Bilingue</div>
-                    <div className="text-secondary text-xs">FR/EN</div>
-                  </div>
-                </div>
+                  <li className="py-8 border-b border-black/10">
+                    <div className="font-display-aptos text-xl md:text-2xl mb-2">Direction des Marchés</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Recherche, analyse et exécution</p>
+                  </li>
+                  <li className="py-8 border-b border-black/10">
+                    <div className="font-display-aptos text-xl md:text-2xl mb-2">Direction des Opérations</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Conformité, risques et middle office</p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Conformité & Réglementation */}
-        <section ref={conformiteRef} id="conformite" className="reveal section-py-sm bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Conformité & Réglementation</h2>
-            <div ref={conformiteGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/25 p-6">
-                <h3 className="font-display-aptos mb-3 flex items-center gap-2">
-                  <FiCheckCircle className="text-[var(--jaune-or)]" />
-                  Cadre réglementaire
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Licence CREPMF</span>
-                    <span className="font-display-aptos">SGI/DA/2016/60</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Date d'obtention</span>
-                    <span className="font-display-aptos">30 mars 2016</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Juridiction</span>
-                    <span className="font-display-aptos">UEMOA</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-secondary">Activités autorisées</span>
-                    <span className="font-display-aptos text-xs">Gestion, Intermédiation</span>
-                  </div>
+        {/* ─── 7. Conformité — Dark Section ─── */}
+        <section ref={conformiteRef} id="conformite" className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Réglementation</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
+                    Conformité & Sécurité
+                  </h2>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/25 p-6">
-                <h3 className="font-display-aptos mb-3 flex items-center gap-2">
-                  <FiShield className="text-[var(--jaune-or)]" />
-                  Contrôles & Sécurité
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
-                    <div>
-                      <div className="font-display-aptos text-sm">Ségrégation des actifs</div>
-                      <p className="text-secondary text-xs">Comptes dédiés et dépositaire central BRVM</p>
+              
+              <div className="lg:col-span-8">
+                <div className="space-y-12">
+                  <div>
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-6 text-white">
+                      Cadre réglementaire
+                    </h3>
+                    <div className="space-y-4 text-white/60">
+                      <div className="flex justify-between py-3 border-b border-white/10">
+                        <span>Licence CREPMF</span>
+                        <span className="font-display-aptos text-white">SGI/DA/2016/60</span>
+                      </div>
+                      <div className="flex justify-between py-3 border-b border-white/10">
+                        <span>Date d'obtention</span>
+                        <span className="font-display-aptos text-white">30 mars 2016</span>
+                      </div>
+                      <div className="flex justify-between py-3 border-b border-white/10">
+                        <span>Juridiction</span>
+                        <span className="font-display-aptos text-white">UEMOA</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
-                    <div>
-                      <div className="font-display-aptos text-sm">KYC/AML renforcé</div>
-                      <p className="text-secondary text-xs">Procédures anti-blanchiment conformes CENTIF</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--jaune-or)] mt-2"></div>
-                    <div>
-                      <div className="font-display-aptos text-sm">Reporting réglementaire</div>
-                      <p className="text-secondary text-xs">Déclarations périodiques CREPMF et BCEAO</p>
-                    </div>
+
+                  <div>
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-6 text-white">
+                      Contrôles & Sécurité
+                    </h3>
+                    <ul className="space-y-4 text-white/60">
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>Ségrégation des actifs — Comptes dédiés et dépositaire central BRVM</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>KYC/AML renforcé — Procédures conformes CENTIF</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>Reporting réglementaire — Déclarations CREPMF et BCEAO</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>

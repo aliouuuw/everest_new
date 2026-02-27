@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
 
 type QA = { q: string; a: string }
@@ -8,7 +9,6 @@ export const FAQPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const qaRef = useReveal<HTMLDivElement>()
   const glossaryRef = useReveal<HTMLDivElement>()
-  const indexRef = useReveal<HTMLDivElement>()
 
   const qas: Array<QA> = [
     { q: 'Comment ouvrir un compte ?', a: 'Remplissez le formulaire en ligne, notre équipe vous accompagne pour la suite.' },
@@ -85,114 +85,168 @@ export const FAQPage = () => {
   }, [filteredGlossary])
 
   return (
-    <div>
-        {/* Hero: Compact Centered */}
-        <section ref={heroRef} className="reveal" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-          <div className="mx-auto max-w-6xl px-6 text-center">
-            <span className="kicker text-gradient-gold">Abécédaire & FAQ</span>
-            <h1 className="luxury-heading mt-3">Comprendre nos services</h1>
-            <p className="luxury-subheading mt-5 pt-8">Questions fréquentes et définitions clés pour mieux décider.</p>
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--jaune-or)] selection:text-white">
+        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
+        <section ref={heroRef} className="reveal relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh]">
+          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden bg-[var(--white-smoke)]">
+            {/* Abstract geometric pattern instead of photo for FAQ */}
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
           </div>
-        </section>
-
-        {/* Q&A Section */}
-        <section className="section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="font-display-aptos text-lg mb-4">Questions fréquentes</h2>
-            <div ref={qaRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {qas.map((item) => (
-                <div key={item.q} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="font-display-aptos mb-2">{item.q}</div>
-                  <div className="text-secondary text-sm">{item.a}</div>
+          
+          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+              <div className="md:col-span-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                    Abécédaire & FAQ
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Abécédaire (Glossary) */}
-        <section className="section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="flex flex-col items-center text-center">
-              <h2 className="font-display-aptos text-lg mb-2">Abécédaire</h2>
-              <p className="text-secondary mb-6">Jargon et termes clés de nos métiers.</p>
-              <div className="w-full max-w-2xl flex items-center gap-3">
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Rechercher un terme ou une définition..."
-                  aria-label="Rechercher dans l’abécédaire"
-                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--night)]/15 bg-[var(--white-smoke)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--jaune-or-20)]"
-                />
-                <button
-                  type="button"
-                  onClick={() => { setQuery(''); setActiveLetter('') }}
-                  className="btn-secondary text-xs"
-                >
-                  Effacer
-                </button>
+                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                  Comprendre nos services.
+                </h1>
+              </div>
+              
+              <div className="md:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                  Questions fréquentes et définitions clés pour mieux décider.
+                </p>
+                <a href="#faq" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                  <span>Voir les questions</span>
+                  <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
+                </a>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* A–Z Index */}
-            <div ref={indexRef} className="reveal-stagger mt-6 flex flex-wrap items-center justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveLetter('')}
-                className={`${activeLetter === '' ? 'btn-primary' : 'btn-secondary'} text-xs px-3 py-2 rounded-full`}
-                aria-pressed={activeLetter === ''}
-              >
-                Tous
-              </button>
-              {letters.map((l) => (
-                <a
-                  key={l}
-                  href={`#letter-${l}`}
-                  onClick={() => setActiveLetter(l)}
-                  className={`${activeLetter === l ? 'btn-primary' : 'btn-secondary'} text-xs px-3 py-2 rounded-full`}
-                  aria-label={`Aller à la lettre ${l}`}
-                >
-                  {l}
-                </a>
-              ))}
-            </div>
-
-            {/* Grouped terms */}
-            <div ref={glossaryRef} className="reveal mt-10 space-y-10">
-              {grouped.length === 0 && (
-                <div className="text-center text-secondary">Aucun résultat.</div>
-              )}
-              {grouped.map(([letter, terms]) => (
-                <div key={letter} id={`letter-${letter}`} className="scroll-mt-24">
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <div className="font-display-aptos text-2xl">{letter}</div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {terms.map((g) => (
-                      <div key={g.term} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                        <div className="font-display-aptos mb-1">{g.term}</div>
-                        <div className="text-secondary text-sm">{g.def}</div>
-                      </div>
-                    ))}
-                  </div>
+        {/* ─── 2. Q&A Section — Stark Grid ─── */}
+        <section id="faq" className="py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Support</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
+                    Questions fréquentes.
+                  </h2>
                 </div>
-              ))}
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div ref={qaRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                  {qas.map((item) => (
+                    <div key={item.q} className="relative">
+                      <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-[var(--night)]">
+                        {item.q}
+                      </h3>
+                      <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
+                        {item.a}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Contact CTA */}
-        <section className="section-py">
-          <div className="mx-auto max-w-6xl px-6 text-center">
-            <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
-              <div className="text-secondary">Besoin d’aide supplémentaire ?</div>
-              <a href="#contact" className="btn-primary font-display-aptos tracking-wide">Nous contacter</a>
+        {/* ─── 3. Abécédaire (Glossary) — Editorial List ─── */}
+        <section id="glossary" className="py-24 md:py-40 bg-[var(--white-smoke)]">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32 flex flex-col border-t border-black/10">
+                  <div className="py-6 border-b border-black/10">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-6">Définitions</span>
+                    <h2 className="font-display-aptos text-3xl md:text-4xl leading-[1.05] mb-6">
+                      Abécédaire
+                    </h2>
+                    
+                    <div className="flex flex-col gap-4 mt-8">
+                      <input
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Rechercher..."
+                        className="w-full px-0 py-3 bg-transparent border-b border-black/20 focus:border-black outline-none font-display-aptos text-xl transition-colors rounded-none"
+                      />
+                      
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        <button
+                          type="button"
+                          onClick={() => setActiveLetter('')}
+                          className={`text-xs font-bold tracking-[0.2em] uppercase px-3 py-2 border ${activeLetter === '' ? 'border-black bg-black text-white' : 'border-black/10 hover:border-black/30'}`}
+                        >
+                          Tous
+                        </button>
+                        {letters.map((l) => (
+                          <button
+                            key={l}
+                            type="button"
+                            onClick={() => setActiveLetter(l)}
+                            className={`text-xs font-bold uppercase px-3 py-2 border ${activeLetter === l ? 'border-black bg-black text-white' : 'border-black/10 hover:border-black/30'}`}
+                          >
+                            {l}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-8">
+                <div ref={glossaryRef} className="border-t border-black/10">
+                  {grouped.length === 0 && (
+                    <div className="py-10 text-[rgba(10, 10, 10, 0.8)] font-light text-xl">Aucun résultat.</div>
+                  )}
+                  {grouped.map(([letter, terms]) => (
+                    <div key={letter} className="group py-10 border-b border-black/10">
+                      <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-8">
+                        {letter}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        {terms.map((g) => (
+                          <div key={g.term}>
+                            <h3 className="font-display-aptos text-xl md:text-2xl mb-2 text-[var(--night)]">
+                              {g.term}
+                            </h3>
+                            <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
+                              {g.def}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-      </section>
+        </section>
+
+        {/* ─── 4. CTA — Editorial Footer Block ─── */}
+        <section className="bg-[var(--night)] text-white py-24 md:py-32">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+              <div className="md:col-span-7">
+                <h2 className="font-display-aptos text-5xl md:text-7xl leading-[1.05] mb-6">
+                  Besoin d'aide supplémentaire ?
+                </h2>
+                <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
+                  Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.
+                </p>
+              </div>
+              <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
+                <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit">
+                  Nous contacter <FiArrowRight className="text-lg" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
     </div>
   )
 }

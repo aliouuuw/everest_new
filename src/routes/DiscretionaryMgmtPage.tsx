@@ -1,4 +1,4 @@
-import { FiCheckCircle, FiClock, FiCompass, FiDollarSign, FiGrid, FiShield, FiTrendingUp } from 'react-icons/fi'
+import { FiArrowDown } from 'react-icons/fi'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
 import { PerformanceComparison } from '../components/Sections/PerformanceComparison'
@@ -9,69 +9,161 @@ import { useReveal } from '../components/Hooks/useReveal'
 export const DiscretionaryMgmtPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const approachSectionRef = useReveal<HTMLElement>()
-  const approachGridRef = useReveal<HTMLDivElement>()
   const packsSectionRef = useReveal<HTMLElement>()
-  const packsGridRef = useReveal<HTMLDivElement>()
   const advantagesSectionRef = useReveal<HTMLElement>()
-  const advantagesGridRef = useReveal<HTMLDivElement>()
   const processSectionRef = useReveal<HTMLElement>()
-  const processGridRef = useReveal<HTMLDivElement>()
 
   return (
-    <div>
-        {/* Hero — Split pattern focused on approach */}
-        <section ref={heroRef} className="reveal relative overflow-hidden" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+    <div className="bg-[var(--pure-white)] text-[var(--night)]">
+        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
+        <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden bg-[var(--white-smoke)]">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <span className="kicker text-gradient-gold">Services — Gestion sous-mandat</span>
-                <h1 className="luxury-heading mt-3">Pilotez vos investissements en toute simplicité</h1>
-                <p className="luxury-subheading-left mt-5 leading-relaxed">Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.</p>
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#packs" className="btn-primary font-display-aptos tracking-wide">Découvrir les packs</a>
-                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Nous contacter</a>
+          
+          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+              <div className="md:col-span-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                    Services — Gestion sous mandat
+                  </span>
+                </div>
+                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                  Pilotez vos investissements en toute simplicité.
+                </h1>
+              </div>
+              
+              <div className="md:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                  Vous décidez de l'orientation et des limites. Nous exécutons avec rigueur sur la BRVM, dans un cadre clair et transparent.
+                </p>
+                <a href="#packs" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                  <span>Découvrir les packs</span>
+                  <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 2. Approche & Univers — Editorial Grid ─── */}
+        <section ref={approachSectionRef} className="reveal py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Cadre</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  Approche et univers d'investissement.
+                </h2>
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
+                  Un cadre simple, des règles explicites, et un univers BRVM adapté à vos objectifs.
+                </p>
+              </div>
+              
+              <div className="lg:col-span-7">
+                <div className="border-t border-black/10">
+                  <div className="group py-10 border-b border-black/10">
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-[var(--night)]">
+                      Approche
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light mb-4">
+                      Vous fixez les objectifs, contraintes et limites; nous assurons l'exécution et le suivi.
+                    </p>
+                    <ul className="text-[rgba(10,10,10,0.6)] space-y-2 text-sm">
+                      <li>• Profil de risque défini dès l'ouverture</li>
+                      <li>• Règles d'allocation simples et traçables</li>
+                      <li>• Reporting périodique clair</li>
+                    </ul>
+                  </div>
+                  <div className="group py-10 border-b border-black/10">
+                    <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-[var(--night)]">
+                      Univers d'investissement
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light mb-4">
+                      Titres cotés BRVM et opérations primaires, avec filtres de qualité et liquidité.
+                    </p>
+                    <ul className="text-[rgba(10,10,10,0.6)] space-y-2 text-sm">
+                      <li>• Actions principales de la cote</li>
+                      <li>• Obligations souveraines et corporates</li>
+                      <li>• Participations primaires éligibles</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7">
-                <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--jaune-or-10)] blur-3xl" />
-                <div className="relative w-full h-[280px] sm:h-[320px] rounded-xl overflow-hidden border border-[var(--jaune-or)]/25 bg-[var(--white-smoke)]/80">
-                  <div className="absolute inset-0 grid grid-cols-3 gap-3 p-6">
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--jaune-or)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiCompass className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                      </div>
-                      <div className="text-xs font-display-aptos">Approche</div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 3. Packs — Stark Dark Table/Grid ─── */}
+        <section id="packs" ref={packsSectionRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Packs</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                    Le niveau d'accompagnement.
+                  </h2>
+                  <p className="text-white/60 leading-relaxed font-light text-lg">
+                    Frais transparents et outils adaptés à votre autonomie.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div className="border-t border-white/10">
+                  <div className="py-8 border-b border-white/10 flex flex-col md:flex-row gap-8 justify-between md:items-center group">
+                    <div className="flex-1">
+                      <h3 className="font-display-aptos text-2xl md:text-3xl text-white mb-2">Essentiel</h3>
+                      <p className="text-white/60 font-light">Exécution simple • Appli web</p>
                     </div>
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--jaune-or)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiGrid className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
+                    <div className="flex-1 flex gap-8">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Frais dès</div>
+                        <div className="font-display-aptos text-xl text-white">0,60%</div>
                       </div>
-                      <div className="text-xs font-display-aptos">Univers</div>
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Minimum</div>
+                        <div className="font-display-aptos text-xl text-white">100 000 F CFA</div>
+                      </div>
                     </div>
-                    <div className="rounded-lg bg-[var(--pure-white)]/70 border border-[var(--jaune-or)]/25 flex flex-col items-center justify-center text-center p-4">
-                      <div className="relative shrink-0 mb-2">
-                        <div className="w-10 h-10 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                          <div className="w-6 h-6 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)]">
-                            <FiDollarSign className="text-sm" />
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
+                  </div>
+
+                  <div className="py-8 border-b border-white/10 flex flex-col md:flex-row gap-8 justify-between md:items-center group">
+                    <div className="flex-1">
+                      <h3 className="font-display-aptos text-2xl md:text-3xl text-white mb-2">Confort</h3>
+                      <p className="text-white/60 font-light">Support prioritaire • Appli web + alertes</p>
+                    </div>
+                    <div className="flex-1 flex gap-8">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Frais dès</div>
+                        <div className="font-display-aptos text-xl text-[var(--jaune-or)]">0,50%</div>
                       </div>
-                      <div className="text-xs font-display-aptos">Frais clairs</div>
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Minimum</div>
+                        <div className="font-display-aptos text-xl text-[var(--jaune-or)]">250 000 F CFA</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="py-8 border-b border-white/10 flex flex-col md:flex-row gap-8 justify-between md:items-center group">
+                    <div className="flex-1">
+                      <h3 className="font-display-aptos text-2xl md:text-3xl text-white mb-2">Expert</h3>
+                      <p className="text-white/60 font-light">Desk dédié • Outils avancés + flux</p>
+                    </div>
+                    <div className="flex-1 flex gap-8">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Frais dès</div>
+                        <div className="font-display-aptos text-xl text-white">0,40%</div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Minimum</div>
+                        <div className="font-display-aptos text-xl text-white">1 000 000 F CFA</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -80,153 +172,35 @@ export const DiscretionaryMgmtPage = () => {
           </div>
         </section>
 
-        {/* Approche & Univers d'investissement */}
-        <section ref={approachSectionRef} className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Cadre</span>
-              <h2 className="luxury-heading mt-3">Approche et univers d'investissement</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Un cadre simple, des règles explicites, et un univers BRVM adapté à vos objectifs.</p>
-            </div>
-            <div ref={approachGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiCompass />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Approche</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Vous fixez les objectifs, contraintes et limites; nous assurons l'exécution et le suivi.</p>
-                  </div>
-                </div>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <ul className="mt-3 text-secondary text-sm md:text-base space-y-1 leading-relaxed">
-                  <li>• Profil de risque défini dès l'ouverture</li>
-                  <li>• Règles d'allocation simples et traçables</li>
-                  <li>• Reporting périodique clair</li>
-                </ul>
+        {/* ─── 4. Avantages — Stark List ─── */}
+        <section ref={advantagesSectionRef} className="reveal py-24 md:py-40 border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-5">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Avantages</span>
+                <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                  Pourquoi choisir ce mandat ?
+                </h2>
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
+                  Une approche qui allie autonomie et expertise professionnelle.
+                </p>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiGrid />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
+              <div className="lg:col-span-7">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 border-t border-black/10 pt-10">
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-6" />
+                    <h3 className="font-display-aptos text-2xl mb-2 text-[var(--night)]">Contrôle total</h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">Vous prenez toutes les décisions d'investissement selon vos critères.</p>
                   </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Univers d'investissement</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Titres cotés BRVM et opérations primaires, avec filtres de qualité et liquidité.</p>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-6" />
+                    <h3 className="font-display-aptos text-2xl mb-2 text-[var(--night)]">Réactivité</h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">Exécution rapide de vos ordres sur la BRVM.</p>
                   </div>
-                </div>
-                <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                <ul className="mt-3 text-secondary text-sm md:text-base space-y-1 leading-relaxed">
-                  <li>• Actions principales de la cote</li>
-                  <li>• Obligations souveraines et corporates</li>
-                  <li>• Participations primaires éligibles</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Packs */}
-        <section id="packs" ref={packsSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Packs</span>
-              <h2 className="luxury-heading mt-3">Choisissez le niveau d'accompagnement</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Frais transparents et outils adaptés à votre autonomie.</p>
-            </div>
-            <div ref={packsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 mt-12">
-              {[
-                { name: 'Essentiel', fee: '0,60%', min: '100 000 F CFA', tools: 'Appli web', note: 'Exécution simple' },
-                { name: 'Confort', fee: '0,50%', min: '250 000 F CFA', tools: 'Appli web + alertes', note: 'Support prioritaire' },
-                { name: 'Expert', fee: '0,40%', min: '1 000 000 F CFA', tools: 'Outils avancés + flux', note: 'Desk dédié' },
-              ].map((p) => (
-                <div key={p.name} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="font-display-aptos text-lg md:text-xl">{p.name}</div>
-                  <div className="mt-4 grid grid-cols-2 gap-4 numeric-tabular">
-                    <div className="stat-card"><div className="text-xs text-secondary">Frais dès</div><div className="font-display-aptos text-xl">{p.fee}</div></div>
-                    <div className="stat-card"><div className="text-xs text-secondary">Minimum</div><div className="font-display-aptos text-xl">{p.min}</div></div>
-                  </div>
-                  <div className="mt-4 h-px w-full bg-gradient-to-r from-transparent via-[var(--jaune-or-10)] to-transparent" />
-                  <div className="mt-3 text-sm md:text-base text-[rgba(10, 10, 10, 0.8)]/80 flex items-center gap-2 leading-relaxed"><FiTrendingUp className="opacity-80" />{p.tools}</div>
-                  <div className="text-secondary text-xs md:text-sm mt-1">{p.note}</div>
-                  <a href="#contact" className="mt-5 inline-flex items-center justify-center btn-secondary font-display-aptos tracking-wide">Ouvrir un compte</a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Avantages Clés */}
-        <section ref={advantagesSectionRef} className="reveal section-py">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Avantages</span>
-              <h2 className="luxury-heading mt-3">Pourquoi choisir la gestion libre ?</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Une approche qui allie autonomie et expertise professionnelle.</p>
-            </div>
-            <div ref={advantagesGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mt-12">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiCheckCircle />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Contrôle total</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Vous prenez toutes les décisions d'investissement selon vos critères.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiClock />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Réactivité</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Exécution rapide de vos ordres sur la BRVM.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 md:p-7 lg:p-8 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                <div className="flex items-start gap-5 md:gap-6">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiShield />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1">Transparence</div>
-                    <p className="text-secondary text-sm md:text-base leading-relaxed">Frais clairs et reporting régulier de vos opérations.</p>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-6" />
+                    <h3 className="font-display-aptos text-2xl mb-2 text-[var(--night)]">Transparence</h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">Frais clairs et reporting régulier de vos opérations.</p>
                   </div>
                 </div>
               </div>
@@ -234,46 +208,60 @@ export const DiscretionaryMgmtPage = () => {
           </div>
         </section>
 
-        {/* Processus */}
-        <section ref={processSectionRef} className="reveal section-py bg-[var(--white-smoke)]">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="kicker text-gradient-gold">Processus</span>
-              <h2 className="luxury-heading mt-3">Comment ça fonctionne</h2>
-              <p className="luxury-subheading mt-5 leading-relaxed">Un processus simple et efficace en 4 étapes.</p>
+        {/* ─── 5. Processus — Engineered Sequence ─── */}
+        <section ref={processSectionRef} className="reveal py-24 md:py-40 bg-[var(--white-smoke)] border-b border-black/10">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="mb-20">
+              <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Processus</span>
+              <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+                Comment ça fonctionne.
+              </h2>
             </div>
-            <div ref={processGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mt-12">
-              {[
-                { step: '01', title: 'Ouverture compte', desc: 'Remplissez le formulaire en ligne et signez électroniquement.' },
-                { step: '02', title: 'Définition profil', desc: 'Établissez vos objectifs, contraintes et niveau de risque.' },
-                { step: '03', title: 'Premier dépôt', desc: 'Effectuez votre premier versement selon vos moyens.' },
-                { step: '04', title: 'Prise de contrôle', desc: 'Commencez à passer vos ordres via notre plateforme.' },
-              ].map((s) => (
-                <div key={s.step} className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover text-center">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-                  <div className="numeric-tabular text-2xl font-display-aptos text-[var(--jaune-or)] mb-3">{s.step}</div>
-                  <div className="font-display-aptos text-lg mb-2">{s.title}</div>
-                  <p className="text-secondary text-sm">{s.desc}</p>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+              <div className="relative border-t border-black/10 pt-8">
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-6">01.</div>
+                <h3 className="font-display-aptos text-xl mb-4 text-[var(--night)]">Ouverture compte</h3>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Remplissez le formulaire en ligne et signez électroniquement.</p>
+              </div>
+              <div className="relative border-t border-black/10 pt-8">
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-6">02.</div>
+                <h3 className="font-display-aptos text-xl mb-4 text-[var(--night)]">Définition profil</h3>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Établissez vos objectifs, contraintes et niveau de risque.</p>
+              </div>
+              <div className="relative border-t border-black/10 pt-8">
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-6">03.</div>
+                <h3 className="font-display-aptos text-xl mb-4 text-[var(--night)]">Premier dépôt</h3>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Effectuez votre premier versement selon vos moyens.</p>
+              </div>
+              <div className="relative border-t border-black/10 pt-8">
+                <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-6">04.</div>
+                <h3 className="font-display-aptos text-xl mb-4 text-[var(--night)]">Prise de contrôle</h3>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Commencez à passer vos ordres via notre plateforme.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Service Comparison */}
-        <ServiceComparison currentService="discretionary" />
+        {/* ─── Other Components ─── */}
+        <div className="border-b border-black/10">
+          <ServiceComparison currentService="discretionary" />
+        </div>
 
-        {/* Testimonials */}
-        <TestimonialsCarousel service="discretionary" />
+        <div className="border-b border-black/10">
+          <TestimonialsCarousel service="discretionary" />
+        </div>
 
-        {/* Performance Comparison */}
-        <PerformanceComparison />
+        <div className="border-b border-black/10">
+          <PerformanceComparison />
+        </div>
 
-        {/* Investment Calculator */}
-        <InvestmentCalculator />
+        <div className="border-b border-black/10">
+          <InvestmentCalculator />
+        </div>
 
-        {/* FAQ */}
-        <ServiceFAQ service="discretionary" />
+        <div>
+          <ServiceFAQ service="discretionary" />
+        </div>
     </div>
   )
 }

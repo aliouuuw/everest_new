@@ -1,4 +1,4 @@
-import { FiCheckCircle, FiCompass, FiHeadphones, FiHelpCircle, FiShield } from 'react-icons/fi'
+import { FiCompass, FiHeadphones, FiShield, FiArrowRight, FiArrowDown } from 'react-icons/fi'
 
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
@@ -9,282 +9,182 @@ import { useReveal } from '../components/Hooks/useReveal'
 export const ServicesPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const servicesOverviewRef = useReveal<HTMLElement>()
-  const servicesGridRef = useReveal<HTMLDivElement>()
   const comparisonRef = useReveal<HTMLDivElement>()
   const testimonialsRef = useReveal<HTMLDivElement>()
   const performanceRef = useReveal<HTMLDivElement>()
   const faqRef = useReveal<HTMLDivElement>()
 
   return (
-    <div>
-        {/* Hero Section */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+    <div className="bg-[var(--pure-white)] text-[var(--night)]">
+        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
+        <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden bg-[var(--white-smoke)]">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '64px 64px' }} />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-6" style={{ paddingTop: 'var(--hero-py)', paddingBottom: 'var(--hero-py)' }}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <div>
-                <span className="kicker text-gradient-gold">Services d'investissement</span>
-                <h1 className="luxury-heading mt-3">Votre partenaire pour investir sur la BRVM</h1>
-                <p className="luxury-subheading-left mt-5 leading-relaxed">
-                  Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style,
-                  votre expérience et vos objectifs financiers.
+          
+          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+              <div className="md:col-span-8">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
+                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                    Services d'investissement
+                  </span>
+                </div>
+                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                  Votre partenaire pour investir sur la BRVM.
+                </h1>
+              </div>
+              
+              <div className="md:col-span-4 pb-4">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                  Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style, votre expérience et vos objectifs financiers.
                 </p>
-
-                <div className="mt-8 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
-                    <span className="text-secondary">Accompagnement personnalisé</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
-                    <span className="text-secondary">Expertise reconnue sur la BRVM</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full flex-shrink-0" />
-                    <span className="text-secondary">Transparence et suivi continu</span>
-                  </div>
-                </div>
-
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <a href="#services" className="btn-primary font-display-aptos tracking-wide">Explorer nos services</a>
-                  <a href="#contact" className="btn-secondary font-display-aptos tracking-wide">Parler à un conseiller</a>
-                </div>
-              </div>
-
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-8">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
-
-                <div className="text-center mb-6">
-                  <div className="text-3xl font-display-aptos text-[var(--jaune-or)] mb-2">500+</div>
-                  <div className="text-sm text-secondary">Clients satisfaits</div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-display-aptos text-[var(--jaune-or)] mb-1">4.9/5</div>
-                    <div className="text-xs text-secondary">Note moyenne</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-display-aptos text-[var(--jaune-or)] mb-1">98%</div>
-                    <div className="text-xs text-secondary">Recommandation</div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-[var(--jaune-or)]/25">
-                  <div className="text-center">
-                    <div className="text-sm font-display-aptos text-[var(--night)] mb-1">Montant minimum</div>
-                    <div className="text-lg font-display-aptos text-[var(--jaune-or)]">100 000 F CFA</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services Overview */}
-        <section id="services" ref={servicesOverviewRef} className="reveal section-py bg-[var(--night)] transition-colors duration-500">
-          <div className="mx-auto max-w-6xl px-6">
-            {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="kicker text-gradient-gold">Nos approches</span>
-              <h2 className="luxury-heading-dark mt-3">Choisissez votre niveau d'accompagnement</h2>
-              <p className="luxury-subheading-dark mt-5 leading-relaxed">
-                Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur
-                et à vos objectifs sur la BRVM.
-              </p>
-            </div>
-
-            {/* Services Grid */}
-            <div ref={servicesGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mb-16">
-              {/* Gestion Libre */}
-              <div className="glass-card-dark glass-card-hover">
-                {/* Service Level Indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or)]/80 bg-[var(--jaune-or-light)]/20 px-3 py-1 rounded-full">
-                    Niveau 1
-                  </span>
-                  <div className="text-xs text-secondary-dark">À partir de 100K F CFA</div>
-                </div>
-
-                <div className="flex items-start gap-5 md:gap-6 mb-4">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiCompass />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Libre</div>
-                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Décisions 100% indépendantes</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Exécution professionnelle</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Frais réduits</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,40% - 0,60%</span>
-                  </div>
-                  <a href="#gestion-libre" className="inline-flex items-center justify-center btn-secondary-dark font-display-aptos tracking-wide w-full">
-                    Découvrir ce service
-                  </a>
-                </div>
-              </div>
-
-              {/* Gestion Assistée */}
-              <div className="glass-card-dark glass-card-hover border-2 border-[var(--jaune-or)]/40">
-                {/* Service Level Indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or-light)] bg-[var(--jaune-or)]/30 px-3 py-1 rounded-full">
-                    Niveau 2
-                  </span>
-                  <div className="text-xs text-secondary-dark">À partir de 250K F CFA</div>
-                </div>
-
-                <div className="flex items-start gap-5 md:gap-6 mb-4">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiHeadphones />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Assistée</div>
-                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Parfait équilibre entre autonomie et conseils d'experts.</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Conseils personnalisés</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Analyses et recommandations</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Décisions finales vôtres</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,60% - 0,80%</span>
-                  </div>
-                  <a href="#gestion-assistee" className="inline-flex items-center justify-center btn-primary-dark font-display-aptos tracking-wide w-full">
-                    Service recommandé
-                  </a>
-                </div>
-              </div>
-
-              {/* Gestion Sous-Mandat */}
-              <div className="glass-card-dark glass-card-hover">
-                {/* Service Level Indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-medium tracking-wider text-[var(--jaune-or)]/80 bg-[var(--jaune-or-light)]/20 px-3 py-1 rounded-full">
-                    Niveau 3
-                  </span>
-                  <div className="text-xs text-secondary-dark">À partir de 500K F CFA</div>
-                </div>
-
-                <div className="flex items-start gap-5 md:gap-6 mb-4">
-                  <div className="relative shrink-0">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--night-20)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-[var(--night-10)] border border-[var(--jaune-or-20)] grid place-content-center text-[var(--pure-white)] text-xl md:text-2xl transition-transform duration-300 group-hover:scale-110">
-                        <FiShield />
-                      </div>
-                    </div>
-                    <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--jaune-or-10)]" />
-                  </div>
-                  <div>
-                    <div className="font-display-aptos text-lg md:text-xl mb-1 text-[var(--pure-white)]">Gestion Sous-Mandat</div>
-                    <p className="text-secondary-dark text-sm md:text-base leading-relaxed">Pour ceux qui préfèrent déléguer la gestion à nos experts.</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Gestion complète déléguée</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Reporting détaillé</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <FiCheckCircle className="text-emerald-400 w-4 h-4 flex-shrink-0" />
-                    <span className="text-sm text-secondary-dark">Suivi personnalisé</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-[var(--jaune-or-20)]">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-display-aptos text-[var(--pure-white)]">Frais annuels</span>
-                    <span className="font-display-aptos text-[var(--jaune-or-light)]">0,80% - 1,20%</span>
-                  </div>
-                  <a href="#gestion-sous-mandat" className="inline-flex items-center justify-center btn-secondary-dark font-display-aptos tracking-wide w-full">
-                    En savoir plus
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="text-center">
-              <div className="inline-flex items-center gap-4 px-8 py-4 glass-card-dark">
-                <FiHelpCircle className="text-[var(--jaune-or-light)] w-5 h-5" />
-                <div className="text-left">
-                  <div className="font-display-aptos text-sm text-[var(--pure-white)]">Besoin d'aide pour choisir ?</div>
-                  <div className="text-xs text-secondary-dark">Nos conseillers vous guident gratuitement</div>
-                </div>
-                <a href="#contact" className="btn-secondary-dark font-display-aptos tracking-wide text-sm">
-                  Être conseillé
+                <a href="#services" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                  <span>Explorer nos approches</span>
+                  <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Service Comparison */}
+        {/* ─── 2. Services Overview — Stark Grid ─── */}
+        <section id="services" ref={servicesOverviewRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+              <div className="lg:col-span-4">
+                <div className="sticky top-32">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Nos approches</span>
+                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+                    Choisissez votre niveau d'accompagnement.
+                  </h2>
+                  <p className="text-white/60 leading-relaxed font-light text-lg mb-12">
+                    Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur.
+                  </p>
+                  
+                  <div className="border border-white/10 p-8 flex items-center justify-between">
+                    <div>
+                      <div className="text-[10px] font-bold tracking-[0.3em] text-white/50 uppercase mb-2">Besoin d'aide ?</div>
+                      <div className="font-display-aptos text-xl text-white">Nos conseillers vous guident</div>
+                    </div>
+                    <a href="#contact" className="w-12 h-12 bg-[var(--jaune-or)] text-[var(--night)] flex items-center justify-center hover:bg-white transition-colors">
+                      <FiArrowRight className="text-xl" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div className="border-t border-white/10">
+                  {/* Gestion Libre */}
+                  <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16">
+                    <div className="w-16 h-16 bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
+                      <FiCompass className="text-3xl" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
+                          Gestion Libre
+                        </h3>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] px-3 py-1">Niveau 1</span>
+                      </div>
+                      <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
+                        Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.
+                      </p>
+                      <ul className="space-y-3 text-white/80 mb-8">
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Décisions 100% indépendantes</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Exécution professionnelle</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Frais réduits</li>
+                      </ul>
+                      <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,40% - 0,60%</div>
+                        <a href="#gestion-libre" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
+                          Découvrir <FiArrowRight />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gestion Assistée */}
+                  <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
+                    <div className="absolute -left-6 top-12 bottom-12 w-1 bg-[var(--jaune-or)]" /> {/* Highlight for recommended */}
+                    <div className="w-16 h-16 bg-[var(--jaune-or)] shrink-0 flex items-center justify-center text-[var(--night)]">
+                      <FiHeadphones className="text-3xl" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white">
+                          Gestion Assistée
+                        </h3>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--night)] bg-[var(--jaune-or)] uppercase px-3 py-1">Recommandé</span>
+                      </div>
+                      <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
+                        Parfait équilibre entre autonomie et conseils d'experts.
+                      </p>
+                      <ul className="space-y-3 text-white/80 mb-8">
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Conseils personnalisés</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Analyses et recommandations</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Décisions finales vôtres</li>
+                      </ul>
+                      <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,60% - 0,80%</div>
+                        <a href="/services/gestion-assistee" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
+                          Découvrir <FiArrowRight />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gestion Sous-Mandat */}
+                  <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16">
+                    <div className="w-16 h-16 bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
+                      <FiShield className="text-3xl" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
+                          Gestion Sous-Mandat
+                        </h3>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] px-3 py-1">Niveau 3</span>
+                      </div>
+                      <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
+                        Pour ceux qui préfèrent déléguer la gestion à nos experts.
+                      </p>
+                      <ul className="space-y-3 text-white/80 mb-8">
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Gestion complète déléguée</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Reporting détaillé</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Suivi personnalisé</li>
+                      </ul>
+                      <div className="flex items-center justify-between pt-6 border-t border-white/10">
+                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,80% - 1,20%</div>
+                        <a href="/services/gestion-sous-mandat" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
+                          Découvrir <FiArrowRight />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Other Components (To be updated later if needed) ─── */}
         <div ref={comparisonRef}>
           <ServiceComparison />
         </div>
 
-        {/* Testimonials */}
         <div ref={testimonialsRef}>
           <TestimonialsCarousel />
         </div>
 
-        {/* Performance Comparison */}
         <div ref={performanceRef}>
           <PerformanceComparison />
         </div>
 
-        {/* FAQ */}
         <div ref={faqRef}>
           <ServiceFAQ service="discretionary" />
         </div>
