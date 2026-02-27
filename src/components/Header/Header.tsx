@@ -217,6 +217,14 @@ export const Header: React.FC = () => {
           </Link>
 
           <Link
+            to="/actualites"
+            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+          >
+            Actualités
+          </Link>
+
+          <Link
             to="/bourse"
             className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
@@ -317,6 +325,15 @@ export const Header: React.FC = () => {
                 ))}
               </div>
             </div>
+
+            <Link
+              to="/actualites"
+              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Actualités
+            </Link>
 
             <Link
               to="/services"

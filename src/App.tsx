@@ -1,5 +1,5 @@
 import { HeroSectionMountain } from './components/Hero';
-import { CTA, ClientPortalPreview, Insights, MountainTransition, Services, ValueProps } from './components/Sections';
+import { CTA, Insights, MountainTransition, Services, ValueProps, NewsSection } from './components/Sections';
 import { InvestmentCalculator } from './components/Sections/InvestmentCalculator';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Insights />
       <MountainTransition />
       <InvestmentCalculator calculatorOnly />
-      <ClientPortalPreview />
+      <NewsSection />
       <CTA scheme="metallic" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
     </>
   );
