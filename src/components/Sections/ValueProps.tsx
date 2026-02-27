@@ -1,151 +1,205 @@
 import { useReveal } from "../Hooks/useReveal";
 
-type Feature = {
-  number: string;
-  title: string;
-  description: string;
-};
-
-const features: Array<Feature> = [
-  { number: "01", title: "Sécurité", description: "Conformité réglementaire rigoureuse et garde sécurisée de vos actifs sous agrément CREPMF." },
-  { number: "02", title: "Accompagnement", description: "Un conseiller dédié, une écoute permanente et une transparence totale sur chaque opération." },
-  { number: "03", title: "Performance", description: "Allocation stratégique, exécution précise et recherche indépendante au service de vos rendements." },
+const stats = [
+  { value: "8", unit: "ans", label: "d'expérience BRVM" },
+  { value: "30+", unit: "", label: "années d'expertise cumulée" },
+  { value: "3", unit: "", label: "pôles de compétence" },
 ];
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
-  const listRef = useReveal<HTMLDivElement>();
+  const rightRef = useReveal<HTMLDivElement>();
 
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-28 md:py-36"
-      style={{ background: 'var(--cream)' }}
+      className="reveal relative overflow-hidden"
+      style={{ background: 'var(--white-smoke)' }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+      {/* Full-bleed two-panel split — light themed */}
+      <div className="flex flex-col lg:flex-row min-h-[80vh]">
 
-        {/* Editorial two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        {/* LEFT PANEL — Cream, stat wall */}
+        <div
+          className="relative lg:w-[42%] flex flex-col justify-between px-8 md:px-14 lg:px-16 pt-20 pb-16 lg:pt-28 lg:pb-24"
+          style={{ background: 'var(--cream)' }}
+        >
+          {/* Vertical gold rule */}
+          <div
+            className="absolute top-0 left-0 w-[2px] h-full"
+            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 20%, var(--jaune-or) 80%, transparent)' }}
+          />
 
-          {/* Left — heading & image */}
-          <div className="lg:col-span-5">
+          <div>
             <span
-              className="block text-[10px] tracking-[0.3em] uppercase mb-5"
+              className="block text-[10px] tracking-[0.35em] uppercase mb-12"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
             >
               Pourquoi Everest Finance
             </span>
+
+            {/* Oversized stat blocks */}
+            <div className="flex flex-col gap-0">
+              {stats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className="py-8 lg:py-10 flex items-baseline gap-4"
+                  style={{ borderBottom: i < stats.length - 1 ? '1px solid var(--timberwolf)' : 'none' }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 300,
+                      fontSize: 'clamp(4rem, 7vw, 6.5rem)',
+                      lineHeight: 0.9,
+                      letterSpacing: '-0.03em',
+                      color: 'var(--mauve)',
+                    }}
+                  >
+                    {s.value}
+                  </span>
+                  {s.unit && (
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 300,
+                        fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
+                        color: 'var(--jaune-or)',
+                        lineHeight: 1,
+                      }}
+                    >
+                      {s.unit}
+                    </span>
+                  )}
+                  <span
+                    className="ml-2"
+                    style={{
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 300,
+                      fontSize: '0.8rem',
+                      lineHeight: 1.4,
+                      color: 'var(--night-60)',
+                      letterSpacing: '0.02em',
+                      maxWidth: '8rem',
+                    }}
+                  >
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom credential strip */}
+          <div className="mt-12 flex items-center gap-3">
+            <span
+              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+              style={{ background: 'var(--jaune-or)' }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 400,
+                fontSize: '0.7rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: 'var(--night-60)',
+              }}
+            >
+              Agrément CREPMF · SGI/DA/2016/60
+            </span>
+          </div>
+        </div>
+
+        {/* RIGHT PANEL — White-smoke, manifesto text */}
+        <div
+          ref={rightRef}
+          className="reveal lg:w-[58%] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-20 lg:py-28 relative overflow-hidden"
+          style={{ background: 'var(--white-smoke)' }}
+        >
+          <div className="relative z-10 max-w-xl">
+            {/* Oversized Fraunces quote/manifesto */}
             <h2
               style={{
-                fontFamily: 'var(--font-display-aptos)',
-                fontWeight: 500,
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
-                lineHeight: 1.0,
-                letterSpacing: '-0.01em',
+                fontFamily: 'var(--font-display)',
+                fontWeight: 300,
+                fontSize: 'clamp(2rem, 4vw, 3.4rem)',
+                lineHeight: 1.15,
+                letterSpacing: '-0.02em',
                 color: 'var(--night)',
               }}
             >
               Exécution rigoureuse,{' '}
-              <em style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              <em
+                style={{
+                  fontStyle: 'italic',
+                  color: 'var(--mauve)',
+                }}
+              >
                 confiance durable.
               </em>
             </h2>
 
-            {/* Gold rule */}
             <div
-              className="h-[1px] w-20 mt-8 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--mauve), var(--jaune-or), transparent)' }}
+              className="my-10 h-[1px] w-16"
+              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
             />
 
             <p
-              className="max-w-sm"
               style={{
                 fontFamily: 'var(--font-primary)',
                 fontWeight: 300,
-                fontSize: '0.95rem',
-                lineHeight: 1.8,
-                color: 'var(--night-60)',
+                fontSize: '1rem',
+                lineHeight: 1.85,
+                color: 'var(--night-80)',
+                maxWidth: '32rem',
               }}
             >
-              Nous allions discipline de marché, ingénierie financière et accompagnement client
-              pour créer de la valeur sur le long terme.
+              Nous allions discipline de marché, ingénierie financière
+              et accompagnement client pour créer de la valeur sur le long terme —
+              avec la rigueur d'une institution et la réactivité d'un partenaire dédié.
             </p>
 
-            {/* Image */}
-            <div className="mt-10 relative w-full h-[280px] lg:h-[340px] overflow-hidden">
-              <img
-                src="/value_props.jpg"
-                alt="Salle de conférence moderne"
-                className="w-full h-full object-cover"
-                style={{ filter: 'saturate(0.85) contrast(1.05)' }}
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: 'linear-gradient(to top, var(--cream) 0%, transparent 40%)' }}
-              />
-            </div>
-          </div>
-
-          {/* Right — feature cards */}
-          <div ref={listRef} className="reveal-stagger lg:col-span-7 flex flex-col gap-0 lg:pt-20">
-            {features.map((f, i) => (
-              <div
-                key={f.title}
-                className="group py-8 md:py-10 flex items-start gap-6 md:gap-10 transition-all duration-300 hover:bg-[var(--mauve-05)]"
-                style={{
-                  borderTop: i === 0 ? '1px solid var(--timberwolf)' : 'none',
-                  borderBottom: '1px solid var(--timberwolf)',
-                  borderLeft: '3px solid transparent',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.borderLeftColor = 'var(--mauve)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderLeftColor = 'transparent'}
-              >
-                {/* Number */}
-                <span
-                  className="shrink-0 mt-1"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
-                    fontSize: '2rem',
-                    lineHeight: 1,
-                    color: 'var(--jaune-or)',
-                    opacity: 0.35,
-                  }}
+            {/* Three pillars — horizontal strip */}
+            <div className="mt-14 grid grid-cols-3 gap-0">
+              {[
+                { label: 'Sécurité', sub: 'Agrément CREPMF' },
+                { label: 'Accompagnement', sub: 'Conseiller dédié' },
+                { label: 'Performance', sub: 'Recherche indépendante' },
+              ].map((p, i) => (
+                <div
+                  key={p.label}
+                  className="pr-6"
+                  style={{ borderLeft: i > 0 ? '1px solid var(--timberwolf)' : 'none', paddingLeft: i > 0 ? '1.5rem' : 0 }}
                 >
-                  {f.number}
-                </span>
-
-                <div>
-                  <h3
-                    className="mb-2"
+                  <div
                     style={{
                       fontFamily: 'var(--font-display-aptos)',
-                      fontWeight: 600,
-                      fontSize: '1.5rem',
-                      lineHeight: 1.15,
+                      fontWeight: 500,
+                      fontSize: '0.95rem',
                       color: 'var(--night)',
+                      marginBottom: '0.3rem',
                     }}
                   >
-                    {f.title}
-                  </h3>
-                  <p
+                    {p.label}
+                  </div>
+                  <div
                     style={{
                       fontFamily: 'var(--font-primary)',
                       fontWeight: 300,
-                      fontSize: '0.9rem',
-                      lineHeight: 1.75,
+                      fontSize: '0.7rem',
                       color: 'var(--night-60)',
-                      maxWidth: '28rem',
+                      letterSpacing: '0.03em',
                     }}
                   >
-                    {f.description}
-                  </p>
+                    {p.sub}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-
         </div>
+
       </div>
     </section>
   );

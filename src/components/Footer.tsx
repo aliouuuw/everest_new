@@ -19,10 +19,10 @@ export const Footer = () => {
   };
 
   return (
-    <footer style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative" style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       {/* Subtle mauve ambient glow */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none opacity-20"
         style={{
           background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
         }}

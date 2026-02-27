@@ -30,6 +30,10 @@
   --mauve-15: rgba(70, 29, 76, 0.15);
   --mauve-10: rgba(70, 29, 76, 0.1);
   --mauve-05: rgba(70, 29, 76, 0.05);
+  --mauve-light: rgba(70, 29, 76, 0.05);
+  --mauve-glow: rgba(70, 29, 76, 0.12);
+  --gold-pale: rgba(202, 148, 47, 0.06);
+  --gold-warm: rgba(202, 148, 47, 0.12);
   
   /* Typography - Modern Dynamic Luxury */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -115,6 +119,43 @@ html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@utility gradient-mauve-gold {
+  background: linear-gradient(90deg, var(--mauve) 0%, var(--jaune-or) 100%);
+}
+
+.section-bg-mauve {
+  background: linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%);
+  color: var(--white-smoke);
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-mauve::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.section-bg-mauve h1, 
+.section-bg-mauve h2, 
+.section-bg-mauve h3, 
+.section-bg-mauve h4,
+.section-bg-mauve h5, 
+.section-bg-mauve h6,
+.section-bg-mauve .luxury-heading-dark {
+  color: var(--pure-white);
+}
+
+.section-bg-mauve p,
+.section-bg-mauve .luxury-subheading-dark {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 @utility floating-animation {
@@ -618,6 +659,10 @@ html {
 .reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }
 .reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
 .reveal-stagger.in > *:nth-child(5) { transition-delay: 300ms; }
+
+/* Service card hover — gold left accent */
+.service-card { border-left: 2px solid transparent; transition: border-color 500ms var(--ease-out-cubic), background 500ms var(--ease-out-cubic); }
+.service-card:hover { border-left-color: var(--jaune-or); }
 
 /* Card hover micro-interactions */
 .card-hover { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }

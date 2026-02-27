@@ -1,10 +1,18 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useQuery } from "convex/react";
 import { useReveal } from "../Hooks/useReveal";
 import { api } from "../../../convex/_generated/api";
 import { FiArrowRight } from "react-icons/fi";
 
-type PublicationCategory = "revues-hebdo" | "revues-mensuelles";
+type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
+
+const CATEGORY_LABELS: Record<PublicationCategory, string> = {
+  "revues-hebdo": "Revues hebdo",
+  "revues-mensuelles": "Revues mensuelles",
+  "teaser-dividende": "Dividendes",
+  "marches": "Marchés",
+  "analyses": "Analyses",
+};
 
 type PublicationItem = {
   title: string;
@@ -14,18 +22,8 @@ type PublicationItem = {
   date: string;
 };
 
-const ALL_LABEL = "tout" as const;
-const CATEGORY_LABELS: Record<PublicationCategory | typeof ALL_LABEL, string> = {
-  [ALL_LABEL]: "Tout",
-  "revues-hebdo": "Revues hebdo",
-  "revues-mensuelles": "Revues mensuelles",
-};
-
 export const Insights: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
-  const listRef = useReveal<HTMLDivElement>();
-
-  const [activeCategory, setActiveCategory] = useState<PublicationCategory | typeof ALL_LABEL>(ALL_LABEL);
 
   const publications = useQuery(api.publications.getPublications, {
     limit: 3,
@@ -34,199 +32,248 @@ export const Insights: React.FC = () => {
 
   const items: Array<PublicationItem> = useMemo(() => {
     if (!publications?.page) return [];
-    const sortedPublications = [...publications.page].sort((a, b) => {
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-      return (b.createdAt || 0) - (a.createdAt || 0);
-    });
-    return sortedPublications.map(pub => ({
-      title: pub.title,
-      desc: pub.description,
-      href: `/publications/${pub.slug}`,
-      category: pub.category as PublicationCategory,
-      date: new Date(pub.createdAt || 0).toISOString().split('T')[0]
-    }));
+    return [...publications.page]
+      .sort((a, b) => {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return (b.createdAt || 0) - (a.createdAt || 0);
+      })
+      .map(pub => ({
+        title: pub.title,
+        desc: pub.description,
+        href: `/publications/${pub.slug}`,
+        category: pub.category as PublicationCategory,
+        date: new Date(pub.createdAt || 0).toISOString().split('T')[0],
+      }));
   }, [publications]);
 
-  const categories: Array<PublicationCategory | typeof ALL_LABEL> = useMemo(
-    () => [ALL_LABEL, "revues-hebdo", "revues-mensuelles"],
-    []
-  );
-
-  const filtered = useMemo(() => {
-    const sorted = [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
-    if (activeCategory === ALL_LABEL) return sorted;
-    return sorted.filter((it) => it.category === activeCategory);
-  }, [items, activeCategory]);
+  const featured = items[0];
+  const secondary = items.slice(1, 3);
 
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-28 md:py-36"
-      style={{ background: 'var(--cream)' }}
+      className="reveal relative overflow-hidden"
+      style={{ background: 'var(--night)' }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+      {/* Subtle mauve atmosphere — top left */}
+      <div
+        className="absolute top-0 left-0 w-[45%] h-[60%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-20) 0%, transparent 65%)' }}
+      />
 
-        {/* Header row */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div className="max-w-xl">
-            <span
-              className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              Publications
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display-aptos)',
-                fontWeight: 500,
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
-                lineHeight: 1.0,
-                letterSpacing: '-0.01em',
-                color: 'var(--night)',
-              }}
-            >
-              Restez informé{' '}
-              <em style={{ fontWeight: 400, fontStyle: 'italic', color: 'var(--jaune-or)' }}>
-                des marchés.
-              </em>
-            </h2>
-          </div>
-
-          {/* Filters */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setActiveCategory(cat)}
-                  className="px-4 py-2 transition-all duration-300"
-                  style={{
-                    fontFamily: 'var(--font-primary)',
-                    fontWeight: isActive ? 500 : 300,
-                    fontSize: '0.75rem',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase' as const,
-                    color: isActive ? 'var(--night)' : 'var(--night-60)',
-                    borderBottom: isActive ? '2px solid var(--mauve)' : '1px solid transparent',
-                  }}
-                  aria-pressed={isActive}
-                >
-                  {CATEGORY_LABELS[cat]}
-                </button>
-              );
-            })}
-          </div>
+      {/* Section header strip */}
+      <div
+        className="relative z-10 flex items-center justify-between px-8 md:px-16 lg:px-24 pt-16 md:pt-20 pb-10 md:pb-12"
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+      >
+        <div className="flex items-center gap-6">
+          <span
+            className="text-[10px] tracking-[0.35em] uppercase"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+          >
+            Publications
+          </span>
+          <span
+            className="h-[1px] w-12"
+            style={{ background: 'var(--jaune-or)', opacity: 0.4 }}
+          />
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(1.5rem, 3vw, 2.4rem)',
+              letterSpacing: '-0.02em',
+              lineHeight: 1,
+              color: 'var(--pure-white)',
+            }}
+          >
+            Restez informé{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>des marchés.</em>
+          </span>
         </div>
 
-        {/* Content */}
-        {publications === undefined ? (
-          <div className="text-center py-20">
-            <div
-              className="w-8 h-8 border border-[var(--jaune-or)]/30 border-t-[var(--jaune-or)] rounded-full animate-spin mx-auto mb-4"
-            />
-            <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.875rem', color: 'var(--night-60)' }}>
-              Chargement des publications…
-            </p>
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.95rem', color: 'var(--night-60)' }}>
-              Aucune publication ne correspond aux critères sélectionnés.
-            </p>
-          </div>
-        ) : (
-          <div ref={listRef} className="reveal-stagger grid grid-cols-1 md:grid-cols-3 gap-0">
-            {filtered.map((it, i) => (
-              <a
-                key={`${it.title}-${it.date}`}
-                href={it.href}
-                className="group flex flex-col py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 transition-colors duration-300 hover:bg-[var(--gold-pale)]/30"
-                style={{
-                  borderTop: '1px solid var(--timberwolf)',
-                  borderRight: i < filtered.length - 1 ? '1px solid var(--timberwolf)' : 'none',
-                  borderBottom: '1px solid var(--timberwolf)',
-                }}
-              >
-                {/* Category + date */}
-                <div className="flex items-center gap-3 mb-5">
-                  <span
-                    className="text-[10px] tracking-[0.15em] uppercase"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-                  >
-                    {CATEGORY_LABELS[it.category]}
-                  </span>
-                  <span
-                    className="text-[10px]"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'var(--night-60)' }}
-                  >
-                    {new Date(it.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                  </span>
-                </div>
+        <a
+          href="/publications"
+          className="hidden md:inline-flex items-center gap-3 group"
+        >
+          <span
+            className="relative overflow-hidden text-[10px] tracking-[0.2em] uppercase"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}
+          >
+            Toutes les publications
+            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+          </span>
+          <FiArrowRight className="text-xs text-[rgba(255,255,255,0.4)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+        </a>
+      </div>
 
-                {/* Title */}
-                <h3
-                  className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300"
+      {/* Loading state */}
+      {publications === undefined && (
+        <div className="relative z-10 flex items-center justify-center py-28">
+          <div className="w-7 h-7 border border-[var(--jaune-or)]/30 border-t-[var(--jaune-or)] rounded-full animate-spin" />
+        </div>
+      )}
+
+      {/* Editorial split — featured left, secondary right */}
+      {publications !== undefined && items.length > 0 && (
+        <div className="relative z-10 flex flex-col lg:flex-row" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+
+          {/* FEATURED — left, large */}
+          {featured && (
+            <a
+              href={featured.href}
+              className="group lg:w-[58%] flex flex-col justify-between px-8 md:px-16 lg:px-24 py-14 md:py-18 transition-colors duration-500 hover:bg-white/[0.02]"
+              style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}
+            >
+              <div>
+                {/* Category badge */}
+                <span
+                  className="inline-block mb-8 px-3 py-1 text-[10px] tracking-[0.12em] uppercase"
                   style={{
-                    fontFamily: 'var(--font-display-aptos)',
-                    fontWeight: 600,
-                    fontSize: '1.35rem',
-                    lineHeight: 1.2,
-                    color: 'var(--night)',
+                    fontFamily: 'var(--font-primary)',
+                    fontWeight: 500,
+                    color: 'var(--jaune-or)',
+                    border: '1px solid rgba(202,148,47,0.25)',
                   }}
                 >
-                  {it.title}
+                  {CATEGORY_LABELS[featured.category]}
+                </span>
+
+                {/* Large display title */}
+                <h3
+                  className="mb-6 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 300,
+                    fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
+                    lineHeight: 1.15,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--pure-white)',
+                  }}
+                >
+                  {featured.title}
                 </h3>
 
-                {/* Description */}
                 <p
-                  className="mb-6 flex-grow"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 300,
-                    fontSize: '0.85rem',
-                    lineHeight: 1.75,
-                    color: 'var(--night-60)',
-                    maxWidth: '22rem',
+                    fontSize: '0.9rem',
+                    lineHeight: 1.8,
+                    color: 'rgba(255,255,255,0.4)',
+                    maxWidth: '34rem',
                   }}
                 >
-                  {it.desc}
+                  {featured.desc}
                 </p>
+              </div>
 
-                {/* Read more */}
+              {/* Bottom row */}
+              <div className="mt-12 flex items-center justify-between">
                 <span
-                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--mauve)] transition-colors duration-300"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
+                  style={{
+                    fontFamily: 'var(--font-primary)',
+                    fontWeight: 300,
+                    fontSize: '0.75rem',
+                    color: 'rgba(255,255,255,0.25)',
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  {new Date(featured.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </span>
+                <span
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.35)' }}
                 >
                   Lire
-                  <span className="inline-block w-4 h-[1px] bg-current group-hover:w-8 transition-all duration-500" />
+                  <span className="inline-block w-5 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
                 </span>
+              </div>
+            </a>
+          )}
+
+          {/* SECONDARY — right, stacked */}
+          <div className="lg:w-[42%] flex flex-col">
+            {secondary.map((it, i) => (
+              <a
+                key={`${it.title}-${it.date}`}
+                href={it.href}
+                className="group flex flex-col justify-between px-8 md:px-12 lg:px-14 py-10 md:py-12 transition-colors duration-500 hover:bg-white/[0.02] flex-1"
+                style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <div>
+                  <span
+                    className="block mb-4 text-[10px] tracking-[0.12em] uppercase"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)', opacity: 0.7 }}
+                  >
+                    {CATEGORY_LABELS[it.category]}
+                  </span>
+                  <h3
+                    className="mb-3 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
+                    style={{
+                      fontFamily: 'var(--font-display-aptos)',
+                      fontWeight: 500,
+                      fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
+                      lineHeight: 1.2,
+                      color: 'var(--pure-white)',
+                    }}
+                  >
+                    {it.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 300,
+                      fontSize: '0.82rem',
+                      lineHeight: 1.7,
+                      color: 'rgba(255,255,255,0.35)',
+                    }}
+                  >
+                    {it.desc}
+                  </p>
+                </div>
+                <div className="mt-6 flex items-center justify-between">
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 300,
+                      fontSize: '0.7rem',
+                      color: 'rgba(255,255,255,0.2)',
+                    }}
+                  >
+                    {new Date(it.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </span>
+                  <FiArrowRight className="text-xs text-[rgba(255,255,255,0.2)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+                </div>
               </a>
             ))}
-          </div>
-        )}
 
-        {/* View all link */}
-        <div className="mt-14 flex justify-center">
-          <a
-            href="/publications"
-            className="group inline-flex items-center gap-4"
-          >
-            <span
-              className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
+            {/* View all — bottom of right column */}
+            <a
+              href="/publications"
+              className="md:hidden flex items-center gap-3 px-8 py-8 group"
+              style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
             >
-              Voir toutes les publications
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-            </span>
-            <span className="w-9 h-9 rounded-full border border-[var(--night)]/15 flex items-center justify-center group-hover:border-[var(--jaune-or)]/50 transition-all duration-500">
-              <FiArrowRight className="text-sm text-[var(--night)]/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
-            </span>
-          </a>
+              <span
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}
+              >
+                Toutes les publications
+              </span>
+              <FiArrowRight className="text-xs text-[rgba(255,255,255,0.4)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+            </a>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Empty state */}
+      {publications !== undefined && items.length === 0 && (
+        <div className="relative z-10 py-24 text-center">
+          <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.9rem', color: 'rgba(255,255,255,0.3)' }}>
+            Aucune publication disponible.
+          </p>
+        </div>
+      )}
     </section>
   );
 };
