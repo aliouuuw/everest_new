@@ -26,6 +26,7 @@ import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
 import { MandateMgmtPage } from './routes/MandateMgmtPage'
 import { ServicesPage } from './routes/ServicesPage'
+import { OffresPage } from './routes/OffresPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
@@ -118,6 +119,12 @@ const servicesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/services',
   component: ServicesPage,
+})
+
+const offresRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/offres',
+  component: OffresPage,
 })
 
 const gestionLibreRoute = createRoute({
@@ -257,6 +264,7 @@ const routeTree = rootRoute.addChildren([
   ibRoute,
   mandateRoute,
   servicesRoute,
+  offresRoute,
   gestionLibreRoute,
   gestionAssisteeRoute,
   bourseRoute,

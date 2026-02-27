@@ -156,7 +156,7 @@ export const Header: React.FC = () => {
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   // Pages with light backgrounds need immediate dark backdrop for nav contrast
-  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
+  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
   const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
 
   // Hide header if authenticated and on dashboard, or if in admin portal
@@ -228,7 +228,7 @@ export const Header: React.FC = () => {
           />
 
           <Link
-            to="/services"
+            to="/offres"
             className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
           >
@@ -338,7 +338,7 @@ export const Header: React.FC = () => {
             </div>
 
             <Link
-              to="/services"
+              to="/offres"
               className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
               onClick={() => setIsMobileMenuOpen(false)}
