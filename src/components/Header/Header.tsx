@@ -167,6 +167,7 @@ export const Header: React.FC = () => {
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
+    { label: 'Actualités', href: '/actualites' },
     { label: 'Publications', href: '/publications' },
     { label: 'Abécédaire / FAQ', href: '/faq' },
   ];
@@ -232,14 +233,6 @@ export const Header: React.FC = () => {
             style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
           >
             Offres
-          </Link>
-
-          <Link
-            to="/actualites"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
-          >
-            Actualités
           </Link>
 
           <Link
@@ -343,15 +336,6 @@ export const Header: React.FC = () => {
                 ))}
               </div>
             </div>
-
-            <Link
-              to="/actualites"
-              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Actualités
-            </Link>
 
             <Link
               to="/services"
