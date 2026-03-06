@@ -46,10 +46,10 @@ export const PublicationForm = () => {
   // Show loading state while checking authentication
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
-          <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]/80">Checking authentication...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--mauve)] mx-auto"></div>
+          <p className="mt-2 text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Vérification...</p>
         </div>
       </div>
     );
@@ -58,15 +58,16 @@ export const PublicationForm = () => {
   // Show error if user is not authenticated
   if (!user || !user._id) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h1>
-          <p className="text-gray-600 mb-4">You must be logged in to create or edit publications.</p>
+          <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Authentification requise</h1>
+          <p className="mb-4" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.9rem' }}>Vous devez être connecté pour créer ou modifier des publications.</p>
           <button
             onClick={() => navigate({ to: '/auth' })}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+            style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
           >
-            Go to Login
+            Se connecter
           </button>
         </div>
       </div>

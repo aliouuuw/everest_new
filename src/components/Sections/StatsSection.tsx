@@ -94,7 +94,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   }, [sectionRef, countersTriggered])
 
   const backgroundClasses = {
-    light: 'bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5',
+    light: 'border-y border-[var(--night)]/5',
     gradient: 'bg-gradient-to-br from-[var(--jaune-or-light)]/5 to-transparent'
   }
 
@@ -129,7 +129,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
               {stat.icon && (
                 <div className="relative inline-flex items-center justify-center mb-4">
                   <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 shadow-sm grid place-content-center">
-                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110">
+                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-full grid place-content-center text-[var(--night)] transition-transform duration-300 group-hover:scale-110" style={{ background: 'rgba(70,29,76,0.06)', border: '1px solid rgba(70,29,76,0.12)' }}>
                       <stat.icon className="text-base md:text-lg" />
                     </div>
                   </div>

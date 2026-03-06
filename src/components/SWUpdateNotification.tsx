@@ -43,32 +43,34 @@ export const SWUpdateNotification: React.FC<SWUpdateNotificationProps> = ({ clas
 
   return (
     <div className={`fixed bottom-4 right-4 z-50 ${className}`}>
-      <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-4 max-w-sm">
+      <div className="p-4 max-w-sm" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.15)', boxShadow: '0 8px 32px rgba(70,29,76,0.12)' }}>
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(70,29,76,0.08)' }}>
+              <svg className="w-5 h-5" style={{ color: 'var(--mauve)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </div>
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-medium text-gray-900">Update Available</h3>
-            <p className="text-sm text-gray-600 mt-1">
+            <h3 className="text-sm font-medium" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night)' }}>Mise à jour disponible</h3>
+            <p className="text-sm mt-1" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>
               New content is available. The page will refresh automatically in {countdown} seconds.
             </p>
             <div className="mt-3 flex gap-2">
               <button
                 onClick={handleUpdate}
-                className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase transition-all duration-300"
+                style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
               >
-                Update Now
+                Mettre à jour
               </button>
               <button
                 onClick={handleDismiss}
-                className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="inline-flex items-center px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase transition-all duration-300"
+                style={{ border: '1px solid rgba(70,29,76,0.2)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
               >
-                Dismiss
+                Ignorer
               </button>
             </div>
           </div>

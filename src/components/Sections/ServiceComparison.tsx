@@ -212,9 +212,8 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
           {serviceFeatures.map((feature, index) => (
             <div
               key={feature.name}
-              className={`grid grid-cols-4 border-b border-black/10 ${
-                index % 2 === 0 ? 'bg-[var(--white-smoke)]/30' : ''
-              }`}
+              className="grid grid-cols-4 border-b border-black/10"
+              style={{ background: index % 2 === 0 ? 'rgba(70,29,76,0.03)' : '' }}
             >
               <div className="p-6 font-medium text-[var(--night)]">
                 {feature.name}
@@ -235,7 +234,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
       </div>
 
       {/* Legend */}
-      <div className="mt-12 p-6 border border-black/10 bg-[var(--white-smoke)]/30">
+      <div className="mt-12 p-6 border border-black/10" style={{ background: 'rgba(70,29,76,0.03)' }}>
         <div className="flex items-start gap-3">
           <FiInfo className="text-[var(--jaune-or)] mt-0.5 flex-shrink-0" />
           <div className="text-sm text-[rgba(10,10,10,0.8)]">
