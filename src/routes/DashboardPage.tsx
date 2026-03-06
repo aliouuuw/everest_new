@@ -157,14 +157,14 @@ const DashboardPageContent = () => {
             icon: <FaExclamationTriangle />
           },
         ].map((k, i) => (
-          <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10 hover:shadow-md transition-shadow">
+          <div key={i} className="p-4 hover:shadow-sm transition-shadow" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.1)' }}>
             <div className="flex items-center justify-between mb-2">
               <div className="text-secondary text-xs">{k.label}</div>
-              <div className="text-[var(--jaune-or)]">{k.icon}</div>
+              <div className="text-[var(--mauve)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
               <div className="font-display-aptos text-lg">{k.value}</div>
-              <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
+              <div className="text-[10px] px-1.5 py-0.5" style={{ border: '1px solid rgba(70,29,76,0.15)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>{k.delta}</div>
             </div>
             <div className="mt-2 opacity-80">
               <Sparkline points={k.trend} />
@@ -176,7 +176,7 @@ const DashboardPageContent = () => {
       {/* Main grid */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
         {/* Positions table */}
-        <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
+        <div className="xl:col-span-2 p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
           <div className="flex items-center justify-between mb-4">
             <div className="text-sm font-display-aptos">Positions</div>
             <div className="flex items-center gap-2">
@@ -203,7 +203,9 @@ const DashboardPageContent = () => {
               </thead>
               <tbody className="align-top">
                 {positions.map((pos) => (
-                  <tr key={pos.id} className="border-t border-[var(--night)]/10 hover:bg-[var(--white-smoke)]/50">
+                  <tr key={pos.id} style={{ borderTop: '1px solid rgba(70,29,76,0.08)' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.02)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = '')}>
                     <td className="py-3 font-medium">{pos.symbol}</td>
                     <td className="py-3">{formatNumber(pos.quantity)}</td>
                     <td className="py-3">{formatCurrency(pos.avgPrice)}</td>
@@ -213,7 +215,7 @@ const DashboardPageContent = () => {
                       {pos.performance > 0 ? '+' : ''}{pos.performance}%
                     </td>
                     <td className="py-3">
-                      <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
+                      <div className="w-20 h-1.5" style={{ background: 'rgba(70,29,76,0.08)' }}>
                         <div className="h-1.5 rounded" style={{ width: `${pos.allocation}%`, background: 'var(--jaune-or)' }} />
                       </div>
                     </td>
@@ -236,7 +238,7 @@ const DashboardPageContent = () => {
 
         {/* Allocation donut + alerts */}
         <div className="space-y-4">
-          <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
+          <div className="p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
             <div className="text-sm font-display-aptos mb-3">Répartition</div>
             <div className="flex items-center gap-4">
               <div className="relative w-28 h-28 shrink-0 rounded-full"
@@ -255,15 +257,16 @@ const DashboardPageContent = () => {
           </div>
 
           {/* Recent alerts */}
-          <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
+          <div className="p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
             <div className="text-sm font-display-aptos mb-3">Alertes récentes</div>
             <div className="space-y-2">
               {alerts.slice(0, 3).map((alert) => (
-                <div key={alert.id} className={`flex items-start gap-2 p-2 rounded text-xs ${
-                  alert.type === 'warning' ? 'bg-amber-50 text-amber-800' :
-                  alert.type === 'success' ? 'bg-emerald-50 text-emerald-800' :
-                  'bg-blue-50 text-blue-800'
-                }`}>
+                <div key={alert.id} className="flex items-start gap-2 p-2 text-xs"
+                  style={{
+                    background: alert.type === 'warning' ? 'rgba(202,148,47,0.08)' : alert.type === 'success' ? 'rgba(70,29,76,0.06)' : 'rgba(70,29,76,0.04)',
+                    color: alert.type === 'warning' ? 'var(--jaune-or)' : alert.type === 'success' ? 'var(--mauve)' : 'var(--night-60)',
+                    borderLeft: alert.type === 'warning' ? '2px solid var(--jaune-or)' : '2px solid var(--mauve)'
+                  }}>
                   <FaBell className="mt-0.5 flex-shrink-0" />
                   <div>
                     <div>{alert.message}</div>
@@ -283,7 +286,7 @@ const DashboardPageContent = () => {
   const renderTransactions = () => (
     <div className="space-y-4">
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+      <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="relative">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary" />
@@ -292,13 +295,15 @@ const DashboardPageContent = () => {
               placeholder="Rechercher un instrument..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
+              className="pl-10 pr-4 py-2 text-sm outline-none transition-all duration-300"
+              style={{ border: '1px solid rgba(70,29,76,0.15)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
             />
           </div>
           <select
             value={transactionFilter}
             onChange={(e) => setTransactionFilter(e.target.value)}
-            className="px-3 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
+            className="px-3 py-2 text-sm outline-none transition-all duration-300"
+            style={{ border: '1px solid rgba(70,29,76,0.15)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
           >
             <option value="all">Tous les types</option>
             <option value="achat">Achats</option>
@@ -313,7 +318,7 @@ const DashboardPageContent = () => {
       </div>
 
       {/* Transactions table */}
-      <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
+      <div className="p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -330,14 +335,17 @@ const DashboardPageContent = () => {
             </thead>
             <tbody className="align-top">
               {filteredTransactions.map((t) => (
-                <tr key={t.id} className="border-t border-[var(--night)]/10 hover:bg-[var(--white-smoke)]/50">
+                <tr key={t.id} style={{ borderTop: '1px solid rgba(70,29,76,0.08)' }}
+                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.02)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = '')}>
                   <td className="py-3">{new Date(t.date).toLocaleDateString('fr-FR')}</td>
                   <td className="py-3">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs ${
-                      t.type === 'Achat' ? 'bg-emerald-100 text-emerald-800' :
-                      t.type === 'Vente' ? 'bg-red-100 text-red-800' :
-                      'bg-blue-100 text-blue-800'
-                    }`}>
+                    <span className="inline-flex items-center px-2 py-1 text-xs"
+                      style={{
+                        background: t.type === 'Achat' ? 'rgba(70,29,76,0.08)' : t.type === 'Vente' ? 'rgba(220,38,38,0.08)' : 'rgba(202,148,47,0.1)',
+                        color: t.type === 'Achat' ? 'var(--mauve)' : t.type === 'Vente' ? '#dc2626' : 'var(--jaune-or)',
+                        fontFamily: 'var(--font-primary)', fontWeight: 500
+                      }}>
                       {t.type}
                     </span>
                   </td>
@@ -347,11 +355,12 @@ const DashboardPageContent = () => {
                   <td className="py-3 font-medium">{formatCurrency(t.amount)}</td>
                   <td className="py-3">{formatCurrency(t.fee)}</td>
                   <td className="py-3">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full border text-[10px] ${
-                      t.status === 'Exécutée' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                      t.status === 'Partielle' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                      'bg-[var(--white-smoke)] text-secondary border-[var(--night)]/10'
-                    }`}>
+                    <span className="inline-flex items-center px-2 py-1 text-[10px]"
+                      style={{
+                        border: t.status === 'Exécutée' ? '1px solid rgba(70,29,76,0.2)' : t.status === 'Partielle' ? '1px solid rgba(202,148,47,0.3)' : '1px solid rgba(70,29,76,0.1)',
+                        color: t.status === 'Exécutée' ? 'var(--mauve)' : t.status === 'Partielle' ? 'var(--jaune-or)' : 'var(--night-60)',
+                        fontFamily: 'var(--font-primary)'
+                      }}>
                       {t.status}
                     </span>
                   </td>
@@ -367,9 +376,9 @@ const DashboardPageContent = () => {
   // Show loading state while checking authentication
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--mauve)] mx-auto"></div>
           <p className="mt-4 text-secondary">Chargement...</p>
         </div>
       </div>
@@ -377,7 +386,7 @@ const DashboardPageContent = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
+    <div className="min-h-screen" style={{ background: 'var(--pure-white)' }}>
       {/* App chrome */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--night)]/10 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
@@ -385,7 +394,7 @@ const DashboardPageContent = () => {
           <div className="text-sm font-display-aptos">Portail Client</div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5" style={{ border: '1px solid rgba(70,29,76,0.12)', background: 'rgba(70,29,76,0.03)' }}>
             <FaSearch className="text-secondary" />
             <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
           </div>
@@ -408,17 +417,14 @@ const DashboardPageContent = () => {
 
       <div className="grid grid-cols-12 min-h-[calc(100vh-73px)]">
         {/* Sidebar */}
-        <aside className="col-span-12 lg:col-span-2 xl:col-span-2 border-r border-[var(--night)]/10 bg-white/50 p-4">
+        <aside className="col-span-12 lg:col-span-2 xl:col-span-2 p-4" style={{ borderRight: '1px solid rgba(70,29,76,0.1)', background: 'rgba(70,29,76,0.02)' }}>
           <nav className="space-y-1">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveView(item.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
-                  item.active
-                    ? 'bg-[var(--night)] text-[var(--pure-white)]'
-                    : 'hover:bg-[var(--white-smoke)] text-secondary'
-                }`}
+                className="w-full flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200"
+                style={item.active ? { background: 'var(--mauve)', color: 'var(--pure-white)' } : { color: 'var(--night-60)' }}
               >
                 <span className="opacity-80">{item.icon}</span>
                 <span className="text-sm">{item.label}</span>
@@ -444,7 +450,7 @@ const DashboardPageContent = () => {
             </div>
             <div className="flex items-center gap-3 text-xs text-secondary">
               <div>Dernière mise à jour: {lastUpdate.toLocaleTimeString('fr-FR')}</div>
-              <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[var(--white-smoke)] border border-[var(--night)]/10">
+              <div className="inline-flex items-center gap-1 px-2 py-1" style={{ border: '1px solid rgba(70,29,76,0.15)', color: 'var(--night-60)' }}>
                 <FaBell className="opacity-70" />
                 <span>{alerts.length}</span>
               </div>
@@ -487,11 +493,12 @@ const DashboardPageContent = () => {
             <div className="space-y-4">
               <h3 className="text-lg font-display-aptos mb-4">Centre de notifications</h3>
               {alerts.map((alert) => (
-                <div key={alert.id} className={`p-4 rounded-lg border ${
-                  alert.type === 'warning' ? 'bg-amber-50 border-amber-200' :
-                  alert.type === 'success' ? 'bg-emerald-50 border-emerald-200' :
-                  'bg-blue-50 border-blue-200'
-                }`}>
+                <div key={alert.id} className="p-4"
+                  style={{
+                    border: alert.type === 'warning' ? '1px solid rgba(202,148,47,0.25)' : alert.type === 'success' ? '1px solid rgba(70,29,76,0.2)' : '1px solid rgba(70,29,76,0.12)',
+                    background: alert.type === 'warning' ? 'rgba(202,148,47,0.06)' : alert.type === 'success' ? 'rgba(70,29,76,0.04)' : 'rgba(70,29,76,0.02)',
+                    borderLeft: alert.type === 'warning' ? '3px solid var(--jaune-or)' : '3px solid var(--mauve)'
+                  }}>
                   <div className="flex items-start gap-3">
                     <FaBell className="mt-1" />
                     <div className="flex-1">
@@ -515,7 +522,7 @@ const DashboardPageContent = () => {
             <div className="max-w-2xl">
               <h3 className="text-lg font-display-aptos mb-6">Préférences</h3>
               <div className="space-y-6">
-                <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
+                <div className="p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
                   <h4 className="font-display-aptos mb-3">Notifications</h4>
                   <div className="space-y-3">
                     <label className="flex items-center gap-3">
@@ -533,7 +540,7 @@ const DashboardPageContent = () => {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
+                <div className="p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
                   <h4 className="font-display-aptos mb-3">Sécurité</h4>
                   <div className="space-y-3">
                     <button className="btn-secondary text-sm">

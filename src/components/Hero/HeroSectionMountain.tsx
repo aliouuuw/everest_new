@@ -35,7 +35,8 @@ export const HeroSectionMountain: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex items-end bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
+      className="relative min-h-[100svh] w-full flex items-end text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
+      style={{ background: 'var(--mauve)' }}
     >
       {/* ─── Cinematic Video Background ─── */}
       <div className="hero-video-wrap absolute inset-0 w-full h-full z-0">
@@ -50,20 +51,30 @@ export const HeroSectionMountain: React.FC = () => {
         >
           <source src="/kling_video.mp4" type="video/mp4" />
         </video>
-        {/* Radial vignette — darker edges, luminous center for the gold sculpture */}
+        {/* Radial vignette — mauve-tinted edges, preserving video center */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 55% 45%, transparent 0%, rgba(15,17,21,0.55) 60%, rgba(15,17,21,0.92) 100%)',
+            background: 'radial-gradient(ellipse 70% 60% at 55% 45%, transparent 0%, rgba(50,18,56,0.6) 60%, rgba(40,12,46,0.95) 100%)',
           }}
         />
-        {/* Bottom fade for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--night)] via-[var(--night)]/60 to-transparent pointer-events-none" />
-        {/* Left editorial fade with subtle mauve hint */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--night)]/80 via-[var(--mauve-10)]/30 to-transparent pointer-events-none" />
+        {/* Bottom fade — deep mauve for text readability */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, var(--mauve) 0%, rgba(70,29,76,0.75) 35%, transparent 65%)',
+          }}
+        />
+        {/* Left editorial fade — mauve dominant */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to right, rgba(50,18,56,0.85) 0%, rgba(70,29,76,0.3) 40%, transparent 70%)',
+          }}
+        />
         {/* Film grain overlay */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay"
+          className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}

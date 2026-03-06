@@ -34,6 +34,8 @@
   --mauve-glow: rgba(70, 29, 76, 0.12);
   --gold-pale: rgba(202, 148, 47, 0.06);
   --gold-warm: rgba(202, 148, 47, 0.12);
+  --mauve-border: rgba(70, 29, 76, 0.15);
+  --mauve-border-strong: rgba(70, 29, 76, 0.3);
   
   /* Typography - Modern Dynamic Luxury */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -126,8 +128,15 @@ html {
 }
 
 .section-bg-mauve {
-  background: linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%);
-  color: var(--white-smoke);
+  background: linear-gradient(135deg, var(--mauve) 0%, #2e1133 100%);
+  color: var(--pure-white);
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-mauve-pure {
+  background: var(--mauve);
+  color: var(--pure-white);
   position: relative;
   z-index: 1;
 }

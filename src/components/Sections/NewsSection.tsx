@@ -45,19 +45,19 @@ export const NewsSection: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative py-24 md:py-32 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
+      style={{ background: 'var(--pure-white)' }}
     >
-      {/* Subtle mauve-gold gradient atmosphere */}
+      {/* Mauve-gold gradient atmosphere — visible brand wash */}
       <div
-        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none opacity-30"
+        className="absolute top-0 right-0 w-2/3 h-2/3 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at top right, var(--mauve-08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at top right, rgba(70,29,76,0.07) 0%, transparent 60%)',
         }}
       />
       <div
-        className="absolute bottom-0 left-0 w-1/3 h-1/3 pointer-events-none opacity-20"
+        className="absolute bottom-0 left-0 w-1/2 h-1/2 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at bottom left, var(--jaune-or-08) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse at bottom left, rgba(202,148,47,0.05) 0%, transparent 50%)',
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
@@ -114,7 +114,8 @@ export const NewsSection: React.FC = () => {
           {/* Featured Article (Left, spans 7 cols) */}
           <a
             href={MOCK_NEWS[0].href}
-            className="group lg:col-span-7 flex flex-col h-full bg-[var(--pure-white)] border border-[var(--timberwolf)] hover:border-[var(--jaune-or)]/40 transition-all duration-500 overflow-hidden"
+            className="group lg:col-span-7 flex flex-col h-full bg-[var(--pure-white)] border hover:border-[var(--jaune-or)]/50 transition-all duration-500 overflow-hidden"
+            style={{ borderColor: 'rgba(70,29,76,0.15)' }}
           >
             <div className="relative aspect-[16/9] lg:aspect-[4/3] overflow-hidden">
               <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
@@ -183,7 +184,8 @@ export const NewsSection: React.FC = () => {
               <a
                 key={i}
                 href={article.href}
-                className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row h-full bg-[var(--pure-white)] border border-[var(--timberwolf)] hover:border-[var(--jaune-or)]/40 transition-all duration-500 overflow-hidden"
+                className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row h-full bg-[var(--pure-white)] border hover:border-[var(--jaune-or)]/50 transition-all duration-500 overflow-hidden"
+                style={{ borderColor: 'rgba(70,29,76,0.15)' }}
               >
                 <div className="relative w-full sm:w-2/5 lg:w-full xl:w-2/5 aspect-[16/9] sm:aspect-auto lg:aspect-[16/9] xl:aspect-auto overflow-hidden shrink-0">
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10" />

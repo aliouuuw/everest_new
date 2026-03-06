@@ -253,7 +253,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Calculator Inputs */}
             <div>
-              <div className="p-8 border border-black/[0.06] bg-[var(--white-smoke)] rounded-2xl">
+              <div className="p-8 rounded-2xl" style={{ border: '1px solid rgba(70,29,76,0.12)', background: 'var(--pure-white)' }}>
                 <h3
                   className="mb-8"
                   style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--night)' }}
@@ -276,7 +276,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                         onClick={() => handleInputChange('service', service.service)}
                         className="p-4 text-left transition-all duration-300 rounded-xl"
                         style={{
-                          border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
+                          border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid rgba(70,29,76,0.15)',
                           background: inputs.service === service.service ? 'var(--gold-pale)' : 'var(--pure-white)',
                         }}
                       >
@@ -365,7 +365,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                           onClick={() => handleInputChange('expectedReturn', value)}
                           className="p-3 text-center transition-all duration-300 rounded-xl"
                           style={{
-                            border: inputs.expectedReturn === value ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
+                            border: inputs.expectedReturn === value ? '1px solid var(--jaune-or)' : '1px solid rgba(70,29,76,0.15)',
                             background: inputs.expectedReturn === value ? 'var(--gold-pale)' : 'var(--pure-white)',
                           }}
                         >
@@ -387,7 +387,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
 
             {/* Results */}
             <div>
-              <div className="p-8 border border-black/[0.06] bg-[var(--white-smoke)] rounded-2xl">
+              <div className="p-8 rounded-2xl" style={{ border: '1px solid rgba(70,29,76,0.12)', background: 'var(--pure-white)' }}>
                 <h3
                   className="mb-8"
                   style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--night)' }}
@@ -396,12 +396,12 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 </h3>
 
                 <div className="space-y-0">
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--timberwolf)' }}>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(70,29,76,0.1)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Total investi</span>
                     <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.2rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--timberwolf)' }}>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid rgba(70,29,76,0.1)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>
                       Frais estimés ({serviceFees[inputs.service].min}%)
                     </span>
@@ -475,7 +475,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   setActiveTab('calculator');
                 }}
                 style={{
-                  border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
+                  border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid rgba(70,29,76,0.15)',
                   background: inputs.service === service.service ? 'var(--gold-pale)' : 'var(--pure-white)',
                 }}
               >

@@ -14,28 +14,39 @@ export const ValueProps: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
+      style={{ background: 'var(--pure-white)' }}
     >
-      {/* Subtle mauve atmosphere top-right */}
+      {/* Mauve atmospheric wash — visible brand presence */}
       <div
-        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none opacity-40"
+        className="absolute top-0 right-0 w-2/3 h-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at top right, var(--mauve-10) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at top right, rgba(70,29,76,0.08) 0%, transparent 65%)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at bottom left, rgba(202,148,47,0.06) 0%, transparent 60%)',
         }}
       />
 
       {/* Full-bleed two-panel split — light themed */}
       <div className="flex flex-col lg:flex-row min-h-[80vh]">
 
-        {/* LEFT PANEL — Cream, stat wall */}
+        {/* LEFT PANEL — Full mauve brand surface */}
         <div
           className="relative lg:w-[42%] flex flex-col justify-between px-8 md:px-14 lg:px-16 pt-20 pb-16 lg:pt-28 lg:pb-24"
-          style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--timberwolf)/30 100%)' }}
+          style={{ background: 'linear-gradient(160deg, var(--mauve) 0%, #2e1133 100%)' }}
         >
-          {/* Vertical gold-to-mauve gradient rule */}
+          {/* Gold accent orb */}
+          <div
+            className="absolute top-0 right-0 w-2/3 h-1/2 pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(202,148,47,0.15) 0%, transparent 60%)' }}
+          />
+          {/* Vertical gold rule */}
           <div
             className="absolute top-0 left-0 w-[3px] h-full"
-            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 30%, var(--mauve) 70%, transparent)' }}
+            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 30%, rgba(202,148,47,0.3) 70%, transparent)' }}
           />
 
           <div>
@@ -46,13 +57,14 @@ export const ValueProps: React.FC = () => {
               Pourquoi Everest Finance
             </span>
 
+
             {/* Oversized stat blocks */}
             <div className="flex flex-col gap-0">
               {stats.map((s, i) => (
                 <div
                   key={s.label}
                   className="py-8 lg:py-10 flex items-baseline gap-4 group"
-                  style={{ borderBottom: i < stats.length - 1 ? '1px solid rgba(220, 218, 210, 0.5)' : 'none' }}
+                  style={{ borderBottom: i < stats.length - 1 ? '1px solid rgba(255,255,255,0.12)' : 'none' }}
                 >
                   <span
                     style={{
@@ -61,10 +73,7 @@ export const ValueProps: React.FC = () => {
                       fontSize: 'clamp(4rem, 7vw, 6.5rem)',
                       lineHeight: 0.9,
                       letterSpacing: '-0.03em',
-                      background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
+                      color: 'var(--pure-white)',
                     }}
                   >
                     {s.value}
@@ -89,7 +98,7 @@ export const ValueProps: React.FC = () => {
                       fontWeight: 300,
                       fontSize: '0.8rem',
                       lineHeight: 1.4,
-                      color: 'var(--night-60)',
+                      color: 'rgba(255,255,255,0.65)',
                       letterSpacing: '0.02em',
                       maxWidth: '8rem',
                     }}
@@ -105,7 +114,7 @@ export const ValueProps: React.FC = () => {
           <div className="mt-12 flex items-center gap-3">
             <span
               className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)' }}
+              style={{ background: 'var(--jaune-or)' }}
             />
             <span
               style={{
@@ -114,7 +123,7 @@ export const ValueProps: React.FC = () => {
                 fontSize: '0.7rem',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'var(--night-60)',
+                color: 'rgba(255,255,255,0.5)',
               }}
             >
               Agrément CREPMF · SGI/DA/2016/60
@@ -125,14 +134,14 @@ export const ValueProps: React.FC = () => {
         {/* Gradient divider between panels */}
         <div 
           className="hidden lg:block w-[1px] self-stretch"
-          style={{ background: 'linear-gradient(to bottom, transparent, var(--mauve-20) 50%, transparent)' }}
+          style={{ background: 'linear-gradient(to bottom, transparent, var(--mauve-40) 50%, transparent)' }}
         />
 
-        {/* RIGHT PANEL — White-smoke with mauve gradient accent */}
+        {/* RIGHT PANEL — Pure white with mauve gradient accent */}
         <div
           ref={rightRef}
           className="reveal lg:w-[58%] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-20 lg:py-28 relative overflow-hidden"
-          style={{ background: 'var(--white-smoke)' }}
+          style={{ background: 'var(--pure-white)' }}
         >
           {/* Mauve-gold gradient orb */}
           <div
@@ -201,7 +210,7 @@ export const ValueProps: React.FC = () => {
                   style={{ 
                     borderLeft: i > 0 ? '1px solid transparent' : 'none', 
                     paddingLeft: i > 0 ? '1.5rem' : 0,
-                    background: i > 0 ? 'linear-gradient(to bottom, transparent, var(--timberwolf) 50%, transparent) 0 0 / 1px 100% no-repeat' : 'none'
+                    background: i > 0 ? 'linear-gradient(to bottom, transparent, rgba(70,29,76,0.25) 50%, transparent) 0 0 / 1px 100% no-repeat' : 'none'
                   }}
                 >
                   <div

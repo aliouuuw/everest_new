@@ -59,7 +59,7 @@ const AdminSigninPage: React.FC = () => {
   // Show loading while checking authentication status
   if (currentUser === undefined) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--mauve)' }}>
         <LoadingSpinner size="lg" />
       </div>
     );
@@ -68,54 +68,88 @@ const AdminSigninPage: React.FC = () => {
   // If user exists but is not admin, show error
   if (currentUser && currentUser.role !== 'admin') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="max-w-md w-full space-y-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-red-600">
-              Access Denied
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              You don't have admin privileges. Please contact an administrator.
-            </p>
-            <button
-              onClick={() => navigate({ to: '/', replace: true })}
-              className="mt-4 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-            >
-              Back to Website
-            </button>
-          </div>
+      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--mauve)' }}>
+        <div className="max-w-md w-full p-8 text-center" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.2)' }}>
+          <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--night)', fontFamily: 'var(--font-display-aptos)' }}>
+            Accès refusé
+          </h2>
+          <p className="text-sm mb-6" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>
+            Vous n'avez pas les privilèges administrateur.
+          </p>
+          <button
+            onClick={() => navigate({ to: '/', replace: true })}
+            className="btn-primary"
+          >
+            Retour au site
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Admin Sign In
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, var(--mauve) 0%, #2e1133 100%)' }}
+    >
+      {/* Gold atmospheric glow */}
+      <div
+        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top right, rgba(202,148,47,0.12) 0%, transparent 60%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-1/2 h-1/2 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom left, rgba(70,29,76,0.4) 0%, transparent 60%)' }}
+      />
+
+      <div className="relative z-10 max-w-md w-full mx-4">
+        {/* Brand header */}
+        <div className="text-center mb-10">
+          <span
+            className="block text-[10px] tracking-[0.35em] uppercase mb-4"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+          >
+            Administration
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: '2rem',
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
+              color: 'var(--pure-white)',
+            }}
+          >
+            Accès CMS
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in with your admin account to access the CMS
-          </p>
         </div>
 
-        <div className="bg-white py-8 px-6 shadow rounded-lg">
+        <div
+          className="py-8 px-8"
+          style={{ background: 'var(--pure-white)', border: '1px solid rgba(202,148,47,0.2)' }}
+        >
           {error && (
-            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
+            <div
+              className="mb-6 p-4"
+              style={{ background: 'rgba(220,38,38,0.06)', border: '1px solid rgba(220,38,38,0.2)' }}
+            >
+              <p className="text-sm" style={{ color: '#dc2626', fontFamily: 'var(--font-primary)' }}>{error}</p>
             </div>
           )}
 
-          <form onSubmit={handleSignIn} className="space-y-6">
+          <form onSubmit={handleSignIn} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+              <label
+                htmlFor="email"
+                className="block text-[11px] tracking-[0.1em] uppercase mb-2"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
+              >
+                Adresse email
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaEnvelope className="h-5 w-5 text-gray-400" />
+                  <FaEnvelope className="h-4 w-4" style={{ color: 'var(--mauve-40)' }} />
                 </div>
                 <input
                   id="email"
@@ -125,19 +159,29 @@ const AdminSigninPage: React.FC = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter your email"
+                  className="block w-full pl-10 pr-3 py-3 text-sm outline-none transition-all duration-300"
+                  style={{
+                    border: '1px solid rgba(70,29,76,0.2)',
+                    fontFamily: 'var(--font-primary)',
+                    color: 'var(--night)',
+                    background: 'var(--pure-white)',
+                  }}
+                  placeholder="admin@everestfin.com"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
+              <label
+                htmlFor="password"
+                className="block text-[11px] tracking-[0.1em] uppercase mb-2"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
+              >
+                Mot de passe
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaLock className="h-5 w-5 text-gray-400" />
+                  <FaLock className="h-4 w-4" style={{ color: 'var(--mauve-40)' }} />
                 </div>
                 <input
                   id="password"
@@ -147,76 +191,72 @@ const AdminSigninPage: React.FC = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  placeholder="Enter your password"
+                  className="block w-full pl-10 pr-10 py-3 text-sm outline-none transition-all duration-300"
+                  style={{
+                    border: '1px solid rgba(70,29,76,0.2)',
+                    fontFamily: 'var(--font-primary)',
+                    color: 'var(--night)',
+                    background: 'var(--pure-white)',
+                  }}
+                  placeholder="••••••••"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                    className="transition-colors duration-200"
+                    style={{ color: 'var(--mauve-40)' }}
                   >
-                    {showPassword ? (
-                      <FaEyeSlash className="h-5 w-5" />
-                    ) : (
-                      <FaEye className="h-5 w-5" />
-                    )}
+                    {showPassword ? <FaEyeSlash className="h-4 w-4" /> : <FaEye className="h-4 w-4" />}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
-            <div>
+            <div className="pt-2">
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center gap-3 py-3 px-6 text-[11px] tracking-[0.2em] uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  background: isLoading ? 'rgba(70,29,76,0.7)' : 'var(--mauve)',
+                  color: 'var(--pure-white)',
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 500,
+                }}
               >
                 {isLoading ? (
                   <>
                     <LoadingSpinner size="sm" className="mr-2" />
-                    Signing in...
+                    Connexion...
                   </>
                 ) : (
                   <>
-                    <FaSignInAlt className="mr-2" />
-                    Sign In
+                    <FaSignInAlt />
+                    Se connecter
                   </>
                 )}
               </button>
             </div>
 
-            <div className="text-center">
+            <div className="text-center pt-2">
               <button
                 type="button"
                 onClick={() => navigate({ to: '/', replace: true })}
-                className="text-sm text-gray-600 hover:text-gray-900"
+                className="text-[11px] tracking-[0.1em] uppercase transition-colors duration-300 hover:text-[var(--mauve)]"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
               >
-                ← Back to website
+                ← Retour au site
               </button>
             </div>
           </form>
         </div>
+
+        {/* Gold rule at bottom */}
+        <div
+          className="h-[2px] w-16 mx-auto mt-6"
+          style={{ background: 'linear-gradient(90deg, transparent, var(--jaune-or), transparent)' }}
+        />
       </div>
     </div>
   );

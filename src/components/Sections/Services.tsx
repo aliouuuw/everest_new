@@ -67,19 +67,19 @@ export const Services: React.FC = () => {
       ref={sectionRef}
       className="reveal relative overflow-hidden"
       id="services"
-      style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
+      style={{ background: 'var(--pure-white)' }}
     >
-      {/* Subtle mauve-gold gradient atmosphere */}
+      {/* Mauve-gold gradient atmosphere — more visible brand presence */}
       <div
         className="absolute top-0 left-0 w-full h-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 30% 20%, var(--mauve-05) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 80% 60%, var(--jaune-or-05) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 60% 50% at 20% 10%, rgba(70,29,76,0.07) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 70%, rgba(202,148,47,0.05) 0%, transparent 50%)',
         }}
       />
       {/* Header — full width, tight */}
       <div
         className="px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-10 md:pb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-        style={{ borderBottom: '1px solid var(--timberwolf)' }}
+        style={{ borderBottom: '1px solid rgba(70,29,76,0.15)' }}
       >
         <div>
           <span
@@ -132,12 +132,12 @@ export const Services: React.FC = () => {
             key={s.title}
             href={s.href}
             className="group flex items-stretch w-full transition-all duration-500 hover:bg-gradient-to-r hover:from-[var(--gold-pale)] hover:to-transparent"
-            style={{ borderBottom: '1px solid var(--timberwolf)' }}
+            style={{ borderBottom: '1px solid rgba(70,29,76,0.12)' }}
           >
             {/* Oversized roman numeral — left column */}
             <div
               className="hidden md:flex items-center justify-center w-32 lg:w-44 shrink-0 transition-all duration-500"
-              style={{ borderRight: '1px solid var(--timberwolf)' }}
+              style={{ borderRight: '1px solid rgba(70,29,76,0.12)' }}
             >
               <span
                 className="group-hover:opacity-100 transition-all duration-500"
@@ -202,7 +202,7 @@ export const Services: React.FC = () => {
                         fontFamily: 'var(--font-primary)',
                         fontWeight: 400,
                         color: 'var(--night-60)',
-                        border: '1px solid var(--timberwolf)',
+                        border: '1px solid rgba(70,29,76,0.2)',
                       }}
                     >
                       {tag}
@@ -216,7 +216,7 @@ export const Services: React.FC = () => {
             <div className="hidden md:flex items-center justify-center w-20 lg:w-28 shrink-0">
               <span
                 className="w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 group-hover:border-[var(--jaune-or)] group-hover:bg-[var(--jaune-or)]/10"
-                style={{ borderColor: 'var(--timberwolf)' }}
+                style={{ borderColor: 'rgba(70,29,76,0.2)' }}
               >
                 <FiArrowUpRight
                   className="text-sm transition-all duration-500 group-hover:text-[var(--jaune-or)]"
