@@ -237,15 +237,16 @@ const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '*',
   component: () => (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">Page Not Found</h1>
-        <p className="text-gray-600 mb-4">The page you're looking for doesn't exist.</p>
+        <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Page introuvable</h1>
+        <p className="mb-4" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>La page que vous recherchez n'existe pas.</p>
         <button
           onClick={() => window.history.back()}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          className="px-4 py-2 text-white rounded transition-all duration-300"
+          style={{ background: 'var(--mauve)' }}
         >
-          Go Back
+          Retour
         </button>
       </div>
     </div>
@@ -325,7 +326,7 @@ if (rootElement) {
             animation: spin 1s linear infinite;
             margin: 0 auto 16px;
           "></div>
-          <p style="color: #6b7280; margin: 0;">Loading Everest Finance...</p>
+          <p style="color: var(--night-60); margin: 0;">Loading Everest Finance...</p>
         </div>
       </div>
       <style>
