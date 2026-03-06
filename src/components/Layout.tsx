@@ -85,17 +85,18 @@ class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
-              Something went wrong
+            <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>
+              Une erreur est survenue
             </h1>
-            <p className="text-gray-600 mb-4">
-              Please refresh the page or try again later.
+            <p className="mb-4" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.9rem' }}>
+              Veuillez actualiser la page ou réessayer plus tard.
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
             >
               Refresh Page
             </button>
