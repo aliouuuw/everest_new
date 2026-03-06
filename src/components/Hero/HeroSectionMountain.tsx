@@ -51,25 +51,25 @@ export const HeroSectionMountain: React.FC = () => {
         >
           <source src="/kling_video.mp4" type="video/mp4" />
         </video>
-        {/* Radial vignette — mauve-tinted edges, preserving video center */}
+        {/* Radial vignette — deep mauve edges, preserving video center */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 55% 45%, transparent 0%, rgba(50,18,56,0.6) 60%, rgba(40,12,46,0.95) 100%)',
+            background: 'radial-gradient(ellipse 75% 65% at 50% 50%, transparent 0%, rgba(50,18,56,0.5) 60%, rgba(30,8,35,0.95) 100%)',
           }}
         />
-        {/* Bottom fade — deep mauve for text readability */}
+        {/* Bottom fade — structural base */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to top, var(--mauve) 0%, rgba(70,29,76,0.75) 35%, transparent 65%)',
+            background: 'linear-gradient(to top, var(--mauve) 0%, rgba(70,29,76,0.85) 25%, transparent 60%)',
           }}
         />
-        {/* Left editorial fade — mauve dominant */}
+        {/* Left editorial fade */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to right, rgba(50,18,56,0.85) 0%, rgba(70,29,76,0.3) 40%, transparent 70%)',
+            background: 'linear-gradient(to right, rgba(70,29,76,0.9) 0%, rgba(70,29,76,0.4) 40%, transparent 75%)',
           }}
         />
         {/* Film grain overlay */}
@@ -82,46 +82,46 @@ export const HeroSectionMountain: React.FC = () => {
       </div>
 
       {/* ─── Editorial Content ─── */}
-      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-40 md:pb-44 pt-32">
-        <div className="max-w-[1400px] mx-auto">
+      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-32 md:pb-40 pt-32 flex flex-col md:flex-row justify-between items-end">
+        <div className="max-w-[800px]">
 
           {/* Kicker */}
-          <div className="hero-kicker mb-8">
+          <div className="hero-kicker mb-10">
             <span
-              className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--jaune-or)' }}
+              className="inline-block text-[11px] tracking-[0.35em] uppercase font-medium text-[var(--jaune-or)]"
+              style={{ fontFamily: 'var(--font-primary)' }}
             >
               Société de Gestion et d'Intermédiation — Dakar
             </span>
           </div>
 
-          {/* Headline — oversized serif */}
-          <h1 className="mb-6">
+          {/* Headline — oversized serif, no gradients */}
+          <h1 className="mb-10">
             <span className="block overflow-hidden">
               <span
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
-                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
-                  lineHeight: 0.95,
-                  letterSpacing: '-0.02em',
+                  fontWeight: 400,
+                  fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+                  lineHeight: 0.9,
+                  letterSpacing: '-0.01em',
                   color: 'var(--pure-white)',
                 }}
               >
                 Élevez vos
               </span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="block overflow-hidden pb-2">
               <span
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
+                  fontWeight: 400,
                   fontStyle: 'italic',
-                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
-                  lineHeight: 0.95,
-                  letterSpacing: '-0.02em',
+                  fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+                  lineHeight: 0.9,
+                  letterSpacing: '-0.01em',
                   color: 'var(--jaune-or)',
                 }}
               >
@@ -130,21 +130,15 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </h1>
 
-          {/* Gold horizontal rule */}
-          <div
-            className="hero-rule h-[1px] w-24 md:w-40 mb-8"
-            style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
-          />
-
           {/* Subhead */}
           <p
-            className="hero-body max-w-lg mb-10"
+            className="hero-body max-w-lg mb-14"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 300,
-              fontSize: 'clamp(0.95rem, 1.4vw, 1.1rem)',
-              lineHeight: 1.75,
-              color: 'rgba(255,255,255,0.55)',
+              fontSize: '1.1rem',
+              lineHeight: 1.6,
+              color: 'rgba(255,255,255,0.7)',
             }}
           >
             Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires
@@ -152,82 +146,42 @@ export const HeroSectionMountain: React.FC = () => {
           </p>
 
           {/* CTA */}
-          <div className="hero-cta">
+          <div className="hero-cta flex gap-6 items-center">
             <a
               href="#services"
-              className="group inline-flex items-center gap-5"
+              className="inline-flex items-center justify-center px-8 py-4 transition-all duration-300 bg-[var(--jaune-or)] text-white hover:bg-white hover:text-[var(--night)]"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, letterSpacing: '0.05em' }}
             >
-              <span
-                className="relative overflow-hidden text-[11px] tracking-[0.25em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.8)' }}
-              >
-                Découvrir notre expertise
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-              </span>
-              <span className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[var(--jaune-or)]/60 group-hover:bg-[var(--jaune-or)]/10 transition-all duration-500">
-                <FiArrowRight className="text-base text-white/70 group-hover:text-[var(--jaune-or)] group-hover:translate-x-0.5 transition-all duration-500" />
-              </span>
+              Découvrir notre expertise
+            </a>
+            
+            <a 
+              href="#contact" 
+              className="inline-flex items-center gap-3 text-white/80 hover:text-[var(--jaune-or)] transition-colors group"
+            >
+              <span className="text-sm font-medium tracking-wide">Nous contacter</span>
+              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
-
         </div>
-      </div>
-
-      {/* ─── Metrics Bar ─── */}
-      <div className="hidden bottom-0 left-0 w-full z-20">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
-          <div
-            className="border-t border-white/[0.06] grid grid-cols-1 md:grid-cols-3"
-          >
-            {/* Metric 1 */}
-            <div className="hero-metric py-7 md:pr-12 border-b md:border-b-0 md:border-r border-white/[0.06] flex items-baseline gap-4">
-              <span
-                className="text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
-              >
-                08
-              </span>
-              <span
-                className="text-[9px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.35)' }}
-              >
-                Années d'expérience
-              </span>
+        
+        {/* Right side contextual metrics - replaces the bottom bar */}
+        <div className="hidden md:flex flex-col gap-10 text-right">
+          <div className="hero-metric">
+            <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--jaune-or)] mb-2 font-medium" style={{ fontFamily: 'var(--font-primary)' }}>
+              Agrément CREPMF
             </div>
-
-            {/* Metric 2 — Licence */}
-            <div className="hero-metric py-7 md:px-12 border-b md:border-b-0 md:border-r border-white/[0.06] flex items-center gap-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)] animate-pulse flex-shrink-0" />
-              <div>
-                <span
-                  className="block text-[9px] tracking-[0.2em] uppercase mb-0.5"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-                >
-                  Agrément CREPMF
-                </span>
-                <span
-                  className="text-xs"
-                  style={{ fontFamily: 'var(--font-mono, monospace)', fontWeight: 400, color: 'rgba(255,255,255,0.45)', letterSpacing: '0.05em' }}
-                >
-                  SGI/DA/2016/60
-                </span>
-              </div>
+            <div className="text-white/70 font-mono text-sm tracking-wider">
+              SGI/DA/2016/60
             </div>
-
-            {/* Metric 3 */}
-            <div className="hero-metric py-7 md:pl-12 flex items-baseline gap-4">
-              <span
-                className="text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--pure-white)' }}
-              >
-                30<span style={{ color: 'var(--jaune-or)' }}>+</span>
-              </span>
-              <span
-                className="text-[9px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.35)' }}
-              >
-                Années d'expertise cumulée
-              </span>
+          </div>
+          
+          <div className="hero-metric">
+            <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--jaune-or)] mb-2 font-medium" style={{ fontFamily: 'var(--font-primary)' }}>
+              Expertise Cumulée
+            </div>
+            <div className="text-white text-3xl" style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300 }}>
+              30+ <span className="text-white/40 text-lg">ans</span>
             </div>
           </div>
         </div>
