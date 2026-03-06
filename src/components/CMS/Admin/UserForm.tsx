@@ -110,8 +110,8 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
   if (!currentUser || currentUser.role !== 'admin') {
     return (
       <div className="text-center py-12">
-        <h3 className="text-lg font-medium text-gray-900 mb-2">Access Denied</h3>
-        <p className="text-gray-600">You need admin privileges to manage users.</p>
+        <h3 className="text-lg font-bold mb-2" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Accès refusé</h3>
+        <p style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.875rem' }}>Vous devez être administrateur pour gérer les utilisateurs.</p>
       </div>
     );
   }
@@ -127,16 +127,16 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-lg shadow-sm border">
-        <div className="p-6 border-b">
+      <div style={{ background: 'var(--pure-white)', border: '1px solid var(--night-10)' }}>
+        <div className="p-6" style={{ borderBottom: '1px solid var(--night-5)' }}>
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {userId && userId !== 'new' ? 'Edit User' : 'Create User'}
+            <h1 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>
+              {userId && userId !== 'new' ? 'Modifier l\'utilisateur' : 'Créer un utilisateur'}
             </h1>
             {onClose && (
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600"
+                style={{ color: 'var(--night-60)', transition: 'color 200ms' }}
               >
                 <FaTimes className="text-xl" />
               </button>
@@ -151,17 +151,21 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
 
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name *
+            <label className="block text-[11px] tracking-[0.08em] uppercase mb-2" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
+              Nom complet *
             </label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.name ? 'border-red-300' : 'border-gray-300'
-              }`}
-              placeholder="Enter user's full name"
+              className="w-full px-3 py-2 text-sm outline-none transition-all duration-300"
+              style={{ 
+                border: errors.name ? '1px solid #ef4444' : '1px solid rgba(70,29,76,0.2)', 
+                fontFamily: 'var(--font-primary)', 
+                color: 'var(--night)',
+                borderRadius: '0.5rem'
+              }}
+              placeholder="Nom de l'utilisateur"
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-600">{errors.name}</p>
@@ -170,17 +174,21 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address *
+            <label className="block text-[11px] tracking-[0.08em] uppercase mb-2" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
+              Adresse email *
             </label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.email ? 'border-red-300' : 'border-gray-300'
-              }`}
-              placeholder="Enter user's email address"
+              className="w-full px-3 py-2 text-sm outline-none transition-all duration-300"
+              style={{ 
+                border: errors.email ? '1px solid #ef4444' : '1px solid rgba(70,29,76,0.2)', 
+                fontFamily: 'var(--font-primary)', 
+                color: 'var(--night)',
+                borderRadius: '0.5rem'
+              }}
+              placeholder="email@exemple.com"
             />
             {errors.email && (
               <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -189,13 +197,14 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
 
           {/* Role */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Role *
+            <label className="block text-[11px] tracking-[0.08em] uppercase mb-2" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
+              Rôle *
             </label>
             <select
               value={formData.role}
               onChange={(e) => handleInputChange('role', e.target.value as 'admin' | 'editor' | 'viewer')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 text-sm outline-none transition-all duration-300"
+              style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)', borderRadius: '0.5rem' }}
             >
               {USER_ROLES.map(role => (
                 <option key={role.value} value={role.value}>
@@ -203,7 +212,7 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
                 </option>
               ))}
             </select>
-            <div className="mt-2 text-sm text-gray-600">
+            <div className="mt-2 text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>
               <div className="space-y-1">
                 <div><strong>Admin:</strong> Full access to all features</div>
                 <div><strong>Editor:</strong> Can create and edit content</div>
@@ -213,22 +222,24 @@ const UserForm: React.FC<UserFormProps> = ({ userId, onClose }) => {
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-4 pt-6 border-t">
+          <div className="flex justify-end gap-4 pt-6" style={{ borderTop: '1px solid rgba(70,29,76,0.1)' }}>
             {onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+                className="px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+                style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontWeight: 500, border: '1px solid rgba(70,29,76,0.2)' }}
               >
-                Cancel
+                Annuler
               </button>
             )}
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
+              className="px-6 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300 flex items-center gap-2"
+              style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
             >
               <FaSave className="text-sm" />
-              {userId && userId !== 'new' ? 'Update' : 'Create'} User
+              {userId && userId !== 'new' ? 'Modifier' : 'Créer'}
             </button>
           </div>
         </form>
