@@ -171,11 +171,13 @@ export const Header: React.FC = () => {
 
   // Header styles based on scroll state
   const headerBgClass = isScrolled
-    ? 'backdrop-blur-xl shadow-sm'
+    ? 'backdrop-blur-2xl shadow-sm'
     : 'bg-transparent';
   const headerStyle = isScrolled
-    ? { background: 'rgba(247,244,251,0.92)', borderBottom: '1px solid rgba(70,29,76,0.10)' }
-    : { background: 'rgba(247,244,251,0.0)' };
+    ? { background: 'rgba(251,250,252,0.85)', borderBottom: '1px solid rgba(70,29,76,0.06)' }
+    : { background: 'rgba(251,250,252,0.0)' };
+    
+  const paddingClass = isScrolled ? 'py-4' : 'py-6 lg:py-8';
 
   // Text color based on light-led theme
   const needsDarkText = true;
@@ -201,8 +203,8 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBgClass}`} style={headerStyle}>
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${headerBgClass}`} style={headerStyle}>
+      <div className={`mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 flex items-center justify-between transition-all duration-700 ease-out ${paddingClass}`}>
         {/* Logo */}
         <div className="flex items-center gap-3">
           <Link to="/" className="flex items-center gap-3 group">
@@ -283,21 +285,16 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 transition-all duration-500 relative overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, var(--mauve) 0%, #5a2462 100%)',
-              boxShadow: '0 4px 18px rgba(70,29,76,0.2)',
-            }}
+            className="group inline-flex items-center gap-2.5 px-6 py-3 transition-all duration-500 relative overflow-hidden rounded-sm bg-[var(--night)] text-white hover:shadow-2xl hover:shadow-[var(--mauve)]/20"
           >
-            <FingerprintIcon className="w-3.5 h-3.5 text-white/80 transition-transform duration-300 group-hover:scale-110 group-hover:text-[var(--jaune-or)]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--mauve)] to-[#3A1440] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+            <FingerprintIcon className="relative z-10 w-3.5 h-3.5 text-white/80 transition-transform duration-500 group-hover:scale-110 group-hover:text-white" />
             <span
-              className="text-[11px] tracking-[0.15em] uppercase font-semibold text-white"
+              className="relative z-10 text-[11px] tracking-[0.15em] uppercase font-semibold text-white"
               style={{ fontFamily: 'var(--font-primary)' }}
             >
               Accès Client
             </span>
-            {/* Gold shimmer on hover */}
-            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, rgba(202,148,47,0.15) 0%, transparent 60%)' }} />
           </Link>
         </div>
 
