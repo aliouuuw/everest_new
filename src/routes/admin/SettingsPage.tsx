@@ -6,38 +6,37 @@ const SettingsPage: React.FC = () => {
     <div className="p-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Paramètres</h1>
-        <p className="mt-2 text-sm" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>Configurez les paramètres du CMS</p>
+        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+        <p className="text-gray-600 mt-2">Configure your CMS settings and preferences</p>
       </div>
 
       {/* Settings Sections */}
       <div className="space-y-6">
         {/* General Settings */}
-        <div style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
-          <div className="p-6" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)' }}>
+        <div className="bg-white rounded-lg shadow-sm border">
+          <div className="p-6 border-b">
             <div className="flex items-center gap-3">
-              <FaCog style={{ color: 'var(--mauve)' }} />
-              <h2 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Paramètres généraux</h2>
+              <FaCog className="text-blue-600" />
+              <h2 className="text-xl font-semibold text-gray-900">General Settings</h2>
             </div>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-[11px] tracking-[0.08em] uppercase mb-2" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
-                  Titre du site
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Site Title
                 </label>
                 <input
                   type="text"
                   defaultValue="Everest Finance CMS"
-                  className="w-full px-3 py-2 text-sm outline-none transition-all duration-300"
-                  style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-[11px] tracking-[0.08em] uppercase mb-2" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
-                  Langue par défaut
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Default Language
                 </label>
-                <select className="w-full px-3 py-2 text-sm outline-none transition-all duration-300" style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}>
+                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                   <option value="en">English</option>
                   <option value="fr">French</option>
                 </select>
@@ -47,22 +46,22 @@ const SettingsPage: React.FC = () => {
         </div>
 
         {/* Database Settings */}
-        <div style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
-          <div className="p-6" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)' }}>
+        <div className="bg-white rounded-lg shadow-sm border">
+          <div className="p-6 border-b">
             <div className="flex items-center gap-3">
-              <FaDatabase style={{ color: 'var(--mauve)' }} />
-              <h2 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Base de données</h2>
+              <FaDatabase className="text-green-600" />
+              <h2 className="text-xl font-semibold text-gray-900">Database</h2>
             </div>
           </div>
           <div className="p-6">
-            <div className="p-4" style={{ background: 'rgba(70,29,76,0.04)', border: '1px solid rgba(70,29,76,0.15)', borderLeft: '3px solid var(--mauve)' }}>
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
               <div className="flex items-center gap-3">
                 <div className="flex-shrink-0">
-                  <div className="w-3 h-3 rounded-full" style={{ background: 'var(--mauve)' }}></div>
+                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium" style={{ fontFamily: 'var(--font-primary)', color: 'var(--mauve)' }}>Connecté à ConvexDB</p>
-                  <p className="text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Base de données temps-réel opérationnelle</p>
+                  <p className="text-sm font-medium text-green-800">Connected to ConvexDB</p>
+                  <p className="text-sm text-green-700">Real-time database is operational</p>
                 </div>
               </div>
             </div>
@@ -70,39 +69,39 @@ const SettingsPage: React.FC = () => {
         </div>
 
         {/* Media Settings */}
-        <div style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
-          <div className="p-6" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)' }}>
+        <div className="bg-white rounded-lg shadow-sm border">
+          <div className="p-6 border-b">
             <div className="flex items-center gap-3">
-              <FaCloud style={{ color: 'var(--jaune-or)' }} />
-              <h2 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Stockage médias</h2>
+              <FaCloud className="text-purple-600" />
+              <h2 className="text-xl font-semibold text-gray-900">Media Storage</h2>
             </div>
           </div>
           <div className="p-6">
-            <div className="p-4" style={{ background: 'rgba(202,148,47,0.04)', border: '1px solid rgba(202,148,47,0.2)', borderLeft: '3px solid var(--jaune-or)' }}>
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
               <div className="flex items-center gap-3">
                 <div className="flex-shrink-0">
-                  <div className="w-3 h-3 rounded-full" style={{ background: 'var(--jaune-or)' }}></div>
+                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium" style={{ fontFamily: 'var(--font-primary)', color: 'var(--jaune-or)' }}>Connecté à Uploadthing</p>
-                  <p className="text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Stockage de fichiers et CDN opérationnel</p>
+                  <p className="text-sm font-medium text-purple-800">Connected to Uploadthing</p>
+                  <p className="text-sm text-purple-700">File storage and CDN is operational</p>
                 </div>
               </div>
             </div>
 
             <div className="mt-6">
-              <h3 className="text-[11px] tracking-[0.08em] uppercase mb-3" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>Limites de téléchargement</h3>
+              <h3 className="text-sm font-medium text-gray-700 mb-3">File Upload Limits</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>Images</label>
+                  <label className="block text-xs text-gray-500 mb-1">Images</label>
                   <div className="text-sm font-medium">4 MB max</div>
                 </div>
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>Vidéos</label>
+                  <label className="block text-xs text-gray-500 mb-1">Videos</label>
                   <div className="text-sm font-medium">16 MB max</div>
                 </div>
                 <div>
-                  <label className="block text-xs mb-1" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>Documents</label>
+                  <label className="block text-xs text-gray-500 mb-1">Documents</label>
                   <div className="text-sm font-medium">8 MB max</div>
                 </div>
               </div>
@@ -111,32 +110,32 @@ const SettingsPage: React.FC = () => {
         </div>
 
         {/* Security Settings */}
-        <div style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
-          <div className="p-6" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)' }}>
+        <div className="bg-white rounded-lg shadow-sm border">
+          <div className="p-6 border-b">
             <div className="flex items-center gap-3">
-              <FaShieldAlt style={{ color: 'var(--mauve)' }} />
-              <h2 className="text-xl font-semibold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Sécurité</h2>
+              <FaShieldAlt className="text-red-600" />
+              <h2 className="text-xl font-semibold text-gray-900">Security</h2>
             </div>
           </div>
           <div className="p-6">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night)' }}>Authentification à deux facteurs</p>
-                  <p className="text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Ajoutez une couche de sécurité supplémentaire</p>
+                  <p className="text-sm font-medium text-gray-900">Two-Factor Authentication</p>
+                  <p className="text-sm text-gray-600">Add an extra layer of security to your account</p>
                 </div>
-                <button className="px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300" style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}>
-                  Activer 2FA
+                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+                  Enable 2FA
                 </button>
               </div>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night)' }}>Gestion des sessions</p>
-                  <p className="text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Gérez les sessions actives et l'historique</p>
+                  <p className="text-sm font-medium text-gray-900">Session Management</p>
+                  <p className="text-sm text-gray-600">Manage active sessions and login history</p>
                 </div>
-                <button className="px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300" style={{ border: '1px solid rgba(70,29,76,0.25)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}>
-                  Voir les sessions
+                <button className="border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm">
+                  View Sessions
                 </button>
               </div>
             </div>
@@ -145,8 +144,8 @@ const SettingsPage: React.FC = () => {
 
         {/* Save Button */}
         <div className="flex justify-end">
-          <button className="px-6 py-2 text-[11px] tracking-[0.2em] uppercase transition-all duration-300" style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}>
-            Enregistrer
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">
+            Save Changes
           </button>
         </div>
       </div>

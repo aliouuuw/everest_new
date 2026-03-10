@@ -43,10 +43,10 @@ export const PublicationPage = () => {
   // Loading state
   if (publication === undefined) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--mauve)] mx-auto mb-4"></div>
-          <p style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.9rem' }}>Chargement de la publication...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto mb-4"></div>
+          <p className="text-[rgba(10, 10, 10, 0.8)]">Chargement de la publication...</p>
         </div>
       </div>
     )
@@ -55,15 +55,15 @@ export const PublicationPage = () => {
   // Publication not found
   if (!publication) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--error-red)]/10 flex items-center justify-center">
             <svg className="w-8 h-8 text-[var(--error-red)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Publication non trouvée</h1>
-          <p className="mb-4" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.9rem' }}>La publication que vous recherchez n'existe pas ou a été supprimée.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Publication non trouvée</h1>
+          <p className="text-gray-600 mb-4">La publication que vous recherchez n'existe pas ou a été supprimée.</p>
           <button
             onClick={() => navigate({ to: '/publications' })}
             className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded hover:bg-[var(--jaune-or)] transition-colors"
@@ -97,7 +97,7 @@ export const PublicationPage = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal py-20 sm:py-28" style={{ background: 'linear-gradient(135deg, rgba(70,29,76,0.04) 0%, rgba(202,148,47,0.06) 100%)' }}>
+      <section ref={heroRef} className="reveal py-20 sm:py-28 bg-gradient-to-br from-[var(--white-smoke)]/50 to-[var(--jaune-or-light)]/10">
         <div className="mx-auto max-w-4xl px-6">
           {/* Back button */}
           <button

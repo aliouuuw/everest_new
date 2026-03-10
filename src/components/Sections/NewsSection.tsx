@@ -44,213 +44,168 @@ export const NewsSection: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-32 overflow-hidden"
-      style={{ background: 'var(--pure-white)' }}
+      className="reveal relative py-28 md:py-36 bg-[#f5f5f5]"
     >
-      {/* Mauve-gold gradient atmosphere — visible brand wash */}
-      <div
-        className="absolute top-0 right-0 w-2/3 h-2/3 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at top right, rgba(70,29,76,0.07) 0%, transparent 60%)',
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-1/2 h-1/2 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at bottom left, rgba(202,148,47,0.05) 0%, transparent 50%)',
-        }}
-      />
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
           <div className="max-w-xl">
-            <span
-              className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              Actualités
-            </span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="h-[1px] w-8 bg-[var(--jaune-or)]" />
+              <span
+                className="text-[10px] tracking-[0.3em] uppercase"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night)' }}
+              >
+                Actualités
+              </span>
+            </div>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
-                lineHeight: 1.0,
+                fontFamily: 'var(--font-display-aptos)',
+                fontWeight: 500,
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                lineHeight: 1.05,
                 letterSpacing: '-0.02em',
                 color: 'var(--night)',
               }}
             >
-              Dernières{' '}
-              <em style={{ 
-                fontStyle: 'italic', 
-                background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                informations.
-              </em>
+              Évolutions &{' '}
+              <span className="block text-[var(--night)]/40 mt-2">
+                perspectives.
+              </span>
             </h2>
           </div>
           
-          <a
-            href="/actualites"
-            className="hidden md:inline-flex items-center gap-3 group"
-          >
-            <span
-              className="relative overflow-hidden text-[10px] tracking-[0.2em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href="/actualites"
+              className="group inline-flex items-center gap-3 text-[11px] tracking-widest uppercase font-semibold text-[var(--night)] hover:text-[var(--jaune-or)] transition-colors"
             >
               Toutes les actualités
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-            </span>
-            <FiArrowRight className="text-xs text-[var(--night-60)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
-          </a>
+              <div className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center group-hover:border-[var(--jaune-or)]/30 group-hover:bg-[var(--jaune-or)]/5 transition-all">
+                <FiArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </a>
+          </div>
         </div>
 
-        {/* Content Grid - 1 large, 2 small stacked */}
-        <div ref={listRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Content Layout - Featured + Grid */}
+        <div ref={listRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           
-          {/* Featured Article (Left, spans 7 cols) */}
-          <a
-            href={MOCK_NEWS[0].href}
-            className="group lg:col-span-7 flex flex-col h-full bg-[var(--pure-white)] border hover:border-[var(--jaune-or)]/50 transition-all duration-500 overflow-hidden"
-            style={{ borderColor: 'rgba(70,29,76,0.15)' }}
-          >
-            <div className="relative aspect-[16/9] lg:aspect-[4/3] overflow-hidden">
-              <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img 
-                src={MOCK_NEWS[0].imageUrl} 
-                alt={MOCK_NEWS[0].title}
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-              />
-              <div className="absolute top-6 left-6 z-20">
-                <span className="bg-[var(--pure-white)] text-[var(--night)] text-[10px] tracking-[0.1em] uppercase px-4 py-2"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
-                >
-                  {MOCK_NEWS[0].category}
-                </span>
+          {/* Featured Article (Left) */}
+          <div className="lg:col-span-7">
+            <a
+              href={MOCK_NEWS[0].href}
+              className="group block relative h-full min-h-[450px] bg-[var(--night)] overflow-hidden"
+            >
+              <div className="absolute inset-0">
+                <img 
+                  src={MOCK_NEWS[0].imageUrl} 
+                  alt={MOCK_NEWS[0].title}
+                  className="w-full h-full object-cover opacity-60 mix-blend-overlay group-hover:scale-105 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--night)] via-[var(--night)]/40 to-transparent" />
               </div>
-            </div>
-            
-            <div className="p-8 lg:p-10 flex flex-col flex-grow">
-              <span
-                className="text-[11px] mb-4 block"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
-              >
-                {new Date(MOCK_NEWS[0].date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
-              </span>
               
-              <h3
-                className="mb-4 transition-colors duration-300 group-hover:text-[var(--jaune-or)]"
-                style={{
-                  fontFamily: 'var(--font-display-aptos)',
-                  fontWeight: 500,
-                  fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)',
-                  lineHeight: 1.25,
-                  color: 'var(--night)',
-                }}
-              >
-                {MOCK_NEWS[0].title}
-              </h3>
-              
-              <p
-                className="mb-8 flex-grow"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 300,
-                  fontSize: '1rem',
-                  lineHeight: 1.6,
-                  color: 'var(--night-60)',
-                  maxWidth: '38rem',
-                }}
-              >
-                {MOCK_NEWS[0].excerpt}
-              </p>
-              
-              <span
-                className="inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300 mt-auto"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
-              >
-                Lire l'article
-                <span className="inline-block w-6 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
-              </span>
-            </div>
-          </a>
+              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="px-3 py-1 bg-white text-[var(--night)] text-[9px] uppercase tracking-widest font-semibold">
+                    {MOCK_NEWS[0].category}
+                  </span>
+                  <span className="text-white/60 text-[11px] font-mono">
+                    {new Date(MOCK_NEWS[0].date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                  </span>
+                </div>
+                
+                <h3
+                  className="text-white mb-4 max-w-2xl group-hover:text-[var(--jaune-or)] transition-colors duration-300"
+                  style={{
+                    fontFamily: 'var(--font-display-aptos)',
+                    fontWeight: 500,
+                    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+                    lineHeight: 1.15,
+                  }}
+                >
+                  {MOCK_NEWS[0].title}
+                </h3>
+                
+                <p className="text-white/70 max-w-xl text-sm md:text-base font-light leading-relaxed mb-8">
+                  {MOCK_NEWS[0].excerpt}
+                </p>
+                
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-[var(--jaune-or)] group-hover:border-[var(--jaune-or)] group-hover:text-[var(--night)] transition-all">
+                    <FiArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                  </div>
+                  <span className="text-[10px] uppercase tracking-widest text-white/70 group-hover:text-white font-medium transition-colors">
+                    Lire l'article
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
 
-          {/* Secondary Articles (Right, spans 5 cols, stacked) */}
-          <div className="lg:col-span-5 flex flex-col gap-8">
+          {/* Secondary Articles (Right List) */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
             {MOCK_NEWS.slice(1).map((article, i) => (
               <a
                 key={i}
                 href={article.href}
-                className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row h-full bg-[var(--pure-white)] border hover:border-[var(--jaune-or)]/50 transition-all duration-500 overflow-hidden"
-                style={{ borderColor: 'rgba(70,29,76,0.15)' }}
+                className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-6 bg-white p-6 border border-black/5 hover:border-[var(--jaune-or)]/30 hover:shadow-lg hover:shadow-black/[0.02] transition-all duration-300 h-full"
               >
-                <div className="relative w-full sm:w-2/5 lg:w-full xl:w-2/5 aspect-[16/9] sm:aspect-auto lg:aspect-[16/9] xl:aspect-auto overflow-hidden shrink-0">
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                <div className="sm:w-1/3 lg:w-full xl:w-1/3 aspect-[4/3] sm:aspect-auto lg:aspect-[21/9] xl:aspect-auto relative overflow-hidden shrink-0">
                   <img 
                     src={article.imageUrl} 
                     alt={article.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 
-                <div className="p-6 flex flex-col justify-center flex-grow">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="text-[9px] tracking-[0.1em] uppercase"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-                    >
+                <div className="flex flex-col flex-grow py-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[9px] uppercase tracking-widest text-[var(--jaune-or)] font-semibold">
                       {article.category}
                     </span>
-                    <span
-                      className="text-[10px]"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
-                    >
-                      {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
+                    <span className="text-[10px] font-mono text-[var(--night)]/40">
+                      {new Date(article.date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' })}
                     </span>
                   </div>
                   
                   <h3
-                    className="mb-3 transition-colors duration-300 group-hover:text-[var(--jaune-or)]"
+                    className="mb-3 text-[var(--night)] group-hover:text-[var(--jaune-or)] transition-colors duration-300"
                     style={{
                       fontFamily: 'var(--font-display-aptos)',
                       fontWeight: 500,
-                      fontSize: '1.1rem',
-                      lineHeight: 1.3,
-                      color: 'var(--night)',
+                      fontSize: '1.25rem',
+                      lineHeight: 1.25,
                     }}
                   >
                     {article.title}
                   </h3>
                   
-                  <span
-                    className="inline-flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300 mt-auto"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
-                  >
-                    Lire
-                    <FiArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
+                  <div className="mt-auto pt-4 flex justify-end">
+                    <FiArrowRight className="w-5 h-5 text-[var(--night)]/20 group-hover:text-[var(--jaune-or)] transition-colors" />
+                  </div>
                 </div>
               </a>
             ))}
           </div>
+
         </div>
 
-        {/* Mobile View all link */}
-        <div className="mt-10 flex justify-center md:hidden">
+        {/* Mobile View All Link */}
+        <div className="mt-12 flex justify-center md:hidden">
           <a
             href="/actualites"
-            className="group inline-flex items-center gap-3"
+            className="group inline-flex items-center gap-4 bg-white border border-black/10 px-8 py-4 w-full justify-center text-[var(--night)] hover:border-[var(--jaune-or)] transition-colors duration-300"
           >
             <span
-              className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
+              className="text-[11px] tracking-[0.2em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600 }}
             >
               Voir toutes les actualités
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
             </span>
+            <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </a>
         </div>
       </div>

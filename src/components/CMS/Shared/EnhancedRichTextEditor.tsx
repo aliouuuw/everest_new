@@ -60,24 +60,24 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-[var(--mauve)] hover:text-[var(--jaune-or)] underline'
+          class: 'text-blue-600 hover:text-blue-800 underline'
         }
       }),
       Table.configure({
         resizable: true,
         HTMLAttributes: {
-          class: 'border-collapse border border-[rgba(70,29,76,0.2)] my-4'
+          class: 'border-collapse border border-gray-300 my-4'
         }
       }),
       TableRow,
       TableCell.configure({
         HTMLAttributes: {
-          class: 'border border-[rgba(70,29,76,0.2)] px-4 py-2'
+          class: 'border border-gray-300 px-4 py-2'
         }
       }),
       TableHeader.configure({
         HTMLAttributes: {
-          class: 'border border-[rgba(70,29,76,0.2)] px-4 py-2 bg-[rgba(70,29,76,0.06)] font-semibold'
+          class: 'border border-gray-300 px-4 py-2 bg-gray-100 font-semibold'
         }
       })
     ],
@@ -190,17 +190,14 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
   // Enhanced toolbar with more formatting options
   const Toolbar = () => (
-    <div className="p-3 flex flex-wrap gap-2 items-center" style={{ background: 'rgba(70,29,76,0.03)', borderBottom: '1px solid rgba(70,29,76,0.15)' }}>
+    <div className="bg-gray-50 border-b border-gray-300 p-3 flex flex-wrap gap-2 items-center">
       {/* Undo/Redo */}
       <div className="flex gap-1 mr-2">
         <button
           type="button"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().undo()}
-          className="p-2 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{ transition: 'background 200ms' }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-          onMouseLeave={e => (e.currentTarget.style.background = '')}
+          className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           title="Undo"
         >
           <FaUndo className="w-4 h-4" />
@@ -209,26 +206,20 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           type="button"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().redo()}
-          className="p-2 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{ transition: 'background 200ms' }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-          onMouseLeave={e => (e.currentTarget.style.background = '')}
+          className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           title="Redo"
         >
           <FaRedo className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Text Formatting */}
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('bold') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('bold') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('bold') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('bold') ? 'bg-gray-200' : ''}`}
         title="Bold"
       >
         <FaBold className="w-4 h-4" />
@@ -236,10 +227,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('italic') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('italic') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('italic') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('italic') ? 'bg-gray-200' : ''}`}
         title="Italic"
       >
         <FaItalic className="w-4 h-4" />
@@ -247,10 +235,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('underline') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('underline') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('underline') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('underline') ? 'bg-gray-200' : ''}`}
         title="Underline"
       >
         <FaUnderline className="w-4 h-4" />
@@ -258,10 +243,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('strike') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('strike') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('strike') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('strike') ? 'bg-gray-200' : ''}`}
         title="Strikethrough"
       >
         <FaStrikethrough className="w-4 h-4" />
@@ -269,16 +251,13 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleCode().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('code') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('code') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('code') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('code') ? 'bg-gray-200' : ''}`}
         title="Code"
       >
         <FaCode className="w-4 h-4" />
       </button>
       
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Headings */}
       <select
@@ -296,8 +275,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
                editor.isActive('heading', { level: 4 }) ? '4' : 
                editor.isActive('heading', { level: 5 }) ? '5' : 
                editor.isActive('heading', { level: 6 }) ? '6' : '0'}
-        className="px-2 py-1 text-sm rounded transition-colors"
-        style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)' }}
+        className="px-2 py-1 text-sm border border-gray-300 rounded hover:bg-gray-200 transition-colors"
         title="Heading"
       >
         <option value="0">Normal</option>
@@ -309,16 +287,13 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         <option value="6">Heading 6</option>
       </select>
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Lists */}
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('bulletList') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('bulletList') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('bulletList') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('bulletList') ? 'bg-gray-200' : ''}`}
         title="Bullet List"
       >
         <FaListUl className="w-4 h-4" />
@@ -326,40 +301,31 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('orderedList') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('orderedList') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('orderedList') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('orderedList') ? 'bg-gray-200' : ''}`}
         title="Numbered List"
       >
         <FaListOl className="w-4 h-4" />
       </button>
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Quote */}
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('blockquote') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('blockquote') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('blockquote') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('blockquote') ? 'bg-gray-200' : ''}`}
         title="Quote"
       >
         <FaQuoteLeft className="w-4 h-4" />
       </button>
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Links */}
       <button
         type="button"
         onClick={setLink}
-        className="p-2 rounded transition-colors"
-        style={{ background: editor.isActive('link') ? 'rgba(70,29,76,0.12)' : '', transition: 'background 200ms' }}
-        onMouseEnter={e => !editor.isActive('link') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => !editor.isActive('link') && (e.currentTarget.style.background = '')}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('link') ? 'bg-gray-200' : ''}`}
         title="Insert Link"
       >
         <FaLink className="w-4 h-4" />
@@ -368,25 +334,19 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         type="button"
         onClick={unsetLink}
         disabled={!editor.isActive('link')}
-        className="p-2 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ transition: 'background 200ms' }}
-        onMouseEnter={e => editor.isActive('link') && (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => editor.isActive('link') && (e.currentTarget.style.background = '')}
+        className="p-2 hover:bg-gray-200 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         title="Remove Link"
       >
         <FaUnlink className="w-4 h-4" />
       </button>
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Media */}
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
-        className="p-2 rounded transition-colors"
-        style={{ transition: 'background 200ms' }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => (e.currentTarget.style.background = '')}
+        className="p-2 hover:bg-gray-200 rounded transition-colors"
         title="Insert Image"
       >
         <FaImage className="w-4 h-4" />
@@ -400,16 +360,13 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         onChange={handleFileInputChange}
       />
 
-      <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+      <div className="w-px h-6 bg-gray-300" />
 
       {/* Tables */}
       <button
         type="button"
         onClick={insertTable}
-        className="p-2 rounded transition-colors"
-        style={{ transition: 'background 200ms' }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
-        onMouseLeave={e => (e.currentTarget.style.background = '')}
+        className="p-2 hover:bg-gray-200 rounded transition-colors"
         title="Insert Table"
       >
         <FaTable className="w-4 h-4" />
@@ -418,15 +375,12 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       {/* Table Controls - only show when cursor is in a table */}
       {editor.isActive('table') && (
         <>
-          <div className="w-px h-6" style={{ background: 'rgba(70,29,76,0.2)' }} />
+          <div className="w-px h-6 bg-gray-300" />
           <div className="flex gap-1">
             <button
               type="button"
               onClick={addColumnBefore}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(70,29,76,0.08)', color: 'var(--mauve)' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.15)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
+              className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Column Before"
             >
               +Col
@@ -434,10 +388,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={addColumnAfter}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(70,29,76,0.08)', color: 'var(--mauve)' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.15)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
+              className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Column After"
             >
               Col+
@@ -445,10 +396,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={deleteColumn}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(220,38,38,0.1)', color: '#dc2626' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.2)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.1)')}
+              className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Column"
             >
               -Col
@@ -456,10 +404,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={addRowBefore}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(70,29,76,0.08)', color: 'var(--mauve)' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.15)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
+              className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Row Before"
             >
               +Row
@@ -467,10 +412,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={addRowAfter}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(70,29,76,0.08)', color: 'var(--mauve)' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.15)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.08)')}
+              className="px-2 py-1 text-xs bg-blue-100 hover:bg-blue-200 rounded transition-colors"
               title="Add Row After"
             >
               Row+
@@ -478,10 +420,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={deleteRow}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(220,38,38,0.1)', color: '#dc2626' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.2)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.1)')}
+              className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Row"
             >
               -Row
@@ -489,10 +428,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
             <button
               type="button"
               onClick={deleteTable}
-              className="px-2 py-1 text-xs rounded transition-colors"
-              style={{ background: 'rgba(220,38,38,0.1)', color: '#dc2626' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.2)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(220,38,38,0.1)')}
+              className="px-2 py-1 text-xs bg-red-100 hover:bg-red-200 rounded transition-colors"
               title="Delete Table"
             >
               -Table
@@ -504,14 +440,13 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
   );
 
   return (
-    <div className={`rounded-lg overflow-hidden ${className}`} style={{ border: '1px solid rgba(70,29,76,0.2)' }}>
+    <div className={`border border-gray-300 rounded-lg overflow-hidden ${className}`}>
       {!readOnly && <Toolbar />}
       <div
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className="relative"
-        style={{ background: isDragOver ? 'rgba(70,29,76,0.05)' : '' }}
+        className={`relative ${isDragOver ? 'bg-blue-50 border-2 border-dashed border-blue-300' : ''}`}
       >
         <EditorContent editor={editor} />
         {isDragOver && (

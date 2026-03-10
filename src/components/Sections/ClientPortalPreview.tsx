@@ -121,7 +121,7 @@ export const ClientPortalPreview: React.FC = () => {
         {/* App window */}
         <div className="mt-12 stat-card overflow-hidden p-0">
           {/* App chrome */}
-          <div className="flex items-center justify-between px-3 py-2" style={{ borderBottom: '1px solid rgba(70,29,76,0.1)', background: 'rgba(70,29,76,0.03)' }}>
+          <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--night)]/10 bg-[var(--white-smoke)]/60">
             <div className="flex items-center gap-1.5">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-red-300" />
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-yellow-300" />
@@ -139,7 +139,7 @@ export const ClientPortalPreview: React.FC = () => {
 
           <div className="grid grid-cols-12">
             {/* Sidebar */}
-            <aside className="col-span-3 lg:col-span-2 p-3" style={{ borderRight: '1px solid rgba(70,29,76,0.1)', background: 'rgba(70,29,76,0.02)' }}>
+            <aside className="col-span-3 lg:col-span-2 border-r border-[var(--night)]/10 bg-[var(--white-smoke)]/50 p-3">
               <div className="font-display-aptos text-sm mb-3">Navigation</div>
               <nav className="space-y-1 text-sm">
                 {[
@@ -153,11 +153,11 @@ export const ClientPortalPreview: React.FC = () => {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 px-3 py-2 cursor-default"
-                    style={item.active
-                      ? { background: 'var(--mauve)', color: 'var(--pure-white)', borderLeft: '2px solid var(--jaune-or)' }
-                      : { color: 'var(--night-60)', borderLeft: '2px solid transparent' }
-                    }
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-default ${
+                      item.active
+                        ? 'bg-[var(--night)] text-[var(--pure-white)] border-l-2 border-l-[var(--mauve)]'
+                        : 'hover:bg-[var(--white-smoke)] text-secondary border-l-2 border-l-transparent'
+                    }`}
                   >
                     <span className="opacity-80">{item.icon}</span>
                     <span>{item.label}</span>
@@ -179,7 +179,7 @@ export const ClientPortalPreview: React.FC = () => {
                 <div className="font-display-aptos">Tableau de bord</div>
                 <div className="flex items-center gap-3 text-xs text-secondary">
                   <div>Compte: 00012345</div>
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5" style={{ border: '1px solid rgba(70,29,76,0.15)', color: 'var(--night-60)' }}>
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--white-smoke)] border border-[var(--night)]/10">
                     <FaBell className="opacity-70" />
                     <span>3</span>
                   </div>
@@ -194,11 +194,11 @@ export const ClientPortalPreview: React.FC = () => {
                   { label: "Liquidités", counter: liquidityCounter, delta: "=", trend: [7, 7.5, 8, 8.6, 9, 9.3, 9.3] },
                   { label: "Risque", value: "Modéré", delta: "Stable", trend: [60, 58, 59, 57, 58, 58, 58] },
                 ].map((k, i) => (
-                  <div key={i} className="p-4" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.1)' }}>
+                  <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10">
                     <div className="text-secondary text-xs">{k.label}</div>
                     <div className="flex items-end justify-between mt-1">
                       <div className="font-display-aptos text-lg">{k.counter ? k.counter.value : k.value}</div>
-                      <div className="text-[10px] px-1.5 py-0.5" style={{ border: '1px solid rgba(70,29,76,0.15)', color: 'var(--night-60)' }}>{k.delta}</div>
+                      <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
                     </div>
                     <div className="mt-2 opacity-80">
                       <Sparkline points={k.trend} />
@@ -210,7 +210,7 @@ export const ClientPortalPreview: React.FC = () => {
               {/* Main grid */}
               <div className="mt-5 grid grid-cols-1 xl:grid-cols-3 gap-4">
                 {/* Positions table */}
-                <div className="xl:col-span-2 p-4" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
+                <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-sm font-display-aptos">Positions</div>
                     <div className="text-xs text-secondary">Mise à jour: il y a 5 min</div>
@@ -241,7 +241,7 @@ export const ClientPortalPreview: React.FC = () => {
                             <td className="py-2">{row.valueCounter.value} FCFA</td>
                             <td className={`py-2 ${row.perfCounter.value.startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.perfCounter.value}</td>
                             <td className="py-2">
-                              <div className="w-20 h-1.5" style={{ background: 'rgba(70,29,76,0.08)' }}>
+                              <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
                                 <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--jaune-or)' }} />
                               </div>
                             </td>
@@ -303,12 +303,11 @@ export const ClientPortalPreview: React.FC = () => {
                           <td className="py-2">{t.q}</td>
                           <td className="py-2">{t.px} {t.ty === 'Coupon' ? 'FCFA' : ''}</td>
                           <td className="py-2">
-                            <span className="inline-flex items-center px-2 py-0.5 text-[10px]"
-                              style={{
-                                border: t.st === 'Exécutée' ? '1px solid rgba(70,29,76,0.2)' : t.st === 'Partielle' ? '1px solid rgba(202,148,47,0.3)' : '1px solid rgba(70,29,76,0.1)',
-                                color: t.st === 'Exécutée' ? 'var(--mauve)' : t.st === 'Partielle' ? 'var(--jaune-or)' : 'var(--night-60)',
-                                fontFamily: 'var(--font-primary)'
-                              }}>
+                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full border text-[10px] ${
+                              t.st === 'Exécutée' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                              t.st === 'Partielle' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                              'bg-[var(--white-smoke)] text-secondary border-[var(--night)]/10'
+                            }`}>
                               {t.st}
                             </span>
                           </td>

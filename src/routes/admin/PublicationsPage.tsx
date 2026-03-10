@@ -48,12 +48,12 @@ const PublicationsPage: React.FC = () => {
     }
   };
 
-  const getStatusStyle = (status: string): React.CSSProperties => {
+  const getStatusColor = (status: string) => {
     switch (status) {
-      case 'published': return { background: 'rgba(70,29,76,0.08)', color: 'var(--mauve)', fontFamily: 'var(--font-primary)', fontWeight: 500 };
-      case 'draft': return { background: 'rgba(202,148,47,0.1)', color: 'var(--jaune-or)', fontFamily: 'var(--font-primary)', fontWeight: 500 };
-      case 'archived': return { background: 'rgba(10,10,10,0.06)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontWeight: 500 };
-      default: return { background: 'rgba(10,10,10,0.06)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontWeight: 500 };
+      case 'published': return 'bg-green-100 text-green-800';
+      case 'draft': return 'bg-yellow-100 text-yellow-800';
+      case 'archived': return 'bg-gray-100 text-gray-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -75,67 +75,63 @@ const PublicationsPage: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Publications</h1>
-          <p className="mt-2 text-sm" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>Gérez vos publications de contenu</p>
+          <h1 className="text-3xl font-bold text-gray-900">Publications</h1>
+          <p className="text-gray-600 mt-2">Manage your content publications</p>
         </div>
         <button
           onClick={handleNewPublication}
-          className="flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
-          style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           <FaPlus className="text-sm" />
-          Nouvelle publication
+          New Publication
         </button>
       </div>
 
       {/* Filters */}
-      <div className="mb-6" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
-        <div className="p-4" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)' }}>
+      <div className="bg-white rounded-lg shadow-sm border mb-6">
+        <div className="p-4 border-b">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               {/* Search */}
               <div className="relative">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sm" style={{ color: 'var(--mauve-40)' }} />
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
                 <input
                   type="text"
-                  placeholder="Rechercher..."
+                  placeholder="Search publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 text-sm outline-none transition-all duration-300"
-                  style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
               {/* Filter Toggle */}
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-3 py-2 text-sm transition-all duration-300"
-                style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}
+                className="flex items-center gap-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
               >
                 <FaFilter className="text-sm" />
-                Filtres
+                Filters
               </button>
             </div>
 
-            <div className="text-sm" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>
+            <div className="text-sm text-gray-500">
               {filteredPublications.length} publication{filteredPublications.length !== 1 ? 's' : ''}
             </div>
           </div>
         </div>
 
         {showFilters && (
-          <div className="p-4" style={{ borderBottom: '1px solid rgba(70,29,76,0.08)', background: 'rgba(70,29,76,0.02)' }}>
+          <div className="p-4 border-b bg-gray-50">
             <div className="flex gap-4">
               {/* Status Filter */}
               <div>
-                <label className="block text-[11px] tracking-[0.08em] uppercase mb-1" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>Statut</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-3 py-2 text-sm outline-none"
-                  style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
+                  className="border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="all">Tous</option>
+                  <option value="all">All Status</option>
                   {PUBLICATION_STATUS.map(status => (
                     <option key={status.value} value={status.value}>{status.label}</option>
                   ))}
@@ -144,14 +140,13 @@ const PublicationsPage: React.FC = () => {
 
               {/* Category Filter */}
               <div>
-                <label className="block text-[11px] tracking-[0.08em] uppercase mb-1" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>Catégorie</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="px-3 py-2 text-sm outline-none"
-                  style={{ border: '1px solid rgba(70,29,76,0.2)', fontFamily: 'var(--font-primary)', color: 'var(--night)' }}
+                  className="border border-gray-300 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="all">Toutes catégories</option>
+                  <option value="all">All Categories</option>
                   {PUBLICATION_CATEGORIES.map(cat => (
                     <option key={cat.value} value={cat.value}>{cat.label}</option>
                   ))}
@@ -163,105 +158,99 @@ const PublicationsPage: React.FC = () => {
       </div>
 
       {/* Publications List */}
-      <div style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.12)' }}>
+      <div className="bg-white rounded-lg shadow-sm border">
         {filteredPublications.length === 0 ? (
           <div className="p-12 text-center">
-            <div className="mb-4" style={{ color: 'var(--mauve-20)' }}>
-              <FaSearch className="text-6xl mx-auto" style={{ color: 'var(--mauve-30)' }} />
+            <div className="text-gray-400 mb-4">
+              <FaSearch className="text-6xl mx-auto" />
             </div>
-            <h3 className="text-lg font-medium mb-2" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>Aucune publication trouvée</h3>
-            <p className="mb-4" style={{ color: 'var(--night-60)', fontFamily: 'var(--font-primary)', fontSize: '0.875rem' }}>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No publications found</h3>
+            <p className="text-gray-600 mb-4">
               {searchQuery || statusFilter !== 'all' || categoryFilter !== 'all'
                 ? 'Try adjusting your filters or search terms.'
                 : 'Get started by creating your first publication.'}
             </p>
             <button
               onClick={handleNewPublication}
-              className="inline-flex items-center gap-2 px-4 py-2 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
-              style={{ background: 'var(--mauve)', color: 'var(--pure-white)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg inline-flex items-center gap-2 transition-colors"
             >
               <FaPlus className="text-sm" />
-              Créer une publication
+              Create Publication
             </button>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead style={{ background: 'rgba(70,29,76,0.04)', borderBottom: '1px solid rgba(70,29,76,0.12)' }}>
+              <thead className="bg-gray-50 border-b">
                 <tr>
-                  <th className="px-6 py-3 text-left text-[10px] tracking-[0.12em] uppercase" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Publication
                   </th>
-                  <th className="px-6 py-3 text-left text-[10px] tracking-[0.12em] uppercase" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
-                    Catégorie
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Category
                   </th>
-                  <th className="px-6 py-3 text-left text-[10px] tracking-[0.12em] uppercase" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
-                    Statut
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
                   </th>
-                  <th className="px-6 py-3 text-left text-[10px] tracking-[0.12em] uppercase" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
-                    Publié
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Published
                   </th>
-                  <th className="px-6 py-3 text-right text-[10px] tracking-[0.12em] uppercase" style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-200">
                 {filteredPublications.map((publication: any) => (
-                  <tr key={publication._id} className="transition-colors duration-200" style={{ borderBottom: '1px solid rgba(70,29,76,0.06)' }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.02)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = '')}>
+                  <tr key={publication._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div>
-                        <div className="text-sm font-medium line-clamp-1" style={{ fontFamily: 'var(--font-display-aptos)', color: 'var(--night)' }}>
+                        <div className="text-sm font-medium text-gray-900 line-clamp-1">
                           {publication.title}
                         </div>
-                        <div className="text-sm line-clamp-2 mt-0.5" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)', fontSize: '0.8rem' }}>
+                        <div className="text-sm text-gray-500 line-clamp-2">
                           {publication.excerpt}
                         </div>
                         {publication.featured && (
-                          <span className="inline-flex items-center px-2 py-0.5 text-xs mt-1" style={{ background: 'rgba(202,148,47,0.1)', color: 'var(--jaune-or)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}>
-                            En vedette
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 mt-1">
+                            Featured
                           </span>
                         )}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-80)' }}>
+                      <span className="text-sm text-gray-900">
                         {getCategoryLabel(publication.category)}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex px-2 py-1 text-xs" style={getStatusStyle(publication.status)}>
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(publication.status)}`}>
                         {publication.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>
-                      {publication.publishedAt ? formatDate(publication.publishedAt) : '—'}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {publication.publishedAt ? formatDate(publication.publishedAt) : 'Not published'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right">
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2">
                         <button
                           onClick={() => navigate({ to: `/publications/${publication.slug}` })}
-                          className="p-1.5 transition-colors duration-200"
-                          style={{ color: 'var(--night-60)' }}
-                          title="Voir"
+                          className="text-gray-600 hover:text-gray-900 p-1"
+                          title="View"
                         >
                           <FaEye className="text-sm" />
                         </button>
                         <button
                           onClick={() => handleEditPublication(publication._id)}
-                          className="p-1.5 transition-colors duration-200"
-                          style={{ color: 'var(--mauve)' }}
-                          title="Modifier"
+                          className="text-blue-600 hover:text-blue-900 p-1"
+                          title="Edit"
                         >
                           <FaEdit className="text-sm" />
                         </button>
                         <button
                           onClick={() => handleDeletePublication(publication._id)}
-                          className="p-1.5 transition-colors duration-200"
-                          style={{ color: '#dc2626' }}
-                          title="Supprimer"
+                          className="text-red-600 hover:text-red-900 p-1"
+                          title="Delete"
                         >
                           <FaTrash className="text-sm" />
                         </button>

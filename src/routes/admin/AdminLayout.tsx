@@ -42,7 +42,7 @@ const AdminLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen text-[var(--night)]" style={{ background: 'var(--pure-white)' }}>
+    <div className="min-h-screen bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)] text-[var(--night)]">
       {/* App Chrome Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--night)]/10 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
@@ -57,7 +57,7 @@ const AdminLayout: React.FC = () => {
           <div className="text-sm font-display-aptos">CMS Admin</div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5" style={{ border: '1px solid rgba(70,29,76,0.12)', background: 'rgba(70,29,76,0.03)' }}>
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
             <FaSearch className="text-secondary" />
             <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
           </div>
@@ -76,9 +76,9 @@ const AdminLayout: React.FC = () => {
 
       <div className="grid grid-cols-12 min-h-[calc(100vh-73px)]">
         {/* Sidebar */}
-        <aside className={`col-span-12 lg:col-span-2 xl:col-span-2 p-4 ${
+        <aside className={`col-span-12 lg:col-span-2 xl:col-span-2 border-r border-[var(--night)]/10 bg-white/50 p-4 ${
           isSidebarCollapsed ? 'hidden lg:block' : ''
-        }`} style={{ borderRight: '1px solid rgba(70,29,76,0.1)', background: 'rgba(70,29,76,0.02)' }}>
+        }`}>
             <nav className="space-y-1">
               {navigationItems.map((item) => (
                 <button
@@ -87,8 +87,11 @@ const AdminLayout: React.FC = () => {
                     setActiveView(item.id);
                     navigate({ to: item.href });
                   }}
-                  className="w-full flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200"
-                  style={item.active ? { background: 'var(--mauve)', color: 'var(--pure-white)' } : { color: 'var(--night-60)' }}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+                    item.active
+                      ? 'bg-[var(--night)] text-[var(--pure-white)]'
+                      : 'hover:bg-[var(--white-smoke)] text-secondary hover:text-[var(--night)]'
+                  }`}
                 >
                   <span className="opacity-80">{item.icon}</span>
                   <span className="text-sm">{item.label}</span>

@@ -4,13 +4,12 @@ import { FiArrowRight } from 'react-icons/fi';
 
 export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      gsap.set('.hero-video-wrap', { scale: 1.1, opacity: 0 });
+      gsap.set('.hero-bg-layer', { scale: 1.05, opacity: 0 });
       gsap.set('.hero-kicker', { y: 20, opacity: 0 });
       gsap.set('.hero-title-line', { y: '110%' });
       gsap.set('.hero-body', { y: 30, opacity: 0 });
@@ -19,7 +18,7 @@ export const HeroSectionMountain: React.FC = () => {
       gsap.set('.hero-metric', { y: 30, opacity: 0 });
 
       tl
-        .to('.hero-video-wrap', { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' })
+        .to('.hero-bg-layer', { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' })
         .to('.hero-kicker', { y: 0, opacity: 1, duration: 0.8 }, '-=1.4')
         .to('.hero-title-line', { y: '0%', duration: 1.4, stagger: 0.12, ease: 'power4.out' }, '-=1.0')
         .to('.hero-rule', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=0.8')
@@ -35,46 +34,33 @@ export const HeroSectionMountain: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex items-end text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
-      style={{ background: 'var(--mauve)' }}
+      className="relative min-h-[100svh] w-full flex items-end bg-[#f5f5f5] text-[var(--night)] overflow-hidden selection:bg-[var(--jaune-or)] selection:text-white"
     >
-      {/* ─── Cinematic Video Background ─── */}
-      <div className="hero-video-wrap absolute inset-0 w-full h-full z-0">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-          style={{ display: 'block' }}
-        >
-          <source src="/kling_video.mp4" type="video/mp4" />
-        </video>
-        {/* Radial vignette — deep mauve edges, preserving video center */}
+      {/* ─── Light Glassy Mountain Background ─── */}
+      <div className="hero-bg-layer absolute inset-0 w-full h-full z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-multiply"
+          style={{ backgroundImage: 'url("/background-sol.jpg")' }}
+        />
+        {/* Ivory to mauve gradient wash */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 75% 65% at 50% 50%, transparent 0%, rgba(50,18,56,0.5) 60%, rgba(30,8,35,0.95) 100%)',
+            background: 'linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.7) 50%, rgba(70,29,76,0.08) 100%)',
           }}
         />
-        {/* Bottom fade — structural base */}
+        {/* Soft champagne gold near horizon */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none opacity-20"
           style={{
-            background: 'linear-gradient(to top, var(--mauve) 0%, rgba(70,29,76,0.85) 25%, transparent 60%)',
+            background: 'linear-gradient(to top, #ca942f 0%, transparent 100%)',
           }}
         />
-        {/* Left editorial fade */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to right, rgba(70,29,76,0.9) 0%, rgba(70,29,76,0.4) 40%, transparent 75%)',
-          }}
-        />
+        {/* Glass veil blur */}
+        <div className="absolute inset-0 backdrop-blur-[2px] pointer-events-none" />
         {/* Film grain overlay */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
+          className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-multiply"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
@@ -82,46 +68,46 @@ export const HeroSectionMountain: React.FC = () => {
       </div>
 
       {/* ─── Editorial Content ─── */}
-      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-32 md:pb-40 pt-32 flex flex-col md:flex-row justify-between items-end">
-        <div className="max-w-[800px]">
+      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-40 md:pb-44 pt-32">
+        <div className="max-w-[1400px] mx-auto">
 
           {/* Kicker */}
-          <div className="hero-kicker mb-10">
+          <div className="hero-kicker mb-8">
             <span
-              className="inline-block text-[11px] tracking-[0.35em] uppercase font-medium text-[var(--jaune-or)]"
-              style={{ fontFamily: 'var(--font-primary)' }}
+              className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
             >
               Société de Gestion et d'Intermédiation — Dakar
             </span>
           </div>
 
-          {/* Headline — oversized serif, no gradients */}
-          <h1 className="mb-10">
+          {/* Headline — oversized serif */}
+          <h1 className="mb-6">
             <span className="block overflow-hidden">
               <span
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontWeight: 400,
-                  fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-                  lineHeight: 0.9,
-                  letterSpacing: '-0.01em',
-                  color: 'var(--pure-white)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--night)',
                 }}
               >
                 Élevez vos
               </span>
             </span>
-            <span className="block overflow-hidden pb-2">
+            <span className="block overflow-hidden">
               <span
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontWeight: 400,
+                  fontWeight: 300,
                   fontStyle: 'italic',
-                  fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-                  lineHeight: 0.9,
-                  letterSpacing: '-0.01em',
+                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-0.02em',
                   color: 'var(--jaune-or)',
                 }}
               >
@@ -130,15 +116,19 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </h1>
 
+          {/* Gold horizontal rule */}
+          <div
+            className="hero-rule h-[1px] w-24 md:w-40 mb-8 bg-[var(--jaune-or)]"
+          />
+
           {/* Subhead */}
           <p
-            className="hero-body max-w-lg mb-14"
+            className="hero-body max-w-lg mb-10 text-[var(--night)]/70"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 300,
-              fontSize: '1.1rem',
-              lineHeight: 1.6,
-              color: 'rgba(255,255,255,0.7)',
+              fontWeight: 400,
+              fontSize: 'clamp(1rem, 1.4vw, 1.15rem)',
+              lineHeight: 1.75,
             }}
           >
             Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires
@@ -146,44 +136,24 @@ export const HeroSectionMountain: React.FC = () => {
           </p>
 
           {/* CTA */}
-          <div className="hero-cta flex gap-6 items-center">
+          <div className="hero-cta">
             <a
               href="#services"
-              className="inline-flex items-center justify-center px-8 py-4 transition-all duration-300 bg-[var(--jaune-or)] text-white hover:bg-white hover:text-[var(--night)]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, letterSpacing: '0.05em' }}
+              className="group inline-flex items-center gap-5"
             >
-              Découvrir notre expertise
+              <span
+                className="relative overflow-hidden text-[11px] tracking-[0.25em] uppercase"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night)' }}
+              >
+                Découvrir notre expertise
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--night)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+              </span>
+              <span className="w-11 h-11 rounded-full border border-[var(--night)]/15 flex items-center justify-center group-hover:border-[var(--night)]/40 bg-white/50 backdrop-blur-sm transition-all duration-500">
+                <FiArrowRight className="text-base text-[var(--night)]/70 group-hover:text-[var(--night)] group-hover:translate-x-0.5 transition-all duration-500" />
+              </span>
             </a>
-            
-            <a 
-              href="#contact" 
-              className="inline-flex items-center gap-3 text-white/80 hover:text-[var(--jaune-or)] transition-colors group"
-            >
-              <span className="text-sm font-medium tracking-wide">Nous contacter</span>
-              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </a>
           </div>
-        </div>
-        
-        {/* Right side contextual metrics - replaces the bottom bar */}
-        <div className="hidden md:flex flex-col gap-10 text-right">
-          <div className="hero-metric">
-            <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--jaune-or)] mb-2 font-medium" style={{ fontFamily: 'var(--font-primary)' }}>
-              Agrément CREPMF
-            </div>
-            <div className="text-white/70 font-mono text-sm tracking-wider">
-              SGI/DA/2016/60
-            </div>
-          </div>
-          
-          <div className="hero-metric">
-            <div className="text-[10px] tracking-[0.2em] uppercase text-[var(--jaune-or)] mb-2 font-medium" style={{ fontFamily: 'var(--font-primary)' }}>
-              Expertise Cumulée
-            </div>
-            <div className="text-white text-3xl" style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300 }}>
-              30+ <span className="text-white/40 text-lg">ans</span>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>

@@ -146,7 +146,7 @@ export const ActualitesPage = () => {
                 </span>
               </div>
             </div>
-            <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-center" style={{ background: 'rgba(70,29,76,0.03)' }}>
+            <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-center bg-[var(--white-smoke)]/30">
               <div className="flex items-center gap-4 mb-6">
                 <span className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--jaune-or)]">
                   {FEATURED.category}
@@ -192,12 +192,10 @@ export const ActualitesPage = () => {
                   <a
                     key={i}
                     href={article.href}
-                    className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 transition-colors"
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(70,29,76,0.02)')}
-                    onMouseLeave={e => (e.currentTarget.style.background = '')}
+                    className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
                   >
                     {/* Thumbnail */}
-                    <div className="relative aspect-[4/3] overflow-hidden" style={{ background: 'rgba(70,29,76,0.06)' }}>
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)]">
                       <img
                         src={article.imageUrl}
                         alt={article.title}

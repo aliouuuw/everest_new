@@ -36,37 +36,37 @@ export function ProtectedRoute({
   if (isLoading) {
     // Show loading while checking auth state
     content = (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--mauve)] mx-auto"></div>
-          <p className="mt-2 text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Vérification de l'authentification...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]/80">Vérification de l'authentification...</p>
         </div>
       </div>
     )
   } else if (!isAuthenticated) {
     // If not authenticated, show redirect message briefly
     content = (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--mauve)] mx-auto"></div>
-          <p className="mt-2 text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Redirection vers la connexion...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]/80">Redirection vers la connexion...</p>
         </div>
       </div>
     )
   } else if (user === undefined) {
     // Show loading while fetching user data
     content = (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--mauve)] mx-auto"></div>
-          <p className="mt-2 text-sm" style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-60)' }}>Chargement des données utilisateur...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]/80">Chargement des données utilisateur...</p>
         </div>
       </div>
     )
   } else if (user === null) {
     // User is authenticated but user data couldn't be found - this is an error state
     content = (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center max-w-md mx-auto p-6">
           <div className="text-6xl mb-4">❌</div>
           <h1 className="text-2xl font-bold text-[var(--night)] mb-2">Erreur de chargement</h1>
@@ -97,7 +97,7 @@ export function ProtectedRoute({
     if (requiredRole && !hasRequiredRole) {
       // Show access denied if role is required but user doesn't have it
       content = (
-        <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--pure-white)' }}>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center max-w-md mx-auto p-6">
             <div className="text-6xl mb-4">🔒</div>
             <h1 className="text-2xl font-bold text-[var(--night)] mb-2">Accès Refusé</h1>

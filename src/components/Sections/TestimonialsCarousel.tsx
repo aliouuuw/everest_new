@@ -177,7 +177,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <FiStar
         key={i}
         className={`w-4 h-4 ${
-          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-white/20'
+          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-gray-300'
         }`}
       />
     ));

@@ -189,7 +189,7 @@ export const PerformanceComparison: React.FC = () => {
           <div className="overflow-x-auto">
             <div className="min-w-[600px]">
               {/* Table Header */}
-              <div className="grid grid-cols-5 border-b border-black/10" style={{ background: 'rgba(70,29,76,0.04)' }}>
+              <div className="grid grid-cols-5 border-b border-black/10 bg-[var(--white-smoke)]/30">
                 <div className="p-4 font-display-aptos text-sm text-[var(--night)]">Période</div>
                 <div className="p-4 font-display-aptos text-sm text-center text-[var(--night)]">Gestion Libre</div>
                 <div className="p-4 font-display-aptos text-sm text-center text-[var(--night)]">Gestion Sous-Mandat</div>
@@ -199,7 +199,7 @@ export const PerformanceComparison: React.FC = () => {
 
               {/* Table Body */}
               {performanceData.map((row, index) => (
-                <div key={row.period} className="grid grid-cols-5 border-b border-black/10" style={{ background: index % 2 === 0 ? 'rgba(70,29,76,0.02)' : '' }}>
+                <div key={row.period} className={`grid grid-cols-5 border-b border-black/10 ${index % 2 === 0 ? 'bg-[var(--white-smoke)]/20' : ''}`}>
                   <div className="p-4 font-medium text-[var(--night)]">{row.period}</div>
                   <div className="p-4 text-center">
                     <span className={`font-display-aptos text-sm ${row.discretionary >= 0 ? 'text-green-700' : 'text-red-600'}`}>
@@ -283,7 +283,7 @@ export const PerformanceComparison: React.FC = () => {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-20 p-6 border border-black/10" style={{ background: 'rgba(70,29,76,0.03)' }}>
+        <div className="mt-20 p-6 border border-black/10 bg-[var(--white-smoke)]/30">
           <div className="flex items-start gap-3">
             <FiTrendingUp className="text-[var(--jaune-or)] mt-0.5 flex-shrink-0" />
             <div className="text-sm text-[rgba(10,10,10,0.8)]">

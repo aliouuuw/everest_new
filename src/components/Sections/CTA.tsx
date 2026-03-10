@@ -15,109 +15,126 @@ export const CTA: React.FC<{
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-36 overflow-hidden"
+      className="reveal relative py-24 md:py-36 overflow-hidden bg-[var(--night)] border-t border-white/5"
       id="contact"
-      style={{ background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 50%, #2a1025 100%)' }}
     >
-      {/* Dramatic gold-mauve gradient orbs */}
-      <div
-        className="absolute top-0 left-0 w-[60%] h-[80%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-30) 0%, var(--jaune-or-10) 30%, transparent 60%)' }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[50%] h-[60%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-15) 0%, var(--mauve-10) 40%, transparent 60%)' }}
-      />
-      {/* Gradient noise texture overlay */}
+      {/* Background Command Center Grid & Glows */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%23FFFFFF' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+        }}
       />
+      <div
+        className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--jaune-or)]/30 to-transparent"
+      />
+      <div
+        className="absolute -top-[20%] -left-[10%] w-[50%] h-[70%] pointer-events-none opacity-30"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(70,29,76,0.6) 0%, transparent 70%)' }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-[40%] h-[60%] pointer-events-none opacity-20"
+        style={{ background: 'radial-gradient(ellipse at bottom right, rgba(202,148,47,0.3) 0%, transparent 70%)' }}
+      />
+      
+      {/* Content */}
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
+        <div className="bg-white/5 border border-white/10 p-8 md:p-16 relative overflow-hidden backdrop-blur-sm">
           
-          {/* Left Side: Oversized Editorial Text */}
-          <div className="lg:w-3/5">
-            <span
-              className="block text-[10px] tracking-[0.35em] uppercase mb-8"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              Prise de contact
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-                color: 'var(--pure-white)',
-              }}
-            >
-              Prêts à franchir{' '}
-              <em style={{ 
-                fontStyle: 'italic', 
-                background: 'linear-gradient(135deg, var(--jaune-or) 0%, #e8c96a 50%, var(--mauve) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                un cap ?
-              </em>
-            </h2>
-            <div
-              className="h-[2px] w-32 mt-10 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
-            />
-            <p
-              className="max-w-md"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                fontSize: '1.05rem',
-                lineHeight: 1.75,
-                color: 'rgba(255,255,255,0.7)',
-              }}
-            >
-              Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
-            </p>
-          </div>
+          {/* Decorative Corner Markers */}
+          <div className="absolute top-0 left-0 w-4 h-[1px] bg-white/30" />
+          <div className="absolute top-0 left-0 w-[1px] h-4 bg-white/30" />
+          <div className="absolute top-0 right-0 w-4 h-[1px] bg-white/30" />
+          <div className="absolute top-0 right-0 w-[1px] h-4 bg-white/30" />
+          <div className="absolute bottom-0 left-0 w-4 h-[1px] bg-white/30" />
+          <div className="absolute bottom-0 left-0 w-[1px] h-4 bg-white/30" />
+          <div className="absolute bottom-0 right-0 w-4 h-[1px] bg-white/30" />
+          <div className="absolute bottom-0 right-0 w-[1px] h-4 bg-white/30" />
 
-          {/* Right Side: Vertical Actions */}
-          <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
-            <a
-              href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 border transition-all duration-500 hover:shadow-[0_0_30px_rgba(202,148,47,0.3)]"
-              style={{ 
-                borderColor: 'rgba(202,148,47,0.4)',
-                background: 'linear-gradient(135deg, rgba(202,148,47,0.1) 0%, transparent 100%)'
-              }}
-            >
-              <span
-                className="text-[12px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-              >
-                {primaryLabel}
-              </span>
-              <FiArrowRight className="text-lg text-[var(--jaune-or)] group-hover:translate-x-1 transition-transform duration-500" />
-            </a>
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
             
-            {secondaryHref && (
-              <a
-                href={secondaryHref}
-                className="group inline-flex items-center gap-4 mt-2"
-              >
+            {/* Left Side: Oversized Editorial Text */}
+            <div className="lg:w-3/5">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-[1px] w-6 bg-[var(--jaune-or)]" />
                 <span
-                  className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}
+                  className="text-[9px] tracking-[0.3em] uppercase font-mono text-[var(--jaune-or)]"
                 >
-                  {secondaryLabel}
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                  Initiation de mandat
                 </span>
-              </a>
-            )}
-          </div>
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display-aptos)',
+                  fontWeight: 400,
+                  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                  lineHeight: 1.05,
+                  letterSpacing: '-0.02em',
+                  color: 'white',
+                }}
+              >
+                Structurez votre{' '}
+                <span className="block text-white/40 mt-1">
+                  patrimoine avec nous.
+                </span>
+              </h2>
+              
+              <p
+                className="max-w-md mt-8"
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 300,
+                  fontSize: '1.05rem',
+                  lineHeight: 1.75,
+                  color: 'rgba(255,255,255,0.6)',
+                }}
+              >
+                Ouvrez un compte titres, initiez un mandat de gestion ou consultez nos experts pour l'ingénierie financière de vos projets.
+              </p>
+            </div>
 
+            {/* Right Side: Vertical Actions */}
+            <div className="lg:w-2/5 flex flex-col gap-4 w-full">
+              <a
+                href={primaryHref}
+                className="group flex items-center justify-between bg-white text-[var(--night)] p-6 hover:bg-[var(--jaune-or)] transition-colors duration-300"
+              >
+                <div className="flex flex-col">
+                  <span
+                    className="text-[10px] tracking-widest uppercase mb-1 opacity-50"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 600 }}
+                  >
+                    Action principale
+                  </span>
+                  <span
+                    className="text-lg"
+                    style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500 }}
+                  >
+                    {primaryLabel}
+                  </span>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                  <FiArrowRight className="w-5 h-5" />
+                </div>
+              </a>
+              
+              {secondaryHref && (
+                <a
+                  href={secondaryHref}
+                  className="group flex items-center justify-between border border-white/10 text-white p-6 hover:border-white/30 hover:bg-white/5 transition-all duration-300"
+                >
+                  <span
+                    className="text-sm tracking-wide"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 400 }}
+                  >
+                    {secondaryLabel}
+                  </span>
+                  <FiArrowRight className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
+                </a>
+              )}
+            </div>
+
+          </div>
         </div>
       </div>
     </section>

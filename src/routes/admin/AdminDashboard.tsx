@@ -96,14 +96,14 @@ export const AdminDashboard = () => {
             icon: <FaUsers />
           },
         ].map((k, i) => (
-          <div key={i} className="p-4 hover:shadow-sm transition-shadow" style={{ background: 'var(--pure-white)', border: '1px solid rgba(70,29,76,0.1)' }}>
+          <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <div className="text-secondary text-xs">{k.label}</div>
               <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
               <div className="font-display-aptos text-lg">{k.value}</div>
-              <div className="text-[10px] px-1.5 py-0.5" style={{ border: '1px solid rgba(70,29,76,0.15)', color: 'var(--night-60)', fontFamily: 'var(--font-primary)' }}>{k.delta}</div>
+              <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
             </div>
             <div className="mt-2 opacity-80">
               <Sparkline points={k.trend} />
@@ -115,7 +115,7 @@ export const AdminDashboard = () => {
       {/* Main Grid Content */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Quick Actions - Takes 2 columns on xl screens */}
-        <div className="xl:col-span-2 p-4 sm:p-6" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
+        <div className="xl:col-span-2 rounded-xl p-4 sm:p-6 border border-[var(--night)]/10 bg-white/70">
           <h2 className="text-lg sm:text-xl font-display-aptos font-semibold text-[var(--night)] mb-4 sm:mb-6">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {quickActions.map((action) => (
@@ -139,7 +139,7 @@ export const AdminDashboard = () => {
         </div>
 
         {/* Recent Publications - Takes 1 column on xl screens */}
-        <div className="p-4 sm:p-6" style={{ border: '1px solid rgba(70,29,76,0.1)', background: 'var(--pure-white)' }}>
+        <div className="rounded-xl p-4 sm:p-6 border border-[var(--night)]/10 bg-white/70">
           <h2 className="text-lg sm:text-xl font-display-aptos font-semibold text-[var(--night)] mb-4 sm:mb-6">Recent Publications</h2>
           {publications?.page && publications.page.length > 0 ? (
             <div className="space-y-4">
