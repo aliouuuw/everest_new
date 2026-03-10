@@ -16,62 +16,78 @@ export const HeroSectionMountain: React.FC = () => {
       gsap.set('.reveal-text', { yPercent: 120 });
       gsap.set('.reveal-fade', { opacity: 0, y: 20 });
       gsap.set('.hero-line', { scaleX: 0, transformOrigin: 'left' });
-      gsap.set('.mountain-plate', { opacity: 0, scale: 1.06 });
-      gsap.set('.glass-veil', { opacity: 0 });
-      gsap.set('.grain-layer', { opacity: 0 });
+      gsap.set('.granient-layer', { opacity: 0 });
       gsap.set('.shimmer-band', { opacity: 0, x: '-110%' });
       gsap.set('.trust-marker', { opacity: 0 });
 
       // ─── Entrance choreography ───
-      // 1. Mountain fades in with subtle scale
-      tl.to('.mountain-plate', { opacity: 1, scale: 1.02, duration: 3, ease: 'power2.out' })
-        // 2. Glass veils emerge
-        .to('.glass-veil', { opacity: 1, duration: 2.5, stagger: 0.3, ease: 'power2.inOut' }, '-=2.5')
-        // 3. Grain fades in
-        .to('.grain-layer', { opacity: 0.035, duration: 2 }, '-=2')
-        // 4. Typography reveals
-        .to('.reveal-text', { yPercent: 0, duration: 1.4, stagger: 0.06, ease: 'expo.out' }, '-=1.5')
-        // 5. Decorative line
-        .to('.hero-line', { scaleX: 1, duration: 1, ease: 'power3.inOut' }, '-=0.8')
-        // 6. Fade elements (subhead, CTAs)
-        .to('.reveal-fade', { opacity: 1, y: 0, duration: 0.9, stagger: 0.06, ease: 'power2.out' }, '-=0.6')
-        // 7. Trust markers
-        .to('.trust-marker', { opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, '-=0.4')
-        // 8. Shimmer sweep across (delight moment)
+      // 1. Base granient layers fade in
+      tl.to('.granient-layer', { opacity: 1, duration: 3, stagger: 0.2, ease: 'power2.out' })
+        // 2. Typography reveals
+        .to('.reveal-text', { yPercent: 0, duration: 1.4, stagger: 0.06, ease: 'expo.out' }, '-=2')
+        // 3. Decorative line
+        .to('.hero-line', { scaleX: 1, duration: 1, ease: 'power3.inOut' }, '-=1')
+        // 4. Fade elements (subhead, CTAs)
+        .to('.reveal-fade', { opacity: 1, y: 0, duration: 0.9, stagger: 0.06, ease: 'power2.out' }, '-=0.8')
+        // 5. Trust markers
+        .to('.trust-marker', { opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, '-=0.6')
+        // 6. Shimmer sweep across
         .to('.shimmer-band', { opacity: 0.15, x: '110%', duration: 2.5, ease: 'power2.inOut' }, '-=0.5');
 
-      // ─── Ambient breathing ───
-      // Glass veils drift almost imperceptibly
-      gsap.to('.veil-1', {
-        x: '+=15', y: '-=10',
-        duration: 22, repeat: -1, yoyo: true, ease: 'sine.inOut'
-      });
-      gsap.to('.veil-2', {
-        x: '-=18', y: '+=12',
-        duration: 28, repeat: -1, yoyo: true, ease: 'sine.inOut'
-      });
-      gsap.to('.veil-3', {
-        x: '+=10', y: '+=8',
-        duration: 25, repeat: -1, yoyo: true, ease: 'sine.inOut'
-      });
-
-      // Veils breathe: opacity softly pulsing
-      gsap.to('.veil-1', {
-        opacity: 0.7, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut'
-      });
-      gsap.to('.veil-2', {
-        opacity: 0.6, duration: 10, repeat: -1, yoyo: true, ease: 'sine.inOut'
+      // ─── Abstract Mountain Animations (Granient Style) ───
+      
+      // The "Mauve Peak" (Right side)
+      gsap.to('.mesh-mauve', {
+        scale: 1.05,
+        rotation: 2,
+        x: '-2%',
+        y: '3%',
+        duration: 18,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
       });
 
-      // Mountain plate: occasionally slightly more/less visible
-      gsap.to('.mountain-plate', {
-        opacity: 0.85, duration: 12, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 3
+      // The "Gold Ridge" (Center/Left)
+      gsap.to('.mesh-gold', {
+        scale: 1.08,
+        rotation: -3,
+        x: '3%',
+        y: '-2%',
+        duration: 24,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+      
+      // The "Deep Valley" (Bottom)
+      gsap.to('.mesh-dark-mauve', {
+        scale: 1.03,
+        y: '-4%',
+        duration: 20,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
       });
 
-      // Grain drifts slowly
-      gsap.to('.grain-layer', {
-        backgroundPosition: '20px 20px',
-        duration: 8, repeat: -1, ease: 'none'
+      // The "Light Mist" (Top/Center)
+      gsap.to('.mesh-white', {
+        x: '5%',
+        y: '5%',
+        scale: 1.1,
+        duration: 30,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // Subtle pulse on the global grain mask to make it feel "alive"
+      gsap.to('.grain-mask', {
+        opacity: 0.85,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
       });
 
       // Shimmer band repeats slowly
@@ -94,89 +110,83 @@ export const HeroSectionMountain: React.FC = () => {
       className="relative min-h-[100svh] w-full flex items-end bg-[#faf9f7] text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
     >
       {/* ══════════════════════════════════════════════
-          LAYER 1 — Mountain Plate
-          Light image, desaturated, subtle scale-up.
-          NO mix-blend-multiply — keeps it light & airy.
+          GRANIENT BACKGROUND — Abstract Mountain Forms
+          Using highly blurred CSS shapes + SVG noise
       ══════════════════════════════════════════════ */}
-      <div 
-        className="mountain-plate absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: 'url(/generated_bg_2.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 40%',
-          backgroundRepeat: 'no-repeat',
-          filter: 'saturate(0.4) brightness(1.1)',
-          willChange: 'transform, opacity',
-        }}
-      />
+      
+      {/* Base Canvas */}
+      <div className="absolute inset-0 bg-[#Fbfafc] overflow-hidden">
+        
+        {/* SVG Noise Filter Definition */}
+        <svg className="hidden">
+          <filter id="granient-noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.12 0" />
+          </filter>
+        </svg>
 
-      {/* ══════════════════════════════════════════════
-          LAYER 2 — Atmospheric Tint
-          Ivory → pale mauve wash with faint gold horizon.
-          Creates the "looking through frosted glass" base.
-      ══════════════════════════════════════════════ */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            linear-gradient(180deg, 
-              rgba(250,249,247,0.35) 0%,
-              rgba(220,218,210,0.25) 30%,
-              rgba(202,148,47,0.06) 55%,
-              rgba(70,29,76,0.05) 70%,
-              rgba(250,249,247,0.85) 100%
-            )
-          `,
-        }}
-      />
-
-      {/* ══════════════════════════════════════════════
-          LAYER 3 — Glass Veils
-          2-4 oversized translucent blurred shapes.
-          Slow drift, material feel. Breathing opacity.
-      ══════════════════════════════════════════════ */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Veil 1 — Mauve, upper-left */}
-        <div className="glass-veil veil-1 absolute -top-[15%] -left-[10%] w-[55%] h-[65%] rounded-[50%]"
+        {/* 1. Deep Valley (Base structure) */}
+        <div 
+          className="granient-layer mesh-dark-mauve absolute -bottom-[30%] -left-[10%] w-[120%] h-[80%] rounded-[100%]"
           style={{
-            background: 'radial-gradient(ellipse, rgba(70,29,76,0.09) 0%, transparent 65%)',
-            filter: 'blur(100px)',
+            background: 'radial-gradient(ellipse at top, #3A1440 0%, transparent 70%)',
+            filter: 'blur(120px)',
+            opacity: 0.15
           }}
         />
-        {/* Veil 2 — Gold, lower-right horizon area */}
-        <div className="glass-veil veil-2 absolute -bottom-[10%] -right-[8%] w-[60%] h-[55%] rounded-[50%]"
+
+        {/* 2. The Gold Ridge (Abstract left mountain) */}
+        <div 
+          className="granient-layer mesh-gold absolute top-[10%] -left-[20%] w-[80%] h-[120%] rounded-[100%] origin-bottom-right"
           style={{
-            background: 'radial-gradient(ellipse, rgba(202,148,47,0.08) 0%, transparent 60%)',
-            filter: 'blur(110px)',
+            background: 'radial-gradient(ellipse at center, var(--jaune-or) 0%, rgba(202,148,47,0.4) 40%, transparent 70%)',
+            filter: 'blur(140px)',
+            opacity: 0.12
           }}
         />
-        {/* Veil 3 — Timberwolf, center-right */}
-        <div className="glass-veil veil-3 absolute top-[20%] right-[5%] w-[40%] h-[50%] rounded-[50%]"
+
+        {/* 3. The Mauve Peak (Abstract right mountain) */}
+        <div 
+          className="granient-layer mesh-mauve absolute top-[5%] -right-[15%] w-[85%] h-[130%] rounded-[100%] origin-bottom-left"
           style={{
-            background: 'radial-gradient(ellipse, rgba(220,218,210,0.35) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse at center, var(--mauve) 0%, rgba(70,29,76,0.3) 40%, transparent 70%)',
+            filter: 'blur(130px)',
+            opacity: 0.15
+          }}
+        />
+
+        {/* 4. The Light Mist (Brightening the center/top) */}
+        <div 
+          className="granient-layer mesh-white absolute -top-[10%] left-[10%] w-[80%] h-[60%] rounded-[100%]"
+          style={{
+            background: 'radial-gradient(ellipse at center, #FFFFFF 0%, transparent 70%)',
             filter: 'blur(90px)',
+            opacity: 0.8
+          }}
+        />
+
+        {/* 5. Hard Noise Layer (The "Granient" Texture) */}
+        <div 
+          className="grain-mask absolute inset-0 pointer-events-none mix-blend-overlay opacity-100"
+          style={{ filter: 'url(#granient-noise)' }}
+        />
+        
+        {/* Additional fine monochromatic grain for print feel */}
+        <div
+          className="absolute inset-0 pointer-events-none mix-blend-multiply opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
         />
       </div>
 
       {/* ══════════════════════════════════════════════
-          LAYER 4 — Noise / Grain
-          Subtle warm-neutral grain, animated slowly.
-      ══════════════════════════════════════════════ */}
-      <div
-        className="grain-layer absolute inset-0 pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: '256px 256px',
-        }}
-      />
-
-      {/* ══════════════════════════════════════════════
           LAYER 5 — Shimmer Band
           Imperceptible moving light band, repeats slowly.
       ══════════════════════════════════════════════ */}
-      <div className="shimmer-band absolute inset-y-0 w-[30%] pointer-events-none"
+      <div className="shimmer-band absolute inset-y-0 w-[30%] pointer-events-none z-0"
         style={{
-          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(202,148,47,0.08), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), rgba(202,148,47,0.05), transparent)',
           filter: 'blur(40px)',
           willChange: 'transform',
         }}
@@ -184,17 +194,15 @@ export const HeroSectionMountain: React.FC = () => {
 
       {/* ══════════════════════════════════════════════
           Bottom fog — ensures text area is always readable.
-          Soft gradient, not a hard cutoff.
       ══════════════════════════════════════════════ */}
-      <div className="absolute bottom-0 left-0 w-full h-[55%] pointer-events-none"
+      <div className="absolute bottom-0 left-0 w-full h-[60%] pointer-events-none z-0"
         style={{
-          background: 'linear-gradient(to top, rgba(250,249,247,0.95) 0%, rgba(250,249,247,0.6) 40%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(251,250,252,1) 0%, rgba(251,250,252,0.8) 40%, transparent 100%)',
         }}
       />
 
       {/* ══════════════════════════════════════════════
           CONTENT — Monumental, single-column, generous space.
-          No cards. No grids of metrics. Just typography + air.
       ══════════════════════════════════════════════ */}
       <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-[clamp(3rem,8vh,6rem)] pt-[clamp(8rem,20vh,14rem)]">
         <div className="max-w-[1100px]">
