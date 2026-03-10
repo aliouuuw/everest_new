@@ -29,11 +29,13 @@ interface DropdownProps {
   isLightBackgroundPage: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose, isScrolled, isLightBackgroundPage }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
+    setIsHovered(true);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -41,9 +43,10 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
   };
 
   const handleMouseLeave = () => {
+    setIsHovered(false);
     timeoutRef.current = setTimeout(() => {
       onClose(name);
-    }, 150); // Small delay to prevent flickering when moving between trigger and dropdown
+    }, 150);
   };
 
   useEffect(() => {
@@ -54,10 +57,6 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
     };
   }, []);
 
-  // Use props or calculate based on them if we ever need dynamic behavior
-  // For now, the site is light-mode led
-  const needsDarkText = isScrolled || isLightBackgroundPage || true;
-
   return (
     <div 
       className="relative" 
@@ -66,30 +65,38 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] group font-medium"
-        style={{ fontFamily: 'var(--font-primary)', color: needsDarkText ? 'var(--night-80)' : 'rgba(255,255,255,0.6)' }}
+        className="flex items-center gap-1.5 text-[13px] tracking-[0.03em] transition-all duration-300 ease-out hover:text-[var(--mauve)] group font-medium py-2 px-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2"
+        style={{ fontFamily: 'var(--font-primary)', color: isHovered || isOpen ? 'var(--mauve)' : 'var(--night-80)' }}
         aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         {title}
         <svg
-          className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-3.5 h-3.5 transition-transform duration-300 ease-out ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-3 w-56 bg-white/95 backdrop-blur-xl border border-[var(--mauve-10)] shadow-xl shadow-[var(--mauve-05)] py-2 z-50 rounded-md">
+        <div 
+          className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-xl border border-[var(--mauve-10)] shadow-lg shadow-[var(--mauve-05)] py-1.5 z-50 rounded-md overflow-hidden"
+          style={{ 
+            animation: 'dropdownEnter 0.25s ease-out',
+          }}
+        >
           {items.map((item, index) => (
             <Link
               key={index}
               to={item.href}
-              className="block px-5 py-2.5 text-[13px] transition-colors duration-200 hover:text-[var(--mauve)] hover:bg-[var(--mauve-05)] font-medium"
+              className="block px-4 py-2.5 text-[13px] transition-all duration-200 ease-out hover:text-[var(--mauve)] hover:bg-[var(--mauve-05)] hover:pl-5 font-medium relative group"
               style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-80)' }}
             >
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-[1px] bg-[var(--jaune-or)] transition-all duration-200 group-hover:w-2" />
               {item.label}
             </Link>
           ))}
@@ -105,12 +112,13 @@ export const Header: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Track scroll to add header background for contrast on light pages
+  // Track scroll with smooth threshold
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -169,20 +177,15 @@ export const Header: React.FC = () => {
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  // Header styles based on scroll state
-  const headerBgClass = isScrolled
-    ? 'backdrop-blur-2xl shadow-sm'
+  // Header styles based on scroll state - refined
+  const headerClasses = isScrolled
+    ? 'backdrop-blur-xl shadow-sm bg-[#Fbfafc]/90 border-b border-[var(--mauve-10)]/50'
     : 'bg-transparent';
-  const headerStyle = isScrolled
-    ? { background: 'rgba(251,250,252,0.85)', borderBottom: '1px solid rgba(70,29,76,0.06)' }
-    : { background: 'rgba(251,250,252,0.0)' };
     
-  const paddingClass = isScrolled ? 'py-4' : 'py-6 lg:py-8';
+  const paddingClasses = isScrolled ? 'py-3' : 'py-5 lg:py-6';
 
-  // Text color based on light-led theme
+  // Theme detection for mobile menu (always light for public pages)
   const needsDarkText = true;
-  const textColorClass = needsDarkText ? 'text-[var(--night-80)]' : 'text-white/60';
-  const logoTextClass = needsDarkText ? 'text-[var(--night)]' : 'text-white/70';
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
@@ -203,22 +206,30 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${headerBgClass}`} style={headerStyle}>
-      <div className={`mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 flex items-center justify-between transition-all duration-700 ease-out ${paddingClass}`}>
-        {/* Logo */}
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${headerClasses}`}>
+      <div className={`mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 flex items-center justify-between transition-all duration-500 ease-out ${paddingClasses}`}>
+        {/* Logo - refined with better hover treatment */}
         <div className="flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-3 group">
-            <img src="/logo-everest.png" alt="Everest Finance" className="h-9 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
+          <Link 
+            to="/" 
+            className="flex items-center gap-3 group py-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2"
+            aria-label="Retour à l'accueil Everest Finance"
+          >
+            <img 
+              src="/logo-everest.png" 
+              alt="Everest Finance" 
+              className="h-8 w-auto transition-all duration-300 ease-out group-hover:scale-[1.03] group-hover:brightness-105" 
+            />
             <div className="hidden sm:flex flex-col">
               <span
-                className={`text-[13px] tracking-[0.12em] uppercase font-semibold leading-tight ${logoTextClass}`}
+                className="text-[12px] tracking-[0.1em] uppercase font-semibold leading-tight text-[var(--night)] transition-colors duration-300 group-hover:text-[var(--mauve)]"
                 style={{ fontFamily: 'var(--font-primary)' }}
               >
                 Everest Finance
               </span>
               <span
-                className="text-[9px] tracking-[0.15em] uppercase leading-tight"
-                style={{ color: 'var(--jaune-or)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
+                className="text-[9px] tracking-[0.12em] uppercase leading-tight text-[var(--jaune-or)]"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
               >
                 SGI — Dakar
               </span>
@@ -226,16 +237,21 @@ export const Header: React.FC = () => {
           </Link>
         </div>
 
-        {/* Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        {/* Navigation - refined with consistent hover states */}
+        <nav className="hidden lg:flex items-center gap-6">
           <Link
             to="/"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
+            onMouseEnter={() => setHoveredLink('accueil')}
+            onMouseLeave={() => setHoveredLink(null)}
+            className={`text-[13px] tracking-[0.02em] transition-all duration-300 ease-out font-medium relative py-2 px-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2 ${hoveredLink === 'accueil' ? 'text-[var(--mauve)]' : 'text-[var(--night-80)]'}`}
             style={{ fontFamily: 'var(--font-primary)' }}
-            activeProps={{ style: { color: 'var(--mauve)' } }}
+            activeProps={{ className: 'text-[var(--mauve)]' }}
           >
             Accueil
-            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
+            <span 
+              className="absolute bottom-0 left-0 h-[2px] bg-[var(--jaune-or)] transition-all duration-300 ease-out"
+              style={{ width: hoveredLink === 'accueil' ? '100%' : '0%' }}
+            />
           </Link>
 
           <Dropdown
@@ -262,35 +278,45 @@ export const Header: React.FC = () => {
 
           <Link
             to="/offres"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
+            onMouseEnter={() => setHoveredLink('offres')}
+            onMouseLeave={() => setHoveredLink(null)}
+            className={`text-[13px] tracking-[0.02em] transition-all duration-300 ease-out font-medium relative py-2 px-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2 ${hoveredLink === 'offres' ? 'text-[var(--mauve)]' : 'text-[var(--night-80)]'}`}
             style={{ fontFamily: 'var(--font-primary)' }}
-            activeProps={{ style: { color: 'var(--mauve)' } }}
+            activeProps={{ className: 'text-[var(--mauve)]' }}
           >
             Offres
-            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
+            <span 
+              className="absolute bottom-0 left-0 h-[2px] bg-[var(--jaune-or)] transition-all duration-300 ease-out"
+              style={{ width: hoveredLink === 'offres' ? '100%' : '0%' }}
+            />
           </Link>
 
           <Link
             to="/bourse"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
+            onMouseEnter={() => setHoveredLink('bourse')}
+            onMouseLeave={() => setHoveredLink(null)}
+            className={`text-[13px] tracking-[0.02em] transition-all duration-300 ease-out font-medium relative py-2 px-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2 ${hoveredLink === 'bourse' ? 'text-[var(--mauve)]' : 'text-[var(--night-80)]'}`}
             style={{ fontFamily: 'var(--font-primary)' }}
-            activeProps={{ style: { color: 'var(--mauve)' } }}
+            activeProps={{ className: 'text-[var(--mauve)]' }}
           >
             Bourse
-            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
+            <span 
+              className="absolute bottom-0 left-0 h-[2px] bg-[var(--jaune-or)] transition-all duration-300 ease-out"
+              style={{ width: hoveredLink === 'bourse' ? '100%' : '0%' }}
+            />
           </Link>
         </nav>
 
-        {/* CTA */}
+        {/* CTA - refined with sophisticated hover */}
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 transition-all duration-500 relative overflow-hidden rounded-sm bg-[var(--night)] text-white hover:shadow-2xl hover:shadow-[var(--mauve)]/20"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 transition-all duration-300 ease-out relative overflow-hidden rounded-sm bg-[var(--night)] text-white hover:shadow-lg hover:shadow-[var(--mauve)]/15 active:scale-[0.98] active:duration-150 focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--mauve)] to-[#3A1440] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            <FingerprintIcon className="relative z-10 w-3.5 h-3.5 text-white/80 transition-transform duration-500 group-hover:scale-110 group-hover:text-white" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--mauve)] to-[#3A1440] translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-out" />
+            <FingerprintIcon className="relative z-10 w-3.5 h-3.5 text-white/90 transition-all duration-300 group-hover:scale-110" />
             <span
-              className="relative z-10 text-[11px] tracking-[0.15em] uppercase font-semibold text-white"
+              className="relative z-10 text-[11px] tracking-[0.12em] uppercase font-semibold text-white"
               style={{ fontFamily: 'var(--font-primary)' }}
             >
               Accès Client
@@ -298,22 +324,35 @@ export const Header: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - improved touch target */}
         <div className="lg:hidden">
           <button
             onClick={toggleMobileMenu}
-            className={`p-2 transition-colors ${needsDarkText ? 'text-[var(--night)] hover:text-[var(--mauve)]' : 'text-white/60 hover:text-[var(--jaune-or)]'}`}
-            aria-label="Menu"
+            className="p-3 -mr-2 transition-colors duration-200 text-[var(--night)] hover:text-[var(--mauve)] rounded-sm focus:outline-none focus:ring-2 focus:ring-[var(--mauve)] focus:ring-offset-2"
+            aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={isMobileMenuOpen}
+            style={{ minHeight: '44px', minWidth: '44px' }}
           >
-            {isMobileMenuOpen ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            <div className="relative w-5 h-5">
+              <span 
+                className="absolute left-0 top-1 h-[2px] w-5 bg-current transition-all duration-300 ease-out"
+                style={{ 
+                  transform: isMobileMenuOpen ? 'rotate(45deg) translateY(4px)' : 'rotate(0deg) translateY(0)',
+                  top: isMobileMenuOpen ? '8px' : '4px'
+                }}
+              />
+              <span 
+                className="absolute left-0 top-[9px] h-[2px] w-5 bg-current transition-all duration-300 ease-out"
+                style={{ opacity: isMobileMenuOpen ? 0 : 1 }}
+              />
+              <span 
+                className="absolute left-0 bottom-1 h-[2px] w-5 bg-current transition-all duration-300 ease-out"
+                style={{ 
+                  transform: isMobileMenuOpen ? 'rotate(-45deg) translateY(-4px)' : 'rotate(0deg) translateY(0)',
+                  bottom: isMobileMenuOpen ? '8px' : '4px'
+                }}
+              />
+            </div>
           </button>
         </div>
       </div>
