@@ -5,14 +5,13 @@ import { InvestmentCalculator } from './components/Sections/InvestmentCalculator
 function App() {
   return (
     <>
-      {/* Hero Section - Full viewport background */}
       <HeroSectionMountain />
       <ValueProps />
       <Services />
       <Insights />
       <InvestmentCalculator calculatorOnly />
       <NewsSection />
-      <CTA scheme="metallic" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
+      <CTA secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
     </>
   );
 }

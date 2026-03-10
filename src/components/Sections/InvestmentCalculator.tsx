@@ -168,8 +168,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-28 md:py-36 overflow-hidden"
-      style={{ background: 'var(--pure-white)' }}
+      className="reveal relative overflow-hidden"
+      style={{ background: 'var(--pure-white)', paddingTop: 'var(--section-gap)', paddingBottom: 'var(--section-gap)' }}
     >
       {/* Dual mauve-gold gradient atmosphere */}
       <div
@@ -190,18 +190,19 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         {/* Header */}
         <div className="max-w-xl mb-14">
           <span
-            className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+            className="inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase mb-6"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
           >
+            <span className="inline-block w-5 h-[1px]" style={{ background: 'var(--mauve)', opacity: 0.4 }} />
             Outil de simulation
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-display-aptos)',
-              fontWeight: 400,
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
-              lineHeight: 1.0,
-              letterSpacing: '-0.01em',
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.015em',
               color: 'var(--night)',
             }}
           >
@@ -209,10 +210,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             <em style={{ 
               fontWeight: 300, 
               fontStyle: 'italic', 
-              background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: 'var(--mauve)',
             }}>
               projections.
             </em>

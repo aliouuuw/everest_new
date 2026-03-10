@@ -108,8 +108,89 @@ Focus states use accessible gold-tinted double ring shadows.
 - Standard easing curve: `--ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);`
 - Reduced motion preferences are strictly respected via media queries.
 
+## Strategic Summit Design Direction
+
+### Atmospheric Surfaces
+```css
+:root {
+  --summit-ivory: #faf8f4;       /* Hero & warm sections */
+  --summit-fog: #f0eee9;         /* Depth layer */
+  --summit-haze: rgba(70, 29, 76, 0.04);  /* Mauve tint for active states */
+  --summit-depth: rgba(70, 29, 76, 0.08); /* Stronger mauve depth */
+  --summit-warm: rgba(202, 148, 47, 0.06); /* Gold warmth */
+  --summit-glass: rgba(255, 255, 255, 0.7);
+  --summit-glass-strong: rgba(255, 255, 255, 0.85);
+}
+```
+
+### Command Center Tokens
+```css
+:root {
+  --command-border: rgba(10, 10, 10, 0.06);       /* Section dividers */
+  --command-border-hover: rgba(70, 29, 76, 0.2);  /* Hover state borders */
+  --command-surface: #f7f6f3;                      /* Structured panels */
+  --command-surface-hover: rgba(70, 29, 76, 0.03); /* Hover surface */
+}
+```
+
+### Motion Grammar
+```css
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+  --duration-reveal: 900ms;
+}
+```
+
+### Section Spacing
+```css
+:root {
+  --section-gap: clamp(6rem, 10vw, 9rem); /* Consistent vertical rhythm */
+}
+```
+
+### Page Rhythm (Light-Led)
+- **Hero**: Light (summit-ivory) with atmospheric glass veils
+- **ValueProps**: Pure white, structured two-column
+- **Services**: Dark (mauve-night gradient) — strategic dark moment
+- **Insights**: Summit ivory, clean publication grid
+- **Calculator**: Pure white with subtle atmospheric orbs
+- **News**: Pure white, card-based grid
+- **CTA**: Dark (mauve-night) — conversion dark moment
+
+### Kicker Pattern
+All section kickers use the same visual pattern:
+```tsx
+<span className="inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase mb-6"
+  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}>
+  <span className="inline-block w-5 h-[1px]" style={{ background: 'var(--mauve)', opacity: 0.4 }} />
+  Section Label
+</span>
+```
+
+Dark sections use `color: 'var(--jaune-or)'` with gold line instead.
+
+### Heading Pattern
+All section headings use Fraunces serif at weight 300:
+```tsx
+<h2 style={{
+  fontFamily: 'var(--font-display)',
+  fontWeight: 300,
+  fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+  lineHeight: 1.05,
+  letterSpacing: '-0.015em',
+  color: 'var(--night)', // or var(--pure-white) on dark
+}}>
+```
+
 ## Implementation Notes
 
 - Tailwind v4 is used alongside custom utilities defined in `styles.css`.
 - The single source of truth for all brand colors, typography logic, and complex component shadows is `src/styles.css`.
 - Do not use arbitrary Tailwind text colors for basic elements; stick to `var(--night)`, `var(--night-80)`, and `var(--pure-white)`.
+- The public site follows a **predominantly light** atmosphere (70-80% light surfaces, 20-30% dark).
+- Dark surfaces are reserved for Services and CTA sections only.
+- All sections use `paddingTop/paddingBottom: var(--section-gap)` for consistent vertical rhythm.
