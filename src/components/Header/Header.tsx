@@ -170,8 +170,13 @@ export const Header: React.FC = () => {
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
   // Header styles based on scroll state
-  const headerBgClass = isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-[var(--mauve-05)] border-b border-[var(--mauve-10)]' : 'bg-transparent';
-  
+  const headerBgClass = isScrolled
+    ? 'backdrop-blur-xl shadow-sm'
+    : 'bg-transparent';
+  const headerStyle = isScrolled
+    ? { background: 'rgba(247,244,251,0.92)', borderBottom: '1px solid rgba(70,29,76,0.10)' }
+    : { background: 'rgba(247,244,251,0.0)' };
+
   // Text color based on light-led theme
   const needsDarkText = true;
   const textColorClass = needsDarkText ? 'text-[var(--night-80)]' : 'text-white/60';
@@ -196,18 +201,26 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBgClass}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBgClass}`} style={headerStyle}>
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <Link to="/" className="transition-opacity hover:opacity-80 flex items-center gap-3">
-            <img src="/logo-everest.png" alt="Everest Finance" className="h-10 w-auto" />
-            <span
-              className={`hidden sm:block text-sm tracking-[0.08em] uppercase font-semibold ${logoTextClass}`}
-              style={{ fontFamily: 'var(--font-primary)' }}
-            >
-              Everest Finance
-            </span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <img src="/logo-everest.png" alt="Everest Finance" className="h-9 w-auto transition-transform duration-300 group-hover:scale-[1.03]" />
+            <div className="hidden sm:flex flex-col">
+              <span
+                className={`text-[13px] tracking-[0.12em] uppercase font-semibold leading-tight ${logoTextClass}`}
+                style={{ fontFamily: 'var(--font-primary)' }}
+              >
+                Everest Finance
+              </span>
+              <span
+                className="text-[9px] tracking-[0.15em] uppercase leading-tight"
+                style={{ color: 'var(--jaune-or)', fontFamily: 'var(--font-primary)', fontWeight: 500 }}
+              >
+                SGI — Dakar
+              </span>
+            </div>
           </Link>
         </div>
 
@@ -215,10 +228,12 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
             style={{ fontFamily: 'var(--font-primary)' }}
+            activeProps={{ style: { color: 'var(--mauve)' } }}
           >
             Accueil
+            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
           </Link>
 
           <Dropdown
@@ -245,18 +260,22 @@ export const Header: React.FC = () => {
 
           <Link
             to="/offres"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
             style={{ fontFamily: 'var(--font-primary)' }}
+            activeProps={{ style: { color: 'var(--mauve)' } }}
           >
             Offres
+            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
           </Link>
 
           <Link
             to="/bourse"
-            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 font-medium relative group ${textColorClass}`}
             style={{ fontFamily: 'var(--font-primary)' }}
+            activeProps={{ style: { color: 'var(--mauve)' } }}
           >
             Bourse
+            <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-400 origin-left" style={{ background: 'var(--jaune-or)' }} />
           </Link>
         </nav>
 
@@ -264,18 +283,21 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className={`group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-md transition-all duration-500 
-              ${needsDarkText 
-                ? 'border border-[var(--mauve-20)] hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)]' 
-                : 'border border-[var(--jaune-or)]/30 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5'}`}
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 transition-all duration-500 relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, var(--mauve) 0%, #5a2462 100%)',
+              boxShadow: '0 4px 18px rgba(70,29,76,0.2)',
+            }}
           >
-            <FingerprintIcon className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110 ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`} />
+            <FingerprintIcon className="w-3.5 h-3.5 text-white/80 transition-transform duration-300 group-hover:scale-110 group-hover:text-[var(--jaune-or)]" />
             <span
-              className={`text-[11px] tracking-[0.15em] uppercase font-semibold ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`}
+              className="text-[11px] tracking-[0.15em] uppercase font-semibold text-white"
               style={{ fontFamily: 'var(--font-primary)' }}
             >
               Accès Client
             </span>
+            {/* Gold shimmer on hover */}
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, rgba(202,148,47,0.15) 0%, transparent 60%)' }} />
           </Link>
         </div>
 
