@@ -32,76 +32,79 @@ export const HeroSectionMountain: React.FC = () => {
       gsap.set('.reveal-text', { yPercent: 120 });
       gsap.set('.reveal-fade', { opacity: 0, y: 24 });
       gsap.set('.glass-panel', { opacity: 0, y: 32, scale: 0.98 });
-      gsap.set('.bg-haze', { opacity: 0 });
       gsap.set('.hero-line', { scaleX: 0, transformOrigin: 'left' });
-      gsap.set('.grain-texture', { opacity: 0 });
+      
+      // Layer initial states
+      gsap.set(['.veil-1', '.veil-2', '.veil-3'], { opacity: 0 });
+      gsap.set('.mountain-plate', { opacity: 0, scale: 1 });
+      gsap.set('.noise-grain', { opacity: 0 });
+      gsap.set('.shimmer-band', { left: '-100%' });
 
-      tl.to('.bg-haze', { opacity: 1, duration: 2.5, ease: 'power2.inOut' })
-        .to('.grain-texture', { opacity: 0.04, duration: 1.5 }, '<')
+      tl.to('.mountain-plate', { opacity: 0.65, duration: 3, ease: 'power2.inOut' })
+        .to(['.veil-1', '.veil-2', '.veil-3'], { opacity: (i) => [0.7, 0.6, 0.4][i], duration: 2.5, stagger: 0.2, ease: 'power2.inOut' }, '-=2')
+        .to('.noise-grain', { opacity: 0.04, duration: 2 }, '-=1.5')
         .to('.reveal-text', { yPercent: 0, duration: 1.4, stagger: 0.08 }, '-=1.8')
         .to('.hero-line', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=1.2')
         .to('.reveal-fade', { opacity: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power2.out' }, '-=1')
         .to('.glass-panel', { opacity: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.1, ease: 'power2.out' }, '-=0.8');
 
-      // Ambient floating for hazy gradients - slower, more elegant
-      gsap.to('.haze-1', {
-        x: '+=30',
-        y: '-=20',
+      // ─── NEW 5-LAYER BACKGROUND ANIMATIONS ───
+      
+      // 1. Mountain Plate - Subtle scale
+      gsap.to('.mountain-plate', {
+        scale: 1.05,
+        duration: 35,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // 3. Glass Veils - Breathing blurs & slow drift
+      gsap.to('.veil-1', {
+        x: '4vw',
+        y: '-3vh',
+        scale: 1.05,
+        duration: 20,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      gsap.to('.veil-2', {
+        x: '-3vw',
+        y: '4vh',
         scale: 1.1,
-        opacity: 0.8,
         duration: 25,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
-      
-      gsap.to('.haze-2', {
-        x: '-=40',
-        y: '+=25',
+
+      // Center fog breathing to occasionally reveal mountain more
+      gsap.to('.veil-3', {
         scale: 1.15,
-        opacity: 0.7,
-        duration: 30,
+        opacity: 0.2,
+        duration: 18,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
 
-      gsap.to('.haze-3', {
-        x: '+=20',
-        y: '+=30',
-        scale: 1.05,
-        opacity: 0.9,
-        duration: 28,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-      // Mountain subtle reveal/breathe
-      gsap.to('.mountain-plate', {
-        scale: 1.05,
-        opacity: 0.85,
-        duration: 40,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-      
-      // Subtle grain animation for premium feel
-      gsap.to('.grain-texture', {
-        backgroundPosition: '100px 100px',
-        duration: 8,
+      // 4. Noise/Grain - Gentle drift for shimmering effect
+      gsap.to('.noise-grain', {
+        backgroundPosition: '15px 15px',
+        duration: 0.4,
         repeat: -1,
         ease: 'none'
       });
 
-      // Shimmer light band
-      gsap.to('.highlight-shimmer', {
-        x: '200%',
-        duration: 15,
+      // 5. Highlight Shimmer - Slow, rare pass
+      gsap.to('.shimmer-band', {
+        left: '200%',
+        duration: 7,
         repeat: -1,
-        ease: 'power1.inOut',
-        delay: 5
+        repeatDelay: 15,
+        ease: 'power1.inOut'
       });
 
     }, heroRef);
@@ -114,43 +117,45 @@ export const HeroSectionMountain: React.FC = () => {
       ref={heroRef}
       className="relative min-h-[100svh] w-full flex items-center bg-[#Fbfafc] text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
     >
-      {/* ─── Base Background Image (Mountain Plate) ─── */}
-      <div 
-        className="mountain-plate absolute inset-0 w-full h-full z-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-[0.75] mix-blend-multiply grayscale-[30%]"
-        style={{ backgroundImage: 'url(/generated_bg_2.jpg)', transformOrigin: 'center center' }}
-      />
-
-      {/* ─── Glass & Haze Overlay Layers ─── */}
+      {/* ─── 5-LAYER BACKGROUND ARCHITECTURE ─── */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
-        {/* Atmospheric Tint: Ivory to Pale Mauve with Gold Horizon */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9FA]/80 via-[#F5F3F6]/60 to-[rgba(70,29,76,0.05)] backdrop-blur-[2px]" />
         
-        {/* Faint gold horizon */}
-        <div className="absolute bottom-[20%] left-0 w-full h-[40%] bg-gradient-to-t from-[rgba(202,148,47,0.08)] to-transparent mix-blend-overlay" />
-
-        {/* Glass Veils: Oversized translucent blurred shapes */}
-        <div className="bg-haze haze-1 absolute top-[-15%] left-[-15%] w-[75%] h-[85%] rounded-[100%] blur-[130px]"
-             style={{ background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.7) 0%, rgba(250,249,250,0.2) 50%, transparent 80%)', transform: 'rotate(-15deg)' }} />
-        
-        <div className="bg-haze haze-2 absolute bottom-[-10%] right-[-10%] w-[85%] h-[95%] rounded-[100%] blur-[150px]"
-             style={{ background: 'radial-gradient(ellipse at center, rgba(70,29,76,0.08) 0%, rgba(202,148,47,0.04) 40%, transparent 75%)', transform: 'rotate(20deg)' }} />
-             
-        <div className="bg-haze haze-3 absolute top-[20%] right-[10%] w-[50%] h-[60%] rounded-full blur-[100px]"
-             style={{ background: 'radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, transparent 70%)' }} />
-             
-        {/* Highlight Shimmer: Imperceptible moving light band */}
-        <div className="highlight-shimmer absolute top-[-50%] left-[-100%] w-[50%] h-[200%] rotate-[35deg] bg-gradient-to-r from-transparent via-white/20 to-transparent blur-[30px]" />
-        
-        {/* Fog gradient rising from bottom - extended for better coverage */}
-        <div className="absolute bottom-0 left-0 w-full h-[70%] bg-gradient-to-t from-[#Fbfafc] via-[#Fbfafc]/95 to-transparent" />
-
-        {/* Animated Grain Texture for premium feel - warm neutral */}
-        <div
-          className="grain-texture absolute inset-0 opacity-0 mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0.9 0 1 0 0 0.85 0 0 1 0 0.8 0 0 0 0.5 0' in='noise'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        {/* Layer 1: Mountain Plate (Base image, desaturated, subtle scale) */}
+        <div 
+          className="mountain-plate absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat saturate-[0.7] opacity-0"
+          style={{ 
+            backgroundImage: 'url(/generated_bg_2.jpg)',
+            transformOrigin: 'center center'
           }}
         />
+
+        {/* Layer 2: Atmospheric Tint (Ivory to pale mauve with gold horizon) */}
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#Fbfafc]/80 via-transparent to-[#Fbfafc]" />
+        
+        {/* Layer 3: Glass Veils (Translucent blurred shapes) */}
+        <div className="veil-1 absolute top-[-10%] left-[-10%] w-[60%] h-[70%] rounded-full blur-[120px]"
+             style={{ background: 'radial-gradient(circle, rgba(70,29,76,0.12) 0%, transparent 70%)' }} />
+             
+        <div className="veil-2 absolute bottom-[-10%] right-[-5%] w-[70%] h-[80%] rounded-full blur-[130px]"
+             style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.10) 0%, transparent 70%)' }} />
+             
+        <div className="veil-3 absolute top-[20%] left-[20%] w-[50%] h-[50%] rounded-full blur-[140px]"
+             style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 60%)' }} />
+
+        {/* Layer 4: Noise/Grain (Subtle animated texture) */}
+        <div
+          className="noise-grain absolute inset-0 mix-blend-overlay opacity-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* Layer 5: Highlight Shimmer (Imperceptible moving light band) */}
+        <div 
+          className="shimmer-band absolute top-0 bottom-0 w-[20%] -skew-x-[30deg] bg-gradient-to-r from-transparent via-white/10 to-transparent blur-[10px]"
+        />
+        
       </div>
 
       {/* ─── Main Content ─── */}
