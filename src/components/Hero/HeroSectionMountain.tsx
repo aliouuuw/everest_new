@@ -2,107 +2,53 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
 
-const heroCapabilities = [
-  {
-    label: 'Marchés régionaux',
-    value: 'Courtage BRVM et accès au marché UEMOA.',
-  },
-  {
-    label: 'Structuration',
-    value: 'Émissions, levées de fonds et ingénierie financière.',
-  },
-  {
-    label: 'Gestion',
-    value: 'Mandats, allocation et accompagnement patrimonial.',
-  },
-];
-
 export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (prefersReducedMotion) {
-        gsap.set([
-          '.hero-bg-image',
-          '.hero-bg-haze',
-          '.hero-glass-veil',
-          '.hero-kicker',
-          '.hero-title-line',
-          '.hero-body',
-          '.hero-cta',
-          '.hero-rule',
-          '.hero-dossier',
-          '.hero-chip',
-          '.hero-panel-row',
-          '.hero-metric',
-        ], { clearProps: 'all' });
-
-        return;
-      }
-
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      gsap.set('.hero-bg-image', { scale: 1.06, opacity: 0 });
-      gsap.set('.hero-bg-haze', { opacity: 0 });
-      gsap.set('.hero-glass-veil', { opacity: 0 });
+      // Initial states
+      gsap.set('.hero-glass-veil-1', { xPercent: -10, yPercent: 10, scale: 1.1 });
+      gsap.set('.hero-glass-veil-2', { xPercent: 10, yPercent: -10, scale: 1.1 });
+      gsap.set('.hero-mountain-plate', { scale: 1.05, opacity: 0 });
       gsap.set('.hero-kicker', { y: 20, opacity: 0 });
-      gsap.set('.hero-title-line', { y: '108%' });
-      gsap.set('.hero-body', { y: 24, opacity: 0 });
-      gsap.set('.hero-cta', { y: 18, opacity: 0 });
+      gsap.set('.hero-title-line', { y: '110%' });
+      gsap.set('.hero-body', { y: 30, opacity: 0 });
+      gsap.set('.hero-cta', { y: 20, opacity: 0 });
       gsap.set('.hero-rule', { scaleX: 0, transformOrigin: 'left' });
-      gsap.set('.hero-dossier', { y: 36, opacity: 0, rotateX: 4 });
-      gsap.set('.hero-chip', { y: 16, opacity: 0 });
-      gsap.set('.hero-panel-row', { y: 16, opacity: 0 });
-      gsap.set('.hero-metric', { y: 24, opacity: 0 });
+      gsap.set('.hero-metric', { y: 30, opacity: 0 });
 
+      // Entrance animation
       tl
-        .to('.hero-bg-image', { scale: 1, opacity: 1, duration: 2.6, ease: 'power2.out' })
-        .to('.hero-bg-haze', { opacity: 1, duration: 1.8, ease: 'power2.out' }, '-=2.0')
-        .to('.hero-glass-veil', { opacity: 1, duration: 1.8, ease: 'power2.out' }, '-=1.6')
-        .to('.hero-kicker', { y: 0, opacity: 1, duration: 0.8 }, '-=1.3')
-        .to('.hero-title-line', { y: '0%', duration: 1.35, stagger: 0.12, ease: 'power4.out' }, '-=1.0')
-        .to('.hero-rule', { scaleX: 1, duration: 0.9, ease: 'power3.inOut' }, '-=0.7')
-        .to('.hero-body', { y: 0, opacity: 1, duration: 0.9 }, '-=0.55')
-        .to('.hero-chip', { y: 0, opacity: 1, duration: 0.8, stagger: 0.08 }, '-=0.45')
-        .to('.hero-cta', { y: 0, opacity: 1, duration: 0.8 }, '-=0.5')
-        .to('.hero-dossier', { y: 0, opacity: 1, rotateX: 0, duration: 1.1, ease: 'power3.out' }, '-=0.8')
-        .to('.hero-panel-row', { y: 0, opacity: 1, duration: 0.75, stagger: 0.08 }, '-=0.55')
-        .to('.hero-metric', { y: 0, opacity: 1, duration: 0.7, stagger: 0.06 }, '-=0.5');
+        .to('.hero-mountain-plate', { scale: 1, opacity: 0.8, duration: 3, ease: 'power2.out' })
+        .to('.hero-kicker', { y: 0, opacity: 1, duration: 0.8 }, '-=2.0')
+        .to('.hero-title-line', { y: '0%', duration: 1.4, stagger: 0.12, ease: 'power4.out' }, '-=1.6')
+        .to('.hero-rule', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=1.4')
+        .to('.hero-body', { y: 0, opacity: 1, duration: 1.0 }, '-=1.2')
+        .to('.hero-cta', { y: 0, opacity: 1, duration: 0.8 }, '-=1.1')
+        .to('.hero-metric', { y: 0, opacity: 1, duration: 0.9, stagger: 0.1 }, '-=1.2');
 
+      // Continuous ambient animations for glass veils
       gsap.to('.hero-glass-veil-1', {
-        x: 18,
-        y: -10,
-        duration: 14,
-        ease: 'sine.inOut',
+        xPercent: 5,
+        yPercent: -5,
+        duration: 15,
         repeat: -1,
         yoyo: true,
+        ease: 'sine.inOut'
       });
+      
       gsap.to('.hero-glass-veil-2', {
-        x: -12,
-        y: 14,
+        xPercent: -5,
+        yPercent: 5,
         duration: 18,
-        ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
+        ease: 'sine.inOut'
       });
-      gsap.to('.hero-bg-image-asset', {
-        scale: 1.05,
-        duration: 20,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-      gsap.to('.hero-dossier', {
-        y: -6,
-        duration: 7,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: 1.2,
-      });
+
     }, heroRef);
 
     return () => ctx.revert();
@@ -111,370 +57,163 @@ export const HeroSectionMountain: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex flex-col justify-end overflow-hidden selection:bg-[var(--mauve)] selection:text-white"
-      style={{ background: 'var(--summit-ivory)' }}
+      className="relative min-h-[100svh] w-full flex items-end bg-[var(--pure-white)] text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
     >
-      {/* ─── Layer 1: Mountain Plate ─── */}
-      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
-        <div
-          className="hero-bg-image absolute inset-y-0 right-0 w-full lg:w-[64%]"
-          style={{
-            maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.35) 16%, rgba(0,0,0,0.95) 35%)',
-            WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.35) 16%, rgba(0,0,0,0.95) 35%)',
-          }}
-        >
-          <img
-            src="/generated_bg.jpg"
-            alt=""
-            aria-hidden="true"
-            className="hero-bg-image-asset h-full w-full object-cover object-center"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 38%, rgba(22,18,28,0.18) 100%)',
-            }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 88px)',
-              opacity: 0.18,
-            }}
-          />
+      {/* ─── Light Glassy Background Architecture ─── */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-[var(--pure-white)]">
+        
+        {/* 1. Base Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--white-smoke)] to-[var(--pure-white)]" />
+
+        {/* 2. Mountain Plate (Abstract SVG) */}
+        <div className="hero-mountain-plate absolute bottom-0 left-0 w-full h-[65%] opacity-80 flex items-end translate-y-[10%]">
+          <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="w-full h-full">
+            <path fill="var(--mauve-05)" d="M0,160L48,170.7C96,181,192,192,288,181.3C384,171,480,139,576,138.7C672,139,768,171,864,186.7C960,203,1056,192,1152,165.3C1248,139,1344,96,1392,74.7L1440,53.3L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <path fill="var(--timberwolf)" fillOpacity="0.3" d="M0,224L60,202.7C120,181,240,139,360,138.7C480,139,600,181,720,202.7C840,224,960,224,1080,202.7C1200,181,1320,139,1380,117.3L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            <path fill="var(--jaune-or-05)" d="M0,256L80,245.3C160,235,320,213,480,213.3C640,213,800,235,960,234.7C1120,235,1280,213,1360,202.7L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+          </svg>
         </div>
-      </div>
 
-      {/* ─── Layer 2: Atmospheric Tint ─── */}
-      <div
-        className="hero-bg-haze absolute inset-0 pointer-events-none z-[1]"
-        style={{
-          background: 'linear-gradient(180deg, rgba(19,15,27,0.45) 0%, rgba(19,15,27,0.18) 7rem, rgba(250,248,244,0.82) 11rem, rgba(250,248,244,0.94) 36%, rgba(250,248,244,0.82) 58%, rgba(250,248,244,0.55) 74%, rgba(250,248,244,0.9) 100%), linear-gradient(90deg, var(--summit-ivory) 0%, rgba(250,248,244,0.98) 28%, rgba(250,248,244,0.84) 46%, rgba(250,248,244,0.32) 72%, transparent 100%)',
-        }}
-      />
+        {/* 3. Atmospheric Tint */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--white-smoke)] via-[var(--mauve-05)] to-transparent opacity-60" />
+        <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-t from-[var(--pure-white)] to-transparent" />
 
-      {/* ─── Layer 3: Glass Veils ─── */}
-      <div className="hero-glass-veil absolute inset-0 pointer-events-none z-[2]">
+        {/* 4. Glass Veils */}
+        <div className="hero-glass-veil-1 absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-[var(--mauve-10)] blur-[100px]" />
+        <div className="hero-glass-veil-2 absolute bottom-[10%] right-[-5%] w-[50%] h-[70%] rounded-full bg-[var(--jaune-or-10)] blur-[120px]" />
+
+        {/* 5. Noise / Grain */}
         <div
-          className="hero-glass-veil-1 absolute rounded-full"
+          className="absolute inset-0 opacity-[0.03] mix-blend-multiply"
           style={{
-            width: '54vw',
-            height: '42vh',
-            top: '10%',
-            left: '-8%',
-            background: 'radial-gradient(ellipse, rgba(255,255,255,0.58) 0%, rgba(250,248,244,0.24) 42%, transparent 72%)',
-            filter: 'blur(68px)',
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
         />
-        <div
-          className="hero-glass-veil-2 absolute rounded-full"
-          style={{
-            width: '42vw',
-            height: '34vh',
-            top: '34%',
-            right: '-4%',
-            background: 'radial-gradient(ellipse, rgba(70,29,76,0.06) 0%, rgba(202,148,47,0.05) 38%, transparent 72%)',
-            filter: 'blur(56px)',
-          }}
-        />
+        
+        {/* Frost / Glass layer over mountain */}
+        <div className="absolute inset-0 backdrop-blur-[1px] bg-white/20" />
       </div>
 
-      {/* ─── Layer 4: Subtle Grain ─── */}
-      <div
-        className="absolute inset-0 pointer-events-none z-[3] opacity-[0.025]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* ─── Editorial Content ─── */}
+      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pb-32 md:pb-40 pt-40">
+        <div className="max-w-[1400px] mx-auto flex flex-col items-start text-left">
 
-      {/* ─── Content ─── */}
-      <div className="relative z-10 w-full px-6 md:px-16 lg:px-24 pt-[clamp(8rem,14vh,12rem)] pb-10 md:pb-14">
-        <div className="max-w-[1400px] mx-auto grid items-end gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)] lg:gap-16">
-
-          <div className="max-w-[46rem] pb-4 lg:pb-10">
-            {/* Kicker */}
-            <div className="hero-kicker mb-8 flex flex-wrap items-center gap-3">
-              <span
-                className="inline-flex items-center gap-3 text-[10px] md:text-[11px] tracking-[0.3em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
-              >
-                <span
-                  className="inline-block w-6 h-[1px]"
-                  style={{ background: 'var(--mauve)', opacity: 0.4 }}
-                />
-                Société de Gestion et d'Intermédiation
-              </span>
-              <span
-                className="hero-chip inline-flex items-center rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.16em]"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 500,
-                  color: 'var(--mauve)',
-                  background: 'rgba(255,255,255,0.5)',
-                  border: '1px solid rgba(70,29,76,0.08)',
-                }}
-              >
-                Dakar · BRVM · UEMOA
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="mb-7">
-              <span className="block overflow-hidden">
-                <span
-                  className="hero-title-line block"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
-                    fontSize: 'clamp(3.2rem, 8.4vw, 7rem)',
-                    lineHeight: 0.92,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--night)',
-                  }}
-                >
-                  Élevez vos
-                </span>
-              </span>
-              <span className="block overflow-hidden">
-                <span
-                  className="hero-title-line block"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
-                    fontStyle: 'italic',
-                    fontSize: 'clamp(3.2rem, 8.4vw, 7rem)',
-                    lineHeight: 0.92,
-                    letterSpacing: '-0.03em',
-                    color: 'var(--mauve)',
-                  }}
-                >
-                  ambitions.
-                </span>
-              </span>
-            </h1>
-
-            {/* Rule */}
-            <div
-              className="hero-rule h-[1px] w-24 md:w-36 mb-7"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
-            />
-
-            {/* Subhead */}
-            <p
-              className="hero-body max-w-xl mb-8"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                fontSize: 'clamp(1rem, 1.35vw, 1.12rem)',
-                lineHeight: 1.8,
-                color: 'var(--night-60)',
-              }}
+          {/* Kicker */}
+          <div className="hero-kicker mb-8">
+            <span
+              className="inline-block px-3 py-1 rounded-full border border-[var(--mauve-15)] bg-[var(--white-smoke)] text-[10px] md:text-[11px] tracking-[0.25em] uppercase shadow-sm"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--mauve)' }}
             >
-              Une maison de marché conçue pour structurer le capital, piloter le patrimoine
-              et exécuter avec clarté sur la BRVM.
-            </p>
-
-            <div className="mb-10 flex flex-wrap gap-2.5">
-              <span
-                className="hero-chip inline-flex items-center rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.16em]"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)', background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(10,10,10,0.08)' }}
-              >
-                Courtage BRVM
-              </span>
-              <span
-                className="hero-chip inline-flex items-center rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.16em]"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)', background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(10,10,10,0.08)' }}
-              >
-                Ingénierie financière
-              </span>
-              <span
-                className="hero-chip inline-flex items-center rounded-full px-3.5 py-2 text-[10px] uppercase tracking-[0.16em]"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)', background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(10,10,10,0.08)' }}
-              >
-                Gestion conseillée
-              </span>
-            </div>
-
-            {/* CTA */}
-            <div className="hero-cta flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <a
-                href="#services"
-                className="group inline-flex items-center gap-3 rounded-full px-6 py-3.5"
-                style={{
-                  background: 'var(--night)',
-                  color: 'var(--pure-white)',
-                  boxShadow: '0 14px 34px rgba(10,10,10,0.10)',
-                }}
-              >
-                <span
-                  className="text-[11px] tracking-[0.18em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
-                >
-                  Découvrir notre expertise
-                </span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 transition-transform duration-500 group-hover:translate-x-1">
-                  <FiArrowRight className="text-sm" />
-                </span>
-              </a>
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-4"
-              >
-                <span
-                  className="relative overflow-hidden text-[11px] tracking-[0.18em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
-                >
-                  Planifier un échange
-                  <span className="absolute bottom-0 left-0 h-[1px] w-full bg-[var(--jaune-or)] translate-x-[-101%] transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-0" />
-                </span>
-              </a>
-            </div>
+              Société de Gestion et d'Intermédiation — Dakar
+            </span>
           </div>
 
-          <div className="hero-dossier w-full lg:ml-auto lg:max-w-[30rem]">
-            <div
-              className="overflow-hidden rounded-[2rem] p-4 md:p-5"
-              style={{
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.58) 100%)',
-                backdropFilter: 'blur(18px) saturate(140%)',
-                WebkitBackdropFilter: 'blur(18px) saturate(140%)',
-                border: '1px solid rgba(70,29,76,0.08)',
-                boxShadow: '0 30px 70px rgba(70,29,76,0.10), 0 12px 30px rgba(10,10,10,0.04)',
-              }}
-            >
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <span
-                  className="text-[10px] uppercase tracking-[0.18em]"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
-                >
-                  Panorama de décision
-                </span>
-                <span
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.14em]"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)', background: 'rgba(255,255,255,0.55)' }}
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--jaune-or)]" />
-                  En veille
-                </span>
-              </div>
+          {/* Headline — oversized serif */}
+          <h1 className="mb-6">
+            <span className="block overflow-hidden">
+              <span
+                className="hero-title-line block"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 400,
+                  fontSize: 'clamp(3rem, 8vw, 6.5rem)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--night)',
+                }}
+              >
+                Élevez vos
+              </span>
+            </span>
+            <span className="block overflow-hidden">
+              <span
+                className="hero-title-line block"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 400,
+                  fontStyle: 'italic',
+                  fontSize: 'clamp(3rem, 8vw, 6.5rem)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--jaune-or)',
+                }}
+              >
+                ambitions.
+              </span>
+            </span>
+          </h1>
 
-              <div className="mb-5 overflow-hidden rounded-[1.6rem]">
-                <div className="relative aspect-[5/6] overflow-hidden">
-                  <img
-                    src="/generated_bg.jpg"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-full w-full object-cover object-center"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.0) 35%, rgba(17,13,22,0.28) 100%)',
-                    }}
-                  />
-                  <div
-                    className="absolute inset-x-0 top-[18%] h-px"
-                    style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)' }}
-                  />
-                  <div
-                    className="absolute inset-x-0 bottom-[24%] h-px"
-                    style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)' }}
-                  />
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-                    <div>
-                      <span
-                        className="mb-1 block text-[10px] uppercase tracking-[0.16em]"
-                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.7)' }}
-                      >
-                        Horizon Everest
-                      </span>
-                      <span
-                        style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1rem', lineHeight: 1.2, color: 'var(--pure-white)' }}
-                      >
-                        Perspective, clarté, exécution.
-                      </span>
-                    </div>
-                    <span
-                      className="shrink-0 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.16em]"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--pure-white)', background: 'rgba(18,16,26,0.35)', border: '1px solid rgba(255,255,255,0.18)' }}
-                    >
-                      BRVM / UEMOA
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                {heroCapabilities.map((capability) => (
-                  <div
-                    key={capability.label}
-                    className="hero-panel-row flex items-start justify-between gap-4 rounded-[1.2rem] px-4 py-3"
-                    style={{ background: 'rgba(255,255,255,0.42)', border: '1px solid rgba(10,10,10,0.04)' }}
-                  >
-                    <div>
-                      <div
-                        className="mb-1 text-[10px] uppercase tracking-[0.16em]"
-                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
-                      >
-                        {capability.label}
-                      </div>
-                      <div
-                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.88rem', lineHeight: 1.55, color: 'var(--night-60)' }}
-                      >
-                        {capability.value}
-                      </div>
-                    </div>
-                    <span
-                      className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full"
-                      style={{ background: 'rgba(202,148,47,0.7)' }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Trust Metrics Bar ─── */}
-      <div className="relative z-10 w-full mt-auto">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
+          {/* Mauve/Gold horizontal rule */}
           <div
-            className="grid grid-cols-2 lg:grid-cols-4 py-1"
-            style={{ borderTop: '1px solid var(--command-border)' }}
+            className="hero-rule h-[2px] w-24 md:w-32 mb-8"
+            style={{ background: 'linear-gradient(90deg, var(--mauve), var(--jaune-or))' }}
+          />
+
+          {/* Subhead */}
+          <p
+            className="hero-body max-w-lg mb-10"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 400,
+              fontSize: 'clamp(0.95rem, 1.4vw, 1.1rem)',
+              lineHeight: 1.75,
+              color: 'var(--night-80)',
+            }}
           >
-            {/* Metric 1 */}
-            <div className="hero-metric py-6 pr-6 border-b lg:border-b-0 lg:border-r flex items-baseline gap-4" style={{ borderColor: 'var(--command-border)' }}>
+            Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires
+            et l'ingénierie financière en Afrique de l'Ouest.
+          </p>
+
+          {/* CTA */}
+          <div className="hero-cta">
+            <a
+              href="#services"
+              className="group inline-flex items-center gap-5 btn-primary shadow-xl shadow-[var(--mauve-15)]"
+            >
               <span
-                className="text-2xl lg:text-3xl"
-                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--night)' }}
+                className="relative overflow-hidden text-[12px] tracking-[0.2em] uppercase font-semibold text-white"
+              >
+                Découvrir notre expertise
+              </span>
+              <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition-transform duration-500 group-hover:translate-x-1">
+                <FiArrowRight className="text-base text-white" />
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ─── Metrics Bar ─── */}
+      <div className="absolute bottom-0 left-0 w-full z-20 bg-white/60 backdrop-blur-xl border-t border-[var(--mauve-10)]">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-3">
+            {/* Metric 1 */}
+            <div className="hero-metric py-6 md:pr-12 border-b md:border-b-0 md:border-r border-[var(--mauve-10)] flex items-baseline gap-4">
+              <span
+                className="text-3xl lg:text-4xl text-[var(--mauve)]"
+                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, letterSpacing: '-0.02em' }}
               >
                 08
               </span>
               <span
-                className="text-[9px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
+                className="text-[10px] tracking-[0.15em] uppercase font-medium text-[var(--night-60)]"
               >
                 Années d'expérience
               </span>
             </div>
 
             {/* Metric 2 — Licence */}
-            <div className="hero-metric py-6 lg:px-8 border-b lg:border-b-0 lg:border-r flex items-center gap-4" style={{ borderColor: 'var(--command-border)' }}>
-              <span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: 'var(--jaune-or)' }}
-              />
+            <div className="hero-metric py-6 md:px-12 border-b md:border-b-0 md:border-r border-[var(--mauve-10)] flex items-center gap-4">
+              <span className="w-2 h-2 rounded-full bg-[var(--jaune-or)] animate-pulse flex-shrink-0" />
               <div>
                 <span
-                  className="block text-[9px] tracking-[0.2em] uppercase mb-0.5"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
+                  className="block text-[10px] tracking-[0.15em] uppercase mb-0.5 font-medium text-[var(--night-80)]"
                 >
                   Agrément CREPMF
                 </span>
                 <span
-                  className="text-[11px]"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)', letterSpacing: '0.05em' }}
+                  className="text-xs font-mono text-[var(--night-60)] tracking-wider"
                 >
                   SGI/DA/2016/60
                 </span>
@@ -482,34 +221,17 @@ export const HeroSectionMountain: React.FC = () => {
             </div>
 
             {/* Metric 3 */}
-            <div className="hero-metric py-6 pr-6 lg:px-8 border-r flex items-baseline gap-4" style={{ borderColor: 'var(--command-border)' }}>
+            <div className="hero-metric py-6 md:pl-12 flex items-baseline gap-4">
               <span
-                className="text-2xl lg:text-3xl"
-                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--night)' }}
+                className="text-3xl lg:text-4xl text-[var(--mauve)]"
+                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, letterSpacing: '-0.02em' }}
               >
-                BRVM
+                30<span className="text-[var(--jaune-or)]">+</span>
               </span>
               <span
-                className="text-[9px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
+                className="text-[10px] tracking-[0.15em] uppercase font-medium text-[var(--night-60)]"
               >
-                Accès marché régional
-              </span>
-            </div>
-
-            {/* Metric 4 */}
-            <div className="hero-metric py-6 lg:pl-8 flex items-baseline gap-4">
-              <span
-                className="text-2xl lg:text-3xl"
-                style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 300, letterSpacing: '-0.03em', color: 'var(--night)' }}
-              >
-                30<span style={{ color: 'var(--jaune-or)' }}>+</span>
-              </span>
-              <span
-                className="text-[9px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--night-60)' }}
-              >
-                Années d'expertise cumulée
+                Années d'expertise
               </span>
             </div>
           </div>
@@ -518,3 +240,4 @@ export const HeroSectionMountain: React.FC = () => {
     </section>
   );
 };
+

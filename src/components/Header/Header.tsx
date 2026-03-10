@@ -25,9 +25,11 @@ interface DropdownProps {
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
+  isScrolled: boolean;
+  isLightBackgroundPage: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose, isScrolled, isLightBackgroundPage }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -52,6 +54,10 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
     };
   }, []);
 
+  // Use props or calculate based on them if we ever need dynamic behavior
+  // For now, the site is light-mode led
+  const needsDarkText = isScrolled || isLightBackgroundPage || true;
+
   return (
     <div 
       className="relative" 
@@ -60,8 +66,8 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] group"
-        style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] group font-medium"
+        style={{ fontFamily: 'var(--font-primary)', color: needsDarkText ? 'var(--night-80)' : 'rgba(255,255,255,0.6)' }}
         aria-expanded={isOpen}
       >
         {title}
@@ -76,13 +82,13 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-3 w-56 bg-[var(--night)]/95 backdrop-blur-xl border border-white/[0.06] py-2 z-50">
+        <div className="absolute top-full left-0 mt-3 w-56 bg-white/95 backdrop-blur-xl border border-[var(--mauve-10)] shadow-xl shadow-[var(--mauve-05)] py-2 z-50 rounded-md">
           {items.map((item, index) => (
             <Link
               key={index}
               to={item.href}
-              className="block px-5 py-2.5 text-[13px] transition-colors duration-200 hover:text-[var(--jaune-or)] hover:bg-white/[0.03]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
+              className="block px-5 py-2.5 text-[13px] transition-colors duration-200 hover:text-[var(--mauve)] hover:bg-[var(--mauve-05)] font-medium"
+              style={{ fontFamily: 'var(--font-primary)', color: 'var(--night-80)' }}
             >
               {item.label}
             </Link>
@@ -92,6 +98,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
     </div>
   );
 };
+
 
 export const Header: React.FC = () => {
   const location = useLocation();
@@ -155,15 +162,20 @@ export const Header: React.FC = () => {
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
-  // Pages with light backgrounds need immediate dark backdrop for nav contrast
-  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
-  const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
+  // Since we are moving to a light-led site, almost all paths will have light backgrounds
+  const lightBackgroundPaths = ['/', '/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
+  const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname === path || location.pathname.startsWith(path)) || location.pathname === '/bourse';
 
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  // Need backdrop immediately on light pages, or when scrolled
-  const needsBackdrop = isScrolled || isLightBackgroundPage;
+  // Header styles based on scroll state
+  const headerBgClass = isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-[var(--mauve-05)] border-b border-[var(--mauve-10)]' : 'bg-transparent';
+  
+  // Text color based on light-led theme
+  const needsDarkText = true;
+  const textColorClass = needsDarkText ? 'text-[var(--night-80)]' : 'text-white/60';
+  const logoTextClass = needsDarkText ? 'text-[var(--night)]' : 'text-white/70';
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
@@ -184,15 +196,15 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${needsBackdrop ? 'bg-[var(--night)]/90 backdrop-blur-xl shadow-lg shadow-black/10' : ''}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBgClass}`}>
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-5 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">
           <Link to="/" className="transition-opacity hover:opacity-80 flex items-center gap-3">
             <img src="/logo-everest.png" alt="Everest Finance" className="h-10 w-auto" />
             <span
-              className="hidden sm:block text-sm tracking-[0.08em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              className={`hidden sm:block text-sm tracking-[0.08em] uppercase font-semibold ${logoTextClass}`}
+              style={{ fontFamily: 'var(--font-primary)' }}
             >
               Everest Finance
             </span>
@@ -203,8 +215,8 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            style={{ fontFamily: 'var(--font-primary)' }}
           >
             Accueil
           </Link>
@@ -216,6 +228,8 @@ export const Header: React.FC = () => {
             isOpen={openDropdown === 'societe'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
+            isScrolled={isScrolled}
+            isLightBackgroundPage={isLightBackgroundPage}
           />
 
           <Dropdown
@@ -225,20 +239,22 @@ export const Header: React.FC = () => {
             isOpen={openDropdown === 'services'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
+            isScrolled={isScrolled}
+            isLightBackgroundPage={isLightBackgroundPage}
           />
 
           <Link
             to="/offres"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            style={{ fontFamily: 'var(--font-primary)' }}
           >
             Offres
           </Link>
 
           <Link
             to="/bourse"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+            className={`text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)] font-medium ${textColorClass}`}
+            style={{ fontFamily: 'var(--font-primary)' }}
           >
             Bourse
           </Link>
@@ -248,12 +264,15 @@ export const Header: React.FC = () => {
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 rounded-sm transition-all duration-500 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5"
+            className={`group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-md transition-all duration-500 
+              ${needsDarkText 
+                ? 'border border-[var(--mauve-20)] hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)]' 
+                : 'border border-[var(--jaune-or)]/30 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5'}`}
           >
-            <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-110" />
+            <FingerprintIcon className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110 ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`} />
             <span
-              className="text-[11px] tracking-[0.15em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+              className={`text-[11px] tracking-[0.15em] uppercase font-semibold ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`}
+              style={{ fontFamily: 'var(--font-primary)' }}
             >
               Accès Client
             </span>
@@ -264,7 +283,7 @@ export const Header: React.FC = () => {
         <div className="lg:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="p-2 text-white/60 hover:text-[var(--jaune-or)] transition-colors"
+            className={`p-2 transition-colors ${needsDarkText ? 'text-[var(--night)] hover:text-[var(--mauve)]' : 'text-white/60 hover:text-[var(--jaune-or)]'}`}
             aria-label="Menu"
           >
             {isMobileMenuOpen ? (
@@ -282,12 +301,13 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 mx-4 mt-1 bg-[var(--night)]/95 backdrop-blur-xl border border-white/[0.06] py-6 z-50">
+        <div className={`lg:hidden absolute top-full left-0 right-0 mx-4 mt-1 backdrop-blur-xl border py-6 z-50 rounded-lg shadow-xl
+          ${needsDarkText ? 'bg-white/95 border-[var(--mauve-10)] shadow-[var(--mauve-10)]' : 'bg-[var(--night)]/95 border-white/[0.06]'}`}>
           <div className="px-6 space-y-5">
             <Link
               to="/"
-              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              className={`block text-sm transition-colors font-medium ${needsDarkText ? 'text-[var(--night)] hover:text-[var(--mauve)]' : 'hover:text-[var(--jaune-or)] text-[rgba(255,255,255,0.7)]'}`}
+              style={{ fontFamily: 'var(--font-primary)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Accueil
@@ -295,18 +315,18 @@ export const Header: React.FC = () => {
 
             <div>
               <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+                className={`text-[10px] tracking-[0.2em] uppercase mb-3 font-semibold ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`}
+                style={{ fontFamily: 'var(--font-primary)' }}
               >
                 Société
               </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.06]">
+              <div className={`space-y-3 pl-3 border-l ${needsDarkText ? 'border-[var(--mauve-15)]' : 'border-white/[0.06]'}`}>
                 {societeItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.href}
-                    className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
+                    className={`block text-sm transition-colors font-medium ${needsDarkText ? 'text-[var(--night-80)] hover:text-[var(--mauve)]' : 'hover:text-[var(--jaune-or)] text-[rgba(255,255,255,0.5)]'}`}
+                    style={{ fontFamily: 'var(--font-primary)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -317,18 +337,18 @@ export const Header: React.FC = () => {
 
             <div>
               <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+                className={`text-[10px] tracking-[0.2em] uppercase mb-3 font-semibold ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`}
+                style={{ fontFamily: 'var(--font-primary)' }}
               >
                 Services
               </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.06]">
+              <div className={`space-y-3 pl-3 border-l ${needsDarkText ? 'border-[var(--mauve-15)]' : 'border-white/[0.06]'}`}>
                 {servicesItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.href}
-                    className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.5)' }}
+                    className={`block text-sm transition-colors font-medium ${needsDarkText ? 'text-[var(--night-80)] hover:text-[var(--mauve)]' : 'hover:text-[var(--jaune-or)] text-[rgba(255,255,255,0.5)]'}`}
+                    style={{ fontFamily: 'var(--font-primary)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -339,8 +359,8 @@ export const Header: React.FC = () => {
 
             <Link
               to="/offres"
-              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              className={`block text-sm transition-colors font-medium ${needsDarkText ? 'text-[var(--night)] hover:text-[var(--mauve)]' : 'hover:text-[var(--jaune-or)] text-[rgba(255,255,255,0.7)]'}`}
+              style={{ fontFamily: 'var(--font-primary)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Offres
@@ -348,23 +368,26 @@ export const Header: React.FC = () => {
 
             <Link
               to="/bourse"
-              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              className={`block text-sm transition-colors font-medium ${needsDarkText ? 'text-[var(--night)] hover:text-[var(--mauve)]' : 'hover:text-[var(--jaune-or)] text-[rgba(255,255,255,0.7)]'}`}
+              style={{ fontFamily: 'var(--font-primary)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Bourse
             </Link>
 
-            <div className="pt-4 border-t border-white/[0.06]">
+            <div className={`pt-4 border-t ${needsDarkText ? 'border-[var(--mauve-10)]' : 'border-white/[0.06]'}`}>
               <Link
                 to="/auth"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 w-full justify-center transition-all duration-300 hover:border-[var(--jaune-or)]/60"
+                className={`inline-flex items-center gap-2.5 px-5 py-2.5 w-full justify-center rounded-md transition-all duration-300
+                  ${needsDarkText 
+                    ? 'border border-[var(--mauve-20)] hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)]' 
+                    : 'border border-[var(--jaune-or)]/30 hover:border-[var(--jaune-or)]/60'}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)]" />
+                <FingerprintIcon className={`w-3.5 h-3.5 ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`} />
                 <span
-                  className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+                  className={`text-[11px] tracking-[0.15em] uppercase font-semibold ${needsDarkText ? 'text-[var(--mauve)]' : 'text-[var(--jaune-or)]'}`}
+                  style={{ fontFamily: 'var(--font-primary)' }}
                 >
                   Accès Client
                 </span>
@@ -376,3 +399,4 @@ export const Header: React.FC = () => {
     </header>
   );
 };
+
