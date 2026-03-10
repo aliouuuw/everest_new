@@ -10,37 +10,33 @@ export const HeroSectionMountain: React.FC = () => {
       // High-end motion language: slow, deliberate, elegant
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-      // Reset states for clean reveal
+      // Initial states
       gsap.set('.reveal-text', { yPercent: 120 });
       gsap.set('.reveal-fade', { opacity: 0, y: 30 });
       gsap.set('.glass-panel', { opacity: 0, y: 40, scale: 0.98 });
-      gsap.set('.bg-shape', { scale: 1.1, opacity: 0 });
-      gsap.set('.bg-grid', { opacity: 0 });
+      gsap.set('.bg-haze', { opacity: 0 });
       gsap.set('.hero-line', { scaleX: 0, transformOrigin: 'left' });
 
-      tl.to('.bg-grid', { opacity: 1, duration: 2, ease: 'power2.inOut' })
-        .to('.bg-shape', { scale: 1, opacity: 1, duration: 2.5, stagger: 0.2 }, '<0.2')
+      tl.to('.bg-haze', { opacity: 1, duration: 3, ease: 'power2.inOut' })
         .to('.reveal-text', { yPercent: 0, duration: 1.6, stagger: 0.1 }, '-=2.0')
         .to('.hero-line', { scaleX: 1, duration: 1.5, ease: 'power4.inOut' }, '-=1.4')
         .to('.reveal-fade', { opacity: 1, y: 0, duration: 1.2, stagger: 0.1 }, '-=1.2')
         .to('.glass-panel', { opacity: 1, y: 0, scale: 1, duration: 1.5, stagger: 0.15 }, '-=1.0');
 
-      // Ambient floating for shapes
-      gsap.to('.bg-shape-1', {
+      // Ambient floating for hazy gradients
+      gsap.to('.haze-1', {
+        x: '+=30',
         y: '-=20',
-        x: '+=10',
-        rotation: 2,
-        duration: 8,
+        duration: 15,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
       });
       
-      gsap.to('.bg-shape-2', {
-        y: '+=25',
-        x: '-=15',
-        rotation: -2,
-        duration: 10,
+      gsap.to('.haze-2', {
+        x: '-=40',
+        y: '+=20',
+        duration: 18,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut'
@@ -56,44 +52,33 @@ export const HeroSectionMountain: React.FC = () => {
       ref={heroRef}
       className="relative min-h-[100svh] w-full flex items-center bg-[#Fbfafc] text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
     >
-      {/* ─── Architectural Background ─── */}
+      {/* ─── Base Background Image ─── */}
+      <div 
+        className="absolute inset-0 w-full h-full z-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-90 mix-blend-multiply"
+        style={{ backgroundImage: 'url(/generated_bg_2.jpg)' }}
+      />
+
+      {/* ─── Glass & Haze Overlay Layers ─── */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-        {/* Precision Grid - "Command Center" feel */}
-        <div 
-          className="bg-grid absolute inset-0 opacity-20"
+        {/* Base Ivory/Fog tint to soften the image and ensure readability */}
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]" />
+
+        {/* Slow-moving luminous haze (Mauve & Gold) */}
+        <div className="bg-haze haze-1 absolute top-[-10%] left-[-10%] w-[60%] h-[70%] rounded-full blur-[140px]"
+             style={{ background: 'radial-gradient(circle, rgba(70,29,76,0.15) 0%, transparent 70%)' }} />
+        <div className="bg-haze haze-2 absolute bottom-[-10%] right-[-5%] w-[70%] h-[80%] rounded-full blur-[150px]"
+             style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.12) 0%, transparent 70%)' }} />
+        
+        {/* Fog gradient rising from bottom */}
+        <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#Fbfafc] via-[#Fbfafc]/80 to-transparent" />
+
+        {/* Animated Grain Texture for premium feel */}
+        <div
+          className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
           style={{
-            backgroundImage: `linear-gradient(rgba(70, 29, 76, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(70, 29, 76, 0.04) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
-            backgroundPosition: 'center center'
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
         />
-
-        {/* Ambient Gradient Orbs */}
-        <div className="bg-shape bg-shape-1 absolute top-[-10%] right-[-5%] w-[60%] h-[70%] rounded-full blur-[120px]"
-             style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.15) 0%, transparent 70%)' }} />
-        <div className="bg-shape bg-shape-2 absolute bottom-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full blur-[100px]"
-             style={{ background: 'radial-gradient(circle, rgba(70,29,76,0.12) 0%, transparent 70%)' }} />
-        
-        {/* Abstract Mountain / Data Curve */}
-        <div className="absolute bottom-0 right-0 w-full md:w-[70%] h-[60%] opacity-40">
-          <svg viewBox="0 0 1000 600" preserveAspectRatio="none" className="w-full h-full">
-            <defs>
-              <linearGradient id="curve-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="var(--mauve)" stopOpacity="0.15" />
-                <stop offset="100%" stopColor="var(--mauve)" stopOpacity="0.0" />
-              </linearGradient>
-              <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="var(--jaune-or)" stopOpacity="0" />
-                <stop offset="50%" stopColor="var(--jaune-or)" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="var(--mauve)" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <path fill="url(#curve-grad)" d="M0,600 L0,400 C200,400 300,200 500,250 C700,300 800,100 1000,50 L1000,600 Z" />
-            <path fill="none" stroke="url(#line-grad)" strokeWidth="2" d="M0,400 C200,400 300,200 500,250 C700,300 800,100 1000,50" />
-          </svg>
-        </div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-[#Fbfafc] via-transparent to-transparent opacity-80" />
       </div>
 
       {/* ─── Main Content ─── */}
