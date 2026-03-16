@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
-import { AtmosphericMountainWebGL } from './AtmosphericMountainWebGL';
+import EverestBackground from '../EverestBackground';
 
 export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -45,13 +45,16 @@ export const HeroSectionMountain: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full flex items-end bg-[#faf9f7] text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
+      className="relative min-h-[100svh] w-full flex items-end text-[var(--night)] overflow-hidden selection:bg-[var(--mauve-20)] selection:text-[var(--night)]"
     >
-      <AtmosphericMountainWebGL />
+      {/* Animated WebGL Background */}
+      <EverestBackground intensity={1.5} speed={0.4} colorTheme="lightSummit" />
+
+      {/* Main Content */}
       {/* ══════════════════════════════════════════════
           CONTENT — Monumental, single-column, generous space.
       ══════════════════════════════════════════════ */}
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-[clamp(3rem,8vh,6rem)] pt-[clamp(8rem,20vh,14rem)] pointer-events-none">
+      <div className="relative z-[1] w-full px-6 md:px-12 lg:px-16 xl:px-24 pb-[clamp(3rem,8vh,6rem)] pt-[clamp(8rem,20vh,14rem)] pointer-events-none">
         <div className="max-w-[1100px] pointer-events-auto">
           
           {/* Kicker — polished spacing and alignment */}
@@ -108,7 +111,7 @@ export const HeroSectionMountain: React.FC = () => {
           <div className="reveal-fade flex flex-col sm:flex-row items-start gap-4 sm:gap-6 mb-12 md:mb-14">
             <a
               href="#services"
-              className="group relative inline-flex items-center gap-3 px-7 py-3.5 bg-[var(--night)] text-white overflow-hidden transition-all duration-300 ease-out hover:shadow-lg hover:shadow-[var(--night)]/20 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2"
+              className="group relative inline-flex items-center gap-3 px-7 py-3.5 bg-[var(--night)] text-[var(--ivory)] overflow-hidden transition-all duration-300 ease-out hover:shadow-lg hover:shadow-[white]/20 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2"
             >
               <div className="absolute inset-0 bg-[var(--mauve)] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 text-[11px] tracking-[0.15em] uppercase font-semibold">
