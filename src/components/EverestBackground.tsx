@@ -50,28 +50,28 @@ const vertexShader = /* glsl */ `
     return 130.0 * dot(m, g);
   }
 
-  // Soft, sweeping mountain displacement
+  // Soft, majestic mountain displacement
   float getElevation(vec2 pos, float t) {
-    // 1) Base massive peak offset to the back/left
-    float peakDist = length(pos - vec2(-5.0, 5.0));
-    float peak = 9.0 * exp(-peakDist * peakDist * 0.015);
+    // We want a single cohesive mountain range.
+    // 1) Base massive sweeping mountain shape using low frequency noise
+    float baseShape = snoise(pos * 0.04) * 8.0;
     
-    // 2) A large sweeping diagonal ridge
-    float sweep = sin(pos.x * 0.12 + pos.y * 0.08) * 3.0;
+    // 2) A long diagonal ridge line to act as the primary summit
+    // Instead of a repeating sine wave, we use a single soft ridge
+    float ridgeDist = abs(pos.x + pos.y * 0.5 - 2.0);
+    float ridge = 4.0 * exp(-ridgeDist * ridgeDist * 0.08);
     
-    // 3) Large-scale organic rolling hills (very low frequency)
-    float hills = snoise(pos * 0.08 + t * 0.08) * 3.5;
+    // 3) Flowing valleys and slopes (medium frequency, slow moving)
+    float valleys = snoise(pos * 0.12 - t * 0.08) * 2.5;
     
-    // 4) Medium-scale flowing valleys that move slowly
-    float flow = snoise(pos * 0.2 - t * 0.05) * 1.2;
-    
-    // 5) Subtle surface smoothness
-    float detail = snoise(pos * 0.4 + t * 0.1) * 0.3;
+    // 4) Subtle terrain texture (no sharp jaggedness)
+    float texture = snoise(pos * 0.3 + t * 0.1) * 0.4;
 
-    // Combine for a landscape with 1 main peak, smooth slopes, and deep valleys
-    float elevation = peak + sweep + hills + flow + detail;
+    // Combine for a landscape with distinct peaks and sweeping valleys
+    float elevation = baseShape + ridge + valleys + texture;
     
-    return elevation * uIntensity;
+    // Smooth the base so it flattens out into a valley floor
+    return smoothstep(-6.0, 10.0, elevation) * 12.0 * uIntensity - 4.0;
   }
 
   void main() {
@@ -90,7 +90,7 @@ const vertexShader = /* glsl */ `
 
     // --- Compute Analytical Normals ---
     // Sample neighboring points to calculate smooth normal
-    float offset = 0.1; // wider offset for smoother normals on a large terrain
+    float offset = 0.2; // wider offset for smoother normals on a huge terrain
     vec3 posU = position + vec3(offset, 0.0, 0.0);
     vec3 posV = position + vec3(0.0, offset, 0.0);
     
@@ -112,10 +112,10 @@ const fragmentShader = /* glsl */ `
   precision highp float;
 
   uniform float uTime;
-  uniform vec3 uColor1; // dark background (deep anchor)
-  uniform vec3 uColor2; // mid mountain (mauve)
-  uniform vec3 uColor3; // front mountain (pale mauve)
-  uniform vec3 uColor4; // warm accent (champagne gold)
+  uniform vec3 uColor1; // Deep anchor (Dark Mauve)
+  uniform vec3 uColor2; // Mid Mountain (Mauve)
+  uniform vec3 uColor3; // Atmospheric depth (Pale mauve-gray/Ivory)
+  uniform vec3 uColor4; // Warm accent (Champagne gold)
   uniform vec3 uCameraPos;
 
   varying vec2 vUv;
@@ -134,62 +134,61 @@ const fragmentShader = /* glsl */ `
 
     // ─── Elevation-based Color Mapping ───
     // Map colors based on elevation (peaks vs valleys) and normal orientation
-    // Higher peaks get warmer/lighter, deep valleys stay mauve
-    float heightMix = smoothstep(-2.0, 5.0, vElevation);
+    // Higher peaks get warmer/lighter, deep valleys stay deep mauve
+    float heightMix = smoothstep(-2.0, 8.0, vElevation);
     float angleMix = dot(N, vec3(0.0, 0.0, 1.0)) * 0.5 + 0.5;
     
     // Combine height and angle for a fluid gradient flow
-    float colorParam = heightMix * 0.75 + angleMix * 0.25;
+    float colorParam = heightMix * 0.8 + angleMix * 0.2;
 
     // Smooth spline interpolation for Granient colors (Ivory, Mauve, Gold)
     vec3 color = uColor1; // Deep mauve base in valleys
-    color = mix(color, uColor2, smoothstep(0.1, 0.4, colorParam)); // Mid mauve
-    color = mix(color, uColor3, smoothstep(0.35, 0.7, colorParam)); // Pale mauve/ivory transition
-    color = mix(color, uColor4, smoothstep(0.65, 1.0, colorParam)); // Peak highlights (Gold)
+    color = mix(color, uColor2, smoothstep(0.15, 0.45, colorParam)); // Mid mauve
+    color = mix(color, uColor3, smoothstep(0.4, 0.75, colorParam)); // Pale mauve/ivory transition
+    color = mix(color, uColor4, smoothstep(0.7, 1.0, colorParam)); // Peak highlights (Gold)
 
-    // ─── Lighting & Satin Reflections ───
-    // Primary light (warm, coming from above/right, like a sun glow)
+    // ─── Lighting & Matte/Satin Reflections ───
+    // Primary light (warm, coming from above/right, like a gentle sun glow)
     vec3 lightDir1 = normalize(vec3(1.0, 1.5, 2.0));
     vec3 H1 = normalize(lightDir1 + V);
     float diff1 = max(dot(N, lightDir1), 0.0);
     
-    // Softer, wider specular for a matte/satin mountain terrain look
-    float spec1 = pow(max(dot(N, H1), 0.0), 16.0) * 0.4;
+    // Softer, wider specular for a matte/satin mountain terrain look (NOT wet/glue)
+    float spec1 = pow(max(dot(N, H1), 0.0), 12.0) * 0.25;
 
-    // Secondary light (cool ambient fill)
+    // Secondary light (cool ambient fill from the left)
     vec3 lightDir2 = normalize(vec3(-1.0, -0.5, 1.0));
     vec3 H2 = normalize(lightDir2 + V);
     float diff2 = max(dot(N, lightDir2), 0.0);
-    float spec2 = pow(max(dot(N, H2), 0.0), 12.0) * 0.2;
+    float spec2 = pow(max(dot(N, H2), 0.0), 8.0) * 0.15;
 
     // Fresnel rim light (pronounced champagne gold along the edges as per PRD)
-    float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0) * 0.6;
+    float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0) * 0.5;
 
     // Combine diffuse lighting
-    vec3 ambient = color * 0.5; // High ambient for the light atmosphere
-    vec3 diffuse = color * (diff1 * 0.4 + diff2 * 0.2);
+    // High ambient light to maintain the light, airy atmosphere of the PRD
+    vec3 ambient = color * 0.6; 
+    vec3 diffuse = color * (diff1 * 0.3 + diff2 * 0.2);
     
-    // Add specular highlights (warm for primary)
+    // Specular highlights (soft warm for primary)
     vec3 specular = vec3(1.0, 0.95, 0.9) * spec1 + vec3(0.9, 0.9, 1.0) * spec2;
     
-    // Add fresnel glow (Champagne gold rim)
+    // Fresnel glow (Champagne gold rim)
     vec3 fresnelGlow = uColor4 * fresnel;
 
     vec3 finalColor = ambient + diffuse + specular + fresnelGlow;
 
-    // ─── Depth of Field Blur Simulation ───
-    // Darken and blur areas far from center
-    float focalDist = length(vUv - vec2(0.5, 0.4));
-    float dofMix = smoothstep(0.3, 0.8, focalDist);
+    // ─── Post-processing ───
     
-    // Soften blurred areas by pushing them towards the pale ivory/mauve background color
-    vec3 blurColor = mix(finalColor, uColor3, 0.6);
+    // Depth of Field Blur Simulation (darken/soften areas far from center)
+    float focalDist = length(vUv - vec2(0.5, 0.4));
+    float dofMix = smoothstep(0.3, 0.9, focalDist);
+    vec3 blurColor = mix(finalColor, uColor3, 0.5); // fade into ivory/pale mauve
     finalColor = mix(finalColor, blurColor, dofMix);
 
-    // ─── Post-processing: Grain and Vignette ───
     // Subtle vignette
-    float vignette = 1.0 - smoothstep(0.4, 1.4, length(vUv - 0.5));
-    finalColor *= mix(0.85, 1.0, vignette);
+    float vignette = 1.0 - smoothstep(0.5, 1.5, length(vUv - 0.5));
+    finalColor *= mix(0.9, 1.0, vignette);
 
     // HDR tone mapping approximation
     finalColor = finalColor / (finalColor + vec3(1.0));
@@ -210,7 +209,7 @@ interface ThemeColors {
   background: string;
 }
 
-// Light theme aligned with PRD: Strategic Summit (Ivory, Mauve, Champagne Gold)
+// Light theme aligned exactly with PRD: Strategic Summit (Ivory, Mauve, Champagne Gold)
 const defaultTheme: ThemeColors = {
   background: '#Fbfafc', // Ivory white background
   color1: '#3A1440', // Deep anchor (Dark Mauve)
