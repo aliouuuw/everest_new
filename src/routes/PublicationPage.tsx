@@ -4,8 +4,19 @@ import { FaArrowLeft, FaCalendar, FaEye, FaShare, FaTag, FaUser } from 'react-ic
 import { useState } from 'react'
 import { api } from '../../convex/_generated/api'
 import { useReveal } from '../components/Hooks/useReveal'
+import { ConvexSafeBoundary } from '../components/ConvexSafeBoundary'
 
-export const PublicationPage = () => {
+export const PublicationPage = () => (
+  <ConvexSafeBoundary fallback={
+    <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
+      <p className="text-[rgba(10,10,10,0.6)]">Publication indisponible pour le moment.</p>
+    </div>
+  }>
+    <PublicationPageInner />
+  </ConvexSafeBoundary>
+)
+
+const PublicationPageInner = () => {
   const { slug } = useParams({ from: '/publications/$slug' })
   const navigate = useNavigate()
   const [isSharing, setIsSharing] = useState(false)

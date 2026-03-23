@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useQuery } from 'convex/react'
 import { useReveal } from '../components/Hooks/useReveal'
 import { api } from '../../convex/_generated/api'
+import { ConvexSafeBoundary } from '../components/ConvexSafeBoundary'
 
 type PublicationCategory = 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses'
 
@@ -19,7 +20,17 @@ const CATEGORY_LABELS: Record<PublicationCategory | typeof ALL_LABEL, string> = 
 
  const VISIBLE_CATEGORIES: Array<VisiblePublicationCategory> = ['revues-hebdo', 'revues-mensuelles']
 
-export const PublicationsPage = () => {
+export const PublicationsPage = () => (
+  <ConvexSafeBoundary fallback={
+    <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
+      <p className="text-[rgba(10,10,10,0.6)]">Publications indisponibles pour le moment.</p>
+    </div>
+  }>
+    <PublicationsPageInner />
+  </ConvexSafeBoundary>
+)
+
+const PublicationsPageInner = () => {
   const heroRef = useReveal<HTMLElement>()
   const filtersRef = useReveal<HTMLDivElement>()
   const listRef = useReveal<HTMLDivElement>()

@@ -28,17 +28,13 @@ export default defineConfig({
     // Enable automatic code splitting for better performance
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Separate Three.js and its dependencies
-          'three-vendor': ['three'],
-          // Separate GSAP
-          'gsap-vendor': ['gsap'],
-          // Separate animation libraries
-          'animation-vendor': ['lenis'],
-          // Separate UI libraries
-          'ui-vendor': ['react-icons'],
-          // Separate router
-          'router-vendor': ['@tanstack/react-router'],
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) return 'three-vendor'
+          if (id.includes('node_modules/gsap')) return 'gsap-vendor'
+          if (id.includes('node_modules/lenis')) return 'animation-vendor'
+          if (id.includes('node_modules/react-icons')) return 'ui-vendor'
+          if (id.includes('node_modules/@tanstack/react-router')) return 'router-vendor'
+          return undefined
         },
       },
     },

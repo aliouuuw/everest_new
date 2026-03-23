@@ -3,6 +3,7 @@ import { useQuery } from "convex/react";
 import { useReveal } from "../Hooks/useReveal";
 import { api } from "../../../convex/_generated/api";
 import { FiArrowRight } from "react-icons/fi";
+import { ConvexSafeBoundary } from "../ConvexSafeBoundary";
 
 type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
 
@@ -24,7 +25,14 @@ const CATEGORY_LABELS: Record<PublicationCategory | typeof ALL_LABEL, string> = 
   "analyses": "Analyses",
 };
 
-export const Insights: React.FC = () => {
+// Exported wrapper that gracefully handles missing Convex provider
+export const Insights: React.FC = () => (
+  <ConvexSafeBoundary>
+    <InsightsInner />
+  </ConvexSafeBoundary>
+);
+
+const InsightsInner: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const listRef = useReveal<HTMLDivElement>();
 

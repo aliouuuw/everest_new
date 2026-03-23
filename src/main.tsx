@@ -43,8 +43,9 @@ import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 import { ActualitesPage } from './routes/ActualitesPage'
 
-// Initialize ConvexDB client
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
+// Initialize ConvexDB client (only when URL is configured)
+const convexUrl = import.meta.env.VITE_CONVEX_URL
+const convex = convexUrl ? new ConvexReactClient(convexUrl) : null
 
 
 const rootRoute = createRootRoute({
@@ -339,9 +340,13 @@ if (rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <StrictMode>
-        <ConvexAuthProvider client={convex}>
+        {convex ? (
+          <ConvexAuthProvider client={convex}>
+            <RouterProvider router={router} />
+          </ConvexAuthProvider>
+        ) : (
           <RouterProvider router={router} />
-        </ConvexAuthProvider>
+        )}
       </StrictMode>,
     )
 
