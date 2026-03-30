@@ -34,12 +34,12 @@ export const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
   return (
     <LenisProvider
       options={{
-        duration: 0.8, // Reduced from 1.2 for better performance
+        duration: 1.4, // Longer duration for cinematic parallax feel
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
-        mouseMultiplier: 0.8, // Reduced for less aggressive scrolling
+        mouseMultiplier: 0.7, // Slightly slower for dramatic scroll effect
         smoothTouch: false, // Disable smooth touch for better mobile performance
         touchMultiplier: 1.5, // Reduced for better touch performance
         infinite: false,
