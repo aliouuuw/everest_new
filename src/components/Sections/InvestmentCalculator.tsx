@@ -244,7 +244,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Calculator Inputs */}
             <div>
-                <div className="p-8 rounded-2xl" style={{ border: '1px solid var(--command-border)', background: 'var(--command-surface)' }}>
+              <div className="p-8 rounded-2xl" style={{ border: '1px solid var(--command-border)', background: 'var(--command-surface)' }}>
                 <h3
                   className="mb-8"
                   style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--night)' }}
@@ -265,7 +265,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       <button
                         key={service.service}
                         onClick={() => handleInputChange('service', service.service)}
-                          className="p-4 text-left transition-all duration-300 rounded-xl cursor-pointer"
+                        className="p-4 text-left transition-all duration-300 rounded-xl cursor-pointer"
                         style={{
                           border: inputs.service === service.service ? '1px solid var(--mauve-border-strong)' : '1px solid var(--command-border)',
                           background: inputs.service === service.service ? 'var(--summit-haze)' : 'var(--pure-white)',
@@ -294,7 +294,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     <input
                       type="number"
                       value={inputs.initialAmount}
-                      onChange={(e) => handleInputChange('initialAmount', e.target.value)}
+                      onChange={(e) => handleInputChange('initialAmount', Number(e.target.value))}
                       className="w-full px-4 py-3 text-[var(--night)] focus:outline-none transition-colors rounded-xl"
                       style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem', border: '1px solid var(--command-border)', background: 'var(--pure-white)' }}
                       onFocus={(e) => e.currentTarget.style.borderColor = 'var(--mauve-border-strong)'}
@@ -314,7 +314,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     <input
                       type="number"
                       value={inputs.monthlyContribution}
-                      onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
+                      onChange={(e) => handleInputChange('monthlyContribution', Number(e.target.value))}
                       className="w-full px-4 py-3 text-[var(--night)] focus:outline-none transition-colors rounded-xl"
                       style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem', border: '1px solid var(--command-border)', background: 'var(--pure-white)' }}
                       onFocus={(e) => e.currentTarget.style.borderColor = 'var(--mauve-border-strong)'}
@@ -336,7 +336,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       min="1"
                       max="20"
                       value={inputs.timeHorizon}
-                      onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
+                      onChange={(e) => handleInputChange('timeHorizon', Number(e.target.value))}
                       className="w-full accent-[var(--jaune-or)]"
                     />
                     <div className="flex justify-between mt-2">

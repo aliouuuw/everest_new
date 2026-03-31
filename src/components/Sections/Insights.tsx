@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { useQuery } from "convex/react";
 import { useReveal } from "../Hooks/useReveal";
 import { api } from "../../../convex/_generated/api";
@@ -37,6 +37,19 @@ const InsightsInner: React.FC = () => {
   const listRef = useReveal<HTMLDivElement>();
 
   const [activeCategory, setActiveCategory] = useState<PublicationCategory | typeof ALL_LABEL>(ALL_LABEL);
+
+  // Magnetic button state
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [buttonMousePosition, setButtonMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleButtonMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    setButtonMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   const publications = useQuery(api.publications.getPublications, {
     limit: 3,
@@ -82,7 +95,7 @@ const InsightsInner: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
           <div className="max-w-xl">
             <span
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
               style={{
                 fontFamily: 'var(--font-primary)',
                 color: 'var(--mauve)',
@@ -116,7 +129,7 @@ const InsightsInner: React.FC = () => {
                   key={cat}
                   type="button"
                   onClick={() => setActiveCategory(cat)}
-                  className="px-3.5 py-2 transition-all duration-300 cursor-pointer rounded-full"
+                  className="px-3.5 py-2 transition-all duration-300 cursor-pointer rounded-full hover:scale-105"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: isActive ? 500 : 400,
@@ -164,7 +177,7 @@ const InsightsInner: React.FC = () => {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'var(--mauve-border)';
                   e.currentTarget.style.boxShadow = '0 12px 40px rgba(70,29,76,0.06)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.transform = 'translateY(-4px)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = 'var(--command-border)';
@@ -222,7 +235,7 @@ const InsightsInner: React.FC = () => {
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.85rem', color: 'var(--mauve)' }}
                 >
                   Lire
-                  <FiArrowRight className="text-sm" />
+                  <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </a>
             ))}
@@ -232,28 +245,42 @@ const InsightsInner: React.FC = () => {
         {/* View all link */}
         <div className="mt-14 flex justify-center">
           <a
+            ref={buttonRef}
             href="/publications"
-            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300"
+            className="group relative overflow-hidden inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-400"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 500,
               fontSize: '0.875rem',
               color: 'var(--mauve)',
               border: '1px solid var(--mauve-border)',
+              transformStyle: 'preserve-3d',
             }}
+            onMouseMove={handleButtonMouseMove}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'var(--mauve)';
               e.currentTarget.style.color = 'var(--pure-white)';
               e.currentTarget.style.borderColor = 'var(--mauve)';
+              e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(70,29,76,0.15)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.color = 'var(--mauve)';
               e.currentTarget.style.borderColor = 'var(--mauve-border)';
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
-            Voir toutes les publications
-            <FiArrowRight className="text-sm" />
+            {/* Interactive Shine Effect */}
+            <div
+              className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 mix-blend-overlay"
+              style={{
+                background: `radial-gradient(100px circle at ${buttonMousePosition.x}px ${buttonMousePosition.y}px, rgba(255,255,255,0.4), transparent 50%)`,
+              }}
+            />
+            <span className="relative z-10">Voir toutes les publications</span>
+            <FiArrowRight className="relative z-10 text-sm group-hover:translate-x-1 transition-transform duration-300" />
           </a>
         </div>
       </div>

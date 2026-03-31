@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -40,6 +41,19 @@ const MOCK_NEWS: NewsArticle[] = [
 export const NewsSection: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const listRef = useReveal<HTMLDivElement>();
+
+  // Magnetic button state
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [buttonMousePosition, setButtonMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleButtonMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    setButtonMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   return (
     <section
@@ -167,28 +181,42 @@ export const NewsSection: React.FC = () => {
         {/* View all link */}
         <div className="mt-14 flex justify-center">
           <a
+            ref={buttonRef}
             href="/actualites"
-            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300"
+            className="group relative overflow-hidden inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-400"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 500,
               fontSize: '0.875rem',
               color: 'var(--mauve)',
               border: '1px solid var(--mauve-border)',
+              transformStyle: 'preserve-3d',
             }}
+            onMouseMove={handleButtonMouseMove}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'var(--mauve)';
               e.currentTarget.style.color = 'var(--pure-white)';
               e.currentTarget.style.borderColor = 'var(--mauve)';
+              e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(70,29,76,0.15)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.color = 'var(--mauve)';
               e.currentTarget.style.borderColor = 'var(--mauve-border)';
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
-            Voir toutes les actualités
-            <FiArrowRight className="text-sm" />
+            {/* Interactive Shine Effect */}
+            <div
+              className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 mix-blend-overlay"
+              style={{
+                background: `radial-gradient(100px circle at ${buttonMousePosition.x}px ${buttonMousePosition.y}px, rgba(255,255,255,0.4), transparent 50%)`,
+              }}
+            />
+            <span className="relative z-10">Voir toutes les actualités</span>
+            <FiArrowRight className="relative z-10 text-sm group-hover:translate-x-1 transition-transform duration-300" />
           </a>
         </div>
       </div>
