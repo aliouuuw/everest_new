@@ -15,6 +15,11 @@ export const Footer = () => {
   };
 
   const headingStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-primary)',
+    fontWeight: 600,
+    fontSize: '0.8rem',
+    letterSpacing: '0.06em',
+    textTransform: 'uppercase',
     marginBottom: '1.25rem',
   };
 
@@ -22,39 +27,43 @@ export const Footer = () => {
     <footer className="relative" style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       {/* Subtle mauve ambient glow */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 50% 40% at 50% 100%, rgba(70,29,76,0.08) 0%, transparent 70%)',
         }}
       />
-      <div className="mx-auto max-w-6xl px-6 py-20 relative z-10">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
 
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
               <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto brightness-125" />
-              <span className="font-display-aptos text-[1.1rem] text-[var(--pure-white)]">
+              <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.1rem', color: 'var(--pure-white)' }}>
                 Everest Finance
               </span>
             </div>
-            <p className="text-secondary-dark text-[0.85rem] font-light leading-relaxed">
+            <p style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.85rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.5)' }}>
               Des idées et des valeurs au service de vos ambitions.
             </p>
             <div className="flex items-center gap-3 mt-6">
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
-                style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+                className="inline-flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-300"
+                style={{ border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(202,148,47,0.4)'; e.currentTarget.style.color = 'var(--jaune-or)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.35)'; }}
               >
                 <FaLinkedin className="text-sm" />
               </a>
               <a
                 href="#"
                 aria-label="Twitter"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
-                style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+                className="inline-flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-300"
+                style={{ border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(202,148,47,0.4)'; e.currentTarget.style.color = 'var(--jaune-or)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.35)'; }}
               >
                 <FaTwitter className="text-sm" />
               </a>
@@ -63,7 +72,7 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Liens</div>
+            <div style={{ ...headingStyle, color: 'var(--pure-white)' }}>Liens</div>
             <ul>
               {[
                 { label: 'À propos', href: '#about' },
@@ -73,7 +82,14 @@ export const Footer = () => {
                 { label: 'Portail client', href: '#portal-preview' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
+                  <a
+                    href={l.href}
+                    style={{ ...linkStyle, fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.8rem', lineHeight: 2, color: 'rgba(255,255,255,0.5)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--jaune-or)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+                  >
+                    {l.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -81,7 +97,7 @@ export const Footer = () => {
 
           {/* Offres */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Offres & services</div>
+            <div style={{ ...headingStyle, color: 'var(--pure-white)' }}>Offres & services</div>
             <ul>
               {[
                 { label: 'Marché des capitaux', href: '/marche-capitaux' },
@@ -91,7 +107,14 @@ export const Footer = () => {
                 { label: 'Gestion assistée', href: '/gestion-assistee' },
               ].map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
+                  <a
+                    href={l.href}
+                    style={{ ...linkStyle, fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.8rem', lineHeight: 2, color: 'rgba(255,255,255,0.5)' }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--jaune-or)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+                  >
+                    {l.label}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -99,18 +122,28 @@ export const Footer = () => {
 
           {/* Contact */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Contact</div>
-            <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
+            <div style={{ ...headingStyle, color: 'var(--pure-white)' }}>Contact</div>
+            <ul className="space-y-3" style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.8rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.5)' }}>
               <li>
                 18 Boulevard de la République,<br />Dakar, Sénégal
               </li>
               <li>
-                <a href="mailto:contact@everest-finance.sn" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                <a
+                  href="mailto:contact@everest-finance.sn"
+                  style={{ ...linkStyle, color: 'rgba(255,255,255,0.5)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--jaune-or)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+                >
                   contact@everest-finance.sn
                 </a>
               </li>
               <li>
-                <a href="tel:+221000000000" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                <a
+                  href="tel:+221000000000"
+                  style={{ ...linkStyle, color: 'rgba(255,255,255,0.5)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--jaune-or)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.5)'}
+                >
                   +221 00 000 00 00
                 </a>
               </li>
@@ -120,12 +153,13 @@ export const Footer = () => {
 
         {/* Bottom bar */}
         <div
-          className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[var(--pure-white)]/5 text-secondary-dark text-[0.7rem] font-light"
+          className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.05)', fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'rgba(255,255,255,0.35)' }}
         >
-          <span className="opacity-70">
+          <span>
             &copy; {new Date().getFullYear()} Everest Finance SGI — Agrément CREPMF SGI/DA/2016/60
           </span>
-          <span className="opacity-60">
+          <span style={{ opacity: 0.7 }}>
             Tous droits réservés
           </span>
         </div>

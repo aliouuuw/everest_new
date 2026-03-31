@@ -5,206 +5,213 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 type Feature = {
-  number: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 };
 
 const features: Array<Feature> = [
-  { number: "01", title: "Sécurité", description: "Conformité réglementaire rigoureuse et garde sécurisée de vos actifs sous agrément CREPMF." },
-  { number: "02", title: "Accompagnement", description: "Un conseiller dédié, une écoute permanente et une transparence totale sur chaque opération." },
-  { number: "03", title: "Performance", description: "Allocation stratégique, exécution précise et recherche indépendante au service de vos rendements." },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    ),
+    title: "Sécurité réglementaire",
+    description: "Conformité rigoureuse et garde sécurisée de vos actifs sous agrément CREPMF. Vos investissements sont protégés par les normes les plus strictes."
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    ),
+    title: "Accompagnement dédié",
+    description: "Un conseiller personnel, une écoute permanente et une transparence totale sur chaque opération. Nous sommes à vos côtés."
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    ),
+    title: "Performance optimisée",
+    description: "Allocation stratégique, exécution précise et recherche indépendante au service de vos rendements sur les marchés de l'UEMOA."
+  },
 ];
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const listRef = useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    // Headline reveal
-    gsap.fromTo('.vp-headline-word',
-      { y: 50, opacity: 0, rotateX: 20 },
+    const triggers: ScrollTrigger[] = [];
+
+    // Section header reveal
+    const headerTween = gsap.fromTo('.vp-header',
+      { y: 40, opacity: 0 },
       {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: 'power4.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse'
-        }
+        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none reverse' }
       }
     );
+    if (headerTween.scrollTrigger) triggers.push(headerTween.scrollTrigger);
 
-    // Features stagger reveal
-    const featureRows = gsap.utils.toArray('.vp-feature-row');
-    featureRows.forEach((row: any, i: number) => {
-      gsap.fromTo(row,
-        { y: 40, opacity: 0 },
+    // Cards stagger reveal
+    const cards = gsap.utils.toArray('.vp-card');
+    cards.forEach((card: any, i: number) => {
+      const tween = gsap.fromTo(card,
+        { y: 50, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          delay: i * 0.15,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: listRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
+          y: 0, opacity: 1, duration: 0.8, delay: i * 0.12, ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 60%', toggleActions: 'play none none reverse' }
         }
       );
+      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
     });
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === section || t.trigger === listRef.current) {
-          t.kill();
-        }
-      });
-    };
+    return () => { triggers.forEach(t => t.kill()); };
   }, []);
 
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ 
-        background: '#ffffff', // Crisp white for contrast after dark hero
-        paddingTop: 'clamp(8rem, 20vw, 12rem)', 
-        paddingBottom: 'clamp(8rem, 20vw, 12rem)' 
+      style={{
+        background: 'var(--pure-white)',
+        paddingTop: 'var(--section-gap)',
+        paddingBottom: 'var(--section-gap)',
       }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20">
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
 
-        {/* Structured two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+        {/* Header — centered, modern */}
+        <div className="vp-header text-center max-w-2xl mx-auto mb-16 md:mb-20">
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--mauve)',
+              background: 'var(--mauve-05)',
+              border: '1px solid var(--mauve-border)',
+            }}
+          >
+            Pourquoi Everest Finance
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 700,
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              lineHeight: 1.1,
+              letterSpacing: '-0.025em',
+              color: 'var(--night)',
+            }}
+          >
+            Exécution rigoureuse,{' '}
+            <span style={{ color: 'var(--mauve)' }}>confiance durable.</span>
+          </h2>
+          <p
+            className="mt-5 mx-auto"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 400,
+              fontSize: '1.05rem',
+              lineHeight: 1.7,
+              color: 'var(--night-60)',
+              maxWidth: '32rem',
+            }}
+          >
+            Nous allions discipline de marché, ingénierie financière et accompagnement client pour créer de la valeur sur le long terme.
+          </p>
+        </div>
 
-          {/* Left — heading block */}
-          <div className="lg:col-span-5 lg:sticky lg:top-40">
-            <span
-              className="inline-flex items-center gap-4 text-[11px] tracking-[0.2em] uppercase mb-8"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night-60)' }}
-            >
-              <span className="inline-block w-8 h-[1px]" style={{ background: 'var(--night-40)' }} />
-              Notre Approche
-            </span>
-            
-            <h2
-              className="flex flex-col gap-1 perspective-[1000px]"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-                color: 'var(--night)',
-              }}
-            >
-              <span className="block overflow-hidden pb-2"><span className="vp-headline-word block origin-bottom">Exécution rigoureuse,</span></span>
-              <em className="block overflow-hidden pb-2"><span className="vp-headline-word block origin-bottom font-light italic text-[var(--jaune-or)]">confiance durable.</span></em>
-            </h2>
-
+        {/* Feature cards — modern 3-column grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {features.map((f) => (
             <div
-              className="h-[1px] w-24 mt-10 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
-            />
-
-            <p
-              className="max-w-md text-lg"
+              key={f.title}
+              className="vp-card group relative p-8 md:p-10 rounded-2xl transition-all duration-500 hover:z-10"
               style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                lineHeight: 1.7,
-                color: 'var(--night-60)',
+                background: 'var(--summit-ivory)',
+                border: '1px solid var(--command-border)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--mauve-border)';
+                e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(70,29,76,0.08), 0 0 20px rgba(70,29,76,0.03)';
+                e.currentTarget.style.transform = 'translateY(-6px) scale(1.01)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--command-border)';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
               }}
             >
-              Nous allions discipline de marché, ingénierie financière et accompagnement client
-              pour créer de la valeur sur le long terme.
-            </p>
-
-            {/* Embedded Trust Marker */}
-            <div className="mt-12 flex items-center gap-6 p-6 rounded-2xl bg-[var(--night)]/[0.02] border border-[var(--night)]/[0.04]">
-              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--jaune-or)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-[var(--night-40)] font-semibold mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Agrément Officiel</p>
-                <p className="text-sm font-medium text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>Régulé par le CREPMF</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right — feature rows */}
-          <div ref={listRef} className="lg:col-span-7 flex flex-col pt-4 lg:pt-0">
-            {features.map((f, i) => (
+              {/* Icon Container with Floating Delight Animation */}
               <div
-                key={f.title}
-                className="vp-feature-row group flex flex-col md:flex-row items-start gap-6 md:gap-12 relative"
-                style={{
-                  paddingTop: i === 0 ? '0' : 'clamp(2.5rem, 5vw, 4rem)',
-                  paddingBottom: 'clamp(2.5rem, 5vw, 4rem)',
-                }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-2 group-hover:scale-110 group-hover:bg-[rgba(70,29,76,0.15)] group-hover:text-[var(--mauve)]"
+                style={{ background: 'var(--mauve-10)', color: 'var(--mauve)', boxShadow: '0 4px 12px rgba(70,29,76,0)' }}
               >
-                {/* Border line */}
-                <div 
-                  className="absolute bottom-0 left-0 h-[1px] bg-[var(--night)]/[0.08] transition-all duration-700 group-hover:bg-[var(--jaune-or)]"
-                  style={{ width: '100%' }}
-                />
-
-                {/* Number */}
-                <span
-                  className="shrink-0 mt-2 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
-                    fontSize: 'clamp(2rem, 3vw, 2.5rem)',
-                    lineHeight: 1,
-                    color: 'var(--night)',
-                    opacity: 0.2,
-                  }}
-                >
-                  {f.number}
-                </span>
-
-                <div className="flex-1">
-                  <h3
-                    className="mb-4 text-2xl transition-transform duration-500 group-hover:translate-x-2"
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 400,
-                      lineHeight: 1.2,
-                      letterSpacing: '-0.01em',
-                      color: 'var(--night)',
-                    }}
-                  >
-                    {f.title}
-                  </h3>
-                  <p
-                    className="text-base md:text-lg transition-colors duration-500 group-hover:text-[var(--night-80)]"
-                    style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 300,
-                      lineHeight: 1.7,
-                      color: 'var(--night-60)',
-                      maxWidth: '32rem',
-                    }}
-                  >
-                    {f.description}
-                  </p>
+                {/* Dynamic floating animation on the SVG itself */}
+                <div className="transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
+                  {f.icon}
                 </div>
               </div>
-            ))}
-          </div>
 
+              <h3
+                className="mb-3 transition-colors duration-300 group-hover:text-[var(--mauve)]"
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 600,
+                  fontSize: '1.2rem',
+                  lineHeight: 1.3,
+                  color: 'var(--night)',
+                }}
+              >
+                {f.title}
+              </h3>
+              <p
+                className="transition-colors duration-300 group-hover:text-[var(--night-80)]"
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 400,
+                  fontSize: '0.9rem',
+                  lineHeight: 1.7,
+                  color: 'var(--night-60)',
+                }}
+              >
+                {f.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust bar — with subtle hover pulses */}
+        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          {['Agrément CREPMF', "30+ années d'expertise", 'BRVM · UEMOA'].map((label) => (
+            <div 
+              key={label} 
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-[var(--summit-ivory)] cursor-default"
+            >
+              <span 
+                className="w-1.5 h-1.5 rounded-full transition-transform duration-300 hover:scale-150" 
+                style={{ background: 'var(--jaune-or)', boxShadow: '0 0 8px var(--jaune-or-30)' }} 
+              />
+              <span
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 500,
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.04em',
+                  color: 'var(--night-60)',
+                }}
+              >
+                {label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

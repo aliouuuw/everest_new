@@ -1,16 +1,27 @@
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
-
-type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
+import { useRef, useState } from "react";
 
 export const CTA: React.FC<{
-  scheme?: CtaScheme;
   primaryHref?: string;
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
 }> = ({ primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryHref = '#offres', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
+  
+  // Magnetic button state
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const [buttonMousePosition, setButtonMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleButtonMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    setButtonMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   return (
     <section
@@ -18,117 +29,142 @@ export const CTA: React.FC<{
       className="reveal relative overflow-hidden"
       id="contact"
       style={{
-        background: 'linear-gradient(170deg, #12101a 0%, #1a1420 45%, #0f0d12 100%)',
+        background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)',
         paddingTop: 'var(--section-gap)',
         paddingBottom: 'var(--section-gap)',
       }}
     >
-      {/* Restrained atmospheric glow */}
-      <div
-        className="absolute top-0 left-0 w-[50%] h-[60%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(70, 29, 76, 0.15) 0%, transparent 60%)' }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[40%] h-[50%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, rgba(202, 148, 47, 0.06) 0%, transparent 50%)' }}
-      />
-      {/* Grain */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
-      />
+      {/* Purple atmospheric glows with subtle floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute top-0 left-[20%] w-[600px] h-[600px] rounded-full"
+          style={{ 
+            background: 'radial-gradient(circle, rgba(70,29,76,0.2) 0%, transparent 60%)', 
+            filter: 'blur(100px)',
+            animation: 'pulseGlow 8s infinite alternate ease-in-out' 
+          }}
+        />
+        <div
+          className="absolute bottom-0 right-[10%] w-[400px] h-[400px] rounded-full"
+          style={{ 
+            background: 'radial-gradient(circle, rgba(202,148,47,0.06) 0%, transparent 60%)', 
+            filter: 'blur(80px)',
+            animation: 'pulseGlow 10s infinite alternate-reverse ease-in-out' 
+          }}
+        />
+        
+        {/* CSS for the gentle pulse */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes pulseGlow {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+            100% { transform: scale(1.1) translate(20px, -20px); opacity: 1; }
+          }
+        `}} />
+      </div>
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
-          
-          {/* Left */}
-          <div className="lg:w-3/5">
-            <span
-              className="inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase mb-8"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              <span className="inline-block w-5 h-[1px]" style={{ background: 'var(--jaune-or)', opacity: 0.5 }} />
-              Prise de contact
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-                color: 'var(--pure-white)',
-              }}
-            >
-              Prêts à franchir{' '}
-              <em style={{ 
-                fontStyle: 'italic', 
-                color: 'var(--jaune-or)',
-              }}>
-                un cap ?
-              </em>
-            </h2>
-            <div
-              className="h-[1px] w-24 mt-9 mb-7"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
-            />
-            <p
-              className="max-w-md"
+        {/* Centered layout — modern */}
+        <div className="text-center max-w-2xl mx-auto">
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--jaune-or)',
+              background: 'rgba(202,148,47,0.08)',
+              border: '1px solid rgba(202,148,47,0.15)',
+            }}
+          >
+            Prise de contact
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 700,
+              fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
+              lineHeight: 1.1,
+              letterSpacing: '-0.025em',
+              color: 'var(--pure-white)',
+            }}
+          >
+            Prêts à franchir{' '}
+            <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
+          </h2>
+          <p
+            className="mt-5 mx-auto"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 400,
+              fontSize: '1.05rem',
+              lineHeight: 1.7,
+              color: 'rgba(255,255,255,0.5)',
+              maxWidth: '28rem',
+            }}
+          >
+            Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              ref={buttonRef}
+              href={primaryHref}
+              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-400 overflow-hidden"
               style={{
                 fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                fontSize: '1rem',
-                lineHeight: 1.8,
-                color: 'rgba(255,255,255,0.5)',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                color: 'var(--night)',
+                background: 'var(--jaune-or)',
+                transformStyle: 'preserve-3d',
               }}
-            >
-              Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
-            </p>
-          </div>
-
-          {/* Right */}
-          <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
-            <a
-              href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-7 py-4 border transition-all duration-500"
-              style={{ 
-                borderColor: 'rgba(202, 148, 47, 0.25)',
-                background: 'rgba(202, 148, 47, 0.05)',
-              }}
+              onMouseMove={handleButtonMouseMove}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(202, 148, 47, 0.5)';
-                e.currentTarget.style.background = 'rgba(202, 148, 47, 0.1)';
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(202,148,47,0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(202, 148, 47, 0.25)';
-                e.currentTarget.style.background = 'rgba(202, 148, 47, 0.05)';
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              <span
-                className="text-[11px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-              >
-                {primaryLabel}
-              </span>
-              <FiArrowRight className="text-base text-[var(--jaune-or)] group-hover:translate-x-1 transition-transform duration-500" />
+              {/* Interactive Shine Effect */}
+              <div
+                className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 mix-blend-overlay"
+                style={{
+                  background: `radial-gradient(100px circle at ${buttonMousePosition.x}px ${buttonMousePosition.y}px, rgba(255,255,255,0.8), transparent 50%)`,
+                }}
+              />
+              
+              <span className="relative z-10">{primaryLabel}</span>
+              <FiArrowRight className="relative z-10 text-base group-hover:translate-x-1 transition-transform duration-300" />
             </a>
-            
+
             {secondaryHref && (
               <a
                 href={secondaryHref}
-                className="group inline-flex items-center gap-4 mt-1"
+                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full transition-all duration-300"
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                  color: 'rgba(255,255,255,0.7)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)';
+                  e.currentTarget.style.color = 'var(--pure-white)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                  e.currentTarget.style.background = 'transparent';
+                }}
               >
-                <span
-                  className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.4)' }}
-                >
-                  {secondaryLabel}
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-                </span>
+                {secondaryLabel}
               </a>
             )}
           </div>
-
         </div>
       </div>
     </section>

@@ -45,35 +45,35 @@ export const NewsSection: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative"
-      style={{ background: 'var(--pure-white)', paddingTop: 'var(--section-gap)', paddingBottom: 'var(--section-gap)' }}
+      style={{ background: 'var(--summit-ivory)', paddingTop: 'var(--section-gap)', paddingBottom: 'var(--section-gap)' }}
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div className="max-w-xl">
-            <span
-              className="inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase mb-6"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}
-            >
-              <span className="inline-block w-5 h-[1px]" style={{ background: 'var(--mauve)', opacity: 0.4 }} />
-              Actualités
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.015em',
-                color: 'var(--night)',
-              }}
-            >
-              Dernières{' '}
-              <em style={{ fontWeight: 300, fontStyle: 'italic', color: 'var(--mauve)' }}>
-                informations.
-              </em>
-            </h2>
-          </div>
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              color: 'var(--mauve)',
+              background: 'var(--mauve-05)',
+              border: '1px solid var(--mauve-border)',
+            }}
+          >
+            Actualités
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 700,
+              fontSize: 'clamp(2rem, 4vw, 3rem)',
+              lineHeight: 1.1,
+              letterSpacing: '-0.025em',
+              color: 'var(--night)',
+            }}
+          >
+            Dernières{' '}
+            <span style={{ color: 'var(--mauve)' }}>informations.</span>
+          </h2>
         </div>
 
         {/* Content Grid */}
@@ -82,16 +82,18 @@ export const NewsSection: React.FC = () => {
             <a
               key={i}
               href={article.href}
-              className="group flex flex-col h-full overflow-hidden transition-all duration-500"
+              className="group flex flex-col h-full overflow-hidden rounded-2xl transition-all duration-500"
               style={{
                 border: '1px solid var(--command-border)',
-                background: 'var(--summit-ivory)',
+                background: 'var(--pure-white)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--command-border-hover)';
+                e.currentTarget.style.borderColor = 'var(--mauve-border)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(70,29,76,0.06)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = 'var(--command-border)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <div className="relative aspect-[16/10] overflow-hidden">
@@ -103,7 +105,7 @@ export const NewsSection: React.FC = () => {
                 />
                 <div className="absolute top-4 left-4 z-10">
                   <span
-                    className="text-[9px] tracking-[0.12em] uppercase px-2.5 py-1"
+                    className="text-[10px] tracking-[0.06em] uppercase px-2.5 py-1 rounded-full"
                     style={{
                       fontFamily: 'var(--font-primary)',
                       fontWeight: 500,
@@ -127,7 +129,7 @@ export const NewsSection: React.FC = () => {
                 <h3
                   className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300"
                   style={{
-                    fontFamily: 'var(--font-display-aptos)',
+                    fontFamily: 'var(--font-primary)',
                     fontWeight: 600,
                     fontSize: '1.15rem',
                     lineHeight: 1.3,
@@ -166,18 +168,27 @@ export const NewsSection: React.FC = () => {
         <div className="mt-14 flex justify-center">
           <a
             href="/actualites"
-            className="group inline-flex items-center gap-4"
+            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full transition-all duration-300"
+            style={{
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 500,
+              fontSize: '0.875rem',
+              color: 'var(--mauve)',
+              border: '1px solid var(--mauve-border)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--mauve)';
+              e.currentTarget.style.color = 'var(--pure-white)';
+              e.currentTarget.style.borderColor = 'var(--mauve)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--mauve)';
+              e.currentTarget.style.borderColor = 'var(--mauve-border)';
+            }}
           >
-            <span
-              className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night)' }}
-            >
-              Voir toutes les actualités
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-            </span>
-            <span className="w-9 h-9 rounded-full border border-[var(--night)]/10 flex items-center justify-center group-hover:border-[var(--mauve)]/40 transition-all duration-500">
-              <FiArrowRight className="text-sm text-[var(--night)]/50 group-hover:text-[var(--mauve)] transition-colors duration-500" />
-            </span>
+            Voir toutes les actualités
+            <FiArrowRight className="text-sm" />
           </a>
         </div>
       </div>

@@ -16,12 +16,14 @@
   /* Extended Opacity/Variations */
   --night-80: rgba(10, 10, 10, 0.8);
   --night-60: rgba(10, 10, 10, 0.6);
+  --night-40: rgba(10, 10, 10, 0.4);
   --night-20: rgba(10, 10, 10, 0.2);
   --night-10: rgba(10, 10, 10, 0.1);
   --jaune-or-light: rgba(202, 148, 47, 0.4);
   --jaune-or-30: rgba(202, 148, 47, 0.3);
   --jaune-or-20: rgba(202, 148, 47, 0.2);
   --jaune-or-10: rgba(202, 148, 47, 0.1);
+  --jaune-or-05: rgba(202, 148, 47, 0.05);
   --mauve-80: rgba(70, 29, 76, 0.8);
   --mauve-60: rgba(70, 29, 76, 0.6);
   --mauve-40: rgba(70, 29, 76, 0.4);
@@ -40,6 +42,8 @@
   
   /* Backgrounds */
   --cream: #faf6ef;
+  --gold-pale: rgba(202, 148, 47, 0.06);
+  --white-smoke-80: rgba(245, 245, 245, 0.8);
   
   /* Atmospheric Surfaces — Strategic Summit */
   --summit-ivory: #faf8f4;
@@ -1128,4 +1132,17 @@ html {
     opacity: 1;
     transform: translateX(-50%) scaleY(1) translateY(0);
   }
+}
+
+/* Hero Headline Character Animation */
+.hero-headline-line {
+  display: block;
+  perspective: 1000px;
+}
+
+.hero-headline-line .char,
+.hero-headline-line .char-space {
+  display: inline-block;
+  transform-origin: center bottom;
+  will-change: transform, opacity;
 }

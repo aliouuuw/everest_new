@@ -45,17 +45,39 @@ export const HeroSectionMountain: React.FC = () => {
     };
   }, [lenis, isReady]);
 
-  // ─── Entrance animation ───
+  // ─── Entrance animation with character stagger ───
   useEffect(() => {
     if (prefersReducedMotion) return;
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-      gsap.set('.reveal-text', { yPercent: 120 });
+      
+      // Split each headline line into characters
+      const headlineLines = document.querySelectorAll('.hero-headline-line');
+      headlineLines.forEach((line) => {
+        const text = line.textContent || '';
+        const chars = text.split('').map((char) => 
+          char === ' ' ? '<span class="char-space">&nbsp;</span>' : `<span class="char">${char}</span>`
+        ).join('');
+        line.innerHTML = chars;
+      });
+
+      // Set initial states
+      gsap.set('.char', { opacity: 0, y: 30, rotationX: -90 });
+      gsap.set('.char-space', { opacity: 0 });
       gsap.set('.reveal-fade', { opacity: 0, y: 24 });
       gsap.set('.trust-marker', { opacity: 0, y: 12 });
-      tl.to('.reveal-text', { yPercent: 0, duration: 1.4, stagger: 0.08, ease: 'expo.out' })
-        .to('.reveal-fade', { opacity: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power2.out' }, '-=0.9')
-        .to('.trust-marker', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, '-=0.5');
+
+      // Animate characters with stagger
+      tl.to('.char, .char-space', { 
+        opacity: 1, 
+        y: 0, 
+        rotationX: 0,
+        duration: 0.8, 
+        stagger: 0.02,
+        ease: 'back.out(1.2)'
+      })
+        .to('.reveal-fade', { opacity: 1, y: 0, duration: 1, stagger: 0.08, ease: 'power2.out' }, '-=0.5')
+        .to('.trust-marker', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' }, '-=0.6');
     }, heroRef);
     return () => ctx.revert();
   }, [prefersReducedMotion]);
@@ -71,7 +93,7 @@ export const HeroSectionMountain: React.FC = () => {
           trigger: hero,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: 0.3,
+          scrub: 0.6,
           pin: '.hero-pin-layer',
           pinSpacing: false,
           onUpdate: (self: ScrollTrigger) => {
@@ -80,36 +102,27 @@ export const HeroSectionMountain: React.FC = () => {
         };
         const tl = gsap.timeline({ scrollTrigger: pinTrigger });
 
-        // Purple mountain zooms in as it dissolves — feels like flying into it
+        // Purple mountain zooms in on scroll (no fade-out)
         tl.to('.hero-mountain-img', {
-          opacity: 0,
-          scale: 1.6,
-          duration: 0.35,
+          scale: 1.3,
+          duration: 0.5,
           ease: 'power2.in',
         }, 0);
-
-        // Golden image fades in underneath
-        tl.fromTo(
-          '.hero-golden-img',
-          { opacity: 0 },
-          { opacity: 1, duration: 0.35, ease: 'sine.inOut' },
-          0.05,
-        );
 
         // Gradient overlay dissolves in sync
         tl.to('.hero-gradient-overlay', {
           opacity: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: 'sine.inOut',
-        }, 0.08);
+        }, 0.1);
 
         // Content fades out
         tl.to('.hero-content-layer', {
           opacity: 0,
           y: -40,
-          duration: 0.2,
+          duration: 0.3,
           ease: 'power2.in',
-        }, 0.3);
+        }, 0.25);
       }, hero);
       return () => ctx.revert();
     }, 150);
@@ -120,7 +133,7 @@ export const HeroSectionMountain: React.FC = () => {
     <section
       ref={heroRef}
       className="relative w-full overflow-hidden selection:bg-[var(--jaune-or-20)] selection:text-white"
-      style={{ height: '250vh' }}
+      style={{ height: '120vh' }}
     >
       {/* Pinned viewport */}
       <div className="hero-pin-layer relative w-full h-[100svh] flex items-center justify-center overflow-hidden">
@@ -133,23 +146,9 @@ export const HeroSectionMountain: React.FC = () => {
           style={{ background: 'linear-gradient(180deg, #1c1224 0%, #120e18 100%)' }}
         />
 
-        {/* 2. Golden mountain — fades in as purple dissolves */}
-        <div className="absolute inset-0 z-[1] pointer-events-none">
-          <img
-            src="/golden-mountain-at-sunrise.png"
-            alt="Golden mountain at sunrise"
-            className="hero-golden-img w-full h-full object-cover opacity-0 will-change-transform"
-            style={{
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-            }}
-          />
-        </div>
-
-        {/* 3. Purple mountain — zooms in as it fades */}
+        {/* 2. Purple mountain — zooms in and fades out on scroll */}
         <div
-          className="absolute inset-0 z-[2] pointer-events-none"
-          style={{ mixBlendMode: 'screen' }}
+          className="absolute inset-0 z-[1] pointer-events-none"
         >
           <img
             src="/mountain-peak-purple.jpg"
@@ -175,14 +174,34 @@ export const HeroSectionMountain: React.FC = () => {
           }}
         />
 
-        {/* 5. WebGL volumetric fog/haze — covers middle to bottom */}
+        {/* 5. Film grain texture overlay */}
+        <div
+          className="absolute inset-0 z-[4] pointer-events-none opacity-[0.015] mix-blend-overlay"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)"/%3E%3C/svg%3E")',
+            backgroundRepeat: 'repeat',
+            backgroundSize: '180px 180px',
+          }}
+        />
+
+        {/* 6. WebGL volumetric fog/haze — covers middle to bottom */}
         <CloudFog
           scrollProgress={scrollProgress}
-          className="z-[4]"
+          className="z-[5]"
         />
 
         {/* ═══ CONTENT — Centered, modern, approachable ═══ */}
-        <div className="hero-content-layer relative z-[5] w-full max-w-[920px] mx-auto px-6 flex flex-col items-center text-center pointer-events-none">
+        <div className="hero-content-layer relative z-[6] w-full max-w-[920px] mx-auto px-6 flex flex-col items-center text-center pointer-events-none">
+
+          {/* Atmospheric light bloom behind headline */}
+          <div
+            className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse at center, rgba(218,165,32,0.15) 0%, rgba(218,165,32,0.08) 30%, transparent 70%)',
+              filter: 'blur(60px)',
+              opacity: 0.6,
+            }}
+          />
 
           {/* Kicker pill */}
           <div className="reveal-fade pointer-events-auto mb-8">
@@ -195,28 +214,37 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </div>
 
-          {/* Headline — bold, clear, with text shadow for depth */}
-          <h1 className="mb-6 md:mb-10 flex flex-col items-center">
+          {/* Headline — bold, clear, with warm glow shadow */}
+          <h1 className="hero-headline mb-6 md:mb-10 flex flex-col items-center relative">
             <span className="block overflow-hidden pb-1">
               <span
-                className="reveal-text block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white drop-shadow-lg"
-                style={{ fontFamily: 'var(--font-primary)', textShadow: '0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)' }}
+                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white"
+                style={{ 
+                  fontFamily: 'var(--font-primary)', 
+                  textShadow: '0 0 40px rgba(218,165,32,0.3), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
+                }}
               >
                 L'excellence
               </span>
             </span>
             <span className="block overflow-hidden pb-1">
               <span
-                className="reveal-text block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-[var(--jaune-or)] drop-shadow-lg"
-                style={{ fontFamily: 'var(--font-primary)', textShadow: '0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)' }}
+                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-[var(--jaune-or)]"
+                style={{ 
+                  fontFamily: 'var(--font-primary)', 
+                  textShadow: '0 0 60px rgba(218,165,32,0.5), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
+                }}
               >
                 au sommet
               </span>
             </span>
             <span className="block overflow-hidden pb-1">
               <span
-                className="reveal-text block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white drop-shadow-lg"
-                style={{ fontFamily: 'var(--font-primary)', textShadow: '0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)' }}
+                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white"
+                style={{ 
+                  fontFamily: 'var(--font-primary)', 
+                  textShadow: '0 0 40px rgba(218,165,32,0.3), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
+                }}
               >
                 du capital.
               </span>
@@ -284,7 +312,7 @@ export const HeroSectionMountain: React.FC = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-[5] reveal-fade pointer-events-none">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-[7] reveal-fade pointer-events-none">
           <span 
             className="text-[10px] tracking-[0.2em] uppercase text-white/40 font-medium"
             style={{ fontFamily: 'var(--font-primary)' }}
