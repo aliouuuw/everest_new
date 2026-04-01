@@ -7,7 +7,7 @@ function App() {
     <>
       <HeroSectionMountain />
       <ValueProps />
-      <StatsBand />
+      {/* <StatsBand /> */}
       <Services />
       <Insights />
       <InvestmentCalculator calculatorOnly />

@@ -22,28 +22,8 @@ export const HeroSectionMountain: React.FC = () => {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // Sync Lenis with ScrollTrigger
-  useEffect(() => {
-    if (!lenis || !isReady) return;
-    ScrollTrigger.scrollerProxy(document.body, {
-      scrollTop(value) {
-        if (arguments.length && value !== undefined) {
-          lenis.scrollTo(value as number, { immediate: true });
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-      },
-    });
-    lenis.on('scroll', ScrollTrigger.update);
-    const onResize = () => ScrollTrigger.refresh();
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-      lenis.off('scroll', ScrollTrigger.update);
-    };
-  }, [lenis, isReady]);
+  // Lenis/ScrollTrigger sync is handled globally in LenisWrapper
+  // No need to re-proxy here
 
   // ─── Entrance animation with character stagger ───
   useEffect(() => {
