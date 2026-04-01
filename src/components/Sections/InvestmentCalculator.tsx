@@ -210,9 +210,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium"
             style={{
               fontFamily: 'var(--font-primary)',
-              color: 'var(--mauve)',
-              background: 'var(--mauve-05)',
-              border: '1px solid var(--mauve-border)',
+              color: 'var(--pure-white)',
+              background: 'var(--mauve)',
             }}
           >
             Outil de simulation

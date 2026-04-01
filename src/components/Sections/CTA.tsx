@@ -29,37 +29,21 @@ export const CTA: React.FC<{
       className="reveal-scale relative overflow-hidden"
       id="contact"
       style={{
-        background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)',
+        background: 'var(--mauve-solid)',
         paddingTop: 'var(--section-gap)',
         paddingBottom: 'var(--section-gap)',
       }}
     >
-      {/* Purple atmospheric glows with subtle floating particles */}
+      {/* Subtle atmospheric accents on solid mauve */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="absolute top-0 left-[20%] w-[600px] h-[600px] rounded-full"
-          style={{ 
-            background: 'radial-gradient(circle, rgba(70,29,76,0.2) 0%, transparent 60%)', 
-            filter: 'blur(100px)',
-            animation: 'pulseGlow 8s infinite alternate ease-in-out' 
-          }}
+          className="absolute top-[-20%] left-[10%] w-[500px] h-[500px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(90,41,99,0.4) 0%, transparent 60%)', filter: 'blur(100px)' }}
         />
         <div
-          className="absolute bottom-0 right-[10%] w-[400px] h-[400px] rounded-full"
-          style={{ 
-            background: 'radial-gradient(circle, rgba(202,148,47,0.06) 0%, transparent 60%)', 
-            filter: 'blur(80px)',
-            animation: 'pulseGlow 10s infinite alternate-reverse ease-in-out' 
-          }}
+          className="absolute bottom-[-15%] right-[15%] w-[400px] h-[400px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.08) 0%, transparent 60%)', filter: 'blur(80px)' }}
         />
-        
-        {/* CSS for the gentle pulse */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes pulseGlow {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-            100% { transform: scale(1.1) translate(20px, -20px); opacity: 1; }
-          }
-        `}} />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
@@ -74,7 +58,7 @@ export const CTA: React.FC<{
               border: '1px solid rgba(202,148,47,0.15)',
             }}
           >
-            Prise de contact
+            Parlons de votre projet
           </span>
           <h2
             style={{
@@ -86,21 +70,21 @@ export const CTA: React.FC<{
               color: 'var(--pure-white)',
             }}
           >
-            Prêts à franchir{' '}
-            <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
+            Prêts à passer à{' '}
+            <span style={{ color: 'var(--jaune-or)', textShadow: '0 0 40px rgba(202,148,47,0.3)' }}>l'action ?</span>
           </h2>
           <p
             className="mt-6 mx-auto"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 300,
+              fontWeight: 400,
               fontSize: '1.05rem',
               lineHeight: 1.8,
-              color: 'rgba(255,255,255,0.45)',
+              color: 'var(--mauve-on-solid-muted)',
               maxWidth: '28rem',
             }}
           >
-            Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
+            Partagez vos objectifs d'investissement — nous construisons la stratégie avec vous.
           </p>
 
           {/* CTA buttons */}

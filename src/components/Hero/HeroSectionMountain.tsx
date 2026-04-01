@@ -122,7 +122,6 @@ export const HeroSectionMountain: React.FC = () => {
           const speed = parseFloat((layer as HTMLElement).dataset.parallaxSpeed || '1');
           tl.to(layer, {
             y: -60 * speed,
-            opacity: 0,
             duration: 0.4,
             ease: 'power2.in',
           }, 0.15);
@@ -197,13 +196,13 @@ export const HeroSectionMountain: React.FC = () => {
         {/* ═══ CONTENT — Centered, modern, approachable ═══ */}
         <div className="hero-content-layer relative z-[6] w-full max-w-[920px] mx-auto px-6 flex flex-col items-center text-center pointer-events-none">
 
-          {/* Atmospheric light bloom behind headline */}
+          {/* Atmospheric light bloom behind headline — dual purple + gold */}
           <div
-            className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
+            className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at center, rgba(218,165,32,0.15) 0%, rgba(218,165,32,0.08) 30%, transparent 70%)',
-              filter: 'blur(60px)',
-              opacity: 0.6,
+              background: 'radial-gradient(ellipse at center, rgba(70,29,76,0.25) 0%, rgba(70,29,76,0.12) 25%, rgba(218,165,32,0.08) 50%, transparent 75%)',
+              filter: 'blur(80px)',
+              opacity: 0.8,
             }}
           />
 
@@ -217,7 +216,7 @@ export const HeroSectionMountain: React.FC = () => {
               style={{ fontFamily: 'var(--font-primary)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" />
-              Société de Gestion et d'Intermédiation
+              Dakar · BRVM · UEMOA
             </span>
           </div>
 
@@ -268,7 +267,7 @@ export const HeroSectionMountain: React.FC = () => {
               style={{ fontFamily: 'var(--font-primary)', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
             >
               Courtage BRVM, émissions primaires et ingénierie financière.
-              La rigueur d'une institution, la précision d'un partenaire dédié.
+              La rigueur d'une institution au service de vos ambitions.
             </p>
           </div>
 
@@ -277,14 +276,19 @@ export const HeroSectionMountain: React.FC = () => {
             <MagneticButton
               as="a"
               href="#services"
-              className="group inline-flex items-center gap-2.5 px-7 py-3 bg-white text-[var(--night)] rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-white/20 active:scale-[0.98] focus:outline-none"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full transition-all duration-300 hover:shadow-xl active:scale-[0.98] focus:outline-none"
+              style={{
+                background: 'var(--mauve)',
+                color: 'var(--pure-white)',
+                boxShadow: '0 4px 24px rgba(70,29,76,0.4)',
+              }}
               strength={40}
             >
               <span
                 className="text-[13px] font-semibold tracking-wide"
                 style={{ fontFamily: 'var(--font-primary)' }}
               >
-                Découvrir nos services
+                Voir nos services
               </span>
               <FiArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </MagneticButton>
@@ -292,7 +296,7 @@ export const HeroSectionMountain: React.FC = () => {
             <MagneticButton
               as="a"
               href="/auth"
-              className="group inline-flex items-center gap-2.5 px-7 py-3 bg-white/[0.08] backdrop-blur-sm text-white border border-white/[0.15] rounded-full transition-all duration-300 hover:bg-white/[0.15] hover:border-white/[0.25] active:scale-[0.98] focus:outline-none"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white/[0.08] backdrop-blur-sm text-white border border-white/[0.15] rounded-full transition-all duration-300 hover:bg-white/[0.15] hover:border-white/[0.25] active:scale-[0.98] focus:outline-none"
               strength={30}
             >
               <span
@@ -304,14 +308,21 @@ export const HeroSectionMountain: React.FC = () => {
             </MagneticButton>
           </div>
 
-          {/* Trust markers — better visibility */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 gap-y-2 mb-16 md:mb-0">
+          {/* Trust markers — purple-tinted glass pills */}
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-16 md:mb-0">
             {['Agrément CREPMF', "30+ années d'expertise", 'BRVM · UEMOA'].map((label) => (
-              <div key={label} className="trust-marker flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" />
+              <div
+                key={label}
+                className="trust-marker flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm"
+                style={{
+                  background: 'rgba(70,29,76,0.2)',
+                  border: '1px solid rgba(70,29,76,0.3)',
+                }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" style={{ boxShadow: '0 0 6px rgba(202,148,47,0.5)' }} />
                 <span
-                  className="text-[11px] md:text-[12px] tracking-[0.05em] text-white/70 font-medium drop-shadow"
-                  style={{ fontFamily: 'var(--font-primary)', textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
+                  className="text-[11px] md:text-[12px] tracking-[0.04em] text-white/80 font-medium"
+                  style={{ fontFamily: 'var(--font-primary)' }}
                 >
                   {label}
                 </span>

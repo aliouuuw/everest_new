@@ -54,11 +54,25 @@
   --summit-glass: rgba(255, 255, 255, 0.7);
   --summit-glass-strong: rgba(255, 255, 255, 0.85);
   
+  /* Purple Canvas — structural purple surfaces */
+  --canvas-purple-light: #f5eef8;
+  --canvas-purple: #ede4f2;
+  --canvas-purple-deep: #e4d8ec;
+  --mauve-solid: #461D4C;
+  --mauve-solid-light: #5a2963;
+  --mauve-solid-dark: #371740;
+  --mauve-on-solid: rgba(255, 255, 255, 0.85);
+  --mauve-on-solid-muted: rgba(255, 255, 255, 0.55);
+  
   /* Command Center — structured grays */
   --command-border: rgba(10, 10, 10, 0.06);
   --command-border-hover: rgba(70, 29, 76, 0.2);
   --command-surface: #f7f6f3;
   --command-surface-hover: rgba(70, 29, 76, 0.03);
+  
+  /* Purple-tinted borders for canvas sections */
+  --canvas-border: rgba(70, 29, 76, 0.1);
+  --canvas-border-hover: rgba(70, 29, 76, 0.25);
   
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);

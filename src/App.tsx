@@ -1,5 +1,5 @@
 import { HeroSectionMountain } from './components/Hero';
-import { CTA, Insights, Services, ValueProps, NewsSection } from './components/Sections';
+import { CTA, Insights, Services, ValueProps, NewsSection, StatsBand } from './components/Sections';
 import { InvestmentCalculator } from './components/Sections/InvestmentCalculator';
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <>
       <HeroSectionMountain />
       <ValueProps />
+      <StatsBand />
       <Services />
       <Insights />
       <InvestmentCalculator calculatorOnly />

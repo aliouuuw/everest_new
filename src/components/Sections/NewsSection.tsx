@@ -68,9 +68,8 @@ export const NewsSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium"
             style={{
               fontFamily: 'var(--font-primary)',
-              color: 'var(--mauve)',
-              background: 'var(--mauve-05)',
-              border: '1px solid var(--mauve-border)',
+              color: 'var(--pure-white)',
+              background: 'var(--mauve)',
             }}
           >
             Actualités
@@ -86,7 +85,7 @@ export const NewsSection: React.FC = () => {
             }}
           >
             Dernières{' '}
-            <span style={{ color: 'var(--mauve)' }}>informations.</span>
+            <span style={{ color: 'var(--mauve)' }}>actualités.</span>
           </h2>
         </div>
 
@@ -98,25 +97,29 @@ export const NewsSection: React.FC = () => {
               href={article.href}
               className="group flex flex-col h-full overflow-hidden rounded-2xl transition-all duration-500"
               style={{
-                border: '1px solid var(--command-border)',
+                border: '1px solid var(--canvas-border)',
                 background: 'var(--pure-white)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--mauve-border)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(70,29,76,0.06)';
+                e.currentTarget.style.borderColor = 'var(--canvas-border-hover)';
+                e.currentTarget.style.boxShadow = '0 16px 48px rgba(70,29,76,0.1)';
+                e.currentTarget.style.transform = 'translateY(-4px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--command-border)';
+                e.currentTarget.style.borderColor = 'var(--canvas-border)';
                 e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img 
                   src={article.imageUrl} 
                   alt={article.title}
-                  className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  className="w-full h-full object-cover transform group-hover:scale-[1.05] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                   style={{ filter: 'saturate(0.9) contrast(1.02)' }}
                 />
+                {/* Purple gradient overlay on image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(70,29,76,0.15)] to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                 <div className="absolute top-4 left-4 z-10">
                   <span
                     className="text-[10px] tracking-[0.06em] uppercase px-2.5 py-1 rounded-full"

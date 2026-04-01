@@ -1,219 +1,113 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiArrowRight } from 'react-icons/fi';
-import { TiltCard } from '../ui/TiltCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type Service = {
   id: string;
+  number: string;
   title: string;
   desc: string;
   href: string;
-  tags: string[];
-  icon: React.ReactNode;
+  detail: string;
 };
 
-const services: Array<Service> = [
+const services: Service[] = [
   {
-    id: "ing-fin",
+    id: 'ing-fin',
+    number: '01',
     title: 'Ingénierie financière',
-    desc: "Structuration d'opérations, levées de fonds, émissions obligataires et placements primaires sur le marché régional.",
-    href: "/ingenieurie-financiere",
-    tags: ["Structuration", "Levée de fonds", "Obligations"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>
-      </svg>
-    ),
+    desc: "Structuration d'opérations complexes, levées de fonds et émissions obligataires sur le marché régional UEMOA.",
+    detail: 'Émissions primaires · Levée de fonds · Obligations',
+    href: '/ingenieurie-financiere',
   },
   {
-    id: "marche-cap",
+    id: 'marche-cap',
+    number: '02',
     title: 'Marché des capitaux',
-    desc: "Courtage actions et obligations BRVM, gestion sous-mandat, émissions primaires et placements institutionnels.",
-    href: "/marche-capitaux",
-    tags: ["Courtage BRVM", "Gestion sous mandat", "Placements"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-    ),
+    desc: 'Courtage actions et obligations BRVM, gestion sous-mandat et placements institutionnels.',
+    detail: 'Courtage BRVM · Gestion sous mandat',
+    href: '/marche-capitaux',
   },
   {
-    id: "rech-ana",
+    id: 'rech-ana',
+    number: '03',
     title: 'Recherche & analyses',
-    desc: "Veille macroéconomique, notes sectorielles, analyses de valeurs et tableaux de bord des marchés UEMOA.",
-    href: "/recherche-analyses",
-    tags: ["Macroéconomie", "Notes sectorielles", "Marchés UEMOA"],
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-    ),
+    desc: 'Veille macroéconomique, notes sectorielles et tableaux de bord des marchés UEMOA.',
+    detail: 'Macroéconomie · Notes sectorielles',
+    href: '/recherche-analyses',
   },
 ];
-
-// Card component with 3D tilt effect
-const ServiceCard: React.FC<{ svc: Service }> = ({ svc }) => {
-  return (
-    <TiltCard
-      as="a"
-      href={svc.href}
-      className="svc-card group relative p-8 md:p-10 rounded-2xl overflow-hidden"
-      style={{
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-      }}
-      maxTilt={10}
-      glareIntensity={0.12}
-      hoverScale={1.03}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = 'rgba(202,148,47,0.4)';
-        el.style.boxShadow = '0 25px 50px -12px rgba(70,29,76,0.25), 0 0 30px rgba(202,148,47,0.08)';
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLElement;
-        el.style.borderColor = 'rgba(255,255,255,0.08)';
-        el.style.boxShadow = 'none';
-      }}
-    >
-      {/* Icon */}
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:bg-[rgba(202,148,47,0.15)] group-hover:shadow-[0_0_20px_rgba(202,148,47,0.2)]"
-        style={{ background: 'rgba(202,148,47,0.08)', color: 'var(--jaune-or)' }}
-      >
-        {svc.icon}
-      </div>
-
-      <h3
-        className="mb-3"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          fontWeight: 600,
-          fontSize: '1.25rem',
-          lineHeight: 1.3,
-          color: 'var(--pure-white)',
-        }}
-      >
-        {svc.title}
-      </h3>
-      <p
-        className="mb-6"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          fontWeight: 400,
-          fontSize: '0.9rem',
-          lineHeight: 1.7,
-          color: 'rgba(255,255,255,0.5)',
-        }}
-      >
-        {svc.desc}
-      </p>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {svc.tags.map(tag => (
-          <span
-            key={tag}
-            className="px-3 py-1 rounded-full text-[10px] tracking-[0.06em] uppercase transition-colors duration-300 group-hover:bg-[rgba(255,255,255,0.05)] group-hover:text-[rgba(255,255,255,0.7)]"
-            style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 500,
-              color: 'rgba(255,255,255,0.4)',
-              border: '1px solid rgba(255,255,255,0.08)',
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Link */}
-      <span
-        className="inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          fontWeight: 500,
-          fontSize: '0.85rem',
-          color: 'var(--jaune-or)',
-        }}
-      >
-        En savoir plus
-        <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
-      </span>
-    </TiltCard>
-  );
-};
 
 export const Services: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const ambientRef = useRef<HTMLDivElement>(null);
 
-  // Ambient cursor light — soft glow follows mouse across section
-  React.useEffect(() => {
+  // Ambient cursor light
+  useEffect(() => {
     const section = sectionRef.current;
     const ambient = ambientRef.current;
     if (!section || !ambient) return;
-
     let rafId: number | null = null;
-    const handleMouseMove = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         const rect = section.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        ambient.style.background = `radial-gradient(800px circle at ${x}px ${y}px, rgba(70,29,76,0.15), rgba(202,148,47,0.04) 40%, transparent 60%)`;
+        ambient.style.background = `radial-gradient(700px circle at ${x}px ${y}px, rgba(202,148,47,0.07), rgba(70,29,76,0.1) 40%, transparent 65%)`;
         ambient.style.opacity = '1';
       });
     };
-    const handleMouseLeave = () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      ambient.style.opacity = '0';
-    };
-
-    section.addEventListener('mousemove', handleMouseMove);
-    section.addEventListener('mouseleave', handleMouseLeave);
+    const onLeave = () => { if (rafId) cancelAnimationFrame(rafId); ambient.style.opacity = '0'; };
+    section.addEventListener('mousemove', onMove);
+    section.addEventListener('mouseleave', onLeave);
     return () => {
-      section.removeEventListener('mousemove', handleMouseMove);
-      section.removeEventListener('mouseleave', handleMouseLeave);
+      section.removeEventListener('mousemove', onMove);
+      section.removeEventListener('mouseleave', onLeave);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
-  React.useEffect(() => {
+  // Scroll reveals
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-
     const triggers: ScrollTrigger[] = [];
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
 
-    // Header — blur-to-sharp reveal with scale
-    const headerTween = gsap.fromTo('.svc-header',
-      { y: 60, opacity: 0, scale: 0.95, filter: 'blur(8px)' },
-      { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2, ease: 'expo.out',
-        scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none reverse' }
-      }
+    const header = gsap.fromTo('.svc-header',
+      { y: 40, opacity: 0, filter: 'blur(6px)' },
+      { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out',
+        scrollTrigger: { trigger: section, start: 'top 78%', toggleActions: 'play none none reverse' } }
     );
-    if (headerTween.scrollTrigger) triggers.push(headerTween.scrollTrigger);
+    if (header.scrollTrigger) triggers.push(header.scrollTrigger);
 
-    // Cards — horizontal stagger (alternating directions) with depth
-    const cards = gsap.utils.toArray('.svc-card');
-    cards.forEach((card: any, i: number) => {
-      const xOffset = i === 0 ? -80 : i === 2 ? 80 : 0;
-      const tween = gsap.fromTo(card,
-        { x: xOffset, y: 40, opacity: 0, scale: 0.92, filter: 'blur(6px)', rotateY: i === 0 ? -5 : i === 2 ? 5 : 0 },
-        { x: 0, y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', rotateY: 0,
-          duration: 1, delay: i * 0.15, ease: 'expo.out',
-          scrollTrigger: { trigger: section, start: 'top 55%', toggleActions: 'play none none reverse' }
-        }
+    // Featured card
+    const featured = gsap.fromTo('.svc-featured',
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'expo.out',
+        scrollTrigger: { trigger: '.svc-featured', start: 'top 82%', toggleActions: 'play none none reverse' } }
+    );
+    if (featured.scrollTrigger) triggers.push(featured.scrollTrigger);
+
+    // Secondary cards stagger
+    gsap.utils.toArray('.svc-secondary').forEach((el: any, i: number) => {
+      const t = gsap.fromTo(el,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, delay: i * 0.1, ease: 'expo.out',
+          scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' } }
       );
-      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
+      if (t.scrollTrigger) triggers.push(t.scrollTrigger);
     });
 
     return () => { triggers.forEach(t => t.kill()); };
   }, []);
+
+  const [featured, ...secondary] = services;
 
   return (
     <section
@@ -221,82 +115,255 @@ export const Services: React.FC = () => {
       id="services"
       className="relative w-full overflow-hidden"
       style={{
-        background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)',
+        background: 'linear-gradient(170deg, #2e1a3a 0%, #1e1028 45%, #130c1a 100%)',
         paddingTop: 'var(--section-gap)',
         paddingBottom: 'var(--section-gap)',
       }}
     >
-      {/* Background Atmosphere — purple dominant */}
+      {/* Static atmospheric depth */}
       <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-[-20%] left-[20%] w-[700px] h-[700px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(70,29,76,0.25) 0%, transparent 60%)', filter: 'blur(100px)' }}
-        />
-        <div
-          className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.06) 0%, transparent 60%)', filter: 'blur(80px)' }}
-        />
+        <div className="absolute top-[-10%] left-[15%] w-[900px] h-[900px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(70,29,76,0.3) 0%, transparent 55%)', filter: 'blur(130px)' }} />
+        <div className="absolute bottom-[-5%] right-[5%] w-[600px] h-[600px] rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(202,148,47,0.05) 0%, transparent 60%)', filter: 'blur(100px)' }} />
       </div>
 
-      {/* Ambient cursor light overlay */}
-      <div
-        ref={ambientRef}
-        className="absolute inset-0 pointer-events-none z-[1] transition-opacity duration-500"
-        style={{ opacity: 0 }}
-      />
+      {/* Ambient cursor overlay */}
+      <div ref={ambientRef} className="absolute inset-0 pointer-events-none z-[1] transition-opacity duration-500" style={{ opacity: 0 }} />
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        {/* Header — centered, modern */}
-        <div className="svc-header text-center max-w-2xl mx-auto mb-16 md:mb-20">
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 md:px-12 lg:px-16">
+
+        {/* Header */}
+        <div className="svc-header mb-14 md:mb-16">
           <span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
-            style={{
-              fontFamily: 'var(--font-primary)',
-              color: 'var(--jaune-or)',
-              background: 'rgba(202,148,47,0.08)',
-              border: '1px solid rgba(202,148,47,0.15)',
-            }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium"
+            style={{ fontFamily: 'var(--font-primary)', color: 'var(--jaune-or)', background: 'rgba(202,148,47,0.08)', border: '1px solid rgba(202,148,47,0.15)' }}
           >
-            Nos métiers
+            Ce que nous faisons
           </span>
-          <h2
-            style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 800,
-              fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.03em',
-              color: 'var(--pure-white)',
-            }}
-          >
-            Solutions pour chaque{' '}
-            <span style={{ color: 'var(--jaune-or)' }}>profil investisseur.</span>
-          </h2>
-          <p
-            className="mt-6 mx-auto"
-            style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 300,
-              fontSize: '1.05rem',
-              lineHeight: 1.8,
-              color: 'rgba(255,255,255,0.45)',
-              maxWidth: '32rem',
-            }}
-          >
-            Nous déployons une ingénierie de pointe pour structurer, protéger et faire croître vos actifs sur les marchés de l'UEMOA.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <h2
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 800,
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                lineHeight: 1.06,
+                letterSpacing: '-0.03em',
+                color: 'var(--pure-white)',
+                maxWidth: '22rem',
+              }}
+            >
+              Une offre complète pour chaque{' '}
+              <span style={{ color: 'var(--jaune-or)' }}>profil d'investisseur.</span>
+            </h2>
+            <p
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 300,
+                fontSize: '1rem',
+                lineHeight: 1.75,
+                color: 'rgba(255,255,255,0.45)',
+                maxWidth: '26rem',
+              }}
+            >
+              Structuration, exécution, recherche — nous couvrons l'ensemble du cycle d'investissement sur les marchés de l'UEMOA.
+            </p>
+          </div>
         </div>
 
-        {/* Service cards — modern grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {services.map((svc) => (
-            <ServiceCard key={svc.id} svc={svc} />
-          ))}
+        {/* ── ASYMMETRIC LAYOUT ── */}
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-4 md:gap-5">
+
+          {/* Featured — left, full height */}
+          <a
+            href={featured.href}
+            className="svc-featured group relative flex flex-col justify-between rounded-2xl overflow-hidden"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              padding: 'clamp(2rem, 4vw, 2.75rem)',
+              minHeight: '420px',
+              transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'rgba(202,148,47,0.25)';
+              e.currentTarget.style.boxShadow = '0 24px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            {/* Number */}
+            <span
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 800,
+                fontSize: 'clamp(4rem, 8vw, 6rem)',
+                lineHeight: 1,
+                letterSpacing: '-0.04em',
+                color: 'rgba(202,148,47,0.12)',
+                display: 'block',
+                marginBottom: '1rem',
+                transition: 'color 0.4s ease',
+              }}
+              className="group-hover:!text-[rgba(202,148,47,0.2)]"
+            >
+              {featured.number}
+            </span>
+
+            {/* Content */}
+            <div>
+              {/* Gold accent line */}
+              <div
+                className="mb-6 transition-all duration-500 group-hover:w-16"
+                style={{ width: '2.5rem', height: '2px', background: 'var(--jaune-or)', opacity: 0.7 }}
+              />
+              <h3
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 700,
+                  fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+                  lineHeight: 1.2,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--pure-white)',
+                  marginBottom: '1rem',
+                }}
+              >
+                {featured.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 300,
+                  fontSize: '0.975rem',
+                  lineHeight: 1.7,
+                  color: 'rgba(255,255,255,0.5)',
+                  marginBottom: '1.5rem',
+                  maxWidth: '28rem',
+                }}
+              >
+                {featured.desc}
+              </p>
+              <span
+                style={{
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 400,
+                  fontSize: '0.75rem',
+                  letterSpacing: '0.06em',
+                  color: 'rgba(255,255,255,0.25)',
+                  textTransform: 'uppercase',
+                  display: 'block',
+                  marginBottom: '2rem',
+                }}
+              >
+                {featured.detail}
+              </span>
+              <span
+                className="inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.875rem', color: 'var(--jaune-or)' }}
+              >
+                Explorer
+                <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </div>
+          </a>
+
+          {/* Secondary — right column, stacked */}
+          <div className="flex flex-col gap-4 md:gap-5">
+            {secondary.map((svc) => (
+              <a
+                key={svc.id}
+                href={svc.href}
+                className="svc-secondary group relative flex flex-col justify-between rounded-2xl overflow-hidden flex-1"
+                style={{
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  padding: 'clamp(1.5rem, 3vw, 2rem)',
+                  transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = 'rgba(202,148,47,0.2)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,0,0,0.25)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    {/* Number + accent line inline */}
+                    <div className="flex items-center gap-3 mb-4">
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-primary)',
+                          fontWeight: 800,
+                          fontSize: '0.75rem',
+                          letterSpacing: '0.1em',
+                          color: 'rgba(202,148,47,0.5)',
+                        }}
+                      >
+                        {svc.number}
+                      </span>
+                      <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-primary)',
+                        fontWeight: 600,
+                        fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)',
+                        lineHeight: 1.25,
+                        letterSpacing: '-0.01em',
+                        color: 'var(--pure-white)',
+                        marginBottom: '0.75rem',
+                      }}
+                    >
+                      {svc.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-primary)',
+                        fontWeight: 300,
+                        fontSize: '0.9rem',
+                        lineHeight: 1.65,
+                        color: 'rgba(255,255,255,0.45)',
+                        marginBottom: '1.25rem',
+                      }}
+                    >
+                      {svc.desc}
+                    </p>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-primary)',
+                        fontWeight: 400,
+                        fontSize: '0.7rem',
+                        letterSpacing: '0.06em',
+                        color: 'rgba(255,255,255,0.2)',
+                        textTransform: 'uppercase',
+                        display: 'block',
+                        marginBottom: '1.25rem',
+                      }}
+                    >
+                      {svc.detail}
+                    </span>
+                  </div>
+                  {/* Arrow — top right */}
+                  <div
+                    className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-[rgba(202,148,47,0.15)] group-hover:scale-110"
+                    style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.4)' }}
+                  >
+                    <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--jaune-or)]" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );
 };
-
-
-

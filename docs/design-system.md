@@ -1,5 +1,8 @@
 # Everest Finance Design System
 
+> **Design Direction:** Modern Professional (Apple, Google, dabafinance.com inspired)  
+> **Status:** Shifted from editorial/literary to clean, confident sans-serif aesthetic
+
 ## Foundations
 
 ### Color Palette (Source of Truth: `src/styles.css`)
@@ -12,35 +15,40 @@
   --line-soft: #eeeeee;        /* hairline dividers */
   --cream: #faf6ef;            /* warmer alternate background */
 
-  /* Brand Accents */
-  --jaune-or: #ca942f;         /* Primary brand accent */
-  --mauve: #461D4C;            /* Secondary brand accent */
+  /* Brand Accents — NEW HIERARCHY */
+  --mauve: #461D4C;            /* DOMINANT UI COLOR — headings, active states, badges, links */
+  --jaune-or: #ca942f;         /* ACCENT — dark section CTAs, trust markers, gold highlights */
   
   /* Ink / Text */
   --night: #0a0a0a;            /* Primary ink */
   --night-80: rgba(10, 10, 10, 0.8);
   --night-60: rgba(10, 10, 10, 0.6);
+  --night-40: rgba(10, 10, 10, 0.4);
   --night-20: rgba(10, 10, 10, 0.2);
   --night-10: rgba(10, 10, 10, 0.1);
 }
 ```
 
-- Backgrounds: `--pure-white` (base), `--white-smoke` (panels), `--cream` (alternate), `--night` (dark sections)
-- Text: `--night` primary, `--night-80` secondary, `--night-60` tertiary
-- Accents: `--jaune-or` as primary action and highlight color; `--mauve` as secondary accent (tags, hover states, badges)
+**Color Usage Rules:**
+- **Mauve (#461D4C)** — Primary UI color for: headings, section kickers, active states, badges, filters, links, borders on hover
+- **Gold (#ca942f)** — Accent reserved for: primary CTAs on dark backgrounds, trust markers, summit highlights, dark section emphasis
+- **Backgrounds:** `--pure-white` (base), `--summit-ivory` (warm sections), dark sections use purple-dominant gradients
+- **Text:** `--night` primary, `--night-60` secondary, `--night-40` tertiary
 
 ### Fonts
 ```css
 :root {
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 ```
 
-- **Primary**: Clean sans-serif used for body text and ui elements.
-- **Display**: Elegant serif (`Fraunces`) used exclusively for large luxury headings.
-- **Display Aptos**: Medium-weight sans-serif for component headers and structural text.
+**Typography Rules:**
+- **ALL headings** use `var(--font-primary)` at weight **600-800** — NO Fraunces serif
+- **NO italic emphasis** in headings — use `<span style={{ color: 'var(--mauve)' }}>` for accent words instead
+- **Body text:** weight 300-400, clean sans-serif throughout
+- **Fluid sizing:** Use `clamp()` for responsive scaling (e.g., `clamp(2rem, 4vw, 3rem)`)
+- **Tight letter-spacing:** `-0.02em` to `-0.03em` for headings
 
 ## Typography
 
@@ -94,12 +102,77 @@
 ## Components
 
 ### Buttons
-- **Primary**: `.btn-primary` (Dark ink bg, white text, hover lift)
-- **Secondary**: `.btn-secondary` (Bordered night, hover night bg)
-- **Dark Mode Primary**: `.btn-primary-dark` (Gold bg, white text)
-- **Dark Mode Secondary**: `.btn-secondary-dark` (Bordered gold, gold text)
+All buttons use **pill shape** (`rounded-full`):
 
-Focus states use accessible gold-tinted double ring shadows.
+- **Primary Light:** `.btn-primary` — Mauve bg (`--mauve`), white text, hover lift + scale
+- **Secondary Light:** `.btn-secondary` — Bordered mauve, mauve text, hover fill
+- **Primary Dark:** `.btn-primary-dark` — Gold bg (`--jaune-or`), night text, hover lift + shadow
+- **Secondary Dark:** `.btn-secondary-dark` — Bordered gold, gold text, hover bg fill
+
+Focus states use accessible mauve-tinted double ring shadows.
+
+### Section Kicker Pattern (NEW)
+All section kickers use **rounded pill badges** — NOT editorial line+text:
+
+```tsx
+<span
+  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
+  style={{ fontFamily: 'var(--font-primary)', color: 'var(--pure-white)', background: 'var(--mauve)' }}
+>
+  Section Label
+</span>
+```
+
+Dark sections: Use gold background (`--jaune-or`) with night text instead.
+
+### Section Header Pattern (NEW)
+All section headers follow the **centered triple pattern**:
+
+```tsx
+<div className="text-center mb-12 md:mb-16">
+  {/* 1. Pill badge kicker */}
+  <span className="...">Section Label</span>
+  
+  {/* 2. Bold sans-serif heading with color accent */}
+  <h2 style={{
+    fontFamily: 'var(--font-primary)',
+    fontWeight: 800,
+    fontSize: 'clamp(2rem, 4vw, 3rem)',
+    lineHeight: 1.05,
+    letterSpacing: '-0.03em',
+    color: 'var(--night)',
+  }}>
+    Heading with <span style={{ color: 'var(--mauve)' }}>accent word</span>
+  </h2>
+  
+  {/* 3. Subtext paragraph */}
+  <p className="mt-5 mx-auto" style={{...}}>Description text</p>
+</div>
+```
+
+### Cards
+Cards use **rounded-2xl** with subtle hover lift and purple border glow:
+
+```tsx
+<div
+  className="rounded-2xl p-8 transition-all duration-300 hover:translate-y-[-4px]"
+  style={{
+    background: 'var(--pure-white)',
+    border: '1px solid var(--command-border)',
+    boxShadow: '0 4px 20px rgba(70,29,76,0.04)',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.borderColor = 'rgba(70,29,76,0.2)';
+    e.currentTarget.style.boxShadow = '0 12px 40px rgba(70,29,76,0.08)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.borderColor = 'var(--command-border)';
+    e.currentTarget.style.boxShadow = '0 4px 20px rgba(70,29,76,0.04)';
+  }}
+>
+  {/* Card content */}
+</div>
+```
 
 ## Animations
 
@@ -109,6 +182,35 @@ Focus states use accessible gold-tinted double ring shadows.
 - Reduced motion preferences are strictly respected via media queries.
 
 ## Strategic Summit Design Direction
+
+### Dark Sections (NEW)
+Dark sections use a **purple-dominant gradient** — NOT flat black:
+
+```css
+background: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
+```
+
+Dark section rules:
+- Reserve for strategic moments: Services showcase, CTA conversion, authority emphasis
+- Gold (`--jaune-or`) becomes primary for CTAs and accents on dark
+- Mauve becomes secondary (borders, subtle highlights)
+- Keep text at 70-80% opacity for readability (`rgba(255,255,255,0.7)`)
+
+### Light Sections
+Light sections alternate between:
+- `--pure-white` — clean, crisp surfaces
+- `--summit-ivory` — warm, welcoming backgrounds
+
+### Page Rhythm (Light-Led)
+- **Hero:** Light (`--summit-ivory`) with WebGL atmospheric mountain background
+- **ValueProps:** Light (`--pure-white` or `--summit-ivory`), ascending graph layout
+- **Services:** Dark (purple gradient) — strategic dark moment
+- **Insights:** Light (`--summit-ivory`), clean publication grid
+- **Calculator:** Light (`--pure-white`), structured panels
+- **News:** Light (`--pure-white`), card-based grid
+- **CTA:** Dark (purple gradient) — conversion dark moment
+
+**Balance target:** 70-80% light surfaces, 20-30% dark surfaces
 
 ### Atmospheric Surfaces
 ```css
@@ -150,40 +252,6 @@ Focus states use accessible gold-tinted double ring shadows.
 :root {
   --section-gap: clamp(6rem, 10vw, 9rem); /* Consistent vertical rhythm */
 }
-```
-
-### Page Rhythm (Light-Led)
-- **Hero**: Light (summit-ivory) with atmospheric glass veils
-- **ValueProps**: Pure white, structured two-column
-- **Services**: Dark (mauve-night gradient) — strategic dark moment
-- **Insights**: Summit ivory, clean publication grid
-- **Calculator**: Pure white with subtle atmospheric orbs
-- **News**: Pure white, card-based grid
-- **CTA**: Dark (mauve-night) — conversion dark moment
-
-### Kicker Pattern
-All section kickers use the same visual pattern:
-```tsx
-<span className="inline-flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase mb-6"
-  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--mauve)' }}>
-  <span className="inline-block w-5 h-[1px]" style={{ background: 'var(--mauve)', opacity: 0.4 }} />
-  Section Label
-</span>
-```
-
-Dark sections use `color: 'var(--jaune-or)'` with gold line instead.
-
-### Heading Pattern
-All section headings use Fraunces serif at weight 300:
-```tsx
-<h2 style={{
-  fontFamily: 'var(--font-display)',
-  fontWeight: 300,
-  fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-  lineHeight: 1.05,
-  letterSpacing: '-0.015em',
-  color: 'var(--night)', // or var(--pure-white) on dark
-}}>
 ```
 
 ## Implementation Notes

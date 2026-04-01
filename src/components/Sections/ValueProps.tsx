@@ -1,80 +1,99 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TiltCard } from '../ui/TiltCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Feature = {
-  icon: React.ReactNode;
+type Waypoint = {
+  number: string;
   title: string;
   description: string;
+  altitude: string;
 };
 
-const features: Array<Feature> = [
+const waypoints: Waypoint[] = [
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      </svg>
-    ),
-    title: "Sécurité réglementaire",
-    description: "Conformité rigoureuse et garde sécurisée de vos actifs sous agrément CREPMF. Vos investissements sont protégés par les normes les plus strictes."
+    number: '01',
+    title: 'Sécurité réglementaire',
+    description: 'Garde sécurisée de vos actifs sous agrément CREPMF et conformité aux normes les plus strictes.',
+    altitude: 'Base',
   },
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-      </svg>
-    ),
-    title: "Accompagnement dédié",
-    description: "Un conseiller personnel, une écoute permanente et une transparence totale sur chaque opération. Nous sommes à vos côtés."
+    number: '02',
+    title: 'Accompagnement dédié',
+    description: 'Un conseiller personnel, une écoute permanente et une transparence totale.',
+    altitude: 'Ascension',
   },
   {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-    ),
-    title: "Performance optimisée",
-    description: "Allocation stratégique, exécution précise et recherche indépendante au service de vos rendements sur les marchés de l'UEMOA."
+    number: '03',
+    title: 'Performance optimisée',
+    description: 'Allocation stratégique, exécution précise et recherche indépendante.',
+    altitude: 'Sommet',
   },
 ];
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const triggers: ScrollTrigger[] = [];
+    const ctx = gsap.context(() => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const dur = prefersReduced ? 0 : 1;
 
-    // Section header — cinematic scale-up from depth
-    const headerTween = gsap.fromTo('.vp-header',
-      { y: 50, opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-      {
-        y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.3, ease: 'expo.out',
-        scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none reverse' }
-      }
-    );
-    if (headerTween.scrollTrigger) triggers.push(headerTween.scrollTrigger);
-
-    // Cards — scale from depth with staggered timing (feels like emerging from fog)
-    const cards = gsap.utils.toArray('.vp-card');
-    cards.forEach((card: any, i: number) => {
-      const tween = gsap.fromTo(card,
-        { y: 60, opacity: 0, scale: 0.85, filter: 'blur(8px)' },
-        {
-          y: 0, opacity: 1, scale: 1, filter: 'blur(0px)',
-          duration: 1.1, delay: i * 0.18, ease: 'expo.out',
-          scrollTrigger: { trigger: section, start: 'top 55%', toggleActions: 'play none none reverse' }
-        }
+      // Header fade in with blur-to-sharp reveal
+      gsap.fromTo('.vp-header',
+        { y: prefersReduced ? 0 : 24, opacity: 0, filter: 'blur(6px)' },
+        { y: 0, opacity: 1, filter: 'blur(0px)', duration: dur * 0.5, ease: 'expo.out',
+          scrollTrigger: { trigger: '.vp-header', start: 'top 88%', toggleActions: 'play none none reverse' } }
       );
-      if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
-    });
 
-    return () => { triggers.forEach(t => t.kill()); };
+      // Desktop Timeline Animation
+      const tlDesktop = gsap.timeline({
+        scrollTrigger: { trigger: '.vp-desktop-graph', start: 'top 80%', toggleActions: 'play none none reverse' }
+      });
+
+      // Line draw — fast and snappy
+      if (pathRef.current) {
+        tlDesktop.fromTo(pathRef.current,
+          { strokeDashoffset: 1 },
+          { strokeDashoffset: 0, duration: dur * 0.9, ease: 'expo.out' }, 0
+        );
+      }
+
+      // Nodes pop-in — tight stagger
+      gsap.utils.toArray('.vp-node-d').forEach((el: any, i: number) => {
+        tlDesktop.fromTo(el,
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: dur * 0.35, ease: 'back.out(2.5)' },
+          dur * (0.2 + i * 0.2)
+        );
+      });
+
+      // Text fade-up — tight stagger right behind nodes
+      gsap.utils.toArray('.vp-text-d').forEach((el: any, i: number) => {
+        tlDesktop.fromTo(el,
+          { y: 16, opacity: 0 },
+          { y: 0, opacity: 1, duration: dur * 0.4, ease: 'power3.out' },
+          dur * (0.25 + i * 0.2)
+        );
+      });
+
+      // Mobile Timeline Animation
+      gsap.utils.toArray('.vp-mobile-step').forEach((el: any, i: number) => {
+        gsap.fromTo(el,
+          { x: prefersReduced ? 0 : -20, opacity: 0 },
+          { x: 0, opacity: 1, duration: dur * 0.4, delay: i * 0.08, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' } }
+        );
+      });
+
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -82,146 +101,340 @@ export const ValueProps: React.FC = () => {
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{
-        background: 'var(--pure-white)',
-        paddingTop: 'var(--section-gap)',
-        paddingBottom: 'var(--section-gap)',
+        background: 'var(--summit-ivory)',
+        paddingTop: 'clamp(3.5rem, 6vw, 5rem)',
+        paddingBottom: 'clamp(3.5rem, 6vw, 5rem)',
       }}
     >
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+      {/* Gradient mesh background with atmospheric depth */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top-right: large mauve bloom */}
+        <div
+          className="absolute top-[-15%] right-[-5%] w-[800px] h-[800px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(70,29,76,0.18) 0%, rgba(70,29,76,0.08) 40%, transparent 65%)',
+            filter: 'blur(72px)',
+          }}
+        />
+        {/* Bottom-left: gold warmth */}
+        <div
+          className="absolute bottom-[-10%] left-[-5%] w-[700px] h-[700px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(202,148,47,0.14) 0%, rgba(202,148,47,0.06) 40%, transparent 65%)',
+            filter: 'blur(64px)',
+          }}
+        />
+        {/* Center: soft mauve depth */}
+        <div
+          className="absolute top-[35%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(70,29,76,0.08) 0%, transparent 65%)',
+            filter: 'blur(80px)',
+          }}
+        />
 
-        {/* Header — centered, modern */}
-        <div className="vp-header text-center max-w-2xl mx-auto mb-16 md:mb-20">
+        {/* Fine grain texture overlay — premium feel */}
+        <div
+          className="absolute inset-0 mix-blend-overlay"
+          style={{
+            opacity: 0.06,
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")',
+            backgroundRepeat: 'repeat',
+            backgroundSize: '180px 180px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1100px] px-6 md:px-12 lg:px-16">
+        
+        {/* Header Block — Modern Professional Triple Pattern */}
+        <div className="vp-header text-center mb-10 md:mb-12">
           <span
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-[11px] tracking-[0.08em] uppercase font-medium transition-transform hover:scale-105 duration-300"
-            style={{
-              fontFamily: 'var(--font-primary)',
-              color: 'var(--mauve)',
-              background: 'var(--mauve-05)',
-              border: '1px solid var(--mauve-border)',
-            }}
+            style={{ fontFamily: 'var(--font-primary)', color: 'var(--pure-white)', background: 'var(--mauve)' }}
           >
-            Pourquoi Everest Finance
+            Notre approche
           </span>
           <h2
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 800,
-              fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
-              lineHeight: 1.05,
+              fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+              lineHeight: 1.08,
               letterSpacing: '-0.03em',
               color: 'var(--night)',
+              marginBottom: '1.25rem',
             }}
           >
-            Exécution rigoureuse,{' '}
-            <span style={{ color: 'var(--mauve)' }}>confiance durable.</span>
+            Construire. Protéger.{' '}
+            <span style={{ color: 'var(--mauve)' }}>Faire croître.</span>
           </h2>
           <p
-            className="mt-6 mx-auto"
+            className="mx-auto"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 300,
+              fontWeight: 400,
               fontSize: '1.05rem',
-              lineHeight: 1.8,
+              lineHeight: 1.7,
               color: 'var(--night-60)',
-              maxWidth: '32rem',
+              maxWidth: '34rem',
             }}
           >
-            Nous allions discipline de marché, ingénierie financière et accompagnement client pour créer de la valeur sur le long terme.
+            Sécurité réglementaire, accompagnement personnalisé, performance durable — 
+            trois engagements qui guident chaque décision.
           </p>
         </div>
 
-        {/* Feature cards — modern 3-column grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {features.map((f) => (
-            <TiltCard
-              key={f.title}
-              className="vp-card group relative p-8 md:p-10 rounded-2xl overflow-hidden"
-              style={{
-                background: 'var(--summit-ivory)',
-                border: '1px solid var(--command-border)',
-                transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-              }}
-              maxTilt={8}
-              glareIntensity={0.08}
-              hoverScale={1.02}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = 'var(--mauve-border-strong)';
-                el.style.boxShadow = '0 25px 50px -12px rgba(70,29,76,0.12), 0 0 30px rgba(70,29,76,0.04)';
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.borderColor = 'var(--command-border)';
-                el.style.boxShadow = 'none';
-              }}
-            >
-              {/* Icon Container with Floating Delight Animation */}
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-2 group-hover:scale-110 group-hover:bg-[rgba(70,29,76,0.15)] group-hover:text-[var(--mauve)]"
-                style={{ background: 'var(--mauve-10)', color: 'var(--mauve)', boxShadow: '0 4px 12px rgba(70,29,76,0)' }}
-              >
-                <div className="transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
-                  {f.icon}
-                </div>
-              </div>
-
-              <h3
-                className="mb-3 transition-colors duration-300 group-hover:text-[var(--mauve)]"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 600,
-                  fontSize: '1.2rem',
-                  lineHeight: 1.3,
-                  color: 'var(--night)',
-                }}
-              >
-                {f.title}
-              </h3>
-              <p
-                className="transition-colors duration-300 group-hover:text-[var(--night-80)]"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 400,
-                  fontSize: '0.9rem',
-                  lineHeight: 1.7,
-                  color: 'var(--night-60)',
-                }}
-              >
-                {f.description}
-              </p>
-            </TiltCard>
-          ))}
-        </div>
-
-        {/* Trust bar — with subtle hover pulses */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-          {['Agrément CREPMF', "30+ années d'expertise", 'BRVM · UEMOA'].map((label) => (
-            <div 
-              key={label} 
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 hover:bg-[var(--summit-ivory)] cursor-default"
-            >
-              <span 
-                className="w-1.5 h-1.5 rounded-full transition-transform duration-300 hover:scale-150" 
-                style={{ background: 'var(--jaune-or)', boxShadow: '0 0 8px var(--jaune-or-30)' }} 
+        {/* =========================================
+            DESKTOP LAYOUT: CLEAN ASCENDING GRAPH
+            ========================================= */}
+        <div className="hidden md:block vp-desktop-graph w-full relative">
+          
+          {/* 1. The Graph Container */}
+          <div className="relative w-full h-[200px] mb-4">
+            {/* SVG Curve — cleaner, more precise */}
+            <svg className="absolute inset-0 w-full h-full overflow-visible" viewBox="0 0 900 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="curveGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--mauve)" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="var(--mauve)" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="var(--jaune-or)" stopOpacity="0.9" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <path
+                d="M 150 160 C 300 160, 300 90, 450 90 C 600 90, 600 30, 750 30"
+                fill="none"
+                stroke="rgba(70,29,76,0.08)"
+                strokeWidth="2"
+                vectorEffect="non-scaling-stroke"
               />
-              <span
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 500,
-                  fontSize: '0.75rem',
-                  letterSpacing: '0.04em',
-                  color: 'var(--night-60)',
-                }}
-              >
-                {label}
-              </span>
-            </div>
-          ))}
+              <path
+                ref={pathRef}
+                d="M 150 160 C 300 160, 300 90, 450 90 C 600 90, 600 30, 750 30"
+                fill="none"
+                stroke="url(#curveGrad)"
+                strokeWidth="3.5"
+                vectorEffect="non-scaling-stroke"
+                strokeLinecap="round"
+                pathLength="1"
+                strokeDasharray="1"
+                strokeDashoffset="1"
+                filter="url(#glow)"
+              />
+            </svg>
+
+            {/* Nodes precisely positioned */}
+            {[160, 90, 30].map((topPos, i) => {
+              const isSummit = i === 2;
+              return (
+                <div
+                  key={i}
+                  className="vp-node-d absolute flex items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                  style={{
+                    left: `${(i * 33.33) + 16.66}%`,
+                    top: `${topPos}px`,
+                    transform: 'translate(-50%, -50%)',
+                    width: isSummit ? '48px' : '44px',
+                    height: isSummit ? '48px' : '44px',
+                    background: isSummit 
+                      ? 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)' 
+                      : 'var(--mauve)',
+                    boxShadow: isSummit 
+                      ? '0 8px 24px rgba(202,148,47,0.3), 0 0 40px rgba(202,148,47,0.2)' 
+                      : '0 6px 16px rgba(70,29,76,0.25)',
+                    zIndex: 20,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span 
+                    className="text-[13px] font-bold text-white" 
+                    style={{ fontFamily: 'var(--font-primary)' }}
+                  >
+                    {waypoints[i].number}
+                  </span>
+                  {/* Summit glow pulse — CSS keyframe, not animate-ping */}
+                  {isSummit && (
+                    <div 
+                      className="absolute inset-0 rounded-full border-2 border-[var(--jaune-or)]" 
+                      style={{ 
+                        animation: 'summitPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+                        opacity: 0.4,
+                      }} 
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* 2. The Text Grid — robust flexbox layout */}
+          <div className="grid grid-cols-3 gap-8 text-center">
+            {waypoints.map((wp, i) => {
+              const isSummit = i === 2;
+              return (
+                <div 
+                  key={wp.number} 
+                  className="vp-text-d flex flex-col items-center px-4"
+                  style={{
+                    // Offset text vertically to align with node heights
+                    marginTop: i === 0 ? '0px' : i === 1 ? '-44px' : '-88px',
+                  }}
+                >
+                  <div 
+                    className="text-[11px] font-bold tracking-[0.1em] uppercase mb-3" 
+                    style={{ 
+                      fontFamily: 'var(--font-primary)', 
+                      color: isSummit ? 'var(--jaune-or)' : 'var(--mauve)' 
+                    }}
+                  >
+                    {wp.altitude}
+                  </div>
+                  <h3 
+                    className="mb-3 transition-colors duration-300 hover:text-[var(--mauve)]" 
+                    style={{ 
+                      fontFamily: 'var(--font-primary)', 
+                      fontWeight: 700, 
+                      fontSize: '1.3rem', 
+                      lineHeight: 1.25, 
+                      letterSpacing: '-0.01em', 
+                      color: 'var(--night)',
+                      cursor: 'default',
+                    }}
+                  >
+                    {wp.title}
+                  </h3>
+                  <p 
+                    style={{ 
+                      fontFamily: 'var(--font-primary)', 
+                      fontWeight: 400, 
+                      fontSize: '0.95rem', 
+                      lineHeight: 1.65, 
+                      color: 'var(--night-60)', 
+                      maxWidth: '280px' 
+                    }}
+                  >
+                    {wp.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
+
+        {/* =========================================
+            MOBILE LAYOUT: VERTICAL TIMELINE
+            ========================================= */}
+        <div className="md:hidden flex flex-col gap-12 relative ml-2 py-4">
+          {/* Vertical connecting line — gradient */}
+          <div 
+            className="absolute left-[21px] top-0 bottom-0 w-[3px] rounded-full" 
+            style={{ 
+              background: 'linear-gradient(180deg, rgba(70,29,76,0.3) 0%, var(--mauve) 40%, var(--jaune-or) 100%)',
+            }} 
+          />
+          
+          {waypoints.map((wp, i) => {
+            const isSummit = i === 2;
+            return (
+              <div key={wp.number} className="vp-mobile-step relative pl-16">
+                {/* Node */}
+                <div
+                  className="absolute left-0 top-1 rounded-full flex items-center justify-center shadow-md z-10 transition-all duration-300 hover:scale-110"
+                  style={{
+                    width: isSummit ? '44px' : '42px',
+                    height: isSummit ? '44px' : '42px',
+                    background: isSummit 
+                      ? 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)' 
+                      : 'var(--mauve)',
+                    boxShadow: isSummit 
+                      ? '0 6px 20px rgba(202,148,47,0.3)' 
+                      : '0 4px 12px rgba(70,29,76,0.2)',
+                  }}
+                >
+                  <span 
+                    className="text-[13px] font-bold text-white" 
+                    style={{ fontFamily: 'var(--font-primary)' }}
+                  >
+                    {wp.number}
+                  </span>
+                  {isSummit && (
+                    <div 
+                      className="absolute inset-0 rounded-full border-2 border-[var(--jaune-or)]" 
+                      style={{ 
+                        animation: 'summitPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite',
+                        opacity: 0.4,
+                      }} 
+                    />
+                  )}
+                </div>
+
+                {/* Text */}
+                <div 
+                  className="text-[10px] font-bold tracking-[0.1em] uppercase mb-2" 
+                  style={{ 
+                    fontFamily: 'var(--font-primary)', 
+                    color: isSummit ? 'var(--jaune-or)' : 'var(--mauve)' 
+                  }}
+                >
+                  {wp.altitude}
+                </div>
+                <h3 
+                  className="mb-2" 
+                  style={{ 
+                    fontFamily: 'var(--font-primary)', 
+                    fontWeight: 700, 
+                    fontSize: '1.25rem', 
+                    lineHeight: 1.25, 
+                    color: 'var(--night)' 
+                  }}
+                >
+                  {wp.title}
+                </h3>
+                <p 
+                  style={{ 
+                    fontFamily: 'var(--font-primary)', 
+                    fontWeight: 400, 
+                    fontSize: '0.95rem', 
+                    lineHeight: 1.65, 
+                    color: 'var(--night-60)' 
+                  }}
+                >
+                  {wp.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
       </div>
+
+      {/* CSS Keyframe for summit pulse — smooth, not jarring */}
+      <style>{`
+        @keyframes summitPulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 0.4;
+          }
+          50% {
+            transform: scale(1.15);
+            opacity: 0.1;
+          }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .vp-node-d,
+          .vp-node-d > div {
+            animation: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
-
-
-

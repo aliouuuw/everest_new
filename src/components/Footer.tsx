@@ -24,12 +24,14 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative" style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative" style={{ background: 'var(--night)' }}>
+      {/* Gradient accent line — mauve to gold */}
+      <div className="h-[2px] w-full" style={{ background: 'linear-gradient(90deg, var(--mauve-solid), var(--jaune-or))' }} />
       {/* Subtle mauve ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 50% 40% at 50% 100%, rgba(70,29,76,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 50% 40% at 50% 0%, rgba(70,29,76,0.12) 0%, transparent 70%)',
         }}
       />
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-20 relative z-10">

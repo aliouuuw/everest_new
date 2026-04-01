@@ -1,20 +1,46 @@
 # Public Pages Experience Redesign Plan
  
-**Status:** Hero section redesigned and polished. Ready for remaining sections.
+> **Approved Design Direction:** Modern Professional (Apple, Google, dabafinance.com inspired)  
+> **Core Shift:** Editorial/literary → Clean, confident sans-serif aesthetic  
+> **Dominant Color:** Mauve (#461D4C) | **Accent:** Gold (#ca942f)
+
+## Design Direction Summary
+
+### Key Principles
+- **ALL headings** use sans-serif (`var(--font-primary)` = Aptos/Plus Jakarta Sans), weight **600-800** — NO Fraunces serif
+- **NO italic emphasis** in headings — use `<span style={{ color: 'var(--mauve)' }}>` for accent words
+- **Mauve (#461D4C)** is the **DOMINANT UI color** — headings, active states, badges, filters, links
+- **Gold (#ca942f)** is the **ACCENT** — dark section CTAs, trust markers, primary buttons on dark
+- **Section kickers** use rounded pill badges (`px-4 py-1.5 rounded-full`) — NOT editorial line+text
+- **All section headers** are centered with: pill badge → bold heading → subtext pattern
+- **Cards** use `rounded-2xl` with subtle hover lift + purple border glow
+- **Buttons** use `rounded-full` (pill shape)
+- **Dark sections** use purple-dominant gradient: `linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)`
+- **Light sections** alternate between `var(--pure-white)` and `var(--summit-ivory)`
 
 ## Completed Work
 
 ### HeroSectionMountain.tsx
-**Status:** ✅ Redesigned, polished, and committed
+**Status:** ✅ Redesigned with WebGL atmospheric mountain background
 
 **Key Decisions:**
-- Removed image-based background in favor of code-generated Granient-style gradients
-- Eliminated AI-slop patterns (glass cards, metric layouts, pulse animations)
-- Implemented single-column monumental typography
-- Added sophisticated micro-interactions via `/delight` skill
-- Refined spacing and consistency via `/polish` skill
+- WebGL shader-based mountain landscape with fbm noise, golden rim lighting, rolling fog
+- All sans-serif typography (Aptos/Plus Jakarta Sans), weight 800 for headline
+- Color span accents instead of italic emphasis
+- Removed Fraunces serif completely
+- Performance-optimized: IntersectionObserver mounting, low-power GPU preference
 
-**Skills Used:** `/critique`, `/frontend-design`, `/delight`, `/polish`
+**Skills Used:** `/critique`, `/frontend-design`, `/delight`, `/polish`, `webgl-expert`
+
+### ValueProps.tsx
+**Status:** ✅ Redesigned with ascending graph layout + WebGL background
+
+**Key Decisions:**
+- Mathematical graph alignment (SVG curve + CSS grid with negative margins)
+- Zero text overlap guarantee through decoupled layout
+- WebGL mountain background matching hero palette
+- Mauve-dominant nodes, gold gradient for summit node
+- Staggered GSAP animations for line draw and node reveals
 
 ## Scope
  
@@ -220,34 +246,55 @@
  - it can still incorporate trust metrics, market intelligence, and conversion logic
 
  ## Approved Direction
- 
- The approved direction for implementation is:
- - **Strategic Summit + Capital Command Center**
+
+The approved direction for implementation is:
+- **Modern Professional** (Apple, Google, dabafinance.com inspired)
+- **Primary metaphor:** Strategic Summit + Capital Command Center
 
 Interpretation:
-- `Strategic Summit` defines the emotional and symbolic layer
-- `Capital Command Center` defines the structural and operational layer
+- Clean, confident sans-serif typography throughout (NO Fraunces serif)
+- Mauve (#461D4C) as the dominant UI color for structure, hierarchy, and interaction
+- Gold (#ca942f) as strategic accent for conversion moments and dark sections
+- Pill-shaped buttons and rounded-2xl cards as core component language
+- WebGL atmospheric backgrounds for hero and value props sections
+- Light-led overall with strategic dark moments (Services, CTA)
 
 This means the public site should feel:
-- elevated, clear, and confident
-- rigorous, informed, and execution-oriented
+- elevated, clear, and confident through bold sans-serif typography
+- rigorous, informed, and execution-oriented through structured layouts
 - premium through restraint rather than ornament
 - guided by perspective and control, not by editorial styling
+- welcoming first (light surfaces), then authoritative (strategic dark sections)
 
 ## Approved Atmosphere
 
-The public experience should be **predominantly light**.
+The public experience should be **predominantly light** with a **Modern Professional** aesthetic.
 
 Target balance:
 - **Light surfaces:** roughly `70–80%`
 - **Dark surfaces:** roughly `20–30%`
+
+Typography:
+- **ALL headings:** Sans-serif (`var(--font-primary)`), weight 600-800
+- **NO italic emphasis:** Use `<span style={{ color: 'var(--mauve)' }}>` for accents
+- **Tight letter-spacing:** `-0.02em` to `-0.03em` for impact
+
+Color hierarchy:
+- **Mauve (#461D4C):** Dominant — headings, active states, badges, filters, links
+- **Gold (#ca942f):** Accent — dark section CTAs, trust markers, primary buttons on dark
+
+Component language:
+- **Buttons:** `rounded-full` (pill shape)
+- **Cards:** `rounded-2xl` with hover lift + purple border glow
+- **Kickters:** `rounded-full` pill badges, NOT line+text
+- **Dark sections:** Purple gradient (`#2a1435 → #1e1028 → #150e1c`)
 
 Atmospheric rules:
 - light mode is the default experience across most public pages
 - dark mode is reserved for cinematic, high-authority, or conversion-heavy moments
 - avoid treating black as the default brand background
 - prefer ivory, white-smoke, cream, and very soft mauve-tinted surfaces for the main reading and browsing experience
-- when dark is used, prefer mauve-night or plum-depth over flat black
+- when dark is used, prefer purple-dominant gradients over flat black
 
 Page rhythm guidance:
 - homepage: light-led overall, with one or two strategic dark emphasis sections at most
@@ -277,50 +324,47 @@ Design consequence:
 
 ## Approved Hero Background Concept
 
-The hero background uses a **Granient-style abstract mountain** approach — code-generated using CSS radial gradients, SVG noise filters, and GSAP animations. This aligns with the Strategic Summit direction and the light-led atmosphere while avoiding image dependencies and AI-slop patterns.
+The hero background uses a **WebGL atmospheric mountain** approach — code-generated using Three.js/React Three Fiber with custom GLSL shaders. This aligns with the Modern Professional direction and the Strategic Summit metaphor.
 
 ### Visual Description
-An abstract mountain landscape constructed from overlapping, highly-blurred radial gradients in mauve, champagne gold, ivory, and deep plum. The forms suggest elevation and horizon without literal representation. A premium SVG noise texture (`feTurbulence` + `feColorMatrix`) creates the characteristic Granient grain. Slow-moving ambient animations (scale, rotation, drift) make the surface feel alive and breathing. A subtle shimmer band periodically sweeps across for moments of delight. The result is airy and welcoming, but still strategic, elevated, and quietly authoritative.
+An abstract mountain landscape constructed from procedural noise (fbm) generating three parallax ridge layers in mauve, purple, and deep plum. Golden rim lighting on peaks suggests sunlight. Rolling fog at the bottom using warped fbm noise creates depth. The color palette is sampled from the hero image: warm ivory sky, rich purple ridges, soft lavender mist, and gold highlights. Subtle film grain adds texture. The result is airy and welcoming, but still strategic, elevated, and quietly authoritative.
 
 ### Technical Implementation
-**Stack:** CSS Radial Gradients + SVG Filters + GSAP
+**Stack:** React Three Fiber + Three.js + Custom GLSL Shaders
 
-**Layer architecture:**
-1. **Base Canvas** — ivory white (#Fbfafc)
-2. **Deep Valley** — dark mauve (#3A1440) radial gradient, blur(120px), opacity 0.12 — anchor element
-3. **Gold Ridge** — champagne gold radial gradient, blur(140px), opacity 0.1 — left-side warmth
-4. **Mauve Peak** — brand mauve radial gradient, blur(130px), opacity 0.12 — right-side elevation
-5. **Light Mist** — pure white radial gradient, blur(90px), opacity 0.75 — center brightening
-6. **SVG Noise Layer** — `feTurbulence` baseFrequency="0.65" + `feColorMatrix` alpha 0.12, mix-blend-overlay
-7. **Fine Grain Overlay** — secondary noise layer, mix-blend-multiply, opacity 0.025
-8. **Shimmer Band** — moving light sweep, 6s duration, 12s repeat delay
-9. **Bottom Fog** — gradient ensuring text readability
+**Shader architecture:**
+1. **Base Sky** — warm ivory to soft lavender gradient
+2. **Golden Sun Glow** — top-right glow with exponential falloff
+3. **Far Ridge** — muted purple with soft peaks
+4. **Mid Ridge** — richer purple with gold rim lighting
+5. **Near Ridge** — deep mauve, most prominent, strong gold rim
+6. **Rolling Fog** — warped fbm noise at bottom
+7. **Film Grain** — subtle noise overlay
 
 **Animation approach:**
-- Entrance: 3s fade-in for gradient layers, staggered 0.2s
-- Typography reveal: 1.4s expo.out per line, staggered 0.06s
-- Ambient breathing: each gradient mesh scales/rotates at different speeds (18s, 24s, 20s, 30s) using sine.inOut
-- Grain mask: opacity pulses 0.9 for "alive" texture feel
-- Shimmer: sweeps across every 18s (6s animate + 12s rest)
+- Slow mountain drift (`uTime * 0.008`)
+- Rolling fog animation (`uTime * 0.02`)
+- Entrance: fade-in with GSAP
+- `prefers-reduced-motion` disables shader animation
 
 **Color palette integration:**
-- Base: ivory white (#Fbfafc) — 75% dominance
-- Atmospheric depth: pale mauve-gray (#461D4C at 10-12% opacity) — 15%
-- Warm accent: champagne gold (#ca942f at 10% opacity) — 10%
-- Deep anchor: dark mauve (#3A1440 at 12% opacity) — texture base
+- Base: ivory white (`#f2eff3`) — 75% dominance
+- Atmospheric depth: pale mauve-gray — 15%
+- Warm accent: champagne gold (`#ca942f`) — 10%
+- Deep anchor: dark mauve (`#421d4d`) — texture base
 
 ### Content Layout
 - **Structure:** Single-column monumental typography, no side cards
-- **Kicker:** "Société de Gestion et d'Intermédiation — Dakar" with animated line
-- **Headline:** "L'excellence / au sommet / du capital." — Fraunces display, italic on "au sommet"
-- **Subhead:** Clean paragraph, max-width 480px, --night-50 color
-- **CTAs:** Primary (dark with mauve hover fill) + Secondary (text with gold underline)
-- **Trust signals:** Inline text markers with gold dots (not cards)
+- **Kicker:** Pill badge "Société de Gestion et d'Intermédiation — Dakar"
+- **Headline:** "L'excellence au sommet du capital." — Sans-serif weight 800, color span accent on "sommet"
+- **Subhead:** Clean paragraph, max-width 480px, `--night-60` color
+- **CTAs:** Primary (mauve with hover fill) + Secondary (text with mauve underline)
+- **Trust signals:** Inline text markers with mauve/gold dots
 
 ### Micro-interactions (Delight)
 - Primary CTA: mauve fill slides up on hover, arrow translates right (200ms)
-- Secondary CTA: gold underline animates width on hover, arrow translates right (200ms)
-- Trust markers: gold dot scales 125% and switches to mauve on hover, text darkens
+- Secondary CTA: mauve underline animates width on hover, arrow translates right (200ms)
+- Trust markers: dot scales 125% on hover
 - All interactive elements have `focus-visible:ring-2` for keyboard accessibility
 - `prefers-reduced-motion` detection disables all animations
 
@@ -333,4 +377,4 @@ An abstract mountain landscape constructed from overlapping, highly-blurred radi
 - ❌ Hero metric layout template (big number + small label)
 - ❌ Identical card grids
 - ❌ `animate-pulse` decorative elements
-- ❌ `mix-blend-multiply` darkening backgrounds
+- ❌ Fraunces serif typography
