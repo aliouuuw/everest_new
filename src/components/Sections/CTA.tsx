@@ -26,7 +26,7 @@ export const CTA: React.FC<{
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden"
+      className="reveal-scale relative overflow-hidden"
       id="contact"
       style={{
         background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)',
@@ -79,10 +79,10 @@ export const CTA: React.FC<{
           <h2
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 700,
-              fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.025em',
+              fontWeight: 800,
+              fontSize: 'clamp(2.4rem, 5.5vw, 4rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
               color: 'var(--pure-white)',
             }}
           >
@@ -90,13 +90,13 @@ export const CTA: React.FC<{
             <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
           </h2>
           <p
-            className="mt-5 mx-auto"
+            className="mt-6 mx-auto"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 400,
+              fontWeight: 300,
               fontSize: '1.05rem',
-              lineHeight: 1.7,
-              color: 'rgba(255,255,255,0.5)',
+              lineHeight: 1.8,
+              color: 'rgba(255,255,255,0.45)',
               maxWidth: '28rem',
             }}
           >

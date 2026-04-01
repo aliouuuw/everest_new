@@ -82,7 +82,7 @@ export const HeroSectionMountain: React.FC = () => {
     return () => ctx.revert();
   }, [prefersReducedMotion]);
 
-  // ─── Scroll-driven parallax (pinned) ───
+  // ─── Scroll-driven parallax (pinned) with per-layer depth ───
   useEffect(() => {
     if (prefersReducedMotion || !isReady) return;
     const timer = setTimeout(() => {
@@ -116,13 +116,17 @@ export const HeroSectionMountain: React.FC = () => {
           ease: 'sine.inOut',
         }, 0.1);
 
-        // Content fades out
-        tl.to('.hero-content-layer', {
-          opacity: 0,
-          y: -40,
-          duration: 0.3,
-          ease: 'power2.in',
-        }, 0.25);
+        // Per-layer parallax: each element drifts up at its own speed
+        const parallaxLayers = hero.querySelectorAll('.hero-parallax-layer');
+        parallaxLayers.forEach((layer) => {
+          const speed = parseFloat((layer as HTMLElement).dataset.parallaxSpeed || '1');
+          tl.to(layer, {
+            y: -60 * speed,
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power2.in',
+          }, 0.15);
+        });
       }, hero);
       return () => ctx.revert();
     }, 150);
@@ -203,8 +207,11 @@ export const HeroSectionMountain: React.FC = () => {
             }}
           />
 
-          {/* Kicker pill */}
-          <div className="reveal-fade pointer-events-auto mb-8">
+          {/* Kicker pill — parallax layer (fastest, drifts up first) */}
+          <div
+            className="reveal-fade pointer-events-auto mb-8 hero-parallax-layer"
+            data-parallax-speed="1.8"
+          >
             <span
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-sm border border-white/[0.1] text-[11px] md:text-[12px] tracking-[0.1em] uppercase font-medium text-white/70"
               style={{ fontFamily: 'var(--font-primary)' }}
@@ -214,11 +221,11 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </div>
 
-          {/* Headline — bold, clear, with warm glow shadow */}
+          {/* Headline — bold, each line at different parallax speed */}
           <h1 className="hero-headline mb-6 md:mb-10 flex flex-col items-center relative">
-            <span className="block overflow-hidden pb-1">
+            <span className="block overflow-hidden pb-1 hero-parallax-layer" data-parallax-speed="1.4">
               <span
-                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white"
+                className="hero-headline-line block text-[clamp(2.4rem,6vw,4.8rem)] leading-[1.08] tracking-[-0.03em] font-bold text-white"
                 style={{ 
                   fontFamily: 'var(--font-primary)', 
                   textShadow: '0 0 40px rgba(218,165,32,0.3), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
@@ -227,9 +234,9 @@ export const HeroSectionMountain: React.FC = () => {
                 L'excellence
               </span>
             </span>
-            <span className="block overflow-hidden pb-1">
+            <span className="block overflow-hidden pb-1 hero-parallax-layer" data-parallax-speed="1.0">
               <span
-                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-[var(--jaune-or)]"
+                className="hero-headline-line block text-[clamp(2.4rem,6vw,4.8rem)] leading-[1.08] tracking-[-0.03em] font-bold text-[var(--jaune-or)]"
                 style={{ 
                   fontFamily: 'var(--font-primary)', 
                   textShadow: '0 0 60px rgba(218,165,32,0.5), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
@@ -238,9 +245,9 @@ export const HeroSectionMountain: React.FC = () => {
                 au sommet
               </span>
             </span>
-            <span className="block overflow-hidden pb-1">
+            <span className="block overflow-hidden pb-1 hero-parallax-layer" data-parallax-speed="0.6">
               <span
-                className="hero-headline-line block text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[1.1] tracking-[-0.02em] font-semibold text-white"
+                className="hero-headline-line block text-[clamp(2.4rem,6vw,4.8rem)] leading-[1.08] tracking-[-0.03em] font-bold text-white"
                 style={{ 
                   fontFamily: 'var(--font-primary)', 
                   textShadow: '0 0 40px rgba(218,165,32,0.3), 0 4px 30px rgba(0,0,0,0.4), 0 2px 10px rgba(0,0,0,0.3)'
@@ -251,8 +258,11 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </h1>
 
-          {/* Subhead — better contrast */}
-          <div className="reveal-fade max-w-[480px] mb-10 md:mb-12 pointer-events-auto">
+          {/* Subhead — parallax layer */}
+          <div
+            className="reveal-fade max-w-[480px] mb-10 md:mb-12 pointer-events-auto hero-parallax-layer"
+            data-parallax-speed="0.4"
+          >
             <p
               className="text-[clamp(0.95rem,1.1vw,1.05rem)] leading-[1.6] text-white/75 font-normal drop-shadow-md"
               style={{ fontFamily: 'var(--font-primary)', textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}
@@ -263,7 +273,7 @@ export const HeroSectionMountain: React.FC = () => {
           </div>
 
           {/* CTAs — rounded pills, modern feel */}
-          <div className="reveal-fade flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-12 md:mb-16 pointer-events-auto">
+          <div className="reveal-fade flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-12 md:mb-16 pointer-events-auto hero-parallax-layer" data-parallax-speed="0.2">
             <MagneticButton
               as="a"
               href="#services"

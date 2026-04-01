@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { TiltCard } from '../ui/TiltCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,24 +50,25 @@ export const ValueProps: React.FC = () => {
 
     const triggers: ScrollTrigger[] = [];
 
-    // Section header reveal
+    // Section header — cinematic scale-up from depth
     const headerTween = gsap.fromTo('.vp-header',
-      { y: 40, opacity: 0 },
+      { y: 50, opacity: 0, scale: 0.9, filter: 'blur(10px)' },
       {
-        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.3, ease: 'expo.out',
         scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none reverse' }
       }
     );
     if (headerTween.scrollTrigger) triggers.push(headerTween.scrollTrigger);
 
-    // Cards stagger reveal
+    // Cards — scale from depth with staggered timing (feels like emerging from fog)
     const cards = gsap.utils.toArray('.vp-card');
     cards.forEach((card: any, i: number) => {
       const tween = gsap.fromTo(card,
-        { y: 50, opacity: 0 },
+        { y: 60, opacity: 0, scale: 0.85, filter: 'blur(8px)' },
         {
-          y: 0, opacity: 1, duration: 0.8, delay: i * 0.12, ease: 'power3.out',
-          scrollTrigger: { trigger: section, start: 'top 60%', toggleActions: 'play none none reverse' }
+          y: 0, opacity: 1, scale: 1, filter: 'blur(0px)',
+          duration: 1.1, delay: i * 0.18, ease: 'expo.out',
+          scrollTrigger: { trigger: section, start: 'top 55%', toggleActions: 'play none none reverse' }
         }
       );
       if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
@@ -103,10 +105,10 @@ export const ValueProps: React.FC = () => {
           <h2
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 700,
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.025em',
+              fontWeight: 800,
+              fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
               color: 'var(--night)',
             }}
           >
@@ -114,12 +116,12 @@ export const ValueProps: React.FC = () => {
             <span style={{ color: 'var(--mauve)' }}>confiance durable.</span>
           </h2>
           <p
-            className="mt-5 mx-auto"
+            className="mt-6 mx-auto"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 400,
+              fontWeight: 300,
               fontSize: '1.05rem',
-              lineHeight: 1.7,
+              lineHeight: 1.8,
               color: 'var(--night-60)',
               maxWidth: '32rem',
             }}
@@ -131,22 +133,26 @@ export const ValueProps: React.FC = () => {
         {/* Feature cards — modern 3-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {features.map((f) => (
-            <div
+            <TiltCard
               key={f.title}
-              className="vp-card group relative p-8 md:p-10 rounded-2xl transition-all duration-500 hover:z-10"
+              className="vp-card group relative p-8 md:p-10 rounded-2xl overflow-hidden"
               style={{
                 background: 'var(--summit-ivory)',
                 border: '1px solid var(--command-border)',
+                transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
               }}
+              maxTilt={8}
+              glareIntensity={0.08}
+              hoverScale={1.02}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--mauve-border)';
-                e.currentTarget.style.boxShadow = '0 20px 40px -10px rgba(70,29,76,0.08), 0 0 20px rgba(70,29,76,0.03)';
-                e.currentTarget.style.transform = 'translateY(-6px) scale(1.01)';
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--mauve-border-strong)';
+                el.style.boxShadow = '0 25px 50px -12px rgba(70,29,76,0.12), 0 0 30px rgba(70,29,76,0.04)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--command-border)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                const el = e.currentTarget as HTMLElement;
+                el.style.borderColor = 'var(--command-border)';
+                el.style.boxShadow = 'none';
               }}
             >
               {/* Icon Container with Floating Delight Animation */}
@@ -154,7 +160,6 @@ export const ValueProps: React.FC = () => {
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-2 group-hover:scale-110 group-hover:bg-[rgba(70,29,76,0.15)] group-hover:text-[var(--mauve)]"
                 style={{ background: 'var(--mauve-10)', color: 'var(--mauve)', boxShadow: '0 4px 12px rgba(70,29,76,0)' }}
               >
-                {/* Dynamic floating animation on the SVG itself */}
                 <div className="transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1">
                   {f.icon}
                 </div>
@@ -184,7 +189,7 @@ export const ValueProps: React.FC = () => {
               >
                 {f.description}
               </p>
-            </div>
+            </TiltCard>
           ))}
         </div>
 

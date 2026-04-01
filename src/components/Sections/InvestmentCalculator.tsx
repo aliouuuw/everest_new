@@ -2,6 +2,29 @@ import { useEffect, useState } from 'react';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
+/** Triggers .in class on split-reveal children when section enters viewport */
+function useSplitReveal(sectionRef: React.RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const targets = section.querySelectorAll('.reveal-split-left, .reveal-split-right');
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            targets.forEach((t) => t.classList.add('in'));
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [sectionRef]);
+}
+
 interface CalculatorInputs {
   initialAmount: number;
   monthlyContribution: number;
@@ -36,6 +59,7 @@ interface InvestmentCalculatorProps {
 
 export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calculatorOnly = false }) => {
   const sectionRef = useReveal<HTMLElement>();
+  useSplitReveal(sectionRef);
 
   const [inputs, setInputs] = useState<CalculatorInputs>({
     initialAmount: 1000000, // 1M F CFA
@@ -196,10 +220,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           <h2
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 700,
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.025em',
+              fontWeight: 800,
+              fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
               color: 'var(--night)',
             }}
           >
@@ -243,7 +267,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         {(calculatorOnly || activeTab === 'calculator') ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Calculator Inputs */}
-            <div>
+            <div className="reveal-split-left">
               <div className="p-8 rounded-2xl" style={{ border: '1px solid var(--command-border)', background: 'var(--command-surface)' }}>
                 <h3
                   className="mb-8"
@@ -381,7 +405,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             </div>
 
             {/* Results */}
-            <div>
+            <div className="reveal-split-right">
               <div className="p-8 rounded-2xl" style={{ border: '1px solid var(--command-border)', background: 'var(--command-surface)' }}>
                 <h3
                   className="mb-8"

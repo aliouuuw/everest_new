@@ -108,10 +108,10 @@ const InsightsInner: React.FC = () => {
             <h2
               style={{
                 fontFamily: 'var(--font-primary)',
-                fontWeight: 700,
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.025em',
+                fontWeight: 800,
+                fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
+                lineHeight: 1.05,
+                letterSpacing: '-0.03em',
                 color: 'var(--night)',
               }}
             >
