@@ -1,5 +1,5 @@
 import { HeroSectionMountain } from './components/Hero';
-import { CTA, Insights, Services, ValueProps, NewsSection, StatsBand } from './components/Sections';
+import { CTA, Insights, Services, ValueProps, NewsSection, HomeFAQ } from './components/Sections';
 
 function App() {
   return (
@@ -7,8 +7,9 @@ function App() {
       <HeroSectionMountain />
       <ValueProps />
       <Services />
-      <NewsSection />
       <Insights />
+      <NewsSection />
+      <HomeFAQ />
       <CTA secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
     </>
   );

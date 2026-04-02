@@ -134,6 +134,7 @@ export const Header: React.FC = () => {
     { label: 'À propos', href: '/about' },
     { label: 'Actualités', href: '/actualites' },
     { label: 'Publications', href: '/publications' },
+    { label: 'Simulateur', href: '/simulateur' },
     { label: 'Abécédaire / FAQ', href: '/faq' },
   ];
 
