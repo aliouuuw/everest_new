@@ -8,3 +8,4 @@ count.txt
 !.env.example
 .nitro
 .tanstack
+tsconfig.tsbuildinfo
