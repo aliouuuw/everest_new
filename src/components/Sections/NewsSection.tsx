@@ -72,24 +72,18 @@ export const NewsSection: React.FC = () => {
             </span>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 800,
                 fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
                 lineHeight: 1.0,
-                letterSpacing: '-0.02em',
+                letterSpacing: '-0.03em',
                 color: 'var(--night)',
               }}
             >
               Dernières{' '}
-              <em style={{ 
-                fontStyle: 'italic', 
-                background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ color: 'var(--mauve)' }}>
                 informations.
-              </em>
+              </span>
             </h2>
           </div>
           

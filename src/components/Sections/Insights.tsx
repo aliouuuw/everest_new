@@ -91,22 +91,16 @@ export const Insights: React.FC = () => {
           />
           <span
             style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 300,
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 800,
               fontSize: 'clamp(1.5rem, 3vw, 2.4rem)',
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
               lineHeight: 1,
               color: 'var(--pure-white)',
             }}
           >
             Restez informé{' '}
-            <em style={{ 
-              fontStyle: 'italic', 
-              background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>des marchés.</em>
+            <span style={{ color: 'var(--jaune-or)' }}>des marchés.</span>
           </span>
         </div>
 
@@ -161,11 +155,11 @@ export const Insights: React.FC = () => {
                 <h3
                   className="mb-6 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
                   style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
+                    fontFamily: 'var(--font-primary)',
+                    fontWeight: 700,
                     fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-                    lineHeight: 1.15,
-                    letterSpacing: '-0.02em',
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.03em',
                     color: 'var(--pure-white)',
                   }}
                 >

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -35,21 +35,43 @@
   --gold-pale: rgba(202, 148, 47, 0.06);
   --gold-warm: rgba(202, 148, 47, 0.12);
   
-  /* Typography - Modern Dynamic Luxury */
+  /* Typography - Modern Professional (sans-serif only) */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  
+
   /* Backgrounds */
   --cream: #faf6ef;
-  
+
+  /* Atmospheric Surfaces */
+  --summit-ivory: #faf8f4;
+  --summit-fog: #f0eee9;
+  --summit-haze: rgba(70, 29, 76, 0.04);
+  --summit-depth: rgba(70, 29, 76, 0.08);
+  --summit-warm: rgba(202, 148, 47, 0.06);
+  --summit-glass: rgba(255, 255, 255, 0.7);
+  --summit-glass-strong: rgba(255, 255, 255, 0.85);
+
+  /* Command Center Tokens */
+  --command-border: rgba(10, 10, 10, 0.06);
+  --command-border-hover: rgba(70, 29, 76, 0.2);
+  --command-surface: #f7f6f3;
+  --command-surface-hover: rgba(70, 29, 76, 0.03);
+
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
   --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* Section Spacing Utilities */
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+  --duration-reveal: 900ms;
+
+  /* Section Spacing */
   --hero-py: clamp(7rem, 12vw, 9rem);
+  --section-gap: clamp(6rem, 10vw, 9rem);
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -229,17 +251,17 @@ html {
 
 /* Typography Classes */
 .heading-display {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
 }
 
 /* Brand lockup for header */
 .brand-heading {
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
@@ -260,9 +282,16 @@ html {
 }
 
 .heading-primary {
-  font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.15;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.font-display {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .text-primary {
@@ -287,17 +316,10 @@ html {
 }
 
 /* Enhanced typography for luxury feel */
-.font-display {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  line-height: 1.1;
-}
-
 .font-display-aptos {
-  font-family: var(--font-display-aptos);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
@@ -307,13 +329,13 @@ html {
   line-height: 1.6;
 }
 
-/* Luxury text treatments */
+/* Luxury text treatments — sans-serif, bold */
 .luxury-heading {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 800;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   color: var(--night);
 }
 
@@ -338,11 +360,11 @@ html {
 
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 800;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
   color: var(--pure-white);
 }
 
@@ -351,7 +373,7 @@ html {
   font-weight: 300;
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 38rem;
   margin: 0 auto;
 }
@@ -361,7 +383,7 @@ html {
   font-weight: 300;
   font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 38rem;
 }
 
@@ -381,13 +403,14 @@ html {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-black/10 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 bg-[var(--mauve)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/20 rounded-full relative overflow-hidden cursor-pointer;
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--mauve) 85%, black);
 }
 
 .btn-primary:active {
@@ -396,12 +419,17 @@ html {
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 bg-[var(--white-smoke)]/80 hover:bg-[var(--night)]/2 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 border text-[var(--mauve)] font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  border-color: var(--mauve);
+  background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary:hover {
-  transform: translateY(-1px);
+  background: var(--mauve);
+  color: var(--pure-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(70,29,76,0.2);
 }
 
 .btn-secondary:active {
@@ -411,13 +439,17 @@ html {
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 bg-[var(--jaune-or)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--jaune-or-light)] hover:text-[var(--night)] hover:shadow-lg hover:shadow-[var(--jaune-or)]/20 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  background: var(--jaune-or);
+  color: var(--night);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary-dark:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(202,148,47,0.35);
+  filter: brightness(1.05);
 }
 
 .btn-primary-dark:active {
@@ -426,13 +458,18 @@ html {
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 border border-[var(--jaune-or)]/40 text-[var(--jaune-or-light)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/10 hover:text-[var(--pure-white)] rounded-lg relative overflow-hidden cursor-pointer;
-  background: rgba(202, 148, 47, 0.05);
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  border: 1px solid rgba(202,148,47,0.5);
+  color: var(--jaune-or);
+  background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary-dark:hover {
-  transform: translateY(-1px);
+  background: rgba(202,148,47,0.12);
+  border-color: var(--jaune-or);
+  color: var(--pure-white);
+  transform: translateY(-2px);
 }
 
 .btn-secondary-dark:active {
@@ -440,15 +477,15 @@ html {
   transition-duration: 100ms;
 }
 
-/* Subtle gold-tinted focus rings and hover shadows */
+/* Accessible mauve-tinted focus rings */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
+  box-shadow: 0 0 0 3px var(--mauve-20), 0 0 0 1px var(--mauve);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-10), 0 0 0 1px var(--jaune-or);
+  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
 }
 
 .btn-primary-dark:focus-visible {
@@ -459,22 +496,6 @@ html {
 .btn-secondary-dark:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 8px 24px var(--jaune-or-20);
-}
-
-.btn-secondary:hover {
-  box-shadow: 0 8px 24px var(--jaune-or-10);
-}
-
-.btn-primary-dark:hover {
-  box-shadow: 0 8px 24px var(--jaune-or-30);
-}
-
-.btn-secondary-dark:hover {
-  box-shadow: 0 8px 24px var(--jaune-or-20);
 }
 
 /* Card Styles */
@@ -551,10 +572,10 @@ html {
 
 /* Enhanced Typography */
 .hero-title {
-  font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 0.92;
-  letter-spacing: -0.015em;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
 }
 
 .hero-subtitle {
@@ -879,36 +900,38 @@ html {
 
 .publication-content h1 {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 800;
   margin: 1.5rem 0 1rem 0;
   color: var(--night);
-  font-family: var(--font-display);
+  font-family: var(--font-primary);
+  letter-spacing: -0.03em;
 }
 
 .publication-content h2 {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin: 1.25rem 0 0.75rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-display);
+  font-family: var(--font-primary);
+  letter-spacing: -0.02em;
 }
 
 .publication-content h3 {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 700;
   margin: 1rem 0 0.5rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-display);
+  font-family: var(--font-primary);
 }
 
 .publication-content h4,
 .publication-content h5,
 .publication-content h6 {
   font-size: 1.125rem;
-  font-weight: bold;
+  font-weight: 600;
   margin: 0.75rem 0 0.5rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-display);
+  font-family: var(--font-primary);
 }
 
 .publication-content p {

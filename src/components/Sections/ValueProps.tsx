@@ -56,15 +56,12 @@ export const ValueProps: React.FC = () => {
                 >
                   <span
                     style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 300,
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 800,
                       fontSize: 'clamp(4rem, 7vw, 6.5rem)',
                       lineHeight: 0.9,
                       letterSpacing: '-0.03em',
-                      background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
+                      color: 'var(--mauve)',
                     }}
                   >
                     {s.value}
@@ -72,8 +69,8 @@ export const ValueProps: React.FC = () => {
                   {s.unit && (
                     <span
                       style={{
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 300,
+                        fontFamily: 'var(--font-primary)',
+                        fontWeight: 700,
                         fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
                         color: 'var(--jaune-or)',
                         lineHeight: 1,
@@ -143,29 +140,21 @@ export const ValueProps: React.FC = () => {
           />
 
           <div className="relative z-10 max-w-xl">
-            {/* Oversized Fraunces quote/manifesto */}
+            {/* Bold sans-serif manifesto heading */}
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 800,
                 fontSize: 'clamp(2rem, 4vw, 3.4rem)',
-                lineHeight: 1.15,
-                letterSpacing: '-0.02em',
+                lineHeight: 1.05,
+                letterSpacing: '-0.03em',
                 color: 'var(--night)',
               }}
             >
               Exécution rigoureuse,{' '}
-              <em
-                style={{
-                  fontStyle: 'italic',
-                  background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
+              <span style={{ color: 'var(--mauve)' }}>
                 confiance durable.
-              </em>
+              </span>
             </h2>
 
             <div
@@ -206,13 +195,10 @@ export const ValueProps: React.FC = () => {
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-display-aptos)',
-                      fontWeight: 500,
+                      fontFamily: 'var(--font-primary)',
+                      fontWeight: 600,
                       fontSize: '0.95rem',
-                      background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
+                      color: 'var(--mauve)',
                       marginBottom: '0.3rem',
                     }}
                   >

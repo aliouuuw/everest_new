@@ -90,24 +90,18 @@ export const Services: React.FC = () => {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 300,
+              fontFamily: 'var(--font-primary)',
+              fontWeight: 800,
               fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
               lineHeight: 1.0,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
               color: 'var(--night)',
             }}
           >
             Solutions pour chaque{' '}
-            <em style={{ 
-              fontStyle: 'italic', 
-              background: 'linear-gradient(135deg, var(--mauve) 0%, var(--jaune-or) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span style={{ color: 'var(--mauve)' }}>
               profil.
-            </em>
+            </span>
           </h2>
         </div>
         <p
@@ -142,15 +136,12 @@ export const Services: React.FC = () => {
               <span
                 className="group-hover:opacity-100 transition-all duration-500"
                 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 800,
                   fontSize: 'clamp(3rem, 5vw, 5rem)',
                   lineHeight: 1,
-                  letterSpacing: '-0.02em',
-                  background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  letterSpacing: '-0.03em',
+                  color: 'var(--mauve)',
                   opacity: 0.25,
                 }}
               >
@@ -162,17 +153,14 @@ export const Services: React.FC = () => {
             <div className="flex flex-col md:flex-row md:items-center flex-1 px-8 md:px-12 lg:px-16 py-10 md:py-12 gap-6 md:gap-16">
               {/* Title */}
               <h3
-                className="md:w-[38%] shrink-0 transition-all duration-500 group-hover:text-[var(--mauve)]"
+                className="md:w-[38%] shrink-0 transition-all duration-500"
                 style={{
-                  fontFamily: 'var(--font-display-aptos)',
-                  fontWeight: 500,
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 700,
                   fontSize: 'clamp(1.5rem, 2.8vw, 2.2rem)',
                   lineHeight: 1.1,
-                  letterSpacing: '-0.01em',
-                  background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  letterSpacing: '-0.02em',
+                  color: 'var(--night)',
                 }}
               >
                 {s.title}

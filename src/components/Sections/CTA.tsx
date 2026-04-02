@@ -17,7 +17,7 @@ export const CTA: React.FC<{
       ref={sectionRef}
       className="reveal relative py-24 md:py-36 overflow-hidden"
       id="contact"
-      style={{ background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 50%, #2a1025 100%)' }}
+      style={{ background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)' }}
     >
       {/* Dramatic gold-mauve gradient orbs */}
       <div
@@ -46,24 +46,18 @@ export const CTA: React.FC<{
             </span>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 800,
                 fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
                 lineHeight: 1.05,
-                letterSpacing: '-0.02em',
+                letterSpacing: '-0.03em',
                 color: 'var(--pure-white)',
               }}
             >
               Prêts à franchir{' '}
-              <em style={{ 
-                fontStyle: 'italic', 
-                background: 'linear-gradient(135deg, var(--jaune-or) 0%, #e8c96a 50%, var(--mauve) 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ color: 'var(--jaune-or)' }}>
                 un cap ?
-              </em>
+              </span>
             </h2>
             <div
               className="h-[2px] w-32 mt-10 mb-8"
