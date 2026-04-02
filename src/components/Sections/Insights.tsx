@@ -298,7 +298,7 @@ const InsightsInner: React.FC = () => {
             {/* Secondary — horizontal list, lighter weight */}
             {secondary.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-                {secondary.slice(0, 3).map((it, i) => (
+                {secondary.slice(0, 3).map((it) => (
                   <a
                     key={`${it.title}-${it.date}`}
                     href={it.href}

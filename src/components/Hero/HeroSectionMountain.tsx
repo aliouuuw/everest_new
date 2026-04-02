@@ -12,7 +12,7 @@ export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const { lenis, isReady } = useLenisContext();
+  const { isReady } = useLenisContext();
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
