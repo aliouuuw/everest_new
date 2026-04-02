@@ -16,14 +16,24 @@ export class ConvexSafeBoundary extends Component<
   }
 
   static getDerivedStateFromError(error: Error) {
-    if (error.message.includes("Could not find Convex client")) {
+    const isConvexError = 
+      error.message.includes("Could not find Convex client") ||
+      error.message.includes("ConvexProvider") ||
+      error.message.includes("convex") ||
+      error.message.includes("Convex");
+    if (isConvexError) {
       return { hasError: true };
     }
     throw error;
   }
 
   componentDidCatch(error: Error, _info: ErrorInfo) {
-    if (!error.message.includes("Could not find Convex client")) {
+    const isConvexError = 
+      error.message.includes("Could not find Convex client") ||
+      error.message.includes("ConvexProvider") ||
+      error.message.includes("convex") ||
+      error.message.includes("Convex");
+    if (!isConvexError) {
       throw error;
     }
   }

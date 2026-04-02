@@ -131,84 +131,84 @@ export const Services: React.FC = () => {
 
     const mm = gsap.matchMedia();
 
-    mm.add('(min-width: 768px)', (ctx) => {
-      // Scope all queries to the section to avoid global collisions
-      const panels = gsap.utils.toArray<HTMLElement>('.svc-panel', section);
-      const dots   = gsap.utils.toArray<HTMLElement>('.svc-dot', section);
-      const labels = gsap.utils.toArray<HTMLElement>('.svc-dot-label', section);
-      const bar    = section.querySelector<HTMLElement>('.svc-progress-bar');
+    // Defer GSAP initialization to the next frame so the DOM is fully painted,
+    // avoiding the _getComputedProperty recursion in CSSPlugin.
+    const rafId = requestAnimationFrame(() => {
+      mm.add('(min-width: 768px)', (ctx) => {
+        // Scope all queries to the section to avoid global collisions
+        const panels = gsap.utils.toArray<HTMLElement>('.svc-panel', section);
+        const bar    = section.querySelector<HTMLElement>('.svc-progress-bar');
 
-      const count = services.length;
-      const vh = window.innerHeight;
+        const count = services.length;
+        const vh = window.innerHeight;
 
-      // ── Initial states ──
-      panels.forEach((p, i) => gsap.set(p, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 48 }));
+        // NOTE: Initial panel states are now set via inline styles in JSX
+        // to avoid gsap.set() triggering _getComputedTransformMatrixAsArray
+        // recursion in CSSPlugin.
 
-      // ── Single scrubbed master timeline ──
-      // Each service occupies 1 unit of the timeline (0→1, 1→2, 2→3)
-      // scrub: 0.8 gives a smooth lag that feels physical
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: `+=${vh * (count - 1)}`,
-          pin: pin,
-          pinSpacing: true,
-          scrub: 0.8,
-          onUpdate(self) {
-            const raw = self.progress * (count - 1);
-            updateActiveIndex(Math.min(Math.round(raw), count - 1));
-          },
-        },
-      });
-
-      // Progress bar — scrubs from 0 to 1 across the full timeline
-      if (bar) tl.to(bar, { scaleY: 1, ease: 'none' }, 0);
-
-      // Panel cross-fades — each transition occupies 1 unit
-      for (let i = 1; i < count; i++) {
-        const prev = panels[i - 1];
-        const curr = panels[i];
-        const start = i - 1;   // timeline position where this transition begins
-        const mid   = i - 0.5; // midpoint — outgoing finishes, incoming peaks
-
-        // Outgoing: fade + slide up, completes at midpoint
-        tl.to(prev, { opacity: 0, y: -32, ease: 'power2.inOut' }, start);
-        // Incoming: fade + slide up from below, starts slightly before midpoint
-        tl.fromTo(curr,
-          { opacity: 0, y: 48 },
-          { opacity: 1, y: 0, ease: 'power2.out' },
-          mid - 0.3
-        );
-      }
-
-      // Dot + label states — driven by scrub progress, no per-frame gsap.set
-      // We use CSS transitions on the elements and only toggle inline styles
-      // when the index changes (handled by updateActiveIndex → React state)
-
-      // ── Resize refresh ──
-      const onResize = () => ScrollTrigger.refresh();
-      window.addEventListener('resize', onResize);
-
-      // Header entrance (not scrubbed — fires once on enter)
-      gsap.fromTo('.svc-header',
-        { y: 36, opacity: 0, filter: 'blur(5px)' },
-        { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.65, ease: 'expo.out',
+        // ── Single scrubbed master timeline ──
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: 'top 82%',
-            toggleActions: 'play none none reverse',
+            start: 'top top',
+            end: `+=${vh * (count - 1)}`,
+            pin: pin,
+            pinSpacing: true,
+            scrub: 0.8,
+            onUpdate(self) {
+              const raw = self.progress * (count - 1);
+              updateActiveIndex(Math.min(Math.round(raw), count - 1));
+            },
           },
-        }
-      );
+        });
 
-      return () => {
-        window.removeEventListener('resize', onResize);
-        ctx.revert();
-      };
+        // Progress bar — scrubs from 0 to 1 across the full timeline
+        if (bar) tl.to(bar, { scaleY: 1, ease: 'none' }, 0);
+
+        // Panel cross-fades — each transition occupies 1 unit
+        for (let i = 1; i < count; i++) {
+          const prev = panels[i - 1];
+          const curr = panels[i];
+          const start = i - 1;
+          const mid   = i - 0.5;
+
+          // Outgoing: fade + slide up
+          tl.to(prev, { opacity: 0, y: -32, ease: 'power2.inOut' }, start);
+          // Incoming: fade + slide up from below
+          tl.fromTo(curr,
+            { opacity: 0, y: 48 },
+            { opacity: 1, y: 0, ease: 'power2.out' },
+            mid - 0.3
+          );
+        }
+
+        // ── Resize refresh ──
+        const onResize = () => ScrollTrigger.refresh();
+        window.addEventListener('resize', onResize);
+
+        // Header entrance (no filter animation — avoids CSSPlugin recursion)
+        gsap.fromTo('.svc-header',
+          { y: 36, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.65, ease: 'expo.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 82%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+
+        return () => {
+          window.removeEventListener('resize', onResize);
+          ctx.revert();
+        };
+      });
     });
 
-    return () => mm.revert();
+    return () => {
+      cancelAnimationFrame(rafId);
+      mm.revert();
+    };
   }, [prefersReduced, updateActiveIndex]);
 
   // Mobile entrance
@@ -362,6 +362,11 @@ export const Services: React.FC = () => {
               <div
                 key={svc.id}
                 className="svc-panel absolute inset-0 flex flex-col justify-center px-12 lg:px-16"
+                style={{
+                  opacity: i === 0 ? 1 : 0,
+                  transform: i === 0 ? 'translateY(0px)' : 'translateY(48px)',
+                  willChange: 'opacity, transform',
+                }}
               >
                 {/* Per-service atmospheric bloom */}
                 <div className="absolute inset-0 pointer-events-none"

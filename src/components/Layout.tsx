@@ -20,65 +20,45 @@ class ErrorBoundary extends Component<
 
   static getDerivedStateFromError(error: Error) {
     // Don't catch authentication, navigation, or React lifecycle errors
-    const shouldIgnore = 
-      error.message.includes('signout') || 
+    const shouldIgnore =
+      error.message.includes('signout') ||
       error.message.includes('signIn') ||
       error.message.includes('auth') ||
-      error.message.includes('getCurrentUser') ||
-      error.message.includes('Could not find public function') ||
-      error.message.includes('Server Error') ||
-      error.message.includes('Rendered fewer hooks than expected') ||
-      error.message.includes('Rendered more hooks than during the previous render') ||
-      error.message.includes('early return statement') ||
       error.message.includes('navigate') ||
       error.message.includes('Navigation') ||
       error.message.includes('router') ||
       error.message.includes('Router') ||
       error.message.includes('Cannot update a component') ||
-      error.message.includes('Warning: Can\'t perform a React state update') ||
-      error.message.includes('AbortError') ||
-      error.message.includes('The operation was aborted') ||
-      error.stack?.includes('useNavigate') ||
-      error.stack?.includes('navigate') ||
-      error.stack?.includes('useAuth') ||
-      error.stack?.includes('ProtectedRoute')
-    
+      error.message.includes('AbortError')
+
     if (shouldIgnore) {
-      console.warn('Non-critical error caught by boundary (ignoring):', error.message)
+      console.warn(
+        '🟡 Non-critical error caught by boundary (ignoring):',
+        error.message,
+      )
       return { hasError: false }
     }
-    
-    // Only catch genuine UI errors, not auth/navigation errors
-    const isUIError = 
-      error.message.includes('Cannot read property') ||
-      error.message.includes('Cannot access before initialization') ||
-      error.message.includes('is not a function') ||
-      error.message.includes('Cannot destructure property') ||
-      error.message.includes('ReferenceError') ||
-      error.message.includes('TypeError')
-    
-    if (isUIError) {
-      console.error('UI Error caught by boundary:', error.message)
-      return { hasError: true, error }
-    }
-    
-    // For all other errors, log but don't show error boundary
-    console.warn('Unknown error caught by boundary (ignoring):', error.message)
-    return { hasError: false }
+
+    console.error('🔴 getDerivedStateFromError:', error.message)
+    return { hasError: true, error }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Only log genuine errors that we're actually handling
-    const shouldIgnore = 
-      error.message.includes('signout') || 
+    const shouldIgnore =
+      error.message.includes('signout') ||
       error.message.includes('signIn') ||
       error.message.includes('auth') ||
       error.message.includes('navigate') ||
       error.message.includes('Cannot update a component') ||
       error.message.includes('AbortError')
-    
+
     if (!shouldIgnore) {
-      console.error('❌ Layout Error Boundary caught an error:', error, errorInfo)
+      console.error(
+        '❌ Layout Error Boundary caught an error:',
+        error.message,
+        error.stack,
+        errorInfo,
+      )
     }
   }
 
@@ -112,10 +92,12 @@ export const Layout = () => {
   const location = useLocation()
 
   // Check if user is authenticated and on dashboard
-  const isAuthenticated = typeof window !== 'undefined' && sessionStorage.getItem('isAuthenticated') === 'true'
+  const isAuthenticated =
+    typeof window !== 'undefined' &&
+    sessionStorage.getItem('isAuthenticated') === 'true'
   const isOnDashboard = location.pathname === '/dashboard'
   const hideExtras = isAuthenticated && isOnDashboard
-  
+
   return (
     <ErrorBoundary>
       <LenisWrapper>
