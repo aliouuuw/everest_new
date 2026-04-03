@@ -25,110 +25,107 @@ export const FAQ: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-36 overflow-hidden"
-      style={{ background: 'linear-gradient(170deg, #150e1c 0%, #1e1028 100%)' }}
+      className="reveal relative py-24 md:py-36 overflow-hidden flex items-center justify-center min-h-screen"
     >
-      {/* Background Image with dramatic fade */}
+      {/* Full-bleed background image with overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src="/HERO-.png"
           alt="Montagnes — Questions fréquentes"
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity"
+          className="w-full h-full object-cover object-center"
         />
+        {/* Dark mauve tint to make the white card pop */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(90deg, #150e1c 20%, transparent 100%)' }}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(0deg, #1e1028 0%, transparent 50%, #150e1c 100%)' }}
+          style={{ background: 'linear-gradient(135deg, rgba(70,29,76,0.6) 0%, rgba(21,14,28,0.8) 100%)' }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+      <div className="relative z-10 w-full max-w-[1000px] px-6">
+        {/* Floating Frosted Glass Card */}
+        <div className="bg-[var(--pure-white)]/95 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-14 shadow-[0_40px_80px_rgba(0,0,0,0.3)] border border-white/40">
           
-          {/* Left Column — Sticky Header & CTA */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-32">
-              <div className="mb-6">
-                <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--jaune-or)] bg-[var(--jaune-or-10)] border border-[var(--jaune-or-20)]">
-                  FAQ
-                </span>
-              </div>
-              
-              <h2 className="luxury-heading-dark mb-6">
-                Vous avez des{' '}
-                <span style={{ color: 'var(--jaune-or)' }}>questions ?</span>
-              </h2>
-              
-              <p className="font-primary font-light text-base md:text-lg mb-10 text-[var(--pure-white)] opacity-70 max-w-md">
-                Retrouvez les réponses aux interrogations les plus courantes de nos clients. Notre équipe reste à votre entière disposition.
-              </p>
-
-              <Link
-                to="/faq"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-[0.75rem] font-bold uppercase tracking-[0.15em] text-[var(--night)] bg-[var(--jaune-or)] hover:bg-[var(--pure-white)] transition-all duration-300"
-              >
-                Toutes les questions
-              </Link>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="mb-6">
+              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+                FAQ
+              </span>
             </div>
+            <h2 className="luxury-heading mb-4">
+              Vous avez des{' '}
+              <span style={{ color: 'var(--jaune-or)' }}>questions ?</span>
+            </h2>
+            <p className="text-secondary text-base md:text-lg max-w-xl mx-auto">
+              Retrouvez les réponses aux interrogations les plus courantes de nos clients.
+            </p>
           </div>
 
-          {/* Right Column — Accordion */}
-          <div className="lg:col-span-7">
-            <div className="border-t border-white/10">
-              {faqs.map((item, i) => {
-                const isOpen = openIndex === i;
-                return (
-                  <div
-                    key={item.q}
-                    className="border-b border-white/10"
+          {/* Accordion */}
+          <div className="space-y-0 mb-12 max-w-3xl mx-auto">
+            {faqs.map((item, i) => {
+              const isOpen = openIndex === i;
+              return (
+                <div
+                  key={item.q}
+                  className="border-b border-[var(--mauve-10)] last:border-0"
+                >
+                  <button
+                    onClick={() => toggle(i)}
+                    className="w-full py-5 flex items-center justify-between text-left group"
                   >
-                    <button
-                      onClick={() => toggle(i)}
-                      className="w-full py-6 flex items-center justify-between text-left group"
+                    <h3
+                      className="font-primary font-semibold text-base md:text-lg transition-colors duration-300 pr-8"
+                      style={{ color: isOpen ? 'var(--mauve)' : 'var(--night)' }}
                     >
-                      <h3
-                        className="font-primary font-semibold text-lg md:text-xl transition-colors duration-300 pr-8"
-                        style={{ color: isOpen ? 'var(--jaune-or)' : 'var(--pure-white)' }}
-                      >
-                        {item.q}
-                      </h3>
-                      <div
-                        className="flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300"
-                        style={{
-                          borderColor: isOpen ? 'var(--jaune-or)' : 'rgba(255,255,255,0.2)',
-                          background: isOpen ? 'var(--jaune-or-10)' : 'transparent',
-                        }}
-                      >
-                        <FiChevronDown
-                          className="w-5 h-5 transition-transform duration-300"
-                          style={{
-                            color: isOpen ? 'var(--jaune-or)' : 'var(--pure-white)',
-                            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                          }}
-                        />
-                      </div>
-                    </button>
-
+                      {item.q}
+                    </h3>
                     <div
-                      className="overflow-hidden transition-all duration-300"
+                      className="flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300"
                       style={{
-                        maxHeight: isOpen ? '250px' : '0px',
-                        opacity: isOpen ? 1 : 0,
+                        borderColor: isOpen ? 'var(--mauve)' : 'var(--mauve-20)',
+                        background: isOpen ? 'var(--mauve-10)' : 'transparent',
                       }}
                     >
-                      <p className="pb-8 font-primary font-light text-[var(--pure-white)] opacity-70 text-base md:text-lg leading-relaxed max-w-2xl">
-                        {item.a}
-                      </p>
+                      <FiChevronDown
+                        className="w-4 h-4 transition-transform duration-300"
+                        style={{
+                          color: isOpen ? 'var(--mauve)' : 'var(--night-60)',
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        }}
+                      />
                     </div>
+                  </button>
+
+                  <div
+                    className="overflow-hidden transition-all duration-300"
+                    style={{
+                      maxHeight: isOpen ? '200px' : '0px',
+                      opacity: isOpen ? 1 : 0,
+                    }}
+                  >
+                    <p className="pb-5 font-primary font-light text-[var(--night-60)] text-sm md:text-base leading-relaxed max-w-2xl">
+                      {item.a}
+                    </p>
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
-          
+
+          {/* Bottom CTA */}
+          <div className="text-center pt-8 border-t border-[var(--mauve-10)] max-w-3xl mx-auto">
+            <p className="font-primary font-light text-sm text-[var(--night-60)] mb-4">
+              Vous ne trouvez pas votre réponse ?
+            </p>
+            <Link
+              to="/faq"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[0.75rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-300"
+            >
+              Voir toutes les questions
+            </Link>
+          </div>
+
         </div>
       </div>
     </section>
