@@ -162,12 +162,6 @@ export const Header: React.FC = () => {
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  // Need backdrop immediately on light pages, or when scrolled
-  const needsBackdrop = isScrolled || isLightBackgroundPage;
-
-  // On light pages, nav links should be dark; on dark/hero pages, white
-  const isLightNav = isLightBackgroundPage && !isScrolled;
-
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', href: '/about' },
     { label: 'Actualités', href: '/actualites' },
