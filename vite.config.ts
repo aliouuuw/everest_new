@@ -33,7 +33,9 @@ export default defineConfig({
             if (id.includes('three')) return 'three-vendor';
             if (id.includes('gsap')) return 'gsap-vendor';
             if (id.includes('framer-motion') || id.includes('lenis')) return 'animation-vendor';
-            if (id.includes('lucide-react') || id.includes('react-icons') || id.includes('clsx') || id.includes('tailwind-merge')) return 'ui-vendor';
+            if (id.includes('react-icons')) return 'icons-vendor';
+            if (id.includes('recharts')) return 'charts-vendor';
+            if (id.includes('lucide-react') || id.includes('clsx') || id.includes('tailwind-merge')) return 'ui-vendor';
             if (id.includes('@tanstack/react-router')) return 'router-vendor';
             return 'vendor';
           }
