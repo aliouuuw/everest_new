@@ -97,12 +97,12 @@ export const PublicationPage = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal py-20 sm:py-28 bg-gradient-to-br from-[var(--white-smoke)]/50 to-[var(--jaune-or-light)]/10">
+      <section ref={heroRef} className="reveal py-20 sm:py-28 section-bg-mauve">
         <div className="mx-auto max-w-4xl px-6">
           {/* Back button */}
           <button
             onClick={() => navigate({ to: '/publications' })}
-            className="inline-flex items-center gap-2 text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)] transition-colors mb-8 group"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 group"
           >
             <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
             Retour aux publications
@@ -110,28 +110,28 @@ export const PublicationPage = () => {
 
           {/* Category badge */}
           <div className="mb-6">
-            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-[var(--jaune-or-light)]/10 text-[var(--jaune-or)] border border-[var(--jaune-or-light)]/20">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase bg-[var(--jaune-or)]/15 text-[var(--jaune-or)] border border-[var(--jaune-or)]/20">
               {getCategoryLabel(publication.category)}
             </span>
             {publication.featured && (
-              <span className="inline-flex items-center px-3 py-2 rounded-full text-sm font-medium bg-[var(--jaune-or)]/20 text-[var(--jaune-or)] border border-[var(--jaune-or)]/30 ml-3">
-                ⭐ En vedette
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase bg-white/10 text-white border border-white/20 ml-3">
+                En vedette
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl font-display-aptos font-bold text-[var(--night)] mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-primary font-bold text-white mb-6 leading-tight">
             {publication.title}
           </h1>
 
           {/* Description */}
-          <p className="text-xl text-[rgba(10, 10, 10, 0.8)] mb-8 leading-relaxed">
+          <p className="text-xl text-white/70 mb-8 leading-relaxed font-light border-l-2 border-[var(--jaune-or)] pl-6">
             {publication.description}
           </p>
 
           {/* Meta information */}
-          <div className="flex flex-wrap items-center gap-6 text-[var(--night-60)] text-sm">
+          <div className="flex flex-wrap items-center gap-6 text-white/50 text-sm">
             <div className="flex items-center gap-2">
               <FaCalendar className="text-[var(--jaune-or)]" />
               <span>{publication.createdAt ? formatDate(publication.createdAt) : 'Date non disponible'}</span>
@@ -158,7 +158,7 @@ export const PublicationPage = () => {
                 {publication.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-[var(--jaune-or-10)] text-[var(--jaune-or)] text-xs rounded-full border border-[var(--jaune-or)]/20"
+                    className="px-3 py-1 bg-white/10 text-white/70 text-xs rounded-full border border-white/15"
                   >
                     {tag}
                   </span>

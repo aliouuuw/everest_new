@@ -353,7 +353,7 @@ html {
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--night);
+  color: var(--mauve);
 }
 
 .luxury-subheading {

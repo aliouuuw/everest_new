@@ -130,7 +130,7 @@ export const FAQPage = () => {
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
                   <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Support</span>
-                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05]">
+                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
                     Questions fréquentes.
                   </h2>
                 </div>
@@ -141,7 +141,7 @@ export const FAQPage = () => {
                   {qas.map((item) => (
                     <div key={item.q} className="relative">
                       <div className="w-8 h-px bg-[var(--mauve)] mb-8" />
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night)]">
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--mauve)]">
                         {item.q}
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -212,7 +212,7 @@ export const FAQPage = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         {terms.map((g) => (
                           <div key={g.term}>
-                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--night)]">
+                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--mauve)]">
                               {g.term}
                             </h3>
                             <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">

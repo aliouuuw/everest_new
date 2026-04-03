@@ -97,12 +97,12 @@ export const ActualitesPage = () => {
                   Centre de presse
                 </span>
               </div>
-              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight">
-                Actualités & <em className="font-normal italic text-[var(--mauve)]">Communiqués.</em>
+              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight text-[var(--mauve)]">
+                Actualités & <em className="font-normal italic text-[var(--jaune-or)]">Communiqués.</em>
               </h1>
             </div>
             <div className="lg:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light border-l-2 border-[var(--mauve)] pl-6">
+              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light border-l-2 border-[var(--mauve)] pl-6">
                 Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.
               </p>
             </div>

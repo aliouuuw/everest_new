@@ -505,7 +505,7 @@ export const BoursePage: React.FC = () => {
                 {/* Header with controls */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h2 className="font-primary font-bold text-3xl text-[var(--night)]">Cours des Actions BRVM</h2>
+                    <h2 className="font-primary font-bold text-3xl text-[var(--mauve)]">Cours des Actions BRVM</h2>
                     <p className="text-[var(--night-60)] font-medium mt-1">Données de marché temps réel</p>
                   </div>
 

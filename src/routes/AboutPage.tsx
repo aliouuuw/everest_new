@@ -40,13 +40,13 @@ export const AboutPage = () => {
                     À propos
                   </span>
                 </div>
-                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
-                  Des idées et des valeurs au service de vos ambitions
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
+                  Des idées et des valeurs au service de vos <span style={{ color: 'var(--jaune-or)' }}>ambitions</span>
                 </h1>
               </div>
               
               <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
                   Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client.
                 </p>
                 <a href="#mission" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
@@ -64,7 +64,7 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Notre raison d'être</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8">
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
                   Mission & Vision
                 </h2>
               </div>
@@ -72,7 +72,7 @@ export const AboutPage = () => {
               <div className="lg:col-span-7">
                 <div className="border-t border-black/10">
                   <div className="group py-10 border-b border-black/10">
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
                       Notre mission
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -80,7 +80,7 @@ export const AboutPage = () => {
                     </p>
                   </div>
                   <div className="group py-10 border-b border-black/10">
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
                       Notre vision
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -148,10 +148,10 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="py-16 md:py-24 border-b md:border-b-0 md:border-r border-black/10 md:pr-16">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
+                  <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--mauve)]">
                     11
                   </div>
-                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--mauve)] uppercase">ans</div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">ans</div>
                 </div>
                 <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                   D'existence
@@ -159,10 +159,10 @@ export const AboutPage = () => {
               </div>
               <div className="py-16 md:py-24 border-b md:border-b-0 md:border-r border-black/10 md:px-16">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night)]">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--mauve)]">
                     500
                   </div>
-                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--mauve)] uppercase">Mds</div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
                 </div>
                 <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                   Levée de fonds
@@ -170,10 +170,10 @@ export const AboutPage = () => {
               </div>
               <div className="py-16 md:py-24 md:pl-16">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night)]">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--mauve)]">
                     200
                   </div>
-                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--mauve)] uppercase">Mds</div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
                 </div>
                 <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                   Transactions marché
@@ -187,7 +187,7 @@ export const AboutPage = () => {
         <section ref={histoireRef} id="histoire" className="reveal py-24 md:py-40 border-b border-black/10">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Parcours</span>
-            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-20">
+            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-20 text-[var(--mauve)]">
               Notre histoire
             </h2>
 
@@ -212,7 +212,7 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Leadership</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05]">
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
                   Équipe dirigeante
                 </h2>
               </div>

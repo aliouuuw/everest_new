@@ -194,7 +194,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               Outil de simulation
             </span>
           </div>
-          <h2 className="luxury-heading">
+          <h2 className="luxury-heading" style={{ color: 'var(--mauve)' }}>
             Calculez vos{' '}
             <span style={{ color: 'var(--jaune-or)' }}>
               projections.

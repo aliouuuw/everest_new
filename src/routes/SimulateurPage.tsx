@@ -51,7 +51,7 @@ export const SimulateurPage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
             <div className="lg:col-span-5">
               <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Avantages</span>
-              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8">
+              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
                 Pourquoi utiliser notre simulateur ?
               </h2>
             </div>

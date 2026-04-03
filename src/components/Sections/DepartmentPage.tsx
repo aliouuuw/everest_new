@@ -86,11 +86,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               {metrics.map((metric, i) => (
                 <div key={i} className={`py-16 md:py-24 ${i < metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-black/10' : ''} ${i === 1 ? 'md:px-16' : i === 2 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="flex items-baseline gap-2 mb-4">
-                    <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
+                    <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--mauve)]">
                       {metric.value}
                     </div>
                     {metric.suffix && (
-                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--mauve)] uppercase">{metric.suffix}</div>
+                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">{metric.suffix}</div>
                     )}
                   </div>
                   <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
@@ -110,7 +110,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Audience cible</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8">
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
                   Conçu pour vos enjeux spécifiques.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -182,7 +182,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="mb-20 md:mb-32">
               <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Nos solutions</span>
-              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--mauve)]">
                 Une expertise financière sur mesure.
               </h2>
             </div>
@@ -304,7 +304,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Méthodologie</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8">
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
                   Un processus rigoureux.
                 </h2>
                 {approach_methodology && !method_steps && (
@@ -345,7 +345,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Interventions</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05]">
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
                   Périmètre d'action.
                 </h2>
               </div>

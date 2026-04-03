@@ -133,7 +133,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           <div className="lg:col-span-4">
             <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">FAQ</span>
-            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8">
+            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
               Questions fréquentes.
             </h2>
             <p className="text-lg text-[rgba(10,10,10,0.8)] font-light mb-12">

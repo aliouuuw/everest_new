@@ -36,13 +36,13 @@ export const OffresPage = () => {
                     Services d'investissement
                   </span>
                 </div>
-                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
-                  Votre partenaire pour investir sur la BRVM.
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
+                  Votre partenaire pour investir sur la <span style={{ color: 'var(--jaune-or)' }}>BRVM.</span>
                 </h1>
               </div>
               
               <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
                   Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style, votre expérience et vos objectifs financiers.
                 </p>
                 <a href="#services" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
