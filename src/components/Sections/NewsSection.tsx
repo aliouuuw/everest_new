@@ -1,5 +1,6 @@
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
+import { PillBadge } from '../ui';
 
 type NewsArticle = {
   title: string;
@@ -45,7 +46,7 @@ export const NewsSection: React.FC = () => {
     <section
       ref={sectionRef}
       className="reveal relative py-24 md:py-32 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%)' }}
+      style={{ background: 'var(--gradient-light-section)' }}
     >
       {/* Subtle mauve-gold gradient atmosphere */}
       <div
@@ -65,9 +66,7 @@ export const NewsSection: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div className="max-w-xl">
             <div className="mb-6">
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-                Actualités
-              </span>
+              <PillBadge>Actualités</PillBadge>
             </div>
             <h2 className="luxury-heading">
               Dernières{' '}

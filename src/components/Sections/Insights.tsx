@@ -3,6 +3,7 @@ import { useQuery } from "convex/react";
 import { useReveal } from "../Hooks/useReveal";
 import { api } from "../../../convex/_generated/api";
 import { FiArrowRight } from "react-icons/fi";
+import { PillBadge } from '../ui';
 
 type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
 
@@ -54,7 +55,7 @@ export const Insights: React.FC = () => {
       <section
         ref={sectionRef}
         className="reveal relative overflow-hidden"
-        style={{ background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)' }}
+        style={{ background: 'var(--gradient-dark-section)' }}
       >
         {/* Subtle atmospheric orbs */}
         <div
@@ -70,9 +71,7 @@ export const Insights: React.FC = () => {
         <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-12 md:pb-16 border-b border-white/10 gap-6">
           <div className="flex flex-col gap-6">
             <div>
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--jaune-or)] bg-[var(--jaune-or-10)] border border-[var(--jaune-or-20)]">
-                Publications
-              </span>
+              <PillBadge variant="gold">Publications</PillBadge>
             </div>
             
             <h2 className="luxury-heading-dark">

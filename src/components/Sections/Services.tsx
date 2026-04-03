@@ -1,6 +1,7 @@
 import { useLocation } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
+import { PillBadge } from '../ui';
 
 type Service = {
   number: string;
@@ -67,7 +68,7 @@ export const Services: React.FC = () => {
       ref={sectionRef}
       className="reveal relative overflow-hidden"
       id="services"
-      style={{ background: 'linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%)' }}
+      style={{ background: 'var(--gradient-ivory-section)' }}
     >
       {/* Subtle mauve-gold gradient atmosphere */}
       <div
@@ -80,9 +81,7 @@ export const Services: React.FC = () => {
       <div className="px-8 md:px-16 lg:px-24 pt-24 md:pt-32 pb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-10 border-b border-[var(--mauve-10)] relative z-10">
         <div className="max-w-2xl">
           <div className="mb-8">
-            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-              Nos offres
-            </span>
+            <PillBadge>Nos offres</PillBadge>
           </div>
           <h2 className="luxury-heading">
             Solutions pour chaque{' '}

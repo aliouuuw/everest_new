@@ -1,5 +1,6 @@
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
+import { PillBadge } from '../ui';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
@@ -17,7 +18,7 @@ export const CTA: React.FC<{
       ref={sectionRef}
       className="reveal relative py-24 md:py-36 overflow-hidden"
       id="contact"
-      style={{ background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)' }}
+      style={{ background: 'var(--gradient-dark-section)' }}
     >
       {/* Dramatic gold-mauve gradient orbs */}
       <div
@@ -39,9 +40,7 @@ export const CTA: React.FC<{
           {/* Left Side: Oversized Editorial Text */}
           <div className="lg:w-3/5">
             <div className="mb-8">
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--jaune-or)] bg-[var(--jaune-or-10)] border border-[var(--jaune-or-20)]">
-                Prise de contact
-              </span>
+              <PillBadge variant="gold">Prise de contact</PillBadge>
             </div>
             <h2 className="luxury-heading-dark">
               Prêts à franchir{' '}
@@ -50,7 +49,7 @@ export const CTA: React.FC<{
               </span>
             </h2>
             <div
-              className="h-[2px] w-32 mt-10 mb-8"
+              className="h-[3px] w-32 mt-10 mb-8"
               style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
             />
             <p

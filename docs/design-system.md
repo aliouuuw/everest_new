@@ -25,9 +25,38 @@
 }
 ```
 
-- Backgrounds: `--pure-white` (base), `--white-smoke` (panels), `--cream` (alternate), `--night` (dark sections)
+- Backgrounds: `--pure-white` (base), `--summit-ivory` (alternate light), `--white-smoke` (panels), `--cream` (warm alternate)
 - Text: `--night` primary, `--night-80` secondary, `--night-60` tertiary
-- Accents: `--jaune-or` as primary action and highlight color; `--mauve` as secondary accent (tags, hover states, badges)
+- Accents: `--mauve` (#461D4C) is the **DOMINANT** UI color (headings, badges, active states, borders, links). `--jaune-or` (#ca942f) is the **ACCENT** (dark section highlights, trust markers, primary CTAs on dark backgrounds).
+
+### Gradients (Source of Truth: `:root` in `styles.css`)
+```css
+:root {
+  --gradient-dark-section: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
+  --gradient-image-overlay: linear-gradient(180deg, rgba(42,20,53,0.35) 0%, rgba(30,16,40,0.55) 100%);
+  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(70,29,76,0.6) 0%, rgba(21,14,28,0.8) 100%);
+  --gradient-light-section: linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%);
+  --gradient-ivory-section: linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%);
+}
+```
+
+### Shadows
+```css
+:root {
+  --shadow-card-float: 0 40px 80px rgba(0,0,0,0.3);
+  --shadow-card-lift: 0 8px 24px rgba(70,29,76,0.1);
+  --shadow-card-hover: 0 20px 40px rgba(70,29,76,0.15);
+}
+```
+
+### Border Radius
+```css
+:root {
+  --radius-card: 1rem;      /* Standard cards */
+  --radius-card-lg: 2rem;   /* Large floating cards */
+  --radius-pill: 9999px;    /* Buttons, badges */
+}
+```
 
 ### Fonts
 ```css
@@ -38,9 +67,9 @@
 }
 ```
 
-- **Primary**: Clean sans-serif used for body text and ui elements.
-- **Display**: Elegant serif (`Fraunces`) used exclusively for large luxury headings.
-- **Display Aptos**: Medium-weight sans-serif for component headers and structural text.
+- **Primary (sans-serif)**: Used for ALL headings (weight 600-700), body text, and UI elements.
+- **Display (serif)**: Reserved for cinematic hero only (HeroSectionMountain). NOT used in section headings.
+- No italic emphasis in headings — use `<span style={{ color: 'var(--jaune-or)' }}>` color spans instead.
 
 ## Typography
 
@@ -89,6 +118,31 @@
 @utility gradient-gold { background: linear-gradient(120deg, var(--jaune-or-light), var(--jaune-or)); }
 @utility gradient-gold-subtle { background: linear-gradient(180deg, var(--jaune-or-10) 0%, transparent 75%); }
 @utility text-gradient-gold { background: linear-gradient(135deg, var(--jaune-or) 0%, var(--jaune-or) 100%); background-clip: text; color: transparent; }
+```
+
+## Reusable UI Components (`src/components/ui/`)
+
+### PillBadge
+```tsx
+import { PillBadge } from '../ui';
+
+<PillBadge>Label</PillBadge>                  // mauve variant (light sections)
+<PillBadge variant="gold">Label</PillBadge>   // gold variant (dark sections)
+```
+- Variants: `mauve` (default), `gold`
+- Used for all section kickers consistently
+
+### SectionHeader
+```tsx
+import { SectionHeader } from '../ui';
+
+<SectionHeader
+  badge="Label"
+  heading={<>Heading with <span style={{ color: 'var(--jaune-or)' }}>accent.</span></>}
+  subtext="Optional description text"
+  align="left"    // or "center"
+  dark={false}     // true for dark sections (auto-switches badge to gold)
+/>
 ```
 
 ## Components

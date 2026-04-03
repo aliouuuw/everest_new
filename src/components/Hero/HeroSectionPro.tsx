@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { FiArrowDown, FiArrowRight } from 'react-icons/fi';
+import { PillBadge } from '../ui';
 
 export const HeroSectionPro: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -114,9 +115,7 @@ export const HeroSectionPro: React.FC = () => {
           {/* Main Headline Area (Col 1-8) */}
           <div className="md:col-span-8 relative z-10 pr-4 lg:pr-12">
             <div className="hero-reveal mb-10 md:mb-16">
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-                Société de Gestion et d'Intermédiation
-              </span>
+              <PillBadge>Société de Gestion et d'Intermédiation</PillBadge>
             </div>
             
             <h1 className="hero-reveal luxury-heading mb-10 md:mb-0">
@@ -170,7 +169,7 @@ export const HeroSectionPro: React.FC = () => {
           ].map((stat, i) => (
             <div key={i} className="hero-badge flex flex-col justify-end">
               <div className="flex items-baseline gap-2 mb-3">
-                <div className="font-display text-5xl lg:text-6xl tracking-tighter text-[var(--mauve)] numeric-tabular">
+                <div className="font-primary font-bold text-5xl lg:text-6xl tracking-tighter text-[var(--mauve)] numeric-tabular">
                   {stat.value}
                 </div>
                 {stat.suffix && (

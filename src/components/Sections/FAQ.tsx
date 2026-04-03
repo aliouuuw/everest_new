@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import { Link } from '@tanstack/react-router';
 import { useReveal } from '../Hooks/useReveal';
+import { PillBadge } from '../ui';
 
 type QA = { q: string; a: string };
 
@@ -37,7 +38,7 @@ export const FAQ: React.FC = () => {
         {/* Dark mauve tint to make the white card pop */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(135deg, rgba(70,29,76,0.6) 0%, rgba(21,14,28,0.8) 100%)' }}
+          style={{ background: 'var(--gradient-image-overlay-heavy)' }}
         />
       </div>
 
@@ -48,9 +49,7 @@ export const FAQ: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <div className="mb-4">
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-                FAQ
-              </span>
+              <PillBadge>FAQ</PillBadge>
             </div>
             <h2 className="luxury-heading mb-3">
               Vous avez des{' '}
@@ -72,7 +71,7 @@ export const FAQ: React.FC = () => {
                 >
                   <button
                     onClick={() => toggle(i)}
-                    className="w-full py-4 flex items-center justify-between text-left group"
+                    className="w-full py-4 flex items-center justify-between text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2 rounded-lg"
                   >
                     <h3
                       className="font-primary font-semibold text-sm md:text-base transition-colors duration-300 pr-6"
@@ -81,7 +80,7 @@ export const FAQ: React.FC = () => {
                       {item.q}
                     </h3>
                     <div
-                      className="flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300"
+                      className="flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300"
                       style={{
                         borderColor: isOpen ? 'var(--mauve)' : 'var(--mauve-20)',
                         background: isOpen ? 'var(--mauve-10)' : 'transparent',
@@ -120,7 +119,7 @@ export const FAQ: React.FC = () => {
             </p>
             <Link
               to="/faq"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2"
             >
               Voir toutes les questions
             </Link>

@@ -1,4 +1,5 @@
 import { useReveal } from "../Hooks/useReveal";
+import { PillBadge } from '../ui';
 
 const stats = [
   { value: "08", unit: "ans", label: "d'expérience BRVM" },
@@ -28,7 +29,7 @@ export const ValueProps: React.FC = () => {
           {/* Mauve overlay for brand cohesion */}
           <div
             className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(180deg, rgba(42,20,53,0.35) 0%, rgba(30,16,40,0.55) 100%)' }}
+            style={{ background: 'var(--gradient-image-overlay)' }}
           />
           {/* Right edge fade into white for seamless transition */}
           <div
@@ -60,9 +61,7 @@ export const ValueProps: React.FC = () => {
           <div className="relative z-10 max-w-2xl">
             {/* Pill badge */}
             <div className="mb-8">
-              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-                Pourquoi Everest Finance
-              </span>
+              <PillBadge>Pourquoi Everest Finance</PillBadge>
             </div>
 
             {/* Heading */}
@@ -84,7 +83,7 @@ export const ValueProps: React.FC = () => {
               {stats.map((s) => (
                 <div key={s.label} className="group">
                   <div className="flex items-baseline">
-                    <span className="font-display text-[3.5rem] md:text-[4.5rem] leading-[0.85] tracking-tight text-[var(--mauve)] numeric-tabular transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
+                    <span className="font-primary font-bold text-[3.5rem] md:text-[4.5rem] leading-[0.85] tracking-tight text-[var(--mauve)] numeric-tabular transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
                       {s.value}
                     </span>
                     {s.unit && (

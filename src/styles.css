@@ -69,6 +69,23 @@
   --duration-slow: 700ms;
   --duration-reveal: 900ms;
 
+  /* Gradients */
+  --gradient-dark-section: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
+  --gradient-image-overlay: linear-gradient(180deg, rgba(42,20,53,0.35) 0%, rgba(30,16,40,0.55) 100%);
+  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(70,29,76,0.6) 0%, rgba(21,14,28,0.8) 100%);
+  --gradient-light-section: linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%);
+  --gradient-ivory-section: linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%);
+
+  /* Shadows */
+  --shadow-card-float: 0 40px 80px rgba(0,0,0,0.3);
+  --shadow-card-lift: 0 8px 24px rgba(70,29,76,0.1);
+  --shadow-card-hover: 0 20px 40px rgba(70,29,76,0.15);
+
+  /* Border Radius */
+  --radius-card: 1rem;
+  --radius-card-lg: 2rem;
+  --radius-pill: 9999px;
+
   /* Section Spacing */
   --hero-py: clamp(7rem, 12vw, 9rem);
   --section-gap: clamp(6rem, 10vw, 9rem);
@@ -148,7 +165,7 @@ html {
 }
 
 .section-bg-mauve {
-  background: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
+  background: var(--gradient-dark-section);
   color: var(--white-smoke);
   position: relative;
   z-index: 1;
