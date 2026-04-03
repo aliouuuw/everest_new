@@ -25,7 +25,7 @@ export const FAQ: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-36 overflow-hidden flex items-center justify-center min-h-screen"
+      className="reveal relative py-16 md:py-20 overflow-hidden flex items-center justify-center"
     >
       {/* Full-bleed background image with overlay */}
       <div className="absolute inset-0 z-0">
@@ -43,26 +43,26 @@ export const FAQ: React.FC = () => {
 
       <div className="relative z-10 w-full max-w-[1000px] px-6">
         {/* Floating Frosted Glass Card */}
-        <div className="bg-[var(--pure-white)]/95 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-14 shadow-[0_40px_80px_rgba(0,0,0,0.3)] border border-white/40">
+        <div className="bg-[var(--pure-white)]/95 backdrop-blur-2xl rounded-[2rem] p-6 md:p-10 shadow-[0_40px_80px_rgba(0,0,0,0.3)] border border-white/40">
           
           {/* Header */}
-          <div className="text-center mb-12">
-            <div className="mb-6">
+          <div className="text-center mb-8">
+            <div className="mb-4">
               <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
                 FAQ
               </span>
             </div>
-            <h2 className="luxury-heading mb-4">
+            <h2 className="luxury-heading mb-3">
               Vous avez des{' '}
               <span style={{ color: 'var(--jaune-or)' }}>questions ?</span>
             </h2>
-            <p className="text-secondary text-base md:text-lg max-w-xl mx-auto">
+            <p className="text-secondary text-sm md:text-base max-w-xl mx-auto">
               Retrouvez les réponses aux interrogations les plus courantes de nos clients.
             </p>
           </div>
 
           {/* Accordion */}
-          <div className="space-y-0 mb-12 max-w-3xl mx-auto">
+          <div className="space-y-0 mb-8 max-w-3xl mx-auto">
             {faqs.map((item, i) => {
               const isOpen = openIndex === i;
               return (
@@ -72,23 +72,23 @@ export const FAQ: React.FC = () => {
                 >
                   <button
                     onClick={() => toggle(i)}
-                    className="w-full py-5 flex items-center justify-between text-left group"
+                    className="w-full py-4 flex items-center justify-between text-left group"
                   >
                     <h3
-                      className="font-primary font-semibold text-base md:text-lg transition-colors duration-300 pr-8"
+                      className="font-primary font-semibold text-sm md:text-base transition-colors duration-300 pr-6"
                       style={{ color: isOpen ? 'var(--mauve)' : 'var(--night)' }}
                     >
                       {item.q}
                     </h3>
                     <div
-                      className="flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300"
+                      className="flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300"
                       style={{
                         borderColor: isOpen ? 'var(--mauve)' : 'var(--mauve-20)',
                         background: isOpen ? 'var(--mauve-10)' : 'transparent',
                       }}
                     >
                       <FiChevronDown
-                        className="w-4 h-4 transition-transform duration-300"
+                        className="w-3.5 h-3.5 transition-transform duration-300"
                         style={{
                           color: isOpen ? 'var(--mauve)' : 'var(--night-60)',
                           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -100,11 +100,11 @@ export const FAQ: React.FC = () => {
                   <div
                     className="overflow-hidden transition-all duration-300"
                     style={{
-                      maxHeight: isOpen ? '200px' : '0px',
+                      maxHeight: isOpen ? '120px' : '0px',
                       opacity: isOpen ? 1 : 0,
                     }}
                   >
-                    <p className="pb-5 font-primary font-light text-[var(--night-60)] text-sm md:text-base leading-relaxed max-w-2xl">
+                    <p className="pb-4 font-primary font-light text-[var(--night-60)] text-xs md:text-sm leading-relaxed max-w-2xl">
                       {item.a}
                     </p>
                   </div>
@@ -114,13 +114,13 @@ export const FAQ: React.FC = () => {
           </div>
 
           {/* Bottom CTA */}
-          <div className="text-center pt-8 border-t border-[var(--mauve-10)] max-w-3xl mx-auto">
-            <p className="font-primary font-light text-sm text-[var(--night-60)] mb-4">
+          <div className="text-center pt-6 border-t border-[var(--mauve-10)] max-w-3xl mx-auto">
+            <p className="font-primary font-light text-xs md:text-sm text-[var(--night-60)] mb-3">
               Vous ne trouvez pas votre réponse ?
             </p>
             <Link
               to="/faq"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-[0.75rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-300"
             >
               Voir toutes les questions
             </Link>
