@@ -51,73 +51,47 @@ export const Insights: React.FC = () => {
   const secondary = items.slice(1, 3);
 
   return (
-    <section
-      ref={sectionRef}
-      className="reveal relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--night) 0%, #0f0a10 100%)' }}
-    >
-      {/* Dual mauve-gold gradient atmosphere */}
-      <div
-        className="absolute top-0 left-0 w-[55%] h-[70%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-25) 0%, var(--mauve-10) 40%, transparent 70%)' }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[40%] h-[50%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-10) 0%, transparent 60%)' }}
-      />
-      {/* Gradient orb accent */}
-      <div
-        className="absolute top-1/2 left-1/4 w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 blur-3xl -translate-y-1/2"
-        style={{
-          background: 'radial-gradient(circle, var(--mauve-20) 0%, var(--jaune-or-05) 50%, transparent 70%)',
-        }}
-      />
-
-      {/* Section header strip */}
-      <div
-        className="relative z-10 flex items-center justify-between px-8 md:px-16 lg:px-24 pt-16 md:pt-20 pb-10 md:pb-12"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+      <section
+        ref={sectionRef}
+        className="reveal relative overflow-hidden"
+        style={{ background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)' }}
       >
-        <div className="flex items-center gap-6">
-          <span
-            className="text-[10px] tracking-[0.35em] uppercase"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-          >
-            Publications
-          </span>
-          <span
-            className="h-[1px] w-12"
-            style={{ background: 'var(--jaune-or)', opacity: 0.4 }}
-          />
-          <span
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 300,
-              fontSize: 'clamp(1.5rem, 3vw, 2.4rem)',
-              letterSpacing: '-0.01em',
-              lineHeight: 1,
-              color: 'var(--pure-white)',
-            }}
-          >
-            Restez informé{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>des marchés.</em>
-          </span>
-        </div>
+        {/* Subtle atmospheric orbs */}
+        <div
+          className="absolute top-0 left-0 w-[55%] h-[70%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.25) 0%, transparent 60%)' }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-[40%] h-[50%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-10) 0%, transparent 60%)' }}
+        />
 
-        <a
-          href="/publications"
-          className="hidden md:inline-flex items-center gap-3 group"
-        >
-          <span
-            className="relative overflow-hidden text-[10px] tracking-[0.2em] uppercase"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}
+        {/* Section header strip */}
+        <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-12 md:pb-16 border-b border-white/10 gap-6">
+          <div className="flex flex-col gap-6">
+            <div>
+              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--jaune-or)] bg-[var(--jaune-or-10)] border border-[var(--jaune-or-20)]">
+                Publications
+              </span>
+            </div>
+            
+            <h2 className="luxury-heading-dark">
+              Restez informé{' '}
+              <span style={{ color: 'var(--jaune-or)' }}>des marchés.</span>
+            </h2>
+          </div>
+
+          <a
+            href="/publications"
+            className="hidden md:inline-flex items-center gap-3 group"
           >
-            Toutes les publications
-            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-          </span>
-          <FiArrowRight className="text-xs text-[rgba(255,255,255,0.4)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
-        </a>
-      </div>
+            <span className="kicker text-white/60 group-hover:text-white transition-colors relative overflow-hidden pb-1">
+              Toutes les publications
+              <span className="absolute bottom-0 left-0 w-full h-px bg-[var(--jaune-or)] -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+            </span>
+            <FiArrowRight className="text-lg text-white/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+          </a>
+        </div>
 
       {/* Loading state */}
       {publications === undefined && (
@@ -134,71 +108,33 @@ export const Insights: React.FC = () => {
           {featured && (
             <a
               href={featured.href}
-              className="group lg:w-[58%] flex flex-col justify-between px-8 md:px-16 lg:px-24 py-14 md:py-18 transition-colors duration-500 hover:bg-white/[0.02]"
+              className="group lg:w-[58%] flex flex-col justify-between px-8 md:px-16 lg:px-24 py-16 md:py-20 transition-colors duration-500 hover:bg-white/[0.03]"
               style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}
             >
               <div>
                 {/* Category badge */}
-                <span
-                  className="inline-block mb-8 px-3 py-1 text-[10px] tracking-[0.12em] uppercase"
-                  style={{
-                    fontFamily: 'var(--font-primary)',
-                    fontWeight: 500,
-                    color: 'var(--jaune-or)',
-                    border: '1px solid rgba(202,148,47,0.25)',
-                  }}
-                >
+                <span className="inline-block mb-10 px-4 py-1.5 kicker text-[var(--jaune-or)] border border-[var(--jaune-or)]/30 rounded-full bg-[var(--jaune-or)]/5">
                   {CATEGORY_LABELS[featured.category]}
                 </span>
 
                 {/* Large display title */}
-                <h3
-                  className="mb-6 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 300,
-                    fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-                    lineHeight: 1.1,
-                    letterSpacing: '-0.01em',
-                    color: 'var(--pure-white)',
-                  }}
-                >
+                <h3 className="font-primary font-bold text-3xl md:text-5xl leading-[1.1] tracking-tight text-white mb-6 transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
                   {featured.title}
                 </h3>
 
-                <p
-                  style={{
-                    fontFamily: 'var(--font-primary)',
-                    fontWeight: 300,
-                    fontSize: '0.9rem',
-                    lineHeight: 1.8,
-                    color: 'rgba(255,255,255,0.4)',
-                    maxWidth: '34rem',
-                  }}
-                >
+                <p className="text-secondary-dark text-base md:text-lg mb-8 max-w-2xl">
                   {featured.desc}
                 </p>
               </div>
 
               {/* Bottom row */}
               <div className="mt-12 flex items-center justify-between">
-                <span
-                  style={{
-                    fontFamily: 'var(--font-primary)',
-                    fontWeight: 300,
-                    fontSize: '0.75rem',
-                    color: 'rgba(255,255,255,0.25)',
-                    letterSpacing: '0.05em',
-                  }}
-                >
+                <span className="font-primary font-light text-sm text-white/40 tracking-wider">
                   {new Date(featured.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </span>
-                <span
-                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase group-hover:text-[var(--jaune-or)] transition-colors duration-300"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.35)' }}
-                >
+                <span className="inline-flex items-center gap-3 kicker text-white/60 group-hover:text-[var(--jaune-or)] transition-colors duration-300">
                   Lire
-                  <span className="inline-block w-5 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
+                  <span className="inline-block w-6 h-px bg-current group-hover:w-12 transition-all duration-500" />
                 </span>
               </div>
             </a>
@@ -210,52 +146,25 @@ export const Insights: React.FC = () => {
               <a
                 key={`${it.title}-${it.date}`}
                 href={it.href}
-                className="group flex flex-col justify-between px-8 md:px-12 lg:px-14 py-10 md:py-12 transition-colors duration-500 hover:bg-white/[0.02] flex-1"
+                className="group flex flex-col justify-between px-8 md:px-12 lg:px-16 py-12 transition-colors duration-500 hover:bg-white/[0.03] flex-1"
                 style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.06)' }}
               >
                 <div>
-                  <span
-                    className="block mb-4 text-[10px] tracking-[0.12em] uppercase"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)', opacity: 0.7 }}
-                  >
+                  <span className="block mb-5 kicker text-[var(--jaune-or)]/80">
                     {CATEGORY_LABELS[it.category]}
                   </span>
-                  <h3
-                    className="mb-3 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
-                    style={{
-                      fontFamily: 'var(--font-display-aptos)',
-                      fontWeight: 500,
-                      fontSize: 'clamp(1.1rem, 2vw, 1.45rem)',
-                      lineHeight: 1.2,
-                      color: 'var(--pure-white)',
-                    }}
-                  >
+                  <h3 className="font-display-aptos text-xl md:text-2xl text-white mb-4 transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
                     {it.title}
                   </h3>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 300,
-                      fontSize: '0.82rem',
-                      lineHeight: 1.7,
-                      color: 'rgba(255,255,255,0.35)',
-                    }}
-                  >
+                  <p className="text-secondary-dark text-sm md:text-base line-clamp-3">
                     {it.desc}
                   </p>
                 </div>
-                <div className="mt-6 flex items-center justify-between">
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 300,
-                      fontSize: '0.7rem',
-                      color: 'rgba(255,255,255,0.2)',
-                    }}
-                  >
+                <div className="mt-8 flex items-center justify-between">
+                  <span className="font-primary font-light text-xs text-white/40 tracking-wider">
                     {new Date(it.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </span>
-                  <FiArrowRight className="text-xs text-[rgba(255,255,255,0.2)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+                  <FiArrowRight className="text-lg text-white/40 group-hover:text-[var(--jaune-or)] transition-colors duration-500 group-hover:translate-x-1" />
                 </div>
               </a>
             ))}
@@ -263,15 +172,13 @@ export const Insights: React.FC = () => {
             {/* View all — bottom of right column */}
             <a
               href="/publications"
-              className="md:hidden flex items-center gap-3 px-8 py-8 group"
+              className="md:hidden flex items-center justify-between px-8 py-8 group hover:bg-white/[0.03] transition-colors"
               style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
             >
-              <span
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}
-              >
+              <span className="kicker text-white/60 group-hover:text-[var(--jaune-or)] transition-colors">
                 Toutes les publications
               </span>
-              <FiArrowRight className="text-xs text-[rgba(255,255,255,0.4)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+              <FiArrowRight className="text-lg text-white/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500 group-hover:translate-x-1" />
             </a>
           </div>
         </div>

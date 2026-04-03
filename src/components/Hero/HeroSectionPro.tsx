@@ -103,8 +103,8 @@ export const HeroSectionPro: React.FC = () => {
         />
 
         {/* Structural architectural lines */}
-        <div className="absolute top-0 right-[20%] w-px h-[60vh] bg-gradient-to-b from-black/10 to-transparent" />
-        <div className="absolute bottom-0 left-[30%] w-px h-[40vh] bg-gradient-to-t from-black/10 to-transparent" />
+        <div className="absolute top-0 right-[20%] w-px h-[60vh] bg-gradient-to-b from-[var(--mauve-15)] to-transparent" />
+        <div className="absolute bottom-0 left-[30%] w-px h-[40vh] bg-gradient-to-t from-[var(--mauve-15)] to-transparent" />
       </div>
 
       {/* ─── Editorial Layout Content ─── */}
@@ -112,28 +112,28 @@ export const HeroSectionPro: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
           
           {/* Main Headline Area (Col 1-8) */}
-          <div className="md:col-span-8 relative">
-            <div className="hero-reveal flex items-center gap-4 mb-12">
-              <div className="hero-line w-12 h-px bg-[var(--jaune-or)]" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+          <div className="md:col-span-8 relative z-10 pr-4 lg:pr-12">
+            <div className="hero-reveal mb-10 md:mb-16">
+              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
                 Société de Gestion et d'Intermédiation
               </span>
             </div>
             
-            <h1 className="hero-reveal font-display text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.92] tracking-tight mb-8">
-              Élevez vos ambitions vers de nouveaux <em className="not-italic" style={{ color: 'var(--jaune-or)', fontStyle: 'italic' }}>sommets.</em>
+            <h1 className="hero-reveal luxury-heading mb-10 md:mb-0">
+              Élevez vos ambitions vers de nouveaux{' '}
+              <span style={{ color: 'var(--jaune-or)' }}>sommets.</span>
             </h1>
           </div>
           
           {/* Subtitle & CTA Area (Col 9-12) */}
-          <div className="md:col-span-4 pb-4">
+          <div className="md:col-span-4 pb-2 md:pb-6 relative z-10">
             <div className="relative">
-              {/* Structural accent */}
-              <div className="hero-line absolute left-0 top-0 w-full h-px bg-black/10" />
-              <div className="hero-line absolute left-0 top-0 w-px h-full bg-black/10" />
+              {/* Structural accent - refined */}
+              <div className="hero-line absolute left-0 top-0 w-full h-[1px] bg-[var(--mauve-15)]" />
+              <div className="hero-line hidden md:block absolute left-0 top-0 w-[1px] h-full bg-[var(--mauve-15)]" />
               
-              <div className="pl-8 pt-8">
-                <p className="hero-reveal text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10">
+              <div className="pt-8 md:pl-10 md:pt-10">
+                <p className="hero-reveal luxury-subheading-left mb-10">
                   Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires 
                   et l'ingénierie financière structurée en Afrique de l'Ouest.
                 </p>
@@ -141,18 +141,18 @@ export const HeroSectionPro: React.FC = () => {
                 <div className="hero-reveal flex flex-col sm:flex-row gap-6">
                   <button 
                     onClick={() => scrollToSection('contact')}
-                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 bg-[var(--night)] text-white text-xs font-bold tracking-[0.2em] uppercase transition-all hover:bg-[var(--jaune-or)]"
+                    className="btn-primary group"
                   >
                     <span>Nous contacter</span>
-                    <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
+                    <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform ml-2" />
                   </button>
                   
                   <button 
                     onClick={() => scrollToSection('services')}
-                    className="group inline-flex items-center justify-center gap-4 px-8 py-4 border border-black/10 text-[var(--night)] text-xs font-bold tracking-[0.2em] uppercase transition-all hover:border-[var(--jaune-or)]"
+                    className="btn-secondary group"
                   >
                     <span>Nos services</span>
-                    <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
+                    <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform ml-2" />
                   </button>
                 </div>
               </div>
@@ -162,24 +162,24 @@ export const HeroSectionPro: React.FC = () => {
         </div>
 
         {/* ─── Metric Badges (Bottom Area) ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 border-t border-black/10 pt-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 border-t border-[var(--mauve-15)] pt-12 relative z-10">
           {[
             { value: '08', suffix: '+', label: "Années d'expérience" },
             { value: '30', suffix: '+', label: "Années d'expertise cumulée" },
             { value: 'UEMOA', suffix: '', label: "Zone réglementée (SGI/DA/2016/60)" }
           ].map((stat, i) => (
             <div key={i} className="hero-badge flex flex-col justify-end">
-              <div className="flex items-baseline gap-2 mb-2">
-                <div className="font-display text-4xl md:text-5xl tracking-tighter text-[var(--night)]">
+              <div className="flex items-baseline gap-2 mb-3">
+                <div className="font-display text-5xl lg:text-6xl tracking-tighter text-[var(--mauve)] numeric-tabular">
                   {stat.value}
                 </div>
                 {stat.suffix && (
-                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">
+                  <div className="text-xl lg:text-2xl font-light text-[var(--jaune-or)]">
                     {stat.suffix}
                   </div>
                 )}
               </div>
-              <div className="text-[10px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+              <div className="kicker text-[var(--night-60)]">
                 {stat.label}
               </div>
             </div>

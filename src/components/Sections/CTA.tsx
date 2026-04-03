@@ -17,7 +17,7 @@ export const CTA: React.FC<{
       ref={sectionRef}
       className="reveal relative py-24 md:py-36 overflow-hidden"
       id="contact"
-      style={{ background: 'linear-gradient(135deg, var(--night) 0%, var(--mauve) 50%, #2a1025 100%)' }}
+      style={{ background: 'linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%)' }}
     >
       {/* Dramatic gold-mauve gradient orbs */}
       <div
@@ -38,26 +38,16 @@ export const CTA: React.FC<{
           
           {/* Left Side: Oversized Editorial Text */}
           <div className="lg:w-3/5">
-            <span
-              className="block text-[10px] tracking-[0.35em] uppercase mb-8"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              Prise de contact
-            </span>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.01em',
-                color: 'var(--pure-white)',
-              }}
-            >
+            <div className="mb-8">
+              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--jaune-or)] bg-[var(--jaune-or-10)] border border-[var(--jaune-or-20)]">
+                Prise de contact
+              </span>
+            </div>
+            <h2 className="luxury-heading-dark">
               Prêts à franchir{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              <span style={{ color: 'var(--jaune-or)' }}>
                 un cap ?
-              </em>
+              </span>
             </h2>
             <div
               className="h-[2px] w-32 mt-10 mb-8"
@@ -81,19 +71,15 @@ export const CTA: React.FC<{
           <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
             <a
               href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 border transition-all duration-500 hover:shadow-[0_0_30px_rgba(202,148,47,0.3)]"
-              style={{ 
-                borderColor: 'rgba(202,148,47,0.4)',
-                background: 'linear-gradient(135deg, rgba(202,148,47,0.1) 0%, transparent 100%)'
-              }}
+              className="btn-primary-dark group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 transition-all duration-500"
             >
               <span
                 className="text-[12px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
               >
                 {primaryLabel}
               </span>
-              <FiArrowRight className="text-lg text-[var(--jaune-or)] group-hover:translate-x-1 transition-transform duration-500" />
+              <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform duration-500" />
             </a>
             
             {secondaryHref && (

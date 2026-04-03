@@ -148,7 +148,7 @@ html {
 }
 
 .section-bg-mauve {
-  background: linear-gradient(135deg, var(--night) 0%, var(--mauve) 100%);
+  background: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
   color: var(--white-smoke);
   position: relative;
   z-index: 1;
@@ -251,16 +251,16 @@ html {
 
 /* Typography Classes */
 .heading-display {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
 /* Brand lockup for header */
 .brand-heading {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -282,14 +282,14 @@ html {
 }
 
 .heading-primary {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   line-height: 1.1;
 }
 
 .font-display {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -329,13 +329,13 @@ html {
   line-height: 1.6;
 }
 
-/* Luxury text treatments — Fraunces serif, weight 400 */
+/* Section heading — sans-serif bold */
 .luxury-heading {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--night);
 }
 
@@ -358,13 +358,13 @@ html {
   max-width: 38rem;
 }
 
-/* Dark Mode Luxury text treatments */
+/* Dark Mode section heading — sans-serif bold */
 .luxury-heading-dark {
-  font-family: var(--font-display);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-weight: 700;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--pure-white);
 }
 
@@ -403,16 +403,17 @@ html {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
-  background: var(--night);
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  background: var(--mauve);
   color: var(--pure-white);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(10,10,10,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(70,29,76,0.3);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -421,18 +422,18 @@ html {
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
-  border: 1px solid rgba(10,10,10,0.15);
-  color: var(--night);
-  background: rgba(245,245,245,0.8);
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  border: 1px solid var(--mauve-20);
+  color: var(--mauve);
+  background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary:hover {
-  background: var(--night);
+  background: var(--mauve);
   color: var(--pure-white);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(10,10,10,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(70,29,76,0.2);
 }
 
 .btn-secondary:active {
@@ -442,7 +443,7 @@ html {
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
   color: var(--pure-white);
   border: 0;
@@ -461,7 +462,7 @@ html {
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   border: 1px solid rgba(202,148,47,0.4);
   color: var(--jaune-or);
   background: transparent;
@@ -483,12 +484,12 @@ html {
 /* Accessible gold-tinted focus rings */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
+  box-shadow: 0 0 0 3px var(--mauve-20), 0 0 0 1px var(--mauve);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-10), 0 0 0 1px var(--jaune-or);
+  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
 }
 
 .btn-primary-dark:focus-visible {
@@ -503,7 +504,7 @@ html {
 
 /* Card Styles */
 .stat-card {
-  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--jaune-or)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--jaune-or)]/10;
+  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--mauve)]/10 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/10 hover:border-[var(--mauve)]/25;
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -575,8 +576,8 @@ html {
 
 /* Enhanced Typography */
 .hero-title {
-  font-family: var(--font-display);
-  font-weight: 300;
+  font-family: var(--font-primary);
+  font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.02em;
 }

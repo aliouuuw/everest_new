@@ -169,7 +169,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
     <section
       ref={sectionRef}
       className="reveal relative py-28 md:py-36 overflow-hidden"
-      style={{ background: 'var(--pure-white)' }}
+      style={{ background: 'var(--summit-ivory)' }}
     >
       {/* Dual mauve-gold gradient atmosphere */}
       <div
@@ -189,40 +189,30 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header */}
         <div className="max-w-xl mb-14">
-          <span
-            className="block text-[10px] tracking-[0.3em] uppercase mb-5"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-          >
-            Outil de simulation
-          </span>
-          <h2
-            style={{
-              fontFamily: 'var(--font-display-aptos)',
-              fontWeight: 400,
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
-              lineHeight: 1.0,
-              letterSpacing: '-0.02em',
-              color: 'var(--night)',
-            }}
-          >
+          <div className="mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+              Outil de simulation
+            </span>
+          </div>
+          <h2 className="luxury-heading">
             Calculez vos{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+            <span style={{ color: 'var(--jaune-or)' }}>
               projections.
-            </em>
+            </span>
           </h2>
         </div>
 
         {/* Tab Navigation */}
         {!calculatorOnly && (
-          <div className="flex gap-6 mb-12 border-b border-black/[0.06]">
+          <div className="flex gap-6 mb-12 border-b border-[var(--mauve-10)]">
             <button
               onClick={() => setActiveTab('calculator')}
               className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-primary)',
-                fontWeight: activeTab === 'calculator' ? 500 : 300,
-                color: activeTab === 'calculator' ? 'var(--jaune-or)' : 'var(--night-60)',
-                borderBottom: activeTab === 'calculator' ? '1px solid var(--jaune-or)' : '1px solid transparent',
+                fontWeight: activeTab === 'calculator' ? 600 : 300,
+                color: activeTab === 'calculator' ? 'var(--mauve)' : 'var(--night-60)',
+                borderBottom: activeTab === 'calculator' ? '2px solid var(--mauve)' : '2px solid transparent',
               }}
             >
               Calculateur
@@ -232,9 +222,9 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
               style={{
                 fontFamily: 'var(--font-primary)',
-                fontWeight: activeTab === 'comparison' ? 500 : 300,
-                color: activeTab === 'comparison' ? 'var(--jaune-or)' : 'var(--night-60)',
-                borderBottom: activeTab === 'comparison' ? '1px solid var(--jaune-or)' : '1px solid transparent',
+                fontWeight: activeTab === 'comparison' ? 600 : 300,
+                color: activeTab === 'comparison' ? 'var(--mauve)' : 'var(--night-60)',
+                borderBottom: activeTab === 'comparison' ? '2px solid var(--mauve)' : '2px solid transparent',
               }}
             >
               Comparaison
@@ -246,10 +236,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Calculator Inputs */}
             <div>
-              <div className="p-8 border border-black/[0.06] bg-[var(--white-smoke)] rounded-2xl">
+              <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--night)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.3rem', color: 'var(--night)' }}
                 >
                   Paramètres d'investissement
                 </h3>
@@ -269,11 +259,11 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                         onClick={() => handleInputChange('service', service.service)}
                         className="p-4 text-left transition-all duration-300 rounded-xl"
                         style={{
-                          border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
-                          background: inputs.service === service.service ? 'var(--gold-pale)' : 'var(--pure-white)',
+                          border: inputs.service === service.service ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                          background: inputs.service === service.service ? 'var(--mauve-05)' : 'var(--pure-white)',
                         }}
                       >
-                        <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '0.95rem', color: 'var(--night)', marginBottom: '0.25rem' }}>
+                        <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '0.95rem', color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night)', marginBottom: '0.25rem' }}>
                           {service.title}
                         </div>
                         <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>
@@ -297,7 +287,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       type="number"
                       value={inputs.initialAmount}
                       onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                      className="w-full px-4 py-3 border border-black/[0.08] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--jaune-or)] focus:outline-none transition-colors rounded-xl"
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl"
                       style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem' }}
                       min="100000"
                       step="50000"
@@ -315,7 +305,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       type="number"
                       value={inputs.monthlyContribution}
                       onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                      className="w-full px-4 py-3 border border-black/[0.08] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--jaune-or)] focus:outline-none transition-colors rounded-xl"
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl"
                       style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem' }}
                       min="0"
                       step="5000"
@@ -339,7 +329,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     />
                     <div className="flex justify-between mt-2">
                       <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>1 an</span>
-                      <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1rem', color: 'var(--jaune-or)' }}>{inputs.timeHorizon} ans</span>
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1rem', color: 'var(--mauve)' }}>{inputs.timeHorizon} ans</span>
                       <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>20 ans</span>
                     </div>
                   </div>
@@ -358,16 +348,16 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                           onClick={() => handleInputChange('expectedReturn', value)}
                           className="p-3 text-center transition-all duration-300 rounded-xl"
                           style={{
-                            border: inputs.expectedReturn === value ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
-                            background: inputs.expectedReturn === value ? 'var(--gold-pale)' : 'var(--pure-white)',
+                            border: inputs.expectedReturn === value ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                            background: inputs.expectedReturn === value ? 'var(--mauve-05)' : 'var(--pure-white)',
                           }}
                         >
-                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', color: inputs.expectedReturn === value ? 'var(--jaune-or)' : 'var(--night-60)', marginBottom: '0.15rem' }}>
+                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', color: inputs.expectedReturn === value ? 'var(--mauve)' : 'var(--night-60)', marginBottom: '0.15rem' }}>
                             {key === 'conservative' && 'Conservateur'}
                             {key === 'moderate' && 'Modéré'}
                             {key === 'aggressive' && 'Dynamique'}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--jaune-or)' : 'var(--night-80)' }}>
+                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--mauve)' : 'var(--night-80)' }}>
                             {formatPercentage(value)}
                           </div>
                         </button>
@@ -380,53 +370,53 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
 
             {/* Results */}
             <div>
-              <div className="p-8 border border-black/[0.06] bg-[var(--white-smoke)] rounded-2xl">
+              <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.3rem', color: 'var(--night)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.3rem', color: 'var(--night)' }}
                 >
                   Projections estimées
                 </h3>
 
                 <div className="space-y-0">
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--timberwolf)' }}>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Total investi</span>
-                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.2rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--timberwolf)' }}>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>
                       Frais estimés ({serviceFees[inputs.service].min}%)
                     </span>
-                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '2px solid rgba(202,148,47,0.3)' }}>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '2px solid var(--mauve-20)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.875rem', color: 'var(--night-80)' }}>Valeur projetée</span>
-                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 600, fontSize: '1.5rem', color: '#10b981' }}>{projectedValueCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.5rem', color: '#10b981' }}>{projectedValueCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-5">
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Gain net estimé</span>
-                    <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 500, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#10b981' : '#ef4444' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#10b981' : '#ef4444' }}>
                       {netReturnCounter.value}
                     </span>
                   </div>
                 </div>
 
                 {/* Avg return highlight with gradient */}
-                <div className="mt-8 p-6 rounded-xl relative overflow-hidden" style={{ background: 'var(--gold-pale)', border: '1px solid rgba(202,148,47,0.2)' }}>
+                <div className="mt-8 p-6 rounded-xl relative overflow-hidden" style={{ background: 'var(--mauve-05)', border: '1px solid var(--mauve-15)' }}>
                   <div 
                     className="absolute inset-0 opacity-30 pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, var(--jaune-or-20) 0%, var(--mauve-10) 100%)' }}
+                    style={{ background: 'linear-gradient(135deg, var(--mauve-10) 0%, var(--jaune-or-10) 100%)' }}
                   />
                   <span
                     className="block mb-2 relative z-10"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--jaune-or)' }}
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--mauve)' }}
                   >
                     Rendement annuel moyen estimé
                   </span>
-                  <span style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 600, fontSize: '2.5rem', color: 'var(--jaune-or)' }}>
+                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2.5rem', color: 'var(--mauve)' }}>
                     {avgReturnCounter.value}
                   </span>
                 </div>
@@ -447,10 +437,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 >
                   <span
                     className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--mauve)' }}
                   >
                     Obtenir un conseil personnalisé
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--mauve)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
                   </span>
                 </a>
               </div>
@@ -462,27 +452,27 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             {serviceComparison.map((service) => (
               <div
                 key={service.service}
-                className="p-8 flex flex-col transition-colors duration-300 hover:border-[var(--jaune-or)] cursor-pointer rounded-2xl"
+                className="p-8 flex flex-col transition-colors duration-300 hover:border-[var(--mauve)] cursor-pointer rounded-2xl"
                 onClick={() => {
                   handleInputChange('service', service.service);
                   setActiveTab('calculator');
                 }}
                 style={{
-                  border: inputs.service === service.service ? '1px solid var(--jaune-or)' : '1px solid var(--timberwolf)',
-                  background: inputs.service === service.service ? 'var(--gold-pale)' : 'var(--pure-white)',
+                  border: inputs.service === service.service ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                  background: inputs.service === service.service ? 'var(--mauve-05)' : 'var(--pure-white)',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 600, fontSize: '1.4rem', color: 'var(--night)', marginBottom: '0.75rem' }}>
+                <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.4rem', color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night)', marginBottom: '0.75rem' }}>
                   {service.title}
                 </div>
-                <div style={{ fontFamily: 'var(--font-display-aptos)', fontWeight: 400, fontSize: '1.8rem', color: 'var(--jaune-or)', marginBottom: '1.5rem' }}>
+                <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.8rem', color: 'var(--mauve)', marginBottom: '1.5rem' }}>
                   {service.fee}
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-grow">
                   {service.features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)] flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--mauve)] flex-shrink-0" />
                       <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.85rem', color: 'var(--night-80)' }}>
                         {feature}
                       </span>
@@ -495,7 +485,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 600,
-                    color: inputs.service === service.service ? 'var(--jaune-or)' : 'var(--night-60)',
+                    color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night-60)',
                   }}
                 >
                   {inputs.service === service.service ? 'Sélectionné' : 'Simuler →'}

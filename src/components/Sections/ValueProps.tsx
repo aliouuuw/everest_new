@@ -1,222 +1,126 @@
 import { useReveal } from "../Hooks/useReveal";
 
 const stats = [
-  { value: "8", unit: "ans", label: "d'expérience BRVM" },
+  { value: "08", unit: "ans", label: "d'expérience BRVM" },
   { value: "30+", unit: "", label: "années d'expertise cumulée" },
-  { value: "3", unit: "", label: "pôles de compétence" },
+  { value: "03", unit: "", label: "pôles de compétence" },
 ];
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
-  const rightRef = useReveal<HTMLDivElement>();
+  const contentRef = useReveal<HTMLDivElement>();
 
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, var(--cream) 0%, var(--white-smoke) 100%)' }}
+      className="reveal relative overflow-hidden bg-[var(--pure-white)]"
     >
-      {/* Subtle mauve atmosphere top-right */}
-      <div
-        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none opacity-40"
-        style={{
-          background: 'radial-gradient(ellipse at top right, var(--mauve-10) 0%, transparent 70%)',
-        }}
-      />
-
-      {/* Full-bleed two-panel split — light themed */}
+      {/* Full-bleed two-panel split */}
       <div className="flex flex-col lg:flex-row min-h-[80vh]">
 
-        {/* LEFT PANEL — Cream, stat wall */}
-        <div
-          className="relative lg:w-[42%] flex flex-col justify-between px-8 md:px-14 lg:px-16 pt-20 pb-16 lg:pt-28 lg:pb-24"
-          style={{ background: 'linear-gradient(180deg, var(--cream) 0%, var(--timberwolf)/30 100%)' }}
-        >
-          {/* Vertical gold-to-mauve gradient rule */}
-          <div
-            className="absolute top-0 left-0 w-[3px] h-full"
-            style={{ background: 'linear-gradient(to bottom, transparent, var(--jaune-or) 30%, var(--mauve) 70%, transparent)' }}
+        {/* LEFT PANEL — Hero Image */}
+        <div className="relative lg:w-[45%] min-h-[50vh] lg:min-h-0 overflow-hidden">
+          <img
+            src="/HERO-.png"
+            alt="Sommet montagneux — Everest Finance"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
-
-          <div>
-            <span
-              className="block text-[10px] tracking-[0.35em] uppercase mb-12"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
-            >
-              Pourquoi Everest Finance
-            </span>
-
-            {/* Oversized stat blocks */}
-            <div className="flex flex-col gap-0">
-              {stats.map((s, i) => (
-                <div
-                  key={s.label}
-                  className="py-8 lg:py-10 flex items-baseline gap-4 group"
-                  style={{ borderBottom: i < stats.length - 1 ? '1px solid rgba(220, 218, 210, 0.5)' : 'none' }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 300,
-                      fontSize: 'clamp(4rem, 7vw, 6.5rem)',
-                      lineHeight: 0.9,
-                      letterSpacing: '-0.02em',
-                      background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    {s.value}
-                  </span>
-                  {s.unit && (
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-primary)',
-                        fontWeight: 700,
-                        fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)',
-                        color: 'var(--jaune-or)',
-                        lineHeight: 1,
-                      }}
-                    >
-                      {s.unit}
-                    </span>
-                  )}
-                  <span
-                    className="ml-2"
-                    style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 300,
-                      fontSize: '0.8rem',
-                      lineHeight: 1.4,
-                      color: 'var(--night-60)',
-                      letterSpacing: '0.02em',
-                      maxWidth: '8rem',
-                    }}
-                  >
-                    {s.label}
-                  </span>
-                </div>
-              ))}
+          {/* Mauve overlay for brand cohesion */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(180deg, rgba(42,20,53,0.35) 0%, rgba(30,16,40,0.55) 100%)' }}
+          />
+          {/* Right edge fade into white for seamless transition */}
+          <div
+            className="absolute inset-y-0 right-0 w-24 pointer-events-none hidden lg:block"
+            style={{ background: 'linear-gradient(90deg, transparent 0%, var(--pure-white) 100%)' }}
+          />
+          {/* Bottom credential strip over image */}
+          <div className="absolute bottom-0 left-0 right-0 px-8 md:px-12 py-6 z-10">
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-[var(--jaune-or)]" />
+              <span className="kicker text-white/70">
+                Agrément CREPMF · SGI/DA/2016/60
+              </span>
             </div>
-          </div>
-
-          {/* Bottom credential strip */}
-          <div className="mt-12 flex items-center gap-3">
-            <span
-              className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)' }}
-            />
-            <span
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 400,
-                fontSize: '0.7rem',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: 'var(--night-60)',
-              }}
-            >
-              Agrément CREPMF · SGI/DA/2016/60
-            </span>
           </div>
         </div>
 
-        {/* Gradient divider between panels */}
-        <div 
-          className="hidden lg:block w-[1px] self-stretch"
-          style={{ background: 'linear-gradient(to bottom, transparent, var(--mauve-20) 50%, transparent)' }}
-        />
-
-        {/* RIGHT PANEL — White-smoke with mauve gradient accent */}
+        {/* RIGHT PANEL — Content + Stats */}
         <div
-          ref={rightRef}
-          className="reveal lg:w-[58%] flex flex-col justify-center px-8 md:px-14 lg:px-20 py-20 lg:py-28 relative overflow-hidden"
-          style={{ background: 'var(--white-smoke)' }}
+          ref={contentRef}
+          className="reveal lg:w-[55%] flex flex-col justify-center px-8 md:px-16 lg:px-20 py-20 lg:py-24 relative bg-[var(--pure-white)]"
         >
-          {/* Mauve-gold gradient orb */}
+          {/* Subtle gradient orb */}
           <div
-            className="absolute -top-20 -right-20 w-80 h-80 rounded-full pointer-events-none opacity-30 blur-3xl"
-            style={{
-              background: 'radial-gradient(circle, var(--mauve-20) 0%, var(--jaune-or-10) 50%, transparent 70%)',
-            }}
+            className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full pointer-events-none opacity-[0.04] blur-[100px] translate-x-1/3 -translate-y-1/3"
+            style={{ background: 'var(--mauve)' }}
           />
 
-          <div className="relative z-10 max-w-xl">
-            {/* Fraunces serif manifesto heading */}
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontSize: 'clamp(2rem, 4vw, 3.4rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.01em',
-                color: 'var(--night)',
-              }}
-            >
-              Exécution rigoureuse,{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+          <div className="relative z-10 max-w-2xl">
+            {/* Pill badge */}
+            <div className="mb-8">
+              <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+                Pourquoi Everest Finance
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2 className="luxury-heading mb-6">
+              Exécution rigoureuse,<br />
+              <span style={{ color: 'var(--jaune-or)' }}>
                 confiance durable.
-              </em>
+              </span>
             </h2>
 
-            <div
-              className="my-10 h-[2px] w-24"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
-            />
-
-            <p
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                fontSize: '1rem',
-                lineHeight: 1.85,
-                color: 'var(--night-80)',
-                maxWidth: '32rem',
-              }}
-            >
+            <p className="text-secondary text-base md:text-lg mb-12 max-w-xl">
               Nous allions discipline de marché, ingénierie financière
               et accompagnement client pour créer de la valeur sur le long terme —
               avec la rigueur d'une institution et la réactivité d'un partenaire dédié.
             </p>
 
-            {/* Three pillars — horizontal strip with gradient borders */}
-            <div className="mt-14 grid grid-cols-3 gap-0">
+            {/* Stats row */}
+            <div className="flex flex-wrap gap-x-10 gap-y-6 mb-14 pb-14 border-b border-[var(--mauve-10)]">
+              {stats.map((s) => (
+                <div key={s.label} className="group">
+                  <div className="flex items-baseline">
+                    <span className="font-display text-[3.5rem] md:text-[4.5rem] leading-[0.85] tracking-tight text-[var(--mauve)] numeric-tabular transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
+                      {s.value}
+                    </span>
+                    {s.unit && (
+                      <span className="font-primary font-bold text-lg md:text-xl text-[var(--jaune-or)] ml-1.5">
+                        {s.unit}
+                      </span>
+                    )}
+                  </div>
+                  <span className="font-primary font-light text-sm leading-snug text-[var(--night-60)] mt-1 block max-w-[8rem]">
+                    {s.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Three pillars */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
               {[
-                { label: 'Sécurité', sub: 'Agrément CREPMF' },
-                { label: 'Accompagnement', sub: 'Conseiller dédié' },
-                { label: 'Performance', sub: 'Recherche indépendante' },
-              ].map((p, i) => (
+                { label: 'Sécurité', sub: 'Agrément CREPMF', icon: 'shield' },
+                { label: 'Accompagnement', sub: 'Conseiller dédié', icon: 'users' },
+                { label: 'Performance', sub: 'Recherche indépendante', icon: 'trending-up' },
+              ].map((p) => (
                 <div
                   key={p.label}
-                  className="pr-6"
-                  style={{ 
-                    borderLeft: i > 0 ? '1px solid transparent' : 'none', 
-                    paddingLeft: i > 0 ? '1.5rem' : 0,
-                    background: i > 0 ? 'linear-gradient(to bottom, transparent, var(--timberwolf) 50%, transparent) 0 0 / 1px 100% no-repeat' : 'none'
-                  }}
+                  className="flex flex-col gap-3 group"
                 >
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-display-aptos)',
-                      fontWeight: 500,
-                      fontSize: '0.95rem',
-                      color: 'var(--mauve)',
-                      marginBottom: '0.3rem',
-                    }}
-                  >
-                    {p.label}
+                  <div className="w-10 h-10 rounded-full border border-[var(--mauve-20)] flex items-center justify-center bg-[var(--mauve-05)] transition-colors duration-300 group-hover:border-[var(--mauve)] group-hover:bg-[var(--mauve-10)]">
+                    <span className="w-2 h-2 rounded-full bg-[var(--mauve)] transition-transform duration-300 group-hover:scale-150" />
                   </div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 300,
-                      fontSize: '0.7rem',
-                      color: 'var(--night-60)',
-                      letterSpacing: '0.03em',
-                    }}
-                  >
-                    {p.sub}
+                  <div>
+                    <h4 className="font-primary font-semibold text-[var(--mauve)] text-base mb-1">
+                      {p.label}
+                    </h4>
+                    <p className="font-primary font-light text-sm text-[var(--night-60)]">
+                      {p.sub}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -228,5 +132,3 @@ export const ValueProps: React.FC = () => {
     </section>
   );
 };
-
-

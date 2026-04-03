@@ -156,7 +156,7 @@ export const Header: React.FC = () => {
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   // Pages with light backgrounds need immediate dark backdrop for nav contrast
-  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites'];
+  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites', '/simulateur'];
   const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
 
   // Hide header if authenticated and on dashboard, or if in admin portal
@@ -242,13 +242,21 @@ export const Header: React.FC = () => {
           >
             Bourse
           </Link>
+
+          <Link
+            to="/simulateur"
+            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-[var(--jaune-or)]"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.6)' }}
+          >
+            Simulateur
+          </Link>
         </nav>
 
         {/* CTA */}
         <div className="hidden lg:block">
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 rounded-sm transition-all duration-500 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 rounded-full transition-all duration-500 hover:border-[var(--jaune-or)]/60 hover:bg-[var(--jaune-or)]/5"
           >
             <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-110" />
             <span
@@ -355,10 +363,19 @@ export const Header: React.FC = () => {
               Bourse
             </Link>
 
+            <Link
+              to="/simulateur"
+              className="block text-sm transition-colors hover:text-[var(--jaune-or)]"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.7)' }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Simulateur
+            </Link>
+
             <div className="pt-4 border-t border-white/[0.06]">
               <Link
                 to="/auth"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 w-full justify-center transition-all duration-300 hover:border-[var(--jaune-or)]/60"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/30 rounded-full w-full justify-center transition-all duration-300 hover:border-[var(--jaune-or)]/60"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)]" />

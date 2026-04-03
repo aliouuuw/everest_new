@@ -19,7 +19,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative" style={{ background: 'var(--night)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative" style={{ background: 'linear-gradient(170deg, #1e1028 0%, #150e1c 60%, #0f0a12 100%)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       {/* Subtle mauve ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
@@ -34,7 +34,7 @@ export const Footer = () => {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto brightness-125" />
-              <span className="font-display-aptos text-[1.1rem] text-[var(--pure-white)]">
+              <span className="font-primary font-semibold text-[1.1rem] text-[var(--pure-white)]">
                 Everest Finance
               </span>
             </div>
@@ -45,7 +45,7 @@ export const Footer = () => {
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
                 style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
               >
                 <FaLinkedin className="text-sm" />
@@ -53,7 +53,7 @@ export const Footer = () => {
               <a
                 href="#"
                 aria-label="Twitter"
-                className="inline-flex items-center justify-center w-9 h-9 border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
                 style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
               >
                 <FaTwitter className="text-sm" />
