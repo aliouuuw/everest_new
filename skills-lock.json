@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "adapt": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "computedHash": "fb7cca7602be381b7b486e731fdcd480335cbb9b925e1911276f5bb9352c6b2f"
+    },
     "frontend-ui-ux-engineer": {
       "source": "404kidwiz/claude-supercode-skills",
       "sourceType": "github",
