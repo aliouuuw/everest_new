@@ -68,6 +68,7 @@ export const Footer = () => {
               {[
                 { label: 'À propos', href: '#about' },
                 { label: 'Publications', href: '#publications' },
+                { label: 'Simulateur', href: '/simulateur' },
                 { label: 'Abécédaire / FAQ', href: '#faq' },
                 { label: 'Performance', href: '#performance' },
                 { label: 'Portail client', href: '#portal-preview' },

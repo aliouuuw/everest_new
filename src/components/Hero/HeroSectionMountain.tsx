@@ -48,7 +48,7 @@ export const HeroSectionMountain: React.FC = () => {
           className="w-full h-full object-cover"
           style={{ display: 'block' }}
         >
-          <source src="/kling_video.mp4" type="video/mp4" />
+          <source src="/kling_video_1.mp4" type="video/mp4" />
         </video>
         {/* Radial vignette — darker edges, luminous center for the gold sculpture */}
         <div
@@ -90,8 +90,8 @@ export const HeroSectionMountain: React.FC = () => {
               <span
                 className="hero-title-line block"
                 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 700,
                   fontSize: 'clamp(3rem, 9vw, 7.5rem)',
                   lineHeight: 0.95,
                   letterSpacing: '-0.02em',
@@ -105,9 +105,8 @@ export const HeroSectionMountain: React.FC = () => {
               <span
                 className="hero-title-line block"
                 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 300,
-                  fontStyle: 'italic',
+                  fontFamily: 'var(--font-primary)',
+                  fontWeight: 700,
                   fontSize: 'clamp(3rem, 9vw, 7.5rem)',
                   lineHeight: 0.95,
                   letterSpacing: '-0.02em',
