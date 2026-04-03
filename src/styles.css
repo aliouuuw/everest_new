@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -35,9 +35,9 @@
   --gold-pale: rgba(202, 148, 47, 0.06);
   --gold-warm: rgba(202, 148, 47, 0.12);
   
-  /* Typography - Modern Professional (sans-serif only) */
+  /* Typography */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', 'Georgia', serif;
   --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Backgrounds */
@@ -251,16 +251,16 @@ html {
 
 /* Typography Classes */
 .heading-display {
-  font-family: var(--font-primary);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 /* Brand lockup for header */
 .brand-heading {
-  font-family: var(--font-primary);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -282,14 +282,14 @@ html {
 }
 
 .heading-primary {
-  font-family: var(--font-primary);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 400;
   line-height: 1.1;
 }
 
 .font-display {
-  font-family: var(--font-primary);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -317,8 +317,8 @@ html {
 
 /* Enhanced typography for luxury feel */
 .font-display-aptos {
-  font-family: var(--font-primary);
-  font-weight: 600;
+  font-family: var(--font-display-aptos);
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -329,13 +329,13 @@ html {
   line-height: 1.6;
 }
 
-/* Luxury text treatments — sans-serif, bold */
+/* Luxury text treatments — Fraunces serif, weight 400 */
 .luxury-heading {
-  font-family: var(--font-primary);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   color: var(--night);
 }
 
@@ -360,11 +360,11 @@ html {
 
 /* Dark Mode Luxury text treatments */
 .luxury-heading-dark {
-  font-family: var(--font-primary);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 400;
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.0;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   color: var(--pure-white);
 }
 
@@ -403,14 +403,16 @@ html {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 bg-[var(--mauve)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/20 rounded-full relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
+  background: var(--night);
+  color: var(--pure-white);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  background: color-mix(in srgb, var(--mauve) 85%, black);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(10,10,10,0.2);
 }
 
 .btn-primary:active {
@@ -419,17 +421,18 @@ html {
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 border text-[var(--mauve)] font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
-  border-color: var(--mauve);
-  background: transparent;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
+  border: 1px solid rgba(10,10,10,0.15);
+  color: var(--night);
+  background: rgba(245,245,245,0.8);
   transform: translateY(0);
 }
 
 .btn-secondary:hover {
-  background: var(--mauve);
+  background: var(--night);
   color: var(--pure-white);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(70,29,76,0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(10,10,10,0.15);
 }
 
 .btn-secondary:active {
@@ -439,15 +442,15 @@ html {
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
-  color: var(--night);
+  color: var(--pure-white);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary-dark:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(202,148,47,0.35);
   filter: brightness(1.05);
 }
@@ -458,8 +461,8 @@ html {
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
-  border: 1px solid rgba(202,148,47,0.5);
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-lg relative overflow-hidden cursor-pointer;
+  border: 1px solid rgba(202,148,47,0.4);
   color: var(--jaune-or);
   background: transparent;
   transform: translateY(0);
@@ -469,7 +472,7 @@ html {
   background: rgba(202,148,47,0.12);
   border-color: var(--jaune-or);
   color: var(--pure-white);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .btn-secondary-dark:active {
@@ -477,15 +480,15 @@ html {
   transition-duration: 100ms;
 }
 
-/* Accessible mauve-tinted focus rings */
+/* Accessible gold-tinted focus rings */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--mauve-20), 0 0 0 1px var(--mauve);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
+  box-shadow: 0 0 0 3px var(--jaune-or-10), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-primary-dark:focus-visible {
@@ -572,10 +575,10 @@ html {
 
 /* Enhanced Typography */
 .hero-title {
-  font-family: var(--font-primary);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 300;
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
@@ -900,38 +903,38 @@ html {
 
 .publication-content h1 {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 400;
   margin: 1.5rem 0 1rem 0;
   color: var(--night);
-  font-family: var(--font-primary);
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .publication-content h2 {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 400;
   margin: 1.25rem 0 0.75rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-primary);
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 .publication-content h3 {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 400;
   margin: 1rem 0 0.5rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-primary);
+  font-family: var(--font-display);
 }
 
 .publication-content h4,
 .publication-content h5,
 .publication-content h6 {
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0.75rem 0 0.5rem 0;
   color: rgba(10, 10, 10, 0.8);
-  font-family: var(--font-primary);
+  font-family: var(--font-display-aptos);
 }
 
 .publication-content p {
@@ -1081,11 +1084,11 @@ html {
   }
   
   .publication-content h2 {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
   }
   
   .publication-content h3 {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
   }
   
   .publication-content table {

@@ -56,12 +56,15 @@ export const ValueProps: React.FC = () => {
                 >
                   <span
                     style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 800,
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 300,
                       fontSize: 'clamp(4rem, 7vw, 6.5rem)',
                       lineHeight: 0.9,
-                      letterSpacing: '-0.03em',
-                      color: 'var(--mauve)',
+                      letterSpacing: '-0.02em',
+                      background: 'linear-gradient(135deg, var(--mauve) 0%, var(--night) 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                     }}
                   >
                     {s.value}
@@ -140,21 +143,21 @@ export const ValueProps: React.FC = () => {
           />
 
           <div className="relative z-10 max-w-xl">
-            {/* Bold sans-serif manifesto heading */}
+            {/* Fraunces serif manifesto heading */}
             <h2
               style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 800,
+                fontFamily: 'var(--font-display)',
+                fontWeight: 300,
                 fontSize: 'clamp(2rem, 4vw, 3.4rem)',
-                lineHeight: 1.05,
-                letterSpacing: '-0.03em',
+                lineHeight: 1.1,
+                letterSpacing: '-0.01em',
                 color: 'var(--night)',
               }}
             >
               Exécution rigoureuse,{' '}
-              <span style={{ color: 'var(--mauve)' }}>
+              <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
                 confiance durable.
-              </span>
+              </em>
             </h2>
 
             <div
@@ -195,8 +198,8 @@ export const ValueProps: React.FC = () => {
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-primary)',
-                      fontWeight: 600,
+                      fontFamily: 'var(--font-display-aptos)',
+                      fontWeight: 500,
                       fontSize: '0.95rem',
                       color: 'var(--mauve)',
                       marginBottom: '0.3rem',

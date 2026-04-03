@@ -91,16 +91,16 @@ export const Insights: React.FC = () => {
           />
           <span
             style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
               fontSize: 'clamp(1.5rem, 3vw, 2.4rem)',
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.01em',
               lineHeight: 1,
               color: 'var(--pure-white)',
             }}
           >
             Restez informé{' '}
-            <span style={{ color: 'var(--jaune-or)' }}>des marchés.</span>
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>des marchés.</em>
           </span>
         </div>
 
@@ -155,11 +155,11 @@ export const Insights: React.FC = () => {
                 <h3
                   className="mb-6 transition-colors duration-500 group-hover:text-[var(--jaune-or)]"
                   style={{
-                    fontFamily: 'var(--font-primary)',
-                    fontWeight: 700,
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 300,
                     fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
                     lineHeight: 1.1,
-                    letterSpacing: '-0.03em',
+                    letterSpacing: '-0.01em',
                     color: 'var(--pure-white)',
                   }}
                 >

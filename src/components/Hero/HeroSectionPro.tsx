@@ -121,7 +121,7 @@ export const HeroSectionPro: React.FC = () => {
             </div>
             
             <h1 className="hero-reveal font-display text-5xl md:text-7xl lg:text-[7.5rem] leading-[0.92] tracking-tight mb-8">
-              Élevez vos ambitions vers de nouveaux <span className="text-[var(--jaune-or)]">sommets.</span>
+              Élevez vos ambitions vers de nouveaux <em className="not-italic" style={{ color: 'var(--jaune-or)', fontStyle: 'italic' }}>sommets.</em>
             </h1>
           </div>
           

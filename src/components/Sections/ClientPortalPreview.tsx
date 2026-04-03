@@ -97,18 +97,18 @@ export const ClientPortalPreview: React.FC = () => {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-display-aptos)',
+              fontWeight: 400,
               fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
               lineHeight: 1.0,
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.02em',
               color: 'var(--night)',
             }}
           >
             Un portail pensé pour la{' '}
-            <span style={{ color: 'var(--mauve)' }}>
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               gestion patrimoniale.
-            </span>
+            </em>
           </h2>
           <p
             className="mt-6 max-w-lg"

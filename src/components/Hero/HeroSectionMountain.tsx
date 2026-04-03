@@ -84,17 +84,17 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </div>
 
-          {/* Headline — bold sans-serif */}
+          {/* Headline — Fraunces serif, weight 300 */}
           <h1 className="mb-6">
             <span className="block overflow-hidden">
               <span
                 className="hero-title-line block"
                 style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
                   fontSize: 'clamp(3rem, 9vw, 7.5rem)',
                   lineHeight: 0.95,
-                  letterSpacing: '-0.03em',
+                  letterSpacing: '-0.02em',
                   color: 'var(--pure-white)',
                 }}
               >
@@ -105,11 +105,12 @@ export const HeroSectionMountain: React.FC = () => {
               <span
                 className="hero-title-line block"
                 style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontStyle: 'italic',
                   fontSize: 'clamp(3rem, 9vw, 7.5rem)',
                   lineHeight: 0.95,
-                  letterSpacing: '-0.03em',
+                  letterSpacing: '-0.02em',
                   color: 'var(--jaune-or)',
                 }}
               >

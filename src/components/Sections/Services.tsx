@@ -90,18 +90,18 @@ export const Services: React.FC = () => {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
               fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
               lineHeight: 1.0,
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.01em',
               color: 'var(--night)',
             }}
           >
             Solutions pour chaque{' '}
-            <span style={{ color: 'var(--mauve)' }}>
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
               profil.
-            </span>
+            </em>
           </h2>
         </div>
         <p
@@ -136,13 +136,16 @@ export const Services: React.FC = () => {
               <span
                 className="group-hover:opacity-100 transition-all duration-500"
                 style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
                   fontSize: 'clamp(3rem, 5vw, 5rem)',
                   lineHeight: 1,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--mauve)',
-                  opacity: 0.25,
+                  letterSpacing: '-0.02em',
+                  background: 'linear-gradient(135deg, var(--jaune-or) 0%, var(--mauve) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  opacity: 0.35,
                 }}
               >
                 {s.number}
@@ -155,11 +158,11 @@ export const Services: React.FC = () => {
               <h3
                 className="md:w-[38%] shrink-0 transition-all duration-500"
                 style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 700,
+                  fontFamily: 'var(--font-display-aptos)',
+                  fontWeight: 500,
                   fontSize: 'clamp(1.5rem, 2.8vw, 2.2rem)',
                   lineHeight: 1.1,
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '-0.01em',
                   color: 'var(--night)',
                 }}
               >
