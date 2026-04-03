@@ -85,37 +85,36 @@ export const FAQPage = () => {
   }, [filteredGlossary])
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--jaune-or)] selection:text-white">
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-        <section ref={heroRef} className="reveal relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh]">
+        <section ref={heroRef} className="reveal relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
           <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80"
               alt="Support client"
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover opacity-20"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
+            <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
           </div>
           
           <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-12">
-                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
-                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
                     Abécédaire & FAQ
                   </span>
                 </div>
-                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
                   Comprendre nos services.
                 </h1>
               </div>
               
               <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-10 border-l-2 border-[var(--jaune-or)] pl-6">
                   Questions fréquentes et définitions clés pour mieux décider.
                 </p>
-                <a href="#faq" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                <a href="#faq" className="btn-primary-dark group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
                   <span>Voir les questions</span>
                   <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
                 </a>
@@ -130,8 +129,8 @@ export const FAQPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Support</span>
-                  <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Support</span>
+                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05]">
                     Questions fréquentes.
                   </h2>
                 </div>
@@ -141,8 +140,8 @@ export const FAQPage = () => {
                 <div ref={qaRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
                   {qas.map((item) => (
                     <div key={item.q} className="relative">
-                      <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
-                      <h3 className="font-display-aptos text-2xl md:text-3xl mb-4 text-[var(--night)]">
+                      <div className="w-8 h-px bg-[var(--mauve)] mb-8" />
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night)]">
                         {item.q}
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -161,10 +160,10 @@ export const FAQPage = () => {
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
-                <div className="sticky top-32 flex flex-col border-t border-black/10">
-                  <div className="py-6 border-b border-black/10">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-6">Définitions</span>
-                    <h2 className="font-display-aptos text-3xl md:text-4xl leading-[1.05] mb-6">
+                <div className="sticky top-32 flex flex-col border-t border-[var(--mauve)]/10">
+                  <div className="py-6 border-b border-[var(--mauve)]/10">
+                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-6">Définitions</span>
+                    <h2 className="font-primary font-bold text-3xl md:text-4xl leading-[1.05] mb-6">
                       Abécédaire
                     </h2>
                     
@@ -173,14 +172,14 @@ export const FAQPage = () => {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Rechercher..."
-                        className="w-full px-0 py-3 bg-transparent border-b border-black/20 focus:border-black outline-none font-display-aptos text-xl transition-colors rounded-none"
+                        className="w-full px-4 py-3 bg-white border border-[var(--mauve)]/20 focus:border-[var(--mauve)] outline-none font-primary text-lg transition-colors rounded-full"
                       />
                       
                       <div className="flex flex-wrap gap-2 mt-4">
                         <button
                           type="button"
                           onClick={() => setActiveLetter('')}
-                          className={`text-xs font-bold tracking-[0.2em] uppercase px-3 py-2 border ${activeLetter === '' ? 'border-black bg-black text-white' : 'border-black/10 hover:border-black/30'}`}
+                          className={`text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === '' ? 'border-[var(--mauve)] bg-[var(--mauve)] text-white' : 'border-[var(--mauve)]/10 text-[var(--mauve)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                         >
                           Tous
                         </button>
@@ -189,7 +188,7 @@ export const FAQPage = () => {
                             key={l}
                             type="button"
                             onClick={() => setActiveLetter(l)}
-                            className={`text-xs font-bold uppercase px-3 py-2 border ${activeLetter === l ? 'border-black bg-black text-white' : 'border-black/10 hover:border-black/30'}`}
+                            className={`text-xs font-bold uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === l ? 'border-[var(--mauve)] bg-[var(--mauve)] text-white' : 'border-[var(--mauve)]/10 text-[var(--mauve)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                           >
                             {l}
                           </button>
@@ -206,14 +205,14 @@ export const FAQPage = () => {
                     <div className="py-10 text-[rgba(10, 10, 10, 0.8)] font-light text-xl">Aucun résultat.</div>
                   )}
                   {grouped.map(([letter, terms]) => (
-                    <div key={letter} className="group py-10 border-b border-black/10">
-                      <div className="font-display-aptos text-4xl text-[var(--jaune-or)] mb-8">
+                    <div key={letter} className="group py-10 border-b border-[var(--mauve)]/10">
+                      <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-8">
                         {letter}
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         {terms.map((g) => (
                           <div key={g.term}>
-                            <h3 className="font-display-aptos text-xl md:text-2xl mb-2 text-[var(--night)]">
+                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--night)]">
                               {g.term}
                             </h3>
                             <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -231,11 +230,11 @@ export const FAQPage = () => {
         </section>
 
         {/* ─── 4. CTA — Editorial Footer Block ─── */}
-        <section className="bg-[var(--night)] text-white py-24 md:py-32">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <section className="section-bg-mauve py-24 md:py-32">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
               <div className="md:col-span-7">
-                <h2 className="font-display-aptos text-5xl md:text-7xl leading-[1.05] mb-6">
+                <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
                   Besoin d'aide supplémentaire ?
                 </h2>
                 <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">

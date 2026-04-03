@@ -15,7 +15,7 @@ export const ServicesPage = () => {
   const faqRef = useReveal<HTMLDivElement>()
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)]">
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
           <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
@@ -32,18 +32,17 @@ export const ServicesPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-12">
-                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
-                  <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
                     Services d'investissement
                   </span>
                 </div>
-                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
                   Votre partenaire pour investir sur la BRVM.
                 </h1>
               </div>
               
               <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l border-[var(--jaune-or)] pl-6">
+                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
                   Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style, votre expérience et vos objectifs financiers.
                 </p>
                 <a href="#services" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
@@ -56,25 +55,25 @@ export const ServicesPage = () => {
         </section>
 
         {/* ─── 2. Services Overview — Stark Grid ─── */}
-        <section id="services" ref={servicesOverviewRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <section id="services" ref={servicesOverviewRef} className="reveal py-24 md:py-40 section-bg-mauve">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4 min-w-0">
                 <div className="sticky top-32">
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Nos approches</span>
-                  <h2 className="font-display-aptos text-4xl md:text-5xl leading-[1.05] mb-8 whitespace-normal break-words" style={{ hyphens: 'auto', wordBreak: 'break-word' }}>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">Nos approches</span>
+                  <h2 className="font-primary font-bold text-4xl md:text-5xl leading-[1.05] mb-8 text-white whitespace-normal break-words" style={{ hyphens: 'auto', wordBreak: 'break-word' }}>
                     Choisissez votre niveau d'accompagnement.
                   </h2>
                   <p className="text-white/60 leading-relaxed font-light text-lg mb-12">
                     Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur.
                   </p>
                   
-                  <div className="border border-white/10 p-8 flex items-center justify-between">
+                  <div className="border border-white/10 p-8 flex items-center justify-between rounded-2xl">
                     <div>
                       <div className="text-[10px] font-bold tracking-[0.3em] text-white/50 uppercase mb-2">Besoin d'aide ?</div>
-                      <div className="font-display-aptos text-xl text-white">Nos conseillers vous guident</div>
+                      <div className="font-primary font-bold text-xl text-white">Nos conseillers vous guident</div>
                     </div>
-                    <a href="#contact" className="w-12 h-12 bg-[var(--jaune-or)] text-[var(--night)] flex items-center justify-center hover:bg-white transition-colors">
+                    <a href="#contact" className="w-12 h-12 rounded-full bg-[var(--jaune-or)] text-[var(--night)] flex items-center justify-center hover:bg-white transition-colors">
                       <FiArrowRight className="text-xl" />
                     </a>
                   </div>
@@ -85,26 +84,26 @@ export const ServicesPage = () => {
                 <div className="border-t border-white/10">
                   {/* Gestion Libre */}
                   <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16">
-                    <div className="w-16 h-16 bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
+                    <div className="w-16 h-16 rounded-2xl bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
                       <FiCompass className="text-3xl" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
+                        <h3 className="font-primary font-bold text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
                           Gestion Libre
                         </h3>
-                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] px-3 py-1">Niveau 1</span>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] rounded-full px-4 py-1.5">Niveau 1</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
                         Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Décisions 100% indépendantes</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Exécution professionnelle</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Frais réduits</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Décisions 100% indépendantes</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Exécution professionnelle</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Frais réduits</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,40% - 0,60%</div>
+                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,40% - 0,60%</div>
                         <a href="#gestion-libre" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
@@ -114,27 +113,27 @@ export const ServicesPage = () => {
 
                   {/* Gestion Assistée */}
                   <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
-                    <div className="absolute -left-6 top-12 bottom-12 w-1 bg-[var(--jaune-or)]" /> {/* Highlight for recommended */}
-                    <div className="w-16 h-16 bg-[var(--jaune-or)] shrink-0 flex items-center justify-center text-[var(--night)]">
+                    <div className="absolute -left-6 top-12 bottom-12 w-1 rounded-full bg-[var(--jaune-or)]" /> {/* Highlight for recommended */}
+                    <div className="w-16 h-16 rounded-2xl bg-[var(--jaune-or)] shrink-0 flex items-center justify-center text-[var(--night)]">
                       <FiHeadphones className="text-3xl" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white">
+                        <h3 className="font-primary font-bold text-3xl md:text-4xl text-white">
                           Gestion Assistée
                         </h3>
-                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--night)] bg-[var(--jaune-or)] uppercase px-3 py-1">Recommandé</span>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--night)] bg-[var(--jaune-or)] rounded-full uppercase px-4 py-1.5">Recommandé</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
                         Parfait équilibre entre autonomie et conseils d'experts.
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Conseils personnalisés</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Analyses et recommandations</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Décisions finales vôtres</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Conseils personnalisés</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Analyses et recommandations</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Décisions finales vôtres</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,60% - 0,80%</div>
+                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,60% - 0,80%</div>
                         <a href="/services/gestion-assistee" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
@@ -144,26 +143,26 @@ export const ServicesPage = () => {
 
                   {/* Gestion Sous-Mandat */}
                   <div className="group py-12 border-b border-white/10 flex flex-col lg:flex-row gap-8 lg:gap-16">
-                    <div className="w-16 h-16 bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
+                    <div className="w-16 h-16 rounded-2xl bg-white/5 shrink-0 flex items-center justify-center text-[var(--jaune-or)]">
                       <FiShield className="text-3xl" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-display-aptos text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
+                        <h3 className="font-primary font-bold text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
                           Gestion Sous-Mandat
                         </h3>
-                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] px-3 py-1">Niveau 3</span>
+                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] rounded-full px-4 py-1.5">Niveau 3</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
                         Pour ceux qui préfèrent déléguer la gestion à nos experts.
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Gestion complète déléguée</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Reporting détaillé</li>
-                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-[var(--jaune-or)]" /> Suivi personnalisé</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Gestion complète déléguée</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Reporting détaillé</li>
+                        <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Suivi personnalisé</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-display-aptos text-lg text-white/50">Frais: 0,80% - 1,20%</div>
+                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,80% - 1,20%</div>
                         <a href="/services/gestion-sous-mandat" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>

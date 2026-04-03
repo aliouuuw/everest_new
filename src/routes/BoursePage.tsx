@@ -213,34 +213,34 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
   return (
     <div
       ref={cardRef}
-      className="border border-black/10 p-8"
+      className="border border-black/10 p-8 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Capitalisation</div>
-          <div className="font-display-aptos text-2xl text-[var(--night)]">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--mauve-60)] mb-2 font-bold">Capitalisation</div>
+          <div className="font-primary font-bold text-2xl text-[var(--night)]">
             {formatCurrency(stats.totalMarketCap)}
           </div>
-          <div className="text-green-700 text-sm mt-1">
+          <div className="text-green-700 font-semibold text-sm mt-1">
             {formatPercent(stats.marketCapChange)}
           </div>
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Volume 24h</div>
-          <div className="font-display-aptos text-2xl text-[var(--night)]">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--mauve-60)] mb-2 font-bold">Volume 24h</div>
+          <div className="font-primary font-bold text-2xl text-[var(--night)]">
             {formatCurrency(stats.totalVolume)}
           </div>
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Sociétés Cotées</div>
-          <div className="font-display-aptos text-2xl text-[var(--night)]">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--mauve-60)] mb-2 font-bold">Sociétés Cotées</div>
+          <div className="font-primary font-bold text-2xl text-[var(--night)]">
             47
           </div>
         </div>
         <div>
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)] mb-2">Indices BRVM</div>
-          <div className="font-display-aptos text-2xl text-[var(--night)]">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-[var(--mauve-60)] mb-2 font-bold">Indices BRVM</div>
+          <div className="font-primary font-bold text-2xl text-[var(--night)]">
             BRVM 10
           </div>
         </div>
@@ -255,39 +255,39 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
   return (
     <div
       ref={rowRef}
-      className="border-b border-black/10 py-4 hover:bg-[var(--white-smoke)]/30 transition-colors cursor-pointer"
+      className="border-b border-black/10 py-4 hover:bg-[var(--mauve)]/5 transition-colors cursor-pointer px-4 -mx-4 rounded-xl"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="grid grid-cols-12 gap-4 items-center">
         {/* Rank & Favorite */}
         <div className="col-span-1 flex items-center gap-2">
-          <button className="text-[var(--night)] hover:text-[var(--jaune-or)] transition-colors opacity-60 hover:opacity-100">
+          <button className="text-[var(--night-20)] hover:text-[var(--jaune-or)] transition-colors hover:opacity-100">
             <FiStar className="w-4 h-4" />
           </button>
-          <span className="text-[rgba(10,10,10,0.5)] font-mono text-sm">#{asset.rank}</span>
+          <span className="text-[var(--night-60)] font-mono text-sm font-medium">#{asset.rank}</span>
         </div>
 
         {/* Name & Symbol */}
         <div className="col-span-3 flex items-center gap-3">
-          <div className="w-8 h-8 bg-[var(--jaune-or)] flex items-center justify-center">
-            <span className="text-[var(--night)] font-bold text-xs">{asset.symbol.slice(0, 3)}</span>
+          <div className="w-8 h-8 rounded-full bg-[var(--mauve-10)] flex items-center justify-center text-[var(--mauve)]">
+            <span className="font-bold text-[10px]">{asset.symbol.slice(0, 3)}</span>
           </div>
           <div>
-            <div className="font-display-aptos text-[var(--night)] font-medium">{asset.name}</div>
-            <div className="text-[rgba(10,10,10,0.5)] text-xs uppercase">{asset.symbol}</div>
+            <div className="font-primary font-bold text-[var(--night)]">{asset.name}</div>
+            <div className="text-[var(--night-60)] text-[10px] uppercase font-bold tracking-widest">{asset.symbol}</div>
           </div>
         </div>
 
         {/* Price */}
         <div className="col-span-2 text-right">
-          <div className="font-display-aptos text-[var(--night)] font-medium">
+          <div className="font-primary font-bold text-[var(--night)]">
             {formatPrice(asset.price)}
           </div>
         </div>
 
         {/* 24h Change */}
-        <div className="col-span-2 text-right">
-          <div className={`inline-flex items-center gap-1 px-2 py-1 text-sm font-medium ${
+        <div className="col-span-2 text-right flex justify-end">
+          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-sm font-bold rounded-full ${
             asset.changePercent24h >= 0
               ? 'text-green-700 bg-green-700/10'
               : 'text-red-600 bg-red-600/10'
@@ -302,7 +302,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* 24h High/Low */}
         <div className="col-span-2 text-right">
-          <div className="text-xs text-[rgba(10,10,10,0.5)]">
+          <div className="text-xs text-[var(--night-60)] font-medium space-y-0.5">
             <div>Max: {formatPrice(asset.high24h)}</div>
             <div>Min: {formatPrice(asset.low24h)}</div>
           </div>
@@ -310,10 +310,10 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* Market Cap */}
         <div className="col-span-2 text-right">
-          <div className="font-display-aptos text-[var(--night)] font-medium">
+          <div className="font-primary font-bold text-[var(--night)]">
             {formatCurrency(asset.marketCap)}
           </div>
-          <div className="text-[rgba(10,10,10,0.5)] text-xs">
+          <div className="text-[var(--night-60)] text-xs font-medium mt-0.5">
             Vol: {formatCurrency(asset.volume24h)}
           </div>
         </div>
@@ -328,24 +328,23 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
   return (
     <div
       ref={cardRef}
-      className="border border-black/10 p-6"
+      className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-center gap-2 mb-6">
-        <div className="w-8 h-px bg-[var(--jaune-or)]" />
-        <h3 className="font-display-aptos text-[var(--night)] text-lg">En Tendance</h3>
+        <h3 className="font-primary font-bold text-[var(--night)] text-xl">En Tendance</h3>
       </div>
       <div className="space-y-4">
         {assets.map((asset, index) => (
-          <div key={asset.symbol} className="flex items-center justify-between py-2 border-b border-black/5 last:border-0">
+          <div key={asset.symbol} className="flex items-center justify-between py-2 border-b border-[var(--mauve)]/5 last:border-0 hover:bg-[var(--mauve)]/5 px-2 -mx-2 rounded-lg transition-colors">
             <div className="flex items-center gap-3">
-              <span className="text-[rgba(10,10,10,0.5)] font-mono text-sm">#{index + 1}</span>
+              <span className="text-[var(--mauve)]/50 font-mono text-xs font-bold">#{index + 1}</span>
               <div>
-                <div className="font-display-aptos text-[var(--night)] text-sm font-medium">{asset.symbol}</div>
-                <div className="text-[rgba(10,10,10,0.5)] text-xs">{formatPrice(asset.price)}</div>
+                <div className="font-primary font-bold text-[var(--night)] text-sm">{asset.symbol}</div>
+                <div className="text-[var(--night-60)] text-xs font-medium">{formatPrice(asset.price)}</div>
               </div>
             </div>
-            <div className={`text-sm font-medium ${
+            <div className={`text-sm font-bold ${
               asset.changePercent >= 0 ? 'text-green-700' : 'text-red-600'
             }`}>
               {formatPercent(asset.changePercent)}
@@ -435,55 +434,53 @@ export const BoursePage: React.FC = () => {
   }, [refreshData])
 
   return (
-    <div className="bg-[var(--pure-white)] min-h-screen">
+    <div className="bg-[var(--pure-white)] min-h-screen font-primary">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10">
+      <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
         <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80"
             alt="Marché BRVM"
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-20"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
         </div>
         <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-8">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-px bg-[var(--jaune-or)]" />
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
                   BRVM — Marché Actions
                 </span>
               </div>
-              <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
-                Cours Actions Temps Réel.
+              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
+                Cours Actions Temps Réel
               </h1>
             </div>
             <div className="lg:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-8 border-l border-[var(--jaune-or)] pl-6">
+              <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-8 border-l-2 border-[var(--jaune-or)] pl-6">
                 Données de marché en temps réel, cours et volumes de transaction BRVM.
               </p>
               {/* Market Status Indicator */}
               <div className="flex items-center gap-4 text-sm">
-                <div className="relative inline-flex items-center gap-2 px-3 py-1.5 border border-green-700/20">
+                <div className="relative inline-flex items-center gap-2 px-3 py-1.5 border border-green-400/20 rounded-full">
                   <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full bg-green-700 opacity-40"></span>
-                    <span className="relative inline-flex h-2.5 w-2.5 bg-green-700"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full bg-green-400 opacity-40 rounded-full"></span>
+                    <span className="relative inline-flex h-2.5 w-2.5 bg-green-400 rounded-full"></span>
                   </span>
-                  <span className="text-green-700 font-semibold">Marché Ouvert</span>
+                  <span className="text-green-400 font-semibold">Marché Ouvert</span>
                 </div>
-                <span className="text-[rgba(10,10,10,0.5)]">
+                <span className="text-white/50 font-medium">
                   {lastUpdated.toLocaleTimeString('fr-FR')}
                 </span>
                 <button
                   onClick={refreshData}
                   disabled={isLoading}
-                  className="flex items-center gap-2 px-3 py-1 border border-black/10 hover:border-[var(--jaune-or)] transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 px-4 py-2 border border-white/10 hover:border-[var(--jaune-or)] hover:text-[var(--jaune-or)] text-white rounded-full transition-colors disabled:opacity-50"
                   aria-label="Actualiser les données"
                 >
-                  <FiRefreshCw className={`w-4 h-4 text-[var(--night)] ${isLoading ? 'animate-spin' : ''}`} />
-                  <span className="text-xs font-medium text-[var(--night)]">Actualiser</span>
+                  <FiRefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+                  <span className="text-xs font-semibold">Actualiser</span>
                 </button>
               </div>
             </div>
@@ -508,39 +505,39 @@ export const BoursePage: React.FC = () => {
                 {/* Header with controls */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h2 className="font-display-aptos text-2xl text-[var(--night)]">Cours des Actions BRVM</h2>
-                    <p className="text-[rgba(10,10,10,0.5)] mt-1">Données de marché temps réel</p>
+                    <h2 className="font-primary font-bold text-3xl text-[var(--night)]">Cours des Actions BRVM</h2>
+                    <p className="text-[var(--night-60)] font-medium mt-1">Données de marché temps réel</p>
                   </div>
 
                   {/* Filter & Sort Controls */}
                   <div className="flex flex-wrap gap-2">
-                    <div className="flex gap-1">
+                    <div className="flex gap-2">
                       <button
                         onClick={() => setFilterBy('all')}
-                        className={`px-3 py-1 text-sm font-medium transition-all border ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all border ${
                           filterBy === 'all'
-                            ? 'bg-[var(--night)] text-white border-[var(--night)]'
-                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
+                            ? 'bg-[var(--mauve)] text-white border-[var(--mauve)]'
+                            : 'bg-transparent text-[var(--night-60)] border-black/10 hover:border-[var(--mauve)] hover:text-[var(--mauve)]'
                         }`}
                       >
                         Toutes
                       </button>
                       <button
                         onClick={() => setFilterBy('gainers')}
-                        className={`px-3 py-1 text-sm font-medium transition-all border ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all border ${
                           filterBy === 'gainers'
                             ? 'bg-green-700/10 text-green-700 border-green-700/30'
-                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
+                            : 'bg-transparent text-[var(--night-60)] border-black/10 hover:border-green-700 hover:text-green-700'
                         }`}
                       >
                         Gagnantes
                       </button>
                       <button
                         onClick={() => setFilterBy('losers')}
-                        className={`px-3 py-1 text-sm font-medium transition-all border ${
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all border ${
                           filterBy === 'losers'
                             ? 'bg-red-600/10 text-red-600 border-red-600/30'
-                            : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'
+                            : 'bg-transparent text-[var(--night-60)] border-black/10 hover:border-red-600 hover:text-red-600'
                         }`}
                       >
                         Perdantes
@@ -550,8 +547,8 @@ export const BoursePage: React.FC = () => {
                 </div>
 
                 {/* Table Header */}
-                <div className="border-t border-black/10 py-4 mb-0">
-                  <div className="grid grid-cols-12 gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgba(10,10,10,0.5)]">
+                <div className="border-b border-black/10 py-4 mb-2">
+                  <div className="grid grid-cols-12 gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--mauve-60)] px-4">
                     <div className="col-span-1">#</div>
                     <div className="col-span-3">Société</div>
                     <div className="col-span-2 text-right">Cours</div>
@@ -586,36 +583,35 @@ export const BoursePage: React.FC = () => {
               </div>
 
               {/* Market Insights */}
-              <div className="border border-black/10 p-6">
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] transition-all duration-300">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-8 h-px bg-[var(--jaune-or)]" />
-                  <h3 className="font-display-aptos text-[var(--night)] text-lg">Analyse Marché</h3>
+                  <h3 className="font-primary font-bold text-[var(--night)] text-xl">Analyse Marché</h3>
                 </div>
                 <div className="space-y-4 text-sm">
-                  <div className="flex justify-between items-center py-2 border-b border-black/5">
-                    <span className="text-[rgba(10,10,10,0.6)]">BRVM 10</span>
-                    <span className="text-green-700 font-medium">+2.45%</span>
+                  <div className="flex justify-between items-center py-2 border-b border-[var(--mauve)]/5">
+                    <span className="text-[var(--night-60)] font-medium">BRVM 10</span>
+                    <span className="text-green-700 font-bold bg-green-700/10 px-2 py-0.5 rounded-full">+2.45%</span>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b border-black/5">
-                    <span className="text-[rgba(10,10,10,0.6)]">Volume Moyen</span>
-                    <span className="text-[var(--night)]">1,8 Mds XOF</span>
+                  <div className="flex justify-between items-center py-2 border-b border-[var(--mauve)]/5">
+                    <span className="text-[var(--night-60)] font-medium">Volume Moyen</span>
+                    <span className="text-[var(--night)] font-bold">1,8 Mds XOF</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-[rgba(10,10,10,0.6)]">Secteur Dominant</span>
-                    <span className="text-green-700">Banques</span>
+                    <span className="text-[var(--night-60)] font-medium">Secteur Dominant</span>
+                    <span className="text-[var(--mauve)] font-bold bg-[var(--mauve-10)] px-2 py-0.5 rounded-full">Banques</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Actions */}
-              <div className="border border-black/10 p-6">
-                <h3 className="font-display-aptos text-[var(--night)] text-lg mb-6">Actions Rapides</h3>
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] transition-all duration-300">
+                <h3 className="font-primary font-bold text-[var(--night)] text-xl mb-6">Actions Rapides</h3>
                 <div className="space-y-3">
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[var(--jaune-or)] hover:bg-[var(--night)] text-[var(--night)] hover:text-white transition-colors font-medium">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-colors font-bold text-sm tracking-wide">
                     <FiEye className="w-4 h-4" />
                     Liste de Surveillance
                   </button>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-black/10 hover:border-[var(--jaune-or)] text-[var(--night)] transition-colors">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-[var(--mauve)]/20 hover:border-[var(--mauve)] hover:bg-[var(--mauve-10)] text-[var(--mauve)] transition-colors font-bold text-sm tracking-wide">
                     <FiBarChart className="w-4 h-4" />
                     Portefeuille
                   </button>

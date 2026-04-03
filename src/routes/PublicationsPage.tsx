@@ -66,33 +66,31 @@ export const PublicationsPage = () => {
   }, [publications, searchQuery, activeCategory])
 
   return (
-    <div className="bg-[var(--pure-white)]">
+    <div className="bg-[var(--pure-white)] font-primary">
         {/* Hero: Editorial & Asymmetrical */}
-        <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10">
+        <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
           <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80"
               alt="Recherche et publications"
-              className="w-full h-full object-cover opacity-35"
+              className="w-full h-full object-cover opacity-20"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
+            <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
           </div>
           <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               <div className="lg:col-span-8">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-px bg-[var(--jaune-or)]" />
-                  <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
                     Publications
                   </span>
                 </div>
-                <h1 className="font-display-aptos text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight">
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight text-[var(--pure-white)]">
                   Nos études et analyses.
                 </h1>
               </div>
               <div className="lg:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light border-l border-[var(--jaune-or)] pl-6">
+                <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
                   Revues, analyses et teasers de dividendes pour vous accompagner dans vos décisions d'investissement.
                 </p>
               </div>
@@ -111,7 +109,7 @@ export const PublicationsPage = () => {
                   placeholder="Rechercher des publications..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-0 py-3 bg-transparent border-b border-black/10 focus:border-[var(--jaune-or)] outline-none font-display-aptos text-lg transition-colors"
+                  className="w-full px-6 py-3 bg-white border border-[var(--mauve)]/20 focus:border-[var(--mauve)] outline-none font-primary text-lg transition-colors rounded-full shadow-sm"
                 />
               </div>
 
@@ -124,7 +122,7 @@ export const PublicationsPage = () => {
                       key={cat}
                       type="button"
                       onClick={() => setActiveCategory(cat)}
-                      className={`${isActive ? 'bg-[var(--night)] text-white border-[var(--night)]' : 'bg-transparent text-[var(--night)] border-black/10 hover:border-black/30'} px-4 py-2 border text-[11px] tracking-[0.1em] uppercase font-bold transition-colors`}
+                      className={`${isActive ? 'bg-[var(--mauve)] text-white border-[var(--mauve)]' : 'bg-white text-[var(--night)] border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] text-[var(--mauve)]'} px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow`}
                       aria-pressed={isActive}
                     >
                       {CATEGORY_LABELS[cat]}
@@ -142,31 +140,31 @@ export const PublicationsPage = () => {
             {publications === undefined ? (
               // Loading state
               <div className="text-center py-16">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto mb-4"></div>
-                <p className="text-[rgba(10, 10, 10, 0.8)]">Chargement des publications...</p>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--mauve)] mx-auto mb-4"></div>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-primary">Chargement des publications...</p>
               </div>
             ) : filtered.length === 0 ? (
               // Empty state
               <div className="text-center py-16">
-                <div className="w-16 h-16 mx-auto mb-4 bg-[var(--white-smoke)] flex items-center justify-center">
-                  <svg className="w-8 h-8 text-[var(--jaune-or)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 mx-auto mb-4 bg-[var(--mauve-10)] rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-[var(--mauve)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-display-aptos text-[var(--night)] mb-2">Aucune publication trouvée</h3>
-                <p className="text-[rgba(10, 10, 10, 0.8)]">Aucune publication ne correspond aux critères sélectionnés.</p>
+                <h3 className="text-lg font-primary font-bold text-[var(--night)] mb-2">Aucune publication trouvée</h3>
+                <p className="text-[rgba(10, 10, 10, 0.8)] font-primary">Aucune publication ne correspond aux critères sélectionnés.</p>
               </div>
             ) : (
               <div ref={listRef} className="reveal grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((item, index) => (
                 <article key={index} className="group">
-                  <a href={`/publications/${item.slug}`} className="block">
-                    <div className="border border-black/10 p-6 transition-all duration-300 hover:border-[var(--jaune-or)]/50 h-full flex flex-col">
+                  <a href={`/publications/${item.slug}`} className="block h-full">
+                    <div className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] hover:border-[var(--mauve)]/20 h-full flex flex-col">
                       {/* Cover image placeholder */}
-                      <div className="h-40 bg-[var(--white-smoke)] flex items-center justify-center text-[rgba(10,10,10,0.5)] mb-6 border border-black/5">
+                      <div className="h-40 bg-[var(--mauve-10)] rounded-xl flex items-center justify-center text-[rgba(10,10,10,0.5)] mb-6 overflow-hidden">
                         <div className="text-center">
-                          <div className="w-12 h-12 mx-auto mb-2 bg-[var(--jaune-or)]/10 flex items-center justify-center">
-                            <svg className="w-6 h-6 text-[var(--jaune-or)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="w-12 h-12 mx-auto bg-[var(--mauve)]/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg className="w-6 h-6 text-[var(--mauve)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                           </div>
@@ -177,12 +175,12 @@ export const PublicationsPage = () => {
                       <div className="flex-1 flex flex-col">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--jaune-or)]">
+                            <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--mauve)]">
                               {CATEGORY_LABELS[item.category]}
                             </span>
                             {/* Featured indicator */}
                             {item.featured && (
-                              <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night)] bg-[var(--jaune-or)] px-2 py-0.5">
+                              <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-white bg-[var(--mauve)] px-2.5 py-0.5 rounded-full">
                                 En vedette
                               </span>
                             )}
@@ -196,23 +194,23 @@ export const PublicationsPage = () => {
                           </time>
                         </div>
                         
-                        <h3 className="font-display-aptos text-xl font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--jaune-or)] transition-colors leading-tight">
+                        <h3 className="font-primary font-bold text-xl text-[var(--night)] mb-3 group-hover:text-[var(--mauve)] transition-colors leading-tight">
                           {item.title}
                         </h3>
                         
-                        <p className="text-[rgba(10,10,10,0.7)] text-sm leading-relaxed mb-6 flex-1">
+                        <p className="text-[rgba(10,10,10,0.7)] text-sm leading-relaxed mb-6 flex-1 font-primary">
                           {item.description}
                         </p>
 
                         {/* Divider */}
-                        <div className="h-px w-full bg-black/10 mb-4" />
+                        <div className="h-px w-full bg-[var(--mauve)]/10 mb-4" />
 
                         {/* Read more indicator */}
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--jaune-or)]">
+                        <div className="flex items-center justify-between mt-auto">
+                          <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--mauve)] group-hover:tracking-[0.15em] transition-all">
                             Lire la suite
                           </span>
-                          <svg className="w-4 h-4 text-[var(--jaune-or)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 text-[var(--mauve)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>
@@ -220,7 +218,7 @@ export const PublicationsPage = () => {
                     </div>
                   </a>
                 </article>
-              ))}
+                ))}
               </div>
             )}
           </div>

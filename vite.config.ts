@@ -28,19 +28,17 @@ export default defineConfig({
     // Enable automatic code splitting for better performance
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Separate Three.js and its dependencies
-          'three-vendor': ['three'],
-          // Separate GSAP
-          'gsap-vendor': ['gsap'],
-          // Separate animation libraries
-          'animation-vendor': ['lenis'],
-          // Separate UI libraries
-          'ui-vendor': ['react-icons'],
-          // Separate router
-          'router-vendor': ['@tanstack/react-router'],
-        },
-      },
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three')) return 'three-vendor';
+            if (id.includes('gsap')) return 'gsap-vendor';
+            if (id.includes('framer-motion') || id.includes('lenis')) return 'animation-vendor';
+            if (id.includes('lucide-react') || id.includes('react-icons') || id.includes('clsx') || id.includes('tailwind-merge')) return 'ui-vendor';
+            if (id.includes('@tanstack/react-router')) return 'router-vendor';
+            return 'vendor';
+          }
+        }
+      }
     },
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,

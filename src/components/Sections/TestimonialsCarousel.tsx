@@ -177,7 +177,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <FiStar
         key={i}
         className={`w-4 h-4 ${
-          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-gray-300'
+          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-gray-600'
         }`}
       />
     ));
@@ -201,32 +201,32 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white relative">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+    <section ref={sectionRef} className="reveal py-24 md:py-40 section-bg-mauve text-white relative font-primary">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-16">
           <div className="lg:col-span-5">
-            <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">{title}</span>
-            <h2 className="font-display-aptos text-4xl md:text-6xl leading-[1.05] mb-8">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">{title}</span>
+            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-white">
               Ils nous font confiance.
             </h2>
-            <p className="text-white/60 leading-relaxed font-light text-lg">
+            <p className="text-white/70 leading-relaxed font-light text-lg">
               {subtitle}
             </p>
           </div>
           <div className="lg:col-span-7">
             {/* Trust Indicators */}
-            <div className="flex items-center gap-12 pt-8 border-t border-white/10">
+            <div className="flex flex-wrap md:flex-nowrap items-center gap-12 pt-8 border-t border-white/10">
               <div>
-                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{clientsCounter.value}</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Clients satisfaits</div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{clientsCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Clients satisfaits</div>
               </div>
               <div>
-                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{ratingCounter.value}</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Note moyenne</div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{ratingCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Note moyenne</div>
               </div>
               <div>
-                <div className="font-display-aptos text-4xl text-[var(--jaune-or)]">{satisfactionCounter.value}</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-white/50">Recommandation</div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{satisfactionCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Recommandation</div>
               </div>
             </div>
           </div>
@@ -238,14 +238,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
             <>
               <button
                 onClick={prevSlide}
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:border-[var(--jaune-or)] transition-all"
+                className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--mauve)]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:text-[var(--night)] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Previous testimonials"
               >
                 <FiChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:border-[var(--jaune-or)] transition-all"
+                className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--mauve)]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:text-[var(--night)] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Next testimonials"
               >
                 <FiChevronRight className="w-5 h-5" />
@@ -256,7 +256,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           {/* Testimonials Container */}
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out gap-6"
+              className="flex transition-transform duration-500 ease-in-out"
               style={{
                 transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
                 width: `${(filteredTestimonials.length / itemsPerView) * 100}%`
@@ -265,9 +265,9 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
               {filteredTestimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3"
+                  className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3"
                 >
-                  <div className="group border border-white/10 p-8 h-full hover:border-[var(--jaune-or)]/50 transition-colors">
+                  <div className="group border border-white/10 p-8 rounded-2xl bg-white/5 backdrop-blur-sm h-full hover:border-[var(--jaune-or)]/50 transition-colors flex flex-col">
                     {/* Quote Icon */}
                     <div className="flex items-center justify-between mb-6">
                       <div className="w-8 h-px bg-[var(--jaune-or)]" />
@@ -284,23 +284,23 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                     </div>
 
                     {/* Content */}
-                    <blockquote className="text-white/70 font-light leading-relaxed mb-8 text-lg">
+                    <blockquote className="text-white/80 font-light leading-relaxed mb-8 text-lg flex-1">
                       "{testimonial.content}"
                     </blockquote>
 
                     {/* Author */}
-                    <div className="border-t border-white/10 pt-6">
+                    <div className="border-t border-white/10 pt-6 mt-auto">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-white/5 flex items-center justify-center">
-                          <span className="text-lg font-display-aptos text-[var(--jaune-or)]">
+                        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                          <span className="text-lg font-primary font-bold text-[var(--jaune-or)]">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                         <div>
-                          <div className="font-display-aptos text-base text-white">
+                          <div className="font-primary font-bold text-base text-white mb-1">
                             {testimonial.name}
                           </div>
-                          <div className="text-sm text-white/50">
+                          <div className="text-xs text-white/50 font-medium">
                             {testimonial.role} • {testimonial.company}
                           </div>
                         </div>
@@ -319,10 +319,10 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
                 <button
                   key={i}
                   onClick={() => setCurrentIndex(i)}
-                  className={`h-1 transition-all ${
+                  className={`h-1.5 rounded-full transition-all ${
                     i === currentIndex
                       ? 'bg-[var(--jaune-or)] w-8'
-                      : 'bg-white/30 w-4'
+                      : 'bg-white/30 w-4 hover:bg-white/50'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
