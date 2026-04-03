@@ -5,7 +5,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section className="reveal relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
+      <section className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
         <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80"

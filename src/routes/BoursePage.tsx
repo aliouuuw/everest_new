@@ -436,7 +436,7 @@ export const BoursePage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] min-h-screen font-primary">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
+      <section ref={heroRef} className="relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
         <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80"

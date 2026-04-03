@@ -21,7 +21,7 @@ export const AboutPage = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-        <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+        <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
           <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"

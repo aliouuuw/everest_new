@@ -68,7 +68,7 @@ export const PublicationsPage = () => {
   return (
     <div className="bg-[var(--pure-white)] font-primary">
         {/* Hero: Editorial & Asymmetrical */}
-        <section ref={heroRef} className="reveal relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
+        <section ref={heroRef} className="relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
           <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80"

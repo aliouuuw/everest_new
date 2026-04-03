@@ -97,7 +97,7 @@ export const PublicationPage = () => {
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
-      <section ref={heroRef} className="reveal py-20 sm:py-28 section-bg-mauve">
+      <section ref={heroRef} className="py-20 sm:py-28 section-bg-mauve">
         <div className="mx-auto max-w-4xl px-6">
           {/* Back button */}
           <button

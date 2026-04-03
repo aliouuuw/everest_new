@@ -40,7 +40,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
       {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10 section-bg-mauve">
+      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10 section-bg-mauve">
         {hero_background && (
           <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
             <img

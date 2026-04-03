@@ -168,24 +168,8 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-28 md:py-36 overflow-hidden"
-      style={{ background: 'var(--summit-ivory)' }}
+      className="reveal relative py-28 md:py-36 overflow-hidden bg-[var(--summit-ivory)]"
     >
-      {/* Dual mauve-gold gradient atmosphere */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 60% 50% at 20% 30%, var(--mauve-05) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 85% 70%, var(--jaune-or-05) 0%, transparent 50%)',
-        }}
-      />
-      {/* Gradient orb accent */}
-      <div
-        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full pointer-events-none opacity-20 blur-3xl"
-        style={{
-          background: 'radial-gradient(circle, var(--mauve-10) 0%, var(--jaune-or-05) 40%, transparent 70%)',
-        }}
-      />
-
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header */}
         <div className="max-w-xl mb-14">
@@ -239,7 +223,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.3rem', color: 'var(--night)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
                 >
                   Paramètres d'investissement
                 </h3>
@@ -313,24 +297,27 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   </div>
 
                   <div>
-                    <label
-                      className="block mb-2"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                    >
-                      Horizon d'investissement (années)
-                    </label>
+                    <div className="flex items-center justify-between mb-3">
+                      <label
+                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
+                      >
+                        Horizon d'investissement
+                      </label>
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1rem', color: 'var(--mauve)' }}>
+                        {inputs.timeHorizon} ans
+                      </span>
+                    </div>
                     <input
                       type="range"
                       min="1"
                       max="20"
                       value={inputs.timeHorizon}
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
-                      className="w-full accent-[var(--jaune-or)]"
+                      className="w-full accent-[var(--mauve)]"
                     />
-                    <div className="flex justify-between mt-2">
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>1 an</span>
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1rem', color: 'var(--mauve)' }}>{inputs.timeHorizon} ans</span>
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>20 ans</span>
+                    <div className="flex justify-between mt-1.5">
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'var(--night-60)' }}>1 an</span>
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'var(--night-60)' }}>20 ans</span>
                     </div>
                   </div>
 
@@ -373,7 +360,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
                 <h3
                   className="mb-8"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.3rem', color: 'var(--night)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
                 >
                   Projections estimées
                 </h3>
@@ -381,42 +368,40 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 <div className="space-y-0">
                   <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Total investi</span>
-                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
                   <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>
                       Frais estimés ({serviceFees[inputs.service].min}%)
                     </span>
-                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: '#ef4444' }}>-{totalFeesCounter.value}</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: 'var(--mauve-60)' }}>−{totalFeesCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '2px solid var(--mauve-20)' }}>
-                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.875rem', color: 'var(--night-80)' }}>Valeur projetée</span>
-                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.5rem', color: '#10b981' }}>{projectedValueCounter.value}</span>
+                  {/* Hero result — projected value */}
+                  <div className="py-6 mt-2 mb-2 rounded-xl px-5" style={{ background: 'var(--mauve-05)', border: '1px solid var(--mauve-15)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'var(--mauve-60)', display: 'block', marginBottom: '0.5rem' }}>
+                      Valeur projetée
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2.2rem', letterSpacing: '-0.02em', color: 'var(--mauve)' }}>
+                      {projectedValueCounter.value}
+                    </span>
                   </div>
 
                   <div className="flex justify-between items-center py-5">
                     <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Gain net estimé</span>
-                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.2rem', color: results.netReturn >= 0 ? '#10b981' : '#ef4444' }}>
-                      {netReturnCounter.value}
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: results.netReturn >= 0 ? 'var(--jaune-or)' : 'var(--mauve)' }}>
+                      {results.netReturn >= 0 ? '+' : ''}{netReturnCounter.value}
                     </span>
                   </div>
                 </div>
 
-                {/* Avg return highlight with gradient */}
-                <div className="mt-8 p-6 rounded-xl relative overflow-hidden" style={{ background: 'var(--mauve-05)', border: '1px solid var(--mauve-15)' }}>
-                  <div 
-                    className="absolute inset-0 opacity-30 pointer-events-none"
-                    style={{ background: 'linear-gradient(135deg, var(--mauve-10) 0%, var(--jaune-or-10) 100%)' }}
-                  />
-                  <span
-                    className="block mb-2 relative z-10"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--mauve)' }}
-                  >
-                    Rendement annuel moyen estimé
+                {/* Avg return — clean, no gradient noise */}
+                <div className="mt-6 pt-6 flex items-baseline justify-between" style={{ borderTop: '1px solid var(--mauve-10)' }}>
+                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}>
+                    Rendement annuel moyen
                   </span>
-                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2.5rem', color: 'var(--mauve)' }}>
+                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2rem', letterSpacing: '-0.02em', color: 'var(--jaune-or)' }}>
                     {avgReturnCounter.value}
                   </span>
                 </div>
@@ -432,16 +417,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                   Les marchés financiers comportent des risques.
                 </p>
                 <a
-                  href="#contact"
-                  className="group inline-flex items-center gap-4"
+                  href="https://everest-account-opening.vercel.app/new-home"
+                  className="btn-primary inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase"
                 >
-                  <span
-                    className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--mauve)' }}
-                  >
-                    Obtenir un conseil personnalisé
-                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--mauve)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
-                  </span>
+                  Ouvrir un compte
                 </a>
               </div>
             </div>
