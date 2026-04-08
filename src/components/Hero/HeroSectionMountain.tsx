@@ -54,7 +54,7 @@ export const HeroSectionMountain: React.FC = () => {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse 70% 60% at 55% 45%, transparent 0%, rgba(15,17,21,0.55) 60%, rgba(15,17,21,0.92) 100%)',
+            background: 'radial-gradient(ellipse 70% 60% at 55% 45%, transparent 0%, rgba(15,17,21,0.10) 60%, rgba(15,17,21,0.05) 100%)',
           }}
         />
         {/* Bottom fade for text readability */}

@@ -9,7 +9,7 @@ export const CTA: React.FC<{
   primaryHref?: string;
   primaryLabel?: string;
   secondaryHref?: string;
-  secondaryLabel?: string;
+  secondaryLabel?: string | null;
 }> = ({ primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryHref = '#offres', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
 
@@ -18,40 +18,40 @@ export const CTA: React.FC<{
       ref={sectionRef}
       className="reveal relative py-24 md:py-36 overflow-hidden"
       id="contact"
-      style={{ background: 'var(--gradient-dark-section)' }}
+      style={{ background: 'var(--pure-white)' }}
     >
-      {/* Dramatic gold-mauve gradient orbs */}
+      {/* Soft mauve orb — top left */}
       <div
-        className="absolute top-0 left-0 w-[60%] h-[80%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, var(--mauve-30) 0%, var(--jaune-or-10) 30%, transparent 60%)' }}
+        className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
       />
+      {/* Soft gold orb — bottom right */}
       <div
-        className="absolute bottom-0 right-0 w-[50%] h-[60%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-15) 0%, var(--mauve-10) 40%, transparent 60%)' }}
+        className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%)' }}
       />
-      {/* Gradient noise texture overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
-      />
+
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
-          
-          {/* Left Side: Oversized Editorial Text */}
+
+          {/* Left Side */}
           <div className="lg:w-3/5">
             <div className="mb-8">
-              <PillBadge variant="gold">Prise de contact</PillBadge>
+              <PillBadge>Prise de contact</PillBadge>
             </div>
-            <h2 className="luxury-heading-dark">
-              Prêts à franchir{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>
-                un cap ?
-              </span>
+            <h2
+              className="mb-8"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: 700,
+                fontSize: 'clamp(2.2rem, 5vw, 4rem)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+                color: 'var(--mauve)',
+              }}
+            >
+              Prêts à franchir<br />un cap ?
             </h2>
-            <div
-              className="h-[3px] w-32 mt-10 mb-8"
-              style={{ background: 'linear-gradient(90deg, var(--jaune-or), var(--mauve), transparent)' }}
-            />
             <p
               className="max-w-md"
               style={{
@@ -59,42 +59,48 @@ export const CTA: React.FC<{
                 fontWeight: 300,
                 fontSize: '1.05rem',
                 lineHeight: 1.75,
-                color: 'rgba(255,255,255,0.7)',
+                color: 'var(--night-60)',
               }}
             >
               Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
             </p>
           </div>
 
-          {/* Right Side: Vertical Actions */}
+          {/* Right Side: Actions */}
           <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
-            <a
-              href={primaryHref}
-              className="btn-primary-dark group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 px-8 py-5 transition-all duration-500"
-            >
-              <span
-                className="text-[12px] tracking-[0.2em] uppercase"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
-              >
-                {primaryLabel}
-              </span>
-              <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform duration-500" />
-            </a>
-            
-            {secondaryHref && (
+            {secondaryHref && secondaryLabel && (
               <a
                 href={secondaryHref}
-                className="group inline-flex items-center gap-4 mt-2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent hover:[&>span]:text-[var(--jaune-or)] transition-all duration-500"
               >
                 <span
-                  className="relative overflow-hidden text-[11px] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}
+                  className="relative overflow-hidden text-[12px] tracking-[0.1em] font-extrabold text-[var(--pure-white)]"
+                  style={{ fontFamily: 'var(--font-primary)', }}
                 >
                   {secondaryLabel}
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+                </span>
+                <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
+                  <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
                 </span>
               </a>
             )}
+            <a
+              href={primaryHref}
+              className="group w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--mauve)] bg-[var(--mauve)] hover:bg-transparent transition-all duration-500"
+            >
+              <span
+                className="text-[12px] tracking-[0.1em] text-white font-extrabold group-hover:text-[var(--mauve)] transition-colors duration-500"
+                style={{ fontFamily: 'var(--font-primary)', }}
+              >
+                {primaryLabel}
+              </span>
+              <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
+                <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
+              </span>
+            </a>
+
           </div>
 
         </div>

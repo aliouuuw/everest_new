@@ -1,5 +1,5 @@
 import { useLocation } from '@tanstack/react-router';
-import { FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaTiktok } from 'react-icons/fa';
 
 export const Footer = () => {
   const location = useLocation();
@@ -33,10 +33,7 @@ export const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <img src="/logo-everest.png" alt="Everest Finance" className="h-8 w-auto brightness-125" />
-              <span className="font-primary font-semibold text-[1.1rem] text-[var(--pure-white)]">
-                Everest Finance
-              </span>
+              <img src="/logo-everest.png" alt="Everest Finance" className="h-32 w-auto brightness-125" />
             </div>
             <p className="text-secondary-dark text-[0.85rem] font-light leading-relaxed">
               Des idées et des valeurs au service de vos ambitions.
@@ -52,11 +49,19 @@ export const Footer = () => {
               </a>
               <a
                 href="#"
-                aria-label="Twitter"
+                aria-label="Facebook"
                 className="inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
                 style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
               >
-                <FaTwitter className="text-sm" />
+                <FaFacebook className="text-sm" />
+              </a>
+              <a
+                href="#"
+                aria-label="TikTok"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 hover:border-[var(--jaune-or)]/40 hover:text-[var(--jaune-or)]"
+                style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
+              >
+                <FaTiktok className="text-sm" />
               </a>
             </div>
           </div>
@@ -87,9 +92,7 @@ export const Footer = () => {
               {[
                 { label: 'Marché des capitaux', href: '/marche-capitaux' },
                 { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
-                { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
-                { label: 'Gestion libre', href: '/gestion-libre' },
-                { label: 'Gestion assistée', href: '/gestion-assistee' },
+                { label: 'Gestion sous mandat', href: '/gestion-sous-mandat' },
               ].map((l) => (
                 <li key={l.href}>
                   <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
@@ -103,16 +106,19 @@ export const Footer = () => {
             <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Contact</div>
             <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
               <li>
-                18 Boulevard de la République,<br />Dakar, Sénégal
+                18 Boulevard de la République,<br />Dakar, Sénégal - BP: 11659-13000
               </li>
               <li>
-                <a href="mailto:contact@everest-finance.sn" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
-                  contact@everest-finance.sn
+                <a href="mailto:contact@everestfin.com" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                  contact@everestfin.com
                 </a>
               </li>
               <li>
-                <a href="tel:+221000000000" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
-                  +221 00 000 00 00
+                <a href="tel:+221338228700" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                  +221 33 822 87 00
+                </a>
+                <a href="tel:+221338228701" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                  +221 33 822 87 01
                 </a>
               </li>
             </ul>
@@ -124,7 +130,13 @@ export const Footer = () => {
           className="mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-[var(--pure-white)]/5 text-secondary-dark text-[0.7rem] font-light"
         >
           <span className="opacity-70">
-            &copy; {new Date().getFullYear()} Everest Finance SGI — Agrément CREPMF SGI/DA/2016/60
+            &copy; {new Date().getFullYear()} Everest Finance SGI — Numéro d’agrément n° SGI /DA/2016/60
+          </span>
+          <span>
+            Termes et conditions.        
+          </span>
+          <span>
+            Politique de Confidentialite
           </span>
           <span className="opacity-60">
             Tous droits réservés

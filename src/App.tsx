@@ -11,7 +11,7 @@ function App() {
       <Insights />
       <NewsSection />
       <FAQ />
-      <CTA scheme="metallic" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
+      <CTA scheme="ivory" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel={"Découvrir votre profil d'investisseur"} />
     </>
   );
 }

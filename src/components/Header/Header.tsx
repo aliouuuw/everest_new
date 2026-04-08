@@ -60,8 +60,8 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseLeave={handleMouseLeave}
     >
       <button
-        className="flex items-center gap-1 text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-white group"
-        style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+        className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+        style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
         aria-expanded={isOpen}
       >
         {title}
@@ -81,8 +81,8 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
             <Link
               key={index}
               to={item.href}
-              className="block px-6 py-3 text-[13px] transition-all duration-200 hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
             >
               {item.label}
             </Link>
@@ -183,10 +183,10 @@ export const Header: React.FC = () => {
   // Header background: darker mauve/purple on all pages
   const headerBg = isLightBackgroundPage
     ? isScrolled
-      ? 'bg-[#2a1435] shadow-lg shadow-black/30'
+      ? 'bg-[#2a1435]'
       : 'bg-[#2a1435]'
     : isScrolled
-      ? 'bg-[#2a1435]/95 backdrop-blur-xl shadow-lg shadow-black/30'
+      ? 'bg-[#6c786eba]/90 backdrop-blur-xl'
       : '';
 
   // Nav link color: always white on mauve bg
@@ -204,8 +204,8 @@ export const Header: React.FC = () => {
         <nav className="hidden lg:flex items-center gap-8">
           <Link
             to="/"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: navLinkColor }}
+            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
             Accueil
           </Link>
@@ -230,39 +230,52 @@ export const Header: React.FC = () => {
 
           <Link
             to="/offres"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: navLinkColor }}
+            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
             Offres
           </Link>
 
           <Link
             to="/bourse"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: navLinkColor }}
+            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
             Bourse
           </Link>
 
           <Link
             to="/simulateur"
-            className="text-[13px] tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: navLinkColor }}
+            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
             Simulateur
           </Link>
         </nav>
 
         {/* CTA */}
-        <div className="hidden lg:block">
-          <Link
-            to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/50 rounded-full transition-all duration-500 hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10"
+        <div className="hidden lg:flex items-center gap-3">
+          <a
+            href="https://everest-account-opening.vercel.app/new-home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--jaune-or)] rounded-full transition-all duration-500 hover:bg-[var(--jaune-or)]/90"
           >
-            <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-110" />
             <span
               className="text-[11px] tracking-[0.15em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
+            >
+              Ouvrir un compte
+            </span>
+          </a>
+          <Link
+            to="/auth"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full transition-all duration-500 hover:border-white/70 hover:bg-white/10"
+          >
+            <FingerprintIcon className="w-3.5 h-3.5 text-white/70 transition-transform duration-300 group-hover:scale-110 group-hover:text-white" />
+            <span
+              className="text-[11px] tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
             >
               Accès Client
             </span>
@@ -296,7 +309,7 @@ export const Header: React.FC = () => {
             <Link
               to="/"
               className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Accueil
@@ -349,7 +362,7 @@ export const Header: React.FC = () => {
             <Link
               to="/offres"
               className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Offres
@@ -358,7 +371,7 @@ export const Header: React.FC = () => {
             <Link
               to="/bourse"
               className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Bourse
@@ -367,22 +380,36 @@ export const Header: React.FC = () => {
             <Link
               to="/simulateur"
               className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Simulateur
             </Link>
 
-            <div className="pt-4 border-t border-white/[0.12]">
-              <Link
-                to="/auth"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-[var(--jaune-or)]/50 rounded-full w-full justify-center transition-all duration-300 hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10"
+            <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
+              <a
+                href="https://everest-account-opening.vercel.app/new-home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-2.5 bg-[var(--jaune-or)] rounded-full w-full transition-all duration-300 hover:bg-[var(--jaune-or)]/90"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-3.5 h-3.5 text-[var(--jaune-or)]" />
                 <span
                   className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night)' }}
+                >
+                  Ouvrir un compte
+                </span>
+              </a>
+              <Link
+                to="/auth"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full w-full justify-center transition-all duration-300 hover:border-white/70 hover:bg-white/10"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FingerprintIcon className="w-3.5 h-3.5 text-white/70" />
+                <span
+                  className="text-[11px] tracking-[0.15em] uppercase"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
                 >
                   Accès Client
                 </span>
