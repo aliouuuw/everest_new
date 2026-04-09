@@ -71,11 +71,10 @@ export const PublicationsPage = () => {
         <section ref={heroRef} className="relative py-24 md:py-32 border-b border-black/10 section-bg-mauve">
           <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80"
+              src="/Assets_Website/publications.png"
               alt="Recherche et publications"
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
           </div>
           <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">

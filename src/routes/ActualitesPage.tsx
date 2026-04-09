@@ -98,7 +98,7 @@ export const ActualitesPage = () => {
                 </span>
               </div>
               <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight text-[var(--mauve)]">
-                Actualités & <em className="font-normal italic text-[var(--jaune-or)]">Communiqués.</em>
+                Actualités & <span className="font-normal text-[var(--jaune-or)]">Communiqués.</span>
               </h1>
             </div>
             <div className="lg:col-span-4 pb-4">

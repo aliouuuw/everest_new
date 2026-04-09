@@ -90,11 +90,10 @@ export const FAQPage = () => {
         <section ref={heroRef} className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
           <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1600&q=80"
+              src="/Assets_Website/Abécédaire-&-FAQ.png"
               alt="Support client"
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
           </div>
           
           <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">

@@ -75,7 +75,7 @@ export const ValueProps: React.FC = () => {
         {/* LEFT PANEL — Hero Image */}
         <div className="relative lg:w-[45%] min-h-[50vh] lg:min-h-0 overflow-hidden">
           <img
-            src="/VALUEPROPS.jpg"
+            src="/Assets_Website/Valueprops.png"
             alt="Sommet montagneux — Everest Finance"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
