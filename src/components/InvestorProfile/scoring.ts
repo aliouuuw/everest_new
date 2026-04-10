@@ -7,9 +7,10 @@ export function calculateProfile(answers: UserAnswers): ProfileResult {
   const ratio = total / maxScore
 
   let type: InvestorProfileType
-  if (ratio <= 0.35) type = 'conservative'
-  else if (ratio <= 0.55) type = 'balanced'
-  else if (ratio <= 0.75) type = 'growth'
+  if (ratio <= 0.28) type = 'conservative'
+  else if (ratio <= 0.44) type = 'moderate'
+  else if (ratio <= 0.60) type = 'balanced'
+  else if (ratio <= 0.78) type = 'growth'
   else type = 'aggressive'
 
   return PROFILES[type]
@@ -38,6 +39,28 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     ],
     recommendation: "Nous recommandons une gestion sous mandat \u00ab Prudent \u00bb, orientée vers les obligations souveraines UEMOA et les instruments monétaires de qualité.",
   },
+  moderate: {
+    type: 'moderate',
+    title: 'Modéré',
+    subtitle: "Prudence avec une touche de croissance",
+    description: "Vous privilégiez la sécurité tout en acceptant une légère exposition aux marchés pour améliorer vos rendements. Une approche progressive qui équilibre protection et potentiel.",
+    color: '#0891b2',
+    colorLight: 'rgba(8, 145, 178, 0.1)',
+    riskLevel: 2,
+    allocation: [
+      { label: 'Obligations', percentage: 55, color: '#0891b2' },
+      { label: 'Monétaire', percentage: 20, color: '#22d3ee' },
+      { label: 'Actions', percentage: 20, color: '#67e8f9' },
+      { label: 'Alternatif', percentage: 5, color: '#a5f3fc' },
+    ],
+    traits: [
+      "Aversion au risque modérée",
+      "Horizon moyen terme (2–4 ans)",
+      "Priorité : stabilité avec croissance modeste",
+      "Faible tolérance aux fluctuations",
+    ],
+    recommendation: "Nous recommandons une gestion sous mandat \u00ab Prudent + \u00bb, majoritairement orientée obligations avec une exposition contrôlée aux actions de qualité.",
+  },
   balanced: {
     type: 'balanced',
     title: 'Équilibré',
@@ -45,7 +68,7 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     description: "Vous cherchez un équilibre entre croissance et sécurité. Vous acceptez une volatilité modérée en échange d\u2019un meilleur rendement à moyen terme. La diversification est votre meilleur allié.",
     color: '#7c3aed',
     colorLight: 'rgba(124, 58, 237, 0.1)',
-    riskLevel: 2,
+    riskLevel: 3,
     allocation: [
       { label: 'Obligations', percentage: 40, color: '#7c3aed' },
       { label: 'Actions', percentage: 35, color: '#a78bfa' },
@@ -54,7 +77,7 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     ],
     traits: [
       "Tolérance au risque modérée",
-      "Horizon moyen terme (3\u20135 ans)",
+      "Horizon moyen terme (3–5 ans)",
       "Objectif : croissance régulière",
       "Diversification privilégiée",
     ],
@@ -67,7 +90,7 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     description: "Vous visez une croissance significative de votre patrimoine et acceptez une volatilité importante. Vous avez un horizon long et une bonne connaissance des marchés financiers.",
     color: '#ca942f',
     colorLight: 'rgba(202, 148, 47, 0.1)',
-    riskLevel: 3,
+    riskLevel: 4,
     allocation: [
       { label: 'Actions', percentage: 55, color: '#ca942f' },
       { label: 'Obligations', percentage: 25, color: '#d4a94a' },
@@ -89,7 +112,7 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     description: "Vous recherchez la performance maximale et êtes prêt à supporter des fluctuations importantes. Vous avez une solide expérience des marchés et un horizon très long.",
     color: '#dc2626',
     colorLight: 'rgba(220, 38, 38, 0.1)',
-    riskLevel: 4,
+    riskLevel: 5,
     allocation: [
       { label: 'Actions', percentage: 70, color: '#dc2626' },
       { label: 'Alternatif', percentage: 15, color: '#ef4444' },

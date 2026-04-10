@@ -28,6 +28,18 @@ export const QUESTIONS: Question[] = [
   },
   // ─── Financial Preferences ───
   {
+    id: 'investment_amount',
+    category: 'financial',
+    title: "Quel montant envisagez-vous d'investir ?",
+    subtitle: "Votre capacité d'investissement",
+    options: [
+      { label: "Moins de 1 000 000 FCFA", value: 1 },
+      { label: "1 000 000 – 5 000 000 FCFA", value: 2 },
+      { label: "5 000 000 – 25 000 000 FCFA", value: 3 },
+      { label: "Plus de 25 000 000 FCFA", value: 4 },
+    ],
+  },
+  {
     id: 'investment_goal',
     category: 'financial',
     title: "Quel est votre objectif principal d\u2019investissement ?",

@@ -180,4 +180,53 @@ export default defineSchema({
   })
     .index("by_slug", ["slug"])
     .index("by_order", ["order"]),
+
+  // Investor Profile Leads Table
+  investorProfileLeads: defineTable({
+    // Personal Information
+    firstName: v.string(),
+    lastName: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+
+    // Profile Results
+    profileType: v.union(
+      v.literal("conservative"),
+      v.literal("moderate"),
+      v.literal("balanced"),
+      v.literal("growth"),
+      v.literal("aggressive")
+    ),
+    profileTitle: v.string(),
+    riskLevel: v.number(),
+
+    // Quiz Answers (stored as JSON)
+    answers: v.array(v.object({
+      questionId: v.string(),
+      value: v.number(),
+    })),
+
+    // Investment Amount (from quiz)
+    investmentAmount: v.optional(v.number()), // 1-4 scale
+
+    // Email Status
+    emailSent: v.boolean(),
+    emailSentAt: v.optional(v.number()),
+    emailError: v.optional(v.string()),
+
+    // PDF Report
+    pdfGenerated: v.boolean(),
+    pdfUrl: v.optional(v.string()),
+
+    // Source tracking
+    source: v.optional(v.string()), // 'cta_button', 'auto_trigger', etc.
+    userAgent: v.optional(v.string()),
+
+    // Timestamps
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_profile_type", ["profileType"])
+    .index("by_created_at", ["createdAt"]),
 });

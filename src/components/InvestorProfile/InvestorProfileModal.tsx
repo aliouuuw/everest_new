@@ -1,13 +1,17 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { FiArrowRight, FiArrowLeft, FiX, FiCheck, FiShield, FiTrendingUp, FiTarget, FiZap, FiMail, FiUser, FiPhone, FiLock } from 'react-icons/fi'
+import { FiArrowRight, FiArrowLeft, FiX, FiCheck, FiShield, FiTrendingUp, FiTarget, FiZap, FiMail, FiUser, FiPhone, FiLock, FiAnchor } from 'react-icons/fi'
+import { useMutation } from 'convex/react'
+import { api } from '../../../convex/_generated/api'
 import { QUESTIONS, CATEGORY_LABELS } from './questions'
 import { calculateProfile } from './scoring'
+import { ProfileReport } from './ProfileReport'
 import type { UserAnswers, ProfileResult, LeadData, Question } from './types'
 
 type ModalStep = 'intro' | 'quiz' | 'lead' | 'result'
 
 const PROFILE_ICONS = {
   conservative: FiShield,
+  moderate: FiAnchor,
   balanced: FiTarget,
   growth: FiTrendingUp,
   aggressive: FiZap,
@@ -23,7 +27,8 @@ const STEP_ICONS = [
 export const InvestorProfileModal: React.FC<{
   isOpen: boolean
   onClose: () => void
-}> = ({ isOpen, onClose }) => {
+  source?: string
+}> = ({ isOpen, onClose, source = 'website' }) => {
   const [step, setStep] = useState<ModalStep>('intro')
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<UserAnswers>({})
@@ -31,7 +36,10 @@ export const InvestorProfileModal: React.FC<{
   const [lead, setLead] = useState<LeadData>({ firstName: '', lastName: '', email: '' })
   const [isAnimating, setIsAnimating] = useState(false)
   const [direction, setDirection] = useState<'forward' | 'back'>('forward')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
+
+  const createLead = useMutation(api.investorProfiles.createLead)
 
   useEffect(() => {
     if (isOpen) {
@@ -92,11 +100,47 @@ export const InvestorProfileModal: React.FC<{
     }
   }, [currentQuestion])
 
-  const handleLeadSubmit = useCallback((e: React.FormEvent) => {
+  const handleLeadSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Lead submitted:', lead, 'Answers:', answers, 'Profile:', result?.type)
-    setStep('result')
-  }, [lead, answers, result])
+    if (!result) return
+
+    setIsSubmitting(true)
+
+    try {
+      // Prepare answers array
+      const answersArray = Object.entries(answers).map(([questionId, value]) => ({
+        questionId,
+        value,
+      }))
+
+      // Get investment amount if answered
+      const investmentAmount = answers['investment_amount']
+
+      // Create lead in Convex
+      await createLead({
+        firstName: lead.firstName,
+        lastName: lead.lastName,
+        email: lead.email,
+        phone: lead.phone,
+        profileType: result.type,
+        profileTitle: result.title,
+        riskLevel: result.riskLevel,
+        answers: answersArray,
+        investmentAmount,
+        source,
+        userAgent: navigator.userAgent,
+      })
+
+      // Show success state
+      setStep('result')
+    } catch (error) {
+      console.error('Failed to submit lead:', error)
+      // Still show result even if submission fails
+      setStep('result')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }, [lead, answers, result, createLead, source])
 
   const progress = step === 'quiz' ? ((currentQuestion + 1) / QUESTIONS.length) * 100 : 0
   const currentCategoryIdx = step === 'quiz' ? Math.floor(currentQuestion / 2) : -1
@@ -115,7 +159,7 @@ export const InvestorProfileModal: React.FC<{
       <div className="absolute inset-0 bg-[var(--night)]/70 backdrop-blur-md ip-fade-in" />
 
       {/* Modal Panel */}
-      <div className="relative w-full max-w-[580px] max-h-[92vh] bg-white rounded-[28px] shadow-[0_32px_80px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col ip-slide-up">
+      <div className="relative w-full max-w-[720px] max-h-[92vh] bg-white rounded-[28px] shadow-[0_32px_80px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col ip-slide-up">
 
         {/* Close button */}
         <button
@@ -189,10 +233,15 @@ export const InvestorProfileModal: React.FC<{
               onSubmit={handleLeadSubmit}
               profileTitle={result.title}
               profileColor={result.color}
+              isSubmitting={isSubmitting}
             />
           )}
           {step === 'result' && result && (
-            <ResultStep result={result} onClose={onClose} />
+            <ResultStep 
+              result={result} 
+              onClose={onClose} 
+              lead={lead}
+            />
           )}
         </div>
       </div>
@@ -266,13 +315,13 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
         color: 'var(--night-60)',
       }}
     >
-      {"Répondez à 8 questions pour déterminer votre tolérance au risque et recevoir une recommandation personnalisée."}
+      {"Répondez à 9 questions pour déterminer votre tolérance au risque et recevoir une recommandation personnalisée."}
     </p>
 
     {/* Stats row */}
     <div className="flex items-center justify-center gap-3 mb-9">
       {[
-        { label: 'Questions', value: '8', icon: '📝' },
+        { label: 'Questions', value: '9', icon: '📝' },
         { label: 'Durée', value: '2 min', icon: '⏱️' },
         { label: 'Résultat', value: 'Immédiat', icon: '⚡' },
       ].map((stat) => (
@@ -428,7 +477,8 @@ const LeadStep: React.FC<{
   onSubmit: (e: React.FormEvent) => void
   profileTitle: string
   profileColor: string
-}> = ({ lead, setLead, onSubmit, profileTitle, profileColor }) => (
+  isSubmitting?: boolean
+}> = ({ lead, setLead, onSubmit, profileTitle, profileColor, isSubmitting = false }) => (
   <div className="px-8 py-10 md:px-10 md:py-12">
     <div className="text-center mb-8">
       {/* Animated checkmark */}
@@ -462,10 +512,11 @@ const LeadStep: React.FC<{
           <input
             type="text"
             required
+            disabled={isSubmitting}
             placeholder="Prénom"
             value={lead.firstName}
             onChange={(e) => setLead(prev => ({ ...prev, firstName: e.target.value }))}
-            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all"
+            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
             style={{ fontFamily: 'var(--font-primary)' }}
           />
         </div>
@@ -474,10 +525,11 @@ const LeadStep: React.FC<{
           <input
             type="text"
             required
+            disabled={isSubmitting}
             placeholder="Nom"
             value={lead.lastName}
             onChange={(e) => setLead(prev => ({ ...prev, lastName: e.target.value }))}
-            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all"
+            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
             style={{ fontFamily: 'var(--font-primary)' }}
           />
         </div>
@@ -487,10 +539,11 @@ const LeadStep: React.FC<{
         <input
           type="email"
           required
+          disabled={isSubmitting}
           placeholder="Adresse email"
           value={lead.email}
           onChange={(e) => setLead(prev => ({ ...prev, email: e.target.value }))}
-          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all"
+          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
           style={{ fontFamily: 'var(--font-primary)' }}
         />
       </div>
@@ -498,22 +551,30 @@ const LeadStep: React.FC<{
         <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--mauve)]/30" size={15} />
         <input
           type="tel"
+          disabled={isSubmitting}
           placeholder="Téléphone (optionnel)"
           value={lead.phone || ''}
           onChange={(e) => setLead(prev => ({ ...prev, phone: e.target.value }))}
-          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all"
+          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
           style={{ fontFamily: 'var(--font-primary)' }}
         />
       </div>
 
       <button
         type="submit"
-        className="group w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-500 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98] mt-1"
+        disabled={isSubmitting}
+        className="group w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-500 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98] mt-1 disabled:opacity-70 disabled:cursor-not-allowed"
       >
         <span className="text-[12px] tracking-[0.12em] font-bold text-white uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
-          Voir mon profil
+          {isSubmitting ? 'Envoi en cours...' : 'Voir mon profil'}
         </span>
-        <FiArrowRight className="text-white group-hover:translate-x-1 transition-transform" size={15} />
+        {!isSubmitting && <FiArrowRight className="text-white group-hover:translate-x-1 transition-transform" size={15} />}
+        {isSubmitting && (
+          <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        )}
       </button>
 
       <p className="text-[10px] text-center text-[var(--night-20)] mt-2 flex items-center justify-center gap-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
@@ -527,8 +588,14 @@ const LeadStep: React.FC<{
 const ResultStep: React.FC<{
   result: ProfileResult
   onClose: () => void
-}> = ({ result, onClose }) => {
+  lead: LeadData
+}> = ({ result, onClose, lead }) => {
   const Icon = PROFILE_ICONS[result.type]
+  const generatedAt = new Date().toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
 
   return (
     <div className="px-8 py-10 md:px-10 md:py-12 ip-scale-in">
@@ -577,17 +644,17 @@ const ResultStep: React.FC<{
             Niveau de risque
           </span>
           <span className="text-[10px] tracking-[0.1em] uppercase font-bold" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>
-            {result.riskLevel} / 4
+            {result.riskLevel} / 5
           </span>
         </div>
         <div className="flex gap-1.5">
-          {[1, 2, 3, 4].map((level) => (
+          {[1, 2, 3, 4, 5].map((level) => (
             <div
               key={level}
               className="h-2 flex-1 rounded-full transition-all duration-700"
               style={{
                 background: level <= result.riskLevel ? result.color : 'rgba(0,0,0,0.06)',
-                animationDelay: `${level * 150}ms`,
+                animationDelay: `${level * 120}ms`,
               }}
             />
           ))}
@@ -653,6 +720,15 @@ const ResultStep: React.FC<{
           {result.recommendation}
         </p>
       </div>
+
+      {/* PDF Report Download */}
+      <ProfileReport
+        result={result}
+        firstName={lead.firstName}
+        lastName={lead.lastName}
+        email={lead.email}
+        generatedAt={generatedAt}
+      />
 
       {/* CTA */}
       <div className="flex flex-col sm:flex-row gap-2.5">

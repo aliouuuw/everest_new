@@ -1,4 +1,4 @@
-export type InvestorProfileType = 'conservative' | 'balanced' | 'growth' | 'aggressive'
+export type InvestorProfileType = 'conservative' | 'moderate' | 'balanced' | 'growth' | 'aggressive'
 
 export type QuestionOption = {
   label: string
@@ -20,7 +20,7 @@ export type ProfileResult = {
   description: string
   color: string
   colorLight: string
-  riskLevel: number // 1–4
+  riskLevel: 1 | 2 | 3 | 4 | 5 // 5-level risk scale
   allocation: {
     label: string
     percentage: number

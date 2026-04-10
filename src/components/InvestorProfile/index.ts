@@ -1,2 +1,5 @@
 export { InvestorProfileModal } from './InvestorProfileModal'
+export { ProfileReport } from './ProfileReport'
+export { AutoTriggerProfile } from './AutoTriggerProfile'
+export { useAutoTrigger } from './useAutoTrigger'
 export type { InvestorProfileType, ProfileResult, LeadData } from './types'
