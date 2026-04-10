@@ -388,10 +388,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="group inline-flex items-center justify-center gap-4 pl-6 pr-3 py-3 rounded-full border-2 border-[var(--mauve)] bg-[var(--mauve)] hover:bg-transparent transition-all duration-500 text-xs uppercase tracking-[0.2em] font-bold">
-                <span className="text-white group-hover:text-[var(--mauve)] transition-colors duration-500">Prendre rendez-vous</span>
+              <a href="/contact" className="group inline-flex items-center justify-center gap-4 pl-6 pr-3 py-3 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent transition-all duration-500 text-xs uppercase tracking-[0.2em] font-bold">
+                <span className="text-white group-hover:text-[var(--jaune-or)] transition-colors duration-500">Prendre rendez-vous</span>
                 <span className="bg-white rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
-                  <FiArrowRight className="text-lg text-[var(--mauve)]" />
+                  <FiArrowRight className="text-lg text-[var(--jaune-or)]" />
                 </span>
               </a>
             </div>
