@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
 import * as pdfjsLib from 'pdfjs-dist'
+import PdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
 /* ─── Types ─── */
 type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle'
@@ -138,30 +139,41 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
   useEffect(() => {
     const generateThumbnail = async () => {
       try {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+        // Set worker source to local bundled worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = PdfWorker
         
-        const pdf = await pdfjsLib.getDocument(pub.fileUrl).promise
+        // Load PDF with CORS handling
+        const loadingTask = pdfjsLib.getDocument({
+          url: pub.fileUrl,
+          withCredentials: false,
+        })
+        
+        const pdf = await loadingTask.promise
         const page = await pdf.getPage(1)
         
-        const scale = 2
+        const scale = 1.5
         const viewport = page.getViewport({ scale })
         const canvas = document.createElement('canvas')
         const context = canvas.getContext('2d')
         
+        if (!context) {
+          console.warn('Could not get canvas context for PDF thumbnail')
+          return
+        }
+        
         canvas.height = viewport.height
         canvas.width = viewport.width
         
-        if (context) {
-          await page.render({
-            canvasContext: context,
-            viewport: viewport,
-            canvas: canvas,
-          }).promise
-          
-          setThumbnailUrl(canvas.toDataURL('image/jpeg', 0.8))
-        }
+        await page.render({
+          canvasContext: context,
+          viewport: viewport,
+          canvas: canvas,
+        }).promise
+        
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
+        setThumbnailUrl(dataUrl)
       } catch (error) {
-        console.error('Failed to generate PDF thumbnail:', error)
+        console.error('Failed to generate PDF thumbnail for', pub.fileUrl, ':', error)
       }
     }
 
@@ -181,7 +193,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
             <img
               src={thumbnailUrl}
               alt={`${pub.title} preview`}
-              className="w-full h-full object-cover group-hover/preview:scale-105 transition-transform duration-300"
+              className="w-full h-full object-contain group-hover/preview:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black/0 group-hover/preview:bg-black/10 transition-colors duration-300" />
           </>
