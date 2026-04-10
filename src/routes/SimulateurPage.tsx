@@ -126,7 +126,7 @@ export const SimulateurPage: React.FC = () => {
               </ul>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit rounded-full bg-[var(--mauve)] text-white hover:bg-[var(--night)] transition-colors">
+              <a href="/contact" className="inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit rounded-full bg-[var(--jaune-or)] text-white hover:bg-[var(--jaune-or-dark,#b5832a)] transition-colors">
                 Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>

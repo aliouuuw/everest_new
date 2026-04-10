@@ -274,14 +274,14 @@ h1, h2 {
 .section-bg-light .bg-white\/5 { background-color: rgba(70,29,76,0.04) !important; }
 .section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(70,29,76,0.03) !important; }
 
-/* ── btn-primary-dark → light equivalent ── */
+/* ── btn-primary-dark → gold CTA in light sections ── */
 .section-bg-light .btn-primary-dark {
-  background: var(--mauve) !important;
+  background: var(--jaune-or) !important;
   color: var(--pure-white) !important;
   border-radius: 9999px;
 }
 .section-bg-light .btn-primary-dark:hover {
-  background: var(--night) !important;
+  background: var(--jaune-or-dark, #b5832a) !important;
 }
 
 @utility floating-animation {

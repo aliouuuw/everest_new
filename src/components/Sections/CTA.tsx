@@ -90,16 +90,16 @@ export const CTA: React.FC<{
             )}
             <a
               href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--mauve)] bg-[var(--mauve)] hover:bg-transparent transition-all duration-500"
+              className="group w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent transition-all duration-500"
             >
               <span
-                className="text-[12px] tracking-[0.1em] text-white font-extrabold group-hover:text-[var(--mauve)] transition-colors duration-500"
+                className="text-[12px] tracking-[0.1em] text-white font-extrabold group-hover:text-[var(--jaune-or)] transition-colors duration-500"
                 style={{ fontFamily: 'var(--font-primary)', }}
               >
                 {primaryLabel}
               </span>
               <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
-                <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
+                <FiArrowRight className="text-lg text-[var(--jaune-or)] group-hover:translate-x-[1px] transition-all duration-500" />
               </span>
             </a>
 
