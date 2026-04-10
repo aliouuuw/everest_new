@@ -256,8 +256,16 @@ h1, h2 {
   color: var(--night-40);
 }
 
-/* ── Invert white text utilities to dark equivalents ── */
-.section-bg-light .text-white { color: var(--mauve) !important; }
+/* ── Invert white text utilities to dark equivalents ──
+   Exclude a/button elements that carry their own bg (e.g. CTA buttons)
+   by wrapping the override in :not(). Only non-interactive elements
+   and bare links without a background get inverted.             */
+.section-bg-light .text-white:not(a[class*="bg-"]):not(button[class*="bg-"]) { color: var(--mauve) !important; }
+/* Protect white text inside gold/coloured buttons */
+.section-bg-light a[class*="bg-"] .text-white,
+.section-bg-light a[class*="bg-"] span { color: inherit !important; }
+.section-bg-light button[class*="bg-"] .text-white,
+.section-bg-light button[class*="bg-"] span { color: inherit !important; }
 .section-bg-light .text-white\/40 { color: var(--night-40) !important; }
 .section-bg-light .text-white\/50 { color: var(--night-40) !important; }
 .section-bg-light .text-white\/60 { color: var(--night-60) !important; }
