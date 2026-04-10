@@ -20,7 +20,7 @@ const ARTICLES_DATA: Record<string, {
     category: "Marchés",
     date: "2026-04-09",
     readTime: "4 min",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/brvm-marche.jpg",
     source: "Sika Finance",
     sourceUrl: "https://www.sikafinance.com/marches/brvm-sucrivoire-sillustre-societe-generale-ci-donne-le-ton-au-marche_60958",
     content: `
@@ -44,7 +44,7 @@ const ARTICLES_DATA: Record<string, {
     category: "Finance",
     date: "2026-04-10",
     readTime: "6 min",
-    imageUrl: "/background-sol.jpg",
+    imageUrl: "/articles/abidjan-finance.jpg",
     source: "Sika Finance",
     sourceUrl: "https://www.sikafinance.com/marches/afrique-a-abidjan-le-paradoxe-dun-continent-riche-en-capital-mais-pauvre-en-financement_60969",
     content: `
@@ -70,7 +70,7 @@ const ARTICLES_DATA: Record<string, {
     category: "Obligations",
     date: "2026-04-10",
     readTime: "5 min",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/rdc-eurobond.jpg",
     source: "Sika Finance",
     sourceUrl: "https://www.sikafinance.com/marches/la-rdc-leve-1-25-milliard-usd-pour-son-tout-premier-eurobond_60967",
     content: `

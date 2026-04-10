@@ -19,7 +19,7 @@ const FEATURED: Article = {
   category: "Finance",
   date: "2026-04-10",
   readTime: "6 min",
-  imageUrl: "/background-sol.jpg",
+  imageUrl: "/articles/abidjan-finance.jpg",
   slug: "abidjan-paradoxe-financement-afrique"
 };
 
@@ -30,7 +30,7 @@ const ARTICLES: Article[] = [
     category: "Marchés",
     date: "2026-04-09",
     readTime: "4 min",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/brvm-marche.jpg",
     slug: "brvm-sucrivoire-societe-generale-ci"
   },
   {
@@ -39,7 +39,7 @@ const ARTICLES: Article[] = [
     category: "Obligations",
     date: "2026-04-10",
     readTime: "5 min",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/rdc-eurobond.jpg",
     slug: "rdc-premier-eurobond"
   },
 ];

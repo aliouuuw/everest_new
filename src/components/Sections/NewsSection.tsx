@@ -18,7 +18,7 @@ const NEWS_ARTICLES: NewsArticle[] = [
     excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
     category: "Marchés",
     date: "2026-04-09",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/brvm-marche.jpg",
     slug: "brvm-sucrivoire-societe-generale-ci"
   },
   {
@@ -26,7 +26,7 @@ const NEWS_ARTICLES: NewsArticle[] = [
     excerpt: "Réunis à l'initiative de la BAD, les acteurs de la finance africaine constatent un déficit de 400 milliards USD/an malgré 4 000 milliards d'épargne disponible.",
     category: "Finance",
     date: "2026-04-10",
-    imageUrl: "/background-sol.jpg",
+    imageUrl: "/articles/abidjan-finance.jpg",
     slug: "abidjan-paradoxe-financement-afrique"
   },
   {
@@ -34,7 +34,7 @@ const NEWS_ARTICLES: NewsArticle[] = [
     excerpt: "La République démocratique du Congo fait son entrée sur le marché international de la dette avec une émission largement sursouscrite, structurée en deux tranches.",
     category: "Obligations",
     date: "2026-04-10",
-    imageUrl: "/bg-mc.jpg",
+    imageUrl: "/articles/rdc-eurobond.jpg",
     slug: "rdc-premier-eurobond"
   },
 ];
