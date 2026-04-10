@@ -1,6 +1,6 @@
 import { v } from "convex/values";
-import { mutation, action, query } from "./_generated/server";
-import { api, internal } from "./_generated/api";
+import { mutation, query, internalAction, internalQuery, internalMutation } from "./_generated/server";
+import { internal } from "./_generated/api";
 
 // Mutation to create a new investor profile lead
 export const createLead = mutation({
@@ -58,7 +58,7 @@ export const createLead = mutation({
 });
 
 // Action to send profile email via Resend
-export const sendProfileEmail = action({
+export const sendProfileEmail = internalAction({
   args: {
     leadId: v.id("investorProfileLeads"),
   },
@@ -66,7 +66,7 @@ export const sendProfileEmail = action({
     success: v.boolean(),
     error: v.optional(v.string()),
   }),
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ success: boolean; error?: string }> => {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     if (!RESEND_API_KEY) {
       console.error("RESEND_API_KEY not configured");
@@ -141,7 +141,7 @@ export const sendProfileEmail = action({
 });
 
 // Query to get lead by ID
-export const getLeadById = query({
+export const getLeadById = internalQuery({
   args: {
     leadId: v.id("investorProfileLeads"),
   },
@@ -151,7 +151,7 @@ export const getLeadById = query({
 });
 
 // Mutation to update email status
-export const updateEmailStatus = mutation({
+export const updateEmailStatus = internalMutation({
   args: {
     leadId: v.id("investorProfileLeads"),
     emailSent: v.boolean(),
