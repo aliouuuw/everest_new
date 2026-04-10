@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
 import { PillBadge } from '../ui';
+import { InvestorProfileModal } from '../InvestorProfile';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
@@ -10,10 +12,12 @@ export const CTA: React.FC<{
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string | null;
-}> = ({ primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryHref = '#offres', secondaryLabel = 'Découvrir nos offres' }) => {
+}> = ({ primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
+    <>
     <section
       ref={sectionRef}
       className="reveal relative py-12 md:py-20 overflow-hidden"
@@ -68,11 +72,9 @@ export const CTA: React.FC<{
 
           {/* Right Side: Actions */}
           <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
-            {secondaryHref && secondaryLabel && (
-              <a
-                href={secondaryHref}
-                target="_blank"
-                rel="noopener noreferrer"
+            {secondaryLabel && (
+              <button
+                onClick={() => setIsProfileOpen(true)}
                 className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent hover:[&>span]:text-[var(--jaune-or)] transition-all duration-500"
               >
                 <span
@@ -84,7 +86,7 @@ export const CTA: React.FC<{
                 <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
                   <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
                 </span>
-              </a>
+              </button>
             )}
             <a
               href={primaryHref}
@@ -106,5 +108,11 @@ export const CTA: React.FC<{
         </div>
       </div>
     </section>
+
+    <InvestorProfileModal
+      isOpen={isProfileOpen}
+      onClose={() => setIsProfileOpen(false)}
+    />
+    </>
   );
 };
