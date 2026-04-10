@@ -14,28 +14,28 @@ type NewsArticle = {
 
 const NEWS_ARTICLES: NewsArticle[] = [
   {
-    title: "Everest Finance réalise avec succès une émission obligataire de 50 milliards FCFA",
-    excerpt: "Retour sur la structuration et le placement de cette opération phare pour le compte d'un émetteur souverain de la zone UEMOA.",
-    category: "Communiqué",
-    date: "2024-03-15",
+    title: "BRVM : Sucrivoire s'illustre, Société Générale CI donne le ton au marché",
+    excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
+    category: "Marchés",
+    date: "2026-04-09",
     imageUrl: "/bg-mc.jpg",
-    slug: "emission-obligataire-50mds"
+    slug: "brvm-sucrivoire-societe-generale-ci"
   },
   {
-    title: "Nomination d'Everest Finance parmi les SGI les plus actives de la BRVM",
-    excerpt: "Le classement annuel du CREPMF confirme la position d'Everest Finance dans le top 5 des sociétés de gestion et d'intermédiation.",
-    category: "Presse",
-    date: "2024-03-10",
+    title: "À Abidjan, le paradoxe d'un continent riche en capital mais pauvre en financement",
+    excerpt: "Réunis à l'initiative de la BAD, les acteurs de la finance africaine constatent un déficit de 400 milliards USD/an malgré 4 000 milliards d'épargne disponible.",
+    category: "Finance",
+    date: "2026-04-10",
     imageUrl: "/background-sol.jpg",
-    slug: "classement-crepmf"
+    slug: "abidjan-paradoxe-financement-afrique"
   },
   {
-    title: "Lancement du nouveau portail client sécurisé",
-    excerpt: "Accès en temps réel à vos portefeuilles, relevés d'opérations et rapports de performance.",
-    category: "Mise à jour",
-    date: "2024-02-28",
+    title: "La RDC lève 1,25 milliard USD pour son tout premier eurobond",
+    excerpt: "La République démocratique du Congo fait son entrée sur le marché international de la dette avec une émission largement sursouscrite, structurée en deux tranches.",
+    category: "Obligations",
+    date: "2026-04-10",
     imageUrl: "/bg-mc.jpg",
-    slug: "portail-client"
+    slug: "rdc-premier-eurobond"
   },
 ];
 

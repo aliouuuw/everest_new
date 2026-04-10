@@ -14,55 +14,37 @@ type Article = {
 };
 
 const FEATURED: Article = {
-  title: "Everest Finance réalise avec succès une émission obligataire de 50 milliards FCFA",
-  excerpt: "Retour sur la structuration et le placement de cette opération phare pour le compte d'un émetteur souverain de la zone UEMOA — un jalon majeur pour notre équipe d'ingénierie financière.",
-  category: "Communiqué",
-  date: "2024-03-15",
-  readTime: "5 min",
-  imageUrl: "/bg-mc.jpg",
-  slug: "emission-obligataire-50mds"
+  title: "À Abidjan, le paradoxe d'un continent riche en capital mais pauvre en financement",
+  excerpt: "Réunis ce 9 avril à Abidjan à l'initiative de la BAD pour mener des réflexions sur la Nouvelle architecture financière africaine, les principaux acteurs de la finance du continent partagent un diagnostic de plus en plus difficile à éluder.",
+  category: "Finance",
+  date: "2026-04-10",
+  readTime: "6 min",
+  imageUrl: "/background-sol.jpg",
+  slug: "abidjan-paradoxe-financement-afrique"
 };
 
 const ARTICLES: Article[] = [
   {
-    title: "Nomination d'Everest Finance parmi les SGI les plus actives de la BRVM",
-    excerpt: "Le classement annuel du CREPMF confirme la position d'Everest Finance dans le top 5 des sociétés de gestion et d'intermédiation en volume de transactions.",
-    category: "Presse",
-    date: "2024-03-10",
-    readTime: "3 min",
-    imageUrl: "/background-sol.jpg",
-    slug: "classement-crepmf"
-  },
-  {
-    title: "Lancement du nouveau portail client sécurisé",
-    excerpt: "Accès en temps réel à vos portefeuilles, relevés d'opérations et rapports de performance — une refonte complète de l'expérience digitale pour nos clients.",
-    category: "Mise à jour",
-    date: "2024-02-28",
+    title: "BRVM : Sucrivoire s'illustre, Société Générale CI donne le ton au marché",
+    excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
+    category: "Marchés",
+    date: "2026-04-09",
     readTime: "4 min",
     imageUrl: "/bg-mc.jpg",
-    slug: "portail-client"
+    slug: "brvm-sucrivoire-societe-generale-ci"
   },
   {
-    title: "Everest Finance cité dans le rapport annuel de la BRVM",
-    excerpt: "Mention dans le rapport 2023 de la Bourse Régionale pour notre contribution active au dynamisme du marché secondaire et des opérations de courtage.",
-    category: "Médias",
-    date: "2024-02-15",
-    readTime: "6 min",
-    imageUrl: "/background-sol.jpg",
-    slug: "rapport-brvm-2023"
-  },
-  {
-    title: "Webinaire : comprendre les obligations vertes sur le marché UEMOA",
-    excerpt: "Notre équipe recherche animera une session dédiée aux enjeux ESG et aux nouvelles opportunités d'investissement durable dans la sous-région.",
-    category: "Événement",
-    date: "2024-01-30",
-    readTime: "2 min",
+    title: "La RDC lève 1,25 milliard USD pour son tout premier eurobond",
+    excerpt: "La République démocratique du Congo a effectué son entrée sur le marché international de la dette en mobilisant 1,25 milliard de dollars, à l'occasion d'une opération structurée en deux tranches et largement sursouscrite.",
+    category: "Obligations",
+    date: "2026-04-10",
+    readTime: "5 min",
     imageUrl: "/bg-mc.jpg",
-    slug: "webinaire-obligations-vertes"
-  }
+    slug: "rdc-premier-eurobond"
+  },
 ];
 
-const CATEGORIES = ['Tout', 'Communiqué', 'Presse', 'Mise à jour', 'Médias', 'Événement'];
+const CATEGORIES = ['Tout', 'Finance', 'Marchés', 'Obligations'];
 
 export const ActualitesPage = () => {
   const pageRef = useRef<HTMLDivElement>(null);
