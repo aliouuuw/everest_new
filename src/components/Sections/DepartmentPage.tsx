@@ -1,4 +1,4 @@
-import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useState } from 'react'
 import { useReveal } from '../Hooks/useReveal'
@@ -6,6 +6,35 @@ import type { Department } from '../../data/departments'
 
 interface DepartmentPageProps {
   department: Department
+}
+
+const formatHeadline = (text: string) => {
+  const parts = text.split('.').filter(p => p.trim() !== '')
+  if (parts.length === 0) return text
+
+  if (parts.length === 2) {
+    return (
+      <>
+        <span style={{ color: 'var(--mauve)' }}>{parts[0].trim()}.</span>
+        <br />
+        <span style={{ color: 'var(--jaune-or)' }}>{parts[1].trim()}.</span>
+      </>
+    )
+  }
+
+  if (parts.length >= 3) {
+    // First part purple, rest gold
+    const rest = parts.slice(1).join('. ') + '.'
+    return (
+      <>
+        <span style={{ color: 'var(--mauve)' }}>{parts[0].trim()}.</span>
+        <br />
+        <span style={{ color: 'var(--jaune-or)' }}>{rest.trim()}</span>
+      </>
+    )
+  }
+
+  return <span style={{ color: 'var(--mauve)' }}>{text}</span>
 }
 
 export const DepartmentPage = ({ department }: DepartmentPageProps) => {
@@ -39,40 +68,46 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
-      {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
+      {/* ─── 1. Hero — Redesigned ─── */}
+      <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-end pb-20 pt-40 bg-white border-b border-black/10">
         {hero_background && (
-          <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-[80%] z-0 overflow-hidden">
             <img
               src={hero_background}
               alt={department_name}
               className="w-full h-full object-cover"
+              style={{
+                maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
+              }}
             />
-            <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
+            {/* Soft gradient to blend */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white pointer-events-none" />
           </div>
         )}
         
-        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-            <div className="md:col-span-8">
-              <div className="flex items-center gap-4 mb-12">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
+        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px] mt-auto pt-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+            <div className="lg:col-span-7">
+              <div className="mb-6">
+                <span className="px-6 py-2.5 rounded-full bg-[var(--jaune-or)] text-white text-sm font-bold tracking-wide shadow-sm inline-block">
                   {department_name}
                 </span>
               </div>
-              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
-                {hero_headline}
+              <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight drop-shadow-sm">
+                {formatHeadline(hero_headline)}
               </h1>
             </div>
             
-            <div className="md:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-10 border-l-2 border-[var(--jaune-or)] pl-6">
-                {hero_subtitle}
-              </p>
-              <a href="#solutions" className="btn-primary-dark group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
-                <span>Découvrir les solutions</span>
-                <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
-              </a>
+            <div className="lg:col-span-5 pb-2">
+              <div className="border-l-[3px] border-[var(--jaune-or)] pl-6 lg:pl-8">
+                <p className="text-xl md:text-2xl leading-relaxed text-[var(--night)] font-medium mb-8">
+                  {hero_subtitle}
+                </p>
+                <a href="#solutions" className="bg-[var(--jaune-or)] hover:bg-[#b07d24] text-white rounded-full px-8 py-4 text-sm font-bold transition-all inline-block shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                  Découvrir nos solutions
+                </a>
+              </div>
             </div>
           </div>
         </div>
