@@ -41,6 +41,7 @@ import UserFormPage from './routes/admin/UserFormPage'
 import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 import { ActualitesPage } from './routes/ActualitesPage'
+import { ArticlePage } from './routes/ArticlePage'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
@@ -72,6 +73,12 @@ const actualitesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/actualites',
   component: ActualitesPage,
+})
+
+const articleRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/actualites/$slug',
+  component: ArticlePage,
 })
 
 const publicationRoute = createRoute({
@@ -251,6 +258,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   actualitesRoute,
+  articleRoute,
   publicationsRoute,
   publicationRoute,
   faqRoute,
