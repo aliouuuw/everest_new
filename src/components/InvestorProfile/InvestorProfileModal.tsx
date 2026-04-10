@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
-import { FiArrowRight, FiArrowLeft, FiX, FiCheck, FiShield, FiTrendingUp, FiTarget, FiZap, FiMail, FiUser, FiPhone, FiLock, FiAnchor } from 'react-icons/fi'
+import { FiArrowRight, FiArrowLeft, FiX, FiCheck, FiShield, FiTrendingUp, FiTarget, FiZap, FiMail, FiUser, FiPhone, FiLock, FiAnchor, FiBriefcase } from 'react-icons/fi'
 import { useMutation } from 'convex/react'
 import { api } from '../../../convex/_generated/api'
-import { QUESTIONS, CATEGORY_LABELS } from './questions'
+import { QUESTIONS } from './questions'
 import { calculateProfile } from './scoring'
 import { ProfileReport } from './ProfileReport'
 import type { UserAnswers, ProfileResult, LeadData, Question } from './types'
@@ -107,16 +107,12 @@ export const InvestorProfileModal: React.FC<{
     setIsSubmitting(true)
 
     try {
-      // Prepare answers array
       const answersArray = Object.entries(answers).map(([questionId, value]) => ({
         questionId,
         value,
       }))
-
-      // Get investment amount if answered
       const investmentAmount = answers['investment_amount']
 
-      // Create lead in Convex
       await createLead({
         firstName: lead.firstName,
         lastName: lead.lastName,
@@ -131,19 +127,17 @@ export const InvestorProfileModal: React.FC<{
         userAgent: navigator.userAgent,
       })
 
-      // Show success state
       setStep('result')
     } catch (error) {
       console.error('Failed to submit lead:', error)
-      // Still show result even if submission fails
       setStep('result')
     } finally {
       setIsSubmitting(false)
     }
   }, [lead, answers, result, createLead, source])
 
-  const progress = step === 'quiz' ? ((currentQuestion + 1) / QUESTIONS.length) * 100 : 0
-  const currentCategoryIdx = step === 'quiz' ? Math.floor(currentQuestion / 2) : -1
+  const progress = step === 'quiz' ? ((currentQuestion) / QUESTIONS.length) * 100 : (step === 'lead' || step === 'result') ? 100 : 0
+  const currentCategoryIdx = step === 'quiz' ? Math.floor(currentQuestion / Math.ceil(QUESTIONS.length / 4)) : (step === 'lead' || step === 'result') ? 4 : -1
 
   if (!isOpen) return null
 
@@ -152,104 +146,165 @@ export const InvestorProfileModal: React.FC<{
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6"
+      className="fixed inset-0 z-[9999] flex items-center justify-center sm:p-4 md:p-8"
       onClick={(e) => { if (e.target === overlayRef.current) onClose() }}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-[var(--night)]/70 backdrop-blur-md ip-fade-in" />
+      <div className="absolute inset-0 bg-[var(--night)]/70 backdrop-blur-xl ip-fade-in" />
 
-      {/* Modal Panel */}
-      <div className="relative w-full max-w-[720px] max-h-[92vh] bg-white rounded-[28px] shadow-[0_32px_80px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col ip-slide-up">
+      {/* Modal Panel - Full screen on mobile, max-w-5xl on desktop */}
+      <div className="relative w-full h-[100dvh] sm:h-[auto] sm:max-h-[92vh] max-w-5xl sm:rounded-[2rem] bg-[var(--pure-white)] shadow-[0_32px_80px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col md:flex-row ip-slide-up">
 
-        {/* Close button */}
+        {/* Mobile Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-black/5 hover:bg-[var(--mauve)]/10 hover:text-[var(--mauve)] transition-all duration-200"
+          className="md:hidden absolute top-4 right-4 z-[60] w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-[var(--night)] bg-[var(--summit-ivory)] shadow-sm transition-all duration-200"
           aria-label="Fermer"
         >
-          <FiX size={16} />
+          <FiX size={20} />
         </button>
 
-        {/* Progress bar — quiz step */}
-        {step === 'quiz' && (
-          <div className="relative">
-            {/* Track */}
-            <div className="h-1 bg-[var(--summit-ivory)]">
-              <div
-                className="h-full bg-gradient-to-r from-[var(--mauve)] to-[var(--jaune-or)] transition-all duration-600 ease-out"
-                style={{ width: `${progress}%` }}
-              />
+        {/* Desktop Close Button */}
+        <button
+          onClick={onClose}
+          className="hidden md:flex absolute top-6 right-6 z-[60] w-10 h-10 items-center justify-center rounded-full bg-[var(--night-05)] hover:bg-[var(--mauve-10)] text-[var(--night-60)] hover:text-[var(--mauve)] transition-all duration-200"
+          aria-label="Fermer"
+        >
+          <FiX size={20} />
+        </button>
+
+        {/* Left Sidebar (Dark theme) */}
+        <div className="hidden md:flex w-[35%] relative bg-[var(--mauve)] text-white overflow-hidden flex-col justify-between p-10">
+          {/* Subtle gradient orbs */}
+          <div className="absolute top-0 left-0 w-[150%] h-[100%] pointer-events-none opacity-40" style={{ background: 'radial-gradient(ellipse at top left, var(--jaune-or-30) 0%, transparent 70%)' }} />
+          <div className="absolute bottom-0 right-0 w-[100%] h-[80%] pointer-events-none opacity-30" style={{ background: 'radial-gradient(ellipse at bottom right, rgba(255,255,255,0.15) 0%, transparent 70%)' }} />
+
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-16">
+              <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center bg-white/5">
+                <FiTarget size={16} className="text-[var(--jaune-or)]" />
+              </div>
+              <span className="text-[12px] font-bold tracking-[0.2em] uppercase text-white/80" style={{ fontFamily: 'var(--font-primary)' }}>
+                Everest Profiler
+              </span>
             </div>
-            {/* Step indicators */}
-            <div className="flex items-center justify-between px-8 py-3 bg-[var(--summit-ivory)]/50">
-              {STEP_ICONS.map((s, i) => (
-                <div
-                  key={s.label}
-                  className={`flex items-center gap-1.5 transition-all duration-300 ${
-                    i === currentCategoryIdx
-                      ? 'opacity-100 scale-105'
-                      : i < currentCategoryIdx
-                        ? 'opacity-60'
-                        : 'opacity-30'
-                  }`}
-                >
-                  <span className="text-sm">{s.icon}</span>
-                  <span
-                    className={`text-[9px] tracking-[0.08em] uppercase font-bold hidden sm:inline ${
-                      i === currentCategoryIdx ? 'text-[var(--mauve)]' : 'text-[var(--night)]'
-                    }`}
-                    style={{ fontFamily: 'var(--font-primary)' }}
-                  >
-                    {s.label}
-                  </span>
-                  {i < currentCategoryIdx && (
-                    <FiCheck size={10} className="text-green-500" />
-                  )}
-                </div>
-              ))}
+
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold leading-tight" style={{ fontFamily: 'var(--font-primary)' }}>
+                {step === 'intro' ? "Découvrez votre profil d'investisseur" : 
+                 step === 'result' ? "Votre profil est prêt" :
+                 step === 'lead' ? "Presque terminé" :
+                 "Évaluation en cours"}
+              </h2>
+              <p className="text-[15px] leading-relaxed text-white/60 font-light" style={{ fontFamily: 'var(--font-primary)' }}>
+                {step === 'intro' ? "Identifiez votre tolérance au risque et vos objectifs pour recevoir une recommandation d'allocation sur-mesure." :
+                 step === 'quiz' ? "Ces informations nous permettent de définir précisément le niveau de risque qui correspond à votre situation." :
+                 "L'expertise d'Everest Finance à votre service pour optimiser vos rendements."}
+              </p>
             </div>
           </div>
-        )}
 
-        {/* Content area — scrollable */}
-        <div className="flex-1 overflow-y-auto overscroll-contain">
-          {step === 'intro' && <IntroStep onStart={() => setStep('quiz')} />}
-          {step === 'quiz' && question && (
-            <QuizStep
-              question={question}
-              questionIndex={currentQuestion}
-              totalQuestions={QUESTIONS.length}
-              selectedValue={answers[question.id]}
-              onAnswer={handleAnswer}
-              onBack={handleBack}
-              isAnimating={isAnimating}
-              direction={direction}
-            />
-          )}
-          {step === 'lead' && result && (
-            <LeadStep
-              lead={lead}
-              setLead={setLead}
-              onSubmit={handleLeadSubmit}
-              profileTitle={result.title}
-              profileColor={result.color}
-              isSubmitting={isSubmitting}
-            />
-          )}
-          {step === 'result' && result && (
-            <ResultStep 
-              result={result} 
-              onClose={onClose} 
-              lead={lead}
-            />
-          )}
+          <div className="relative z-10">
+            {/* Desktop Progress Tracker */}
+            <div className="space-y-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-[11px] uppercase tracking-[0.1em] font-bold text-[var(--jaune-or)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                  Progression
+                </span>
+                <span className="text-[13px] font-bold" style={{ fontFamily: 'var(--font-primary)' }}>{Math.round(progress)}%</span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-full bg-[var(--jaune-or)] transition-all duration-700 ease-out" style={{ width: `${progress}%` }} />
+              </div>
+
+              {/* Step indicator labels */}
+              {step === 'quiz' && (
+                <div className="pt-6 space-y-4">
+                  {STEP_ICONS.map((s, i) => (
+                    <div
+                      key={s.label}
+                      className={`flex items-center gap-4 transition-all duration-300 ${
+                        i === currentCategoryIdx
+                          ? 'opacity-100 translate-x-1'
+                          : i < currentCategoryIdx
+                            ? 'opacity-50'
+                            : 'opacity-30'
+                      }`}
+                    >
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${
+                        i < currentCategoryIdx ? 'bg-[var(--jaune-or)] border-[var(--jaune-or)] text-[var(--mauve)]' : i === currentCategoryIdx ? 'border-white/50 bg-white/10 text-white' : 'border-white/20 text-white/50'
+                      }`}>
+                        {i < currentCategoryIdx ? <FiCheck size={12} strokeWidth={3} /> : <span className="text-[10px]">{i + 1}</span>}
+                      </div>
+                      <span className="text-[13px] font-semibold" style={{ fontFamily: 'var(--font-primary)' }}>{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Content Area */}
+        <div className="flex-1 flex flex-col relative h-[100dvh] sm:h-[85vh] bg-[var(--pure-white)] overflow-y-auto overscroll-contain pb-10">
+          
+          {/* Mobile Header (Progress Bar) */}
+          <div className="md:hidden sticky top-0 z-50 bg-[var(--pure-white)]/90 backdrop-blur-md border-b border-[var(--night-05)]">
+            {step === 'quiz' && (
+              <div className="px-6 py-4 flex items-center justify-between">
+                <button
+                  onClick={handleBack}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--summit-ivory)] text-[var(--night-60)]"
+                >
+                  <FiArrowLeft size={16} />
+                </button>
+                <div className="flex-1 px-4">
+                  <div className="h-1.5 bg-[var(--summit-ivory)] rounded-full overflow-hidden">
+                    <div className="h-full bg-[var(--mauve)] transition-all duration-500" style={{ width: `${progress}%` }} />
+                  </div>
+                </div>
+                <span className="text-[12px] font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                  {currentQuestion + 1}/{QUESTIONS.length}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex-1 flex flex-col justify-center min-h-full">
+            {step === 'intro' && <IntroStep onStart={() => setStep('quiz')} />}
+            {step === 'quiz' && question && (
+              <QuizStep
+                question={question}
+                questionIndex={currentQuestion}
+                totalQuestions={QUESTIONS.length}
+                selectedValue={answers[question.id]}
+                onAnswer={handleAnswer}
+                onBack={handleBack}
+                isAnimating={isAnimating}
+                direction={direction}
+              />
+            )}
+            {step === 'lead' && result && (
+              <LeadStep
+                lead={lead}
+                setLead={setLead}
+                onSubmit={handleLeadSubmit}
+                profileTitle={result.title}
+                profileColor={result.color}
+                isSubmitting={isSubmitting}
+              />
+            )}
+            {step === 'result' && result && (
+              <ResultStep result={result} onClose={onClose} lead={lead} />
+            )}
+          </div>
         </div>
       </div>
 
       <style>{`
-        .ip-fade-in { animation: ipFadeIn 250ms ease-out both }
-        .ip-slide-up { animation: ipSlideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) both }
-        .ip-scale-in { animation: ipScaleIn 500ms cubic-bezier(0.16, 1, 0.3, 1) both }
+        .ip-fade-in { animation: ipFadeIn 300ms ease-out both }
+        .ip-slide-up { animation: ipSlideUp 500ms cubic-bezier(0.16, 1, 0.3, 1) both }
+        .ip-scale-in { animation: ipScaleIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both }
         .ip-check-draw { animation: ipCheckDraw 600ms cubic-bezier(0.16, 1, 0.3, 1) both }
 
         @keyframes ipFadeIn {
@@ -257,23 +312,16 @@ export const InvestorProfileModal: React.FC<{
           to { opacity: 1 }
         }
         @keyframes ipSlideUp {
-          from { opacity: 0; transform: translateY(32px) scale(0.96) }
+          from { opacity: 0; transform: translateY(40px) scale(0.98) }
           to { opacity: 1; transform: translateY(0) scale(1) }
         }
         @keyframes ipScaleIn {
-          from { opacity: 0; transform: scale(0.92) }
+          from { opacity: 0; transform: scale(0.94) }
           to { opacity: 1; transform: scale(1) }
         }
         @keyframes ipCheckDraw {
           0% { stroke-dashoffset: 24 }
           100% { stroke-dashoffset: 0 }
-        }
-        @keyframes ipPulse {
-          0%, 100% { transform: scale(1) }
-          50% { transform: scale(1.05) }
-        }
-        @keyframes ipBarGrow {
-          from { width: 0% }
         }
       `}</style>
     </div>
@@ -282,77 +330,41 @@ export const InvestorProfileModal: React.FC<{
 
 /* ───────────── Intro Step ───────────── */
 const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
-  <div className="px-8 py-12 md:px-10 md:py-14 text-center">
-    {/* Animated icon */}
-    <div
-      className="mx-auto mb-7 w-[72px] h-[72px] rounded-2xl flex items-center justify-center relative"
-      style={{ background: 'linear-gradient(135deg, var(--mauve-10), var(--jaune-or-10))' }}
-    >
-      <FiTarget size={30} className="text-[var(--mauve)]" />
-      <div className="absolute inset-0 rounded-2xl" style={{ background: 'linear-gradient(135deg, var(--mauve-10), var(--jaune-or-10))', animation: 'ipPulse 3s ease-in-out infinite' }} />
-      <FiTarget size={30} className="text-[var(--mauve)] relative z-10" />
+  <div className="px-6 py-12 md:px-16 md:py-16 text-center md:text-left max-w-xl mx-auto md:mx-0 w-full ip-scale-in">
+    {/* Mobile only icon */}
+    <div className="md:hidden mx-auto mb-6 w-16 h-16 rounded-2xl bg-[var(--mauve-05)] flex items-center justify-center">
+      <FiTarget size={28} className="text-[var(--mauve)]" />
     </div>
 
-    <h2
-      className="mb-3"
-      style={{
-        fontFamily: 'var(--font-primary)',
-        fontWeight: 700,
-        fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-        lineHeight: 1.15,
-        color: 'var(--mauve)',
-      }}
-    >
-      {"Découvrez votre profil d'investisseur"}
+    <h2 className="mb-4 font-bold text-3xl md:text-4xl text-[var(--night)] leading-tight" style={{ fontFamily: 'var(--font-primary)' }}>
+      Comprendre votre profil d'investisseur
     </h2>
-    <p
-      className="mb-8 max-w-sm mx-auto"
-      style={{
-        fontFamily: 'var(--font-primary)',
-        fontWeight: 300,
-        fontSize: '0.95rem',
-        lineHeight: 1.7,
-        color: 'var(--night-60)',
-      }}
-    >
-      {"Répondez à 9 questions pour déterminer votre tolérance au risque et recevoir une recommandation personnalisée."}
+    <p className="mb-10 text-[15px] md:text-[16px] text-[var(--night-60)] leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
+      Un profil d'investisseur adapté est la clé d'une stratégie patrimoniale réussie. Répondez à ces 9 questions rapides pour définir votre allocation idéale.
     </p>
 
-    {/* Stats row */}
-    <div className="flex items-center justify-center gap-3 mb-9">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
       {[
-        { label: 'Questions', value: '9', icon: '📝' },
-        { label: 'Durée', value: '2 min', icon: '⏱️' },
-        { label: 'Résultat', value: 'Immédiat', icon: '⚡' },
+        { label: '9 Questions', icon: <FiBriefcase /> },
+        { label: '2 Minutes', icon: <FiPhone /> },
+        { label: 'Résultat direct', icon: <FiZap /> },
       ].map((stat) => (
-        <div
-          key={stat.label}
-          className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[var(--summit-ivory)] border border-black/5"
-        >
-          <span className="text-base">{stat.icon}</span>
-          <div className="text-left">
-            <div className="text-[13px] font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.value}</div>
-            <div className="text-[9px] tracking-[0.06em] uppercase text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</div>
-          </div>
+        <div key={stat.label} className="flex flex-col items-center md:items-start p-4 rounded-2xl bg-[var(--summit-ivory)] border border-[var(--night-05)]">
+          <div className="text-[var(--mauve)] mb-2 opacity-70">{stat.icon}</div>
+          <span className="text-[13px] font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</span>
         </div>
       ))}
     </div>
 
     <button
       onClick={onStart}
-      className="group inline-flex items-center justify-center gap-4 pl-7 pr-3 py-3.5 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-500 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98]"
+      className="group w-full sm:w-auto inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98]"
     >
-      <span className="text-[12px] tracking-[0.12em] font-bold text-white uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
-        Commencer le test
+      <span className="text-[14px] tracking-[0.1em] font-bold uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
+        Démarrer le test
       </span>
-      <span className="bg-white rounded-full p-2 group-hover:translate-x-[3px] transition-transform duration-300">
-        <FiArrowRight className="text-[var(--mauve)]" size={15} />
-      </span>
+      <FiArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
     </button>
-
-    <p className="mt-6 text-[10px] text-[var(--night-20)] flex items-center justify-center gap-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
-      <FiLock size={10} /> Vos données restent confidentielles
-    </p>
   </div>
 )
 
@@ -367,98 +379,63 @@ const QuizStep: React.FC<{
   isAnimating: boolean
   direction: 'forward' | 'back'
 }> = ({ question, questionIndex, totalQuestions, selectedValue, onAnswer, onBack, isAnimating, direction }) => {
-  const categoryLabel = CATEGORY_LABELS[question.category]
-  const translateDir = direction === 'forward' ? 'translateX(30px)' : 'translateX(-30px)'
+  const translateDir = direction === 'forward' ? 'translateX(40px)' : 'translateX(-40px)'
 
   return (
     <div
-      className="px-8 py-8 md:px-10 md:py-10"
+      className="px-6 py-8 md:px-16 md:py-12 w-full max-w-2xl mx-auto md:mx-0"
       style={{
         opacity: isAnimating ? 0 : 1,
         transform: isAnimating ? translateDir : 'translateX(0)',
-        transition: 'opacity 250ms ease, transform 250ms ease',
+        transition: 'opacity 300ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      {/* Desktop Header/Back button */}
+      <div className="hidden md:flex items-center justify-between mb-10">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-[13px] text-[var(--night-60)] hover:text-[var(--mauve)] transition-colors active:scale-95"
+          className="flex items-center gap-2 text-[14px] font-semibold text-[var(--night-40)] hover:text-[var(--mauve)] transition-colors"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
-          <FiArrowLeft size={15} />
-          Retour
+          <FiArrowLeft size={18} /> Retour
         </button>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] tracking-[0.08em] font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
-            {questionIndex + 1}
-          </span>
-          <span className="text-[11px] text-[var(--night-20)]">/</span>
-          <span className="text-[11px] text-[var(--night-20)]">{totalQuestions}</span>
-        </div>
+        <span className="text-[13px] font-bold text-[var(--night-40)]" style={{ fontFamily: 'var(--font-primary)' }}>
+          {questionIndex + 1} sur {totalQuestions}
+        </span>
       </div>
 
-      {/* Category badge */}
-      <span
-        className="inline-block px-3 py-1 rounded-full text-[9px] font-bold tracking-[0.15em] uppercase mb-4"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          color: 'var(--mauve)',
-          background: 'var(--mauve-10)',
-        }}
-      >
-        {categoryLabel}
-      </span>
-
-      {/* Question */}
-      <h3
-        className="mb-2"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          fontWeight: 700,
-          fontSize: 'clamp(1.15rem, 3vw, 1.35rem)',
-          lineHeight: 1.35,
-          color: 'var(--night)',
-        }}
-      >
+      <h3 className="mb-3 font-bold text-2xl md:text-3xl text-[var(--night)] leading-tight" style={{ fontFamily: 'var(--font-primary)' }}>
         {question.title}
       </h3>
       {question.subtitle && (
-        <p className="mb-6 text-[13px] text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)', fontWeight: 300 }}>
+        <p className="mb-8 text-[15px] text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
           {question.subtitle}
         </p>
       )}
 
-      {/* Options */}
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3 md:gap-4">
         {question.options.map((option, idx) => {
           const isSelected = selectedValue === option.value
           return (
             <button
               key={option.value}
               onClick={() => onAnswer(question.id, option.value)}
-              className={`group relative w-full text-left px-5 py-4 rounded-2xl border-2 transition-all duration-200 active:scale-[0.98] ${
+              className={`group relative w-full text-left p-5 md:p-6 rounded-2xl border-2 transition-all duration-300 active:scale-[0.99] ${
                 isSelected
-                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_0_0_1px_var(--mauve-20)]'
-                  : 'border-transparent bg-[var(--summit-ivory)] hover:border-[var(--mauve)]/20 hover:bg-[var(--mauve-05)] hover:shadow-sm'
+                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_4px_20px_rgba(70,29,76,0.08)] z-10'
+                  : 'border-[var(--night-10)] bg-white hover:border-[var(--mauve-30)] hover:bg-[var(--summit-ivory)] hover:shadow-sm'
               }`}
-              style={{ animationDelay: `${idx * 50}ms` }}
+              style={{ animationDelay: `${idx * 60}ms` }}
             >
-              <div className="flex items-center gap-4">
-                {/* Radio indicator */}
-                <div className={`w-[18px] h-[18px] rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
-                  isSelected
-                    ? 'border-[var(--mauve)] bg-[var(--mauve)] scale-110'
-                    : 'border-black/15 group-hover:border-[var(--mauve)]/40'
+              <div className="flex items-center gap-4 md:gap-5">
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-300 ${
+                  isSelected ? 'border-[var(--mauve)] bg-[var(--mauve)]' : 'border-black/20 group-hover:border-[var(--mauve-40)]'
                 }`}>
-                  {isSelected && <FiCheck size={10} className="text-white" strokeWidth={3} />}
+                  {isSelected && <FiCheck size={12} className="text-white" strokeWidth={3} />}
                 </div>
-                <span
-                  className={`text-[13px] leading-snug transition-colors duration-200 ${
-                    isSelected ? 'text-[var(--mauve)] font-semibold' : 'text-[var(--night)] font-normal'
-                  }`}
-                  style={{ fontFamily: 'var(--font-primary)' }}
-                >
+                <span className={`text-[15px] md:text-[16px] leading-snug transition-colors duration-300 ${
+                  isSelected ? 'text-[var(--mauve)] font-semibold' : 'text-[var(--night-80)] font-medium'
+                }`} style={{ fontFamily: 'var(--font-primary)' }}>
                   {option.label}
                 </span>
               </div>
@@ -479,36 +456,25 @@ const LeadStep: React.FC<{
   profileColor: string
   isSubmitting?: boolean
 }> = ({ lead, setLead, onSubmit, profileTitle, profileColor, isSubmitting = false }) => (
-  <div className="px-8 py-10 md:px-10 md:py-12">
-    <div className="text-center mb-8">
-      {/* Animated checkmark */}
-      <div className="mx-auto mb-5 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: `${profileColor}15` }}>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={profileColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+  <div className="px-6 py-12 md:px-16 md:py-16 max-w-xl mx-auto w-full ip-scale-in">
+    <div className="text-center mb-10">
+      <div className="mx-auto mb-6 w-20 h-20 rounded-full flex items-center justify-center shadow-lg" style={{ background: `${profileColor}15`, border: `1px solid ${profileColor}30` }}>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke={profileColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20 6L9 17l-5-5" strokeDasharray="24" className="ip-check-draw" />
         </svg>
       </div>
-      <h3
-        className="mb-2"
-        style={{
-          fontFamily: 'var(--font-primary)',
-          fontWeight: 700,
-          fontSize: '1.4rem',
-          color: 'var(--mauve)',
-        }}
-      >
-        {"Questionnaire terminé !"}
+      <h3 className="mb-3 font-bold text-3xl text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
+        Félicitations !
       </h3>
-      <p className="text-[13px] text-[var(--night-60)] max-w-xs mx-auto" style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, lineHeight: 1.65 }}>
-        {"Votre profil "}
-        <strong style={{ color: profileColor }}>{profileTitle}</strong>
-        {" est prêt. Entrez vos coordonnées pour recevoir votre rapport personnalisé."}
+      <p className="text-[16px] text-[var(--night-60)] leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
+        Votre profil <strong style={{ color: profileColor }}>{profileTitle}</strong> est prêt. Indiquez vos coordonnées pour recevoir votre rapport détaillé par email.
       </p>
     </div>
 
-    <form onSubmit={onSubmit} className="space-y-3 max-w-sm mx-auto">
-      <div className="grid grid-cols-2 gap-2.5">
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="relative">
-          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--mauve)]/30" size={15} />
+          <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-40)]" size={18} />
           <input
             type="text"
             required
@@ -516,12 +482,12 @@ const LeadStep: React.FC<{
             placeholder="Prénom"
             value={lead.firstName}
             onChange={(e) => setLead(prev => ({ ...prev, firstName: e.target.value }))}
-            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
+            className="w-full pl-12 pr-4 py-4 bg-[var(--summit-ivory)] border border-[var(--night-10)] rounded-xl text-[15px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
             style={{ fontFamily: 'var(--font-primary)' }}
           />
         </div>
         <div className="relative">
-          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--mauve)]/30" size={15} />
+          <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-40)]" size={18} />
           <input
             type="text"
             required
@@ -529,33 +495,33 @@ const LeadStep: React.FC<{
             placeholder="Nom"
             value={lead.lastName}
             onChange={(e) => setLead(prev => ({ ...prev, lastName: e.target.value }))}
-            className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
+            className="w-full pl-12 pr-4 py-4 bg-[var(--summit-ivory)] border border-[var(--night-10)] rounded-xl text-[15px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
             style={{ fontFamily: 'var(--font-primary)' }}
           />
         </div>
       </div>
       <div className="relative">
-        <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--mauve)]/30" size={15} />
+        <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-40)]" size={18} />
         <input
           type="email"
           required
           disabled={isSubmitting}
-          placeholder="Adresse email"
+          placeholder="Adresse email professionnelle ou personnelle"
           value={lead.email}
           onChange={(e) => setLead(prev => ({ ...prev, email: e.target.value }))}
-          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
+          className="w-full pl-12 pr-4 py-4 bg-[var(--summit-ivory)] border border-[var(--night-10)] rounded-xl text-[15px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
           style={{ fontFamily: 'var(--font-primary)' }}
         />
       </div>
       <div className="relative">
-        <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--mauve)]/30" size={15} />
+        <FiPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-40)]" size={18} />
         <input
           type="tel"
           disabled={isSubmitting}
           placeholder="Téléphone (optionnel)"
           value={lead.phone || ''}
           onChange={(e) => setLead(prev => ({ ...prev, phone: e.target.value }))}
-          className="w-full pl-10 pr-4 py-3 bg-[var(--summit-ivory)] border border-black/6 rounded-xl text-[13px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
+          className="w-full pl-12 pr-4 py-4 bg-[var(--summit-ivory)] border border-[var(--night-10)] rounded-xl text-[15px] focus:outline-none focus:border-[var(--mauve)] focus:ring-2 focus:ring-[var(--mauve)]/10 transition-all disabled:opacity-50"
           style={{ fontFamily: 'var(--font-primary)' }}
         />
       </div>
@@ -563,22 +529,22 @@ const LeadStep: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-        className="group w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-500 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98] mt-1 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full mt-4 inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        <span className="text-[12px] tracking-[0.12em] font-bold text-white uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
-          {isSubmitting ? 'Envoi en cours...' : 'Voir mon profil'}
+        <span className="text-[14px] font-bold tracking-[0.1em] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
+          {isSubmitting ? 'Génération du rapport...' : 'Découvrir mon profil'}
         </span>
-        {!isSubmitting && <FiArrowRight className="text-white group-hover:translate-x-1 transition-transform" size={15} />}
+        {!isSubmitting && <FiArrowRight size={18} />}
         {isSubmitting && (
-          <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
         )}
       </button>
 
-      <p className="text-[10px] text-center text-[var(--night-20)] mt-2 flex items-center justify-center gap-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
-        <FiLock size={9} /> {"Vos données sont protégées et ne seront jamais partagées."}
+      <p className="text-[11px] text-center text-[var(--night-40)] mt-4 flex items-center justify-center gap-2" style={{ fontFamily: 'var(--font-primary)' }}>
+        <FiLock size={12} /> Vos données sont protégées et resteront confidentielles.
       </p>
     </form>
   </div>
@@ -591,163 +557,77 @@ const ResultStep: React.FC<{
   lead: LeadData
 }> = ({ result, onClose, lead }) => {
   const Icon = PROFILE_ICONS[result.type]
-  const generatedAt = new Date().toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
+  const generatedAt = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
 
   return (
-    <div className="px-8 py-10 md:px-10 md:py-12 ip-scale-in">
-      {/* Profile header */}
-      <div className="text-center mb-8">
-        <div
-          className="mx-auto mb-5 w-[72px] h-[72px] rounded-2xl flex items-center justify-center shadow-lg"
-          style={{ background: `linear-gradient(135deg, ${result.color}20, ${result.color}08)`, border: `1px solid ${result.color}25` }}
-        >
-          <Icon size={30} style={{ color: result.color }} />
+    <div className="px-6 py-12 md:px-16 md:py-16 ip-scale-in w-full max-w-4xl mx-auto">
+      <div className="mb-10 flex flex-col md:flex-row md:items-end gap-6 md:gap-10">
+        <div className="w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: `linear-gradient(135deg, ${result.color}20, ${result.color}08)`, border: `1px solid ${result.color}30` }}>
+          <Icon size={36} style={{ color: result.color }} />
         </div>
-        <span
-          className="inline-block px-3.5 py-1 rounded-full text-[9px] font-bold tracking-[0.2em] uppercase mb-3"
-          style={{ color: result.color, background: result.colorLight, fontFamily: 'var(--font-primary)' }}
-        >
-          Votre profil
-        </span>
-        <h3
-          style={{
-            fontFamily: 'var(--font-primary)',
-            fontWeight: 700,
-            fontSize: 'clamp(1.5rem, 4vw, 1.8rem)',
-            lineHeight: 1.15,
-            color: result.color,
-          }}
-        >
-          {result.title}
-        </h3>
-        <p className="text-[13px] text-[var(--night-60)] mt-1" style={{ fontFamily: 'var(--font-primary)', fontWeight: 300 }}>
-          {result.subtitle}
-        </p>
-      </div>
-
-      {/* Description */}
-      <p
-        className="text-[13px] text-[var(--night-60)] mb-7 text-center max-w-md mx-auto"
-        style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, lineHeight: 1.7 }}
-      >
-        {result.description}
-      </p>
-
-      {/* Risk meter */}
-      <div className="mb-7 p-4 rounded-2xl bg-[var(--summit-ivory)]">
-        <div className="flex items-center justify-between mb-2.5">
-          <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
-            Niveau de risque
+        <div>
+          <span className="inline-block px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: result.color, background: result.colorLight, fontFamily: 'var(--font-primary)' }}>
+            Votre Profil
           </span>
-          <span className="text-[10px] tracking-[0.1em] uppercase font-bold" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>
-            {result.riskLevel} / 5
-          </span>
-        </div>
-        <div className="flex gap-1.5">
-          {[1, 2, 3, 4, 5].map((level) => (
-            <div
-              key={level}
-              className="h-2 flex-1 rounded-full transition-all duration-700"
-              style={{
-                background: level <= result.riskLevel ? result.color : 'rgba(0,0,0,0.06)',
-                animationDelay: `${level * 120}ms`,
-              }}
-            />
-          ))}
+          <h3 className="font-bold text-4xl md:text-5xl leading-none" style={{ fontFamily: 'var(--font-primary)', color: result.color }}>
+            {result.title}
+          </h3>
+          <p className="text-[16px] text-[var(--night-60)] mt-3" style={{ fontFamily: 'var(--font-primary)' }}>
+            {result.subtitle}
+          </p>
         </div>
       </div>
 
-      {/* Allocation chart */}
-      <div className="mb-7">
-        <h4 className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night)] mb-3" style={{ fontFamily: 'var(--font-primary)' }}>
-          Allocation recommandée
-        </h4>
-        <div className="flex h-3 rounded-full overflow-hidden mb-3 bg-black/5">
-          {result.allocation.map((a, i) => (
-            <div
-              key={a.label}
-              style={{
-                width: `${a.percentage}%`,
-                background: a.color,
-                animation: `ipBarGrow 800ms cubic-bezier(0.16,1,0.3,1) ${i * 100}ms both`,
-              }}
-            />
-          ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="p-6 rounded-2xl bg-[var(--summit-ivory)] border border-[var(--night-05)]">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-[11px] tracking-[0.1em] uppercase font-bold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>Niveau de risque</span>
+            <span className="text-[13px] font-bold" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>{result.riskLevel} / 5</span>
+          </div>
+          <div className="flex gap-2">
+            {[1, 2, 3, 4, 5].map((level) => (
+              <div key={level} className="h-2.5 flex-1 rounded-full transition-all duration-700" style={{ background: level <= result.riskLevel ? result.color : 'rgba(0,0,0,0.06)', animationDelay: `${level * 100}ms` }} />
+            ))}
+          </div>
+          <p className="text-[14px] mt-5 leading-relaxed text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>{result.description}</p>
         </div>
-        <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-          {result.allocation.map((a) => (
-            <div key={a.label} className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full" style={{ background: a.color }} />
-              <span className="text-[11px] text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
-                {a.label} <strong className="text-[var(--night)]">{a.percentage}%</strong>
-              </span>
+
+        <div className="p-6 rounded-2xl bg-[var(--summit-ivory)] border border-[var(--night-05)] flex flex-col justify-between">
+          <div>
+            <span className="text-[11px] tracking-[0.1em] uppercase font-bold text-[var(--night-60)] block mb-4" style={{ fontFamily: 'var(--font-primary)' }}>Allocation recommandée</span>
+            <div className="flex h-4 rounded-full overflow-hidden mb-5 bg-black/5">
+              {result.allocation.map((a, i) => (
+                <div key={a.label} style={{ width: `${a.percentage}%`, background: a.color, animation: `ipBarGrow 800ms ease-out ${i * 100}ms both` }} />
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Traits */}
-      <div className="mb-7">
-        <h4 className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night)] mb-3" style={{ fontFamily: 'var(--font-primary)' }}>
-          {"Caractéristiques"}
-        </h4>
-        <div className="grid grid-cols-2 gap-2">
-          {result.traits.map((trait) => (
-            <div
-              key={trait}
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-[var(--summit-ivory)]"
-            >
-              <FiCheck size={12} style={{ color: result.color }} className="shrink-0" strokeWidth={3} />
-              <span className="text-[11px] text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{trait}</span>
+            <div className="grid grid-cols-2 gap-3">
+              {result.allocation.map((a) => (
+                <div key={a.label} className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: a.color }} />
+                  <span className="text-[13px] font-medium text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>{a.label} <span className="font-bold ml-1">{a.percentage}%</span></span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
-      {/* Recommendation */}
-      <div
-        className="p-4 rounded-2xl mb-7"
-        style={{ background: result.colorLight, borderLeft: `3px solid ${result.color}` }}
-      >
-        <h4 className="text-[10px] tracking-[0.1em] uppercase font-bold mb-1.5" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>
-          Notre recommandation
-        </h4>
-        <p className="text-[13px] leading-relaxed text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)', fontWeight: 400 }}>
-          {result.recommendation}
-        </p>
+      <div className="p-6 rounded-2xl mb-8 border" style={{ background: result.colorLight, borderColor: `${result.color}20`, borderLeftWidth: '4px', borderLeftColor: result.color }}>
+        <h4 className="text-[11px] tracking-[0.1em] uppercase font-bold mb-2" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>Notre recommandation</h4>
+        <p className="text-[15px] leading-relaxed text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{result.recommendation}</p>
       </div>
 
-      {/* PDF Report Download */}
-      <ProfileReport
-        result={result}
-        firstName={lead.firstName}
-        lastName={lead.lastName}
-        email={lead.email}
-        generatedAt={generatedAt}
-      />
+      <div className="mb-10">
+        <ProfileReport result={result} firstName={lead.firstName} lastName={lead.lastName} email={lead.email} generatedAt={generatedAt} />
+      </div>
 
-      {/* CTA */}
-      <div className="flex flex-col sm:flex-row gap-2.5">
-        <a
-          href="/contact"
-          className="group flex-1 inline-flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] transition-all duration-500 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98]"
-        >
-          <span className="text-[11px] tracking-[0.1em] font-bold text-white uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
-            Prendre rendez-vous
-          </span>
-          <FiArrowRight className="text-white group-hover:translate-x-1 transition-transform" size={13} />
+      <div className="flex flex-col sm:flex-row gap-4">
+        <a href="/contact" className="flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all hover:shadow-lg">
+          <span className="text-[13px] font-bold tracking-[0.1em] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>Prendre rendez-vous</span>
+          <FiArrowRight size={16} />
         </a>
-        <button
-          onClick={onClose}
-          className="flex-1 inline-flex items-center justify-center px-5 py-3.5 rounded-full border-2 border-black/8 hover:border-[var(--mauve)]/25 hover:bg-[var(--mauve-05)] transition-all duration-300 active:scale-[0.98]"
-        >
-          <span className="text-[11px] tracking-[0.1em] font-bold text-[var(--night)] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
-            Fermer
-          </span>
+        <button onClick={onClose} className="sm:w-auto px-8 py-4 rounded-xl border-2 border-[var(--night-10)] hover:bg-[var(--summit-ivory)] hover:border-[var(--night-20)] text-[var(--night)] transition-all">
+          <span className="text-[13px] font-bold tracking-[0.1em] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>Fermer</span>
         </button>
       </div>
     </div>
