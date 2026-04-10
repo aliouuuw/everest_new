@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
 import { gsap } from 'gsap';
 
@@ -9,7 +10,7 @@ type Article = {
   date: string;
   readTime: string;
   imageUrl: string;
-  href: string;
+  slug: string;
 };
 
 const FEATURED: Article = {
@@ -19,7 +20,7 @@ const FEATURED: Article = {
   date: "2024-03-15",
   readTime: "5 min",
   imageUrl: "/bg-mc.jpg",
-  href: "/actualites/emission-obligataire-50mds"
+  slug: "emission-obligataire-50mds"
 };
 
 const ARTICLES: Article[] = [
@@ -30,7 +31,7 @@ const ARTICLES: Article[] = [
     date: "2024-03-10",
     readTime: "3 min",
     imageUrl: "/background-sol.jpg",
-    href: "/actualites/classement-crepmf"
+    slug: "classement-crepmf"
   },
   {
     title: "Lancement du nouveau portail client sécurisé",
@@ -39,7 +40,7 @@ const ARTICLES: Article[] = [
     date: "2024-02-28",
     readTime: "4 min",
     imageUrl: "/bg-mc.jpg",
-    href: "/actualites/portail-client"
+    slug: "portail-client"
   },
   {
     title: "Everest Finance cité dans le rapport annuel de la BRVM",
@@ -48,7 +49,7 @@ const ARTICLES: Article[] = [
     date: "2024-02-15",
     readTime: "6 min",
     imageUrl: "/background-sol.jpg",
-    href: "/actualites/rapport-brvm-2023"
+    slug: "rapport-brvm-2023"
   },
   {
     title: "Webinaire : comprendre les obligations vertes sur le marché UEMOA",
@@ -57,7 +58,7 @@ const ARTICLES: Article[] = [
     date: "2024-01-30",
     readTime: "2 min",
     imageUrl: "/bg-mc.jpg",
-    href: "/actualites/webinaire-obligations-vertes"
+    slug: "webinaire-obligations-vertes"
   }
 ];
 
@@ -219,7 +220,7 @@ export const ActualitesPage = () => {
       {/* ─── Featured Article ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-          <a href={FEATURED.href} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
+          <Link to="/actualites/$slug" params={{ slug: FEATURED.slug }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
                 <img
@@ -256,7 +257,7 @@ export const ActualitesPage = () => {
                 <span className="inline-block w-6 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
               </span>
             </div>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -282,9 +283,10 @@ export const ActualitesPage = () => {
               ) : (
                 <div className="border-t border-black/10">
                   {filteredArticles.map((article, i) => (
-                    <a
+                    <Link
                       key={i}
-                      href={article.href}
+                      to="/actualites/$slug"
+                      params={{ slug: article.slug }}
                       className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
                     >
                     {/* Thumbnail */}
@@ -320,7 +322,7 @@ export const ActualitesPage = () => {
                         Lire <FiArrowRight />
                       </span>
                     </div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               )}
