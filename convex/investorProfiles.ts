@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { mutation, action, query } from "./_generated/server";
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 
 // Mutation to create a new investor profile lead
 export const createLead = mutation({
@@ -49,7 +49,7 @@ export const createLead = mutation({
     });
 
     // Schedule email sending action
-    await ctx.scheduler.runAfter(0, api.investorProfiles.sendProfileEmail, {
+    await ctx.scheduler.runAfter(0, internal.investorProfiles.sendProfileEmail, {
       leadId,
     });
 
@@ -74,7 +74,7 @@ export const sendProfileEmail = action({
     }
 
     // Fetch lead data
-    const lead = await ctx.runQuery(api.investorProfiles.getLeadById, {
+    const lead = await ctx.runQuery(internal.investorProfiles.getLeadById, {
       leadId: args.leadId,
     });
 
@@ -105,7 +105,7 @@ export const sendProfileEmail = action({
 
       if (response.ok) {
         // Update lead with email sent status
-        await ctx.runMutation(api.investorProfiles.updateEmailStatus, {
+        await ctx.runMutation(internal.investorProfiles.updateEmailStatus, {
           leadId: args.leadId,
           emailSent: true,
           emailSentAt: Date.now(),
@@ -115,7 +115,7 @@ export const sendProfileEmail = action({
         return { success: true };
       } else {
         // Update lead with error
-        await ctx.runMutation(api.investorProfiles.updateEmailStatus, {
+        await ctx.runMutation(internal.investorProfiles.updateEmailStatus, {
           leadId: args.leadId,
           emailSent: false,
           emailError: result.message || "Failed to send email",
@@ -128,7 +128,7 @@ export const sendProfileEmail = action({
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       
       // Update lead with error
-      await ctx.runMutation(api.investorProfiles.updateEmailStatus, {
+      await ctx.runMutation(internal.investorProfiles.updateEmailStatus, {
         leadId: args.leadId,
         emailSent: false,
         emailError: errorMessage,
