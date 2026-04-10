@@ -323,6 +323,9 @@ export const InvestorProfileModal: React.FC<{
           0% { stroke-dashoffset: 24 }
           100% { stroke-dashoffset: 0 }
         }
+        @keyframes ipBarGrow {
+          from { width: 0% }
+        }
       `}</style>
     </div>
   )
