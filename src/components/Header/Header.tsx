@@ -76,13 +76,13 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-4 w-64 bg-[var(--mauve-80)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
+        <div className="absolute top-full left-0 mt-4 w-64 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
           {items.map((item, index) => (
             <Link
               key={index}
               to={item.href}
-              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
-              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--mauve-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
+              style={{ fontFamily: 'var(--font-primary)', }}
             >
               {item.label}
             </Link>
@@ -156,7 +156,7 @@ export const Header: React.FC = () => {
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   // Pages with light backgrounds need immediate dark backdrop for nav contrast
-  const lightBackgroundPaths = ['/about', '/marche-capitaux', '/ingenieurie-financiere', '/gestion-sous-mandat', '/services', '/offres', '/gestion-libre', '/gestion-assistee', '/faq', '/publications', '/actualites', '/simulateur'];
+  const lightBackgroundPaths = ['/test'];
   const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path)) || location.pathname === '/bourse';
 
   // Hide header if authenticated and on dashboard, or if in admin portal

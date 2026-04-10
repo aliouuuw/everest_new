@@ -19,7 +19,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative" style={{ background: 'linear-gradient(170deg, #1e1028 0%, #150e1c 60%, #0f0a12 100%)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative bg-[var(--mauve)]" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
       {/* Subtle mauve ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20"
@@ -75,8 +75,6 @@ export const Footer = () => {
                 { label: 'Publications', href: '#publications' },
                 { label: 'Simulateur', href: '/simulateur' },
                 { label: 'Abécédaire / FAQ', href: '#faq' },
-                { label: 'Performance', href: '#performance' },
-                { label: 'Portail client', href: '#portal-preview' },
               ].map((l) => (
                 <li key={l.href}>
                   <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
@@ -113,7 +111,7 @@ export const Footer = () => {
                   contact@everestfin.com
                 </a>
               </li>
-              <li>
+              <li className="flex flex-col ">
                 <a href="tel:+221338228700" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
                   +221 33 822 87 00
                 </a>

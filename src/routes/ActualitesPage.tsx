@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { FiArrowRight, FiCalendar, FiClock, FiExternalLink } from 'react-icons/fi';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
 import { gsap } from 'gsap';
 
 type Article = {
@@ -76,52 +76,142 @@ export const ActualitesPage = () => {
     return () => ctx.revert();
   }, []);
 
+  const [activeCategory, setActiveCategory] = useState<string>('Tout');
+  const [activeYear, setActiveYear] = useState<string>('Tout');
+  const [activeMonth, setActiveMonth] = useState<string>('Tout');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const years = useMemo(() => {
+    const y = new Set(ARTICLES.map(a => new Date(a.date).getFullYear().toString()));
+    return ['Tout', ...Array.from(y).sort().reverse()];
+  }, []);
+
+  const months = useMemo(() => {
+    if (activeYear === 'Tout') return ['Tout'];
+    const m = new Set(
+      ARTICLES.filter(a => new Date(a.date).getFullYear().toString() === activeYear)
+        .map(a => (new Date(a.date).getMonth() + 1).toString().padStart(2, '0'))
+    );
+    return ['Tout', ...Array.from(m).sort()];
+  }, [activeYear]);
+
+  // Reset month if year changes and month not in new year
+  useEffect(() => {
+    if (activeMonth !== 'Tout' && !months.includes(activeMonth)) {
+      setActiveMonth('Tout');
+    }
+  }, [months, activeMonth]);
+
+  const filteredArticles = useMemo(() => {
+    return ARTICLES.filter(article => {
+      const d = new Date(article.date);
+      const yearMatch = activeYear === 'Tout' || d.getFullYear().toString() === activeYear;
+      const monthMatch = activeMonth === 'Tout' || (d.getMonth() + 1).toString().padStart(2, '0') === activeMonth;
+      const categoryMatch = activeCategory === 'Tout' || article.category === activeCategory;
+      const searchMatch = searchQuery === '' || 
+        article.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      return yearMatch && monthMatch && categoryMatch && searchMatch;
+    });
+  }, [activeYear, activeMonth, activeCategory, searchQuery]);
+
   return (
     <div ref={pageRef} className="font-primary">
-      {/* ─── Hero — Editorial & Asymmetrical ─── */}
-      <section className="relative bg-[var(--pure-white)] pt-32 pb-20 border-b border-black/10">
-        <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-0 overflow-hidden">
+      {/* ─── Hero — Dark Image with Overlay ─── */}
+      <section className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1523287562758-66a65b7f7ef7?auto=format&fit=crop&w=1600&q=80"
+            src="/Assets_Website/Actualités.png"
             alt="Actualités financières"
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
         </div>
-        <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-8">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
-                  Centre de presse
-                </span>
-              </div>
-              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight text-[var(--mauve)]">
-                Actualités & <span className="font-normal text-[var(--jaune-or)]">Communiqués.</span>
+
+        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+            <div className="md:col-span-7">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
+                Centre de presse
+              </span>
+              <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
+                Actualités &{' '}
+                <span style={{ color: 'var(--jaune-or)' }}>Communiqués.</span>
               </h1>
             </div>
-            <div className="lg:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light border-l-2 border-[var(--mauve)] pl-6">
+
+            <div className="md:col-span-5 pb-2">
+              <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
                 Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Category filters */}
-          <div className="actu-reveal flex flex-wrap gap-2 mt-12">
-            {CATEGORIES.map((cat, i) => (
-              <button
-                key={cat}
-                className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-300 border font-primary rounded-full ${
-                  i === 0 
-                    ? 'font-medium text-[var(--pure-white)] bg-[var(--mauve)] border-[var(--mauve)]' 
-                    : 'font-light text-[rgba(10,10,10,0.6)] bg-transparent border-black/10 hover:border-[var(--mauve)] hover:text-[var(--mauve)]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      {/* ─── Search + Filters ─── */}
+      <section className="py-10 border-b border-black/5 sticky top-0 z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="actu-reveal flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+            
+            {/* Category Filters */}
+            <div className="flex flex-wrap items-center gap-2">
+              {CATEGORIES.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-300 border font-primary rounded-full ${
+                      isActive 
+                        ? 'font-bold text-[var(--pure-white)] bg-[var(--mauve)] border-[var(--mauve)] shadow-sm' 
+                        : 'font-bold text-[var(--mauve)] bg-white border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] shadow-sm'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right side: Search + Selectors */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
+              <div className="relative w-full sm:w-64">
+                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--mauve)]/40" size={16} />
+                <input
+                  type="text"
+                  placeholder="Rechercher..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] outline-none font-primary text-sm transition-colors rounded-full shadow-sm"
+                />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <select 
+                  value={activeYear}
+                  onChange={(e) => setActiveYear(e.target.value)}
+                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
+                >
+                  <option value="Tout">Année</option>
+                  {years.filter(y => y !== 'Tout').map(y => (
+                    <option key={y} value={y}>{y}</option>
+                  ))}
+                </select>
+
+                <select 
+                  value={activeMonth}
+                  onChange={(e) => setActiveMonth(e.target.value)}
+                  disabled={activeYear === 'Tout'}
+                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
+                >
+                  <option value="Tout">Mois</option>
+                  {months.filter(m => m !== 'Tout').map(m => (
+                    <option key={m} value={m}>{new Date(2000, parseInt(m) - 1).toLocaleString('fr-FR', { month: 'long' })}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -185,13 +275,18 @@ export const ActualitesPage = () => {
                 </div>
               </div>
 
-              <div className="border-t border-black/10">
-                {ARTICLES.map((article, i) => (
-                  <a
-                    key={i}
-                    href={article.href}
-                    className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
-                  >
+              {filteredArticles.length === 0 ? (
+                <div className="py-12 text-center text-[var(--night)]/60 font-light">
+                  Aucun article ne correspond à vos critères.
+                </div>
+              ) : (
+                <div className="border-t border-black/10">
+                  {filteredArticles.map((article, i) => (
+                    <a
+                      key={i}
+                      href={article.href}
+                      className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                    >
                     {/* Thumbnail */}
                     <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
                       <img
@@ -225,9 +320,10 @@ export const ActualitesPage = () => {
                         Lire <FiArrowRight />
                       </span>
                     </div>
-                  </a>
-                ))}
-              </div>
+                    </a>
+                  ))}
+                </div>
+              )}
 
               {/* Load more */}
               <div className="actu-reveal flex justify-center mt-12">

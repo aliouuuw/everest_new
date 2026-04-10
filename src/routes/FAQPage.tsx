@@ -86,34 +86,37 @@ export const FAQPage = () => {
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
-        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-        <section ref={heroRef} className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
-          <div className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0 overflow-hidden">
+        {/* ─── 1. Hero — Dark Image with Overlay ─── */}
+        <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
             <img
               src="/Assets_Website/Abécédaire-&-FAQ.png"
               alt="Support client"
               className="w-full h-full object-cover"
             />
           </div>
-          
+
           <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-              <div className="md:col-span-8">
-                <div className="flex items-center gap-4 mb-12">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
-                    Abécédaire & FAQ
-                  </span>
-                </div>
-                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
+              <div className="md:col-span-7">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
+                  Abécédaire & FAQ
+                </span>
+                <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
                   Comprendre nos services.
                 </h1>
               </div>
-              
-              <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-10 border-l-2 border-[var(--jaune-or)] pl-6">
+
+              <div className="md:col-span-5 pb-2">
+                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
                   Questions fréquentes et définitions clés pour mieux décider.
                 </p>
-                <a href="#faq" className="btn-primary-dark group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                <a
+                  href="#faq"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
+                  style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
+                >
                   <span>Voir les questions</span>
                   <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
                 </a>

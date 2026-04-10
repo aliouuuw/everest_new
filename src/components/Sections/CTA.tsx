@@ -16,7 +16,7 @@ export const CTA: React.FC<{
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-36 overflow-hidden"
+      className="reveal relative py-12 md:py-20 overflow-hidden"
       id="contact"
       style={{ background: 'var(--pure-white)' }}
     >

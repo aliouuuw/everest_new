@@ -40,13 +40,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
       {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10 section-bg-mauve">
+      <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
         {hero_background && (
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+          <div className="absolute inset-0 z-0 overflow-hidden">
             <img
               src={hero_background}
               alt={department_name}
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
           </div>
@@ -364,21 +364,35 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         </section>
       )}
 
-      {/* ─── 8. CTA — Editorial Footer Block ─── */}
-      <section ref={ctaRef} className="reveal section-bg-mauve py-24 md:py-32">
+      {/* ─── 8. CTA — Light Section with Soft Orbs ─── */}
+      <section ref={ctaRef} className="reveal relative py-24 md:py-32 overflow-hidden" style={{ background: 'var(--summit-ivory)' }}>
+        {/* Soft mauve orb — top left */}
+        <div
+          className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
+        />
+        {/* Soft gold orb — bottom right */}
+        <div
+          className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%)' }}
+        />
+
         <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
+              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--mauve)]">
                 {cta_text}
               </h2>
-              <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
+              <p className="text-xl md:text-2xl text-[rgba(10, 10, 10, 0.6)] font-light max-w-2xl">
                 {cta_subtitle}
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
-                Prendre rendez-vous <FiArrowRight className="text-lg" />
+              <a href="/contact" className="group inline-flex items-center justify-center gap-4 pl-6 pr-3 py-3 rounded-full border-2 border-[var(--mauve)] bg-[var(--mauve)] hover:bg-transparent transition-all duration-500 text-xs uppercase tracking-[0.2em] font-bold">
+                <span className="text-white group-hover:text-[var(--mauve)] transition-colors duration-500">Prendre rendez-vous</span>
+                <span className="bg-white rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
+                  <FiArrowRight className="text-lg text-[var(--mauve)]" />
+                </span>
               </a>
             </div>
           </div>

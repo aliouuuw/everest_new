@@ -129,6 +129,10 @@ html {
   scroll-restoration: manual;
 }
 
+h1, h2 {
+  line-height: 1 !important;
+} 
+
 .section-py {
   @apply py-14 sm:py-18 lg:py-20;
 }

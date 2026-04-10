@@ -20,36 +20,38 @@ export const AboutPage = () => {
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
-        {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-        <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+        {/* ─── 1. Hero — Dark Image with Overlay ─── */}
+        <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
             <img
               src="/Assets_Website/À-propos.png"
               alt="Everest Finance Bureau"
-              className="w-full h-full object-cover opacity-60 contrast-125"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
-          
+
           <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-              <div className="md:col-span-8">
-                <div className="flex items-center gap-4 mb-12">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
-                    À propos
-                  </span>
-                </div>
-                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
-                  Des idées et des valeurs au service de vos <span style={{ color: 'var(--jaune-or)' }}>ambitions</span>
+              <div className="md:col-span-7">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
+                  À propos
+                </span>
+                <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
+                  Des idées et des valeurs au service de vos{' '}
+                  <span style={{ color: 'var(--jaune-or)' }}>ambitions.</span>
                 </h1>
               </div>
-              
-              <div className="md:col-span-4 pb-4">
-                <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
-                  Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client.
+
+              <div className="md:col-span-5 pb-2">
+                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
+                  Société de Gestion et d'Intermédiation agréée CREPMF. < br/> Nous allions discipline de marché, ingénierie financière et proximité client.
                 </p>
-                <a href="#mission" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
+                <a
+                  href="#mission"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
+                  style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
+                >
                   <span>Notre mission</span>
                   <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
                 </a>
@@ -236,14 +238,25 @@ export const AboutPage = () => {
           </div>
         </section>
 
-        {/* ─── 7. Conformité — Dark Section ─── */}
-        <section ref={conformiteRef} id="conformite" className="reveal py-24 md:py-40 section-bg-mauve">
+        {/* ─── 7. Conformité — Light Section with Soft Orbs ─── */}
+        <section ref={conformiteRef} id="conformite" className="reveal relative py-24 md:py-40 overflow-hidden" style={{ background: 'var(--summit-ivory)' }}>
+          {/* Soft mauve orb — top right */}
+          <div
+            className="absolute top-0 right-0 w-[50%] h-[80%] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(70,29,76,0.07) 0%, rgba(203,152,36,0.03) 45%, transparent 65%)' }}
+          />
+          {/* Soft gold orb — bottom left */}
+          <div
+            className="absolute bottom-0 left-0 w-[45%] h-[75%] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 50%, transparent 70%)' }}
+          />
+
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">Réglementation</span>
-                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-white">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Réglementation</span>
+                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
                     Conformité & Sécurité
                   </h2>
                 </div>
@@ -253,31 +266,31 @@ export const AboutPage = () => {
                 <div className="space-y-12">
                   <div>
                     <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-6 text-white">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-6 text-[var(--mauve)]">
                       Cadre réglementaire
                     </h3>
-                    <div className="space-y-4 text-white/60">
-                      <div className="flex justify-between py-3 border-b border-white/10">
+                    <div className="space-y-4 text-[rgba(10, 10, 10, 0.6)]">
+                      <div className="flex justify-between py-3 border-b border-black/10">
                         <span>Licence CREPMF</span>
-                        <span className="font-primary font-bold text-white">SGI/DA/2016/60</span>
+                        <span className="font-primary font-bold text-[var(--mauve)]">SGI/DA/2016/60</span>
                       </div>
-                      <div className="flex justify-between py-3 border-b border-white/10">
+                      <div className="flex justify-between py-3 border-b border-black/10">
                         <span>Date d'obtention</span>
-                        <span className="font-primary font-bold text-white">30 mars 2016</span>
+                        <span className="font-primary font-bold text-[var(--mauve)]">30 mars 2016</span>
                       </div>
-                      <div className="flex justify-between py-3 border-b border-white/10">
+                      <div className="flex justify-between py-3 border-b border-black/10">
                         <span>Juridiction</span>
-                        <span className="font-primary font-bold text-white">UEMOA</span>
+                        <span className="font-primary font-bold text-[var(--mauve)]">UEMOA</span>
                       </div>
                     </div>
                   </div>
 
                   <div>
                     <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-6 text-white">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-6 text-[var(--mauve)]">
                       Contrôles & Sécurité
                     </h3>
-                    <ul className="space-y-4 text-white/60">
+                    <ul className="space-y-4 text-[rgba(10, 10, 10, 0.6)]">
                       <li className="flex items-start gap-4">
                         <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
                         <span>Ségrégation des actifs — Comptes dédiés et dépositaire central BRVM</span>
