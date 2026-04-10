@@ -201,6 +201,89 @@ h1, h2 {
   color: rgba(255, 255, 255, 0.85);
 }
 
+/* Light section — CTA-inspired ivory/white with subtle orbs.
+   Drop-in replacement for section-bg-mauve: just swap the class
+   and all white-on-dark colours are automatically inverted. */
+.section-bg-light {
+  background: var(--pure-white);
+  color: var(--night);
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 90%;
+  background: radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.section-bg-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  height: 70%;
+  background: radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Typography overrides ── */
+.section-bg-light h1,
+.section-bg-light h2,
+.section-bg-light h3,
+.section-bg-light h4,
+.section-bg-light h5,
+.section-bg-light h6,
+.section-bg-light .luxury-heading-dark {
+  color: var(--mauve);
+}
+
+.section-bg-light p,
+.section-bg-light .luxury-subheading-dark,
+.section-bg-light .text-secondary-dark {
+  color: var(--night-60);
+}
+
+.section-bg-light .kicker {
+  color: var(--night-40);
+}
+
+/* ── Invert white text utilities to dark equivalents ── */
+.section-bg-light .text-white { color: var(--mauve) !important; }
+.section-bg-light .text-white\/40 { color: var(--night-40) !important; }
+.section-bg-light .text-white\/50 { color: var(--night-40) !important; }
+.section-bg-light .text-white\/60 { color: var(--night-60) !important; }
+.section-bg-light .text-white\/70 { color: var(--night-60) !important; }
+.section-bg-light .text-white\/80 { color: var(--night) !important; }
+
+/* ── Invert white borders to subtle dark borders ── */
+.section-bg-light .border-white\/5 { border-color: rgba(0,0,0,0.06) !important; }
+.section-bg-light .border-white\/6 { border-color: rgba(0,0,0,0.06) !important; }
+.section-bg-light .border-white\/10 { border-color: rgba(0,0,0,0.08) !important; }
+.section-bg-light .border-white\/20 { border-color: rgba(0,0,0,0.1) !important; }
+
+/* ── Invert white bg utilities to subtle light equivalents ── */
+.section-bg-light .bg-white\/5 { background-color: rgba(70,29,76,0.04) !important; }
+.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(70,29,76,0.03) !important; }
+
+/* ── btn-primary-dark → light equivalent ── */
+.section-bg-light .btn-primary-dark {
+  background: var(--mauve) !important;
+  color: var(--pure-white) !important;
+  border-radius: 9999px;
+}
+.section-bg-light .btn-primary-dark:hover {
+  background: var(--night) !important;
+}
+
 @utility floating-animation {
   animation: float 6s ease-in-out infinite;
 }

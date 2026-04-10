@@ -232,7 +232,7 @@ export const FAQPage = () => {
         </section>
 
         {/* ─── 4. CTA — Editorial Footer Block ─── */}
-        <section className="section-bg-mauve py-24 md:py-32">
+        <section className="section-bg-light py-24 md:py-32">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
               <div className="md:col-span-7">

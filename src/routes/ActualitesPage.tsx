@@ -321,7 +321,7 @@ export const ActualitesPage = () => {
             <aside className="lg:col-span-4 flex flex-col gap-10">
 
               {/* Ad Banner — Premium CTA */}
-              <div className="actu-reveal relative overflow-hidden min-h-[400px] flex flex-col justify-end p-8 section-bg-mauve rounded-2xl">
+              <div className="actu-reveal relative overflow-hidden min-h-[400px] flex flex-col justify-end p-8 section-bg-light rounded-2xl">
                 <div className="absolute inset-0">
                   <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="" className="w-full h-full object-cover opacity-20" />
                 </div>

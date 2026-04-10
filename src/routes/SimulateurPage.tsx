@@ -100,17 +100,17 @@ export const SimulateurPage: React.FC = () => {
       </section>
 
       {/* ─── 4. CTA — Editorial Footer Block ─── */}
-      <section className="section-bg-mauve py-24 md:py-32">
+      <section className="section-bg-light py-24 md:py-32">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
+              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--mauve)]">
                 Besoin d'un conseil personnalisé ?
               </h2>
-              <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl mb-8">
+              <p className="text-xl md:text-2xl text-[var(--night-60)] font-light max-w-2xl mb-8">
                 Nos experts en gestion de portefeuille sont disponibles pour vous accompagner dans la définition de votre stratégie d'investissement.
               </p>
-              <ul className="space-y-3 text-white/70">
+              <ul className="space-y-3 text-[var(--night-60)]">
                 <li className="flex items-center gap-3">
                   <span className="w-1.5 h-1.5 bg-[var(--jaune-or)] rounded-full" />
                   Analyse de votre profil de risque
@@ -126,7 +126,7 @@ export const SimulateurPage: React.FC = () => {
               </ul>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit">
+              <a href="/contact" className="inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit rounded-full bg-[var(--mauve)] text-white hover:bg-[var(--night)] transition-colors">
                 Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>

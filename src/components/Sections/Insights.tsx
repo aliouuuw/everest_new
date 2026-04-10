@@ -61,21 +61,11 @@ export const Insights: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden"
-      style={{ background: 'var(--gradient-dark-section)' }}
+      className="reveal relative overflow-hidden section-bg-light"
     >
-      {/* Subtle atmospheric orbs */}
-      <div
-        className="absolute top-0 left-0 w-[55%] h-[70%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.25) 0%, transparent 60%)' }}
-      />
-      <div
-        className="absolute bottom-0 right-0 w-[40%] h-[50%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, var(--jaune-or-10) 0%, transparent 60%)' }}
-      />
 
       {/* Section header strip */}
-      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-12 md:pb-16 border-b border-white/10 gap-6">
+      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-12 md:pb-16 border-b border-black/10 gap-6">
         <div className="flex flex-col gap-6">
           <div>
             <PillBadge variant="gold">Publications</PillBadge>
@@ -91,21 +81,21 @@ export const Insights: React.FC = () => {
           href="/publications"
           className="hidden md:inline-flex items-center gap-3 group"
         >
-          <span className="kicker text-white/60 group-hover:text-white transition-colors relative overflow-hidden pb-1">
+          <span className="kicker text-[var(--night-60)] group-hover:text-[var(--mauve)] transition-colors relative overflow-hidden pb-1">
             Toutes les publications
             <span className="absolute bottom-0 left-0 w-full h-px bg-[var(--jaune-or)] -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
           </span>
-          <FiArrowRight className="text-lg text-white/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
+          <FiArrowRight className="text-lg text-[var(--night-60)] group-hover:text-[var(--jaune-or)] transition-colors duration-500" />
         </a>
       </div>
 
       {/* Editorial split — featured left, secondary right */}
-      <div className="relative z-10 flex flex-col lg:flex-row" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="relative z-10 flex flex-col lg:flex-row" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
 
         {/* FEATURED — left, large */}
         <div
           className="group lg:w-[58%] flex flex-col justify-between px-8 md:px-16 lg:px-24 py-16 md:py-20"
-          style={{ borderRight: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ borderRight: '1px solid rgba(0,0,0,0.08)' }}
         >
           <div>
             {/* Frequency badge */}
@@ -121,7 +111,7 @@ export const Insights: React.FC = () => {
             </span>
 
             {/* Large display title */}
-            <h3 className="font-primary font-bold text-3xl md:text-5xl leading-[1.1] tracking-tight text-white mb-6">
+            <h3 className="font-primary font-bold text-3xl md:text-5xl leading-[1.1] tracking-tight text-[var(--mauve)] mb-6">
               {featured.title}
             </h3>
 
@@ -132,7 +122,7 @@ export const Insights: React.FC = () => {
 
           {/* Bottom row — meta + actions */}
           <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4 text-sm text-white/40 font-primary font-light tracking-wider">
+            <div className="flex items-center gap-4 text-sm text-[var(--night-40)] font-primary font-light tracking-wider">
               <span>{new Date(featured.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
               {featured.pages && <span>· {featured.pages} pages</span>}
               <span>· {featured.fileSize}</span>
@@ -155,7 +145,7 @@ export const Insights: React.FC = () => {
             <div
               key={it.id}
               className="group flex flex-col justify-between px-8 md:px-12 lg:px-16 py-12 flex-1"
-              style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(255,255,255,0.06)' }}
+              style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(0,0,0,0.08)' }}
             >
               <div>
                 <span
@@ -164,7 +154,7 @@ export const Insights: React.FC = () => {
                 >
                   {FREQUENCY_LABELS[it.frequency]}
                 </span>
-                <h3 className="font-primary font-bold text-xl md:text-2xl text-white mb-4 leading-snug">
+                <h3 className="font-primary font-bold text-xl md:text-2xl text-[var(--mauve)] mb-4 leading-snug">
                   {it.title}
                 </h3>
                 <p className="text-secondary-dark text-sm md:text-base line-clamp-3">
@@ -172,14 +162,14 @@ export const Insights: React.FC = () => {
                 </p>
               </div>
               <div className="mt-8 flex items-center justify-between">
-                <div className="flex items-center gap-3 text-xs text-white/40 font-primary font-light tracking-wider">
+                <div className="flex items-center gap-3 text-xs text-[var(--night-40)] font-primary font-light tracking-wider">
                   <span>{new Date(it.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                   <span>· {it.fileSize}</span>
                 </div>
                 <a
                   href={it.fileUrl}
                   download
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-white/5"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[var(--mauve-08)]"
                   style={{ color: 'var(--jaune-or)', borderColor: 'var(--jaune-or-30)' }}
                 >
                   <FiDownload size={13} />
@@ -192,13 +182,13 @@ export const Insights: React.FC = () => {
           {/* View all — bottom of right column */}
           <a
             href="/publications"
-            className="md:hidden flex items-center justify-between px-8 py-8 group hover:bg-white/[0.03] transition-colors"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+            className="md:hidden flex items-center justify-between px-8 py-8 group hover:bg-[var(--mauve-08)] transition-colors"
+            style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}
           >
-            <span className="kicker text-white/60 group-hover:text-[var(--jaune-or)] transition-colors">
+            <span className="kicker text-[var(--night-60)] group-hover:text-[var(--jaune-or)] transition-colors">
               Toutes les publications
             </span>
-            <FiArrowRight className="text-lg text-white/60 group-hover:text-[var(--jaune-or)] transition-colors duration-500 group-hover:translate-x-1" />
+            <FiArrowRight className="text-lg text-[var(--night-60)] group-hover:text-[var(--jaune-or)] transition-colors duration-500 group-hover:translate-x-1" />
           </a>
         </div>
       </div>

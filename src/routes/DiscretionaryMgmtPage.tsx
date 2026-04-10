@@ -101,7 +101,7 @@ export const DiscretionaryMgmtPage = () => {
         </section>
 
         {/* ─── 3. Packs — Stark Dark Table/Grid ─── */}
-        <section id="packs" ref={packsSectionRef} className="reveal py-24 md:py-40 section-bg-mauve">
+        <section id="packs" ref={packsSectionRef} className="reveal py-24 md:py-40 section-bg-light">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
