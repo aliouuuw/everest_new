@@ -171,7 +171,7 @@ export const Header: React.FC = () => {
 
   const servicesItems: Array<DropdownItem> = [
     { label: 'Marché des capitaux', href: '/marche-capitaux' },
-    { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
+    { label: 'Gestion sous mandat', href: '/gestion-sous-mandat' },
     { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
   ];
 
@@ -245,11 +245,11 @@ export const Header: React.FC = () => {
           </Link>
 
           <Link
-            to="/simulateur"
+            to="/outils-investisseur"
             className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
             style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
-            Simulateur
+            Outils
           </Link>
         </nav>
 
@@ -378,12 +378,12 @@ export const Header: React.FC = () => {
             </Link>
 
             <Link
-              to="/simulateur"
+              to="/outils-investisseur"
               className="block text-sm transition-colors hover:text-white"
               style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Simulateur
+              Outils
             </Link>
 
             <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">

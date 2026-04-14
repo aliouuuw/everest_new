@@ -73,7 +73,7 @@ export const Footer = () => {
               {[
                 { label: 'À propos', href: '#about' },
                 { label: 'Publications', href: '#publications' },
-                { label: 'Simulateur', href: '/simulateur' },
+                { label: 'Outils', href: '/outils-investisseur' },
                 { label: 'Abécédaire / FAQ', href: '#faq' },
               ].map((l) => (
                 <li key={l.href}>

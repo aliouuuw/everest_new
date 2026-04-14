@@ -94,7 +94,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   {department_name}
                 </span>
               </div>
-              <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight drop-shadow-sm">
+              <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight">
                 {formatHeadline(hero_headline)}
               </h1>
             </div>

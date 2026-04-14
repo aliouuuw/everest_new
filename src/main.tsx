@@ -153,7 +153,7 @@ const bourseRoute = createRoute({
 
 const simulateurRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/simulateur',
+  path: '/outils-investisseur',
   component: SimulateurPage,
 })
 

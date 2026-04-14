@@ -35,7 +35,7 @@ interface InvestmentCalculatorProps {
 }
 
 export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calculatorOnly = false }) => {
-  const sectionRef = useReveal<HTMLElement>();
+  const sectionRef = useReveal<HTMLDivElement>();
 
   const [inputs, setInputs] = useState<CalculatorInputs>({
     initialAmount: 1000000, // 1M F CFA
@@ -165,30 +165,13 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
     }
   ];
 
-  return (
-    <section
-      ref={sectionRef}
-      className="reveal relative py-28 md:py-36 overflow-hidden bg-[var(--summit-ivory)]"
-    >
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        {/* Header */}
-        <div className="max-w-xl mb-14">
-          <div className="mb-6">
-            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
-              Outil de simulation
-            </span>
-          </div>
-          <h2 className="luxury-heading" style={{ color: 'var(--mauve)' }}>
-            Calculez vos{' '}
-            <span style={{ color: 'var(--jaune-or)' }}>
-              projections.
-            </span>
-          </h2>
-        </div>
-
+  const calculatorContent = (
+    <>
         {/* Tab Navigation */}
+
+        {/* Navigation Tabs */}
         {!calculatorOnly && (
-          <div className="flex gap-6 mb-12 border-b border-[var(--mauve-10)]">
+          <div className="flex items-center gap-8 mb-12 border-b border-[var(--mauve-10)]">
             <button
               onClick={() => setActiveTab('calculator')}
               className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
@@ -217,23 +200,20 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         )}
 
         {(calculatorOnly || activeTab === 'calculator') ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className={calculatorOnly ? "grid grid-cols-1 lg:grid-cols-2 gap-10" : "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20"}>
             {/* Calculator Inputs */}
             <div>
-              <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
+              <div className={calculatorOnly ? "" : "p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl"}>
                 <h3
-                  className="mb-8"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
+                  className={calculatorOnly ? "mb-6" : "mb-8"}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: calculatorOnly ? '1rem' : '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
                 >
                   Paramètres d'investissement
                 </h3>
 
                 {/* Service Selection */}
                 <div className="mb-8">
-                  <label
-                    className="block mb-4"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                  >
+                  <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                     Service de gestion
                   </label>
                   <div className="grid grid-cols-3 gap-3">
@@ -261,49 +241,39 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                 {/* Input Fields */}
                 <div className="space-y-6">
                   <div>
-                    <label
-                      className="block mb-2"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                    >
+                    <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Investissement initial (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.initialAmount}
                       onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem' }}
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl font-medium"
                       min="100000"
                       step="50000"
                     />
                   </div>
 
                   <div>
-                    <label
-                      className="block mb-2"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                    >
+                    <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Versement mensuel (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.monthlyContribution}
                       onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.95rem' }}
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl font-medium"
                       min="0"
                       step="5000"
                     />
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <label
-                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                      >
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         Horizon d'investissement
                       </label>
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1rem', color: 'var(--mauve)' }}>
+                      <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         {inputs.timeHorizon} ans
                       </span>
                     </div>
@@ -313,19 +283,16 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                       max="20"
                       value={inputs.timeHorizon}
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
-                      className="w-full accent-[var(--mauve)]"
+                      className="w-full accent-[var(--mauve)] h-1.5 bg-[var(--mauve-10)] rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="flex justify-between mt-1.5">
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'var(--night-60)' }}>1 an</span>
-                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.7rem', color: 'var(--night-60)' }}>20 ans</span>
+                    <div className="flex justify-between mt-1 text-[10px] font-medium text-[var(--night-40)]">
+                      <span>1 an</span>
+                      <span>20 ans</span>
                     </div>
                   </div>
 
                   <div>
-                    <label
-                      className="block mb-3"
-                      style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}
-                    >
+                    <label className="block mb-3 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Rendement annuel attendu
                     </label>
                     <div className="grid grid-cols-3 gap-3">
@@ -357,10 +324,10 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
 
             {/* Results */}
             <div>
-              <div className="p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl">
+              <div className={calculatorOnly ? "" : "p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl"}>
                 <h3
-                  className="mb-8"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
+                  className={calculatorOnly ? "mb-6" : "mb-8"}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: calculatorOnly ? '1rem' : '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
                 >
                   Projections estimées
                 </h3>
@@ -408,21 +375,23 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
               </div>
 
               {/* Disclaimer + CTA */}
-              <div className="mt-8">
-                <p
-                  className="mb-6"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', lineHeight: 1.7, color: 'var(--night-60)' }}
-                >
-                  * Ces projections sont estimatives et ne constituent pas une garantie de performance.
-                  Les marchés financiers comportent des risques.
-                </p>
-                <a
-                  href="https://everest-account-opening.vercel.app/new-home"
-                  className="btn-primary inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase"
-                >
-                  Ouvrir un compte
-                </a>
-              </div>
+              {!calculatorOnly && (
+                <div className="mt-8">
+                  <p
+                    className="mb-6"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', lineHeight: 1.7, color: 'var(--night-60)' }}
+                  >
+                    * Ces projections sont estimatives et ne constituent pas une garantie de performance.
+                    Les marchés financiers comportent des risques.
+                  </p>
+                  <a
+                    href="https://everest-account-opening.vercel.app/new-home"
+                    className="btn-primary inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase"
+                  >
+                    Ouvrir un compte
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -473,6 +442,34 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             ))}
           </div>
         )}
+    </>
+  );
+
+  if (calculatorOnly) {
+    return <div ref={sectionRef}>{calculatorContent}</div>;
+  }
+
+  return (
+    <section
+      className="reveal relative py-28 md:py-36 overflow-hidden bg-[var(--summit-ivory)]"
+      ref={sectionRef as React.RefObject<HTMLElement>}
+    >
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+        {/* Header */}
+        <div className="max-w-xl mb-14">
+          <div className="mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+              Outil de simulation
+            </span>
+          </div>
+          <h2 className="luxury-heading" style={{ color: 'var(--mauve)' }}>
+            Calculez vos{' '}
+            <span style={{ color: 'var(--jaune-or)' }}>
+              projections.
+            </span>
+          </h2>
+        </div>
+        {calculatorContent}
       </div>
     </section>
   );
