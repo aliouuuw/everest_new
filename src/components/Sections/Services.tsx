@@ -14,24 +14,24 @@ type Service = {
 const services: Array<Service> = [
   {
     number: "I",
-    title: 'Ingénierie financière',
-    desc: "Structuration d'opérations, levées de fonds, émissions obligataires et placements primaires sur le marché régional UEMOA.",
-    tags: ["Structuration financière", "Levées de fonds", "Accompagnement entreprises"],
-    href: "/ingenieurie-financiere",
-  },
-  {
-    number: "II",
     title: 'Marché des capitaux',
     desc: "Sur le marché des capitaux, EVEREST Finance met à disposition des solutions d’intermédiation de haut niveau, garantissant une exécution optimale des transactions et un accompagnement stratégique adapté aux enjeux des investisseurs.",
     tags: ["Courtage", "Accès BRVM", "Conseil en investissement"],
     href: "/marche-capitaux",
   },
   {
-    number: "III",
+    number: "II",
     title: 'Gestion sous mandat',
     desc: "La Gestion Sous Mandat d’Everest Finance vous permet de confier votre portefeuille à des professionnels, avec une stratégie claire et un pilotage rigoureux.",
     tags: ["Gestion pilotée", "Fonds communs", "Solutions patrimoniales"],
     href: "/recherche-analyses",
+  },
+  {
+    number: "III",
+    title: 'Ingénierie financière',
+    desc: "Structuration d'opérations, levées de fonds, émissions obligataires et placements primaires sur le marché régional UEMOA.",
+    tags: ["Structuration financière", "Levées de fonds", "Accompagnement entreprises"],
+    href: "/ingenieurie-financiere",
   },
 ];
 

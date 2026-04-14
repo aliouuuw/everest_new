@@ -171,8 +171,8 @@ export const Header: React.FC = () => {
 
   const servicesItems: Array<DropdownItem> = [
     { label: 'Marché des capitaux', href: '/marche-capitaux' },
-    { label: 'Ingénieurie financière', href: '/ingenieurie-financiere' },
     { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
+    { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
   ];
 
   // Return null without violating hooks rules
