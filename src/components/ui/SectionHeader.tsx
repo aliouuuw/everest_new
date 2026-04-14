@@ -1,6 +1,13 @@
 import { PillBadge } from './PillBadge';
+import { FiArrowRight } from 'react-icons/fi';
 
 type PillVariant = 'mauve' | 'gold';
+
+interface SectionHeaderAction {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'secondary';
+}
 
 interface SectionHeaderProps {
   badge: string;
@@ -10,6 +17,7 @@ interface SectionHeaderProps {
   align?: 'left' | 'center';
   dark?: boolean;
   className?: string;
+  action?: SectionHeaderAction;
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
@@ -20,24 +28,38 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   align = 'left',
   dark = false,
   className = '',
+  action,
 }) => {
   const centered = align === 'center';
   return (
-    <div className={`${centered ? 'text-center' : ''} ${className}`}>
-      <div className={`mb-6 ${centered ? '' : ''}`}>
-        <PillBadge variant={dark ? 'gold' : badgeVariant}>{badge}</PillBadge>
+    <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 ${className}`}>
+      <div className={`${centered ? 'text-center' : ''}`}>
+        <div className={`mb-6 ${centered ? '' : ''}`}>
+          <PillBadge variant={dark ? 'gold' : badgeVariant}>{badge}</PillBadge>
+        </div>
+        <h2 className={dark ? 'luxury-heading-dark' : 'luxury-heading'}>
+          {heading}
+        </h2>
+        {subtext && (
+          <p
+            className={`mt-4 text-base md:text-lg ${centered ? 'max-w-xl mx-auto' : 'max-w-md'} ${
+              dark ? 'text-secondary-dark' : 'text-secondary'
+            }`}
+          >
+            {subtext}
+          </p>
+        )}
       </div>
-      <h2 className={dark ? 'luxury-heading-dark' : 'luxury-heading'}>
-        {heading}
-      </h2>
-      {subtext && (
-        <p
-          className={`mt-4 text-base md:text-lg ${centered ? 'max-w-xl mx-auto' : 'max-w-md'} ${
-            dark ? 'text-secondary-dark' : 'text-secondary'
+      {action && (
+        <a
+          href={action.href}
+          className={`hidden md:inline-flex items-center gap-3 group ${
+            action.variant === 'secondary' ? 'btn-secondary' : 'btn-primary'
           }`}
         >
-          {subtext}
-        </p>
+          <span>{action.label}</span>
+          <FiArrowRight className="text-sm group-hover:translate-x-0.5 transition-transform" />
+        </a>
       )}
     </div>
   );

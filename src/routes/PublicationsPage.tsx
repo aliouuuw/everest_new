@@ -26,9 +26,9 @@ const FREQUENCY_LABELS: Record<Frequency, string> = {
 }
 
 const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: string }> = {
-  hebdomadaire: { text: 'var(--mauve)', bg: 'var(--mauve-10)', border: 'var(--mauve-20)' },
+  hebdomadaire: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
   mensuelle: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
-  semestrielle: { text: '#1a7a5a', bg: 'rgba(26,122,90,0.08)', border: 'rgba(26,122,90,0.2)' },
+  semestrielle: { text: 'var(--mauve)', bg: 'var(--mauve-10)', border: 'var(--mauve-20)' },
 }
 
 const ALL_LABEL = 'tout' as const
@@ -97,8 +97,7 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
             <a
               href={pub.fileUrl}
               download
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300"
-              style={{ background: 'var(--mauve)', color: 'var(--pure-white)' }}
+              className="btn-primary-dark inline-flex items-center gap-2"
             >
               <FiDownload size={14} />
               Télécharger
@@ -243,7 +242,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
           <button
             type="button"
             onClick={() => onPreview(pub)}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-[var(--mauve)]/15 text-[var(--mauve)] text-xs font-bold uppercase tracking-[0.1em] transition-all duration-300 hover:bg-[var(--mauve-10)] hover:border-[var(--mauve)]/30"
+            className="flex-1 btn-secondary inline-flex items-center justify-center gap-2"
           >
             <FiEye size={14} />
             Aperçu
@@ -251,8 +250,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
           <a
             href={pub.fileUrl}
             download
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:opacity-90"
-            style={{ background: 'var(--mauve)' }}
+            className="flex-1 btn-primary inline-flex items-center justify-center gap-2"
           >
             <FiDownload size={14} />
             Télécharger
@@ -333,17 +331,8 @@ export const PublicationsPage = () => {
 
   return (
     <div className="bg-[var(--pure-white)] font-primary">
-      {/* ─── Hero — Dark Image with Overlay ─── */}
-      <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/Assets_Website/publications.png"
-            alt="Recherche et publications"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
+      {/* ─── Hero ─── */}
+      <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 bg-[var(--mauve)]">
         <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">
