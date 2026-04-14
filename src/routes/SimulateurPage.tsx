@@ -5,15 +5,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] section-bg-mauve">
-        <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80"
-            alt="Calculs financiers"
-            className="w-full h-full object-cover opacity-20"
-          />
-          <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
-        </div>
+      <section className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] bg-[var(--mauve)]">
         <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-8">

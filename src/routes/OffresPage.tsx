@@ -18,15 +18,15 @@ export const OffresPage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
         {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
         <section ref={heroRef} className="relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-[70vh] z-0 overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"
               alt="Services financiers"
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--pure-white) 0%, var(--pure-white) 30%, rgba(250,246,239,0.6) 50%, transparent 100%)' }} />
           </div>
+          <div className="absolute bottom-0 left-0 w-full h-[40vh] z-0" style={{ background: 'linear-gradient(to top, var(--pure-white) 60%, transparent 100%)' }} />
           
           <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
