@@ -12,7 +12,7 @@ export const AboutPage = () => {
 
   const timelineItems = [
     { year: '2013', text: "Création d'Everest Finance SGI à Dakar." },
-    { year: '2016', text: 'Licence CREPMF SGI/DA/2016/60 obtenue.' },
+    { year: '2016', text: 'Licence AMF-UMOA SGI/DA/2016/60 obtenue.' },
     { year: '2018', text: 'Premières opérations structurantes sur le marché primaire.' },
     { year: '2021', text: 'Plateforme client modernisée et renforcement de la recherche.' },
     { year: '2024', text: 'Consolidation du leadership régional sur la BRVM.' },
@@ -45,7 +45,7 @@ export const AboutPage = () => {
 
               <div className="md:col-span-5 pb-2">
                 <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
-                  Société de Gestion et d'Intermédiation agréée CREPMF. < br/> Nous allions discipline de marché, ingénierie financière et proximité client.
+                  Société de Gestion et d'Intermédiation agréée AMF-UMOA. < br/> Nous allions discipline de marché, ingénierie financière et proximité client.
                 </p>
                 <a
                   href="#mission"
@@ -271,7 +271,7 @@ export const AboutPage = () => {
                     </h3>
                     <div className="space-y-4 text-[rgba(10, 10, 10, 0.6)]">
                       <div className="flex justify-between py-3 border-b border-black/10">
-                        <span>Licence CREPMF</span>
+                        <span>Licence AMF-UMOA</span>
                         <span className="font-primary font-bold text-[var(--mauve)]">SGI/DA/2016/60</span>
                       </div>
                       <div className="flex justify-between py-3 border-b border-black/10">
@@ -301,7 +301,7 @@ export const AboutPage = () => {
                       </li>
                       <li className="flex items-start gap-4">
                         <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
-                        <span>Reporting réglementaire — Déclarations CREPMF et BCEAO</span>
+                        <span>Reporting réglementaire — Déclarations AMF-UMOA et BCEAO</span>
                       </li>
                     </ul>
                   </div>

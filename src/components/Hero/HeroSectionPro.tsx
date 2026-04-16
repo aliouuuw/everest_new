@@ -133,8 +133,8 @@ export const HeroSectionPro: React.FC = () => {
               
               <div className="pt-8 md:pl-10 md:pt-10">
                 <p className="hero-reveal luxury-subheading-left mb-10">
-                  Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires 
-                  et l'ingénierie financière structurée en Afrique de l'Ouest.
+                  Votre partenaire d'excellence pour accéder aux opportunités de marché
+                  et réussir vos opérations en Afrique de l'Ouest.
                 </p>
                 
                 <div className="hero-reveal flex flex-col sm:flex-row gap-6">

@@ -53,6 +53,7 @@ export interface Department {
   approach_methodology: string
   method_steps?: MethodStep[]
   hero_background?: string
+  hero_highlight?: string[]
   cta_text: string
   cta_subtitle: string
 }
@@ -71,8 +72,9 @@ export const departmentsData: DepartmentsData = {
       hero_background: "/Assets_Website/dmc.png",
       hero_headline: "Levez des capitaux. Accélérez votre croissance.",
       hero_subtitle: "Accédez au marché financier régional avec un partenaire qui a structuré et placé plus de 25 opérations avec un taux de couverture de 100%.",
+      hero_highlight: ["Financez votre croissance", "Saisissez les opportunités du marché"],
       presentation:
-        "Nous accompagnons les émetteurs publics et privés dans leurs opérations de levée de fonds sur le marché financier régional de l'UEMOA. De la structuration au suivi post-marché, notre équipe intervient sur l'ensemble du cycle de financement pour garantir le succès de chaque opération.",
+        "Lever des fonds sur les marchés financiers ne s'improvise pas. Nous accompagnons les émetteurs publics et privés sur l'ensemble du cycle, de la structuration à la mise en marché et au suivi post-opération, afin d'optimiser chaque levée et d'en assurer le succès de chaque opération.",
       metrics: [
         { value: "+25", label: "Opérations réussies" },
         { value: "8", label: "Pays couverts", suffix: "UEMOA" },
@@ -91,7 +93,7 @@ export const departmentsData: DepartmentsData = {
       missions: [
         "Structurer des émissions obligataires et actions adaptées aux besoins des émetteurs",
         "Assurer le placement auprès d'investisseurs institutionnels et particuliers qualifiés",
-        "Coordonner les interactions avec les autorités de régulation (CREPMF, BRVM, DC/BR)",
+        "Coordonner les interactions avec les autorités de régulation (AMF-UMOA, BRVM, DC/BR)",
         "Gérer le processus de bookbuilding et d'allocation des titres",
         "Assurer le suivi post-marché et la relation investisseurs"
       ],
@@ -100,6 +102,7 @@ export const departmentsData: DepartmentsData = {
         "Augmentations de capital et introductions en bourse",
         "Placements privés auprès d'investisseurs qualifiés",
         "Structuration de titres hybrides",
+        "Titrisation et structuration d'actifs",
         "Opérations de refinancement sur le marché"
       ],
       expertise_solutions: [
@@ -107,14 +110,14 @@ export const departmentsData: DepartmentsData = {
           solution_number: 1,
           name: "Structuration d'émissions",
           description:
-            "Conception sur mesure des termes financiers, montage juridique et documentation complète pour instruments de dette et de capital. Optimisation fiscale et réglementaire adaptée au cadre UEMOA.",
+            "Nous concevons des opérations sur mesure, en dette comme en capital, en alignant structuration financière, cadre juridique et exigences réglementaires. Chaque paramètre est optimisé pour renforcer l'attractivité de l'opération et sécuriser son exécution sur le marché.",
           target_audience: [
             "Entreprises cotées et non cotées",
             "États et collectivités territoriales",
             "Institutions financières"
           ],
           client_problem:
-            "Besoin de lever des capitaux sur le marché financier régional avec des conditions optimales et une conformité réglementaire rigoureuse.",
+            "Lever des capitaux dans des conditions optimales, tout en répondant aux exigences du marché et du régulateur.",
           value_proposition:
             "Un accompagnement de bout en bout, de l'analyse initiale à l'obtention du visa du régulateur, avec une structuration qui maximise l'attractivité de l'opération pour les investisseurs."
         },
@@ -152,7 +155,7 @@ export const departmentsData: DepartmentsData = {
         "Notre approche repose sur un processus en quatre phases : diagnostic et cadrage stratégique, structuration et documentation réglementaire, placement et constitution du livre d'ordres, puis règlement-livraison et suivi post-opération. Chaque étape fait l'objet d'un reporting détaillé et d'une validation conjointe avec le client. Cette méthodologie, éprouvée sur plus de vingt-cinq opérations, garantit rigueur, transparence et respect des délais.",
       method_steps: [
         { title: "Diagnostic et Cadrage", description: "Analyse des besoins de financement, structuration préliminaire et définition du calendrier de l'opération." },
-        { title: "Structuration et Documentation", description: "Montage financier et juridique, rédaction des notes d'information et obtention des visas réglementaires (CREPMF)." },
+        { title: "Structuration et Documentation", description: "Montage financier et juridique, rédaction des notes d'information et obtention des visas réglementaires (AMF-UMOA)." },
         { title: "Placement et Bookbuilding", description: "Roadshow investisseurs, constitution du livre d'ordres et allocation optimale des titres." },
         { title: "Règlement et Suivi", description: "Dénouement financier, cotation à la BRVM (si applicable) et reporting post-opération régulier." }
       ],
@@ -263,7 +266,7 @@ export const departmentsData: DepartmentsData = {
       presentation:
         "Nous pilotons des portefeuilles d'investissement pour le compte d'investisseurs institutionnels, entreprises et particuliers fortunés. Notre approche structurée combine définition de profils d'investissement, allocation stratégique et suivi rigoureux pour optimiser la performance ajustée au risque.",
       metrics: [
-        { value: "3", label: "Profils de mandat" },
+        { value: "3", label: "Profils de mandat", suffix: "Il existe actuellement 5 profils" },
         { value: "24/7", label: "Suivi des marchés" },
         { value: "100%", label: "Reporting transparent" }
       ],

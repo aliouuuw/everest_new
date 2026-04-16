@@ -333,7 +333,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
 
           <div className="footer">
             <p><strong>Everest Finance SGI</strong></p>
-            <p>Agrément CREPMF · SGI/DA/2016/60</p>
+            <p>Agrément AMF-UMOA · SGI/DA/2016/60</p>
             <p>contact@everest-finance.com · everest-finance.com</p>
             <p style={{ marginTop: '16px', fontSize: '11px', color: '#999' }}>
               Ce document est fourni à titre informatif et ne constitue pas un conseil en investissement personnalisé. 

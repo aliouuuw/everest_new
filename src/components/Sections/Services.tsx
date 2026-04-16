@@ -29,7 +29,7 @@ const services: Array<Service> = [
   {
     number: "III",
     title: 'Ingénierie financière',
-    desc: "Structuration d'opérations, levées de fonds, émissions obligataires et placements primaires sur le marché régional UEMOA.",
+    desc: "Structuration financière, accompagnement à la levée de fonds sur les marchés de l'UEMOA et en financement hors marché.",
     tags: ["Structuration financière", "Levées de fonds", "Accompagnement entreprises"],
     href: "/ingenieurie-financiere",
   },
@@ -91,8 +91,8 @@ export const Services: React.FC = () => {
           </h2>
         </div>
         <p className="max-w-md text-secondary text-base md:text-lg mb-2 md:mb-0">
-          Trois domaines d'expertise complémentaires pour couvrir l'ensemble
-          de vos besoins en investissement et en ingénierie financière.
+          Trois domaines d'expertise complémentaires pour couvrir l'ensemble de vos besoins
+          en investissement et en ingénierie financière.
         </p>
       </div>
 

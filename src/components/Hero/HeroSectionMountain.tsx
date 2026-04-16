@@ -134,8 +134,8 @@ export const HeroSectionMountain: React.FC = () => {
               color: 'rgba(255,255,255,0.55)',
             }}
           >
-            Votre partenaire d'excellence pour le courtage BRVM, les émissions primaires
-            et l'ingénierie financière en Afrique de l'Ouest.
+            Votre partenaire d'excellence pour accéder aux opportunités de marché
+            et réussir vos opérations en Afrique de l'Ouest.
           </p>
 
           {/* CTA */}
@@ -190,7 +190,7 @@ export const HeroSectionMountain: React.FC = () => {
                   className="block text-[9px] tracking-[0.2em] uppercase mb-0.5"
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
                 >
-                  Agrément CREPMF
+                  Agrément AMF-UMOA
                 </span>
                 <span
                   className="text-xs"

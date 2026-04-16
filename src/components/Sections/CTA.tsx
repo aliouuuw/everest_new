@@ -68,6 +68,14 @@ export const CTA: React.FC<{
             >
               Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
             </p>
+            <div
+              className="mt-8 inline-block px-6 py-4 rounded-2xl border border-[var(--mauve-15)] bg-[var(--mauve-05)]"
+              style={{ fontFamily: 'var(--font-primary)' }}
+            >
+              <p className="text-sm font-semibold text-[var(--mauve)]">
+                Et pour ceux qui ont besoin de Financement ?
+              </p>
+            </div>
           </div>
 
           {/* Right Side: Actions */}

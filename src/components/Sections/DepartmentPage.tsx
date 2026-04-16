@@ -51,6 +51,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
     department_name,
     hero_headline,
     hero_subtitle,
+    hero_highlight,
     presentation,
     metrics,
     differentiators,
@@ -97,6 +98,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight">
                 {formatHeadline(hero_headline)}
               </h1>
+              {hero_highlight && hero_highlight.length > 0 && (
+                <div className="mt-8 inline-flex flex-col gap-1 px-6 py-4 rounded-2xl border border-[var(--jaune-or)]/30 bg-[var(--jaune-or)]/10">
+                  {hero_highlight.map((line, i) => (
+                    <span key={i} className="font-primary font-bold text-lg text-[var(--jaune-or)]">{line}</span>
+                  ))}
+                </div>
+              )}
             </div>
             
             <div className="lg:col-span-5 pb-2">

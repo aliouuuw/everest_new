@@ -128,7 +128,7 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           <p ref={subheadingRef} className="luxury-subheading mb-10">
-            Votre partenaire de confiance pour le courtage BRVM, les émissions primaires et l'ingénierie financière.
+            Votre partenaire d'excellence pour accéder aux opportunités de marché et réussir vos opérations en Afrique de l'Ouest.
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">

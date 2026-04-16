@@ -126,9 +126,8 @@ export const ValueProps: React.FC = () => {
             </h2>
 
             <p className="text-secondary text-base md:text-lg mb-12 max-w-xl">
-              Nous allions discipline de marché, ingénierie financière
-              et accompagnement client pour créer de la valeur sur le long terme —
-              avec la rigueur d'une institution et la réactivité d'un partenaire dédié.
+              Nous allions expertise de marché, ingénierie financière et accompagnement
+              sur mesure pour créer de la valeur durable.
             </p>
 
             {/* Stats row */}

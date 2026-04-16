@@ -65,7 +65,7 @@ export const CEOMessagePage = () => {
                   <div className="space-y-4 pt-8 border-t border-black/10">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-[rgba(10,10,10,0.6)]">Licence</span>
-                      <span className="font-primary font-bold">CREPMF SGI/DA/2016/60</span>
+                      <span className="font-primary font-bold">AMF-UMOA SGI/DA/2016/60</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-[rgba(10,10,10,0.6)]">Membre</span>
