@@ -8,10 +8,10 @@ function App() {
       <HeroSectionMountain />
       <ValueProps />
       <Services />
+      <CTA scheme="ivory" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel={"Découvrir votre profil d'investisseur"} />
       <Insights />
       <NewsSection />
       <FAQ />
-      <CTA scheme="ivory" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel={"Découvrir votre profil d'investisseur"} />
     </>
   );
 }

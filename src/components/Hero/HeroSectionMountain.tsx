@@ -43,7 +43,6 @@ export const HeroSectionMountain: React.FC = () => {
           ref={videoRef}
           autoPlay
           muted
-          loop
           playsInline
           className="w-full h-full object-cover"
           style={{ display: 'block' }}
@@ -92,7 +91,7 @@ export const HeroSectionMountain: React.FC = () => {
                 style={{
                   fontFamily: 'var(--font-primary)',
                   fontWeight: 700,
-                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
+                  fontSize: 'clamp(2.5rem, 7vw, 4.5rem)',
                   lineHeight: 0.95,
                   letterSpacing: '-0.02em',
                   color: 'var(--pure-white)',
@@ -107,7 +106,7 @@ export const HeroSectionMountain: React.FC = () => {
                 style={{
                   fontFamily: 'var(--font-primary)',
                   fontWeight: 700,
-                  fontSize: 'clamp(3rem, 9vw, 7.5rem)',
+                  fontSize: 'clamp(2.5rem, 7vw, 4.5rem)',
                   lineHeight: 0.95,
                   letterSpacing: '-0.02em',
                   color: 'var(--jaune-or)',
