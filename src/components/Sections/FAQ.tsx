@@ -46,11 +46,11 @@ export const FAQ: React.FC = () => {
       className="reveal relative py-24 md:py-32 overflow-hidden"
       style={{ background: 'var(--white-smoke)' }}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+        <div className="soft-panel flex flex-col items-start gap-10 p-6 sm:gap-12 sm:p-8 md:gap-16 md:p-10 lg:flex-row lg:gap-24">
 
           {/* LEFT — Sticky heading */}
-          <div className="lg:w-[35%] lg:sticky">
+          <div className="lg:w-[35%] lg:sticky lg:top-28 lg:self-start">
             <h2
               className="mb-5"
               style={{
@@ -83,13 +83,9 @@ export const FAQ: React.FC = () => {
               return (
                 <div
                   key={item.q}
-                  className="rounded-2xl overflow-hidden transition-all duration-300"
-                  style={{
-                    background: isOpen ? 'var(--pure-white)' : 'var(--pure-white)',
-                    boxShadow: isOpen
-                      ? '0 4px 24px rgba(70,29,76,0.10)'
-                      : '0 1px 4px rgba(0,0,0,0.05)',
-                  }}
+                  className={`soft-panel-muted overflow-hidden rounded-xl transition-shadow duration-300 ${
+                    isOpen ? 'shadow-md' : ''
+                  }`}
                 >
                   <button
                     onClick={() => toggle(i)}

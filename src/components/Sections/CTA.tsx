@@ -19,32 +19,19 @@ export const CTA: React.FC<{
     <>
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-32 overflow-hidden"
+      className="reveal relative py-16 md:py-20 bg-[var(--pure-white)]"
       id="contact"
-      style={{ background: 'var(--pure-white)' }}
     >
-      {/* Soft mauve orb — top left */}
-      <div
-        className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
-      />
-      {/* Soft gold orb — bottom right */}
-      <div
-        className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%)' }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-20">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+        <div className="soft-panel flex flex-col items-start justify-between gap-10 p-6 sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20">
 
           {/* Left Side */}
           <div className="lg:w-3/5">
-            <h2 className="luxury-heading mb-8">
-              Prêts à franchir<br />
-              <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
+            <h2 className="luxury-heading mb-6">
+              Accéder à une expertise <span style={{ color: 'var(--jaune-or)' }}>financière structurée.</span>
             </h2>
-            <p className="max-w-md font-primary text-base md:text-lg font-light leading-[1.75] text-[var(--night-60)]">
-              Échangeons sur vos objectifs (rendement, horizon, contraintes réglementaires) et sur la formule la plus adaptée : courtage, conseil ou gestion sous mandat.
+            <p className="max-w-md font-primary text-sm md:text-base font-light leading-[1.7] text-[var(--night-60)]">
+              Échangeons sur vos objectifs — rendement, horizon, contraintes réglementaires — et sur la formule la plus adaptée : courtage, conseil ou gestion sous mandat.
             </p>
           </div>
 

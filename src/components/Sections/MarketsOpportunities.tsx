@@ -49,30 +49,17 @@ export const MarketsOpportunities: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden py-24 md:py-32"
-      style={{ background: 'var(--gradient-ivory-section)' }}
+      className="reveal relative py-16 md:py-20 bg-[var(--pure-white)]"
     >
-      <div
-        className="pointer-events-none absolute right-0 top-0 h-[70%] w-[55%]"
-        style={{
-          background:
-            'radial-gradient(ellipse at top right, var(--jaune-or-10) 0%, transparent 65%)',
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        {/* Header — normalized with Insights */}
-        <div className="mb-14 md:mb-16">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="mb-10 md:mb-12">
           <SectionHeader
             heading={
               <>
-                Des marchés porteurs,{' '}
-                <span style={{ color: 'var(--jaune-or)' }}>
-                  une lecture structurée des opportunités.
-                </span>
+                Marchés <span style={{ color: 'var(--jaune-or)' }}>&amp; opportunités.</span>
               </>
             }
-            subtext="Actualités BRVM, dette souveraine et financement régional : veille structurée pour lire les marchés UEMOA dans la continuité de nos publications et notes."
+            subtext="Actualités BRVM, dette souveraine et financement régional : veille structurée sur les marchés UEMOA."
             align="left"
             dark={false}
             action={{
@@ -83,19 +70,18 @@ export const MarketsOpportunities: React.FC = () => {
           />
         </div>
 
-        {/* News card grid */}
         <div
           ref={gridRef}
-          className="reveal-stagger grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3"
+          className="reveal-stagger grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3"
         >
           {NEWS_ARTICLES.map((article) => (
             <Link
               key={article.slug}
               to="/actualites/$slug"
               params={{ slug: article.slug }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--mauve-10)] bg-[var(--pure-white)] transition-all duration-500 hover:border-[var(--mauve-30)] hover:shadow-[var(--mauve-08)]"
+              className="group flex min-h-0 flex-col overflow-hidden rounded-xl border border-[var(--command-border)] bg-[var(--command-surface)] transition-all duration-500 hover:border-[var(--mauve-20)] hover:shadow-md"
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-t-xl">
                 <div className="absolute inset-0 z-10 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />
                 <img
                   src={article.imageUrl}

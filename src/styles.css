@@ -17,6 +17,7 @@
   --night-80: rgba(10, 10, 10, 0.8);
   --night-60: rgba(10, 10, 10, 0.6);
   --night-20: rgba(10, 10, 10, 0.2);
+  --night-40: rgba(10, 10, 10, 0.4);
   --night-10: rgba(10, 10, 10, 0.1);
   --jaune-or-light: rgba(202, 148, 47, 0.4);
   --jaune-or-30: rgba(202, 148, 47, 0.3);
@@ -147,6 +148,30 @@ h1, h2 {
   backdrop-filter: blur(8px) saturate(120%);
   border: 1px solid rgba(0, 0, 0, 0.04);
   box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+}
+
+/* Soft container system — rounded panels, shared across landing sections */
+@utility soft-panel {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid var(--command-border);
+  background: var(--pure-white);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(70, 29, 76, 0.06);
+}
+
+@utility soft-panel-muted {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid var(--command-border);
+  background: var(--command-surface);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+@utility soft-panel-glass {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 @utility gradient-gold {

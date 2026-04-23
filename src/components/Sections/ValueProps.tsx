@@ -1,11 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaCalendarAlt, FaChartLine, FaHandshake } from 'react-icons/fa';
-import { useReveal } from "../Hooks/useReveal";
+import { useReveal } from '../Hooks/useReveal';
 
-const stats = [
-  { prefix: '', value: 10,  suffix: '',  label: "ans d'existence",                                                                                                          icon: FaCalendarAlt },
-  { prefix: '+', value: 500, suffix: '', label: "Mds F CFA de Levée de fonds par émission d'obligation, de titres de capital et fonds communs de titrisation",             icon: FaChartLine },
-  { prefix: '+', value: 200, suffix: '', label: "Mds F CFA de transactions au marché financier",                                                                           icon: FaHandshake },
+const STATS = [
+  {
+    prefix: '',
+    value: 10,
+    suffix: '+',
+    unit: 'ans',
+    label: "d'expérience au service des émetteurs et investisseurs institutionnels de l'UEMOA.",
+    icon: FaCalendarAlt,
+  },
+  {
+    prefix: '+',
+    value: 500,
+    suffix: '',
+    unit: 'Mds F CFA',
+    label: "levés par émissions d'obligations, titres de capital et fonds communs de titrisation.",
+    icon: FaChartLine,
+  },
+  {
+    prefix: '+',
+    value: 200,
+    suffix: '',
+    unit: 'Mds F CFA',
+    label: "de transactions intermédiées sur le marché financier régional.",
+    icon: FaHandshake,
+  },
 ];
 
 function useCounter(target: number, duration = 1600, started = false) {
@@ -14,7 +35,7 @@ function useCounter(target: number, duration = 1600, started = false) {
     if (!started) return;
     let start: number | null = null;
     const step = (ts: number) => {
-      if (!start) start = ts;
+      if (start === null) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * target));
@@ -26,8 +47,10 @@ function useCounter(target: number, duration = 1600, started = false) {
   return count;
 }
 
-function AnimatedStat({ prefix, value, suffix, label, icon: Icon, delay = 0 }: typeof stats[0] & { delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
+type StatRowProps = (typeof STATS)[number] & { delay?: number };
+
+function AnimatedStatRow({ prefix, value, suffix, unit, label, icon: Icon, delay = 0 }: StatRowProps) {
+  const ref = useRef<HTMLLIElement>(null);
   const [started, setStarted] = useState(false);
   const count = useCounter(value, 1600, started);
 
@@ -35,27 +58,39 @@ function AnimatedStat({ prefix, value, suffix, label, icon: Icon, delay = 0 }: t
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setTimeout(() => setStarted(true), delay); obs.disconnect(); } },
-      { threshold: 0.4 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setStarted(true), delay);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.4 },
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, [delay]);
 
   return (
-    <div ref={ref} className="group flex items-center gap-5">
-      <div className="shrink-0 w-11 h-11 rounded-full bg-[var(--mauve-05)] border border-[var(--mauve-10)] flex items-center justify-center transition-all duration-500 group-hover:bg-[var(--mauve)] group-hover:border-[var(--mauve)]">
-        <Icon className="text-base text-[var(--mauve)] transition-colors duration-500 group-hover:text-white" />
+    <li ref={ref} className="flex items-start gap-4 py-5 md:gap-5 md:py-6">
+      <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)]">
+        <Icon className="text-base" aria-hidden />
       </div>
-      <div className="flex items-center gap-4 flex-1">
-        <span className="font-primary font-bold text-[2.8rem] md:text-[3.2rem] leading-none tracking-tight text-[var(--mauve)] numeric-tabular transition-colors duration-500 group-hover:text-[var(--jaune-or)] shrink-0">
-          {prefix}{count}{suffix}
-        </span>
-        <span className="font-primary font-light text-sm leading-snug text-[var(--night-60)] max-w-xs">
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 flex items-baseline gap-2">
+          <span className="font-primary text-3xl font-bold leading-none tracking-tight text-[var(--mauve)] numeric-tabular md:text-[2.25rem]">
+            {prefix}
+            {count}
+            {suffix}
+          </span>
+          <span className="font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)] md:text-[13px]">
+            {unit}
+          </span>
+        </div>
+        <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
           {label}
-        </span>
+        </p>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -66,55 +101,51 @@ export const ValueProps: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden bg-[var(--pure-white)] border-t border-[var(--mauve-10)]"
+      className="reveal relative overflow-hidden bg-[var(--pure-white)] py-16 md:py-20"
     >
-      {/* Full-bleed two-panel split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[80vh]">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+          {/* Left — image */}
+          <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">
+            <img
+              src="/Assets_Website/Valueprops.png"
+              alt="Everest Finance — engagement régional"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, transparent 55%, rgba(70,29,76,0.35) 100%)',
+              }}
+            />
+          </div>
 
-        {/* LEFT PANEL — Hero Image */}
-        <div className="relative lg:col-span-5 min-h-[40vh] lg:min-h-0 overflow-hidden">
-          <img
-            src="/Assets_Website/Valueprops.png"
-            alt="Sommet montagneux — Everest Finance"
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-        </div>
-
-        {/* RIGHT PANEL — Content + Stats */}
-        <div
-          ref={contentRef}
-          className="reveal lg:col-span-7 flex flex-col justify-center px-6 md:px-16 lg:px-24 py-16 lg:py-24 relative bg-[var(--pure-white)]"
-        >
-          {/* Subtle gradient orb */}
+          {/* Right — heading + animated stats list */}
           <div
-            className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full pointer-events-none opacity-[0.04] blur-[100px] translate-x-1/3 -translate-y-1/3"
-            style={{ background: 'var(--mauve)' }}
-          />
-
-          <div className="relative z-10 max-w-2xl">
-            {/* Pill badge */}
-
-            {/* Heading */}
-            <h2 className="luxury-heading mb-6">
-              Exécution rigoureuse,<br />
-              <span style={{ color: 'var(--jaune-or)' }}>
-                confiance durable.
+            ref={contentRef}
+            className="reveal flex flex-col justify-center lg:col-span-7"
+          >
+            <div className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--mauve-15)] bg-[var(--mauve-05)] px-3 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--jaune-or)]" aria-hidden />
+              <span className="font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve)]">
+                Pourquoi EVEREST Finance
               </span>
+            </div>
+            <h2 className="luxury-heading mb-4 max-w-xl">
+              Exécution rigoureuse, <span style={{ color: 'var(--jaune-or)' }}>confiance durable.</span>
             </h2>
-
-            <p className="text-secondary text-base md:text-lg mb-16 max-w-xl font-light">
-              SGI agréée CREPMF (n° SGI/DA/2016/60), nous appuyons nos équipes sur +500&nbsp;Mds F CFA levés et
-              +200&nbsp;Mds F CFA traités en exécution de marché, avec un accompagnement sur mesure.
+            <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
+              SGI agréée CREPMF (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
+              d&apos;exécution et relations institutionnelles au service de nos mandats.
             </p>
 
-            {/* Stats row */}
-            <div className="flex flex-col">
-              {stats.map((s, i) => (
-                <div key={s.label} className={i < stats.length - 1 ? 'pb-8 mb-8 border-b border-[var(--mauve-10)]' : ''}>
-                  <AnimatedStat {...s} delay={i * 180} />
-                </div>
+            <ul className="divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
+              {STATS.map((s, i) => (
+                <AnimatedStatRow key={s.label} {...s} delay={i * 180} />
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
