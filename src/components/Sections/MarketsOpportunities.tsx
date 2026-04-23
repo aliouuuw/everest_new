@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
-import { PillBadge } from '../ui';
+import { SectionHeader } from '../ui';
 
 type NewsArticle = {
   title: string;
@@ -61,40 +61,26 @@ export const MarketsOpportunities: React.FC = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        {/* Header — title left, subtitle + action right */}
-        <div className="mb-14 flex flex-col gap-8 md:mb-16 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <div className="mb-6">
-              <PillBadge>Marchés &amp; opportunités</PillBadge>
-            </div>
-            <h2 className="luxury-heading">
-              Des marchés porteurs,{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>
-                une lecture structurée des opportunités.
-              </span>
-            </h2>
-          </div>
-
-          <div className="flex flex-col items-start gap-5 lg:items-end lg:text-right">
-            <p className="text-secondary max-w-md text-base md:text-lg">
-              Actualités BRVM, dette souveraine et financement régional : veille structurée pour lire les marchés
-              UEMOA dans la continuité de nos publications et notes.
-            </p>
-            <Link to="/actualites" className="group inline-flex items-center gap-3">
-              <span
-                className="relative overflow-hidden text-[10px] tracking-[0.2em] uppercase"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 500,
-                  color: 'var(--night-60)',
-                }}
-              >
-                Voir toutes les actualités
-                <span className="absolute bottom-0 left-0 h-[1px] w-full translate-x-[-101%] bg-[var(--mauve)] transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-0" />
-              </span>
-              <FiArrowRight className="text-xs text-[var(--night-60)] transition-colors duration-500 group-hover:text-[var(--mauve)]" />
-            </Link>
-          </div>
+        {/* Header — normalized with Insights */}
+        <div className="mb-14 md:mb-16">
+          <SectionHeader
+            heading={
+              <>
+                Des marchés porteurs,{' '}
+                <span style={{ color: 'var(--jaune-or)' }}>
+                  une lecture structurée des opportunités.
+                </span>
+              </>
+            }
+            subtext="Actualités BRVM, dette souveraine et financement régional : veille structurée pour lire les marchés UEMOA dans la continuité de nos publications et notes."
+            align="left"
+            dark={false}
+            action={{
+              label: 'Voir toutes les actualités',
+              href: '/actualites',
+              variant: 'primary',
+            }}
+          />
         </div>
 
         {/* News card grid */}
@@ -107,7 +93,7 @@ export const MarketsOpportunities: React.FC = () => {
               key={article.slug}
               to="/actualites/$slug"
               params={{ slug: article.slug }}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--mauve-10)] bg-[var(--pure-white)] transition-all duration-500 hover:border-[var(--mauve-30)] hover:shadow-xl hover:shadow-[var(--mauve-08)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--mauve-10)] bg-[var(--pure-white)] transition-all duration-500 hover:border-[var(--mauve-30)] hover:shadow-[var(--mauve-08)]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <div className="absolute inset-0 z-10 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />

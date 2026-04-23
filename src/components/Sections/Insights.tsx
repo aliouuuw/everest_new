@@ -1,5 +1,5 @@
-import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight, FiDownload } from "react-icons/fi";
+import { useReveal } from "../Hooks/useReveal";
 import { SectionHeader } from '../ui';
 
 /* ─── Types ─── */
@@ -29,7 +29,7 @@ const FREQUENCY_COLORS: Record<Frequency, string> = {
 };
 
 /* ─── Static data (mirrors PublicationsPage catalogue) ─── */
-const PUBLICATIONS: Publication[] = [
+const PUBLICATIONS: Array<Publication> = [
   {
     id: 'revue-hebdo-example',
     title: 'Revue Hebdomadaire — Marchés BRVM',
@@ -67,7 +67,6 @@ export const Insights: React.FC = () => {
       {/* Section header */}
       <div className="relative z-10 mx-auto max-w-[1400px] border-b border-black/10 px-6 pt-24 md:pt-32 pb-12 md:pb-16 md:px-16 lg:px-24">
         <SectionHeader
-          badge="Publications"
           heading={<>Nos revues <span style={{ color: 'var(--jaune-or)' }}>&amp; analyses.</span></>}
           subtext="Même ligne éditoriale que la page Publications : synthèses hebdomadaires, mensuelles ou semestrielles sur l’UEMOA et la BRVM, en PDF téléchargeable."
           align="left"

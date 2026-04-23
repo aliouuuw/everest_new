@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaCalendarAlt, FaChartLine, FaHandshake } from 'react-icons/fa';
 import { useReveal } from "../Hooks/useReveal";
-import { PillBadge } from '../ui';
 
 const stats = [
   { prefix: '', value: 10,  suffix: '',  label: "ans d'existence",                                                                                                          icon: FaCalendarAlt },
@@ -94,9 +93,6 @@ export const ValueProps: React.FC = () => {
 
           <div className="relative z-10 max-w-2xl">
             {/* Pill badge */}
-            <div className="mb-6">
-              <PillBadge>Pourquoi Everest Finance</PillBadge>
-            </div>
 
             {/* Heading */}
             <h2 className="luxury-heading mb-6">

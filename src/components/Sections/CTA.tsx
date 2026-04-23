@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
-import { PillBadge } from '../ui';
 import { InvestorProfileModal } from '../InvestorProfile';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
@@ -40,9 +39,6 @@ export const CTA: React.FC<{
 
           {/* Left Side */}
           <div className="lg:w-3/5">
-            <div className="mb-8">
-              <PillBadge>Prise de contact</PillBadge>
-            </div>
             <h2 className="luxury-heading mb-8">
               Prêts à franchir<br />
               <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import { Link } from '@tanstack/react-router';
 import { useReveal } from '../Hooks/useReveal';
-import { PillBadge } from '../ui';
 
 type QA = { q: string; a: string };
 
@@ -52,9 +51,6 @@ export const FAQ: React.FC = () => {
 
           {/* LEFT — Sticky heading */}
           <div className="lg:w-[35%] lg:sticky">
-            <div className="mb-6">
-              <PillBadge>FAQ</PillBadge>
-            </div>
             <h2
               className="mb-5"
               style={{

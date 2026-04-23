@@ -437,7 +437,7 @@ h1, h2 {
 .luxury-heading {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-size: clamp(2rem, 2.8vw, 2.2rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--mauve);
@@ -466,7 +466,7 @@ h1, h2 {
 .luxury-heading-dark {
   font-family: var(--font-primary);
   font-weight: 700;
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-size: clamp(2rem, 2.8vw, 2.2rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--pure-white);

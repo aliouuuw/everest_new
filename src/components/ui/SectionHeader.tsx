@@ -1,7 +1,4 @@
-import { PillBadge } from './PillBadge';
 import { FiArrowRight } from 'react-icons/fi';
-
-type PillVariant = 'mauve' | 'gold';
 
 interface SectionHeaderAction {
   label: string;
@@ -10,8 +7,6 @@ interface SectionHeaderAction {
 }
 
 interface SectionHeaderProps {
-  badge: string;
-  badgeVariant?: PillVariant;
   heading: React.ReactNode;
   subtext?: string;
   align?: 'left' | 'center';
@@ -21,8 +16,6 @@ interface SectionHeaderProps {
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
-  badge,
-  badgeVariant = 'mauve',
   heading,
   subtext,
   align = 'left',
@@ -34,9 +27,6 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   return (
     <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 ${className}`}>
       <div className={`${centered ? 'text-center' : ''}`}>
-        <div className={`mb-6 ${centered ? '' : ''}`}>
-          <PillBadge variant={dark ? 'gold' : badgeVariant}>{badge}</PillBadge>
-        </div>
         <h2 className={dark ? 'luxury-heading-dark' : 'luxury-heading'}>
           {heading}
         </h2>

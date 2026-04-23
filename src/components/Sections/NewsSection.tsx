@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight, FiCalendar } from "react-icons/fi";
-import { PillBadge } from '../ui';
 
 type NewsArticle = {
   title: string;
@@ -66,9 +65,6 @@ export const NewsSection: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div className="max-w-xl">
-            <div className="mb-6">
-              <PillBadge>Actualités</PillBadge>
-            </div>
             <h2 className="luxury-heading">
               Dernières{' '}
               <span style={{ color: 'var(--jaune-or)' }}>
