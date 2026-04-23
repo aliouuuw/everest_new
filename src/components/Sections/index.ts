@@ -1,4 +1,8 @@
 export { ValueProps } from './ValueProps';
+export { TrustStrip } from './TrustStrip';
+export { Positioning } from './Positioning';
+export { Capacity } from './Capacity';
+export { MarketsOpportunities } from './MarketsOpportunities';
 export { Services } from './Services';
 export { Insights } from './Insights';
 export { MountainTransition } from './MountainTransition';

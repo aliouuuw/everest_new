@@ -1,52 +1,75 @@
-import { useLocation } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { FiArrowUpRight } from "react-icons/fi";
+import { useLocation } from '@tanstack/react-router';
+import { useEffect, useRef } from 'react';
+import { FiBarChart2, FiBriefcase, FiGlobe, FiLayers } from 'react-icons/fi';
+import { EditorialCard } from '../ui/EditorialCard';
 import { PillBadge } from '../ui';
 
-type Service = {
-  number: string;
+const services: Array<{
+  icon: React.ElementType;
+  kicker: string;
   title: string;
-  desc: string;
-  tags: string[];
+  bullets: string[];
   href: string;
-};
-
-const services: Array<Service> = [
+  index: string;
+}> = [
   {
-    number: "I",
-    title: 'Marché des capitaux',
-    desc: "Sur le marché des capitaux, EVEREST Finance met à disposition des solutions d’intermédiation de haut niveau, garantissant une exécution optimale des transactions et un accompagnement stratégique adapté aux enjeux des investisseurs.",
-    tags: ["Courtage", "Accès BRVM", "Conseil en investissement"],
-    href: "/marche-capitaux",
+    icon: FiBarChart2,
+    kicker: 'Expertise I',
+    title: 'Marché des Titres Publics',
+    bullets: [
+      'Émissions souveraines & stratégie de taux',
+      'MTP UEMAO et pilotage de sensibilité',
+    ],
+    href: '/marche-capitaux',
+    index: 'I',
   },
   {
-    number: "II",
-    title: 'Gestion sous mandat',
-    desc: "La Gestion Sous Mandat d’Everest Finance vous permet de confier votre portefeuille à des professionnels, avec une stratégie claire et un pilotage rigoureux.",
-    tags: ["Gestion pilotée", "Fonds communs", "Solutions patrimoniales"],
-    href: "/recherche-analyses",
+    icon: FiGlobe,
+    kicker: 'Expertise II',
+    title: 'Marché financier régional (BRVM)',
+    bullets: [
+      'Actions & obligations sur place',
+      "Intermédiation & conseil d'exécution",
+    ],
+    href: '/bourse',
+    index: 'II',
   },
   {
-    number: "III",
-    title: 'Ingénierie financière',
-    desc: "Structuration financière, accompagnement à la levée de fonds sur les marchés de l'UEMOA et en financement hors marché.",
-    tags: ["Structuration financière", "Levées de fonds", "Accompagnement entreprises"],
-    href: "/ingenieurie-financiere",
+    icon: FiLayers,
+    kicker: 'Expertise III',
+    title: 'Structuration & ingénierie financière',
+    bullets: [
+      "Solutions sur mesure pour l'émetteur",
+      'Levées, financement & accompagnement UEMOA',
+    ],
+    href: '/ingenieurie-financiere',
+    index: 'III',
+  },
+  {
+    icon: FiBriefcase,
+    kicker: 'Expertise IV',
+    title: 'Private Office',
+    bullets: [
+      "Allocation & vision patrimoniale long terme",
+      'Conseil sur mesure pour profils exigeants',
+    ],
+    href: '/gestion-sous-mandat',
+    index: 'IV',
   },
 ];
 
 export const Services: React.FC = () => {
   const location = useLocation();
   const sectionRef = useRef<HTMLElement>(null);
-  const rowsRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const sectionEl = sectionRef.current;
-    const rowsEl = rowsRef.current;
-    if (!sectionEl || !rowsEl) return;
+    const gridEl = gridRef.current;
+    if (!sectionEl || !gridEl) return;
 
     sectionEl.classList.remove('in');
-    rowsEl.classList.remove('in');
+    gridEl.classList.remove('in');
 
     const obs = (el: Element) => {
       const o = new IntersectionObserver(
@@ -58,8 +81,11 @@ export const Services: React.FC = () => {
     };
 
     const o1 = obs(sectionEl);
-    const o2 = obs(rowsEl);
-    return () => { o1.disconnect(); o2.disconnect(); };
+    const o2 = obs(gridEl);
+    return () => {
+      o1.disconnect();
+      o2.disconnect();
+    };
   }, [location.pathname]);
 
   return (
@@ -70,86 +96,54 @@ export const Services: React.FC = () => {
       id="services"
       style={{ background: 'var(--gradient-ivory-section)' }}
     >
-      {/* Subtle mauve-gold gradient atmosphere */}
       <div
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="pointer-events-none absolute left-0 top-0 h-full w-full"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 30% 20%, var(--mauve-05) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 80% 60%, var(--jaune-or-05) 0%, transparent 50%)',
+          background:
+            'radial-gradient(ellipse 60% 40% at 30% 20%, var(--mauve-05) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 80% 60%, var(--jaune-or-05) 0%, transparent 50%)',
         }}
       />
-      {/* Header — full width, tight */}
-      <div className="px-8 md:px-16 lg:px-24 pt-24 md:pt-32 pb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-10 border-b border-[var(--mauve-10)] relative z-10">
-        <div className="max-w-2xl">
-          <div className="mb-8">
-            <PillBadge>Nos offres</PillBadge>
+
+      <div className="relative z-10 border-b border-[var(--mauve-10)] px-8 pb-16 pt-24 md:px-16 md:pt-32 lg:px-24">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <div className="mb-8">
+              <PillBadge>Nos expertises</PillBadge>
+            </div>
+            <h2 className="luxury-heading">
+              Nos expertises —{' '}
+              <span style={{ color: 'var(--jaune-or)' }}>marchés &amp; patrimoine.</span>
+            </h2>
           </div>
-          <h2 className="luxury-heading">
-            Solutions pour chaque{' '}
-            <span style={{ color: 'var(--jaune-or)' }}>
-              profil.
-            </span>
-          </h2>
+          <p className="text-secondary max-w-md text-base md:text-lg">
+            Quatre expertises complémentaires : titres publics, marché financier régional,
+            structuration &amp; ingénierie, et accompagnement patrimonial.
+          </p>
         </div>
-        <p className="max-w-md text-secondary text-base md:text-lg mb-2 md:mb-0">
-          Trois domaines d'expertise complémentaires pour couvrir l'ensemble de vos besoins
-          en investissement et en ingénierie financière.
-        </p>
       </div>
 
-      {/* Stacked full-width service rows */}
-      <div ref={rowsRef} className="reveal-stagger relative z-10">
-        {services.map((s) => (
-          <a
-            key={s.title}
-            href={s.href}
-            className="group flex flex-col md:flex-row items-stretch w-full transition-colors duration-500 hover:bg-[var(--pure-white)] border-b border-[var(--mauve-10)]"
-          >
-            {/* Oversized roman numeral — left column */}
-            <div className="hidden md:flex items-center justify-center w-24 lg:w-40 shrink-0 border-r border-[var(--mauve-10)] transition-colors duration-500 group-hover:border-[var(--mauve-30)]">
-              <span className="font-display text-[3rem] lg:text-[4rem] leading-none text-[var(--mauve)] opacity-30 transition-all duration-500 group-hover:opacity-100 group-hover:text-[var(--jaune-or)]">
-                {s.number}
-              </span>
-            </div>
-
-            {/* Main content */}
-            <div className="flex flex-col md:flex-row md:items-center flex-1 px-8 md:px-12 lg:px-16 py-12 gap-6 md:gap-16">
-              {/* Title */}
-              <h3 className="md:w-[40%] shrink-0 font-primary font-semibold text-2xl lg:text-3xl text-[var(--night)] transition-colors duration-300 group-hover:text-[var(--mauve)]">
-                {s.title}
-              </h3>
-
-              {/* Description + tags */}
-              <div className="flex-1">
-                <p className="text-secondary text-sm md:text-base mb-6 max-w-xl transition-colors duration-300 group-hover:text-[var(--night)]">
-                  {s.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {s.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-[var(--night-60)] border border-[var(--mauve-15)] rounded-full transition-all duration-300 group-hover:border-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:bg-[var(--mauve-05)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Arrow — right column */}
-            <div className="hidden md:flex items-center justify-center w-24 lg:w-32 shrink-0 border-l border-transparent transition-colors duration-500 group-hover:border-[var(--mauve-10)]">
-              <span className="w-12 h-12 rounded-full border border-[var(--mauve-15)] flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:border-[var(--mauve)] group-hover:bg-[var(--mauve)]">
-                <FiArrowUpRight className="text-lg text-[var(--night-60)] transition-colors duration-500 group-hover:text-[var(--pure-white)]" />
-              </span>
-            </div>
-          </a>
-        ))}
+      <div className="relative z-10 px-8 py-10 md:px-16 md:py-12 lg:px-24">
+        <div
+          ref={gridRef}
+          className="reveal-stagger grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+        >
+          {services.map((s) => (
+            <EditorialCard
+              key={s.title}
+              variant="light"
+              icon={s.icon}
+              kicker={s.kicker}
+              title={s.title}
+              bullets={s.bullets}
+              href={s.href}
+              linkLabel={"Découvrir l'expertise"}
+              index={s.index}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Bottom padding */}
-      <div className="h-10 md:h-16" />
+      <div className="h-8 md:h-12" />
     </section>
   );
 };
-
-
