@@ -7,12 +7,30 @@ import { PillBadge } from '../ui';
 type QA = { q: string; a: string };
 
 const faqs: Array<QA> = [
-  { q: 'Comment ouvrir un compte ?', a: 'Remplissez le formulaire en ligne, notre équipe vous accompagne pour la suite.' },
-  { q: 'Quels sont vos frais ?', a: 'Frais transparents selon le service et le profil ; détail communiqué à l\u2019ouverture.' },
-  { q: 'Comment accéder au portail client ?', a: 'Via le lien "Accès Client" en haut de page ; identifiants fournis à l\u2019activation.' },
-  { q: 'Offrez-vous la gestion sous mandat ?', a: 'Oui, plusieurs profils sont disponibles selon vos objectifs et contraintes.' },
-  { q: 'Puis-je recevoir des recommandations ?', a: 'Oui, via la gestion assistée et nos publications de recherche.' },
-  { q: 'Comment contacter un conseiller ?', a: 'Par le formulaire de contact ou WhatsApp ; réponse sous 24h ouvrées.' },
+  {
+    q: 'Comment ouvrir un compte ?',
+    a: 'Déposez une demande en ligne ou écrivez-nous : un conseiller vous guide pour les pièces (identité, KYC) et la signature des documents. Le délai dépend du type de compte et du profil.',
+  },
+  {
+    q: 'Quels sont vos frais ?',
+    a: 'Les frais varient selon le service (courtage, conseil, gestion sous mandat) et le profil. Une grille tarifaire détaillée vous est remise à l’ouverture du compte, avant tout engagement.',
+  },
+  {
+    q: 'Comment accéder au portail client ?',
+    a: 'Utilisez le lien « Accès client » dans le menu. Après activation de votre compte, vos identifiants vous sont envoyés par email ; en cas de perte, contactez le support par le même canal que pour une ouverture.',
+  },
+  {
+    q: 'Offrez-vous la gestion sous mandat ?',
+    a: 'Oui. Nous proposons des profils de gestion adaptés à votre horizon, à votre tolérance au risque et à vos contraintes réglementaires ; le détail est précisé en entretien préalable.',
+  },
+  {
+    q: 'Puis-je recevoir des recommandations ?',
+    a: 'Oui, selon le mandat : gestion assistée, conseil ponctuel ou accès à nos notes et revues (BRVM, obligations, macro UEMOA). Le périmètre est défini contractuellement.',
+  },
+  {
+    q: 'Comment contacter un conseiller ?',
+    a: 'Utilisez la section « Nous contacter » sur cette page, l’email contact@everestfin.com ou le téléphone indiqué en pied de page. Nous répondons en général sous 24 h ouvrées.',
+  },
 ];
 
 export const FAQ: React.FC = () => {
@@ -26,10 +44,10 @@ export const FAQ: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-20 md:py-28 overflow-hidden"
+      className="reveal relative py-24 md:py-32 overflow-hidden"
       style={{ background: 'var(--white-smoke)' }}
     >
-      <div className="w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
 
           {/* LEFT — Sticky heading */}
@@ -56,7 +74,7 @@ export const FAQ: React.FC = () => {
             </p>
             <Link
               to="/faq"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[0.7rem] font-bold uppercase tracking-[0.15em] text-[var(--pure-white)] bg-[var(--jaune-or)] hover:bg-[var(--night)] transition-all duration-300"
+              className="btn-primary-dark inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em]"
             >
               Voir toutes les questions
             </Link>
@@ -107,7 +125,7 @@ export const FAQ: React.FC = () => {
                   <div
                     className="overflow-hidden transition-all duration-300"
                     style={{
-                      maxHeight: isOpen ? '200px' : '0px',
+                      maxHeight: isOpen ? '360px' : '0px',
                       opacity: isOpen ? 1 : 0,
                     }}
                   >

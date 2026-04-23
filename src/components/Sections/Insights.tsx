@@ -65,11 +65,11 @@ export const Insights: React.FC = () => {
     >
 
       {/* Section header */}
-      <div className="relative z-10 px-8 md:px-16 lg:px-24 pt-20 md:pt-28 pb-12 md:pb-16 border-b border-black/10">
+      <div className="relative z-10 mx-auto max-w-[1400px] border-b border-black/10 px-6 pt-24 md:pt-32 pb-12 md:pb-16 md:px-16 lg:px-24">
         <SectionHeader
           badge="Publications"
           heading={<>Nos revues <span style={{ color: 'var(--jaune-or)' }}>&amp; analyses.</span></>}
-          subtext="Découvrez nos revues hebdomadaires, mensuelles et semestrielles pour suivre l'évolution des marchés."
+          subtext="Même ligne éditoriale que la page Publications : synthèses hebdomadaires, mensuelles ou semestrielles sur l’UEMOA et la BRVM, en PDF téléchargeable."
           align="left"
           dark={false}
           action={{
@@ -81,11 +81,11 @@ export const Insights: React.FC = () => {
       </div>
 
       {/* Editorial split — featured left, secondary right */}
-      <div className="relative z-10 flex flex-col lg:flex-row" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+      <div className="relative z-10 mx-auto flex max-w-[1400px] flex-col lg:flex-row" style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
 
         {/* FEATURED — left, large */}
         <div
-          className="group lg:w-[58%] flex flex-col justify-between px-8 md:px-16 lg:px-24 py-16 md:py-20 transition-all duration-300 hover:bg-[var(--summit-warm)]"
+          className="group lg:w-[58%] flex flex-col justify-between px-6 py-16 md:px-16 md:py-20 lg:px-24 transition-all duration-300 hover:bg-[var(--summit-warm)]"
           style={{ borderRight: '1px solid rgba(0,0,0,0.08)' }}
         >
           <div>
@@ -135,7 +135,7 @@ export const Insights: React.FC = () => {
           {secondary.map((it, i) => (
             <div
               key={it.id}
-              className="group flex flex-col justify-between px-8 md:px-12 lg:px-16 py-12 flex-1 transition-all duration-300 hover:bg-[var(--summit-warm)]"
+              className="group flex flex-col justify-between px-6 py-12 md:px-16 lg:px-20 flex-1 transition-all duration-300 hover:bg-[var(--summit-warm)]"
               style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(0,0,0,0.08)' }}
             >
               <div>
@@ -177,7 +177,7 @@ export const Insights: React.FC = () => {
           {/* View all — bottom of right column */}
           <a
             href="/publications"
-            className="md:hidden flex items-center justify-between px-8 py-8 transition-colors duration-300 hover:bg-[var(--summit-warm)]"
+            className="md:hidden flex items-center justify-between px-6 py-8 transition-colors duration-300 hover:bg-[var(--summit-warm)]"
             style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}
           >
             <span className="kicker text-[var(--mauve)]">Toutes les publications</span>

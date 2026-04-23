@@ -52,7 +52,7 @@ function AnimatedStat({ prefix, value, suffix, label, icon: Icon, delay = 0 }: t
         <span className="font-primary font-bold text-[2.8rem] md:text-[3.2rem] leading-none tracking-tight text-[var(--mauve)] numeric-tabular transition-colors duration-500 group-hover:text-[var(--jaune-or)] shrink-0">
           {prefix}{count}{suffix}
         </span>
-        <span className="font-primary font-light text-sm leading-snug text-[var(--night-60)]">
+        <span className="font-primary font-light text-sm leading-snug text-[var(--night-60)] max-w-xs">
           {label}
         </span>
       </div>
@@ -67,43 +67,24 @@ export const ValueProps: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden bg-[var(--pure-white)]"
+      className="reveal relative overflow-hidden bg-[var(--pure-white)] border-t border-[var(--mauve-10)]"
     >
       {/* Full-bleed two-panel split */}
-      <div className="flex flex-col lg:flex-row min-h-[80vh]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[80vh]">
 
         {/* LEFT PANEL — Hero Image */}
-        <div className="relative lg:w-[45%] min-h-[50vh] lg:min-h-0 overflow-hidden">
+        <div className="relative lg:col-span-5 min-h-[40vh] lg:min-h-0 overflow-hidden">
           <img
             src="/Assets_Website/Valueprops.png"
             alt="Sommet montagneux — Everest Finance"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
-          {/* Mauve overlay for brand cohesion */}
-          {/* <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: 'var(--gradient-image-overlay)' }}
-          /> */}
-          {/* Right edge fade into white for seamless transition */}
-          {/* <div
-            className="absolute inset-y-0 right-0 w-24 pointer-events-none hidden lg:block"
-            style={{ background: 'linear-gradient(90deg, transparent 0%, var(--pure-white) 100%)' }}
-          /> */}
-          {/* Bottom credential strip over image */}
-          {/* <div className="absolute bottom-0 left-0 right-0 px-8 md:px-12 py-6 z-10">
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[var(--jaune-or)]" />
-              <span className="kicker text-white/70">
-                Agrément CREPMF · SGI/DA/2016/60
-              </span>
-            </div>
-          </div> */}
         </div>
 
         {/* RIGHT PANEL — Content + Stats */}
         <div
           ref={contentRef}
-          className="reveal lg:w-[55%] flex flex-col justify-center px-8 md:px-16 lg:px-20 py-10 lg:py-12 relative bg-[var(--pure-white)]"
+          className="reveal lg:col-span-7 flex flex-col justify-center px-6 md:px-16 lg:px-24 py-16 lg:py-24 relative bg-[var(--pure-white)]"
         >
           {/* Subtle gradient orb */}
           <div
@@ -113,7 +94,7 @@ export const ValueProps: React.FC = () => {
 
           <div className="relative z-10 max-w-2xl">
             {/* Pill badge */}
-            <div className="mb-8">
+            <div className="mb-6">
               <PillBadge>Pourquoi Everest Finance</PillBadge>
             </div>
 
@@ -125,45 +106,19 @@ export const ValueProps: React.FC = () => {
               </span>
             </h2>
 
-            <p className="text-secondary text-base md:text-lg mb-12 max-w-xl">
-              Nous allions expertise de marché, ingénierie financière et accompagnement
-              sur mesure pour créer de la valeur durable.
+            <p className="text-secondary text-base md:text-lg mb-16 max-w-xl font-light">
+              SGI agréée CREPMF (n° SGI/DA/2016/60), nous appuyons nos équipes sur +500&nbsp;Mds F CFA levés et
+              +200&nbsp;Mds F CFA traités en exécution de marché, avec un accompagnement sur mesure.
             </p>
 
             {/* Stats row */}
-            <div className="flex flex-col pb-12">
+            <div className="flex flex-col">
               {stats.map((s, i) => (
-                <div key={s.label} className={i < stats.length - 1 ? 'pb-6 mb-6 border-b border-[var(--mauve-10)]' : ''}>
+                <div key={s.label} className={i < stats.length - 1 ? 'pb-8 mb-8 border-b border-[var(--mauve-10)]' : ''}>
                   <AnimatedStat {...s} delay={i * 180} />
                 </div>
               ))}
             </div>
-
-            {/* Three pillars */}
-            {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
-              {[
-                { label: 'Sécurité', sub: 'Agrément CREPMF', icon: 'shield' },
-                { label: 'Accompagnement', sub: 'Conseiller dédié', icon: 'users' },
-                { label: 'Performance', sub: 'Recherche indépendante', icon: 'trending-up' },
-              ].map((p) => (
-                <div
-                  key={p.label}
-                  className="flex flex-col gap-3 group"
-                >
-                  <div className="w-10 h-10 rounded-full border border-[var(--mauve-20)] flex items-center justify-center bg-[var(--mauve-05)] transition-colors duration-300 group-hover:border-[var(--mauve)] group-hover:bg-[var(--mauve-10)]">
-                    <span className="w-2 h-2 rounded-full bg-[var(--mauve)] transition-transform duration-300 group-hover:scale-150" />
-                  </div>
-                  <div>
-                    <h4 className="font-primary font-semibold text-[var(--mauve)] text-base mb-1">
-                      {p.label}
-                    </h4>
-                    <p className="font-primary font-light text-sm text-[var(--night-60)]">
-                      {p.sub}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

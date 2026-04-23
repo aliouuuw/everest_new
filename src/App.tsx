@@ -32,7 +32,7 @@ function App() {
       <CTA
         scheme="ivory"
         secondaryHref="https://everest-account-opening.vercel.app/new-home"
-        secondaryLabel={"Découvrir votre profil d'investisseur"}
+        secondaryLabel="Évaluer mon profil d'investisseur"
       />
       <FAQ />
     </>

@@ -329,16 +329,8 @@ h1, h2 {
   }
 }
 
-@keyframes tickerScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll {
+/* Horizontal marquee — shared by ticker + trust strip (duration differs per class) */
+@keyframes marquee-translate {
   0% {
     transform: translateX(0);
   }
@@ -349,16 +341,16 @@ h1, h2 {
 
 /* Stock Ticker Animations */
 .ticker-scroll {
-  animation: tickerScroll 45s linear infinite;
+  animation: marquee-translate 45s linear infinite;
 }
 
 .ticker-scroll-paused {
-  animation: tickerScroll 45s linear infinite;
+  animation: marquee-translate 45s linear infinite;
   animation-play-state: paused;
 }
 
 .animate-scroll {
-  animation: scroll 60s linear infinite;
+  animation: marquee-translate 60s linear infinite;
 }
 
 /* Typography Classes */
@@ -614,6 +606,89 @@ h1, h2 {
   box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
+/*
+ * Landing CTA row — gold / mauve pill with trailing disc.
+ * Consolidates duplicate inline styles in CTA.tsx.
+ */
+.btn-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  transition: all 500ms;
+  cursor: pointer;
+  font-family: var(--font-primary);
+}
+
+@media (min-width: 640px) {
+  .btn-cta-pill {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+
+.btn-cta-pill__label {
+  position: relative;
+  overflow: hidden;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  transition: color 500ms;
+}
+
+.btn-cta-pill__trail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pure-white);
+  border-radius: 9999px;
+  padding: 0.5rem;
+  transition: transform 500ms;
+}
+
+.btn-cta-pill:hover .btn-cta-pill__trail {
+  transform: translateX(2px);
+}
+
+.btn-cta-pill--gold {
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
+}
+
+.btn-cta-pill--gold .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--gold:hover {
+  background: transparent;
+}
+
+.btn-cta-pill--gold:hover .btn-cta-pill__label {
+  color: var(--jaune-or);
+}
+
+.btn-cta-pill--mauve {
+  border-color: var(--mauve);
+  background: var(--mauve);
+}
+
+.btn-cta-pill--mauve .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--mauve:hover {
+  background: transparent;
+}
+
+.btn-cta-pill--mauve:hover .btn-cta-pill__label {
+  color: var(--mauve);
+}
+
 /* Card Styles */
 .stat-card {
   @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--mauve)]/10 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/10 hover:border-[var(--mauve)]/25;
@@ -785,12 +860,12 @@ h1, h2 {
 }
 
 /* --- Scroll Reveal Utilities --- */
-.reveal { opacity: 0; transform: translateY(18px); filter: blur(8px); }
-.reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); transition: opacity 700ms var(--ease-out-cubic), transform 700ms var(--ease-out-cubic), filter 700ms var(--ease-out-cubic); }
+.reveal { opacity: 0; transform: translateY(60px); filter: blur(12px); }
+.reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); transition: opacity 1000ms cubic-bezier(0.32, 0.72, 0, 1), transform 1000ms cubic-bezier(0.32, 0.72, 0, 1), filter 1000ms cubic-bezier(0.32, 0.72, 0, 1); }
 
-.reveal-stagger > * { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+.reveal-stagger > * { opacity: 0; transform: translateY(40px); filter: blur(8px); }
 .reveal-stagger.in > * { opacity: 1; transform: translateY(0); filter: blur(0); }
-.reveal-stagger.in > * { transition: opacity 650ms var(--ease-out-cubic), transform 650ms var(--ease-out-cubic), filter 650ms var(--ease-out-cubic); }
+.reveal-stagger.in > * { transition: opacity 900ms cubic-bezier(0.32, 0.72, 0, 1), transform 900ms cubic-bezier(0.32, 0.72, 0, 1), filter 900ms cubic-bezier(0.32, 0.72, 0, 1); }
 .reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
 .reveal-stagger.in > *:nth-child(2) { transition-delay: 120ms; }
 .reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }

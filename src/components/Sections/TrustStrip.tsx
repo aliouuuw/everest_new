@@ -1,6 +1,6 @@
 import { useReveal } from '../Hooks/useReveal';
 
-const TRUST_NAMES = ['BRVM', 'UEMOA-Titres', 'AFRICA50', 'SFI', 'Proparco'] as const;
+const TRUST_NAMES = ['BRVM', 'UEMOA-Titres', 'AFRICA50', 'SFI', 'Proparco', 'BOAD', 'BCEAO'];
 
 /**
  * Full-bleed band with institutional partner names, centered.
@@ -12,35 +12,27 @@ export const TrustStrip: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal w-full border-b border-[var(--mauve-10)]/60 bg-[var(--pure-white)]/80"
+      className="reveal w-full border-y border-[var(--mauve-10)] bg-[var(--summit-ivory)] overflow-hidden"
       aria-label="Écosystème & partenaires institutionnels"
     >
-      <div className="mx-auto w-full max-w-[min(100%,1400px)] px-6 py-8 text-center md:px-16 md:py-10 lg:px-24">
-        <div className="mb-5 flex w-full items-center justify-center gap-3">
-          <span
-            className="h-px w-6 shrink-0 sm:w-8"
-            style={{ background: 'var(--mauve-20)' }}
-            aria-hidden
-          />
-          <span className="kicker text-[10px] tracking-[0.25em] text-[var(--night-40)]">
-            Écosystème &amp; partenaires institutionnels
-          </span>
-          <span
-            className="h-px w-6 shrink-0 sm:w-8"
-            style={{ background: 'var(--mauve-20)' }}
-            aria-hidden
-          />
-        </div>
-        <ul className="flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-10">
-          {TRUST_NAMES.map((name) => (
-            <li
-              key={name}
-              className="font-primary text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--night-40)] opacity-70 grayscale transition-opacity duration-500 hover:opacity-100"
-            >
-              {name}
-            </li>
+      <div className="flex w-full items-center py-6 md:py-8 relative">
+        {/* Gradients to fade the edges of the marquee */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[var(--summit-ivory)] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[var(--summit-ivory)] to-transparent z-10 pointer-events-none" />
+
+        <div className="flex whitespace-nowrap animate-scroll">
+          {/* Duplicate the array twice for smooth infinite scrolling */}
+          {[...TRUST_NAMES, ...TRUST_NAMES, ...TRUST_NAMES, ...TRUST_NAMES].map((name, i) => (
+            <div key={`${name}-${i}`} className="flex items-center">
+              <span
+                className="mx-8 md:mx-12 font-primary text-sm md:text-base font-semibold uppercase tracking-[0.15em] text-[var(--night-40)] opacity-60 transition-opacity duration-500 hover:opacity-100 shrink-0"
+              >
+                {name}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-[var(--mauve-20)]" aria-hidden />
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

@@ -104,7 +104,7 @@ export const Services: React.FC = () => {
         }}
       />
 
-      <div className="relative z-10 border-b border-[var(--mauve-10)] px-8 pb-16 pt-24 md:px-16 md:pt-32 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-[1400px] border-b border-[var(--mauve-10)] px-6 pb-16 pt-24 md:px-16 md:pt-32 lg:px-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <div className="mb-8">
@@ -116,13 +116,13 @@ export const Services: React.FC = () => {
             </h2>
           </div>
           <p className="text-secondary max-w-md text-base md:text-lg">
-            Quatre expertises complémentaires : titres publics, marché financier régional,
-            structuration &amp; ingénierie, et accompagnement patrimonial.
+            Quatre blocs — titres publics, BRVM, structuration et Private Office — pour couvrir l&apos;origination,
+            la distribution et le conseil patrimonial depuis une plateforme unique.
           </p>
         </div>
       </div>
 
-      <div className="relative z-10 px-8 py-10 md:px-16 md:py-12 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 py-10 md:px-16 md:py-12 lg:px-24">
         <div
           ref={gridRef}
           className="reveal-stagger grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
@@ -142,8 +142,6 @@ export const Services: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <div className="h-8 md:h-12" />
     </section>
   );
 };

@@ -82,7 +82,7 @@ export const HeroSectionMountain: React.FC = () => {
             </span>
           </div>
 
-          {/* Headline — Fraunces serif, weight 300 */}
+          {/* Headline — brand sans (--font-primary), matches section luxury-heading scale */}
           <h1 className="mb-6 max-w-4xl">
             <span className="block overflow-hidden">
               <span
@@ -134,24 +134,27 @@ export const HeroSectionMountain: React.FC = () => {
             }}
           >
             EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur
-            du marché financier régional. Nous structurons et facilitons l&apos;accès aux opportunités
-            d&apos;investissement et de financement à travers une approche rigoureuse, sélective et orientée
-            performance.
+            du marché financier régional (SGI agréée CREPMF, n° SGI/DA/2016/60). Nous structurons et facilitons
+            l&apos;accès aux opportunités d&apos;investissement et de financement à travers une approche rigoureuse,
+            sélective et orientée performance.
           </p>
 
-          <div className="hero-cta flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center">
+          <div className="hero-cta flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 items-center">
             <Link
               to="/offres"
-              className="btn-primary-dark inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm w-fit"
+              className="btn-primary-dark inline-flex items-center justify-center pl-7 pr-2 py-2 text-sm w-fit group"
             >
               Accéder aux opportunités
-              <FiArrowRight className="text-sm shrink-0" />
+              <div className="w-9 h-9 rounded-full bg-[var(--night)]/15 flex items-center justify-center ml-4 group-hover:bg-[var(--night)]/25 transition-colors">
+                <FiArrowRight className="text-sm shrink-0" />
+              </div>
             </Link>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium border border-white/30 text-white/95 hover:bg-white/10 hover:border-white/50 transition-all duration-300 w-fit"
+              className="inline-flex items-center justify-center py-3.5 text-sm font-medium text-white/80 hover:text-white transition-colors relative group w-fit"
             >
-              Entrer en relation
+              Nous contacter
+              <span className="absolute bottom-2 left-0 right-0 h-[1px] bg-white/30 group-hover:bg-white transition-colors" />
             </a>
           </div>
 

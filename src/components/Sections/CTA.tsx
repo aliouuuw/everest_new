@@ -20,7 +20,7 @@ export const CTA: React.FC<{
     <>
     <section
       ref={sectionRef}
-      className="reveal relative py-12 md:py-20 overflow-hidden"
+      className="reveal relative py-24 md:py-32 overflow-hidden"
       id="contact"
       style={{ background: 'var(--pure-white)' }}
     >
@@ -43,30 +43,12 @@ export const CTA: React.FC<{
             <div className="mb-8">
               <PillBadge>Prise de contact</PillBadge>
             </div>
-            <h2
-              className="mb-8"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 700,
-                fontSize: 'clamp(2.2rem, 5vw, 4rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-                color: 'var(--mauve)',
-              }}
-            >
-              Prêts à franchir<br />un cap ?
+            <h2 className="luxury-heading mb-8">
+              Prêts à franchir<br />
+              <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
             </h2>
-            <p
-              className="max-w-md"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 300,
-                fontSize: '1.05rem',
-                lineHeight: 1.75,
-                color: 'var(--night-60)',
-              }}
-            >
-              Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.
+            <p className="max-w-md font-primary text-base md:text-lg font-light leading-[1.75] text-[var(--night-60)]">
+              Échangeons sur vos objectifs (rendement, horizon, contraintes réglementaires) et sur la formule la plus adaptée : courtage, conseil ou gestion sous mandat.
             </p>
           </div>
 
@@ -74,32 +56,23 @@ export const CTA: React.FC<{
           <div className="lg:w-2/5 flex flex-col items-start lg:items-end gap-6 w-full">
             {secondaryLabel && (
               <button
+                type="button"
                 onClick={() => setIsProfileOpen(true)}
-                className="group w-full sm:w-auto inline-flex items-center justify-between sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent hover:[&>span]:text-[var(--jaune-or)] transition-all duration-500"
+                className="group btn-cta-pill btn-cta-pill--gold justify-between sm:justify-start"
               >
-                <span
-                  className="relative overflow-hidden text-[12px] tracking-[0.1em] font-extrabold text-[var(--pure-white)]"
-                  style={{ fontFamily: 'var(--font-primary)', }}
-                >
-                  {secondaryLabel}
-                </span>
-                <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
-                  <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
+                <span className="btn-cta-pill__label">{secondaryLabel}</span>
+                <span className="btn-cta-pill__trail" aria-hidden>
+                  <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
                 </span>
               </button>
             )}
             <a
               href={primaryHref}
-              className="group w-full sm:w-auto inline-flex items-center justify-center sm:justify-start gap-8 pl-4 pr-2 py-2 rounded-full border-2 border-[var(--mauve)] bg-[var(--mauve)] hover:bg-transparent transition-all duration-500"
+              className="btn-cta-pill btn-cta-pill--mauve group justify-center sm:justify-start"
             >
-              <span
-                className="text-[12px] tracking-[0.1em] text-white font-extrabold group-hover:text-[var(--mauve)] transition-colors duration-500"
-                style={{ fontFamily: 'var(--font-primary)', }}
-              >
-                {primaryLabel}
-              </span>
-              <span className="bg-[var(--pure-white)] rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
-                <FiArrowRight className="text-lg text-[var(--mauve)] group-hover:translate-x-[1px] transition-all duration-500" />
+              <span className="btn-cta-pill__label">{primaryLabel}</span>
+              <span className="btn-cta-pill__trail" aria-hidden>
+                <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
               </span>
             </a>
 

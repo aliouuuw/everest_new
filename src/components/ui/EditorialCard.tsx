@@ -44,7 +44,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
       className={[
         'group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] p-7 md:p-8 transition-all duration-500',
         isDark
-          ? 'border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.01] shadow-[0_20px_50px_-30px_rgba(0,0,0,0.7)] hover:-translate-y-1'
+          ? 'border border-white/[0.08] bg-[rgba(255,255,255,0.02)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_40px_-20px_rgba(70,29,76,0.5)] hover:-translate-y-1 backdrop-blur-2xl'
           : 'border border-[var(--mauve-10)] bg-[var(--pure-white)] shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)]',
         className,
       ].join(' ')}

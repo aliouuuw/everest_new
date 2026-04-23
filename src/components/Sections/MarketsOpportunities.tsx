@@ -77,8 +77,8 @@ export const MarketsOpportunities: React.FC = () => {
 
           <div className="flex flex-col items-start gap-5 lg:items-end lg:text-right">
             <p className="text-secondary max-w-md text-base md:text-lg">
-              Actualités et analyses sur les marchés de l&apos;UEMOA — suivi des émissions,
-              tendances obligataires et dynamiques régionales.
+              Actualités BRVM, dette souveraine et financement régional : veille structurée pour lire les marchés
+              UEMOA dans la continuité de nos publications et notes.
             </p>
             <Link to="/actualites" className="group inline-flex items-center gap-3">
               <span

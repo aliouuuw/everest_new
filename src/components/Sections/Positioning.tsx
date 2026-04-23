@@ -1,59 +1,31 @@
-import { FiGitBranch, FiGlobe, FiPieChart, FiSend } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
-import { EditorialCard } from '../ui/EditorialCard';
+import { FiGitBranch, FiGlobe, FiSend, FiPieChart } from 'react-icons/fi';
 import { PillBadge } from '../ui';
 
-const PILLARS: Array<{
-  icon: React.ElementType;
-  kicker: string;
-  title: string;
-  bullets: string[];
-  href: string;
-  index: string;
-}> = [
+const PILLARS = [
   {
     icon: FiGitBranch,
-    kicker: 'Structuration',
-    title: "Structuration d'opérations de financement",
-    bullets: [
-      'Montages adaptés aux émetteurs publics et privés',
-      "Coordination des acteurs de la chaîne d'investissement",
-    ],
-    href: '/offres',
-    index: '01',
+    num: '01',
+    title: 'Structuration',
+    desc: "Montages adaptés aux émetteurs publics et privés, coordination des acteurs de la chaîne d'investissement.",
   },
   {
     icon: FiGlobe,
-    kicker: 'Intermédiation',
-    title: 'Marchés secondaires & exécution',
-    bullets: [
-      "Discipline d'exécution sur les titres publics",
-      'Intervention sur le marché financier régional (BRVM)',
-    ],
-    href: '/bourse',
-    index: '02',
+    num: '02',
+    title: 'Intermédiation',
+    desc: "Discipline d'exécution sur les titres publics et intervention sur le marché financier régional (BRVM).",
   },
   {
     icon: FiSend,
-    kicker: 'Distribution',
-    title: "Instruments de dette & de capital",
-    bullets: [
-      "Placement auprès d'investisseurs qualifiés",
-      "Structuration d'offres adaptée aux émetteurs",
-    ],
-    href: '/offres',
-    index: '03',
+    num: '03',
+    title: 'Distribution',
+    desc: "Placement d'instruments de dette et de capital auprès d'investisseurs qualifiés.",
   },
   {
     icon: FiPieChart,
-    kicker: 'Allocation',
-    title: 'Conseil stratégique en allocation',
-    bullets: [
-      'Cadre analytique et objectifs de rendement',
-      "Alignement sur le profil de risque du portefeuille",
-    ],
-    href: 'https://everest-account-opening.vercel.app/new-home',
-    index: '04',
+    num: '04',
+    title: 'Allocation',
+    desc: "Conseil stratégique en allocation, alignement sur le profil de risque du portefeuille.",
   },
 ];
 
@@ -64,8 +36,7 @@ export const Positioning: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden py-24 md:py-32"
-      style={{ background: 'var(--pure-white)' }}
+      className="reveal relative overflow-hidden py-24 md:py-32 bg-[var(--pure-white)]"
     >
       <div
         className="absolute left-0 top-0 h-[60%] w-[45%] pointer-events-none"
@@ -76,8 +47,9 @@ export const Positioning: React.FC = () => {
       />
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
-        <div className="mb-14 flex flex-col gap-8 md:mb-20 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
+        {/* Header — tight full-width block */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-end gap-8 lg:gap-16 mb-16 md:mb-20">
+          <div className="lg:col-span-7">
             <div className="mb-6">
               <PillBadge>Positionnement</PillBadge>
             </div>
@@ -89,30 +61,65 @@ export const Positioning: React.FC = () => {
               </span>
             </h2>
           </div>
-          <p className="text-secondary max-w-md text-base md:text-lg">
-            Dans un environnement de transformation des marchés de capitaux en Afrique de l&apos;Ouest,
-            nous alignons les besoins de financement des émetteurs avec les stratégies d&apos;allocation
-            des investisseurs.
-          </p>
+          <div className="lg:col-span-5">
+            <p className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto">
+              Agréée CREPMF (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les flux entre
+              émetteurs UEMOA et investisseurs institutionnels ou privés qualifiés.
+            </p>
+          </div>
         </div>
 
+        {/* 4 pillars — softened matrix (rounded shell + inner hairlines, matches EditorialCard radius) */}
         <div
-          ref={gridRef}
-          className="reveal-stagger grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+          className="overflow-hidden rounded-[1.25rem] border border-[var(--mauve-10)] bg-[var(--pure-white)]"
+          style={{
+            boxShadow:
+              '0 8px 32px -12px rgba(70,29,76,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
+          }}
         >
-          {PILLARS.map((p) => (
-            <EditorialCard
-              key={p.kicker}
-              variant="light"
-              icon={p.icon}
-              kicker={p.kicker}
-              title={p.title}
-              bullets={p.bullets}
-              href={p.href}
-              linkLabel="En savoir plus"
-              index={p.index}
-            />
-          ))}
+          <div
+            ref={gridRef}
+            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 [&>*]:border-[var(--mauve-10)]"
+          >
+          {PILLARS.map((p, i) => {
+            const Icon = p.icon;
+            return (
+              <div
+                key={p.title}
+                className={[
+                  'group relative flex flex-col pt-8 pb-2 px-0 sm:px-6 lg:px-8 transition-colors duration-500 hover:bg-[var(--mauve-05)]',
+                  i > 0 ? 'border-t' : '',
+                  i % 2 === 1 ? 'sm:border-l' : 'sm:border-l-0',
+                  i >= 2 ? 'sm:border-t' : 'sm:border-t-0',
+                  i > 0 ? 'lg:border-l' : 'lg:border-l-0',
+                  'lg:border-t-0',
+                ].join(' ')}
+              >
+                {/* Top-accent gold line on hover */}
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-[2px] w-0 transition-[width] duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:w-full"
+                  style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
+                />
+
+                {/* Header: numeric + icon */}
+                <div className="flex items-center justify-between mb-10">
+                  <span className="font-primary text-[11px] font-semibold tracking-[0.22em] text-[var(--mauve-40)]">
+                    {p.num}
+                  </span>
+                  <Icon className="text-lg text-[var(--mauve)] opacity-80 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:text-[var(--jaune-or)]" />
+                </div>
+
+                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[var(--mauve)] mb-3 leading-tight">
+                  {p.title}
+                </h3>
+                <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] max-w-xs">
+                  {p.desc}
+                </p>
+              </div>
+            );
+          })}
+          </div>
         </div>
       </div>
     </section>
