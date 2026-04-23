@@ -84,7 +84,7 @@ export const CompoundInterestCalculator: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Capital initial */}
           <div>
-            <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <label className="block mb-2 text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
               $ Capital initial (F CFA)
             </label>
             <input
@@ -98,7 +98,7 @@ export const CompoundInterestCalculator: React.FC = () => {
           {/* Taux d'intérêt annuel */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+              <label className="text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                 % Taux d'intérêt annuel
               </label>
               <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{inputs.annualRate}%</span>
@@ -115,7 +115,7 @@ export const CompoundInterestCalculator: React.FC = () => {
 
           {/* Versement mensuel */}
           <div>
-            <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <label className="block mb-2 text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
               <FiCalendar className="inline mr-1.5 -mt-0.5" size={12} />Versement mensuel (F CFA)
             </label>
             <input
@@ -129,7 +129,7 @@ export const CompoundInterestCalculator: React.FC = () => {
           {/* Durée d'investissement */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+              <label className="text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                 Durée d'investissement
               </label>
               <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{inputs.durationYears} ans</span>
@@ -150,19 +150,19 @@ export const CompoundInterestCalculator: React.FC = () => {
           <div className="pt-6 border-t border-[var(--mauve-10)] mt-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Investissement initial</span>
+                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Investissement initial</span>
                 <span className="font-bold text-lg text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(inputs.initialCapital)}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Total des versements</span>
+                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Total des versements</span>
                 <span className="font-bold text-lg text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(results.totalInvested - inputs.initialCapital)}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Intérêts gagnés</span>
+                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Intérêts gagnés</span>
                 <span className="font-bold text-lg text-[#16a34a]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(results.totalInterest)}</span>
               </div>
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Valeur future</span>
+                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Valeur future</span>
                 <span className="font-bold text-xl text-[#dc2626]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(results.finalValue)}</span>
               </div>
             </div>

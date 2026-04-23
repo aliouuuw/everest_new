@@ -334,7 +334,7 @@ export const ClientPortalPreview: React.FC = () => {
             </span>
           </a>
           <a
-            href="#contact"
+            href="/contact"
             className="group inline-flex items-center gap-3"
           >
             <span

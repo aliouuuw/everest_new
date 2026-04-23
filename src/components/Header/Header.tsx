@@ -23,13 +23,14 @@ interface DropdownItem {
 interface DropdownProps {
   name: string;
   title: string;
+  titleTo?: string;
   items: Array<DropdownItem>;
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen, onOpen, onClose }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -61,21 +62,42 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button
-        className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
-        style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-        aria-expanded={isOpen}
-      >
-        {title}
-        <svg
-          className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {titleTo ? (
+        <Link
+          to={titleTo}
+          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          {title}
+          <svg
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </Link>
+      ) : (
+        <button
+          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
+        >
+          {title}
+          <svg
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      )}
 
       {isOpen && (
         <div className="absolute top-full left-0 mt-4 w-64 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
@@ -167,10 +189,10 @@ export const Header: React.FC = () => {
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
   const expertisesItems: Array<DropdownItem> = [
-    { label: 'Marché des Titres Publics', to: '/expertises/marche-titres-publics' },
-    { label: 'Marché Financier Régional (BRVM)', to: '/bourse' },
-    { label: 'Structuration & Ingénierie', to: '/ingenieurie-financiere' },
-    { label: 'Private Office', to: '/expertises/private-office' },
+    { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
+    { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
+    { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
+    { label: 'Private Office', to: '/expertises', hash: 'private-office' },
   ];
 
   const marchesItems: Array<DropdownItem> = [
@@ -239,6 +261,7 @@ export const Header: React.FC = () => {
           <Dropdown
             name="expertises"
             title="Expertises"
+            titleTo="/expertises"
             items={expertisesItems}
             isOpen={openDropdown === 'expertises'}
             onOpen={openDropdownByName}

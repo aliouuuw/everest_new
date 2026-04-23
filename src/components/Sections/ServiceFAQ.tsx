@@ -150,7 +150,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
                   <div className="font-primary font-bold text-lg text-[var(--night)] mb-1">Vous avez d'autres questions ?</div>
                   <div className="text-sm text-[rgba(10,10,10,0.6)] mb-6 font-medium">Notre équipe est là pour vous accompagner</div>
                   <a
-                    href="#contact"
+                    href="/contact"
                     className="btn-primary inline-flex text-[10px] font-bold tracking-[0.2em] uppercase rounded-full"
                   >
                     Nous contacter

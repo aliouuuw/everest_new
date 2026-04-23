@@ -18,10 +18,10 @@ const societeLinks: Array<FooterLink> = [
 ];
 
 const expertisesLinks: Array<FooterLink> = [
-  { label: 'Marché des Titres Publics', to: '/expertises/marche-titres-publics' },
-  { label: 'Marché Financier Régional (BRVM)', to: '/bourse' },
-  { label: 'Structuration & Ingénierie', to: '/ingenieurie-financiere' },
-  { label: 'Private Office', to: '/expertises/private-office' },
+  { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
+  { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
+  { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
+  { label: 'Private Office', to: '/expertises', hash: 'private-office' },
 ];
 
 const marchesLinks: Array<FooterLink> = [

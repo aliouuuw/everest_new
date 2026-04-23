@@ -42,6 +42,8 @@ import { Settings } from './routes/admin/Settings'
 import { AuthPage } from './routes/AuthPage'
 import { ActualitesPage } from './routes/ActualitesPage'
 import { ArticlePage } from './routes/ArticlePage'
+import { ContactPage } from './routes/ContactPage'
+import { ExpertisesPage } from './routes/ExpertisesPage'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
@@ -111,10 +113,10 @@ const insightsRedirectRoute = createRoute({
   component: redirectTo('/publications'),
 })
 
-const contactRedirectRoute = createRoute({
+const contactRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/contact',
-  component: redirectTo('/#contact'),
+  component: ContactPage,
 })
 
 const faqRoute = createRoute({
@@ -145,28 +147,34 @@ const ibRoute = createRoute({
   component: InvestmentBankingPage,
 })
 
+const expertisesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises',
+  component: ExpertisesPage,
+})
+
 const expertiseMtpRedirectRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/expertises/marche-titres-publics',
-  component: redirectTo('/marche-capitaux'),
+  component: redirectTo('/expertises#marche-titres-publics'),
 })
 
 const expertiseBrvmRedirectRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/expertises/marche-financier-regional',
-  component: redirectTo('/bourse'),
+  component: redirectTo('/expertises#marche-financier-regional'),
 })
 
 const expertiseEngineeringRedirectRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/expertises/ingenierie-financiere',
-  component: redirectTo('/ingenieurie-financiere'),
+  component: redirectTo('/expertises#ingenierie-financiere'),
 })
 
 const expertisePrivateOfficeRedirectRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/expertises/private-office',
-  component: redirectTo('/services'),
+  component: redirectTo('/expertises#private-office'),
 })
 
 const mandateRoute = createRoute({
@@ -317,11 +325,12 @@ const routeTree = rootRoute.addChildren([
   publicationsRoute,
   publicationRoute,
   insightsRedirectRoute,
-  contactRedirectRoute,
+  contactRoute,
   faqRoute,
   ceoRoute,
   capitalMarketsRoute,
   ibRoute,
+  expertisesRoute,
   expertiseMtpRedirectRoute,
   expertiseBrvmRedirectRoute,
   expertiseEngineeringRedirectRoute,

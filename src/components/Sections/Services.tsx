@@ -19,7 +19,7 @@ const services: Array<{
       'Émissions souveraines & stratégie de taux',
       'MTP UEMAO et pilotage de sensibilité',
     ],
-    href: '/marche-capitaux',
+    href: '/expertises#marche-titres-publics',
     index: 'I',
   },
   {
@@ -30,7 +30,7 @@ const services: Array<{
       'Actions & obligations sur place',
       "Intermédiation & conseil d'exécution",
     ],
-    href: '/bourse',
+    href: '/expertises#marche-financier-regional',
     index: 'II',
   },
   {
@@ -41,7 +41,7 @@ const services: Array<{
       "Solutions sur mesure pour l'émetteur",
       'Levées, financement & accompagnement UEMOA',
     ],
-    href: '/ingenieurie-financiere',
+    href: '/expertises#ingenierie-financiere',
     index: 'III',
   },
   {
@@ -52,7 +52,7 @@ const services: Array<{
       "Allocation & vision patrimoniale long terme",
       'Conseil sur mesure pour profils exigeants',
     ],
-    href: '/gestion-sous-mandat',
+    href: '/expertises#private-office',
     index: 'IV',
   },
 ];

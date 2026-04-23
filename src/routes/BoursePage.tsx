@@ -436,21 +436,16 @@ export const BoursePage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] min-h-screen font-primary">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-24 md:py-32 border-b border-black/10 bg-[var(--mauve)]">
+      <section ref={heroRef} className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
         <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
-                  BRVM — Marché Actions
-                </span>
-              </div>
-              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
                 Cours Actions Temps Réel
               </h1>
             </div>
-            <div className="lg:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-8 border-l-2 border-[var(--jaune-or)] pl-6">
+            <div className="lg:col-span-4">
+              <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
                 Données de marché en temps réel, cours et volumes de transaction BRVM.
               </p>
               {/* Market Status Indicator */}

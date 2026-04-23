@@ -121,11 +121,12 @@ export const HeroSectionMountain: React.FC = () => {
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
-                  fontWeight: 700,
-                  fontSize: 'clamp(2.125rem, 4.2vw + 1.1rem, 3.85rem)',
+                  fontWeight: 800,
+                  fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)',
                   lineHeight: 1.04,
                   letterSpacing: '-0.03em',
                   color: 'var(--pure-white)',
+                  textShadow: '0 3px 8px rgba(0,0,0,0.4)',
                 }}
               >
                 Accès stratégique aux marchés financiers
@@ -136,11 +137,12 @@ export const HeroSectionMountain: React.FC = () => {
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
-                  fontWeight: 700,
-                  fontSize: 'clamp(2.125rem, 4.2vw + 1.1rem, 3.85rem)',
+                  fontWeight: 800,
+                  fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)',
                   lineHeight: 1.04,
                   letterSpacing: '-0.03em',
                   color: 'var(--jaune-or)',
+                  textShadow: '0 3px 8px rgba(0,0,0,0.4)',
                 }}
               >
                 de l&apos;UEMOA
@@ -160,10 +162,11 @@ export const HeroSectionMountain: React.FC = () => {
             className="hero-body mb-9 sm:mb-10 mx-auto max-w-[60ch] text-pretty"
             style={{
               fontFamily: 'var(--font-primary)',
-              fontWeight: 400,
-              fontSize: 'clamp(1rem, 0.35vw + 0.9rem, 1.125rem)',
-              lineHeight: 1.7,
-              color: 'color-mix(in srgb, var(--pure-white) 78%, var(--mauve) 22%)',
+              fontWeight: 500,
+              fontSize: 'clamp(1.0625rem, 0.4vw + 0.95rem, 1.2rem)',
+              lineHeight: 1.65,
+              color: 'var(--pure-white)',
+              textShadow: '0 1px 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)',
             }}
           >
             EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur
@@ -175,20 +178,21 @@ export const HeroSectionMountain: React.FC = () => {
           <div className="hero-cta flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-5 items-stretch sm:items-center justify-center w-full sm:w-auto">
             <Link
               to="/offres"
-              className="btn-primary-dark inline-flex min-h-[3rem] min-w-[min(100%,12rem)] sm:min-w-0 items-center justify-center pl-7 pr-2 py-2.5 text-sm w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
+              className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
             >
-              <span className="font-medium tracking-tight">Accéder aux opportunités</span>
-              <div className="ml-3 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-4">
-                <FiArrowRight className="text-sm shrink-0" aria-hidden />
+              <span className="font-semibold tracking-tight">Accéder aux opportunités</span>
+              <div className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-5">
+                <FiArrowRight className="text-base shrink-0" aria-hidden />
               </div>
             </Link>
             <a
-              href="#contact"
-              className="group inline-flex min-h-[3rem] items-center justify-center py-3 text-sm font-medium sm:min-h-0 sm:py-3.5 touch-manipulation transition-colors duration-200 text-[color-mix(in_srgb,var(--pure-white)_90%,var(--mauve)_10%)] hover:text-white relative w-full sm:w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 rounded-sm"
+              href="/contact"
+              className="group inline-flex min-h-[3.75rem] items-center justify-center px-6 py-4 text-base font-semibold touch-manipulation transition-colors duration-200 text-white hover:text-white relative w-full sm:w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 rounded-sm"
+              style={{ textShadow: '0 2px 5px rgba(0,0,0,0.35)' }}
             >
               Nous contacter
               <span
-                className="pointer-events-none absolute bottom-2.5 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/45 to-transparent group-hover:via-white/90"
+                className="pointer-events-none absolute bottom-3 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent group-hover:via-white"
                 aria-hidden
               />
             </a>

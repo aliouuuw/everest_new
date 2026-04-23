@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiArrowDown, FiArrowRight, FiTarget, FiTrendingUp, FiPercent, FiDollarSign, FiBookOpen, FiInfo, FiCheck } from 'react-icons/fi'
+import { FiArrowRight, FiTarget, FiTrendingUp, FiPercent, FiDollarSign, FiBookOpen, FiInfo, FiCheck } from 'react-icons/fi'
 import { CompoundInterestCalculator } from '../components/InvestorProfile/CompoundInterestCalculator'
 import { DividendCalculator } from '../components/InvestorProfile/DividendCalculator'
 import { InvestorProfileInline } from '../components/InvestorProfile/InvestorProfileInline'
@@ -68,36 +68,27 @@ export const SimulateurPage: React.FC = () => {
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
-      {/* ─── 1. Hero — Mauve Editorial (matches Bourse / Services pages) ─── */}
-      <section className="relative flex items-end pb-20 pt-40 border-b border-black/10 min-h-[60vh] bg-[var(--mauve)]">
+      {/* ─── 1. Hero — Mauve Banner (matches Bourse / Contact / Expertises) ─── */}
+      <section className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
         <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
             <div className="md:col-span-8">
-              <div className="flex items-center gap-4 mb-12">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)]">
-                  Outils — Investisseurs
-                </span>
-              </div>
-              <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--pure-white)]">
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
                 Outils Investisseurs.
               </h1>
             </div>
 
-            <div className="md:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-white/70 font-light mb-10 border-l-2 border-[var(--jaune-or)] pl-6">
+            <div className="md:col-span-4">
+              <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
                 Utilisez nos outils pour optimiser vos décisions d'investissement sur la BRVM.
               </p>
-              <a href="#outils" className="btn-primary-dark group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
-                <span>Découvrir les outils</span>
-                <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
-              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── 2. Tab Navigation ─── */}
-      <div id="outils" className="bg-[var(--pure-white)] border-b border-black/10 sticky top-[72px] z-30">
+      <div id="outils" className="bg-[var(--pure-white)] border-b border-black/10 sticky top-[64px] z-30">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           <div className="flex justify-center overflow-x-auto no-scrollbar py-4 gap-2 md:gap-4">
             {TABS.map((tab) => {
@@ -125,7 +116,7 @@ export const SimulateurPage: React.FC = () => {
       </div>
 
       {/* ─── 3. Tool Content ─── */}
-      <section className="py-16 md:py-24">
+      <section className="py-6 md:py-8">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12">
           {/* White card container */}
           <div className="bg-[var(--pure-white)] rounded-2xl border border-black/10 shadow-sm overflow-hidden">
@@ -136,10 +127,10 @@ export const SimulateurPage: React.FC = () => {
                   {meta.icon}
                 </div>
                 <div>
-                  <h2 className="font-bold text-lg md:text-xl text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <h2 className="font-bold text-lg md:text-xl uppercase tracking-[0.08em] text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
                     {meta.title}
                   </h2>
-                  <p className="text-sm text-[var(--night-60)] mt-1" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <p className="text-base text-[var(--night-60)] mt-1" style={{ fontFamily: 'var(--font-primary)' }}>
                     {meta.subtitle}
                   </p>
                 </div>
@@ -161,13 +152,13 @@ export const SimulateurPage: React.FC = () => {
                   <div className="bg-[var(--mauve-05)] rounded-xl p-6 border border-[var(--mauve-10)]">
                     <div className="flex items-center gap-2 mb-4">
                       <FiBookOpen size={18} className="text-[var(--mauve)]" />
-                      <h3 className="font-bold text-sm text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                      <h3 className="font-bold text-base uppercase tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         {tips.title}
                       </h3>
                     </div>
                     <ul className="space-y-3">
                       {tips.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                        <li key={i} className="flex items-start gap-3 text-base text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
                           <FiCheck size={14} className="text-[var(--jaune-or)] mt-0.5 shrink-0" />
                           <span>{item}</span>
                         </li>
@@ -179,11 +170,11 @@ export const SimulateurPage: React.FC = () => {
                   <div className="mt-4 bg-[var(--summit-ivory)] rounded-xl p-6 border border-[var(--mauve-10)]">
                     <div className="flex items-center gap-2 mb-3">
                       <FiInfo size={16} className="text-[var(--night-40)]" />
-                      <span className="text-xs font-semibold uppercase tracking-wider text-[var(--night-40)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                      <span className="text-base font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         Note importante
                       </span>
                     </div>
-                    <p className="text-xs text-[var(--night-60)] leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
+                    <p className="text-sm text-[var(--night-60)] leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
                       Ces outils sont fournis à titre indicatif. Les performances passées ne garantissent pas les performances futures. Consultez un conseiller pour des recommandations personnalisées.
                     </p>
                   </div>

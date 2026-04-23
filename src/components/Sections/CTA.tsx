@@ -11,7 +11,7 @@ export const CTA: React.FC<{
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string | null;
-}> = ({ primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryLabel = 'Découvrir nos offres' }) => {
+}> = ({ primaryHref = '/contact', primaryLabel = 'Nous contacter', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
