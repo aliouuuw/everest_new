@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { FaEdit, FaEye, FaImages, FaNewspaper, FaPlus, FaUsers } from 'react-icons/fa';
+import { FaEdit, FaEye, FaGlobe, FaImages, FaNewspaper, FaPlus, FaUsers } from 'react-icons/fa';
 import { useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { Sparkline } from '@/components/CMS/Shared';
@@ -33,6 +33,13 @@ export const AdminDashboard = () => {
   };
 
   const quickActions = [
+    {
+      title: 'Contenu marketing',
+      description: 'Textes des pages vitrine (hero, sections, CTA)',
+      icon: FaGlobe,
+      href: '/admin/site-content',
+      color: 'bg-[var(--mauve)] hover:bg-[var(--mauve)]',
+    },
     {
       title: 'Create Publication',
       description: 'Add a new publication or blog post',

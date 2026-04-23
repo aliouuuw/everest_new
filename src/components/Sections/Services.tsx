@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { FiBarChart2, FiBriefcase, FiGlobe, FiLayers } from 'react-icons/fi';
 import { EditorialCard } from '../ui/EditorialCard';
 import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 const services: Array<{
   icon: React.ElementType;
@@ -108,17 +109,21 @@ export const Services: React.FC = () => {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <div className="mb-8">
-              <PillBadge>Nos expertises</PillBadge>
+              <PillBadge><EditableText id="home.services.badge" as="span">Nos expertises</EditableText></PillBadge>
             </div>
             <h2 className="luxury-heading">
-              Nos expertises —{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>marchés &amp; patrimoine.</span>
+              <EditableText id="home.services.title" as="span">Nos expertises —</EditableText>{' '}
+              <EditableText id="home.services.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>marchés &amp; patrimoine.</EditableText>
             </h2>
           </div>
-          <p className="text-secondary max-w-md text-base md:text-lg">
-            Quatre blocs — titres publics, BRVM, structuration et Private Office — pour couvrir l&apos;origination,
+          <EditableText
+            id="home.services.intro"
+            as="p"
+            className="text-secondary max-w-md text-base md:text-lg"
+          >
+            Quatre blocs — titres publics, BRVM, structuration et Private Office — pour couvrir l'origination,
             la distribution et le conseil patrimonial depuis une plateforme unique.
-          </p>
+          </EditableText>
         </div>
       </div>
 

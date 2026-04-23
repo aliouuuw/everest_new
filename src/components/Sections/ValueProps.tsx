@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FaCalendarAlt, FaChartLine, FaHandshake } from 'react-icons/fa';
 import { useReveal } from "../Hooks/useReveal";
 import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 const stats = [
   { prefix: '', value: 10,  suffix: '',  label: "ans d'existence",                                                                                                          icon: FaCalendarAlt },
@@ -95,21 +96,29 @@ export const ValueProps: React.FC = () => {
           <div className="relative z-10 max-w-2xl">
             {/* Pill badge */}
             <div className="mb-6">
-              <PillBadge>Pourquoi Everest Finance</PillBadge>
+              <PillBadge><EditableText id="home.valueProps.badge" as="span">Pourquoi Everest Finance</EditableText></PillBadge>
             </div>
 
             {/* Heading */}
             <h2 className="luxury-heading mb-6">
-              Exécution rigoureuse,<br />
-              <span style={{ color: 'var(--jaune-or)' }}>
+              <EditableText id="home.valueProps.title" as="span">Exécution rigoureuse,</EditableText><br />
+              <EditableText
+                id="home.valueProps.titleAccent"
+                as="span"
+                style={{ color: 'var(--jaune-or)' }}
+              >
                 confiance durable.
-              </span>
+              </EditableText>
             </h2>
 
-            <p className="text-secondary text-base md:text-lg mb-16 max-w-xl font-light">
-              SGI agréée CREPMF (n° SGI/DA/2016/60), nous appuyons nos équipes sur +500&nbsp;Mds F CFA levés et
-              +200&nbsp;Mds F CFA traités en exécution de marché, avec un accompagnement sur mesure.
-            </p>
+            <EditableText
+              id="home.valueProps.intro"
+              as="p"
+              className="text-secondary text-base md:text-lg mb-16 max-w-xl font-light"
+            >
+              SGI agréée CREPMF (n° SGI/DA/2016/60), nous appuyons nos équipes sur +500 Mds F CFA levés et
+              +200 Mds F CFA traités en exécution de marché, avec un accompagnement sur mesure.
+            </EditableText>
 
             {/* Stats row */}
             <div className="flex flex-col">

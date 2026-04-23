@@ -229,4 +229,16 @@ export default defineSchema({
     .index("by_email", ["email"])
     .index("by_profile_type", ["profileType"])
     .index("by_created_at", ["createdAt"]),
+
+  // Site Content Table (Light CMS overrides for marketing pages)
+  siteContent: defineTable({
+    contentId: v.string(),                   // e.g. "home.hero.title"
+    pageKey: v.string(),                     // e.g. "home"
+    type: v.literal("text"),                 // plain text only in v1
+    value: v.string(),
+    updatedBy: v.id("users"),
+    updatedAt: v.number(),
+  })
+    .index("by_contentId", ["contentId"])
+    .index("by_page", ["pageKey"]),
 });

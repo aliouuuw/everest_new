@@ -39,6 +39,7 @@ import { MediaManagement } from './routes/admin/MediaManagement'
 import { UserManagement } from './routes/admin/UserManagement'
 import UserFormPage from './routes/admin/UserFormPage'
 import { Settings } from './routes/admin/Settings'
+import { SiteContentPage } from './routes/admin/SiteContentPage'
 import { AuthPage } from './routes/AuthPage'
 import { ActualitesPage } from './routes/ActualitesPage'
 import { ArticlePage } from './routes/ArticlePage'
@@ -54,6 +55,16 @@ const redirectTo = (target: string) => () => {
 
 const rootRoute = createRootRoute({
   component: Layout,
+  validateSearch: (raw: Record<string, unknown>) => {
+    const out: { edit?: boolean; panel?: boolean } = {}
+    if (raw.edit === true || raw.edit === 'true' || raw.edit === 1 || raw.edit === '1') {
+      out.edit = true
+    }
+    if (raw.panel === true || raw.panel === 'true' || raw.panel === 1 || raw.panel === '1') {
+      out.panel = true
+    }
+    return out
+  },
 })
 
 const indexRoute = createRoute({
@@ -283,6 +294,12 @@ const adminSettingsRoute = createRoute({
   component: Settings,
 })
 
+const adminSiteContentRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/site-content',
+  component: SiteContentPage,
+})
+
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
@@ -345,6 +362,7 @@ const routeTree = rootRoute.addChildren([
     adminNewUserRoute,
     adminEditUserRoute,
     adminSettingsRoute,
+    adminSiteContentRoute,
   ]),
   authRoute,
   notFoundRoute,

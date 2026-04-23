@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from '@tanstack/react-router';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
+import { EditableText } from '../../cms';
 
 export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -74,18 +75,22 @@ export const HeroSectionMountain: React.FC = () => {
 
           {/* Kicker */}
           <div className="hero-kicker mb-8">
-            <span
+            <EditableText
+              id="home.hero.kicker"
+              as="span"
               className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
               style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--jaune-or)' }}
             >
               Société de Gestion et d'Intermédiation — Dakar
-            </span>
+            </EditableText>
           </div>
 
           {/* Headline — brand sans (--font-primary), matches section luxury-heading scale */}
           <h1 className="mb-6 max-w-4xl">
             <span className="block overflow-hidden">
-              <span
+              <EditableText
+                id="home.hero.title"
+                as="span"
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
@@ -97,10 +102,12 @@ export const HeroSectionMountain: React.FC = () => {
                 }}
               >
                 Accès stratégique aux marchés financiers
-              </span>
+              </EditableText>
             </span>
             <span className="block overflow-hidden">
-              <span
+              <EditableText
+                id="home.hero.titleAccent"
+                as="span"
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
@@ -111,8 +118,8 @@ export const HeroSectionMountain: React.FC = () => {
                   color: 'var(--jaune-or)',
                 }}
               >
-                de l&apos;UEMOA
-              </span>
+                de l'UEMOA
+              </EditableText>
             </span>
           </h1>
 
@@ -123,7 +130,9 @@ export const HeroSectionMountain: React.FC = () => {
           />
 
           {/* Subhead */}
-          <p
+          <EditableText
+            id="home.hero.subtitle"
+            as="p"
             className="hero-body max-w-2xl mb-10"
             style={{
               fontFamily: 'var(--font-primary)',
@@ -133,18 +142,18 @@ export const HeroSectionMountain: React.FC = () => {
               color: 'rgba(255,255,255,0.6)',
             }}
           >
-            EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur
+            EVEREST Finance est une plateforme d'ingénierie et d'intermédiation financière opérant au cœur
             du marché financier régional (SGI agréée CREPMF, n° SGI/DA/2016/60). Nous structurons et facilitons
-            l&apos;accès aux opportunités d&apos;investissement et de financement à travers une approche rigoureuse,
+            l'accès aux opportunités d'investissement et de financement à travers une approche rigoureuse,
             sélective et orientée performance.
-          </p>
+          </EditableText>
 
           <div className="hero-cta flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 items-center">
             <Link
               to="/offres"
               className="btn-primary-dark inline-flex items-center justify-center pl-7 pr-2 py-2 text-sm w-fit group"
             >
-              Accéder aux opportunités
+              <EditableText id="home.hero.ctaPrimary" as="span">Accéder aux opportunités</EditableText>
               <div className="w-9 h-9 rounded-full bg-[var(--night)]/15 flex items-center justify-center ml-4 group-hover:bg-[var(--night)]/25 transition-colors">
                 <FiArrowRight className="text-sm shrink-0" />
               </div>
@@ -153,7 +162,7 @@ export const HeroSectionMountain: React.FC = () => {
               href="#contact"
               className="inline-flex items-center justify-center py-3.5 text-sm font-medium text-white/80 hover:text-white transition-colors relative group w-fit"
             >
-              Nous contacter
+              <EditableText id="home.hero.ctaSecondary" as="span">Nous contacter</EditableText>
               <span className="absolute bottom-2 left-0 right-0 h-[1px] bg-white/30 group-hover:bg-white transition-colors" />
             </a>
           </div>

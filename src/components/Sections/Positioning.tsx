@@ -1,6 +1,7 @@
 import { useReveal } from '../Hooks/useReveal';
 import { FiGitBranch, FiGlobe, FiSend, FiPieChart } from 'react-icons/fi';
 import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 const PILLARS = [
   {
@@ -51,21 +52,29 @@ export const Positioning: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-end gap-8 lg:gap-16 mb-16 md:mb-20">
           <div className="lg:col-span-7">
             <div className="mb-6">
-              <PillBadge>Positionnement</PillBadge>
+              <PillBadge><EditableText id="home.positioning.badge" as="span">Positionnement</EditableText></PillBadge>
             </div>
             <h2 className="luxury-heading">
-              Un intermédiaire de référence
+              <EditableText id="home.positioning.title" as="span">Un intermédiaire de référence</EditableText>
               <br />
-              <span style={{ color: 'var(--jaune-or)' }}>
+              <EditableText
+                id="home.positioning.titleAccent"
+                as="span"
+                style={{ color: 'var(--jaune-or)' }}
+              >
                 au service des flux de capitaux régionaux.
-              </span>
+              </EditableText>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto">
+            <EditableText
+              id="home.positioning.intro"
+              as="p"
+              className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto"
+            >
               Agréée CREPMF (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les flux entre
               émetteurs UEMOA et investisseurs institutionnels ou privés qualifiés.
-            </p>
+            </EditableText>
           </div>
         </div>
 

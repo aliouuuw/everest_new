@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 type NewsArticle = {
   title: string;
@@ -65,21 +66,29 @@ export const MarketsOpportunities: React.FC = () => {
         <div className="mb-14 flex flex-col gap-8 md:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <div className="mb-6">
-              <PillBadge>Marchés &amp; opportunités</PillBadge>
+              <PillBadge><EditableText id="home.markets.badge" as="span">Marchés &amp; opportunités</EditableText></PillBadge>
             </div>
             <h2 className="luxury-heading">
-              Des marchés porteurs,{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>
+              <EditableText id="home.markets.title" as="span">Des marchés porteurs,</EditableText>{' '}
+              <EditableText
+                id="home.markets.titleAccent"
+                as="span"
+                style={{ color: 'var(--jaune-or)' }}
+              >
                 une lecture structurée des opportunités.
-              </span>
+              </EditableText>
             </h2>
           </div>
 
           <div className="flex flex-col items-start gap-5 lg:items-end lg:text-right">
-            <p className="text-secondary max-w-md text-base md:text-lg">
+            <EditableText
+              id="home.markets.intro"
+              as="p"
+              className="text-secondary max-w-md text-base md:text-lg"
+            >
               Actualités BRVM, dette souveraine et financement régional : veille structurée pour lire les marchés
               UEMOA dans la continuité de nos publications et notes.
-            </p>
+            </EditableText>
             <Link to="/actualites" className="group inline-flex items-center gap-3">
               <span
                 className="relative overflow-hidden text-[10px] tracking-[0.2em] uppercase"
@@ -89,7 +98,7 @@ export const MarketsOpportunities: React.FC = () => {
                   color: 'var(--night-60)',
                 }}
               >
-                Voir toutes les actualités
+                <EditableText id="home.markets.linkLabel" as="span">Voir toutes les actualités</EditableText>
                 <span className="absolute bottom-0 left-0 h-[1px] w-full translate-x-[-101%] bg-[var(--mauve)] transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-0" />
               </span>
               <FiArrowRight className="text-xs text-[var(--night-60)] transition-colors duration-500 group-hover:text-[var(--mauve)]" />

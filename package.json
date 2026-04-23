@@ -16,7 +16,9 @@
     "performance": "echo '🚀 Performance optimizations applied!' && echo '📊 Bundle analysis: dist/stats.html' && echo '🔍 Check browser dev tools for performance metrics'",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
-    "cms:dev": "concurrently \"npm run convex:dev\" \"npm run dev\""
+    "cms:dev": "concurrently \"npm run convex:dev\" \"npm run dev\"",
+    "dev:stable": "VITE_DISABLE_HMR=true vite --port 8000",
+    "cms:dev:stable": "concurrently \"npm run convex:dev\" \"npm run dev:stable\""
   },
   "dependencies": {
     "@auth/core": "0.37.0",

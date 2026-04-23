@@ -3,6 +3,7 @@ import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight } from "react-icons/fi";
 import { PillBadge } from '../ui';
 import { InvestorProfileModal } from '../InvestorProfile';
+import { EditableText } from '../../cms';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
@@ -41,15 +42,19 @@ export const CTA: React.FC<{
           {/* Left Side */}
           <div className="lg:w-3/5">
             <div className="mb-8">
-              <PillBadge>Prise de contact</PillBadge>
+              <PillBadge><EditableText id="home.cta.badge" as="span">Prise de contact</EditableText></PillBadge>
             </div>
             <h2 className="luxury-heading mb-8">
-              Prêts à franchir<br />
-              <span style={{ color: 'var(--jaune-or)' }}>un cap ?</span>
+              <EditableText id="home.cta.title" as="span">Prêts à franchir</EditableText><br />
+              <EditableText id="home.cta.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>un cap ?</EditableText>
             </h2>
-            <p className="max-w-md font-primary text-base md:text-lg font-light leading-[1.75] text-[var(--night-60)]">
+            <EditableText
+              id="home.cta.intro"
+              as="p"
+              className="max-w-md font-primary text-base md:text-lg font-light leading-[1.75] text-[var(--night-60)]"
+            >
               Échangeons sur vos objectifs (rendement, horizon, contraintes réglementaires) et sur la formule la plus adaptée : courtage, conseil ou gestion sous mandat.
-            </p>
+            </EditableText>
           </div>
 
           {/* Right Side: Actions */}
@@ -60,7 +65,9 @@ export const CTA: React.FC<{
                 onClick={() => setIsProfileOpen(true)}
                 className="group btn-cta-pill btn-cta-pill--gold justify-between sm:justify-start"
               >
-                <span className="btn-cta-pill__label">{secondaryLabel}</span>
+                <span className="btn-cta-pill__label">
+                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
+                </span>
                 <span className="btn-cta-pill__trail" aria-hidden>
                   <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
                 </span>
@@ -70,7 +77,9 @@ export const CTA: React.FC<{
               href={primaryHref}
               className="btn-cta-pill btn-cta-pill--mauve group justify-center sm:justify-start"
             >
-              <span className="btn-cta-pill__label">{primaryLabel}</span>
+              <span className="btn-cta-pill__label">
+                <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
+              </span>
               <span className="btn-cta-pill__trail" aria-hidden>
                 <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
               </span>
