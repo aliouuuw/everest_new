@@ -1,22 +1,78 @@
-import { useLocation } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 import { FaFacebook, FaLinkedin, FaTiktok } from 'react-icons/fa';
+import type { CSSProperties } from 'react';
+
+type FooterLink = {
+  label: string;
+  to: string;
+  search?: { frequency?: 'hebdomadaire' | 'mensuelle' | 'semestrielle' };
+  hash?: string;
+};
+
+const societeLinks: Array<FooterLink> = [
+  { label: 'À propos', to: '/about' },
+  { label: 'Vision & gouvernance', to: '/about', hash: 'gouvernance' },
+  { label: 'Conformité & agrément', to: '/about', hash: 'conformite' },
+  { label: 'Abécédaire / FAQ', to: '/faq' },
+  { label: 'Contact', to: '/contact' },
+];
+
+const expertisesLinks: Array<FooterLink> = [
+  { label: 'Marché des Titres Publics', to: '/expertises/marche-titres-publics' },
+  { label: 'Marché Financier Régional (BRVM)', to: '/bourse' },
+  { label: 'Structuration & Ingénierie', to: '/ingenieurie-financiere' },
+  { label: 'Private Office', to: '/expertises/private-office' },
+];
+
+const marchesLinks: Array<FooterLink> = [
+  { label: 'Actualités', to: '/actualites' },
+  { label: 'Publications', to: '/publications' },
+];
+
+const autresLinks: Array<FooterLink> = [
+  { label: 'Opportunités en cours', to: '/offres' },
+  { label: 'BRVM / Marché régional', to: '/bourse' },
+  { label: 'Outils investisseur', to: '/outils-investisseur' },
+];
 
 export const Footer = () => {
   const location = useLocation();
 
-  const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
+  const isInAdminorClientPortal =
+    location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
   if (isInAdminorClientPortal) {
     return null;
   }
 
-    const linkStyle: React.CSSProperties = {
+  const linkStyle: CSSProperties = {
     transition: 'color 0.3s',
   };
 
-  const headingStyle: React.CSSProperties = {
+  const headingStyle: CSSProperties = {
     marginBottom: '1.25rem',
   };
+
+  const linkClass =
+    'text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]';
+
+  const renderLinkList = (items: Array<FooterLink>) => (
+    <ul>
+      {items.map((l) => (
+        <li key={`${l.to}-${l.label}`}>
+          <Link
+            to={l.to}
+            {...(l.search ? { search: l.search } : {})}
+            {...(l.hash ? { hash: l.hash } : {})}
+            style={linkStyle}
+            className={linkClass}
+          >
+            {l.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <footer className="relative bg-[var(--mauve)]" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
@@ -28,7 +84,7 @@ export const Footer = () => {
         }}
       />
       <div className="mx-auto max-w-6xl px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
 
           {/* Brand */}
           <div>
@@ -64,39 +120,39 @@ export const Footer = () => {
                 <FaTiktok className="text-sm" />
               </a>
             </div>
+            <div className="mt-8">
+              <Link
+                to="/"
+                style={linkStyle}
+                className={`${linkClass} font-medium`}
+              >
+                Accueil
+              </Link>
+            </div>
           </div>
 
-          {/* Links */}
+          {/* Société */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Liens</div>
-            <ul>
-              {[
-                { label: 'À propos', href: '#about' },
-                { label: 'Publications', href: '#publications' },
-                { label: 'Outils', href: '/outils-investisseur' },
-                { label: 'Abécédaire / FAQ', href: '#faq' },
-              ].map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
-                </li>
-              ))}
-            </ul>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Société</div>
+            {renderLinkList(societeLinks)}
           </div>
 
-          {/* Offres */}
+          {/* Expertises */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Offres & services</div>
-            <ul>
-              {[
-                { label: 'Marché des capitaux', href: '/marche-capitaux' },
-                { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
-                { label: 'Gestion sous mandat', href: '/gestion-sous-mandat' },
-              ].map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]">{l.label}</a>
-                </li>
-              ))}
-            </ul>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Expertises</div>
+            {renderLinkList(expertisesLinks)}
+          </div>
+
+          {/* Marchés & Autres — one column, two groups */}
+          <div className="space-y-10">
+            <div>
+              <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Marchés &amp; opportunités</div>
+              {renderLinkList(marchesLinks)}
+            </div>
+            <div>
+              <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Autres</div>
+              {renderLinkList(autresLinks)}
+            </div>
           </div>
 
           {/* Contact */}
@@ -131,7 +187,7 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} Everest Finance SGI — Numéro d’agrément n° SGI /DA/2016/60
           </span>
           <span>
-            Termes et conditions.        
+            Termes et conditions.
           </span>
           <span>
             Politique de Confidentialite
