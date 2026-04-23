@@ -303,7 +303,7 @@ function generateProfileEmailHtml(lead: {
     
     <div class="footer">
       <p><strong>Everest Finance SGI</strong></p>
-      <p>Agrément CREPMF · SGI/DA/2016/60</p>
+      <p>Agrément AMF-UMOA · SGI/DA/2016/60</p>
       <p style="margin-top: 12px;">
         <a href="https://everest-finance.com">everest-finance.com</a> · 
         <a href="mailto:contact@everest-finance.com">contact@everest-finance.com</a>

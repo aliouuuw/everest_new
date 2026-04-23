@@ -137,7 +137,7 @@ export const ValueProps: React.FC = () => {
               Exécution rigoureuse, <span style={{ color: 'var(--jaune-or)' }}>confiance durable.</span>
             </h2>
             <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
-              SGI agréée CREPMF (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
+              SGI agréée AMF-UMOA (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
               d&apos;exécution et relations institutionnelles au service de nos mandats.
             </p>
 

@@ -218,7 +218,7 @@ export const ContactPage = () => {
                       </a>
                     </InfoRow>
                     <InfoRow icon={FiBriefcase}>
-                      Agrément CREPMF n° SGI/DA/2016/60
+                      Agrément AMF-UMOA n° SGI/DA/2016/60
                     </InfoRow>
                   </ul>
                 </div>

@@ -59,7 +59,7 @@ export const Positioning: React.FC = () => {
           </div>
           <div className="lg:col-span-5">
             <p className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto">
-              Agréée CREPMF (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les flux entre
+              Agréée AMF-UMOA (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les flux entre
               émetteurs UEMOA et investisseurs institutionnels ou privés qualifiés.
             </p>
           </div>

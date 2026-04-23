@@ -5,7 +5,7 @@ A minimalist yet bold landing page for Everest Finance SGI that embodies the com
 
 ## Company Profile
 **Everest Finance, Société de Gestion et d'Intermédiation (SGI)**
-- License: SGI/DA/2016/60 (CREPMF, March 30, 2016)
+- License: SGI/DA/2016/60 (AMF-UMOA, March 30, 2016)
 - Location: 18 Boulevard de la République, Dakar, Sénégal
 - Services: Brokerage (BRVM), Primary issuance, Financial engineering, Asset management
 - Tagline: "Des idées et des valeurs au service de vos ambitions"

@@ -1,7 +1,7 @@
 
 Everest Finance (everestfin.com) — Current Brand & Design Overview
 Core Identity & Tagline
-Based in Dakar, regulated in Senegal and the UEMOA zone as a Société de Gestion et d’Intermédiation (SGI) under license SGI/DA/2016/60 issued by CREPMF on March 30, 2016 
+Based in Dakar, regulated in Senegal and the UEMOA zone as a Société de Gestion et d’Intermédiation (SGI) under license SGI/DA/2016/60 issued by AMF-UMOA on March 30, 2016 
 Everest Finance
 MediaPex
 .

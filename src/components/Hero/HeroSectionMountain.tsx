@@ -170,7 +170,7 @@ export const HeroSectionMountain: React.FC = () => {
             }}
           >
             EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur
-            du marché financier régional (SGI agréée CREPMF, n° SGI/DA/2016/60). Nous structurons et facilitons
+            du marché financier régional (SGI agréée AMF-UMOA, n° SGI/DA/2016/60). Nous structurons et facilitons
             l&apos;accès aux opportunités d&apos;investissement et de financement à travers une approche rigoureuse,
             sélective et orientée performance.
           </p>
