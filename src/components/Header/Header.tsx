@@ -15,7 +15,9 @@ const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-
 
 interface DropdownItem {
   label: string;
-  href: string;
+  to: string;
+  search?: { frequency?: 'hebdomadaire' | 'mensuelle' | 'semestrielle' };
+  hash?: string;
 }
 
 interface DropdownProps {
@@ -80,7 +82,9 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
           {items.map((item, index) => (
             <Link
               key={index}
-              to={item.href}
+              to={item.to}
+              {...(item.search ? { search: item.search } : {})}
+              {...(item.hash ? { hash: item.hash } : {})}
               className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--mauve-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
               style={{ fontFamily: 'var(--font-primary)', }}
             >
@@ -162,17 +166,30 @@ export const Header: React.FC = () => {
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  const societeItems: Array<DropdownItem> = [
-    { label: 'À propos', href: '/about' },
-    { label: 'Actualités', href: '/actualites' },
-    { label: 'Publications', href: '/publications' },
-    { label: 'Abécédaire / FAQ', href: '/faq' },
+  const expertisesItems: Array<DropdownItem> = [
+    { label: 'Marché des Titres Publics', to: '/expertises/marche-titres-publics' },
+    { label: 'Marché Financier Régional (BRVM)', to: '/bourse' },
+    { label: 'Structuration & Ingénierie', to: '/ingenieurie-financiere' },
+    { label: 'Private Office', to: '/expertises/private-office' },
   ];
 
-  const servicesItems: Array<DropdownItem> = [
-    { label: 'Marché des capitaux', href: '/marche-capitaux' },
-    { label: 'Gestion sous mandat', href: '/gestion-sous-mandat' },
-    { label: 'Ingénierie financière', href: '/ingenieurie-financiere' },
+  const marchesItems: Array<DropdownItem> = [
+    { label: 'Actualités', to: '/actualites' },
+    { label: 'Publications', to: '/publications' },
+  ];
+
+  const autresItems: Array<DropdownItem> = [
+    { label: 'Opportunités en cours', to: '/offres' },
+    { label: 'BRVM / Marché régional', to: '/bourse' },
+    { label: 'Outils investisseur', to: '/outils-investisseur' },
+  ];
+
+  const societeItems: Array<DropdownItem> = [
+    { label: 'À propos', to: '/about' },
+    { label: 'Vision & gouvernance', to: '/about', hash: 'gouvernance' },
+    { label: 'Conformité & agrément', to: '/about', hash: 'conformite' },
+    { label: 'Abécédaire / FAQ', to: '/faq' },
+    { label: 'Contact', to: '/contact' },
   ];
 
   // Return null without violating hooks rules
@@ -220,37 +237,31 @@ export const Header: React.FC = () => {
           />
 
           <Dropdown
-            name="services"
-            title="Services"
-            items={servicesItems}
-            isOpen={openDropdown === 'services'}
+            name="expertises"
+            title="Expertises"
+            items={expertisesItems}
+            isOpen={openDropdown === 'expertises'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
 
-          <Link
-            to="/offres"
-            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
-          >
-            Offres
-          </Link>
+          <Dropdown
+            name="marches"
+            title="Marchés & Opportunités"
+            items={marchesItems}
+            isOpen={openDropdown === 'marches'}
+            onOpen={openDropdownByName}
+            onClose={closeDropdownByName}
+          />
 
-          <Link
-            to="/bourse"
-            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
-          >
-            Bourse
-          </Link>
-
-          <Link
-            to="/outils-investisseur"
-            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
-          >
-            Outils
-          </Link>
+          <Dropdown
+            name="autres"
+            title="Autres"
+            items={autresItems}
+            isOpen={openDropdown === 'autres'}
+            onOpen={openDropdownByName}
+            onClose={closeDropdownByName}
+          />
         </nav>
 
         {/* CTA */}
@@ -326,7 +337,9 @@ export const Header: React.FC = () => {
                 {societeItems.map((item, index) => (
                   <Link
                     key={index}
-                    to={item.href}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
                     className="block text-sm transition-colors hover:text-white"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -342,13 +355,15 @@ export const Header: React.FC = () => {
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
               >
-                Services
+                Expertises
               </div>
               <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {servicesItems.map((item, index) => (
+                {expertisesItems.map((item, index) => (
                   <Link
                     key={index}
-                    to={item.href}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
                     className="block text-sm transition-colors hover:text-white"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -359,32 +374,53 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            <Link
-              to="/offres"
-              className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Offres
-            </Link>
+            <div>
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Marchés &amp; Opportunités
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
+                {marchesItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-            <Link
-              to="/bourse"
-              className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Bourse
-            </Link>
-
-            <Link
-              to="/outils-investisseur"
-              className="block text-sm transition-colors hover:text-white"
-              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Outils
-            </Link>
+            <div>
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Autres
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
+                {autresItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
 
             <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
               <a

@@ -46,6 +46,11 @@ import { ArticlePage } from './routes/ArticlePage'
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
 
+const redirectTo = (target: string) => () => {
+  window.location.replace(target)
+  return null
+}
+
 
 const rootRoute = createRootRoute({
   component: Layout,
@@ -66,6 +71,13 @@ const aboutRoute = createRoute({
 const publicationsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications',
+  validateSearch: (raw: Record<string, unknown>) => {
+    const f = raw.frequency
+    if (f === 'hebdomadaire' || f === 'mensuelle' || f === 'semestrielle') {
+      return { frequency: f }
+    }
+    return {}
+  },
   component: PublicationsPage,
 })
 
@@ -73,6 +85,12 @@ const actualitesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/actualites',
   component: ActualitesPage,
+})
+
+const marchesOpportunitesRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/marches-opportunites',
+  component: redirectTo('/actualites'),
 })
 
 const articleRoute = createRoute({
@@ -85,6 +103,18 @@ const publicationRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications/$slug',
   component: PublicationPage,
+})
+
+const insightsRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/insights',
+  component: redirectTo('/publications'),
+})
+
+const contactRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: redirectTo('/#contact'),
 })
 
 const faqRoute = createRoute({
@@ -113,6 +143,30 @@ const ibRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/ingenieurie-financiere',
   component: InvestmentBankingPage,
+})
+
+const expertiseMtpRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/marche-titres-publics',
+  component: redirectTo('/marche-capitaux'),
+})
+
+const expertiseBrvmRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/marche-financier-regional',
+  component: redirectTo('/bourse'),
+})
+
+const expertiseEngineeringRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/ingenierie-financiere',
+  component: redirectTo('/ingenieurie-financiere'),
+})
+
+const expertisePrivateOfficeRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/private-office',
+  component: redirectTo('/services'),
 })
 
 const mandateRoute = createRoute({
@@ -258,13 +312,20 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   actualitesRoute,
+  marchesOpportunitesRedirectRoute,
   articleRoute,
   publicationsRoute,
   publicationRoute,
+  insightsRedirectRoute,
+  contactRedirectRoute,
   faqRoute,
   ceoRoute,
   capitalMarketsRoute,
   ibRoute,
+  expertiseMtpRedirectRoute,
+  expertiseBrvmRedirectRoute,
+  expertiseEngineeringRedirectRoute,
+  expertisePrivateOfficeRedirectRoute,
   mandateRoute,
   servicesRoute,
   offresRoute,

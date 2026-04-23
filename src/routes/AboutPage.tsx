@@ -48,7 +48,7 @@ export const AboutPage = () => {
                   Société de Gestion et d'Intermédiation agréée AMF-UMOA. < br/> Nous allions discipline de marché, ingénierie financière et proximité client.
                 </p>
                 <a
-                  href="#mission"
+                  href="#gouvernance"
                   className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
                   style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
                 >
@@ -61,7 +61,7 @@ export const AboutPage = () => {
         </section>
 
         {/* ─── 2. Mission & Vision — Editorial List ─── */}
-        <section ref={missionRef} id="mission" className="reveal py-24 md:py-40 border-b border-black/10">
+        <section ref={missionRef} id="gouvernance" className="reveal py-24 md:py-40 border-b border-black/10">
           <div className="mx-auto max-w-[1600px] px-6 md:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">

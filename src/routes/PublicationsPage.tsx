@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
-import { useReveal } from '../components/Hooks/useReveal'
 import * as pdfjsLib from 'pdfjs-dist'
 import PdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+import { useReveal } from '../components/Hooks/useReveal'
 
 /* ─── Types ─── */
 type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle'
@@ -267,9 +268,38 @@ export const PublicationsPage = () => {
   const filtersRef = useReveal<HTMLDivElement>()
   const listRef = useReveal<HTMLDivElement>()
 
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>(ALL_LABEL)
+  const navigate = useNavigate()
+  const search = useRouterState({
+    select: (s) => s.location.search as { frequency?: Frequency },
+  })
+
+  const initialFilter: FilterCategory =
+    search.frequency === 'hebdomadaire' ||
+    search.frequency === 'mensuelle' ||
+    search.frequency === 'semestrielle'
+      ? search.frequency
+      : ALL_LABEL
+
+  const [activeFilter, setActiveFilter] = useState<FilterCategory>(initialFilter)
   const [searchQuery, setSearchQuery] = useState('')
   const [previewPub, setPreviewPub] = useState<Publication | null>(null)
+
+  useEffect(() => {
+    const f = search.frequency
+    if (f === 'hebdomadaire' || f === 'mensuelle' || f === 'semestrielle') {
+      setActiveFilter(f)
+    } else {
+      setActiveFilter(ALL_LABEL)
+    }
+  }, [search.frequency])
+
+  const goToFilter = (cat: FilterCategory) => {
+    if (cat === ALL_LABEL) {
+      navigate({ to: '/publications', search: {} })
+    } else {
+      navigate({ to: '/publications', search: { frequency: cat } })
+    }
+  }
 
   const handlePreview = useCallback((pub: Publication) => setPreviewPub(pub), [])
   const handleClosePreview = useCallback(() => setPreviewPub(null), [])
@@ -378,7 +408,7 @@ export const PublicationsPage = () => {
                   <button
                     key={cat}
                     type="button"
-                    onClick={() => setActiveFilter(cat)}
+                    onClick={() => goToFilter(cat)}
                     className={`px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow ${
                       isActive
                         ? 'bg-[var(--mauve)] text-white border-[var(--mauve)]'
