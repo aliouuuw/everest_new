@@ -247,7 +247,7 @@ export const Header: React.FC = () => {
 
           <Dropdown
             name="marches"
-            title="Marchés & Opportunités"
+            title="Insights"
             items={marchesItems}
             isOpen={openDropdown === 'marches'}
             onOpen={openDropdownByName}
@@ -379,7 +379,7 @@ export const Header: React.FC = () => {
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
               >
-                Marchés &amp; Opportunités
+                Insights
               </div>
               <div className="space-y-3 pl-3 border-l border-white/[0.15]">
                 {marchesItems.map((item, index) => (
