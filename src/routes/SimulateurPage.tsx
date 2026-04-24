@@ -185,18 +185,18 @@ export const SimulateurPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── 4. CTA — Light Section (matches services pages) ─── */}
-      <section className="section-bg-light py-24 md:py-32">
+      {/* ─── 4. CTA — Dark band (spacing matches FAQ / Expertises) ─── */}
+      <section className="section-bg-light py-12 md:py-20">
         <div className="page-container relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
             <div className="md:col-span-7">
               <h2
-                className="font-primary font-bold leading-[0.95] tracking-tight mb-6 text-white"
+                className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
                 style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
               >
                 Besoin d'un accompagnement personnalisé ?
               </h2>
-              <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
+              <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
                 Nos conseillers vous aident à construire une stratégie adaptée à votre profil et vos objectifs.
               </p>
             </div>

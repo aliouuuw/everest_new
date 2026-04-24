@@ -5,6 +5,9 @@ import { useReveal } from '../components/Hooks/useReveal'
 type QA = { q: string; a: string }
 type Glossary = { term: string; def: string }
 
+/** Matches À propos / Outils — section & hero titles max 50px. */
+const sectionTitleStyle = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' } as const
+
 export const FAQPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const qaRef = useReveal<HTMLDivElement>()
@@ -87,7 +90,7 @@ export const FAQPage = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
         {/* ─── 1. Hero — Dark Image with Overlay ─── */}
-        <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
+        <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
           {/* Background image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -98,18 +101,21 @@ export const FAQPage = () => {
           </div>
 
           <div className="relative z-10 w-full page-container">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
               <div className="md:col-span-7">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-3">
                   Abécédaire & FAQ
                 </span>
-                <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
+                <h1
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
+                  style={sectionTitleStyle}
+                >
                   Comprendre nos services.
                 </h1>
               </div>
 
               <div className="md:col-span-5 pb-2">
-                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
+                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-5">
                   Questions fréquentes et définitions clés pour mieux décider.
                 </p>
                 <a
@@ -126,24 +132,27 @@ export const FAQPage = () => {
         </section>
 
         {/* ─── 2. Q&A Section — Stark Grid ─── */}
-        <section id="faq" className="py-24 md:py-40 border-b border-black/10">
+        <section id="faq" className="py-12 md:py-20 border-b border-black/10">
           <div className="page-container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
-                <div className="sticky top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Support</span>
-                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
+                <div className="sticky top-28 md:top-32">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Support</span>
+                  <h2
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
+                    style={sectionTitleStyle}
+                  >
                     Questions fréquentes.
                   </h2>
                 </div>
               </div>
               
               <div className="lg:col-span-8">
-                <div ref={qaRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+                <div ref={qaRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-8 md:gap-y-10">
                   {qas.map((item) => (
                     <div key={item.q} className="relative">
-                      <div className="w-8 h-px bg-[var(--mauve)] mb-8" />
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--mauve)]">
+                      <div className="w-8 h-px bg-[var(--mauve)] mb-5" />
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-[var(--mauve)]">
                         {item.q}
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -158,18 +167,21 @@ export const FAQPage = () => {
         </section>
 
         {/* ─── 3. Abécédaire (Glossary) — Editorial List ─── */}
-        <section id="glossary" className="py-24 md:py-40 bg-[var(--white-smoke)]">
+        <section id="glossary" className="py-12 md:py-20 bg-[var(--white-smoke)]">
           <div className="page-container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
-                <div className="sticky top-32 flex flex-col border-t border-[var(--mauve)]/10">
-                  <div className="py-6 border-b border-[var(--mauve)]/10">
-                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-6">Définitions</span>
-                    <h2 className="font-primary font-bold text-3xl md:text-4xl leading-[1.05] mb-6">
+                <div className="sticky top-28 md:top-32 flex flex-col border-t border-[var(--mauve)]/10">
+                  <div className="py-5 border-b border-[var(--mauve)]/10">
+                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Définitions</span>
+                    <h2
+                      className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)] mb-4"
+                      style={sectionTitleStyle}
+                    >
                       Abécédaire
                     </h2>
                     
-                    <div className="flex flex-col gap-4 mt-8">
+                    <div className="flex flex-col gap-3 mt-6">
                       <input
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
@@ -204,14 +216,14 @@ export const FAQPage = () => {
               <div className="lg:col-span-8">
                 <div ref={glossaryRef} className="border-t border-black/10">
                   {grouped.length === 0 && (
-                    <div className="py-10 text-[rgba(10, 10, 10, 0.8)] font-light text-xl">Aucun résultat.</div>
+                    <div className="py-8 text-[rgba(10, 10, 10, 0.8)] font-light text-lg">Aucun résultat.</div>
                   )}
                   {grouped.map(([letter, terms]) => (
-                    <div key={letter} className="group py-10 border-b border-[var(--mauve)]/10">
-                      <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-8">
+                    <div key={letter} className="group py-5 md:py-6 border-b border-[var(--mauve)]/10">
+                      <div className="font-primary font-bold text-3xl md:text-4xl text-[var(--mauve)] mb-5">
                         {letter}
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                         {terms.map((g) => (
                           <div key={g.term}>
                             <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--mauve)]">
@@ -232,14 +244,17 @@ export const FAQPage = () => {
         </section>
 
         {/* ─── 4. CTA — Editorial Footer Block ─── */}
-        <section className="section-bg-light py-24 md:py-32">
+        <section className="section-bg-light py-12 md:py-20">
           <div className="page-container relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
               <div className="md:col-span-7">
-                <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
+                <h2
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
+                  style={sectionTitleStyle}
+                >
                   Besoin d'aide supplémentaire ?
                 </h2>
-                <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
+                <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
                   Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.
                 </p>
               </div>
