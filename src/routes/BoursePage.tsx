@@ -437,7 +437,7 @@ export const BoursePage: React.FC = () => {
     <div className="bg-[var(--pure-white)] min-h-screen font-primary">
       {/* Hero Section */}
       <section ref={heroRef} className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
-        <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="relative z-10 page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
               <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
@@ -477,14 +477,14 @@ export const BoursePage: React.FC = () => {
 
       {/* Market Stats Overview */}
       <section ref={statsSectionRef} className="reveal py-12 border-b border-black/10">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <MarketStatsCard stats={marketStats} />
         </div>
       </section>
 
       {/* Main Content */}
       <section className="py-24 md:py-40">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Main Asset List */}
             <div className="lg:col-span-3">

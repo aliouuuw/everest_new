@@ -97,7 +97,7 @@ export const Insights: React.FC = () => {
       ref={sectionRef}
       className="reveal relative bg-[var(--pure-white)] py-16 md:py-20"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+      <div className="page-container">
         <div className="mb-10 md:mb-12">
           <SectionHeader
             heading={

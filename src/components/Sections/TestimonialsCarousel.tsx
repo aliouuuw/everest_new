@@ -202,7 +202,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
   return (
     <section ref={sectionRef} className="reveal py-24 md:py-40 section-bg-light text-white relative font-primary">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+      <div className="page-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-16">
           <div className="lg:col-span-5">
             <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">{title}</span>

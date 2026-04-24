@@ -98,7 +98,8 @@ export const PublicationPage = () => {
     <div className="min-h-screen bg-[var(--pure-white)]">
       {/* Hero Section */}
       <section ref={heroRef} className="py-20 sm:py-28 section-bg-mauve">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-4xl">
           {/* Back button */}
           <button
             onClick={() => navigate({ to: '/publications' })}
@@ -166,12 +167,14 @@ export const PublicationPage = () => {
               </div>
             </div>
           )}
+          </div>
         </div>
       </section>
 
       {/* Content Section */}
       <section ref={contentRef} className="py-16">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-4xl">
           <div className="prose prose-lg max-w-none">
             {/* Content */}
             <div className="bg-white rounded-2xl border border-[var(--jaune-or)]/20 p-8 shadow-sm">
@@ -191,6 +194,7 @@ export const PublicationPage = () => {
                 {isSharing ? 'Lien copié !' : 'Partager cette publication'}
               </button>
             </div>
+          </div>
           </div>
         </div>
       </section>

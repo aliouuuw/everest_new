@@ -18,7 +18,7 @@ export const CEOMessagePage = () => {
             />
           </div>
 
-          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+          <div className="relative z-10 w-full page-container">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-7">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
@@ -48,7 +48,7 @@ export const CEOMessagePage = () => {
 
         {/* ─── 2. Message — Editorial Layout ─── */}
         <section id="message" className="py-24 md:py-40">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32 flex flex-col border-t border-black/10 pt-8">

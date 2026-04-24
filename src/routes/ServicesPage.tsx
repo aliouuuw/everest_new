@@ -28,7 +28,7 @@ export const ServicesPage = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
           </div>
           
-          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+          <div className="relative z-10 w-full page-container">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-12">
@@ -56,7 +56,7 @@ export const ServicesPage = () => {
 
         {/* ─── 2. Services Overview — Stark Grid ─── */}
         <section id="services" ref={servicesOverviewRef} className="reveal py-24 md:py-40 section-bg-light">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4 min-w-0">
                 <div className="sticky top-32">

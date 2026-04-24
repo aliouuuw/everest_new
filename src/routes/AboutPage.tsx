@@ -31,7 +31,7 @@ export const AboutPage = () => {
             />
           </div>
 
-          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+          <div className="relative z-10 w-full page-container">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-7">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
@@ -62,7 +62,7 @@ export const AboutPage = () => {
 
         {/* ─── 2. Mission & Vision — Editorial List ─── */}
         <section ref={missionRef} id="gouvernance" className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Notre raison d'être</span>
@@ -97,7 +97,7 @@ export const AboutPage = () => {
 
         {/* ─── 3. Philosophie — Stark Grid ─── */}
         <section ref={philosophieRef} id="philosophie" className="reveal py-24 md:py-40 section-bg-light">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
@@ -146,7 +146,7 @@ export const AboutPage = () => {
 
         {/* ─── 4. Metrics — Stark & Engineered ─── */}
         <section ref={metricsRef} className="reveal border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="py-16 md:py-24 border-b md:border-b-0 md:border-r border-black/10 md:pr-16">
                 <div className="flex items-baseline gap-2 mb-4">
@@ -187,7 +187,7 @@ export const AboutPage = () => {
 
         {/* ─── 5. Histoire — Timeline ─── */}
         <section ref={histoireRef} id="histoire" className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Parcours</span>
             <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-20 text-[var(--mauve)]">
               Notre histoire
@@ -210,7 +210,7 @@ export const AboutPage = () => {
 
         {/* ─── 6. Équipe — Minimalist Grid ─── */}
         <section ref={equipeRef} id="equipe" className="reveal py-24 md:py-40">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Leadership</span>
@@ -251,7 +251,7 @@ export const AboutPage = () => {
             style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 50%, transparent 70%)' }}
           />
 
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">

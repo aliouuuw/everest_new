@@ -15,7 +15,7 @@ export const TrustStrip: React.FC = () => {
       className="reveal w-full border-b border-[var(--command-border)] bg-[var(--pure-white)] py-8 md:py-10"
       aria-label="Partenaires institutionnels"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+      <div className="page-container">
         <p className="mb-6 text-center font-primary text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)] md:mb-7">
           La confiance d&apos;émetteurs et investisseurs institutionnels
         </p>

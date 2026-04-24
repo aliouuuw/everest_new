@@ -137,7 +137,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   };
 
   const content = (
-    <div className={`${variant === 'modal' ? 'p-6' : 'mx-auto max-w-[1600px] px-6 md:px-12'}`}>
+    <div className={`${variant === 'modal' ? 'p-6' : 'page-container'}`}>
       <div className="mb-20 text-center">
         <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Comparaison des services</span>
         <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mx-auto text-[var(--mauve)]">

@@ -111,7 +111,7 @@ export const ActualitesPage = () => {
           />
         </div>
 
-        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+        <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
@@ -134,7 +134,7 @@ export const ActualitesPage = () => {
 
       {/* ─── Search + Filters ─── */}
       <section className="py-10 border-b border-black/5 sticky top-0 z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <div className="actu-reveal flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
             
             {/* Category Filters */}
@@ -201,7 +201,7 @@ export const ActualitesPage = () => {
 
       {/* ─── Featured Article ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <Link to="/actualites/$slug" params={{ slug: FEATURED.slug }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
@@ -245,7 +245,7 @@ export const ActualitesPage = () => {
 
       {/* ─── Main Content: Articles + Sidebar ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
             {/* Articles Feed */}

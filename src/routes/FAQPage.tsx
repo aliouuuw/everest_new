@@ -97,7 +97,7 @@ export const FAQPage = () => {
             />
           </div>
 
-          <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+          <div className="relative z-10 w-full page-container">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-7">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
@@ -127,7 +127,7 @@ export const FAQPage = () => {
 
         {/* ─── 2. Q&A Section — Stark Grid ─── */}
         <section id="faq" className="py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
@@ -159,7 +159,7 @@ export const FAQPage = () => {
 
         {/* ─── 3. Abécédaire (Glossary) — Editorial List ─── */}
         <section id="glossary" className="py-24 md:py-40 bg-[var(--white-smoke)]">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32 flex flex-col border-t border-[var(--mauve)]/10">
@@ -233,7 +233,7 @@ export const FAQPage = () => {
 
         {/* ─── 4. CTA — Editorial Footer Block ─── */}
         <section className="section-bg-light py-24 md:py-32">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
               <div className="md:col-span-7">
                 <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">

@@ -109,7 +109,7 @@ export const HeroSectionPro: React.FC = () => {
       </div>
 
       {/* ─── Editorial Layout Content ─── */}
-      <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+      <div className="relative z-10 w-full page-container">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
           
           {/* Main Headline Area (Col 1-8) */}

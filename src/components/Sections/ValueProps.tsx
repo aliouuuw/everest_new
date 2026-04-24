@@ -103,7 +103,7 @@ export const ValueProps: React.FC = () => {
       ref={sectionRef}
       className="reveal relative overflow-hidden bg-[var(--pure-white)] py-16 md:py-20"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+      <div className="page-container">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
           {/* Left — image */}
           <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">

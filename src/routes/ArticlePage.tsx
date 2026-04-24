@@ -149,7 +149,8 @@ export const ArticlePage = () => {
           <div className="absolute inset-0" style={{ background: 'var(--gradient-image-overlay-heavy)' }} />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6">
+        <div className="relative z-10 page-container">
+          <div className="mx-auto max-w-4xl">
           {/* Back button */}
           <button
             onClick={() => navigate({ to: '/actualites' })}
@@ -182,12 +183,14 @@ export const ArticlePage = () => {
               <span>{article.readTime} de lecture</span>
             </div>
           </div>
+          </div>
         </div>
       </section>
 
       {/* Content Section */}
       <section ref={contentRef} className="py-16 md:py-24">
-        <div className="mx-auto max-w-4xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-4xl">
           <div className="prose prose-lg max-w-none">
             {/* Content */}
             <div className="bg-white rounded-2xl border border-[var(--mauve)]/10 p-8 md:p-12 shadow-sm">
@@ -228,6 +231,7 @@ export const ArticlePage = () => {
                 Retour aux actualités
               </button>
             </div>
+          </div>
           </div>
         </div>
       </section>

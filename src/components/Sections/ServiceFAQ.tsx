@@ -129,7 +129,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
 
   return (
     <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)] font-primary">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+      <div className="page-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           <div className="lg:col-span-4">
             <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">FAQ</span>

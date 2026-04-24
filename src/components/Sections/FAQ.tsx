@@ -46,7 +46,7 @@ export const FAQ: React.FC = () => {
       className="reveal relative py-24 md:py-32 overflow-hidden"
       style={{ background: 'var(--white-smoke)' }}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+      <div className="page-container">
         <div className="soft-panel flex flex-col items-start gap-10 p-6 sm:gap-12 sm:p-8 md:gap-16 md:p-10 lg:flex-row lg:gap-24">
 
           {/* LEFT — Sticky heading */}

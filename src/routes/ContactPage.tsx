@@ -52,7 +52,7 @@ export const ContactPage = () => {
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Expertises) ─── */}
       <section className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
-        <div className="relative z-10 mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="relative z-10 page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
               <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
@@ -75,7 +75,7 @@ export const ContactPage = () => {
         ref={formRef}
         className="reveal bg-[var(--summit-ivory)] py-16 md:py-20"
       >
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+        <div className="page-container">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
             {/* Form */}
             <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">

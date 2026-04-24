@@ -169,7 +169,7 @@ export const PerformanceComparison: React.FC = () => {
 
   return (
     <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)]">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+      <div className="page-container">
         <div className="mb-20">
           <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Performance</span>
           <h2 className="font-display-aptos font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-8 text-[var(--mauve)]">

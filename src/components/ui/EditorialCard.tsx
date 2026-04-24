@@ -28,13 +28,13 @@ const wellDark =
 export const EditorialCard: React.FC<EditorialCardProps> = ({
   variant,
   icon: Icon,
-  kicker,
+  kicker: _kicker,
   title,
   bullets,
   href,
   linkLabel,
   className = '',
-  index,
+  index: _index,
 }) => {
   const isDark = variant === 'dark';
   const isExternal = /^https?:\/\//i.test(href);

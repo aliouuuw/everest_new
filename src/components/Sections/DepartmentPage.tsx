@@ -87,7 +87,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           </div>
         )}
         
-        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px] mt-auto pt-32">
+        <div className="relative z-10 w-full page-container mt-auto pt-32">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
             <div className="lg:col-span-7">
               <div className="mb-6">
@@ -124,7 +124,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 2. Metrics — Stark & Engineered ─── */}
       {metrics && metrics.length > 0 && (
         <section ref={metricsRef} className="reveal border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {metrics.map((metric, i) => (
                 <div key={i} className={`py-16 md:py-24 ${i < metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-black/10' : ''} ${i === 1 ? 'md:px-16' : i === 2 ? 'md:pl-16' : 'md:pr-16'}`}>
@@ -149,7 +149,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 3. "Who is this for?" — Raw Editorial List ─── */}
       {target_personas.length > 0 && (
         <section ref={personasRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Audience cible</span>
@@ -188,7 +188,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 4. "Why Everest" — Stark Grid ─── */}
       {differentiators.length > 0 && (
         <section ref={diffRef} className="reveal py-24 md:py-40 section-bg-light">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
@@ -222,7 +222,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 5. Solutions — Engineered Display ─── */}
       {expertise_solutions.length > 0 && (
         <section id="solutions" ref={solutionsRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="mb-20 md:mb-32">
               <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Nos solutions</span>
               <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--mauve)]">
@@ -343,7 +343,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 6. Methodology — Brutalist Sequence ─── */}
       {(approach_methodology || method_steps) && (
         <section ref={approachRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Méthodologie</span>
@@ -384,7 +384,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 7. Operations — Minimalist Grid ─── */}
       {operations_selected.length > 0 && (
         <section ref={operationsRef} className="reveal py-24 md:py-40">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
                 <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Interventions</span>
@@ -420,7 +420,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%)' }}
         />
 
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12 relative z-10">
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
               <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--mauve)]">

@@ -13,7 +13,8 @@ export const AuthPage = () => {
     <div>
       {/* Hero — Compact Centered */}
       <section ref={heroRef} className="reveal pt-34 pb-8 sm:pt-28">
-        <div className="mx-auto max-w-6xl px-6 text-center">
+        <div className="page-container">
+          <div className="mx-auto max-w-6xl text-center">
           <span className="kicker text-gradient-gold">Accès Client</span>
           <h1 className="luxury-heading mt-3">
             {/* {authMode === 'signin' ? 'Connectez-vous à votre espace' : 'Créez votre compte en toute sécurité'} */}
@@ -25,12 +26,14 @@ export const AuthPage = () => {
               : 'Rejoignez notre plateforme de gestion financière sécurisée.' */}
             Un accès simple et sécurisé à votre portefeuille et vos documents.
           </p>
+          </div>
         </div>
       </section>
 
       {/* Formulaire d'authentification */}
       <section id="auth" ref={formSectionRef} className="reveal pb-14 sm:pb-18">
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-2xl">
           {/* Mode switcher */}
           {/* <div className="flex justify-center mb-8">
             <div className="inline-flex rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-1">
@@ -74,12 +77,14 @@ export const AuthPage = () => {
               </a>
             </p>
           </div>
+          </div>
         </div>
       </section>
 
       {/* Avantages */}
       <section ref={benefitsSectionRef} className="reveal py-14 sm:py-18">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-6xl">
           <div className="text-center max-w-2xl mx-auto">
             <span className="kicker text-gradient-gold">Avantages</span>
             <h2 className="luxury-heading mt-3">Un portail pensé pour vous</h2>
@@ -115,6 +120,7 @@ export const AuthPage = () => {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>

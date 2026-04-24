@@ -54,16 +54,19 @@ export const PortalPage = () => {
     <div>
         {/* Hero — Compact Centered */}
         <section ref={heroRef} className="reveal py-34 sm:py-28">
-          <div className="mx-auto max-w-6xl px-6 text-center">
+          <div className="page-container">
+            <div className="mx-auto max-w-6xl text-center">
             <span className="kicker text-gradient-gold">Accès Client</span>
             <h1 className="luxury-heading mt-3">Créez votre compte en toute sécurité</h1>
             <p className="luxury-subheading mt-5 pt-5">Un accès simple et sécurisé à votre portefeuille et vos documents.</p>
+            </div>
           </div>
         </section>
 
         {/* Formulaire de connexion */}
         <section id="signin" ref={formSectionRef} className="reveal pb-14 sm:pb-18">
-          <div className="mx-auto max-w-2xl px-6">
+          <div className="page-container">
+            <div className="mx-auto max-w-2xl">
             <div ref={formCardRef} className="reveal-stagger group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 sm:p-8">
               <div className="flex items-start justify-between">
                 <div>
@@ -131,12 +134,14 @@ export const PortalPage = () => {
                 </div>
               </form>
             </div>
+            </div>
           </div>
         </section>
 
         {/* Avantages */}
         <section ref={benefitsSectionRef} className="reveal py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
+          <div className="page-container">
+            <div className="mx-auto max-w-6xl">
             <div className="text-center max-w-2xl mx-auto">
               <span className="kicker text-gradient-gold">Avantages</span>
               <h2 className="luxury-heading mt-3">Un portail pensé pour vous</h2>
@@ -172,6 +177,7 @@ export const PortalPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
       </section>

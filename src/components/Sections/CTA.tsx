@@ -22,7 +22,7 @@ export const CTA: React.FC<{
       className="reveal relative py-16 md:py-20 bg-[var(--pure-white)]"
       id="contact"
     >
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 md:px-10 lg:px-12">
+      <div className="page-container">
         <div
           className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-[var(--radius-card-lg)] border border-white/10 p-6 shadow-[0_8px_40px_rgba(0,0,0,0.12)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
           style={{ background: 'var(--mauve)' }}

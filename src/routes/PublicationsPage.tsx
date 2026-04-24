@@ -363,7 +363,7 @@ export const PublicationsPage = () => {
     <div className="bg-[var(--pure-white)] font-primary">
       {/* ─── Hero ─── */}
       <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 bg-[var(--mauve)]">
-        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
+        <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
@@ -386,7 +386,7 @@ export const PublicationsPage = () => {
 
       {/* ─── Search + Filters ─── */}
       <section className="py-10 border-b border-black/5 sticky top-0 z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           <div ref={filtersRef} className="reveal flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Search */}
             <div className="relative w-full sm:max-w-sm">
@@ -452,7 +452,7 @@ export const PublicationsPage = () => {
 
       {/* ─── Publications Grid ─── */}
       <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="page-container">
           {filtered.length === 0 ? (
             <div className="text-center py-20">
               <div className="w-16 h-16 mx-auto mb-4 bg-[var(--mauve-10)] rounded-full flex items-center justify-center">
