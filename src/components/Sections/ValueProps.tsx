@@ -127,12 +127,6 @@ export const ValueProps: React.FC = () => {
             ref={contentRef}
             className="reveal flex flex-col justify-center lg:col-span-7"
           >
-            <div className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--mauve-15)] bg-[var(--mauve-05)] px-3 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--jaune-or)]" aria-hidden />
-              <span className="font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve)]">
-                Pourquoi EVEREST Finance
-              </span>
-            </div>
             <h2 className="luxury-heading mb-4 max-w-xl">
               Exécution rigoureuse, <span style={{ color: 'var(--jaune-or)' }}>confiance durable.</span>
             </h2>

@@ -108,13 +108,7 @@ export const Capacity: React.FC = () => {
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                <div className="flex items-center justify-between mb-10">
-                  <span
-                    className="font-primary text-[11px] font-semibold tracking-[0.22em]"
-                    style={{ color: 'rgba(255,255,255,0.35)' }}
-                  >
-                    {c.num}
-                  </span>
+                <div className="flex items-center justify-start mb-10">
                   <Icon className="text-lg text-[var(--jaune-or)] opacity-85 transition-transform duration-500 group-hover:-translate-y-0.5" />
                 </div>
 

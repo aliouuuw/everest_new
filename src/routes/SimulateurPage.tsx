@@ -69,7 +69,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── 1. Hero — Mauve Banner (matches Bourse / Contact / Expertises) ─── */}
-      <section className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
+      <section className="relative pt-[150px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
         <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
             <div className="md:col-span-8">

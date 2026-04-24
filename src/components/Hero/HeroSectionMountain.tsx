@@ -75,10 +75,10 @@ export const HeroSectionMountain: React.FC = () => {
           className="h-full w-full min-h-full min-w-full object-cover [object-position:32%_50%] md:[object-position:30%_48%] motion-reduce:object-center"
           style={{ display: 'block' }}
         >
-          <source src="/ai-hero-bg-2.mp4" type="video/mp4" />
+          <source src="/ai-hero-bg-3.mp4" type="video/mp4" />
         </video>
         {/* Radial vignette — subtle mauve only (light center → soft dark edge) */}
-        <div
+        {/* <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: [
@@ -90,13 +90,20 @@ export const HeroSectionMountain: React.FC = () => {
               'color-mix(in srgb, var(--mauve) 16%, transparent) 100%)',
             ].join(' '),
           }}
-        />
+        /> */}
         {/* Bottom fade — mauve dark → light, for legibility */}
         <div
           className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--mauve)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--mauve)_12%,transparent)] to-transparent"
         />
         {/* Left edge — darker, more pronounced mauve falloff */}
         <div className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--mauve)_58%,black_42%)] via-[color-mix(in_srgb,var(--mauve)_20%,transparent)] to-transparent pointer-events-none" />
+        {/* Bottom right dark vignette — hides watermark */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 60% 30% at 100% 100%, rgb(0, 0, 0) 0%, rgba(10, 10, 10, 0.98) 0% 30%, transparent 80%)',
+          }}
+        />
         {/* Very subtle read-through scrim for type contrast without crushing the image */}
         <div className="absolute inset-0 bg-[var(--mauve)]/[0.04] mix-blend-soft-light pointer-events-none" />
         {/* Film grain */}
@@ -113,7 +120,7 @@ export const HeroSectionMountain: React.FC = () => {
         className="relative z-10 w-full px-5 sm:px-6 md:px-16 lg:px-24 pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
         style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
-        <div className="max-w-[52rem] mx-auto flex flex-col items-center text-center">
+        <div className="max-w-[52rem] flex flex-col items-start text-start">
 
           <h1 id={headingId} className="text-balance mb-6 sm:mb-7 max-w-4xl mx-auto">
             <span className="block overflow-hidden">
@@ -126,7 +133,6 @@ export const HeroSectionMountain: React.FC = () => {
                   lineHeight: 1.04,
                   letterSpacing: '-0.03em',
                   color: 'var(--pure-white)',
-                  textShadow: '0 3px 8px rgba(0,0,0,0.4)',
                 }}
               >
                 Accès stratégique aux marchés financiers
@@ -142,7 +148,6 @@ export const HeroSectionMountain: React.FC = () => {
                   lineHeight: 1.04,
                   letterSpacing: '-0.03em',
                   color: 'var(--jaune-or)',
-                  textShadow: '0 3px 8px rgba(0,0,0,0.4)',
                 }}
               >
                 de l&apos;UEMOA
@@ -166,7 +171,6 @@ export const HeroSectionMountain: React.FC = () => {
               fontSize: 'clamp(1.0625rem, 0.4vw + 0.95rem, 1.2rem)',
               lineHeight: 1.65,
               color: 'var(--pure-white)',
-              textShadow: '0 1px 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)',
             }}
           >
             EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur

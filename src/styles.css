@@ -714,6 +714,25 @@ h1, h2 {
   color: var(--mauve);
 }
 
+/* Mauve / dark card — primary line legible on mauve background */
+.btn-cta-pill--outline-light {
+  border-color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-cta-pill--outline-light .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--outline-light:hover {
+  background: var(--pure-white);
+  border-color: var(--pure-white);
+}
+
+.btn-cta-pill--outline-light:hover .btn-cta-pill__label {
+  color: var(--mauve);
+}
+
 /* Card Styles */
 .stat-card {
   @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--mauve)]/10 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/10 hover:border-[var(--mauve)]/25;

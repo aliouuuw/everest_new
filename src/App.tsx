@@ -3,8 +3,7 @@ import {
   Capacity,
   CTA,
   FAQ,
-  Insights,
-  MarketsOpportunities,
+  InsightsMerged,
   Positioning,
   Services,
   TrustStrip,
@@ -25,10 +24,8 @@ function App() {
       <Capacity />
       {/* PM §4 — Nos expertises */}
       <Services />
-      {/* PM §5 — Marchés & opportunités (actualités) */}
-      <MarketsOpportunities />
-      {/* PM §6 — Insights / publications */}
-      <Insights />
+      {/* PM §5-6 — Insights : actualités & publications */}
+      <InsightsMerged />
       <CTA
         scheme="ivory"
         secondaryHref="https://everest-account-opening.vercel.app/new-home"

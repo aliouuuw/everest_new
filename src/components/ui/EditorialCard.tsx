@@ -68,22 +68,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
         <div className={isDark ? wellDark : wellLight}>
           <Icon className="text-lg" aria-hidden />
         </div>
-        {index && (
-          <span
-            className="font-primary text-[11px] font-semibold tracking-[0.2em] text-[var(--mauve-40)]"
-            style={isDark ? { color: 'rgba(255,255,255,0.35)' } : undefined}
-          >
-            {index}
-          </span>
-        )}
       </header>
-
-      <p
-        className="mb-2 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]"
-        style={isDark ? { color: 'var(--jaune-or)' } : undefined}
-      >
-        {kicker}
-      </p>
 
       <h3
         className="mb-4 font-primary text-base font-semibold leading-snug text-[var(--mauve)] md:text-lg"
