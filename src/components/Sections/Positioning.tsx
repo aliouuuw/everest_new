@@ -1,5 +1,5 @@
+import { FiGitBranch, FiGlobe, FiPieChart, FiSend } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
-import { FiGitBranch, FiGlobe, FiSend, FiPieChart } from 'react-icons/fi';
 
 const PILLARS = [
   {
@@ -75,7 +75,7 @@ export const Positioning: React.FC = () => {
         >
           <div
             ref={gridRef}
-            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 [&>*]:border-[var(--mauve-10)]"
+            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
           >
           {PILLARS.map((p, i) => {
             const Icon = p.icon;
@@ -83,7 +83,9 @@ export const Positioning: React.FC = () => {
               <div
                 key={p.title}
                 className={[
-                  'group relative flex flex-col pt-8 pb-2 px-0 sm:px-6 lg:px-8 transition-colors duration-500 hover:bg-[var(--mauve-05)]',
+                  'group relative z-0 flex flex-col border-[var(--mauve-10)] bg-[var(--pure-white)] py-8 px-0 sm:px-6 lg:px-8',
+                  'transition-[background-color,box-shadow] duration-500',
+                  'hover:z-10 hover:bg-[var(--mauve)] hover:shadow-[0_20px_40px_-20px_rgba(70,29,76,0.35)]',
                   i > 0 ? 'border-t' : '',
                   i % 2 === 1 ? 'sm:border-l' : 'sm:border-l-0',
                   i >= 2 ? 'sm:border-t' : 'sm:border-t-0',
@@ -91,25 +93,28 @@ export const Positioning: React.FC = () => {
                   'lg:border-t-0',
                 ].join(' ')}
               >
-                {/* Top-accent gold line on hover */}
+                {/* Top accent — gold on light hover, lighter gold on mauve hover */}
                 <span
                   aria-hidden
                   className="absolute left-0 top-0 h-[2px] w-0 transition-[width] duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:w-full"
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                {/* Header: numeric + icon */}
                 <div className="flex items-center justify-between mb-10">
-                  <span className="font-primary text-[11px] font-semibold tracking-[0.22em] text-[var(--mauve-40)]">
+                  <span className="font-primary text-[11px] font-semibold tracking-[0.22em] text-[var(--mauve-40)] transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
                     {p.num}
                   </span>
-                  <Icon className="text-lg text-[var(--mauve)] opacity-80 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:text-[var(--jaune-or)]" />
+                  <div
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--mauve-10)] bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]"
+                  >
+                    <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
+                  </div>
                 </div>
 
-                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[var(--mauve)] mb-3 leading-tight">
+                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[var(--mauve)] transition-colors duration-500 group-hover:text-white mb-3 leading-tight">
                   {p.title}
                 </h3>
-                <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] max-w-xs">
+                <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 max-w-xs">
                   {p.desc}
                 </p>
               </div>

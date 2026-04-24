@@ -15,15 +15,19 @@ type EditorialCardProps = {
   index?: string;
 };
 
-const wellLight =
+/** Icon frame — same structure as expertises (Services) cards; use on- or off-mauve surfaces. */
+export const EDITORIAL_ICON_WELL_LIGHT =
   'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-colors duration-500 ' +
   'bg-[var(--mauve-05)] border-[var(--mauve-10)] text-[var(--mauve)] ' +
   'group-hover:border-[var(--mauve)] group-hover:bg-[var(--mauve-10)]';
 
-const wellDark =
+export const EDITORIAL_ICON_WELL_DARK =
   'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border text-[var(--jaune-or)] transition-colors duration-500 ' +
   'bg-[rgba(203,152,36,0.12)] border-[rgba(203,152,36,0.25)] ' +
   'group-hover:border-[var(--jaune-or)] group-hover:bg-[var(--jaune-or)] group-hover:text-[var(--night)]';
+
+const wellLight = EDITORIAL_ICON_WELL_LIGHT;
+const wellDark = EDITORIAL_ICON_WELL_DARK;
 
 export const EditorialCard: React.FC<EditorialCardProps> = ({
   variant,

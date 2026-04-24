@@ -1,5 +1,6 @@
 import { useReveal } from '../Hooks/useReveal';
 import { FiTrendingUp, FiUsers, FiBarChart2, FiLayers } from 'react-icons/fi';
+import { EDITORIAL_ICON_WELL_DARK } from '../ui/EditorialCard';
 
 const CAPABILITIES = [
   {
@@ -108,8 +109,10 @@ export const Capacity: React.FC = () => {
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                <div className="flex items-center justify-start mb-10">
-                  <Icon className="text-lg text-[var(--jaune-or)] opacity-85 transition-transform duration-500 group-hover:-translate-y-0.5" />
+                <div className="mb-10">
+                  <div className={`shrink-0 ${EDITORIAL_ICON_WELL_DARK}`}>
+                    <Icon className="text-lg" aria-hidden />
+                  </div>
                 </div>
 
                 <p

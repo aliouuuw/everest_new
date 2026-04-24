@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { FaCalendarAlt, FaChartLine, FaHandshake } from 'react-icons/fa';
+import { FiCalendar, FiDatabase, FiUsers } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
+import { EDITORIAL_ICON_WELL_LIGHT } from '../ui/EditorialCard';
 
 const STATS = [
   {
@@ -9,7 +10,7 @@ const STATS = [
     suffix: '+',
     unit: 'ans',
     label: "d'expérience au service des émetteurs et investisseurs institutionnels de l'UEMOA.",
-    icon: FaCalendarAlt,
+    icon: FiCalendar,
   },
   {
     prefix: '+',
@@ -17,7 +18,7 @@ const STATS = [
     suffix: '',
     unit: 'Mds F CFA',
     label: "levés par émissions d'obligations, titres de capital et fonds communs de titrisation.",
-    icon: FaChartLine,
+    icon: FiDatabase,
   },
   {
     prefix: '+',
@@ -25,7 +26,7 @@ const STATS = [
     suffix: '',
     unit: 'Mds F CFA',
     label: "de transactions intermédiées sur le marché financier régional.",
-    icon: FaHandshake,
+    icon: FiUsers,
   },
 ];
 
@@ -71,9 +72,9 @@ function AnimatedStatRow({ prefix, value, suffix, unit, label, icon: Icon, delay
   }, [delay]);
 
   return (
-    <li ref={ref} className="flex items-start gap-4 py-5 md:gap-5 md:py-6">
-      <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)]">
-        <Icon className="text-base" aria-hidden />
+    <li ref={ref} className="group flex items-center gap-4 py-5 md:gap-5 md:py-6">
+      <div className={`shrink-0 ${EDITORIAL_ICON_WELL_LIGHT}`}>
+        <Icon className="text-lg" aria-hidden />
       </div>
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex items-baseline gap-2">
