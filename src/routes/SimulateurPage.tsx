@@ -127,7 +127,7 @@ export const SimulateurPage: React.FC = () => {
                   {meta.icon}
                 </div>
                 <div>
-                  <h2 className="font-bold text-lg md:text-xl uppercase tracking-[0.08em] text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <h2 className="font-bold text-lg md:text-xl tracking-[0.08em] text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
                     {meta.title}
                   </h2>
                   <p className="text-base text-[var(--night-60)] mt-1" style={{ fontFamily: 'var(--font-primary)' }}>
@@ -152,7 +152,7 @@ export const SimulateurPage: React.FC = () => {
                   <div className="bg-[var(--mauve-05)] rounded-xl p-6 border border-[var(--mauve-10)]">
                     <div className="flex items-center gap-2 mb-4">
                       <FiBookOpen size={18} className="text-[var(--mauve)]" />
-                      <h3 className="font-bold outils-invest-label uppercase tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                      <h3 className="font-bold outils-invest-label tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         {tips.title}
                       </h3>
                     </div>
