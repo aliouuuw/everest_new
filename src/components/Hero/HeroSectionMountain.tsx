@@ -36,7 +36,7 @@ export const HeroSectionMountain: React.FC = () => {
       gsap.set('.hero-title-line', { y: '110%' });
       gsap.set('.hero-body', { y: 30, opacity: 0 });
       gsap.set('.hero-cta', { y: 20, opacity: 0 });
-      gsap.set('.hero-rule', { scaleX: 0, transformOrigin: 'center' });
+        gsap.set('.hero-rule', { scaleX: 0, transformOrigin: 'right' });
 
       tl
         .to('.hero-video-wrap', { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' })
@@ -59,7 +59,7 @@ export const HeroSectionMountain: React.FC = () => {
       ref={heroRef}
       id="hero"
       aria-labelledby={headingId}
-      className="relative min-h-[100dvh] w-full flex items-end justify-center bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
+      className="relative min-h-[100dvh] w-full flex items-end bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
     >
       {/* ─── Cinematic Video Background (mountain left — open center for type) ─── */}
       <div className="hero-video-wrap absolute inset-0 w-full h-full z-0" aria-hidden>
@@ -72,7 +72,7 @@ export const HeroSectionMountain: React.FC = () => {
           preload="auto"
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback"
-          className="h-full w-full min-h-full min-w-full object-cover [object-position:32%_50%] md:[object-position:30%_48%] motion-reduce:object-center"
+          className="h-full w-full min-h-full min-w-full object-cover [object-position:22%_50%] md:[object-position:18%_48%] motion-reduce:object-center"
           style={{ display: 'block' }}
         >
           <source src="/ai-hero-bg-3.mp4" type="video/mp4" />
@@ -115,14 +115,14 @@ export const HeroSectionMountain: React.FC = () => {
         />
       </div>
 
-      {/* ─── Editorial Content (centered — balances left-weighted background) ─── */}
+      {/* ─── Editorial Content — right column, gutters match Header (`page-container`) ─── */}
       <div
-        className="relative z-10 w-full px-5 sm:px-6 md:px-16 lg:px-24 pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
+        className="relative z-10 w-full page-container pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
         style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
-        <div className="max-w-[52rem] flex flex-col items-start text-start">
+        <div className="ml-auto flex w-full max-w-[min(52rem,100%)] flex-col items-end text-right">
 
-          <h1 id={headingId} className="text-balance mb-6 sm:mb-7 max-w-4xl mx-auto">
+          <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
             <span className="block overflow-hidden">
               <span
                 className="hero-title-line block"
@@ -156,7 +156,7 @@ export const HeroSectionMountain: React.FC = () => {
           </h1>
 
           <div
-            className="hero-rule h-px w-20 sm:w-32 md:w-40 mb-7 sm:mb-8 mx-auto"
+            className="hero-rule ms-auto h-px w-20 sm:w-32 md:w-40 mb-7 sm:mb-8"
             style={{
               background:
                 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--jaune-or) 85%, var(--mauve) 15%) 50%, transparent)',
@@ -164,7 +164,7 @@ export const HeroSectionMountain: React.FC = () => {
           />
 
           <p
-            className="hero-body mb-9 sm:mb-10 mx-auto max-w-[60ch] text-pretty"
+            className="hero-body mb-9 sm:mb-10 max-w-[60ch] text-pretty"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 500,
@@ -179,12 +179,12 @@ export const HeroSectionMountain: React.FC = () => {
             sélective et orientée performance.
           </p>
 
-          <div className="hero-cta flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-5 items-stretch sm:items-center justify-center w-full sm:w-auto">
+          <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch justify-end gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
             <Link
               to="/offres"
               className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
             >
-              <span className="font-semibold tracking-tight">Accéder aux opportunités</span>
+              <span className="text-base font-semibold tracking-tight">Accéder aux opportunités</span>
               <div className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-5">
                 <FiArrowRight className="text-base shrink-0" aria-hidden />
               </div>
@@ -194,7 +194,7 @@ export const HeroSectionMountain: React.FC = () => {
               className="group inline-flex min-h-[3.75rem] items-center justify-center px-6 py-4 text-base font-semibold touch-manipulation transition-colors duration-200 text-white hover:text-white relative w-full sm:w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 rounded-sm"
               style={{ textShadow: '0 2px 5px rgba(0,0,0,0.35)' }}
             >
-              Nous contacter
+              <span className="text-base font-semibold tracking-tight">Nous contacter</span>
               <span
                 className="pointer-events-none absolute bottom-3 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent group-hover:via-white"
                 aria-hidden
