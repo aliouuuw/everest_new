@@ -102,17 +102,6 @@ export const HeroSectionMountain: React.FC = () => {
         style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
         <div className="ml-auto flex w-full max-w-[min(52rem,100%)] flex-col items-end text-right">
-          <div className="hero-kicker mb-8">
-            <EditableText
-              id="home.hero.kicker"
-              as="span"
-              className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--jaune-or)' }}
-            >
-              Société de Gestion et d&apos;Intermédiation — Dakar
-            </EditableText>
-          </div>
-
           <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
             <span className="block overflow-hidden">
               <EditableText

@@ -37,7 +37,6 @@ export type PageKey =
 export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   home: [
     // Hero
-    { id: "home.hero.kicker", label: "Hero kicker", section: "Hero", type: "text" },
     { id: "home.hero.title", label: "Hero title (line 1)", section: "Hero", type: "text" },
     { id: "home.hero.titleAccent", label: "Hero title (line 2, gold)", section: "Hero", type: "text" },
     { id: "home.hero.subtitle", label: "Hero subtitle", section: "Hero", type: "text" },
