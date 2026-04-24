@@ -4,3 +4,4 @@ export { PublicationForm } from './PublicationForm';
 export { MediaManagement } from './MediaManagement';
 export { UserManagement } from './UserManagement';
 export { Settings } from './Settings';
+export { SiteContentPage } from './SiteContentPage';

@@ -22,6 +22,7 @@ import type * as investorProfiles from "../investorProfiles.js";
 import type * as media from "../media.js";
 import type * as publications from "../publications.js";
 import type * as seedUsers from "../seedUsers.js";
+import type * as siteContent from "../siteContent.js";
 import type * as users from "../users.js";
 
 /**
@@ -42,6 +43,7 @@ declare const fullApi: ApiFromModules<{
   media: typeof media;
   publications: typeof publications;
   seedUsers: typeof seedUsers;
+  siteContent: typeof siteContent;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

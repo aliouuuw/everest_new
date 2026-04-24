@@ -1,7 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
-import { SectionHeader } from '../ui';
+import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 type NewsArticle = {
   title: string;
@@ -52,22 +53,47 @@ export const MarketsOpportunities: React.FC = () => {
       className="reveal relative py-16 md:py-20 bg-[var(--pure-white)]"
     >
       <div className="page-container">
-        <div className="mb-10 md:mb-12">
-          <SectionHeader
-            heading={
-              <>
-                Marchés <span style={{ color: 'var(--jaune-or)' }}>&amp; opportunités.</span>
-              </>
-            }
-            subtext="Actualités BRVM, dette souveraine et financement régional : veille structurée sur les marchés UEMOA."
-            align="left"
-            dark={false}
-            action={{
-              label: 'Voir toutes les actualités',
-              href: '/actualites',
-              variant: 'primary',
-            }}
-          />
+        <div className="mb-10 flex flex-col gap-8 md:mb-12 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <div className="mb-4 md:mb-6">
+              <PillBadge>
+                <EditableText id="home.markets.badge" as="span">
+                  Marchés &amp; opportunités
+                </EditableText>
+              </PillBadge>
+            </div>
+            <h2 className="luxury-heading">
+              <EditableText id="home.markets.title" as="span">
+                Marchés
+              </EditableText>{' '}
+              <EditableText
+                id="home.markets.titleAccent"
+                as="span"
+                style={{ color: 'var(--jaune-or)' }}
+              >
+                &amp; opportunités.
+              </EditableText>
+            </h2>
+            <EditableText
+              id="home.markets.intro"
+              as="p"
+              className="text-secondary mt-4 max-w-md text-base md:text-lg"
+            >
+              Actualités BRVM, dette souveraine et financement régional : veille structurée sur les marchés
+              UEMOA.
+            </EditableText>
+          </div>
+          <Link
+            to="/actualites"
+            className="group inline-flex shrink-0 items-center gap-2 btn-primary md:self-end"
+          >
+            <span>
+              <EditableText id="home.markets.linkLabel" as="span">
+                Voir toutes les actualités
+              </EditableText>
+            </span>
+            <FiArrowRight className="text-sm transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
         <div

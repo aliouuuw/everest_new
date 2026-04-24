@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar, FiFileText } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
-import { SectionHeader } from '../ui';
+import { EditableText } from '../../cms';
 
 /* ─── Data: Actualités ─── */
 
@@ -143,25 +143,40 @@ export const InsightsMerged: React.FC = () => {
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 pb-16 pt-24 md:px-16 md:pt-32 md:pb-20 lg:px-24">
         <div className="mb-10 md:mb-12">
-          <SectionHeader
-            heading="Insights"
-            subtext="Veille de marché, actualités BRVM et notes de recherche pour éclairer vos décisions d'investissement sur les marchés UEMOA."
-            align="left"
-            dark={false}
-          />
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="luxury-heading">
+                <EditableText id="home.insights.title" as="span">
+                  Insights
+                </EditableText>
+              </h2>
+              <EditableText
+                id="home.insights.subtext"
+                as="p"
+                className="text-secondary mt-4 max-w-md text-base md:text-lg"
+              >
+                Veille de marché, actualités BRVM et notes de recherche pour éclairer vos décisions
+                d&apos;investissement sur les marchés UEMOA.
+              </EditableText>
+            </div>
+          </div>
         </div>
 
         {/* ─── Actualités grid ─── */}
         <div className="mb-14 md:mb-18">
           <div className="mb-6 flex items-center justify-between gap-4">
             <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-              Actualités
+              <EditableText id="home.insights.actualitesKicker" as="span">
+                Actualités
+              </EditableText>
             </p>
             <Link
               to="/actualites"
               className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--mauve)] transition-all duration-300 hover:gap-3"
             >
-              Toutes les actualités
+              <EditableText id="home.insights.actualitesLink" as="span">
+                Toutes les actualités
+              </EditableText>
               <FiArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </div>
@@ -257,13 +272,17 @@ export const InsightsMerged: React.FC = () => {
         <div>
           <div className="mb-6 flex items-center justify-between gap-4">
             <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-              Publications
+              <EditableText id="home.insights.publicationsKicker" as="span">
+                Publications
+              </EditableText>
             </p>
             <Link
               to="/publications"
               className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--mauve)] transition-all duration-300 hover:gap-3"
             >
-              Toutes les publications
+              <EditableText id="home.insights.publicationsLink" as="span">
+                Toutes les publications
+              </EditableText>
               <FiArrowRight className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </div>

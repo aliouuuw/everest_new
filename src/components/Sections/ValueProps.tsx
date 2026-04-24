@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { FiCalendar, FiDatabase, FiUsers } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { EDITORIAL_ICON_WELL_LIGHT } from '../ui/EditorialCard';
+import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 const STATS = [
   {
@@ -128,13 +130,34 @@ export const ValueProps: React.FC = () => {
             ref={contentRef}
             className="reveal flex flex-col justify-center lg:col-span-7"
           >
+            <div className="mb-4">
+              <PillBadge>
+                <EditableText id="home.valueProps.badge" as="span">
+                  Pourquoi Everest Finance
+                </EditableText>
+              </PillBadge>
+            </div>
             <h2 className="luxury-heading mb-4 max-w-xl">
-              Exécution rigoureuse, <span style={{ color: 'var(--jaune-or)' }}>confiance durable.</span>
+              <EditableText id="home.valueProps.title" as="span">
+                Exécution rigoureuse,
+              </EditableText>
+              <br />
+              <EditableText
+                id="home.valueProps.titleAccent"
+                as="span"
+                style={{ color: 'var(--jaune-or)' }}
+              >
+                confiance durable.
+              </EditableText>
             </h2>
-            <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
+            <EditableText
+              id="home.valueProps.intro"
+              as="p"
+              className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base"
+            >
               SGI agréée AMF-UMOA (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
               d&apos;exécution et relations institutionnelles au service de nos mandats.
-            </p>
+            </EditableText>
 
             <ul className="divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
               {STATS.map((s, i) => (

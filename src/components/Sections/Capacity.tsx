@@ -1,6 +1,8 @@
 import { useReveal } from '../Hooks/useReveal';
 import { FiTrendingUp, FiUsers, FiBarChart2, FiLayers } from 'react-icons/fi';
 import { EDITORIAL_ICON_WELL_DARK } from '../ui/EditorialCard';
+import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 const CAPABILITIES = [
   {
@@ -63,18 +65,29 @@ export const Capacity: React.FC = () => {
         {/* Header — coherent with Positioning: 7/5 split, brand typography */}
         <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-end gap-8 lg:gap-16 mb-16 md:mb-20">
           <div className="lg:col-span-7">
+            <div className="mb-6">
+              <PillBadge variant="gold">
+                <EditableText id="home.capacity.badge" as="span">
+                  Capacité d&apos;intervention
+                </EditableText>
+              </PillBadge>
+            </div>
             <h2 className="luxury-heading-dark">
-              Capacité{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>opérationnelle</span>
+              <EditableText id="home.capacity.titleLead" as="span">Capacité</EditableText>{' '}
+              <EditableText id="home.capacity.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>opérationnelle</EditableText>
               <br />
-              &amp; relationnelle.
+              <EditableText id="home.capacity.titleSuffix" as="span">&amp; relationnelle.</EditableText>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="luxury-subheading-dark-left max-w-md lg:ml-auto">
-              Exécution de marché éprouvée : présence MTP UEMOA et BRVM, réseau d&apos;investisseurs qualifiés et
-              ingénierie sur mesure — au service de +500&nbsp;Mds F CFA levés par nos mandats d&apos;émission.
-            </p>
+            <EditableText
+              id="home.capacity.intro"
+              as="p"
+              className="luxury-subheading-dark-left max-w-md lg:ml-auto"
+            >
+              Exécution de marché éprouvée : présence MTP UEMOA et BRVM, réseau d'investisseurs qualifiés et
+              ingénierie sur mesure — au service de +500 Mds F CFA levés par nos mandats d'émission.
+            </EditableText>
           </div>
         </div>
 

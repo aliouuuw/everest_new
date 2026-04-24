@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from '@tanstack/react-router';
-import { FaBars, FaCog, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { Link, Outlet, useLocation, useNavigate } from '@tanstack/react-router';
+import { FaBars, FaCog, FaGlobe, FaHome, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 import { useAuth } from '../../components/Auth/useAuth';
+
+function isNavActive(pathname: string, href: string): boolean {
+  if (href === '/admin') {
+    return pathname === '/admin' || pathname === '/admin/';
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 const AdminLayout: React.FC = () => {
   const { signOut, isTransitioning } = useAuth();
   const navigate = useNavigate();
+  const pathname = useLocation({ select: (l) => l.pathname });
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [activeView, setActiveView] = useState('dashboard');
 
   const navigationItems = [
-    { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: activeView === 'dashboard' },
-    { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: activeView === 'publications' },
-    { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: activeView === 'media' },
-    { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: activeView === 'users' },
-    { icon: <FaCog />, label: "Settings", id: 'settings', href: '/admin/settings', active: activeView === 'settings' },
+    { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: isNavActive(pathname, '/admin') },
+    { icon: <FaGlobe />, label: "Contenu site", id: 'site-content', href: '/admin/site-content', active: isNavActive(pathname, '/admin/site-content') },
+    { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: isNavActive(pathname, '/admin/publications') },
+    { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: isNavActive(pathname, '/admin/media') },
+    { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: isNavActive(pathname, '/admin/users') },
+    { icon: <FaCog />, label: "Settings", id: 'settings', href: '/admin/settings', active: isNavActive(pathname, '/admin/settings') },
   ];
 
   const handleLogout = async () => {
@@ -56,7 +64,15 @@ const AdminLayout: React.FC = () => {
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
           <div className="text-sm font-display-aptos">CMS Admin</div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Link
+            to="/"
+            aria-label="Retour au site vitrine (accueil)"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[var(--mauve)] hover:bg-[var(--mauve-05)] rounded-lg transition-colors border border-transparent hover:border-[var(--mauve-15)]"
+          >
+            <FaHome className="text-base shrink-0 opacity-90" aria-hidden />
+            <span className="hidden sm:inline">Site vitrine</span>
+          </Link>
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
             <FaSearch className="text-secondary" />
             <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
@@ -84,7 +100,6 @@ const AdminLayout: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => {
-                    setActiveView(item.id);
                     navigate({ to: item.href });
                   }}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${

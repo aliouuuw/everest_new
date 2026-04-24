@@ -2,6 +2,7 @@ import { useEffect, useId, useRef } from 'react';
 import { Link } from '@tanstack/react-router';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
+import { EditableText } from '../../cms';
 
 export const HeroSectionMountain: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -77,36 +78,17 @@ export const HeroSectionMountain: React.FC = () => {
         >
           <source src="/ai-hero-bg-3.mp4" type="video/mp4" />
         </video>
-        {/* Radial vignette — subtle mauve only (light center → soft dark edge) */}
-        {/* <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: [
-              'radial-gradient(ellipse 82% 72% at 50% 44%,',
-              'color-mix(in srgb, var(--mauve) 0%, transparent) 0%,',
-              'color-mix(in srgb, var(--mauve) 0%, transparent) 32%,',
-              'color-mix(in srgb, var(--mauve) 5%, transparent) 58%,',
-              'color-mix(in srgb, var(--mauve) 11%, transparent) 82%,',
-              'color-mix(in srgb, var(--mauve) 16%, transparent) 100%)',
-            ].join(' '),
-          }}
-        /> */}
-        {/* Bottom fade — mauve dark → light, for legibility */}
         <div
           className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--mauve)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--mauve)_12%,transparent)] to-transparent"
         />
-        {/* Left edge — darker, more pronounced mauve falloff */}
         <div className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--mauve)_58%,black_42%)] via-[color-mix(in_srgb,var(--mauve)_20%,transparent)] to-transparent pointer-events-none" />
-        {/* Bottom right dark vignette — hides watermark */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: 'radial-gradient(ellipse 60% 30% at 100% 100%, rgb(0, 0, 0) 0%, rgba(10, 10, 10, 0.98) 0% 30%, transparent 80%)',
           }}
         />
-        {/* Very subtle read-through scrim for type contrast without crushing the image */}
         <div className="absolute inset-0 bg-[var(--mauve)]/[0.04] mix-blend-soft-light pointer-events-none" />
-        {/* Film grain */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.035] mix-blend-overlay"
           style={{
@@ -115,16 +97,27 @@ export const HeroSectionMountain: React.FC = () => {
         />
       </div>
 
-      {/* ─── Editorial Content — right column, gutters match Header (`page-container`) ─── */}
       <div
         className="relative z-10 w-full page-container pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
         style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
         <div className="ml-auto flex w-full max-w-[min(52rem,100%)] flex-col items-end text-right">
+          <div className="hero-kicker mb-8">
+            <EditableText
+              id="home.hero.kicker"
+              as="span"
+              className="inline-block text-[10px] md:text-[11px] tracking-[0.35em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, color: 'var(--jaune-or)' }}
+            >
+              Société de Gestion et d&apos;Intermédiation — Dakar
+            </EditableText>
+          </div>
 
           <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
             <span className="block overflow-hidden">
-              <span
+              <EditableText
+                id="home.hero.title"
+                as="span"
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
@@ -136,10 +129,12 @@ export const HeroSectionMountain: React.FC = () => {
                 }}
               >
                 Accès stratégique aux marchés financiers
-              </span>
+              </EditableText>
             </span>
             <span className="mt-1 block overflow-hidden sm:mt-0.5">
-              <span
+              <EditableText
+                id="home.hero.titleAccent"
+                as="span"
                 className="hero-title-line block"
                 style={{
                   fontFamily: 'var(--font-primary)',
@@ -151,7 +146,7 @@ export const HeroSectionMountain: React.FC = () => {
                 }}
               >
                 de l&apos;UEMOA
-              </span>
+              </EditableText>
             </span>
           </h1>
 
@@ -163,7 +158,9 @@ export const HeroSectionMountain: React.FC = () => {
             }}
           />
 
-          <p
+          <EditableText
+            id="home.hero.subtitle"
+            as="p"
             className="hero-body mb-9 sm:mb-10 max-w-[60ch] text-pretty"
             style={{
               fontFamily: 'var(--font-primary)',
@@ -173,18 +170,20 @@ export const HeroSectionMountain: React.FC = () => {
               color: 'var(--pure-white)',
             }}
           >
-            EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au cœur
-            du marché financier régional (SGI agréée AMF-UMOA, n° SGI/DA/2016/60). Nous structurons et facilitons
-            l&apos;accès aux opportunités d&apos;investissement et de financement à travers une approche rigoureuse,
-            sélective et orientée performance.
-          </p>
+            EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au
+            cœur du marché financier régional (SGI agréée AMF-UMOA, n° SGI/DA/2016/60). Nous structurons et
+            facilitons l&apos;accès aux opportunités d&apos;investissement et de financement à travers une
+            approche rigoureuse, sélective et orientée performance.
+          </EditableText>
 
           <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch justify-end gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
             <Link
               to="/offres"
               className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
             >
-              <span className="text-base font-semibold tracking-tight">Accéder aux opportunités</span>
+              <EditableText id="home.hero.ctaPrimary" as="span" className="text-base font-semibold tracking-tight">
+                Accéder aux opportunités
+              </EditableText>
               <div className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-5">
                 <FiArrowRight className="text-base shrink-0" aria-hidden />
               </div>
@@ -194,7 +193,9 @@ export const HeroSectionMountain: React.FC = () => {
               className="group inline-flex min-h-[3.75rem] items-center justify-center px-6 py-4 text-base font-semibold touch-manipulation transition-colors duration-200 text-white hover:text-white relative w-full sm:w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 rounded-sm"
               style={{ textShadow: '0 2px 5px rgba(0,0,0,0.35)' }}
             >
-              <span className="text-base font-semibold tracking-tight">Nous contacter</span>
+              <EditableText id="home.hero.ctaSecondary" as="span" className="text-base font-semibold tracking-tight">
+                Nous contacter
+              </EditableText>
               <span
                 className="pointer-events-none absolute bottom-3 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent group-hover:via-white"
                 aria-hidden

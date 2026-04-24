@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { Outlet, useLocation } from '@tanstack/react-router'
+import { CMSProvider, EditPanel, EditToggle, isPublicCmsEditUiEnabled } from '../cms'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { BRVMTicker } from './Header/BRVMTicker'
@@ -115,31 +116,46 @@ export const Layout = () => {
   const isAuthenticated = typeof window !== 'undefined' && sessionStorage.getItem('isAuthenticated') === 'true'
   const isOnDashboard = location.pathname === '/dashboard'
   const hideExtras = isAuthenticated && isOnDashboard
-  
+
+  // The light CMS (floating toggle + edit panel) is suppressed on admin and
+  // auth routes to avoid conflicting with back-office tooling.
+  const isCmsSuppressedRoute =
+    location.pathname.startsWith('/admin') || location.pathname === '/auth'
+
   return (
     <ErrorBoundary>
       <LenisWrapper>
-        <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
-          {/* Header - Fixed position overlay */}
-          <Header />
+        <CMSProvider>
+          <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
+            {/* Header - Fixed position overlay */}
+            <Header />
 
-          {/* Main content area - No padding needed since Header is fixed */}
-          <main className="relative">
-            <Outlet />
-          </main>
+            {/* Main content area - No padding needed since Header is fixed */}
+            <main className="relative">
+              <Outlet />
+            </main>
 
-          {/* BRVM Live Ticker - Hide on dashboard */}
-          {!hideExtras && <BRVMTicker />}
+            {/* BRVM Live Ticker - Hide on dashboard */}
+            {!hideExtras && <BRVMTicker />}
 
-          {/* Footer - Hide on dashboard */}
-          {!hideExtras && <Footer />}
+            {/* Footer - Hide on dashboard */}
+            {!hideExtras && <Footer />}
 
-          {/* Floating WhatsApp Button - Hide on dashboard */}
-          {!hideExtras && <WhatsAppButton />}
+            {/* Floating WhatsApp Button - Hide on dashboard */}
+            {!hideExtras && <WhatsAppButton />}
 
-          {/* Service Worker Update Notification */}
-          <SWUpdateNotification />
-        </div>
+            {/* Service Worker Update Notification */}
+            <SWUpdateNotification />
+
+            {/* Light CMS controls: optional on-site UI; admin editor at /admin/site-content */}
+            {!isCmsSuppressedRoute && isPublicCmsEditUiEnabled() && (
+              <>
+                <EditToggle />
+                <EditPanel />
+              </>
+            )}
+          </div>
+        </CMSProvider>
       </LenisWrapper>
     </ErrorBoundary>
   )

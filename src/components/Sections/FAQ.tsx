@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import { Link } from '@tanstack/react-router';
 import { useReveal } from '../Hooks/useReveal';
+import { PillBadge } from '../ui';
+import { EditableText } from '../../cms';
 
 type QA = { q: string; a: string };
 
@@ -51,6 +53,13 @@ export const FAQ: React.FC = () => {
 
           {/* LEFT — Sticky heading */}
           <div className="lg:w-[35%] lg:sticky lg:top-28 lg:self-start">
+            <div className="mb-6">
+              <PillBadge>
+                <EditableText id="home.faq.badge" as="span">
+                  FAQ
+                </EditableText>
+              </PillBadge>
+            </div>
             <h2
               className="mb-5"
               style={{
@@ -62,17 +71,21 @@ export const FAQ: React.FC = () => {
                 color: 'var(--mauve)',
               }}
             >
-              Vous avez des questions ?<br />
-              Nous pouvons y répondre.
+              <EditableText id="home.faq.title" as="span">Vous avez des questions ?</EditableText><br />
+              <EditableText id="home.faq.titleSub" as="span">Nous pouvons y répondre.</EditableText>
             </h2>
-            <p className="text-secondary text-sm md:text-base mb-10 max-w-sm">
+            <EditableText
+              id="home.faq.intro"
+              as="p"
+              className="text-secondary text-sm md:text-base mb-10 max-w-sm"
+            >
               Retrouvez les réponses aux interrogations les plus courantes de nos clients.
-            </p>
+            </EditableText>
             <Link
               to="/faq"
               className="btn-primary-dark inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em]"
             >
-              Voir toutes les questions
+              <EditableText id="home.faq.linkLabel" as="span">Voir toutes les questions</EditableText>
             </Link>
           </div>
 
