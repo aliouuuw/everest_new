@@ -1,20 +1,13 @@
 import { Link } from '@tanstack/react-router';
-import {
-  FiArrowRight,
-  FiBarChart2,
-  FiBriefcase,
-  FiGlobe,
-  FiLayers,
-} from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 import { useReveal } from '../components/Hooks/useReveal';
 
 type Expertise = {
   id: string;
-  index: string;
-  kicker: string;
   title: string;
   titleAccent: string;
-  icon: React.ElementType;
+  imageUrl: string;
+  imageAlt: string;
   intro: string;
   approach: { label: string; text: string };
   bullets: string[];
@@ -23,11 +16,11 @@ type Expertise = {
 const EXPERTISES: Array<Expertise> = [
   {
     id: 'marche-titres-publics',
-    index: 'I',
-    kicker: 'Expertise I',
     title: 'Marché des',
     titleAccent: 'Titres Publics.',
-    icon: FiBarChart2,
+    imageUrl:
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Obligations souveraines et courbe de taux',
     intro:
       "Nous accompagnons les investisseurs dans leur accès aux émissions souveraines de l'UEMOA, en intégrant une analyse fine des dynamiques de taux et des conditions de marché.",
     approach: {
@@ -42,11 +35,11 @@ const EXPERTISES: Array<Expertise> = [
   },
   {
     id: 'marche-financier-regional',
-    index: 'II',
-    kicker: 'Expertise II',
     title: 'Marché Financier',
     titleAccent: 'Régional.',
-    icon: FiGlobe,
+    imageUrl:
+      'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Salle de marché et exécution boursière',
     intro:
       "Nous intervenons sur la BRVM en assurant une exécution efficiente et un conseil éclairé pour les investisseurs institutionnels et privés qualifiés.",
     approach: {
@@ -61,11 +54,11 @@ const EXPERTISES: Array<Expertise> = [
   },
   {
     id: 'ingenierie-financiere',
-    index: 'III',
-    kicker: 'Expertise III',
     title: 'Structuration &',
     titleAccent: 'Ingénierie financière.',
-    icon: FiLayers,
+    imageUrl:
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Structuration financière et modélisation',
     intro:
       "Nous concevons et mettons en œuvre des solutions de financement adaptées aux besoins des émetteurs publics et privés de la zone UEMOA.",
     approach: {
@@ -81,11 +74,11 @@ const EXPERTISES: Array<Expertise> = [
   },
   {
     id: 'private-office',
-    index: 'IV',
-    kicker: 'Expertise IV',
     title: 'Private',
     titleAccent: 'Office.',
-    icon: FiBriefcase,
+    imageUrl:
+      'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Conseil patrimonial personnalisé',
     intro:
       "Nous accompagnons une clientèle exigeante dans la structuration et la gestion de leur patrimoine, avec une approche disciplinée et long terme.",
     approach: {
@@ -129,22 +122,19 @@ export const ExpertisesPage = () => {
         </div>
       </section>
 
-      {/* ─── Sommaire (sticky TOC band) ─── */}
+      {/* ─── Sommaire (sticky TOC band, centered) ─── */}
       <nav
         aria-label="Sommaire des expertises"
         className="sticky top-[64px] z-20 border-b border-black/10 bg-[var(--pure-white)]/95 backdrop-blur"
       >
         <div className="page-container">
-          <ul className="flex flex-wrap gap-2 py-3 md:gap-3 md:py-4">
+          <ul className="flex flex-wrap justify-center gap-2 py-3 md:gap-3 md:py-4">
             {EXPERTISES.map((e) => (
               <li key={e.id}>
                 <a
                   href={`#${e.id}`}
                   className="group inline-flex items-center gap-2 rounded-full border border-[var(--command-border)] px-4 py-2 transition-colors duration-200 hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)]"
                 >
-                  <span className="font-primary text-[10px] font-bold tracking-[0.22em] text-[var(--jaune-or)]">
-                    {e.index}
-                  </span>
                   <span className="font-primary text-xs font-semibold text-[var(--mauve)] md:text-sm">
                     {e.title} {e.titleAccent.replace(/\.$/, '')}
                   </span>
@@ -159,9 +149,9 @@ export const ExpertisesPage = () => {
         </div>
       </nav>
 
-      {/* ─── Sections ─── */}
+      {/* ─── Sections (ValueProps-style image + content, alternating) ─── */}
       {EXPERTISES.map((e, idx) => (
-        <ExpertiseSection key={e.id} expertise={e} reversed={idx % 2 === 1} />
+        <ExpertiseSection key={e.id} expertise={e} imageLeft={idx % 2 === 0} />
       ))}
 
       {/* ─── CTA — Dark band (spacing matches FAQ / Outils) ─── */}
@@ -194,68 +184,82 @@ export const ExpertisesPage = () => {
   );
 };
 
-/* ───────── ExpertiseSection ───────── */
+/* ───────── ExpertiseSection — mirrors ValueProps image + copy grid ───────── */
 
-const ExpertiseSection: React.FC<{ expertise: Expertise; reversed: boolean }> = ({
+const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> = ({
   expertise,
-  reversed,
+  imageLeft,
 }) => {
   const sectionRef = useReveal<HTMLElement>();
-  const Icon = expertise.icon;
 
   return (
     <section
       id={expertise.id}
       ref={sectionRef}
-      className="reveal scroll-mt-40 bg-[var(--pure-white)] py-16 md:py-20 odd:bg-[var(--summit-ivory)]"
+      className="reveal scroll-mt-40 bg-[var(--pure-white)] py-16 md:py-20"
     >
       <div className="page-container">
-        <div
-          className={`grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12 ${
-            reversed ? 'lg:[&>*:first-child]:order-2' : ''
-          }`}
-        >
-          {/* Left/identity */}
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)]">
-                <Icon className="text-base" aria-hidden />
-              </span>
-              <span className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
-                {expertise.kicker}
-              </span>
-            </div>
-            <h2 className="mt-6 font-primary text-3xl font-bold leading-[1.05] tracking-tight text-[var(--mauve)] md:text-4xl lg:text-5xl">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+          {/* Image — col-span-5, order swaps with content */}
+          <div
+            className={`relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px] ${
+              imageLeft ? 'lg:order-1' : 'lg:order-2'
+            }`}
+          >
+            <img
+              src={expertise.imageUrl}
+              alt={expertise.imageAlt}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, transparent 55%, rgba(70,29,76,0.35) 100%)',
+              }}
+            />
+          </div>
+
+          {/* Copy — col-span-7 (no nested .reveal: only the ref host gets .in from useReveal) */}
+          <div
+            className={`flex flex-col justify-center lg:col-span-7 ${
+              imageLeft ? 'lg:order-2' : 'lg:order-1'
+            }`}
+          >
+            <h2 className="luxury-heading mb-4 max-w-xl">
               {expertise.title}{' '}
               <span style={{ color: 'var(--jaune-or)' }}>{expertise.titleAccent}</span>
             </h2>
-          </div>
-
-          {/* Right/content */}
-          <div className="lg:col-span-7">
-            <p className="text-base font-light leading-relaxed text-[var(--night-80)] md:text-lg">
+            <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
               {expertise.intro}
             </p>
 
-            <div className="mt-8 rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-7">
-              <p className="mb-4 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
+            <div className="mb-6 max-w-xl border-b border-[var(--command-border)] pb-6">
+              <p className="mb-2 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
                 {expertise.approach.label}
               </p>
-              <ul className="space-y-3">
-                {expertise.bullets.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-start gap-3 font-primary text-sm leading-relaxed text-[var(--night-80)] md:text-base"
-                  >
-                    <span
-                      aria-hidden
-                      className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--jaune-or)]"
-                    />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
+                {expertise.approach.text}
+              </p>
             </div>
+
+            <ul className="max-w-xl divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
+              {expertise.bullets.map((b) => (
+                <li
+                  key={b}
+                  className="flex items-start gap-3 py-5 md:gap-4 md:py-6"
+                >
+                  <span
+                    aria-hidden
+                    className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--jaune-or)]"
+                  />
+                  <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
+                    {b}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
