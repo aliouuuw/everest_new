@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { FiX } from "react-icons/fi";
 import { useCMS } from "./CMSProvider";
-import { MAX_VALUE_LENGTH, registry } from "./registry";
-import type { RegistryEntry } from "./registry";
+import { MAX_VALUE_LENGTH, PAGE_KEY_LABELS, registry } from "./registry";
+import type { PageKey, RegistryEntry } from "./registry";
 
 interface FieldState {
   value: string;
@@ -11,10 +12,10 @@ interface FieldState {
 }
 
 const btnReset =
-  "font-primary rounded-full border border-[var(--mauve-20)] bg-[var(--pure-white)] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--mauve-20)] disabled:hover:bg-[var(--pure-white)] disabled:hover:text-[var(--mauve)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve-30)] focus-visible:ring-offset-2";
+  "font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border border-[var(--mauve-20)] bg-[var(--command-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--mauve-20)] disabled:hover:bg-[var(--command-surface)] disabled:hover:text-[var(--mauve)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve-30)] focus-visible:ring-offset-2";
 
 const btnSave =
-  "font-primary rounded-full border-0 bg-[var(--jaune-or)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(202,148,47,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_8px_24px_rgba(202,148,47,0.35)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:brightness-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or-30)] focus-visible:ring-offset-2";
+  "font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border-0 bg-[var(--jaune-or)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(202,148,47,0.28)] transition-all duration-300 hover:-translate-y-px hover:brightness-105 hover:shadow-[0_6px_20px_rgba(202,148,47,0.35)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:brightness-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or-30)] focus-visible:ring-offset-2";
 
 /**
  * Side panel listing every editable field defined for the current page. Only
@@ -25,6 +26,11 @@ const btnSave =
  */
 export function EditPanel() {
   const { canEdit, editMode, panelOpen, pageKey, overrides, closeAll, saveContent, resetContent } = useCMS();
+
+  const pageTitle =
+    pageKey != null && pageKey in PAGE_KEY_LABELS
+      ? PAGE_KEY_LABELS[pageKey as PageKey]
+      : (pageKey ?? "Page");
 
   const entries: ReadonlyArray<RegistryEntry> =
     pageKey != null ? registry[pageKey] : [];
@@ -120,24 +126,34 @@ export function EditPanel() {
   return (
     <aside
       data-lenis-prevent
-      className="fixed right-0 top-0 z-[9999] flex h-[100dvh] w-[min(440px,100vw)] flex-col overscroll-contain border-l border-[var(--mauve-10)] bg-[var(--summit-ivory)] font-primary shadow-[-8px_0_32px_-12px_rgba(70,29,76,0.18)]"
+      className="fixed right-0 top-0 z-[9999] flex h-[100dvh] w-[min(440px,100vw)] flex-col overscroll-contain border-l border-[var(--command-border)] bg-[var(--pure-white)] font-primary shadow-[-12px_0_40px_-16px_rgba(70,29,76,0.2)]"
     >
-      <header className="flex shrink-0 items-center justify-between gap-4 border-b border-[var(--jaune-or-20)] bg-[var(--mauve)] px-5 py-4 text-[var(--pure-white)]">
-        <div className="min-w-0">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
-            Contenu — page
+      <header className="relative shrink-0 border-b border-[var(--mauve-15)] bg-[var(--mauve)] px-5 py-5 text-[var(--pure-white)]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--jaune-or)]/50 to-transparent"
+        />
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 pr-2">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
+              Édition — contenu
+            </p>
+            <h2 className="mt-1.5 truncate font-primary text-xl font-bold leading-tight tracking-tight">
+              {pageTitle}
+            </h2>
+            <p className="mt-1.5 text-xs font-light leading-relaxed text-white/75">
+              Les changements s&apos;affichent sur le site après enregistrement.
+            </p>
           </div>
-          <div className="truncate font-primary text-lg font-bold tracking-tight text-[var(--pure-white)]">
-            {pageKey ?? "unknown"}
-          </div>
+          <button
+            type="button"
+            onClick={closeAll}
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/[0.08] text-[var(--jaune-or)] transition-all duration-300 hover:border-[var(--jaune-or)]/50 hover:bg-[var(--jaune-or)]/15 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--mauve)]"
+            aria-label="Fermer le panneau d'édition"
+          >
+            <FiX className="h-5 w-5" strokeWidth={2.25} />
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={closeAll}
-          className="font-primary shrink-0 rounded-full border border-[color-mix(in_srgb,var(--jaune-or)_45%,transparent)] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--jaune-or)] transition-all duration-300 hover:bg-[var(--jaune-or-10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--mauve)]"
-        >
-          Fermer
-        </button>
       </header>
 
       <div
@@ -160,7 +176,7 @@ export function EditPanel() {
 
         {Object.entries(sections).map(([section, sectionEntries]) => (
           <section key={section} className="mb-8 last:mb-0">
-            <h3 className="font-primary mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--mauve-40)]">
+            <h3 className="font-primary mb-3 border-l-2 border-[var(--jaune-or)] pl-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--mauve-40)]">
               {section}
             </h3>
 
