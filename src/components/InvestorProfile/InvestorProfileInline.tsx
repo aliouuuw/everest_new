@@ -123,10 +123,10 @@ export const InvestorProfileInline: React.FC = () => {
       {step === 'quiz' && (
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-semibold text-[var(--night-60)] uppercase tracking-wider" style={{ fontFamily: 'var(--font-primary)' }}>
+            <span className="outils-invest-label font-semibold text-[var(--night-60)] uppercase tracking-wider" style={{ fontFamily: 'var(--font-primary)' }}>
               {step === 'quiz' ? `Question ${currentQuestion + 1} sur ${QUESTIONS.length}` : 'Presque terminé'}
             </span>
-            <span className="text-xs font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <span className="outils-invest-label font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
               {Math.round(progress)}%
             </span>
           </div>
@@ -188,7 +188,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center">
           <div className="text-[var(--mauve)] mb-1 opacity-70">{stat.icon}</div>
-          <span className="text-xs font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</span>
+          <span className="outils-invest-label font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</span>
         </div>
       ))}
     </div>
@@ -227,7 +227,7 @@ const QuizStep: React.FC<{
     >
       {/* Category indicator */}
       <div className="flex items-center gap-2 mb-6">
-        <span className="text-xs font-semibold text-[var(--mauve)] bg-[var(--mauve-10)] px-3 py-1 rounded-full" style={{ fontFamily: 'var(--font-primary)' }}>
+        <span className="outils-invest-label font-semibold text-[var(--mauve)] bg-[var(--mauve-10)] px-3 py-1 rounded-full" style={{ fontFamily: 'var(--font-primary)' }}>
           {STEP_ICONS[currentCategoryIdx]?.label || 'Profil'}
         </span>
       </div>
@@ -260,7 +260,7 @@ const QuizStep: React.FC<{
                 }`}>
                   {isSelected && <FiCheck size={12} className="text-white" />}
                 </div>
-                <span className={`text-sm leading-snug ${
+                <span className={`outils-invest-label leading-snug ${
                   isSelected ? 'text-[var(--mauve)] font-semibold' : 'text-[var(--night-80)]'
                 }`} style={{ fontFamily: 'var(--font-primary)' }}>
                   {option.label}
@@ -274,7 +274,7 @@ const QuizStep: React.FC<{
       {questionIndex > 0 && (
         <button
           onClick={onBack}
-          className="mt-6 flex items-center gap-2 text-sm text-[var(--night-60)] hover:text-[var(--mauve)] transition-colors"
+          className="mt-6 flex items-center gap-2 outils-invest-label text-[var(--night-60)] hover:text-[var(--mauve)] transition-colors"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           <FiArrowLeft size={16} /> Retour
@@ -298,7 +298,7 @@ const PersonalStep: React.FC<{
       <h3 className="font-bold text-xl text-[var(--night)] mb-2" style={{ fontFamily: 'var(--font-primary)' }}>
         Vos informations personnelles
       </h3>
-      <p className="text-sm text-[var(--night-60)] max-w-md mx-auto" style={{ fontFamily: 'var(--font-primary)' }}>
+      <p className="text-base text-[var(--night-60)] max-w-md mx-auto" style={{ fontFamily: 'var(--font-primary)' }}>
         Entrez vos données personnelles avant de continuer le formulaire profil d'investisseur.
       </p>
     </div>
@@ -306,7 +306,7 @@ const PersonalStep: React.FC<{
     <form onSubmit={onSubmit} className="space-y-4 max-w-md mx-auto">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>Prénom *</label>
+          <label className="block outils-invest-label font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>Prénom *</label>
           <input
             type="text"
             required
@@ -318,7 +318,7 @@ const PersonalStep: React.FC<{
           />
         </div>
         <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>Nom *</label>
+          <label className="block outils-invest-label font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>Nom *</label>
           <input
             type="text"
             required
@@ -332,7 +332,7 @@ const PersonalStep: React.FC<{
       </div>
 
       <div>
-        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
+        <label className="block outils-invest-label font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
           <FiMail size={12} className="inline mr-1" />Email *
         </label>
         <input
@@ -347,7 +347,7 @@ const PersonalStep: React.FC<{
       </div>
 
       <div>
-        <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
+        <label className="block outils-invest-label font-semibold uppercase tracking-wider text-[var(--night-60)] mb-1.5" style={{ fontFamily: 'var(--font-primary)' }}>
           <FiPhone size={12} className="inline mr-1" />Téléphone
         </label>
         <input
@@ -368,7 +368,7 @@ const PersonalStep: React.FC<{
         Continuer le questionnaire <FiArrowRight size={16} />
       </button>
 
-      <p className="text-[10px] text-[var(--night-40)] text-center leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
+      <p className="text-sm text-[var(--night-40)] text-center leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
         Vos données sont traitées de manière confidentielle et ne seront jamais partagées avec des tiers.
       </p>
     </form>
@@ -389,7 +389,7 @@ const ResultStep: React.FC<{
       {isSubmitting && (
         <div className="flex items-center justify-center gap-2 mb-4 py-2 px-4 rounded-lg bg-[var(--mauve-05)] border border-[var(--mauve-10)]">
           <span className="w-4 h-4 border-2 border-[var(--mauve-30)] border-t-[var(--mauve)] rounded-full animate-spin" />
-          <span className="text-xs text-[var(--mauve)] font-medium" style={{ fontFamily: 'var(--font-primary)' }}>Enregistrement en cours...</span>
+          <span className="outils-invest-label text-[var(--mauve)] font-medium" style={{ fontFamily: 'var(--font-primary)' }}>Enregistrement en cours...</span>
         </div>
       )}
       <div className="mb-6 flex items-center gap-4">
@@ -397,7 +397,7 @@ const ResultStep: React.FC<{
           <Icon size={28} style={{ color: result.color }} />
         </div>
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider px-2 py-1 rounded" style={{ color: result.color, background: result.colorLight, fontFamily: 'var(--font-primary)' }}>
+          <span className="outils-invest-label font-bold uppercase tracking-wider px-2 py-1 rounded" style={{ color: result.color, background: result.colorLight, fontFamily: 'var(--font-primary)' }}>
             Votre Profil
           </span>
           <h3 className="font-bold text-2xl mt-1" style={{ fontFamily: 'var(--font-primary)', color: result.color }}>
@@ -406,27 +406,27 @@ const ResultStep: React.FC<{
         </div>
       </div>
 
-      <p className="text-sm text-[var(--night-60)] mb-6" style={{ fontFamily: 'var(--font-primary)' }}>
+      <p className="text-base text-[var(--night-60)] mb-6" style={{ fontFamily: 'var(--font-primary)' }}>
         {result.subtitle}
       </p>
 
       {/* Risk level */}
       <div className="mb-6 p-4 rounded-xl bg-[var(--summit-ivory)] border border-[var(--mauve-10)]">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs uppercase tracking-wider font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>Niveau de risque</span>
-          <span className="text-sm font-bold" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>{result.riskLevel} / 5</span>
+          <span className="outils-invest-label uppercase tracking-wider font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>Niveau de risque</span>
+          <span className="outils-invest-label font-bold" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>{result.riskLevel} / 5</span>
         </div>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((level) => (
             <div key={level} className="h-2 flex-1 rounded-full" style={{ background: level <= result.riskLevel ? result.color : 'var(--mauve-10)' }} />
           ))}
         </div>
-        <p className="text-xs text-[var(--night-80)] mt-3" style={{ fontFamily: 'var(--font-primary)' }}>{result.description}</p>
+        <p className="text-sm text-[var(--night-80)] mt-3" style={{ fontFamily: 'var(--font-primary)' }}>{result.description}</p>
       </div>
 
       {/* Allocation */}
       <div className="mb-6 p-4 rounded-xl bg-[var(--summit-ivory)] border border-[var(--mauve-10)]">
-        <span className="text-xs uppercase tracking-wider font-semibold text-[var(--night-60)] block mb-3" style={{ fontFamily: 'var(--font-primary)' }}>Allocation recommandée</span>
+        <span className="outils-invest-label uppercase tracking-wider font-semibold text-[var(--night-60)] block mb-3" style={{ fontFamily: 'var(--font-primary)' }}>Allocation recommandée</span>
         <div className="flex h-3 rounded-full overflow-hidden mb-4 bg-[var(--mauve-10)]">
           {result.allocation.map((a) => (
             <div key={a.label} style={{ width: `${a.percentage}%`, background: a.color }} />
@@ -436,7 +436,7 @@ const ResultStep: React.FC<{
           {result.allocation.map((a) => (
             <div key={a.label} className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: a.color }} />
-              <span className="text-xs text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>{a.label} <strong>{a.percentage}%</strong></span>
+              <span className="outils-invest-label text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>{a.label} <strong>{a.percentage}%</strong></span>
             </div>
           ))}
         </div>
@@ -444,8 +444,8 @@ const ResultStep: React.FC<{
 
       {/* Recommendation */}
       <div className="p-4 rounded-xl mb-6" style={{ background: result.colorLight, border: `1px solid ${result.color}20`, borderLeftWidth: '3px', borderLeftColor: result.color }}>
-        <span className="text-xs uppercase tracking-wider font-bold block mb-1" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>Notre recommandation</span>
-        <p className="text-sm text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{result.recommendation}</p>
+        <span className="outils-invest-label uppercase tracking-wider font-bold block mb-1" style={{ color: result.color, fontFamily: 'var(--font-primary)' }}>Notre recommandation</span>
+        <p className="text-base text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{result.recommendation}</p>
       </div>
 
       {/* PDF Report */}

@@ -111,7 +111,7 @@ export const DividendCalculator: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           {/* Nombre d'actions */}
           <div>
-            <label className="block mb-2 text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <label className="block mb-2 outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
               Nombre d'actions
             </label>
             <input
@@ -124,7 +124,7 @@ export const DividendCalculator: React.FC = () => {
 
           {/* Prix par action */}
           <div>
-            <label className="block mb-2 text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <label className="block mb-2 outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
               $ Prix par action (F CFA)
             </label>
             <input
@@ -137,7 +137,7 @@ export const DividendCalculator: React.FC = () => {
 
           {/* Dividende annuel par action */}
           <div>
-            <label className="block mb-2 text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <label className="block mb-2 outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
               Dividende annuel par action (F CFA)
             </label>
             <input
@@ -151,7 +151,7 @@ export const DividendCalculator: React.FC = () => {
           {/* Croissance annuelle du dividende */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+              <label className="outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                 Croissance annuelle du dividende
               </label>
               <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{inputs.dividendGrowthRate}%</span>
@@ -169,7 +169,7 @@ export const DividendCalculator: React.FC = () => {
           {/* Horizon de projection */}
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="text-sm font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+              <label className="outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                 Horizon de projection
               </label>
               <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{inputs.projectionYears} ans</span>
@@ -190,15 +190,15 @@ export const DividendCalculator: React.FC = () => {
           <div className="pt-6 border-t border-[var(--mauve-10)] mt-auto">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               <div>
-                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Rendement du dividende</span>
+                <span className="outils-invest-label text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Rendement du dividende</span>
                 <span className="font-bold text-lg text-[#16a34a]" style={{ fontFamily: 'var(--font-primary)' }}>{results.dividendYield.toFixed(2)}%</span>
               </div>
               <div>
-                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Revenu annuel</span>
+                <span className="outils-invest-label text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Revenu annuel</span>
                 <span className="font-bold text-lg text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(results.annualDividendIncome)}</span>
               </div>
               <div>
-                <span className="text-sm text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Revenu projeté ({inputs.projectionYears} ans)</span>
+                <span className="outils-invest-label text-[var(--night-60)] block mb-1" style={{ fontFamily: 'var(--font-primary)' }}>Revenu projeté ({inputs.projectionYears} ans)</span>
                 <span className="font-bold text-xl text-[#dc2626]" style={{ fontFamily: 'var(--font-primary)' }}>{formatCurrency(results.yearlyProjection[results.yearlyProjection.length - 1].annualIncome)}</span>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiArrowRight, FiTarget, FiTrendingUp, FiPercent, FiDollarSign, FiBookOpen, FiInfo, FiCheck } from 'react-icons/fi'
+import { FiArrowRight, FiBookOpen, FiCheck, FiDollarSign, FiInfo, FiPercent, FiTarget, FiTrendingUp } from 'react-icons/fi'
 import { CompoundInterestCalculator } from '../components/InvestorProfile/CompoundInterestCalculator'
 import { DividendCalculator } from '../components/InvestorProfile/DividendCalculator'
 import { InvestorProfileInline } from '../components/InvestorProfile/InvestorProfileInline'
@@ -30,7 +30,7 @@ const TOOL_META: Record<ToolId, { title: string; subtitle: string; icon: React.R
   },
 }
 
-const TOOL_TIPS: Record<ToolId, { title: string; items: string[] }> = {
+const TOOL_TIPS: Record<ToolId, { title: string; items: Array<string> }> = {
   profil: {
     title: "Pourquoi connaître votre profil ?",
     items: [
@@ -73,7 +73,7 @@ export const SimulateurPage: React.FC = () => {
         <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
             <div className="md:col-span-8">
-              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
                 Outils Investisseurs.
               </h1>
             </div>
@@ -97,7 +97,7 @@ export const SimulateurPage: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTool(tab.id)}
-                  className={`group flex items-center gap-2 px-5 py-2.5 text-sm font-medium whitespace-nowrap rounded-md transition-all duration-200 ${
+                  className={`group flex items-center gap-2 px-5 py-2.5 outils-invest-label font-medium whitespace-nowrap rounded-md transition-all duration-200 ${
                     isActive
                       ? 'border border-[var(--night)] text-[var(--night)] shadow-sm'
                       : 'border border-transparent text-[var(--night-60)] hover:text-[var(--night)] hover:bg-[var(--mauve-05)]'
@@ -152,13 +152,13 @@ export const SimulateurPage: React.FC = () => {
                   <div className="bg-[var(--mauve-05)] rounded-xl p-6 border border-[var(--mauve-10)]">
                     <div className="flex items-center gap-2 mb-4">
                       <FiBookOpen size={18} className="text-[var(--mauve)]" />
-                      <h3 className="font-bold text-base uppercase tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                      <h3 className="font-bold outils-invest-label uppercase tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         {tips.title}
                       </h3>
                     </div>
                     <ul className="space-y-3">
                       {tips.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-base text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                        <li key={i} className="flex items-start gap-3 outils-invest-label text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
                           <FiCheck size={14} className="text-[var(--jaune-or)] mt-0.5 shrink-0" />
                           <span>{item}</span>
                         </li>
@@ -170,7 +170,7 @@ export const SimulateurPage: React.FC = () => {
                   <div className="mt-4 bg-[var(--summit-ivory)] rounded-xl p-6 border border-[var(--mauve-10)]">
                     <div className="flex items-center gap-2 mb-3">
                       <FiInfo size={16} className="text-[var(--night-40)]" />
-                      <span className="text-base font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                      <span className="outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                         Note importante
                       </span>
                     </div>
@@ -190,7 +190,10 @@ export const SimulateurPage: React.FC = () => {
         <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
+              <h2
+                className="font-primary font-bold leading-[0.95] tracking-tight mb-6 text-white"
+                style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
+              >
                 Besoin d'un accompagnement personnalisé ?
               </h2>
               <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">

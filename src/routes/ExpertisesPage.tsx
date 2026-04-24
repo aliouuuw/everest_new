@@ -109,12 +109,12 @@ export const ExpertisesPage = () => {
       {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Contact) ─── */}
       <section
         ref={heroRef}
-        className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]"
+        className="relative pt-[150px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]"
       >
         <div className="relative z-10 page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
-              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
                 Nos expertises.
               </h1>
             </div>
@@ -169,7 +169,10 @@ export const ExpertisesPage = () => {
         <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-white">
+              <h2
+                className="font-primary font-bold leading-[0.95] tracking-tight mb-6 text-white"
+                style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
+              >
                 Besoin d'un accompagnement personnalisé ?
               </h2>
               <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">

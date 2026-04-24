@@ -179,6 +179,11 @@ h1, h2 {
   @apply mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24;
 }
 
+/* Outils investisseur — label scale: 14px (sm) → 16px (md) → 18px (lg) */
+@utility outils-invest-label {
+  @apply text-sm md:text-base lg:text-[18px];
+}
+
 @utility gradient-gold {
   background: linear-gradient(120deg, var(--jaune-or-light) 0%, var(--jaune-or) 55%, var(--jaune-or) 100%);
 }

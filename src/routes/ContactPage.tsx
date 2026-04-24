@@ -51,11 +51,11 @@ export const ContactPage = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Expertises) ─── */}
-      <section className="relative pt-[88px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
+      <section className="relative pt-[150px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
         <div className="relative z-10 page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
-              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)' }}>
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
                 Parlons de vos projets.
               </h1>
             </div>
