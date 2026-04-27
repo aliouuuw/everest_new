@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
-import { Link } from '@tanstack/react-router';
+import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2';
 import { useReveal } from '../Hooks/useReveal';
-import { PillBadge } from '../ui';
 import { EditableText } from '../../cms';
 
 type QA = { q: string; a: string };
@@ -45,96 +44,67 @@ export const FAQ: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative py-24 md:py-32 overflow-hidden"
-      style={{ background: 'var(--white-smoke)' }}
+      className="reveal relative bg-[var(--summit-ivory)] py-16 md:py-20"
     >
       <div className="page-container">
-        <div className="soft-panel flex flex-col items-start gap-10 p-6 sm:gap-12 sm:p-8 md:gap-16 md:p-10 lg:flex-row lg:gap-24">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(240px,0.5fr)_1fr] lg:gap-16">
 
-          {/* LEFT — Sticky heading */}
-          <div className="lg:w-[35%] lg:sticky lg:top-28 lg:self-start">
-            <div className="mb-6">
-              <PillBadge>
-                <EditableText id="home.faq.badge" as="span">
-                  FAQ
-                </EditableText>
-              </PillBadge>
-            </div>
-            <h2
-              className="mb-5"
-              style={{
-                fontFamily: 'var(--font-primary)',
-                fontWeight: 700,
-                fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)',
-                lineHeight: 1.2,
-                letterSpacing: '-0.02em',
-                color: 'var(--mauve)',
-              }}
-            >
-              <EditableText id="home.faq.title" as="span">Vous avez des questions ?</EditableText><br />
-              <EditableText id="home.faq.titleSub" as="span">Nous pouvons y répondre.</EditableText>
+          {/* LEFT — Compact intro */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <h2 className="luxury-heading mb-6">
+              <EditableText id="home.faq.title" as="span">Questions</EditableText>{' '}
+              <EditableText id="home.faq.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>fréquentes.</EditableText>
             </h2>
-            <EditableText
-              id="home.faq.intro"
-              as="p"
-              className="text-secondary text-sm md:text-base mb-10 max-w-sm"
-            >
-              Retrouvez les réponses aux interrogations les plus courantes de nos clients.
-            </EditableText>
-            <Link
-              to="/faq"
-              className="btn-primary-dark inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em]"
-            >
-              <EditableText id="home.faq.linkLabel" as="span">Voir toutes les questions</EditableText>
-            </Link>
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--mauve)] text-white">
+                <HiOutlineChatBubbleLeftRight className="h-5 w-5" />
+              </div>
+              <EditableText
+                id="home.faq.intro"
+                as="p"
+                className="max-w-xs font-primary text-sm font-light leading-relaxed text-[var(--night-70)] md:text-base"
+              >
+                Trouvez rapidement les réponses aux questions les plus fréquentes sur nos services et les marchés.
+              </EditableText>
+            </div>
           </div>
 
-          {/* RIGHT — Bubble accordion */}
-          <div className="lg:w-[65%] flex flex-col gap-3">
+          {/* RIGHT — Stacked rounded cards */}
+          <div className="flex flex-col gap-3">
             {faqs.map((item, i) => {
               const isOpen = openIndex === i;
               return (
                 <div
                   key={item.q}
-                  className={`soft-panel-muted overflow-hidden rounded-xl transition-shadow duration-300 ${
-                    isOpen ? 'shadow-md' : ''
-                  }`}
+                  className="overflow-hidden rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] transition-colors duration-300 hover:border-[var(--mauve-20)]"
                 >
                   <button
                     onClick={() => toggle(i)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2 rounded-2xl group"
+                    className="group flex w-full items-center justify-between gap-5 px-5 py-4 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve)] focus-visible:ring-offset-2 md:px-6"
                   >
                     <h3
-                      className="font-primary font-medium text-sm md:text-base pr-6 transition-colors duration-300"
+                      className="pr-6 font-primary text-sm font-medium leading-relaxed transition-colors duration-300"
                       style={{ color: isOpen ? 'var(--mauve)' : 'var(--night)' }}
                     >
                       {item.q}
                     </h3>
-                    <div
-                      className="flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-300"
+                    <FiChevronDown
+                      className="h-4 w-4 shrink-0 transition-all duration-300"
                       style={{
-                        borderColor: isOpen ? 'var(--mauve)' : 'var(--mauve-20)',
-                        background: isOpen ? 'var(--mauve)' : 'transparent',
+                        color: isOpen ? 'var(--mauve)' : 'var(--night-60)',
+                        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                       }}
-                    >
-                      <FiChevronDown
-                        className="w-3.5 h-3.5 transition-all duration-300"
-                        style={{
-                          color: isOpen ? 'var(--pure-white)' : 'var(--mauve)',
-                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        }}
-                      />
-                    </div>
+                    />
                   </button>
 
                   <div
                     className="overflow-hidden transition-all duration-300"
                     style={{
-                      maxHeight: isOpen ? '360px' : '0px',
+                      maxHeight: isOpen ? '320px' : '0px',
                       opacity: isOpen ? 1 : 0,
                     }}
                   >
-                    <p className="px-6 pb-5 font-primary font-light text-[var(--night-60)] text-xs md:text-sm leading-relaxed">
+                    <p className="max-w-2xl px-5 pb-5 font-primary text-xs font-light leading-relaxed text-[var(--night-60)] md:px-6 md:text-sm">
                       {item.a}
                     </p>
                   </div>

@@ -26,8 +26,7 @@ export const CTA: React.FC<{
     >
       <div className="page-container">
         <div
-          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-[var(--radius-card-lg)] border border-white/10 p-6 shadow-[0_8px_40px_rgba(0,0,0,0.12)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
-          style={{ background: 'var(--mauve)' }}
+          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
         >
           <div className="relative z-10 lg:w-3/5">
             <div className="mb-6">
@@ -37,18 +36,18 @@ export const CTA: React.FC<{
                 </EditableText>
               </PillBadge>
             </div>
-            <h2 className="luxury-heading-dark mb-6">
+            <h2 className="luxury-heading mb-6">
               <EditableText id="home.cta.title" as="span">
                 Accéder à une expertise
               </EditableText>{' '}
-              <EditableText id="home.cta.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>
+              <EditableText id="home.cta.titleAccent" as="span" style={{ color: 'var(--mauve)' }}>
                 financière structurée.
               </EditableText>
             </h2>
             <EditableText
               id="home.cta.intro"
               as="p"
-              className="max-w-md font-primary text-sm md:text-base font-light leading-[1.7] text-white/80"
+              className="max-w-md font-primary text-sm md:text-base font-light leading-[1.7] text-[var(--night-70)]"
             >
               Échangeons sur vos objectifs — rendement, horizon, contraintes réglementaires — et sur la formule
               la plus adaptée : courtage, conseil ou gestion sous mandat.
@@ -60,26 +59,18 @@ export const CTA: React.FC<{
               <button
                 type="button"
                 onClick={() => setIsProfileOpen(true)}
-                className="group btn-cta-pill btn-cta-pill--gold justify-between sm:justify-start"
+                className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
               >
-                <span className="btn-cta-pill__label">
-                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
-                </span>
-                <span className="btn-cta-pill__trail" aria-hidden>
-                  <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
-                </span>
+                <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
+                <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
               </button>
             )}
             <a
               href={primaryHref}
-              className="group btn-cta-pill btn-cta-pill--outline-light justify-center sm:justify-start"
+              className="group inline-flex items-center justify-center gap-3 rounded-full border-2 border-[var(--mauve)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--mauve)] transition-all duration-300 hover:bg-[var(--mauve)] hover:text-white sm:justify-start"
             >
-              <span className="btn-cta-pill__label">
-                <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
-              </span>
-              <span className="btn-cta-pill__trail" aria-hidden>
-                <FiArrowRight className="text-lg text-[var(--mauve)] transition-transform duration-500 group-hover:translate-x-px" />
-              </span>
+              <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
+              <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
             </a>
           </div>
 

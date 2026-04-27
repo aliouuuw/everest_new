@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight } from 'react-icons/fi';
 import { useReveal } from '../components/Hooks/useReveal';
+import { HiArrowRight } from 'react-icons/hi2';
 
 type Expertise = {
   id: string;
@@ -220,13 +221,10 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
               {expertise.bullets.map((b) => (
                 <li
                   key={b}
-                  className="group flex items-start gap-3 py-5 md:gap-4 md:py-6 transition-colors duration-300"
+                  className="group flex items-center gap-3 py-5 md:gap-4 md:py-6 hover:pl-4 transition-all duration-300"
                 >
-                  <span
-                    aria-hidden
-                    className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-125"
-                  />
-                  <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] transition-colors duration-300 group-hover:text-[var(--mauve)] md:text-base">
+                  <HiArrowRight className="text-[var(--mauve)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                  <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
                     {b}
                   </span>
                 </li>

@@ -190,7 +190,7 @@ export const InsightsMerged: React.FC = () => {
                 key={article.slug}
                 to="/actualites/$slug"
                 params={{ slug: article.slug }}
-                className="group flex min-h-0 w-[min(100%,85vw)] max-w-sm shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-[var(--command-border)] bg-[var(--command-surface)] transition-all duration-500 hover:border-[var(--mauve-20)] hover:shadow-md md:w-auto md:max-w-none"
+                className="group flex min-h-0 w-[min(100%,85vw)] max-w-sm shrink-0 snap-start flex-col overflow-hidden rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] transition-all duration-500 hover:border-[var(--mauve-20)] hover:shadow-md md:w-auto md:max-w-none"
               >
                 <div className="relative aspect-[16/10] overflow-hidden rounded-t-xl">
                   <div className="absolute inset-0 z-10 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />

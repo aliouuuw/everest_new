@@ -120,15 +120,6 @@ export const Footer = () => {
                 <FaTiktok className="text-sm" />
               </a>
             </div>
-            <div className="mt-8">
-              <Link
-                to="/"
-                style={linkStyle}
-                className={`${linkClass} font-medium`}
-              >
-                Accueil
-              </Link>
-            </div>
           </div>
 
           {/* Société */}
