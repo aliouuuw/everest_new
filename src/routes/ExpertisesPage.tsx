@@ -121,34 +121,6 @@ export const ExpertisesPage = () => {
           </div>
         </div>
       </section>
-
-      {/* ─── Sommaire (sticky TOC band, centered) ─── */}
-      <nav
-        aria-label="Sommaire des expertises"
-        className="sticky top-[64px] z-20 border-b border-black/10 bg-[var(--pure-white)]/95 backdrop-blur"
-      >
-        <div className="page-container">
-          <ul className="flex flex-wrap justify-center gap-2 py-3 md:gap-3 md:py-4">
-            {EXPERTISES.map((e) => (
-              <li key={e.id}>
-                <a
-                  href={`#${e.id}`}
-                  className="group inline-flex items-center gap-2 rounded-full border border-[var(--command-border)] px-4 py-2 transition-colors duration-200 hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)]"
-                >
-                  <span className="font-primary text-xs font-semibold text-[var(--mauve)] md:text-sm">
-                    {e.title} {e.titleAccent.replace(/\.$/, '')}
-                  </span>
-                  <FiArrowRight
-                    className="text-xs text-[var(--mauve-60)] transition-transform duration-200 group-hover:translate-x-0.5"
-                    aria-hidden
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-
       {/* ─── Sections (ValueProps-style image + content, alternating) ─── */}
       {EXPERTISES.map((e, idx) => (
         <ExpertiseSection key={e.id} expertise={e} imageLeft={idx % 2 === 0} />
@@ -235,7 +207,7 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
               {expertise.intro}
             </p>
 
-            <div className="mb-6 max-w-xl border-b border-[var(--command-border)] pb-6">
+            <div className="mb-6 max-w-xl pb-6">
               <p className="mb-2 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
                 {expertise.approach.label}
               </p>
@@ -244,17 +216,17 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
               </p>
             </div>
 
-            <ul className="max-w-xl divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
+            <ul className="max-w-xl divide-y divide-[var(--command-border)] border-b border-[var(--command-border)]">
               {expertise.bullets.map((b) => (
                 <li
                   key={b}
-                  className="flex items-start gap-3 py-5 md:gap-4 md:py-6"
+                  className="group flex items-start gap-3 py-5 md:gap-4 md:py-6 transition-colors duration-300"
                 >
                   <span
                     aria-hidden
-                    className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--jaune-or)]"
+                    className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--jaune-or)] transition-transform duration-300 group-hover:scale-125"
                   />
-                  <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
+                  <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] transition-colors duration-300 group-hover:text-[var(--mauve)] md:text-base">
                     {b}
                   </span>
                 </li>
