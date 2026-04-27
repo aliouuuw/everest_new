@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
+import { EditableText } from '../cms';
 import { gsap } from 'gsap';
 
 type Article = {
@@ -115,17 +116,16 @@ export const ActualitesPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
-                Centre de presse
+                <EditableText id="actualites.hero.badge">Centre de presse</EditableText>
               </span>
               <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
-                Actualités &{' '}
-                <span style={{ color: 'var(--jaune-or)' }}>Communiqués.</span>
+                <EditableText id="actualites.hero.title">Actualités & Communiqués.</EditableText>
               </h1>
             </div>
 
             <div className="md:col-span-5 pb-2">
               <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
-                Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.
+                <EditableText id="actualites.hero.subtitle">Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.</EditableText>
               </p>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { FiCompass, FiHeadphones, FiShield, FiArrowRight, FiArrowDown } from 'react-icons/fi'
-
+import { EditableText } from '../cms'
 import { ServiceComparison } from '../components/Sections/ServiceComparison'
 import { TestimonialsCarousel } from '../components/Sections/TestimonialsCarousel'
 import { PerformanceComparison } from '../components/Sections/PerformanceComparison'
@@ -33,20 +33,20 @@ export const ServicesPage = () => {
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-12">
                   <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
-                    Services d'investissement
+                    <EditableText id="services.hero.badge">Services d'investissement</EditableText>
                   </span>
                 </div>
                 <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
-                  Votre partenaire pour investir sur la <span style={{ color: 'var(--jaune-or)' }}>BRVM.</span>
+                  <EditableText id="services.hero.title">Votre partenaire pour investir sur la</EditableText> <span style={{ color: 'var(--jaune-or)' }}><EditableText id="services.hero.titleAccent">BRVM.</EditableText></span>
                 </h1>
               </div>
               
               <div className="md:col-span-4 pb-4">
                 <p className="text-lg md:text-xl leading-relaxed text-[rgba(10, 10, 10, 0.7)] font-light mb-10 border-l-2 border-[var(--mauve)] pl-6">
-                  Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style, votre expérience et vos objectifs financiers.
+                  <EditableText id="services.hero.subtitle">Découvrez nos trois approches d'investissement conçues pour s'adapter à votre style, votre expérience et vos objectifs financiers.</EditableText>
                 </p>
                 <a href="#services" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
-                  <span>Explorer nos approches</span>
+                  <span><EditableText id="services.hero.ctaLabel">Explorer nos approches</EditableText></span>
                   <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
                 </a>
               </div>
@@ -60,12 +60,12 @@ export const ServicesPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4 min-w-0">
                 <div className="sticky top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">Nos approches</span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8"><EditableText id="services.overview.badge">Nos approches</EditableText></span>
                   <h2 className="font-primary font-bold text-4xl md:text-5xl leading-[1.05] mb-8 text-white whitespace-normal break-words" style={{ hyphens: 'auto', wordBreak: 'break-word' }}>
-                    Choisissez votre niveau d'accompagnement.
+                    <EditableText id="services.overview.title">Choisissez votre niveau d'accompagnement.</EditableText>
                   </h2>
                   <p className="text-white/60 leading-relaxed font-light text-lg mb-12">
-                    Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur.
+                    <EditableText id="services.overview.intro">Que vous soyez novice ou expérimenté, nous avons la solution adaptée à votre profil d'investisseur.</EditableText>
                   </p>
                   
                   <div className="border border-white/10 p-8 flex items-center justify-between rounded-2xl">
@@ -90,12 +90,12 @@ export const ServicesPage = () => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-primary font-bold text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
-                          Gestion Libre
+                          <EditableText id="services.libre.title">Gestion Libre</EditableText>
                         </h3>
                         <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] rounded-full px-4 py-1.5">Niveau 1</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
-                        Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.
+                        <EditableText id="services.libre.description">Idéal pour les investisseurs autonomes qui veulent garder le contrôle total.</EditableText>
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Décisions 100% indépendantes</li>
@@ -103,7 +103,7 @@ export const ServicesPage = () => {
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Frais réduits</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,40% - 0,60%</div>
+                        <div className="font-primary font-bold text-lg text-white/50"><EditableText id="services.libre.fees">Frais: 0,40% - 0,60%</EditableText></div>
                         <a href="#gestion-libre" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
@@ -120,12 +120,12 @@ export const ServicesPage = () => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-primary font-bold text-3xl md:text-4xl text-white">
-                          Gestion Assistée
+                          <EditableText id="services.assistee.title">Gestion Assistée</EditableText>
                         </h3>
                         <span className="text-xs font-bold tracking-[0.2em] text-[var(--night)] bg-[var(--jaune-or)] rounded-full uppercase px-4 py-1.5">Recommandé</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
-                        Parfait équilibre entre autonomie et conseils d'experts.
+                        <EditableText id="services.assistee.description">Parfait équilibre entre autonomie et conseils d'experts.</EditableText>
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Conseils personnalisés</li>
@@ -133,7 +133,7 @@ export const ServicesPage = () => {
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Décisions finales vôtres</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,60% - 0,80%</div>
+                        <div className="font-primary font-bold text-lg text-white/50"><EditableText id="services.assistee.fees">Frais: 0,60% - 0,80%</EditableText></div>
                         <a href="/services/gestion-assistee" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
@@ -149,12 +149,12 @@ export const ServicesPage = () => {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="font-primary font-bold text-3xl md:text-4xl text-white group-hover:text-[var(--jaune-or)] transition-colors">
-                          Gestion Sous-Mandat
+                          <EditableText id="services.mandat.title">Gestion Sous-Mandat</EditableText>
                         </h3>
                         <span className="text-xs font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase border border-[var(--jaune-or)] rounded-full px-4 py-1.5">Niveau 3</span>
                       </div>
                       <p className="text-white/60 leading-relaxed font-light text-xl mb-8">
-                        Pour ceux qui préfèrent déléguer la gestion à nos experts.
+                        <EditableText id="services.mandat.description">Pour ceux qui préfèrent déléguer la gestion à nos experts.</EditableText>
                       </p>
                       <ul className="space-y-3 text-white/80 mb-8">
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Gestion complète déléguée</li>
@@ -162,7 +162,7 @@ export const ServicesPage = () => {
                         <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-[var(--jaune-or)]" /> Suivi personnalisé</li>
                       </ul>
                       <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                        <div className="font-primary font-bold text-lg text-white/50">Frais: 0,80% - 1,20%</div>
+                        <div className="font-primary font-bold text-lg text-white/50"><EditableText id="services.mandat.fees">Frais: 0,80% - 1,20%</EditableText></div>
                         <a href="/services/gestion-sous-mandat" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>

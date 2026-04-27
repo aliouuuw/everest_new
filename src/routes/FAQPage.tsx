@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
+import { EditableText } from '../cms'
 
 type QA = { q: string; a: string }
 type Glossary = { term: string; def: string }
@@ -104,26 +105,26 @@ export const FAQPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
               <div className="md:col-span-7">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-3">
-                  Abécédaire & FAQ
+                  <EditableText id="faq.hero.badge">Abécédaire & FAQ</EditableText>
                 </span>
                 <h1
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
                   style={sectionTitleStyle}
                 >
-                  Comprendre nos services.
+                  <EditableText id="faq.hero.title">Comprendre nos services.</EditableText>
                 </h1>
               </div>
 
               <div className="md:col-span-5 pb-2">
                 <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-5">
-                  Questions fréquentes et définitions clés pour mieux décider.
+                  <EditableText id="faq.hero.subtitle">Questions fréquentes et définitions clés pour mieux décider.</EditableText>
                 </p>
                 <a
                   href="#faq"
                   className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
                   style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
                 >
-                  <span>Voir les questions</span>
+                  <span><EditableText id="faq.hero.ctaLabel">Voir les questions</EditableText></span>
                   <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
                 </a>
               </div>
@@ -137,12 +138,12 @@ export const FAQPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Support</span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="faq.qa.badge">Support</EditableText></span>
                   <h2
                     className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
                     style={sectionTitleStyle}
                   >
-                    Questions fréquentes.
+                    <EditableText id="faq.qa.title">Questions fréquentes.</EditableText>
                   </h2>
                 </div>
               </div>
@@ -173,12 +174,12 @@ export const FAQPage = () => {
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32 flex flex-col border-t border-[var(--mauve)]/10">
                   <div className="py-5 border-b border-[var(--mauve)]/10">
-                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Définitions</span>
+                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="faq.glossary.badge">Définitions</EditableText></span>
                     <h2
                       className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)] mb-4"
                       style={sectionTitleStyle}
                     >
-                      Abécédaire
+                      <EditableText id="faq.glossary.title">Abécédaire</EditableText>
                     </h2>
                     
                     <div className="flex flex-col gap-3 mt-6">
@@ -252,15 +253,15 @@ export const FAQPage = () => {
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
                   style={sectionTitleStyle}
                 >
-                  Besoin d'aide supplémentaire ?
+                  <EditableText id="faq.cta.title">Besoin d'aide supplémentaire ?</EditableText>
                 </h2>
                 <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
-                  Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.
+                  <EditableText id="faq.cta.subtitle">Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.</EditableText>
                 </p>
               </div>
               <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
                 <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit">
-                  Nous contacter <FiArrowRight className="text-lg" />
+                  <EditableText id="faq.cta.ctaLabel">Nous contacter</EditableText> <FiArrowRight className="text-lg" />
                 </a>
               </div>
             </div>

@@ -98,16 +98,149 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "home.faq.intro", label: "Intro paragraph", section: "FAQ", type: "text" },
     { id: "home.faq.linkLabel", label: "Link: see all questions", section: "FAQ", type: "text" },
   ],
-  about: [],
-  services: [],
-  offres: [],
-  bourse: [],
-  "capital-markets": [],
-  "investment-banking": [],
-  mandate: [],
-  faq: [],
-  publications: [],
-  actualites: [],
+  about: [
+    // Hero
+    { id: "about.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "about.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "about.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "about.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "about.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Mission & Vision
+    { id: "about.mission.badge", label: "Mission — badge", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.sectionTitle", label: "Mission — titre de section", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.missionTitle", label: "Notre mission — titre", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.missionBody", label: "Notre mission — corps", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.visionTitle", label: "Notre vision — titre", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.visionBody", label: "Notre vision — corps", section: "Mission & Vision", type: "text" },
+    // Philosophie
+    { id: "about.philosophie.badge", label: "Philosophie — badge", section: "Philosophie", type: "text" },
+    { id: "about.philosophie.title", label: "Philosophie — titre", section: "Philosophie", type: "text" },
+    // Histoire
+    { id: "about.histoire.badge", label: "Histoire — badge", section: "Histoire", type: "text" },
+    { id: "about.histoire.title", label: "Histoire — titre", section: "Histoire", type: "text" },
+    // Équipe
+    { id: "about.equipe.badge", label: "Équipe — badge", section: "Équipe", type: "text" },
+    { id: "about.equipe.title", label: "Équipe — titre", section: "Équipe", type: "text" },
+    // Conformité
+    { id: "about.conformite.badge", label: "Conformité — badge", section: "Conformité", type: "text" },
+    { id: "about.conformite.title", label: "Conformité — titre", section: "Conformité", type: "text" },
+  ],
+  services: [
+    // Hero
+    { id: "services.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "services.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
+    { id: "services.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "services.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "services.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Services Overview
+    { id: "services.overview.badge", label: "Approches — badge", section: "Aperçu services", type: "text" },
+    { id: "services.overview.title", label: "Approches — titre", section: "Aperçu services", type: "text" },
+    { id: "services.overview.intro", label: "Approches — intro", section: "Aperçu services", type: "text" },
+    // Gestion Libre
+    { id: "services.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
+    { id: "services.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "text" },
+    { id: "services.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
+    // Gestion Assistée
+    { id: "services.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
+    { id: "services.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "text" },
+    { id: "services.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
+    // Gestion Sous-Mandat
+    { id: "services.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "services.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "services.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
+  ],
+  offres: [
+    // Hero
+    { id: "offres.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "offres.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
+    { id: "offres.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "offres.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "offres.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Services Overview
+    { id: "offres.overview.badge", label: "Approches — badge", section: "Aperçu offres", type: "text" },
+    { id: "offres.overview.title", label: "Approches — titre", section: "Aperçu offres", type: "text" },
+    { id: "offres.overview.intro", label: "Approches — intro", section: "Aperçu offres", type: "text" },
+    // Gestion Libre
+    { id: "offres.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
+    { id: "offres.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "text" },
+    { id: "offres.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
+    // Gestion Assistée
+    { id: "offres.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
+    { id: "offres.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "text" },
+    { id: "offres.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
+    // Gestion Sous-Mandat
+    { id: "offres.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "offres.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "offres.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
+  ],
+  bourse: [
+    // Hero
+    { id: "bourse.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "bourse.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Section headers
+    { id: "bourse.assets.title", label: "Section cours — titre", section: "Cours BRVM", type: "text" },
+    { id: "bourse.assets.subtitle", label: "Section cours — sous-titre", section: "Cours BRVM", type: "text" },
+  ],
+  "capital-markets": [
+    // Hero
+    { id: "capital-markets.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "capital-markets.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "capital-markets.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    // CTA
+    { id: "capital-markets.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "capital-markets.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  "investment-banking": [
+    // Hero
+    { id: "investment-banking.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "investment-banking.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "investment-banking.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    // CTA
+    { id: "investment-banking.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "investment-banking.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  mandate: [
+    // Hero
+    { id: "mandate.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "mandate.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "mandate.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    // CTA
+    { id: "mandate.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "mandate.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  faq: [
+    // Hero
+    { id: "faq.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "faq.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "faq.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "faq.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Q&A section
+    { id: "faq.qa.badge", label: "FAQ — badge", section: "FAQ", type: "text" },
+    { id: "faq.qa.title", label: "FAQ — titre de section", section: "FAQ", type: "text" },
+    // Glossary
+    { id: "faq.glossary.badge", label: "Abécédaire — badge", section: "Abécédaire", type: "text" },
+    { id: "faq.glossary.title", label: "Abécédaire — titre", section: "Abécédaire", type: "text" },
+    // CTA
+    { id: "faq.cta.title", label: "CTA — titre", section: "CTA", type: "text" },
+    { id: "faq.cta.subtitle", label: "CTA — sous-titre", section: "CTA", type: "text" },
+    { id: "faq.cta.ctaLabel", label: "CTA — label bouton", section: "CTA", type: "text" },
+  ],
+  publications: [
+    // Hero
+    { id: "publications.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "publications.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
+    { id: "publications.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "publications.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+  ],
+  actualites: [
+    // Hero
+    { id: "actualites.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "actualites.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "actualites.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+  ],
 };
 
 /** Flat set of every known content ID across all pages. */

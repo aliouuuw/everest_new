@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { FiBarChart, FiEye, FiRefreshCw, FiStar } from 'react-icons/fi'
+import { EditableText } from '../cms'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 import { useReveal } from '../components/Hooks/useReveal'
 import { LoadingSpinner } from '@/components/CMS/Shared'
@@ -441,12 +442,12 @@ export const BoursePage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
               <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
-                Cours Actions Temps Réel
+                <EditableText id="bourse.hero.title">Cours Actions Temps Réel</EditableText>
               </h1>
             </div>
             <div className="lg:col-span-4">
               <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
-                Données de marché en temps réel, cours et volumes de transaction BRVM.
+                <EditableText id="bourse.hero.subtitle">Données de marché en temps réel, cours et volumes de transaction BRVM.</EditableText>
               </p>
               {/* Market Status Indicator */}
               <div className="flex items-center gap-4 text-sm">
@@ -492,8 +493,8 @@ export const BoursePage: React.FC = () => {
                 {/* Header with controls */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h2 className="font-primary font-bold text-3xl text-[var(--mauve)]">Cours des Actions BRVM</h2>
-                    <p className="text-[var(--night-60)] font-medium mt-1">Données de marché temps réel</p>
+                    <h2 className="font-primary font-bold text-3xl text-[var(--mauve)]"><EditableText id="bourse.assets.title">Cours des Actions BRVM</EditableText></h2>
+                    <p className="text-[var(--night-60)] font-medium mt-1"><EditableText id="bourse.assets.subtitle">Données de marché temps réel</EditableText></p>
                   </div>
 
                   {/* Filter & Sort Controls */}

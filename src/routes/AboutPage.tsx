@@ -1,5 +1,6 @@
 import { FiArrowRight } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
+import { EditableText } from '../cms'
 
 /** Matches Outils / Expertises / Contact section hero typography (max 50px). */
 const sectionTitleStyle = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' } as const
@@ -38,27 +39,27 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
               <div className="md:col-span-7">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-3">
-                  À propos
+                  <EditableText id="about.hero.badge">À propos</EditableText>
                 </span>
                 <h1
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
                   style={sectionTitleStyle}
                 >
-                  Des idées et des valeurs au service de vos{' '}
-                  <span style={{ color: 'var(--jaune-or)' }}>ambitions.</span>
+                  <EditableText id="about.hero.title">Des idées et des valeurs au service de vos</EditableText>{' '}
+                  <span style={{ color: 'var(--jaune-or)' }}><EditableText id="about.hero.titleAccent">ambitions.</EditableText></span>
                 </h1>
               </div>
 
               <div className="md:col-span-5 pb-2">
                 <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-5">
-                  Société de Gestion et d'Intermédiation agréée AMF-UMOA. <br /> Nous allions discipline de marché, ingénierie financière et proximité client.
+                  <EditableText id="about.hero.subtitle">Société de Gestion et d'Intermédiation agréée AMF-UMOA. Nous allions discipline de marché, ingénierie financière et proximité client.</EditableText>
                 </p>
                 <a
                   href="#gouvernance"
                   className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
                   style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
                 >
-                  <span>Notre mission</span>
+                  <span><EditableText id="about.hero.ctaLabel">Notre mission</EditableText></span>
                   <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
@@ -71,12 +72,12 @@ export const AboutPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Notre raison d'être</span>
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.mission.badge">Notre raison d'être</EditableText></span>
                 <h2
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-0 text-[var(--mauve)]"
                   style={sectionTitleStyle}
                 >
-                  Mission & Vision
+                  <EditableText id="about.mission.sectionTitle">Mission & Vision</EditableText>
                 </h2>
               </div>
               
@@ -84,18 +85,18 @@ export const AboutPage = () => {
                 <div className="border-t border-black/10">
                   <div className="group py-5 md:py-6 border-b border-black/10">
                     <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
-                      Notre mission
+                      <EditableText id="about.mission.missionTitle">Notre mission</EditableText>
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
-                      Proposer des solutions d'investissement performantes et responsables, fondées sur la transparence, l'expertise et la proximité.
+                      <EditableText id="about.mission.missionBody">Proposer des solutions d'investissement performantes et responsables, fondées sur la transparence, l'expertise et la proximité.</EditableText>
                     </p>
                   </div>
                   <div className="group py-5 md:py-6 border-b border-black/10">
                     <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
-                      Notre vision
+                      <EditableText id="about.mission.visionTitle">Notre vision</EditableText>
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
-                      Devenir un partenaire de référence en Afrique de l'Ouest pour la gestion de patrimoine et l'accès aux marchés financiers.
+                      <EditableText id="about.mission.visionBody">Devenir un partenaire de référence en Afrique de l'Ouest pour la gestion de patrimoine et l'accès aux marchés financiers.</EditableText>
                     </p>
                   </div>
                 </div>
@@ -110,12 +111,12 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-4">Philosophie</span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-4"><EditableText id="about.philosophie.badge">Philosophie</EditableText></span>
                   <h2
                     className="font-primary font-bold leading-[0.95] tracking-tight text-white"
                     style={sectionTitleStyle}
                   >
-                    Notre approche d'investissement.
+                    <EditableText id="about.philosophie.title">Notre approche d'investissement.</EditableText>
                   </h2>
                 </div>
               </div>
@@ -200,12 +201,12 @@ export const AboutPage = () => {
         {/* ─── 5. Histoire — Timeline ─── */}
         <section ref={histoireRef} id="histoire" className="reveal py-12 md:py-20 border-b border-black/10">
           <div className="page-container">
-            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Parcours</span>
+            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.histoire.badge">Parcours</EditableText></span>
             <h2
               className="font-primary font-bold leading-[0.95] tracking-tight max-w-3xl mb-7 md:mb-8 text-[var(--mauve)]"
               style={sectionTitleStyle}
             >
-              Notre histoire
+              <EditableText id="about.histoire.title">Notre histoire</EditableText>
             </h2>
 
             <div className="border-t border-black/10">
@@ -228,12 +229,12 @@ export const AboutPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Leadership</span>
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.equipe.badge">Leadership</EditableText></span>
                 <h2
                   className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
                   style={sectionTitleStyle}
                 >
-                  Équipe dirigeante
+                  <EditableText id="about.equipe.title">Équipe dirigeante</EditableText>
                 </h2>
               </div>
               <div className="lg:col-span-7">
@@ -273,12 +274,12 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4">Réglementation</span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.conformite.badge">Réglementation</EditableText></span>
                   <h2
                     className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
                     style={sectionTitleStyle}
                   >
-                    Conformité & Sécurité
+                    <EditableText id="about.conformite.title">Conformité & Sécurité</EditableText>
                   </h2>
                 </div>
               </div>

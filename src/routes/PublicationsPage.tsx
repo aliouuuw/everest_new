@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useRouterState } from '@tanstack/react-router'
+import { EditableText } from '../cms'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
 import * as pdfjsLib from 'pdfjs-dist'
 import PdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
@@ -367,17 +368,17 @@ export const PublicationsPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">
               <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
-                Publications
+                <EditableText id="publications.hero.badge">Publications</EditableText>
               </span>
               <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
-                Nos revues{' '}
-                <span style={{ color: 'var(--jaune-or)' }}>&amp; analyses.</span>
+                <EditableText id="publications.hero.title">Nos revues</EditableText>{' '}
+                <span style={{ color: 'var(--jaune-or)' }}><EditableText id="publications.hero.titleAccent">&amp; analyses.</EditableText></span>
               </h1>
             </div>
 
             <div className="md:col-span-5 pb-2">
               <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
-                Consultez et téléchargez nos revues hebdomadaires, mensuelles et semestrielles pour suivre l'évolution des marchés.
+                <EditableText id="publications.hero.subtitle">Consultez et téléchargez nos revues hebdomadaires, mensuelles et semestrielles pour suivre l'évolution des marchés.</EditableText>
               </p>
             </div>
           </div>

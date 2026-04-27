@@ -3,6 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useState } from 'react'
 import { useReveal } from '../Hooks/useReveal'
 import type { Department } from '../../data/departments'
+import { EditableText, useContent } from '../../cms'
 
 interface DepartmentPageProps {
   department: Department
@@ -48,6 +49,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   const ctaRef = useReveal<HTMLElement>()
 
   const {
+    slug,
     department_name,
     hero_headline,
     hero_subtitle,
@@ -64,6 +66,12 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
     cta_text,
     cta_subtitle,
   } = department
+
+  const headlineOverride = useContent(`${slug}.hero.headline`)
+  const resolvedHeadline =
+    headlineOverride?.value !== undefined && headlineOverride.value !== ''
+      ? headlineOverride.value
+      : hero_headline
 
   const [activeSolution, setActiveSolution] = useState(0)
 
@@ -96,7 +104,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 </span>
               </div>
               <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight">
-                {formatHeadline(hero_headline)}
+                {formatHeadline(resolvedHeadline)}
               </h1>
               {hero_highlight && hero_highlight.length > 0 && (
                 <div className="mt-8 inline-flex flex-col gap-1 px-6 py-4 rounded-2xl border border-[var(--jaune-or)]/30 bg-[var(--jaune-or)]/10">
@@ -110,7 +118,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="lg:col-span-5 pb-2">
               <div className="border-l-[3px] border-[var(--jaune-or)] pl-6 lg:pl-8">
                 <p className="text-xl md:text-2xl leading-relaxed text-[var(--night)] font-medium mb-8">
-                  {hero_subtitle}
+                  <EditableText id={`${slug}.hero.subtitle`}>{hero_subtitle}</EditableText>
                 </p>
                 <a href="#solutions" className="bg-[var(--jaune-or)] hover:bg-[#b07d24] text-white rounded-full px-8 py-4 text-sm font-bold transition-all inline-block shadow-md hover:shadow-lg hover:-translate-y-0.5">
                   Découvrir nos solutions
@@ -157,7 +165,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   Conçu pour vos enjeux spécifiques.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
-                  {presentation}
+                  <EditableText id={`${slug}.presentation`}>{presentation}</EditableText>
                 </p>
               </div>
               
@@ -424,10 +432,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
               <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--mauve)]">
-                {cta_text}
+                <EditableText id={`${slug}.cta.text`}>{cta_text}</EditableText>
               </h2>
               <p className="text-xl md:text-2xl text-[rgba(10, 10, 10, 0.6)] font-light max-w-2xl">
-                {cta_subtitle}
+                <EditableText id={`${slug}.cta.subtitle`}>{cta_subtitle}</EditableText>
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
