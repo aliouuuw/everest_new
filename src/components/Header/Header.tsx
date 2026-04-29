@@ -207,7 +207,7 @@ export const Header: React.FC = () => {
     { label: 'Publications', to: '/publications' },
   ];
 
-  const autresItems: Array<DropdownItem> = [
+  const ressourcesItems: Array<DropdownItem> = [
     { label: 'Opportunités en cours', to: '/offres' },
     { label: 'BRVM / Marché régional', to: '/bourse' },
     { label: 'Outils investisseur', to: '/outils-investisseur' },
@@ -215,8 +215,6 @@ export const Header: React.FC = () => {
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', to: '/about' },
-    { label: 'Vision & gouvernance', to: '/about', hash: 'gouvernance' },
-    { label: 'Conformité & agrément', to: '/about', hash: 'conformite' },
     { label: 'Abécédaire / FAQ', to: '/faq' },
     { label: 'Contact', to: '/contact' },
   ];
@@ -285,10 +283,10 @@ export const Header: React.FC = () => {
           />
 
           <Dropdown
-            name="autres"
-            title="Autres"
-            items={autresItems}
-            isOpen={openDropdown === 'autres'}
+            name="ressources"
+            title="Ressources"
+            items={ressourcesItems}
+            isOpen={openDropdown === 'ressources'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
@@ -433,10 +431,10 @@ export const Header: React.FC = () => {
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
               >
-                Autres
+                Ressources
               </div>
               <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {autresItems.map((item, index) => (
+                {ressourcesItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.to}

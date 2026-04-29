@@ -26,7 +26,7 @@ export const CTA: React.FC<{
     >
       <div className="page-container">
         <div
-          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 shadow-[0_8px_40px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
+          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
         >
           <div className="relative z-10 lg:w-3/5">
             <div className="mb-6">

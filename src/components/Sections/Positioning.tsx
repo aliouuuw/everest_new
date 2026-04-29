@@ -117,10 +117,7 @@ export const Positioning: React.FC = () => {
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                <div className="flex items-center justify-between mb-10">
-                  <span className="font-primary text-[11px] font-semibold tracking-[0.22em] text-[var(--mauve-40)] transition-colors duration-500 group-hover:text-[var(--jaune-or)]">
-                    {p.num}
-                  </span>
+                <div className="flex items-center gap-4 mb-10">
                   <div
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--mauve-10)] bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]"
                   >

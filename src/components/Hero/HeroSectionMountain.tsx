@@ -1,13 +1,17 @@
-import { useEffect, useId, useRef } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { useCloudShader } from './useCloudShader';
 import { Link } from '@tanstack/react-router';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
 import { EditableText } from '../../cms';
 
 export const HeroSectionMountain: React.FC = () => {
-  const heroRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const headingId = useId();
+  const heroRef   = useRef<HTMLElement>(null);
+  const videoRef   = useRef<HTMLVideoElement>(null);
+  const canvasRef  = useRef<HTMLCanvasElement>(null);
+  const headingId  = useId();
+  const [cloudVisible, setCloudVisible] = useState(false);
+  const { start: startCloud } = useCloudShader(canvasRef);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -73,11 +77,21 @@ export const HeroSectionMountain: React.FC = () => {
           preload="auto"
           disablePictureInPicture
           controlsList="nodownload noplaybackrate noremoteplayback"
-          className="h-full w-full min-h-full min-w-full object-cover [object-position:22%_50%] md:[object-position:18%_48%] motion-reduce:object-center"
+          className="h-full w-full min-h-full min-w-full object-cover [object-position:0%_50%] md:[object-position:0%_48%] motion-reduce:object-center"
           style={{ display: 'block' }}
+          onEnded={() => { setCloudVisible(true); startCloud(); }}
         >
-          <source src="/ai-hero-bg-3.mp4" type="video/mp4" />
+          <source src="/ai-hero-bg.mp4" type="video/mp4" />
         </video>
+        <canvas
+          ref={canvasRef}
+          aria-hidden
+          className="absolute inset-0 h-full w-full pointer-events-none"
+          style={{
+            opacity: cloudVisible ? 0.6 : 0,
+            transition: 'opacity 2500ms ease-in-out',
+          }}
+        />
         <div
           className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--mauve)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--mauve)_12%,transparent)] to-transparent"
         />
@@ -101,7 +115,7 @@ export const HeroSectionMountain: React.FC = () => {
         className="relative z-10 w-full page-container pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
         style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
-        <div className="ml-auto flex w-full max-w-[min(52rem,100%)] flex-col items-end text-right">
+        <div className="flex w-full max-w-[min(52rem,100%)] flex-col items-start text-left">
           <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
             <span className="block overflow-hidden">
               <EditableText
@@ -140,7 +154,7 @@ export const HeroSectionMountain: React.FC = () => {
           </h1>
 
           <div
-            className="hero-rule ms-auto h-px w-20 sm:w-32 md:w-40 mb-7 sm:mb-8"
+            className="hero-rule h-px w-20 sm:w-32 md:w-40 mb-7 sm:mb-8"
             style={{
               background:
                 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--jaune-or) 85%, var(--mauve) 15%) 50%, transparent)',
@@ -165,7 +179,7 @@ export const HeroSectionMountain: React.FC = () => {
             approche rigoureuse, sélective et orientée performance.
           </EditableText>
 
-          <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch justify-end gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
+          <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
             <Link
               to="/offres"
               className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
@@ -177,19 +191,6 @@ export const HeroSectionMountain: React.FC = () => {
                 <FiArrowRight className="text-base shrink-0" aria-hidden />
               </div>
             </Link>
-            <a
-              href="/contact"
-              className="group inline-flex min-h-[3.75rem] items-center justify-center px-6 py-4 text-base font-semibold touch-manipulation transition-colors duration-200 text-white hover:text-white relative w-full sm:w-fit focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50 rounded-sm"
-              style={{ textShadow: '0 2px 5px rgba(0,0,0,0.35)' }}
-            >
-              <EditableText id="home.hero.ctaSecondary" as="span" className="text-base font-semibold tracking-tight">
-                Nous contacter
-              </EditableText>
-              <span
-                className="pointer-events-none absolute bottom-3 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent group-hover:via-white"
-                aria-hidden
-              />
-            </a>
           </div>
         </div>
       </div>

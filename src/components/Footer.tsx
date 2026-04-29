@@ -29,7 +29,7 @@ const marchesLinks: Array<FooterLink> = [
   { label: 'Publications', to: '/publications' },
 ];
 
-const autresLinks: Array<FooterLink> = [
+const ressourcesLinks: Array<FooterLink> = [
   { label: 'Opportunités en cours', to: '/offres' },
   { label: 'BRVM / Marché régional', to: '/bourse' },
   { label: 'Outils investisseur', to: '/outils-investisseur' },
@@ -142,7 +142,7 @@ export const Footer = () => {
             </div>
             <div>
               <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Autres</div>
-              {renderLinkList(autresLinks)}
+              {renderLinkList(ressourcesLinks)}
             </div>
           </div>
 

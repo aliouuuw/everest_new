@@ -111,7 +111,7 @@ export const ValueProps: React.FC = () => {
           {/* Left — image */}
           <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">
             <img
-              src="/Assets_Website/Valueprops.png"
+              src="/Assets_Website/Valueprops1.png"
               alt="Everest Finance — engagement régional"
               className="absolute inset-0 h-full w-full object-cover"
             />
