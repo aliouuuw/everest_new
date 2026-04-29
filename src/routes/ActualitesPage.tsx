@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { Link } from '@tanstack/react-router';
-import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
+import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiRefreshCw, FiSearch } from 'react-icons/fi';
 import { EditableText } from '../cms';
 import { gsap } from 'gsap';
+import { useQuery, useAction } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 type Article = {
   title: string;
@@ -11,7 +13,10 @@ type Article = {
   date: string;
   readTime: string;
   imageUrl: string;
-  slug: string;
+  slug?: string;
+  externalUrl?: string;
+  sourceName?: string;
+  sourceSlug?: string;
 };
 
 const FEATURED: Article = {
@@ -24,7 +29,7 @@ const FEATURED: Article = {
   slug: "abidjan-paradoxe-financement-afrique"
 };
 
-const ARTICLES: Article[] = [
+const INTERNAL_ARTICLES: Article[] = [
   {
     title: "BRVM : Sucrivoire s'illustre, Société Générale CI donne le ton au marché",
     excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
@@ -45,7 +50,16 @@ const ARTICLES: Article[] = [
   },
 ];
 
-const CATEGORIES = ['Tout', 'Finance', 'Marchés', 'Obligations'];
+const SOURCE_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+  'sika-finance':  { bg: 'rgba(70,29,76,0.08)',  text: 'var(--mauve)',    border: 'rgba(70,29,76,0.2)'  },
+  'madis-invest':  { bg: 'rgba(202,148,47,0.1)', text: 'var(--jaune-or)', border: 'rgba(202,148,47,0.25)' },
+};
+
+function estimateReadTime(text: string): string {
+  const words = text.split(/\s+/).length;
+  return `${Math.max(1, Math.ceil(words / 200))} min`;
+}
+
 
 export const ActualitesPage = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -60,6 +74,46 @@ export const ActualitesPage = () => {
     return () => ctx.revert();
   }, []);
 
+  // ── External articles from Convex ────────────────────────────
+  const rawExternalArticles = useQuery(api.externalNews.getExternalArticles);
+  const triggerFetch = useAction(api.externalNews.fetchExternalNews);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const handleRefresh = useCallback(async () => {
+    setIsFetching(true);
+    try { await triggerFetch({}); } catch (e) { console.error(e); }
+    finally { setIsFetching(false); }
+  }, [triggerFetch]);
+
+  useEffect(() => {
+    if (rawExternalArticles !== undefined && rawExternalArticles.length === 0) {
+      handleRefresh();
+    }
+  }, [rawExternalArticles]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const externalArticles: Article[] = useMemo(() => {
+    if (!rawExternalArticles) return [];
+    return rawExternalArticles.map((a: { title: string; excerpt: string; category: string; publishedAt: number; imageUrl: string; url: string; sourceName: string; source: string }) => ({
+      title: a.title,
+      excerpt: a.excerpt,
+      category: a.category,
+      date: new Date(a.publishedAt).toISOString().split('T')[0],
+      readTime: estimateReadTime(a.excerpt),
+      imageUrl: a.imageUrl,
+      externalUrl: a.url,
+      sourceName: a.sourceName,
+      sourceSlug: a.source,
+    }));
+  }, [rawExternalArticles]);
+
+  const ARTICLES = useMemo(() => [...INTERNAL_ARTICLES, ...externalArticles], [externalArticles]);
+
+  const CATEGORIES = useMemo(() => {
+    const cats = new Set(['Tout']);
+    ARTICLES.forEach(a => cats.add(a.category));
+    return Array.from(cats);
+  }, [ARTICLES]);
+
   const [activeCategory, setActiveCategory] = useState<string>('Tout');
   const [activeYear, setActiveYear] = useState<string>('Tout');
   const [activeMonth, setActiveMonth] = useState<string>('Tout');
@@ -68,7 +122,7 @@ export const ActualitesPage = () => {
   const years = useMemo(() => {
     const y = new Set(ARTICLES.map(a => new Date(a.date).getFullYear().toString()));
     return ['Tout', ...Array.from(y).sort().reverse()];
-  }, []);
+  }, [ARTICLES]);
 
   const months = useMemo(() => {
     if (activeYear === 'Tout') return ['Tout'];
@@ -77,7 +131,7 @@ export const ActualitesPage = () => {
         .map(a => (new Date(a.date).getMonth() + 1).toString().padStart(2, '0'))
     );
     return ['Tout', ...Array.from(m).sort()];
-  }, [activeYear]);
+  }, [activeYear, ARTICLES]);
 
   // Reset month if year changes and month not in new year
   useEffect(() => {
@@ -87,7 +141,7 @@ export const ActualitesPage = () => {
   }, [months, activeMonth]);
 
   const filteredArticles = useMemo(() => {
-    return ARTICLES.filter(article => {
+    return [...ARTICLES].filter(article => {
       const d = new Date(article.date);
       const yearMatch = activeYear === 'Tout' || d.getFullYear().toString() === activeYear;
       const monthMatch = activeMonth === 'Tout' || (d.getMonth() + 1).toString().padStart(2, '0') === activeMonth;
@@ -97,7 +151,7 @@ export const ActualitesPage = () => {
         article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       return yearMatch && monthMatch && categoryMatch && searchMatch;
     });
-  }, [activeYear, activeMonth, activeCategory, searchQuery]);
+  }, [ARTICLES, activeYear, activeMonth, activeCategory, searchQuery]);
 
   return (
     <div ref={pageRef} className="font-primary">
@@ -202,7 +256,7 @@ export const ActualitesPage = () => {
       {/* ─── Featured Article ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
         <div className="page-container">
-          <Link to="/actualites/$slug" params={{ slug: FEATURED.slug }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
+          <Link to="/actualites/$slug" params={{ slug: FEATURED.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
                 <img
@@ -255,7 +309,20 @@ export const ActualitesPage = () => {
                   <h3 className="font-primary font-bold text-2xl text-[var(--night)]">
                     Publications récentes
                   </h3>
+                  {rawExternalArticles !== undefined && externalArticles.length > 0 && (
+                    <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--mauve)]">
+                      {externalArticles.length} externes
+                    </span>
+                  )}
                 </div>
+                <button
+                  onClick={handleRefresh}
+                  disabled={isFetching}
+                  title="Rafraîchir les actualités externes"
+                  className="p-2 rounded-full border border-black/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] transition-all disabled:opacity-40"
+                >
+                  <FiRefreshCw size={14} className={`text-[var(--mauve)] ${isFetching ? 'animate-spin' : ''}`} />
+                </button>
               </div>
 
               {filteredArticles.length === 0 ? (
@@ -264,57 +331,139 @@ export const ActualitesPage = () => {
                 </div>
               ) : (
                 <div className="border-t border-black/10">
-                  {filteredArticles.map((article, i) => (
-                    <Link
-                      key={i}
-                      to="/actualites/$slug"
-                      params={{ slug: article.slug }}
-                      className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
-                    >
-                    {/* Thumbnail */}
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
-                      <img
-                        src={article.imageUrl}
-                        alt={article.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
+                  {filteredArticles.map((article, i) =>
+                    article.externalUrl ? (
+                      <a
+                        key={i}
+                        href={article.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                      >
+                        {/* Thumbnail */}
+                        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
+                          {article.imageUrl ? (
+                            <img
+                              src={article.imageUrl}
+                              alt={article.title}
+                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              referrerPolicy="no-referrer"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex items-center justify-center">
+                              <span className="text-[var(--mauve)]/30 text-4xl font-bold">{article.sourceName?.[0]}</span>
+                            </div>
+                          )}
+                        </div>
 
-                    {/* Content */}
-                    <div className="flex flex-col justify-center">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--mauve)]">
-                          {article.category}
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
-                          <FiCalendar className="text-[9px]" />
-                          {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
-                          <FiClock className="text-[9px]" /> {article.readTime}
+                        {/* Content */}
+                        <div className="flex flex-col justify-center">
+                          <div className="flex flex-wrap items-center gap-2 mb-4">
+                            <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--mauve)]">
+                              {article.category}
+                            </span>
+                            <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                              <FiCalendar className="text-[9px]" />
+                              {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            </span>
+                            <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                              <FiClock className="text-[9px]" /> {article.readTime}
+                            </span>
+                            {article.sourceName && article.sourceSlug && (
+                              <span
+                                className="px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-[0.1em] uppercase"
+                                style={{
+                                  background: SOURCE_COLORS[article.sourceSlug]?.bg ?? 'rgba(0,0,0,0.05)',
+                                  color: SOURCE_COLORS[article.sourceSlug]?.text ?? 'inherit',
+                                  border: `1px solid ${SOURCE_COLORS[article.sourceSlug]?.border ?? 'transparent'}`,
+                                }}
+                              >
+                                {article.sourceName}
+                              </span>
+                            )}
+                          </div>
+                          <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
+                            {article.title}
+                          </h4>
+                          <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
+                            {article.excerpt}
+                          </p>
+                          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
+                            Lire l'original <FiExternalLink size={11} />
+                          </span>
+                        </div>
+                      </a>
+                    ) : (
+                      <Link
+                        key={i}
+                        to="/actualites/$slug"
+                        params={{ slug: article.slug! }}
+                        className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                      >
+                      {/* Thumbnail */}
+                      <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
+                        <img
+                          src={article.imageUrl}
+                          alt={article.title}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex flex-col justify-center">
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--mauve)]">
+                            {article.category}
+                          </span>
+                          <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                            <FiCalendar className="text-[9px]" />
+                            {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </span>
+                          <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                            <FiClock className="text-[9px]" /> {article.readTime}
+                          </span>
+                        </div>
+                        <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
+                          {article.title}
+                        </h4>
+                        <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
+                          {article.excerpt}
+                        </p>
+                        <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
+                          Lire <FiArrowRight />
                         </span>
                       </div>
-                      <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
-                        {article.title}
-                      </h4>
-                      <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
-                        {article.excerpt}
-                      </p>
-                      <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
-                        Lire <FiArrowRight />
-                      </span>
-                    </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    )
+                  )}
                 </div>
               )}
 
-              {/* Load more */}
-              <div className="actu-reveal flex justify-center mt-12">
-                <button className="group px-8 py-4 border border-black/10 rounded-full text-[11px] tracking-[0.15em] uppercase hover:border-[var(--mauve)] hover:text-[var(--mauve)] transition-all duration-300 font-bold text-[var(--night)]">
-                  Voir plus d'articles
-                </button>
-              </div>
+              {/* Load more / External sources credit */}
+              {externalArticles.length > 0 && (
+                <div className="actu-reveal flex items-center gap-3 mt-10 pt-6 border-t border-black/5">
+                  <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night)]/40">Sources externes :</span>
+                  {(['sika-finance', 'madis-invest'] as const).map(slug => {
+                    const count = externalArticles.filter(a => a.sourceSlug === slug).length;
+                    if (!count) return null;
+                    const colors = SOURCE_COLORS[slug];
+                    const name = slug === 'sika-finance' ? 'Sika Finance' : 'Madis Invest';
+                    const href = slug === 'sika-finance' ? 'https://www.sikafinance.com' : 'https://madisinvest.com';
+                    return (
+                      <a
+                        key={slug}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[9px] font-bold tracking-[0.1em] uppercase transition-opacity hover:opacity-70"
+                        style={{ background: colors.bg, color: colors.text, border: `1px solid ${colors.border}` }}
+                      >
+                        {name} <FiExternalLink size={9} />
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* ─── Sidebar ─── */}
