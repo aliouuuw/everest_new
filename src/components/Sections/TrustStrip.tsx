@@ -1,10 +1,28 @@
 import { useReveal } from '../Hooks/useReveal';
 
-const PARTNERS = ['BRVM', 'UEMOA-Titres', 'AFRICA50', 'SFI', 'Proparco'];
+type Partner = {
+  name: string;
+  logo: string;
+};
+
+const PARTNERS: Partner[] = [
+  { name: 'BRVM', logo: '/partners/BRVM.jpg' },
+  { name: 'BDK', logo: '/partners/BDK.jpg' },
+  { name: 'État du Sénégal', logo: '/partners/etat-du-senegal.jpg' },
+  { name: 'Kalia', logo: '/partners/kalia.jpg' },
+  { name: 'BHS', logo: '/partners/bhs.jpg' },
+  { name: 'Sunu Group', logo: '/partners/sunu-group.jpg' },
+  { name: 'BCI', logo: '/partners/bci.jpg' },
+  { name: 'BNDE', logo: '/partners/bnde.jpg' },
+  { name: 'BOAD', logo: '/partners/boad.jpg' },
+  { name: 'Orabank', logo: '/partners/Orabank.jpg' },
+  { name: 'Pagena', logo: '/partners/Pagena.jpg' },
+  { name: 'CDE', logo: '/partners/CDE-1.jpg' },
+  { name: 'Ville de Dakar', logo: '/partners/ville-de-dakar.jpg' },
+];
 
 /**
- * Static institutional partner row — centered caption + evenly spaced logos.
- * Productized, no marquee, no decorative shell.
+ * Institutional partner logos row — centered caption + evenly spaced logo images.
  */
 export const TrustStrip: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
@@ -16,16 +34,20 @@ export const TrustStrip: React.FC = () => {
       aria-label="Partenaires institutionnels"
     >
       <div className="page-container">
-        <p className="mb-6 text-center font-primary text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)] md:mb-7">
+        <p className="mb-8 text-center font-primary text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)] md:mb-10">
           La confiance d&apos;émetteurs et investisseurs institutionnels
         </p>
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:gap-x-10 md:gap-x-14 lg:gap-x-16">
-          {PARTNERS.map((name) => (
+        <ul className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+          {PARTNERS.map((partner) => (
             <li
-              key={name}
-              className="font-primary text-sm font-semibold uppercase tracking-[0.15em] text-[var(--night-40)] opacity-70 transition-opacity duration-300 hover:opacity-100 md:text-[15px]"
+              key={partner.name}
+              className="flex items-center justify-center h-12 opacity-70 transition-opacity duration-300 hover:opacity-100"
             >
-              {name}
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                className="max-h-12 max-w-[140px] object-contain"
+              />
             </li>
           ))}
         </ul>
