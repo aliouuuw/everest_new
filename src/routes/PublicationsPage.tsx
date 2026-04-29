@@ -38,24 +38,34 @@ type FilterCategory = Frequency | typeof ALL_LABEL
 
 const PUBLICATIONS: Array<Publication> = [
   {
-    id: 'revue-hebdo-example',
-    title: 'Revue Hebdomadaire — Marchés BRVM',
+    id: 'revue-hebdo-32',
+    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
     description: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire',
-    date: '2025-04-04',
+    date: '2026-04-24',
+    fileUrl: '/publications/Revue-Hebdo-32.pdf',
+    fileSize: '14.0 MB',
+    pages: 10,
+  },
+  {
+    id: 'revue-hebdo-example',
+    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
+    description: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
+    frequency: 'hebdomadaire',
+    date: '2026-04-04',
     fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
     fileSize: '13.2 MB',
-    pages: 12,
+    pages: 9,
   },
   {
     id: 'revue-semestrielle-sep-26',
-    title: 'Revue Semestrielle — S1 2024',
+    title: 'Revue Semestrielle — S1 2026',
     description: "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
     frequency: 'semestrielle',
-    date: '2024-09-26',
+    date: '2026-09-20',
     fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
     fileSize: '10.5 MB',
-    pages: 28,
+    pages: 16,
   },
 ]
 

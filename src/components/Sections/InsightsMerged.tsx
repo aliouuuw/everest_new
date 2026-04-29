@@ -67,54 +67,34 @@ const FREQUENCY_LABELS: Record<Frequency, string> = {
 
 const PUBLICATIONS: Array<Publication> = [
   {
-    id: 'revue-souveraine-mai-2024',
-    title: 'Revue de la dette souveraine UEMOA — Mai 2024',
-    desc: "Analyse des conditions de marché, des spreads et des perspectives de financement pour les émetteurs souverains de l'union.",
-    frequency: 'semestrielle',
-    date: '2024-05-15',
-    fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
-    fileSize: '10.5 MB',
-    pages: 28,
-  },
-  {
-    id: 'brvm-monthly-avril-2024',
-    title: 'BRVM Monthly Highlights — Avril 2024',
-    desc: "Synthèse mensuelle des performances du marché boursier régional.",
-    frequency: 'mensuelle',
-    date: '2024-04-30',
-    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '6.1 MB',
-    pages: 14,
-  },
-  {
-    id: 'focus-secteur-bancaire-avril-2024',
-    title: 'Focus Secteur — Bancaire UEMOA — Avril 2024',
-    desc: "Lecture structurée des dynamiques du secteur bancaire régional.",
-    frequency: 'mensuelle',
-    date: '2024-04-12',
-    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '4.8 MB',
+    id: 'revue-hebdo-32',
+    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
+    desc: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
+    frequency: 'hebdomadaire',
+    date: '2026-04-24',
+    fileUrl: '/publications/Revue-Hebdo-32.pdf',
+    fileSize: '14.0 MB',
     pages: 10,
   },
   {
-    id: 'allocation-obligataire-uemoa-avril-2024',
-    title: 'Allocation obligataire UEMOA — Avril 2024',
-    desc: "Lecture tactique des maturités, niveaux de rendement et arbitrages possibles sur les émissions récentes.",
+    id: 'revue-hebdo-example',
+    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
+    desc: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire',
-    date: '2024-04-05',
+    date: '2026-04-04',
     fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '5.2 MB',
-    pages: 12,
+    fileSize: '13.2 MB',
+    pages: 9,
   },
   {
-    id: 'tendances-liquidite-brvm-mai-2024',
-    title: 'Tendances de liquidité — BRVM, Mai 2024',
-    desc: "Analyse des volumes, spreads bid-ask et profondeur de carnet sur les compartiments les plus actifs.",
-    frequency: 'mensuelle',
-    date: '2024-05-20',
-    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '3.4 MB',
-    pages: 8,
+    id: 'revue-semestrielle-sep-26',
+    title: 'Revue Semestrielle — S1 2026',
+    desc: "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
+    frequency: 'semestrielle',
+    date: '2026-09-20',
+    fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
+    fileSize: '10.5 MB',
+    pages: 16,
   },
 ];
 
@@ -125,7 +105,7 @@ export const InsightsMerged: React.FC = () => {
   const gridRef = useReveal<HTMLDivElement>();
 
   const featured = PUBLICATIONS[0];
-  const secondary = PUBLICATIONS.slice(1, 4);
+  const secondary = PUBLICATIONS.slice(1);
 
   return (
     <section
@@ -335,50 +315,108 @@ export const InsightsMerged: React.FC = () => {
               </div>
             </a>
 
-            {/* SECONDARY — three clean file rows */}
-            <div className="flex flex-col gap-4 lg:col-span-5">
-              {secondary.map((it) => (
-                <a
-                  key={it.id}
-                  href={it.fileUrl}
-                  download
-                  className="group flex items-start gap-4 rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-5 transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] md:p-6"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
-                    <FiFileText className="text-base" aria-hidden />
+            {/* SECONDARY — dynamic layout based on count */}
+            {secondary.length === 0 ? (
+              <div className="flex items-center justify-center rounded-2xl border border-dashed border-[var(--mauve)]/20 bg-[var(--mauve-05)] p-8 lg:col-span-5 lg:min-h-[360px]">
+                <div className="text-center">
+                  <FiFileText className="mx-auto mb-3 text-3xl text-[var(--mauve-40)]" />
+                  <p className="font-primary text-sm text-[var(--mauve-60)]">Aucune publication supplémentaire</p>
+                </div>
+              </div>
+            ) : secondary.length === 1 ? (
+              <a
+                href={secondary[0].fileUrl}
+                download
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-7 md:p-9 lg:col-span-5 lg:min-h-[360px] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)]"
+              >
+                <div>
+                  <p className="mb-4 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
+                    Note de recherche · {FREQUENCY_LABELS[secondary[0].frequency]}
+                  </p>
+                  <h4 className="mb-4 font-primary text-lg font-bold leading-snug tracking-tight text-[var(--mauve)] md:text-xl">
+                    {secondary[0].title}
+                  </h4>
+                  <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
+                    {secondary[0].desc}
+                  </p>
+                </div>
+                <div className="mt-8 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 font-primary text-xs font-light text-[var(--night-40)]">
+                    <span>
+                      {new Date(secondary[0].date).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </span>
+                    <span aria-hidden>·</span>
+                    <span>{secondary[0].fileSize}</span>
+                    {secondary[0].pages && (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span>{secondary[0].pages} p.</span>
+                      </>
+                    )}
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="mb-1 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
-                      Note de recherche · {FREQUENCY_LABELS[it.frequency]}
-                    </p>
-                    <h4 className="mb-2 font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--mauve)] md:text-base">
-                      {it.title}
-                    </h4>
-                    <div className="flex items-center gap-3 font-primary text-[11px] font-light text-[var(--night-40)]">
-                      <span>
-                        {new Date(it.date).toLocaleDateString('fr-FR', {
-                          day: 'numeric',
-                          month: 'short',
-                          year: 'numeric',
-                        })}
-                      </span>
-                      <span aria-hidden>·</span>
-                      <span>{it.fileSize}</span>
-                      {it.pages && (
-                        <>
-                          <span aria-hidden>·</span>
-                          <span>{it.pages} p.</span>
-                        </>
-                      )}
+                  <span className="inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mauve)] transition-all duration-300 group-hover:gap-3">
+                    Lire
+                    <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <div className={`flex flex-col gap-4 lg:col-span-5 lg:min-h-[360px] ${secondary.length === 2 ? 'lg:gap-6' : ''}`}>
+                {secondary.map((it) => (
+                  <a
+                    key={it.id}
+                    href={it.fileUrl}
+                    download
+                    className={`group flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-5 transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] md:p-6 ${
+                      secondary.length === 2 ? 'lg:flex-1' : ''
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
+                          <FiFileText className="text-base" aria-hidden />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
+                            Note de recherche · {FREQUENCY_LABELS[it.frequency]}
+                          </p>
+                          <h4 className="font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--mauve)] md:text-base">
+                            {it.title}
+                          </h4>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <FiArrowRight
-                    className="mt-2 shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--mauve)]"
-                    aria-hidden
-                  />
-                </a>
-              ))}
-            </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 font-primary text-[11px] font-light text-[var(--night-40)]">
+                        <span>
+                          {new Date(it.date).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </span>
+                        <span aria-hidden>·</span>
+                        <span>{it.fileSize}</span>
+                        {it.pages && (
+                          <>
+                            <span aria-hidden>·</span>
+                            <span>{it.pages} p.</span>
+                          </>
+                        )}
+                      </div>
+                      <FiArrowRight
+                        className="shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--mauve)]"
+                        aria-hidden
+                      />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

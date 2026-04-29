@@ -19,8 +19,7 @@ const EXPERTISES: Array<Expertise> = [
     id: 'marche-titres-publics',
     title: 'Marché des',
     titleAccent: 'Titres Publics.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/Assets_Website/mtp.jpg',
     imageAlt: 'Obligations souveraines et courbe de taux',
     intro:
       "Nous accompagnons les investisseurs dans leur accès aux émissions souveraines de l'UEMOA, en intégrant une analyse fine des dynamiques de taux et des conditions de marché.",
@@ -38,8 +37,7 @@ const EXPERTISES: Array<Expertise> = [
     id: 'marche-financier-regional',
     title: 'Marché Financier',
     titleAccent: 'Régional.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/Assets_Website/mfr.jpg',
     imageAlt: 'Salle de marché et exécution boursière',
     intro:
       "Nous intervenons sur la BRVM en assurant une exécution efficiente et un conseil éclairé pour les investisseurs institutionnels et privés qualifiés.",
@@ -57,8 +55,7 @@ const EXPERTISES: Array<Expertise> = [
     id: 'ingenierie-financiere',
     title: 'Structuration &',
     titleAccent: 'Ingénierie financière.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/Assets_Website/s-&-if.jpg',
     imageAlt: 'Structuration financière et modélisation',
     intro:
       "Nous concevons et mettons en œuvre des solutions de financement adaptées aux besoins des émetteurs publics et privés de la zone UEMOA.",
@@ -77,8 +74,7 @@ const EXPERTISES: Array<Expertise> = [
     id: 'private-office',
     title: 'Private',
     titleAccent: 'Office.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: '/Assets_Website/po.jpg',
     imageAlt: 'Conseil patrimonial personnalisé',
     intro:
       "Nous accompagnons une clientèle exigeante dans la structuration et la gestion de leur patrimoine, avec une approche disciplinée et long terme.",
