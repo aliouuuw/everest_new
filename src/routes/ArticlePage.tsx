@@ -276,7 +276,7 @@ export const ArticlePage = () => {
           {/* Right Sidebar */}
           <aside className="lg:col-span-4 flex flex-col gap-8">
             {/* Promotional Banner */}
-            <div className="sticky top-40 p-8 bg-gradient-to-br from-[var(--mauve)] to-[rgba(70,29,76,0.8)] rounded-2xl text-white overflow-hidden relative">
+            <div className="p-8 bg-gradient-to-br from-[var(--mauve)] to-[rgba(70,29,76,0.8)] rounded-2xl text-white overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
               <div className="relative z-10">
                 <span className="inline-block px-3 py-1 mb-4 text-[9px] tracking-[0.2em] uppercase font-bold text-white/70 bg-white/10 rounded-full">
