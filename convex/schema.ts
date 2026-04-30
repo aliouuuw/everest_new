@@ -230,12 +230,14 @@ export default defineSchema({
     .index("by_profile_type", ["profileType"])
     .index("by_created_at", ["createdAt"]),
 
-  // External Articles Table (RSS-fetched from sikafinance.com & madisinvest.com)
+  // External Articles Table (scraped from sikafinance.com & madisinvest.com)
   externalArticles: defineTable({
     guid: v.string(),
+    slug: v.optional(v.string()),
     title: v.string(),
     excerpt: v.string(),
-    url: v.string(),
+    content: v.optional(v.string()),   // Full article HTML content
+    url: v.string(),          // Original source URL
     imageUrl: v.string(),
     publishedAt: v.number(),
     source: v.string(),       // "sika-finance" | "madis-invest"
@@ -245,7 +247,8 @@ export default defineSchema({
   })
     .index("by_source", ["source"])
     .index("by_guid", ["guid"])
-    .index("by_published", ["publishedAt"]),
+    .index("by_published", ["publishedAt"])
+    .index("by_slug", ["slug"]),
 
   // Site Content Table (Light CMS overrides for marketing pages)
   siteContent: defineTable({

@@ -17,6 +17,8 @@ import type * as api_cloudflare from "../api/cloudflare.js";
 import type * as auth from "../auth.js";
 import type * as categories from "../categories.js";
 import type * as cloudflare from "../cloudflare.js";
+import type * as crons from "../crons.js";
+import type * as externalNews from "../externalNews.js";
 import type * as http from "../http.js";
 import type * as investorProfiles from "../investorProfiles.js";
 import type * as media from "../media.js";
@@ -38,6 +40,8 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   categories: typeof categories;
   cloudflare: typeof cloudflare;
+  crons: typeof crons;
+  externalNews: typeof externalNews;
   http: typeof http;
   investorProfiles: typeof investorProfiles;
   media: typeof media;

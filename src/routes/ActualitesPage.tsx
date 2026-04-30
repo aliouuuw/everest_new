@@ -14,7 +14,6 @@ type Article = {
   readTime: string;
   imageUrl: string;
   slug?: string;
-  externalUrl?: string;
   sourceName?: string;
   sourceSlug?: string;
 };
@@ -93,14 +92,14 @@ export const ActualitesPage = () => {
 
   const externalArticles: Article[] = useMemo(() => {
     if (!rawExternalArticles) return [];
-    return rawExternalArticles.map((a: { title: string; excerpt: string; category: string; publishedAt: number; imageUrl: string; url: string; sourceName: string; source: string }) => ({
+    return rawExternalArticles.map((a) => ({
       title: a.title,
       excerpt: a.excerpt,
       category: a.category,
       date: new Date(a.publishedAt).toISOString().split('T')[0],
       readTime: estimateReadTime(a.excerpt),
       imageUrl: a.imageUrl,
-      externalUrl: a.url,
+      slug: a.slug ?? undefined,
       sourceName: a.sourceName,
       sourceSlug: a.source,
     }));
@@ -332,12 +331,10 @@ export const ActualitesPage = () => {
               ) : (
                 <div className="border-t border-black/10">
                   {filteredArticles.map((article, i) =>
-                    article.externalUrl ? (
-                      <a
+                      <Link
                         key={i}
-                        href={article.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        to="/actualites/$slug"
+                        params={{ slug: article.slug! }}
                         className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
                       >
                         {/* Thumbnail */}
@@ -389,52 +386,10 @@ export const ActualitesPage = () => {
                             {article.excerpt}
                           </p>
                           <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
-                            Lire l'original <FiExternalLink size={11} />
+                            Lire <FiArrowRight />
                           </span>
                         </div>
-                      </a>
-                    ) : (
-                      <Link
-                        key={i}
-                        to="/actualites/$slug"
-                        params={{ slug: article.slug! }}
-                        className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
-                      >
-                      {/* Thumbnail */}
-                      <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
-                        <img
-                          src={article.imageUrl}
-                          alt={article.title}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--mauve)]">
-                            {article.category}
-                          </span>
-                          <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
-                            <FiCalendar className="text-[9px]" />
-                            {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                          </span>
-                          <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
-                            <FiClock className="text-[9px]" /> {article.readTime}
-                          </span>
-                        </div>
-                        <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
-                          {article.title}
-                        </h4>
-                        <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
-                          {article.excerpt}
-                        </p>
-                        <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
-                          Lire <FiArrowRight />
-                        </span>
-                      </div>
                       </Link>
-                    )
                   )}
                 </div>
               )}

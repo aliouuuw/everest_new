@@ -7,83 +7,38 @@ import {
 } from "./_generated/server";
 import { internal } from "./_generated/api";
 
-// ── Sources config ─────────────────────────────────────────────
-const SOURCES = [
-  {
-    slug: "sika-finance",
-    name: "Sika Finance",
-    rssUrls: [
-      "https://www.sikafinance.com/rss",
-      "https://www.sikafinance.com/feed",
-      "https://www.sikafinance.com/actualites/feed",
-      "https://www.sikafinance.com/rss.xml",
-    ],
-    defaultCategory: "Marchés",
-  },
-  {
-    slug: "madis-invest",
-    name: "Madis Invest",
-    rssUrls: [
-      "https://madisinvest.com/feed",
-      "https://madisinvest.com/rss",
-      "https://madisinvest.com/?feed=rss2",
-      "https://madisinvest.com/feed/",
-    ],
-    defaultCategory: "Finance",
-  },
-];
+// ── Shared types ───────────────────────────────────────────────
+type ExternalItem = {
+  guid: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  url: string;
+  imageUrl: string;
+  publishedAt: number;
+  source: string;
+  sourceName: string;
+  category: string;
+  fetchedAt: number;
+};
 
-// ── XML parsing helpers ────────────────────────────────────────
-function extractCDATA(xml: string, tag: string): string {
-  const cdataRe = new RegExp(
-    `<${tag}(?:\\s[^>]*)?><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tag}>`,
-    "i"
+function makeSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 80);
+}
+
+function decodeUnicodeEscapes(str: string): string {
+  return str.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) =>
+    String.fromCharCode(parseInt(hex, 16))
   );
-  const m = xml.match(cdataRe);
-  if (m) return m[1].trim();
-  const re = new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, "i");
-  const m2 = xml.match(re);
-  return m2 ? m2[1].trim() : "";
 }
 
-function extractAttr(xml: string, tag: string, attr: string): string {
-  const re = new RegExp(`<${tag}[^>]*\\s${attr}=["']([^"']+)["'][^>]*>`, "i");
-  const m = xml.match(re);
-  return m ? m[1] : "";
-}
-
-function extractLink(xml: string): string {
-  const m = xml.match(/<link>([^<]+)<\/link>/i);
-  if (m) return m[1].trim();
-  const m2 = xml.match(/<link[^>]+href=["']([^"']+)["']/i);
-  if (m2) return m2[1];
-  return "";
-}
-
-function extractImageUrl(itemXml: string): string {
-  const fromMedia = extractAttr(itemXml, "media:content", "url");
-  if (fromMedia) return fromMedia;
-
-  const fromThumb = extractAttr(itemXml, "media:thumbnail", "url");
-  if (fromThumb) return fromThumb;
-
-  const fromEnclosure = extractAttr(itemXml, "enclosure", "url");
-  if (fromEnclosure) {
-    const typeRe = /type=["']image\/[^"']+["']/i;
-    if (typeRe.test(itemXml)) return fromEnclosure;
-  }
-
-  const desc = extractCDATA(itemXml, "description");
-  const imgM = desc.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (imgM) return imgM[1];
-
-  return "";
-}
-
-function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-}
-
+// ── Helpers ────────────────────────────────────────────────────
 function decodeEntities(str: string): string {
   return str
     .replace(/&amp;/g, "&")
@@ -91,63 +46,200 @@ function decodeEntities(str: string): string {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
+    .replace(/&#x27;/g, "'")
     .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)));
 }
 
-// ── RSS parser ─────────────────────────────────────────────────
-function parseRSSItems(
-  rssText: string,
-  source: string,
-  sourceName: string,
-  defaultCategory: string,
-  maxItems = 3
-) {
-  type Item = {
-    guid: string;
-    title: string;
-    excerpt: string;
-    url: string;
-    imageUrl: string;
-    publishedAt: number;
-    source: string;
-    sourceName: string;
-    category: string;
-    fetchedAt: number;
-  };
+async function safeFetch(url: string): Promise<string | null> {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15_000);
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.5",
+      },
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+    if (!res.ok) return null;
+    return await res.text();
+  } catch {
+    return null;
+  }
+}
 
-  const items: Item[] = [];
-  const itemMatches = [...rssText.matchAll(/<item[^>]*>([\s\S]*?)<\/item>/gi)];
+// ── Sika Finance scraper ───────────────────────────────────────
+// 1. Get article list from RSS feed
+// 2. Fetch each article page and extract <article> content
+async function scrapeSikaFinance(): Promise<ExternalItem[]> {
+  const rssText = await safeFetch("https://www.sikafinance.com/rss/actualites_bourse_brvm");
+  if (!rssText) return [];
+
+  const items: ExternalItem[] = [];
+  const itemMatches = [...rssText.matchAll(/<item>([\s\S]*?)<\/item>/gi)];
 
   for (const m of itemMatches) {
+    if (items.length >= 3) break;
     const xml = m[1];
-    const title = decodeEntities(extractCDATA(xml, "title"));
-    const url = extractLink(xml) || extractCDATA(xml, "guid");
-    const guid = extractCDATA(xml, "guid") || url;
-    const description = extractCDATA(xml, "description");
-    const pubDateStr = extractCDATA(xml, "pubDate");
-    const category =
-      decodeEntities(extractCDATA(xml, "category")) || defaultCategory;
-    const imageUrl = extractImageUrl(xml);
-    const publishedAt = pubDateStr ? new Date(pubDateStr).getTime() : Date.now();
-    const excerpt = stripHtml(description).slice(0, 220);
 
-    if (title && url) {
-      items.push({
-        guid,
-        title,
-        excerpt,
-        url,
-        imageUrl,
-        publishedAt,
-        source,
-        sourceName,
-        category,
-        fetchedAt: Date.now(),
-      });
+    const titleM = xml.match(/<title>([^<]+)<\/title>/i);
+    const title = titleM ? decodeEntities(titleM[1].trim()) : "";
+
+    const linkM = xml.match(/<link>([^<]+)<\/link>/i);
+    const url = linkM ? linkM[1].trim() : "";
+
+    const descM = xml.match(/<description>([^<]+)<\/description>/i);
+    const excerpt = descM ? decodeEntities(descM[1].trim()).slice(0, 250) : "";
+
+    const dateM = xml.match(/<pubDate>([^<]+)<\/pubDate>/i);
+    const publishedAt = dateM ? new Date(dateM[1].trim()).getTime() : Date.now();
+
+    const imgM = xml.match(/<enclosure\s+url="([^"]+)"/i);
+    const imageUrl = imgM ? imgM[1] : "";
+
+    const guidM = xml.match(/<guid[^>]*>([^<]+)<\/guid>/i);
+    const guid = guidM ? guidM[1].trim() : url;
+
+    if (!title || !url) continue;
+
+    // Fetch the full article page to extract <article> content
+    let content = "";
+    const articleHtml = await safeFetch(url);
+    if (articleHtml) {
+      const articleM = articleHtml.match(/<article>([\s\S]*?)<\/article>/i);
+      if (articleM) {
+        // Clean up the content: fix relative image URLs, remove author/date lines
+        content = articleM[1]
+          .replace(/src="\.\.\//g, 'src="https://www.sikafinance.com/')
+          .replace(/<p class="allf[^"]*">[^<]*<\/p>/gi, "") // remove author/date footer
+          .trim();
+      }
     }
+    // Fallback: use RSS description as content
+    if (!content) {
+      content = `<p>${excerpt}</p>`;
+    }
+
+    items.push({
+      guid,
+      slug: makeSlug(title),
+      title,
+      excerpt,
+      content,
+      url,
+      imageUrl,
+      publishedAt,
+      source: "sika-finance",
+      sourceName: "Sika Finance",
+      category: "Marchés",
+      fetchedAt: Date.now(),
+    });
   }
 
-  return items.sort((a, b) => b.publishedAt - a.publishedAt).slice(0, maxItems);
+  return items;
+}
+
+// ── Madis Invest scraper ───────────────────────────────────────
+// Next.js RSC payload with backslash-escaped JSON objects.
+// Full article content is in RSC transfer chunks (e.g. "1c:T3f6d,<html>...")
+// referenced by "$1c" in the description field.
+async function scrapeMadisInvest(): Promise<ExternalItem[]> {
+  const rawHtml = await safeFetch("https://madisinvest.com/");
+  if (!rawHtml) return [];
+
+  // Unescape the RSC payload: \" → "
+  const html = rawHtml.replace(/\\"/g, '"');
+
+  // Build a map of RSC transfer chunks: "$1c" → HTML content
+  // Chunks look like: 1c:T3f6d,"])</script><script>self.__next_f.push([1,"\u003chead\u003e...
+  const chunkMap = new Map<string, string>();
+  const chunkRe = /([0-9a-f]+):T[0-9a-f]+,"\]?\)?\s*<\/script>\s*<script>\s*self\.__next_f\.push\(\[1,"([\s\S]*?)"\]\)/g;
+  for (const cm of rawHtml.matchAll(chunkRe)) {
+    const ref = `$${cm[1]}`;
+    const decoded = decodeUnicodeEscapes(cm[2]
+      .replace(/\\n/g, "\n")
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, "\\")
+    );
+    chunkMap.set(ref, decoded);
+  }
+
+  const items: ExternalItem[] = [];
+  const seen = new Set<string>();
+
+  // Find all JSON-like object blocks that contain both an article id and a media image URL
+  const blockRe = /\{[^{}]{200,3000}?madisinvest\.com\/images\/[^{}]{0,1500}?\}/g;
+
+  for (const blockMatch of html.matchAll(blockRe)) {
+    if (items.length >= 3) break;
+    const block = blockMatch[0];
+
+    // Extract individual fields from the block
+    const idM = block.match(/"id":"([A-Za-z0-9]{15,30})"/);
+    const titleM = block.match(/"title":"([^"]{15,300})"/);
+    const mediaM = block.match(/"media":"(https:\/\/madisinvest\.com\/images\/[^"]+)"/);
+    const createdAtM = block.match(/"createdAt":"(\d{4}-\d{2}-\d{2}T[^"]+)"/);
+    const metaDescM = block.match(/"metaDescription":"([^"]{10,600})"/);
+    const descRefM = block.match(/"description":"(\$[0-9a-f]+)"/);
+
+    if (!titleM || !mediaM || !idM) continue;
+
+    const id = idM[1];
+    if (seen.has(id)) continue;
+    seen.add(id);
+
+    const title = decodeEntities(titleM[1]);
+    const excerpt = metaDescM
+      ? decodeEntities(metaDescM[1]).slice(0, 250)
+      : title.slice(0, 250);
+
+    // Try to get full content from the RSC transfer chunk
+    let content = "";
+    if (descRefM) {
+      const chunkHtml = chunkMap.get(descRefM[1]);
+      if (chunkHtml) {
+        // Extract body content, strip <head>/<body> wrapper, clean up editor classes
+        content = chunkHtml
+          .replace(/<head><\/head>/gi, "")
+          .replace(/<\/?body>/gi, "")
+          .replace(/class="PlaygroundEditorTheme__[^"]*"/g, "")
+          .replace(/style="white-space: pre-wrap;"/g, "")
+          .trim();
+      }
+    }
+    // Fallback: use metaDescription as content paragraphs
+    if (!content && metaDescM) {
+      content = `<p>${decodeEntities(metaDescM[1])}</p>`;
+    }
+    if (!content) {
+      content = `<p>${title}</p>`;
+    }
+
+    const slug = makeSlug(title);
+    const articleUrl = `https://madisinvest.com/`;
+
+    const publishedAt = createdAtM ? new Date(createdAtM[1]).getTime() : Date.now();
+
+    items.push({
+      guid: id,
+      slug,
+      title,
+      excerpt,
+      content,
+      url: articleUrl,
+      imageUrl: mediaM[1],
+      publishedAt,
+      source: "madis-invest",
+      sourceName: "Madis Invest",
+      category: "Bourse",
+      fetchedAt: Date.now(),
+    });
+  }
+
+  return items.sort((a, b) => b.publishedAt - a.publishedAt).slice(0, 3);
 }
 
 // ── Core fetch logic (shared between action & internalAction) ──
@@ -156,58 +248,36 @@ async function runFetch(ctx: {
 }) {
   const results: { source: string; count: number; error?: string }[] = [];
 
-  for (const src of SOURCES) {
-    let rssText: string | null = null;
-
-    for (const rssUrl of src.rssUrls) {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10_000);
-        const res = await fetch(rssUrl, {
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (compatible; EverestFinance/1.0; +https://everestfinance.com)",
-            Accept:
-              "application/rss+xml, application/xml, text/xml, application/atom+xml, */*",
-          },
-          signal: controller.signal,
-        });
-        clearTimeout(timeoutId);
-        if (res.ok) {
-          rssText = await res.text();
-          break;
-        }
-      } catch {
-        continue;
+  // Sika Finance
+  try {
+    const sikaItems = await scrapeSikaFinance();
+    if (sikaItems.length > 0) {
+      await ctx.runMutation(internal.externalNews.clearSourceArticles, {
+        source: "sika-finance",
+      });
+      for (const item of sikaItems) {
+        await ctx.runMutation(internal.externalNews.insertExternalArticle, item);
       }
     }
+    results.push({ source: "sika-finance", count: sikaItems.length, ...(sikaItems.length === 0 ? { error: "No articles found" } : {}) });
+  } catch (e) {
+    results.push({ source: "sika-finance", count: 0, error: String(e) });
+  }
 
-    if (!rssText) {
-      results.push({
-        source: src.slug,
-        count: 0,
-        error: "Feed not accessible",
+  // Madis Invest
+  try {
+    const madisItems = await scrapeMadisInvest();
+    if (madisItems.length > 0) {
+      await ctx.runMutation(internal.externalNews.clearSourceArticles, {
+        source: "madis-invest",
       });
-      continue;
+      for (const item of madisItems) {
+        await ctx.runMutation(internal.externalNews.insertExternalArticle, item);
+      }
     }
-
-    const items = parseRSSItems(
-      rssText,
-      src.slug,
-      src.name,
-      src.defaultCategory,
-      3
-    );
-
-    await ctx.runMutation(internal.externalNews.clearSourceArticles, {
-      source: src.slug,
-    });
-
-    for (const item of items) {
-      await ctx.runMutation(internal.externalNews.insertExternalArticle, item);
-    }
-
-    results.push({ source: src.slug, count: items.length });
+    results.push({ source: "madis-invest", count: madisItems.length, ...(madisItems.length === 0 ? { error: "No articles found" } : {}) });
+  } catch (e) {
+    results.push({ source: "madis-invest", count: 0, error: String(e) });
   }
 
   return results;
@@ -222,6 +292,16 @@ export const getExternalArticles = query({
       .withIndex("by_published")
       .order("desc")
       .collect();
+  },
+});
+
+export const getExternalArticleBySlug = query({
+  args: { slug: v.string() },
+  handler: async (ctx, { slug }) => {
+    return await ctx.db
+      .query("externalArticles")
+      .withIndex("by_slug", (q) => q.eq("slug", slug))
+      .first();
   },
 });
 
@@ -242,8 +322,10 @@ export const clearSourceArticles = internalMutation({
 export const insertExternalArticle = internalMutation({
   args: {
     guid: v.string(),
+    slug: v.string(),
     title: v.string(),
     excerpt: v.string(),
+    content: v.string(),
     url: v.string(),
     imageUrl: v.string(),
     publishedAt: v.number(),
