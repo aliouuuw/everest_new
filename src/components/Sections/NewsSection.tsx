@@ -1,6 +1,9 @@
+import { useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import { useReveal } from "../Hooks/useReveal";
 import { FiArrowRight, FiCalendar } from "react-icons/fi";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 
 type NewsArticle = {
   title: string;
@@ -11,36 +14,28 @@ type NewsArticle = {
   slug: string;
 };
 
-const NEWS_ARTICLES: NewsArticle[] = [
-  {
-    title: "BRVM : Sucrivoire s'illustre, Société Générale CI donne le ton au marché",
-    excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
-    category: "Marchés",
-    date: "2026-04-09",
-    imageUrl: "/articles/brvm-marche.jpg",
-    slug: "brvm-sucrivoire-societe-generale-ci"
-  },
-  {
-    title: "À Abidjan, le paradoxe d'un continent riche en capital mais pauvre en financement",
-    excerpt: "Réunis à l'initiative de la BAD, les acteurs de la finance africaine constatent un déficit de 400 milliards USD/an malgré 4 000 milliards d'épargne disponible.",
-    category: "Finance",
-    date: "2026-04-10",
-    imageUrl: "/articles/abidjan-finance.jpg",
-    slug: "abidjan-paradoxe-financement-afrique"
-  },
-  {
-    title: "La RDC lève 1,25 milliard USD pour son tout premier eurobond",
-    excerpt: "La République démocratique du Congo fait son entrée sur le marché international de la dette avec une émission largement sursouscrite, structurée en deux tranches.",
-    category: "Obligations",
-    date: "2026-04-10",
-    imageUrl: "/articles/rdc-eurobond.jpg",
-    slug: "rdc-premier-eurobond"
-  },
-];
-
 export const NewsSection: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const listRef = useReveal<HTMLDivElement>();
+
+  // Fetch published articles from Convex
+  const rawArticles = useQuery(api.articles.getArticles, { status: 'published' });
+
+  // Transform articles into display format, limit to 3 most recent
+  const NEWS_ARTICLES: NewsArticle[] = useMemo(() => {
+    if (!rawArticles) return [];
+    return rawArticles
+      .sort((a: any, b: any) => (b.publishedAt ?? b.createdAt) - (a.publishedAt ?? a.createdAt))
+      .slice(0, 3)
+      .map((a: any) => ({
+        title: a.title,
+        excerpt: a.excerpt,
+        category: a.category,
+        date: new Date(a.publishedAt ?? a.createdAt).toISOString().split('T')[0],
+        imageUrl: a.imageUrl ?? '/articles/default.jpg',
+        slug: a.slug,
+      }));
+  }, [rawArticles]);
 
   return (
     <section
