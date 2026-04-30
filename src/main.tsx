@@ -40,6 +40,8 @@ import { UserManagement } from './routes/admin/UserManagement'
 import UserFormPage from './routes/admin/UserFormPage'
 import { Settings } from './routes/admin/Settings'
 import { SiteContentPage } from './routes/admin/SiteContentPage'
+import { ArticlesList } from './routes/admin/ArticlesList'
+import { ArticleForm } from './routes/admin/ArticleForm'
 import { AuthPage } from './routes/AuthPage'
 import { ActualitesPage } from './routes/ActualitesPage'
 import { ArticlePage } from './routes/ArticlePage'
@@ -308,6 +310,24 @@ const adminSiteContentRoute = createRoute({
   component: SiteContentPage,
 })
 
+const adminArticlesRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles',
+  component: ArticlesList,
+})
+
+const adminNewArticleRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles/new',
+  component: ArticleForm,
+})
+
+const adminEditArticleRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles/$id/edit',
+  component: ArticleForm,
+})
+
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
@@ -363,6 +383,9 @@ const routeTree = rootRoute.addChildren([
   dashboardRoute,
   adminLayoutRoute.addChildren([
     adminDashboardRoute,
+    adminArticlesRoute,
+    adminNewArticleRoute,
+    adminEditArticleRoute,
     adminPublicationsRoute,
     adminNewPublicationRoute,
     adminEditPublicationRoute,

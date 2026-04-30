@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from '@tanstack/react-router';
-import { FaBars, FaCog, FaGlobe, FaHome, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { FaBars, FaCog, FaFeather, FaGlobe, FaHome, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 import { useAuth } from '../../components/Auth/useAuth';
 
 function isNavActive(pathname: string, href: string): boolean {
@@ -20,6 +20,7 @@ const AdminLayout: React.FC = () => {
   const navigationItems = [
     { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: isNavActive(pathname, '/admin') },
     { icon: <FaGlobe />, label: "Contenu site", id: 'site-content', href: '/admin/site-content', active: isNavActive(pathname, '/admin/site-content') },
+    { icon: <FaFeather />, label: "Actualités", id: 'articles', href: '/admin/articles', active: isNavActive(pathname, '/admin/articles') },
     { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: isNavActive(pathname, '/admin/publications') },
     { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: isNavActive(pathname, '/admin/media') },
     { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: isNavActive(pathname, '/admin/users') },

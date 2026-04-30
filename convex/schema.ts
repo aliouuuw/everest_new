@@ -250,6 +250,38 @@ export default defineSchema({
     .index("by_published", ["publishedAt"])
     .index("by_slug", ["slug"]),
 
+  // Internal News Articles Table (written by admins, shown on /actualites)
+  articles: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    excerpt: v.string(),
+    content: v.string(),
+    imageUrl: v.optional(v.string()),
+    category: v.union(
+      v.literal("Marchés"),
+      v.literal("Obligations"),
+      v.literal("Finance"),
+      v.literal("Économie"),
+      v.literal("BRVM"),
+      v.literal("Analyses")
+    ),
+    status: v.union(
+      v.literal("draft"),
+      v.literal("published"),
+      v.literal("archived")
+    ),
+    featured: v.boolean(),
+    authorId: v.id("users"),
+    tags: v.array(v.string()),
+    publishedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_status", ["status"])
+    .index("by_featured", ["featured"])
+    .index("by_published", ["publishedAt"]),
+
   // Site Content Table (Light CMS overrides for marketing pages)
   siteContent: defineTable({
     contentId: v.string(),                   // e.g. "home.hero.title"

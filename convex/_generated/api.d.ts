@@ -14,6 +14,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as api_cloudflare from "../api/cloudflare.js";
+import type * as articles from "../articles.js";
 import type * as auth from "../auth.js";
 import type * as categories from "../categories.js";
 import type * as cloudflare from "../cloudflare.js";
@@ -37,6 +38,7 @@ import type * as users from "../users.js";
  */
 declare const fullApi: ApiFromModules<{
   "api/cloudflare": typeof api_cloudflare;
+  articles: typeof articles;
   auth: typeof auth;
   categories: typeof categories;
   cloudflare: typeof cloudflare;
