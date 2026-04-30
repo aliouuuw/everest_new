@@ -18,36 +18,10 @@ type Article = {
   sourceSlug?: string;
 };
 
-const FEATURED: Article = {
-  title: "À Abidjan, le paradoxe d'un continent riche en capital mais pauvre en financement",
-  excerpt: "Réunis ce 9 avril à Abidjan à l'initiative de la BAD pour mener des réflexions sur la Nouvelle architecture financière africaine, les principaux acteurs de la finance du continent partagent un diagnostic de plus en plus difficile à éluder.",
-  category: "Finance",
-  date: "2026-04-10",
-  readTime: "6 min",
-  imageUrl: "/articles/abidjan-finance.jpg",
-  slug: "abidjan-paradoxe-financement-afrique"
-};
-
-const INTERNAL_ARTICLES: Article[] = [
-  {
-    title: "BRVM : Sucrivoire s'illustre, Société Générale CI donne le ton au marché",
-    excerpt: "La BRVM orchestre un rebond, clôturant la séance en territoire positif. L'indice BRVM Composite gagne 0,13 % à 406,95 points, porté par Sucrivoire (+7,32 %) et Société Générale CI (+2,66 %).",
-    category: "Marchés",
-    date: "2026-04-09",
-    readTime: "4 min",
-    imageUrl: "/articles/brvm-marche.jpg",
-    slug: "brvm-sucrivoire-societe-generale-ci"
-  },
-  {
-    title: "La RDC lève 1,25 milliard USD pour son tout premier eurobond",
-    excerpt: "La République démocratique du Congo a effectué son entrée sur le marché international de la dette en mobilisant 1,25 milliard de dollars, à l'occasion d'une opération structurée en deux tranches et largement sursouscrite.",
-    category: "Obligations",
-    date: "2026-04-10",
-    readTime: "5 min",
-    imageUrl: "/articles/rdc-eurobond.jpg",
-    slug: "rdc-premier-eurobond"
-  },
-];
+function estimateInternalReadTime(content: string): string {
+  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+  return `${Math.max(1, Math.ceil(words / 200))} min`;
+}
 
 const SOURCE_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   'sika-finance':  { bg: 'rgba(70,29,76,0.08)',  text: 'var(--mauve)',    border: 'rgba(70,29,76,0.2)'  },
@@ -72,6 +46,36 @@ export const ActualitesPage = () => {
     }, pageRef);
     return () => ctx.revert();
   }, []);
+
+  // ── Internal articles from Convex ───────────────────────────
+  const rawInternalArticles = useQuery(api.articles.getArticles, { status: 'published' });
+
+  const internalArticles: Article[] = useMemo(() => {
+    if (!rawInternalArticles) return [];
+    return rawInternalArticles.map(a => ({
+      title: a.title,
+      excerpt: a.excerpt,
+      category: a.category,
+      date: new Date(a.publishedAt ?? a.createdAt).toISOString().split('T')[0],
+      readTime: estimateInternalReadTime(a.content),
+      imageUrl: a.imageUrl ?? '',
+      slug: a.slug,
+    }));
+  }, [rawInternalArticles]);
+
+  const featuredArticle: Article | null = useMemo(() => {
+    const f = rawInternalArticles?.find(a => a.featured);
+    if (!f) return null;
+    return {
+      title: f.title,
+      excerpt: f.excerpt,
+      category: f.category,
+      date: new Date(f.publishedAt ?? f.createdAt).toISOString().split('T')[0],
+      readTime: estimateInternalReadTime(f.content),
+      imageUrl: f.imageUrl ?? '',
+      slug: f.slug,
+    };
+  }, [rawInternalArticles]);
 
   // ── External articles from Convex ────────────────────────────
   const rawExternalArticles = useQuery(api.externalNews.getExternalArticles);
@@ -105,7 +109,7 @@ export const ActualitesPage = () => {
     }));
   }, [rawExternalArticles]);
 
-  const ARTICLES = useMemo(() => [...INTERNAL_ARTICLES, ...externalArticles], [externalArticles]);
+  const ARTICLES = useMemo(() => [...internalArticles, ...externalArticles], [internalArticles, externalArticles]);
 
   const CATEGORIES = useMemo(() => {
     const cats = new Set(['Tout']);
@@ -253,15 +257,17 @@ export const ActualitesPage = () => {
       </section>
 
       {/* ─── Featured Article ─── */}
+      {featuredArticle && (
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
         <div className="page-container">
-          <Link to="/actualites/$slug" params={{ slug: FEATURED.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
+          <Link to="/actualites/$slug" params={{ slug: featuredArticle.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
                 <img
-                  src={FEATURED.imageUrl}
-                  alt={FEATURED.title}
+                  src={featuredArticle.imageUrl}
+                  alt={featuredArticle.title}
                   className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
               </div>
@@ -274,18 +280,18 @@ export const ActualitesPage = () => {
             <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-center bg-[var(--white-smoke)]/30">
               <div className="flex items-center gap-4 mb-6">
                 <span className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--mauve)]">
-                  {FEATURED.category}
+                  {featuredArticle.category}
                 </span>
                 <span className="w-1 h-1 bg-[rgba(10,10,10,0.3)] rounded-full" />
                 <span className="flex items-center gap-1.5 text-[10px] tracking-[0.05em] text-[rgba(10,10,10,0.5)]">
-                  <FiCalendar className="text-xs" /> {new Date(FEATURED.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  <FiCalendar className="text-xs" /> {new Date(featuredArticle.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </span>
               </div>
               <h2 className="mb-6 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-3xl md:text-4xl leading-[1.2] text-[var(--night)]">
-                {FEATURED.title}
+                {featuredArticle.title}
               </h2>
               <p className="mb-8 font-light text-base leading-[1.7] text-[rgba(10,10,10,0.7)]">
-                {FEATURED.excerpt}
+                {featuredArticle.excerpt}
               </p>
               <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase group-hover:gap-4 group-hover:text-[var(--mauve)] transition-all duration-300 font-bold text-[var(--night)]">
                 Lire le communiqué
@@ -295,6 +301,7 @@ export const ActualitesPage = () => {
           </Link>
         </div>
       </section>
+      )}
 
       {/* ─── Main Content: Articles + Sidebar ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40">
