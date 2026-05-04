@@ -1,5 +1,6 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { action, internalMutation, mutation, query } from "./_generated/server";
+import { internal } from "./_generated/api";
 
 function makeSlug(title: string): string {
   return title
@@ -128,5 +129,71 @@ export const deleteArticle = mutation({
   args: { id: v.id("articles") },
   handler: async (ctx, { id }) => {
     await ctx.db.delete(id);
+  },
+});
+
+// ── One-time migration: copy externalArticles → articles ────────────────────
+const CATEGORY_MAP: Record<string, "Marchés" | "Obligations" | "Finance" | "Économie" | "BRVM" | "Analyses"> = {
+  "Marchés":    "Marchés",
+  "Bourse":     "BRVM",
+  "Finance":    "Finance",
+  "Économie":   "Économie",
+  "Obligations":"Obligations",
+  "Analyses":   "Analyses",
+};
+
+export const importExternalArticles = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    // Find an admin user to use as authorId
+    const admin = await ctx.db
+      .query("users")
+      .filter(q => q.eq(q.field("role"), "admin"))
+      .first();
+    if (!admin) throw new Error("No admin user found — seed users first");
+
+    const externals = await ctx.db.query("externalArticles").collect();
+    let imported = 0;
+    let skipped = 0;
+
+    for (const ext of externals) {
+      // Skip if an article with this slug already exists
+      const existing = await ctx.db
+        .query("articles")
+        .withIndex("by_slug", q => q.eq("slug", ext.slug ?? makeSlug(ext.title)))
+        .first();
+      if (existing) { skipped++; continue; }
+
+      const slug = ext.slug ?? makeSlug(ext.title);
+      const category = CATEGORY_MAP[ext.category] ?? "Marchés";
+      const now = Date.now();
+
+      await ctx.db.insert("articles", {
+        title: ext.title,
+        slug,
+        excerpt: ext.excerpt,
+        content: ext.content ?? `<p>${ext.excerpt}</p>`,
+        imageUrl: ext.imageUrl || undefined,
+        category,
+        status: "published",
+        featured: false,
+        authorId: admin._id,
+        tags: [ext.sourceName],
+        publishedAt: ext.publishedAt,
+        createdAt: now,
+        updatedAt: now,
+      });
+      imported++;
+    }
+
+    return { imported, skipped, total: externals.length };
+  },
+});
+
+// Trigger from dashboard: convex run articles:runImportExternal
+export const runImportExternal = action({
+  args: {},
+  handler: async (ctx): Promise<{ imported: number; skipped: number; total: number }> => {
+    return await ctx.runMutation(internal.articles.importExternalArticles, {});
   },
 });

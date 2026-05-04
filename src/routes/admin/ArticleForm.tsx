@@ -29,15 +29,10 @@ export const ArticleForm = () => {
   const isEditing = router.state.location.pathname.includes('/edit');
   const { user, isLoading: authLoading } = useAuth();
 
-  let id: Id<'articles'> | undefined;
-  if (isEditing) {
-    try {
-      const params = useParams({ from: '/admin/articles/$id/edit' });
-      id = params.id as Id<'articles'>;
-    } catch {
-      id = undefined;
-    }
-  }
+  const routeParams = useParams({ strict: false });
+  const id: Id<'articles'> | undefined = isEditing && routeParams.id
+    ? (routeParams.id as Id<'articles'>)
+    : undefined;
 
   const [formData, setFormData] = useState<ArticleFormData>({
     title:    '',
