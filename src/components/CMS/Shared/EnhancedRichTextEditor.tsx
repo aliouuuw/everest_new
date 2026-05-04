@@ -8,7 +8,6 @@ import TextAlign from '@tiptap/extension-text-align';
 import Highlight from '@tiptap/extension-highlight';
 import Color from '@tiptap/extension-color';
 import { TextStyle } from '@tiptap/extension-text-style';
-import HorizontalRule from '@tiptap/extension-horizontal-rule';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
 import { Table }  from '@tiptap/extension-table';
@@ -34,6 +33,8 @@ import {
   FaAlignCenter,
   FaAlignRight,
   FaAlignJustify,
+  FaHighlighter,
+  FaPalette,
   FaEraser,
   FaSubscript,
   FaSuperscript,
@@ -62,9 +63,8 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3, 4, 5, 6]
-        }
+        heading: { levels: [1, 2, 3, 4, 5, 6] },
+        hardBreak: { keepMarks: true },
       }),
       Underline,
       TextAlign.configure({
@@ -75,7 +75,6 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       }),
       Color,
       TextStyle,
-      HorizontalRule,
       Subscript,
       Superscript,
       Image.configure({
@@ -120,14 +119,12 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
   });
 
   const handleImageUpload = useCallback(async (file: File) => {
-    if (onImageUpload) {
-      try {
-        const imageUrl = await onImageUpload(file);
-        editor.chain().focus().setImage({ src: imageUrl }).run();
-      } catch (error) {
-        console.error('Image upload failed:', error);
-        // You could add a toast notification here
-      }
+    if (!editor || !onImageUpload) return;
+    try {
+      const imageUrl = await onImageUpload(file);
+      if (imageUrl) editor.chain().focus().setImage({ src: imageUrl }).run();
+    } catch (error) {
+      console.error('Image upload failed:', error);
     }
   }, [onImageUpload, editor]);
 
@@ -372,24 +369,31 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
       <div className="w-px h-6 bg-gray-300" />
 
       {/* Text Color */}
-      <input
-        type="color"
-        onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
-        className="w-8 h-8 rounded cursor-pointer"
-        title="Text Color"
-      />
+      <label className="relative p-1.5 hover:bg-gray-200 rounded transition-colors cursor-pointer flex items-center" title="Text Color">
+        <FaPalette className="w-4 h-4" />
+        <input
+          type="color"
+          onBlur={(e) => editor.chain().focus().setColor(e.target.value).run()}
+          onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
+          className="absolute opacity-0 w-0 h-0"
+        />
+      </label>
 
       {/* Highlight Color */}
-      <input
-        type="color"
-        onChange={(e) => editor.chain().focus().toggleHighlight({ color: e.target.value }).run()}
-        className="w-8 h-8 rounded cursor-pointer"
-        title="Highlight Color"
-      />
+      <label className="relative p-1.5 hover:bg-gray-200 rounded transition-colors cursor-pointer flex items-center" title="Highlight">
+        <FaHighlighter className="w-4 h-4" />
+        <input
+          type="color"
+          defaultValue="#fef08a"
+          onBlur={(e) => editor.chain().focus().toggleHighlight({ color: e.target.value }).run()}
+          onChange={(e) => editor.chain().focus().toggleHighlight({ color: e.target.value }).run()}
+          className="absolute opacity-0 w-0 h-0"
+        />
+      </label>
 
       <button
         type="button"
-        onClick={() => editor.chain().focus().clearNodes().run()}
+        onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
         className="p-2 hover:bg-gray-200 rounded transition-colors"
         title="Clear Formatting"
       >
