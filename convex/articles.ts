@@ -190,6 +190,33 @@ export const importExternalArticles = internalMutation({
   },
 });
 
+// One-time fix: rewrite old R2 URLs to the correct public subdomain
+export const fixR2Urls = internalMutation({
+  args: {},
+  handler: async (ctx) => {
+    const oldPattern = "everestfin-website.1a56b436e93b42f7548ea31d1174ef41.r2.dev";
+    const newBase = "pub-3977d6c280ef4a1388e6f2edc2ecec78.r2.dev";
+    const articles = await ctx.db.query("articles").collect();
+    let fixed = 0;
+    for (const a of articles) {
+      if (a.imageUrl?.includes(oldPattern)) {
+        await ctx.db.patch(a._id, {
+          imageUrl: a.imageUrl.replace(oldPattern, newBase),
+        });
+        fixed++;
+      }
+    }
+    return { fixed };
+  },
+});
+
+export const runFixR2Urls = action({
+  args: {},
+  handler: async (ctx): Promise<{ fixed: number }> => {
+    return await ctx.runMutation(internal.articles.fixR2Urls, {});
+  },
+});
+
 // Trigger from dashboard: convex run articles:runImportExternal
 export const runImportExternal = action({
   args: {},

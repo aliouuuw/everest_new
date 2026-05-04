@@ -21,7 +21,7 @@ export function useR2Upload() {
     error: null,
   });
 
-  const getUploadUrl = useAction(api.api.cloudflare.getUploadUrl);
+  const getUploadUrl = useAction(api.r2Upload.getUploadUrl);
 
   const upload = useCallback(
     async (file: File, folder = "articles"): Promise<string> => {

@@ -24,6 +24,7 @@ import type * as http from "../http.js";
 import type * as investorProfiles from "../investorProfiles.js";
 import type * as media from "../media.js";
 import type * as publications from "../publications.js";
+import type * as r2Upload from "../r2Upload.js";
 import type * as seedUsers from "../seedUsers.js";
 import type * as siteContent from "../siteContent.js";
 import type * as users from "../users.js";
@@ -48,6 +49,7 @@ declare const fullApi: ApiFromModules<{
   investorProfiles: typeof investorProfiles;
   media: typeof media;
   publications: typeof publications;
+  r2Upload: typeof r2Upload;
   seedUsers: typeof seedUsers;
   siteContent: typeof siteContent;
   users: typeof users;
