@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams, useRouter } from '@tanstack/react-router';
-import { FaEye, FaEyeSlash, FaSave, FaTimes } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaEye, FaEyeSlash, FaSave, FaSpinner, FaTimes, FaTrash } from 'react-icons/fa';
 import { useMutation, useQuery } from 'convex/react';
 import { useAuth } from '../../components/Auth/useAuth';
 import { api } from '../../../convex/_generated/api';
 import EnhancedRichTextEditor from '../../components/CMS/Shared/EnhancedRichTextEditor';
 import type { Id } from '../../../convex/_generated/dataModel';
+import { useR2Upload } from '../../hooks/useR2Upload';
 
 type ArticleCategory = 'Marchés' | 'Obligations' | 'Finance' | 'Économie' | 'BRVM' | 'Analyses';
 type ArticleStatus = 'draft' | 'published' | 'archived';
@@ -47,6 +48,10 @@ export const ArticleForm = () => {
   const [tagInput,     setTagInput]     = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors,       setErrors]       = useState<Record<string, string>>({});
+  const [coverDragOver, setCoverDragOver] = useState(false);
+
+  const { upload: uploadToR2, isUploading, progress, error: uploadError } = useR2Upload();
+  const coverInputRef = useRef<HTMLInputElement>(null);
 
   const existing      = useQuery(api.articles.getArticleById, isEditing && id ? { id } : 'skip');
   const createArticle = useMutation(api.articles.createArticle);
@@ -119,6 +124,33 @@ export const ArticleForm = () => {
       setIsSubmitting(false);
     }
   };
+
+  // ── Upload handlers ─────────────────────────────────────────
+  const handleCoverUpload = useCallback(async (file: File) => {
+    try {
+      const url = await uploadToR2(file, 'covers');
+      field('imageUrl', url);
+    } catch {
+      // error already in uploadError state
+    }
+  }, [uploadToR2]);
+
+  const handleInArticleUpload = useCallback(async (file: File): Promise<string> => {
+    return await uploadToR2(file, 'articles');
+  }, [uploadToR2]);
+
+  const handleCoverFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleCoverUpload(file);
+    if (coverInputRef.current) coverInputRef.current.value = '';
+  }, [handleCoverUpload]);
+
+  const handleCoverDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setCoverDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file?.type.startsWith('image/')) handleCoverUpload(file);
+  }, [handleCoverUpload]);
 
   const addTag = () => {
     const t = tagInput.trim();
@@ -200,10 +232,7 @@ export const ArticleForm = () => {
               <EnhancedRichTextEditor
                 value={formData.content}
                 onChange={(c: string) => field('content', c)}
-                onImageUpload={async (file: File) => {
-                  console.warn('Image upload not yet configured — Cloudflare account pending', file.name);
-                  return '';
-                }}
+                onImageUpload={handleInArticleUpload}
               />
               {errors.content && <p className="mt-1 text-sm text-red-500">{errors.content}</p>}
             </div>
@@ -257,22 +286,63 @@ export const ArticleForm = () => {
               </select>
             </div>
 
-            {/* Image URL */}
-            <div className="stat-card p-5">
-              <label className="block text-sm font-medium text-[var(--night)] mb-2">Image de couverture (URL)</label>
-              <input
-                type="url"
-                value={formData.imageUrl}
-                onChange={e => field('imageUrl', e.target.value)}
-                placeholder="https://..."
-                className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl bg-white/50 text-sm"
-              />
-              {formData.imageUrl && (
-                <img src={formData.imageUrl} alt="preview" className="mt-3 w-full h-32 object-cover rounded-xl" />
+            {/* Cover Image */}
+            <div className="stat-card p-5 space-y-3">
+              <label className="block text-sm font-medium text-[var(--night)]">Image de couverture</label>
+
+              {formData.imageUrl ? (
+                <div className="relative group">
+                  <img src={formData.imageUrl} alt="couverture" className="w-full h-40 object-cover rounded-xl" />
+                  <button
+                    type="button"
+                    onClick={() => field('imageUrl', '')}
+                    className="absolute top-2 right-2 p-1.5 bg-red-500/80 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    title="Supprimer l'image"
+                  >
+                    <FaTrash className="w-3 h-3" />
+                  </button>
+                </div>
+              ) : (
+                <div
+                  onDragOver={e => { e.preventDefault(); setCoverDragOver(true); }}
+                  onDragLeave={e => { e.preventDefault(); setCoverDragOver(false); }}
+                  onDrop={handleCoverDrop}
+                  onClick={() => coverInputRef.current?.click()}
+                  className={`flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
+                    coverDragOver
+                      ? 'border-[var(--mauve)] bg-[var(--mauve)]/5'
+                      : 'border-[var(--jaune-or)]/30 hover:border-[var(--mauve)]/50 hover:bg-[var(--mauve)]/5'
+                  }`}
+                >
+                  {isUploading ? (
+                    <>
+                      <FaSpinner className="w-6 h-6 text-[var(--mauve)] animate-spin" />
+                      <span className="text-xs text-secondary">Upload… {progress}%</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaCloudUploadAlt className="w-6 h-6 text-[var(--mauve)]/60" />
+                      <span className="text-xs text-secondary text-center">Glissez une image ici ou cliquez pour parcourir</span>
+                    </>
+                  )}
+                </div>
               )}
-              <p className="mt-2 text-xs text-secondary">
-                Upload Cloudflare disponible prochainement.
-              </p>
+
+              <input ref={coverInputRef} type="file" accept="image/*" className="hidden" onChange={handleCoverFileChange} />
+
+              {uploadError && <p className="text-xs text-red-500">{uploadError}</p>}
+
+              {/* Fallback: manual URL */}
+              <details className="text-xs">
+                <summary className="text-secondary cursor-pointer hover:text-[var(--night)]">Ou coller une URL</summary>
+                <input
+                  type="url"
+                  value={formData.imageUrl}
+                  onChange={e => field('imageUrl', e.target.value)}
+                  placeholder="https://..."
+                  className="mt-2 w-full px-3 py-2 border border-[var(--jaune-or)]/20 rounded-lg bg-white/50 text-sm"
+                />
+              </details>
             </div>
 
             {/* Tags */}
