@@ -4,6 +4,13 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Underline from '@tiptap/extension-underline';
+import TextAlign from '@tiptap/extension-text-align';
+import Highlight from '@tiptap/extension-highlight';
+import Color from '@tiptap/extension-color';
+import { TextStyle } from '@tiptap/extension-text-style';
+import HorizontalRule from '@tiptap/extension-horizontal-rule';
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
 import { Table }  from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
@@ -22,7 +29,15 @@ import {
   FaTable,
   FaUnderline,
   FaUndo,
-  FaUnlink
+  FaUnlink,
+  FaAlignLeft,
+  FaAlignCenter,
+  FaAlignRight,
+  FaAlignJustify,
+  FaEraser,
+  FaSubscript,
+  FaSuperscript,
+  FaMinus
 } from 'react-icons/fa';
 
 interface EnhancedRichTextEditorProps {
@@ -52,6 +67,17 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         }
       }),
       Underline,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      Highlight.configure({
+        multicolor: true,
+      }),
+      Color,
+      TextStyle,
+      HorizontalRule,
+      Subscript,
+      Superscript,
       Image.configure({
         HTMLAttributes: {
           class: 'max-w-full h-auto rounded-lg shadow-md mx-auto my-4'
@@ -309,6 +335,99 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
 
       <div className="w-px h-6 bg-gray-300" />
 
+      {/* Text Alignment */}
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('left').run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive({ textAlign: 'left' }) ? 'bg-gray-200' : ''}`}
+        title="Align Left"
+      >
+        <FaAlignLeft className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('center').run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive({ textAlign: 'center' }) ? 'bg-gray-200' : ''}`}
+        title="Align Center"
+      >
+        <FaAlignCenter className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('right').run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive({ textAlign: 'right' }) ? 'bg-gray-200' : ''}`}
+        title="Align Right"
+      >
+        <FaAlignRight className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive({ textAlign: 'justify' }) ? 'bg-gray-200' : ''}`}
+        title="Justify"
+      >
+        <FaAlignJustify className="w-4 h-4" />
+      </button>
+
+      <div className="w-px h-6 bg-gray-300" />
+
+      {/* Text Color */}
+      <input
+        type="color"
+        onChange={(e) => editor.chain().focus().setColor(e.target.value).run()}
+        className="w-8 h-8 rounded cursor-pointer"
+        title="Text Color"
+      />
+
+      {/* Highlight Color */}
+      <input
+        type="color"
+        onChange={(e) => editor.chain().focus().toggleHighlight({ color: e.target.value }).run()}
+        className="w-8 h-8 rounded cursor-pointer"
+        title="Highlight Color"
+      />
+
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().clearNodes().run()}
+        className="p-2 hover:bg-gray-200 rounded transition-colors"
+        title="Clear Formatting"
+      >
+        <FaEraser className="w-4 h-4" />
+      </button>
+
+      <div className="w-px h-6 bg-gray-300" />
+
+      {/* Sub/Superscript */}
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleSubscript().run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('subscript') ? 'bg-gray-200' : ''}`}
+        title="Subscript"
+      >
+        <FaSubscript className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleSuperscript().run()}
+        className={`p-2 hover:bg-gray-200 rounded transition-colors ${editor.isActive('superscript') ? 'bg-gray-200' : ''}`}
+        title="Superscript"
+      >
+        <FaSuperscript className="w-4 h-4" />
+      </button>
+
+      {/* Horizontal Rule */}
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        className="p-2 hover:bg-gray-200 rounded transition-colors"
+        title="Horizontal Rule"
+      >
+        <FaMinus className="w-4 h-4" />
+      </button>
+
+      <div className="w-px h-6 bg-gray-300" />
+
       {/* Quote */}
       <button
         type="button"
@@ -505,6 +624,7 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
         .ProseMirror p {
           margin: 0.75rem 0;
           line-height: 1.6;
+          text-align: inherit;
         }
 
         .ProseMirror ul {
@@ -623,12 +743,18 @@ const EnhancedRichTextEditor: React.FC<EnhancedRichTextEditorProps> = ({
           width: 4px;
         }
 
-        .ProseMirror p.is-editor-empty:first-child::before {
-          content: attr(data-placeholder);
-          float: left;
-          color: #adb5bd;
-          pointer-events: none;
-          height: 0;
+        .ProseMirror hr {
+          border: none;
+          border-top: 2px solid #e5e7eb;
+          margin: 1.5rem 0;
+        }
+
+        .ProseMirror sub { font-size: 0.8em; vertical-align: sub; }
+        .ProseMirror sup { font-size: 0.8em; vertical-align: super; }
+
+        .ProseMirror mark {
+          padding: 0.1em 0.2em;
+          border-radius: 0.2em;
         }
       `}</style>
     </div>
