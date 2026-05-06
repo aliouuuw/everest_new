@@ -247,7 +247,7 @@ export default defineSchema({
   siteContent: defineTable({
     contentId: v.string(),                   // e.g. "home.hero.title"
     pageKey: v.string(),                     // e.g. "home"
-    type: v.union(v.literal("text"), v.literal("richtext")),
+    type: v.union(v.literal("text"), v.literal("richtext"), v.literal("image")),
     value: v.string(),
     updatedBy: v.id("users"),
     updatedAt: v.number(),

@@ -11,7 +11,7 @@ export interface SiteContentRow {
   _id: string;
   contentId: string;
   pageKey: string;
-  type: "text" | "richtext";
+  type: "text" | "richtext" | "image";
   value: string;
   updatedAt: number;
 }

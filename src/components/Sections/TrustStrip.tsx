@@ -1,8 +1,25 @@
 import { useReveal } from '../Hooks/useReveal';
+import { EditableImage } from '../../cms';
 
 type Partner = {
   name: string;
   logo: string;
+};
+
+const PARTNER_NAME_TO_CMS: Record<string, string> = {
+  'BRVM': 'home.trust.brvm',
+  'BDK': 'home.trust.bdk',
+  'État du Sénégal': 'home.trust.etatSenegal',
+  'Kalia': 'home.trust.kalia',
+  'BHS': 'home.trust.bhs',
+  'Sunu Group': 'home.trust.sunuGroup',
+  'BCI': 'home.trust.bci',
+  'BNDE': 'home.trust.bnde',
+  'BOAD': 'home.trust.boad',
+  'Orabank': 'home.trust.orabank',
+  'Pagena': 'home.trust.pagena',
+  'CDE': 'home.trust.cde',
+  'Ville de Dakar': 'home.trust.villeDakar',
 };
 
 const PARTNERS: Partner[] = [
@@ -43,7 +60,8 @@ export const TrustStrip: React.FC = () => {
               key={partner.name}
               className="flex items-center justify-center h-12 opacity-70 transition-opacity duration-300 hover:opacity-100"
             >
-              <img
+              <EditableImage
+                id={PARTNER_NAME_TO_CMS[partner.name] || ''}
                 src={partner.logo}
                 alt={partner.name}
                 className="max-h-12 max-w-[140px] object-contain"

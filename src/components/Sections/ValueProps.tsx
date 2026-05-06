@@ -3,7 +3,7 @@ import { FiCalendar, FiDatabase, FiUsers } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { EDITORIAL_ICON_WELL_LIGHT } from '../ui/EditorialCard';
 import { PillBadge } from '../ui';
-import { EditableText } from '../../cms';
+import { EditableImage, EditableText } from '../../cms';
 
 const STATS = [
   {
@@ -110,7 +110,8 @@ export const ValueProps: React.FC = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
           {/* Left — image */}
           <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">
-            <img
+            <EditableImage
+              id="home.valueProps.image"
               src="/Assets_Website/Valueprops1.png"
               alt="Everest Finance — engagement régional"
               className="absolute inset-0 h-full w-full object-cover"

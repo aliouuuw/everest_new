@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
-import { EditableText } from '../cms';
+import { EditableImage, EditableText } from '../cms';
 import { gsap } from 'gsap';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
@@ -121,7 +121,8 @@ export const ActualitesPage = () => {
       <section className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0 z-0">
-          <img
+          <EditableImage
+            id="actualites.hero.background"
             src="/Assets_Website/Actualités.png"
             alt="Actualités financières"
             className="w-full h-full object-cover"

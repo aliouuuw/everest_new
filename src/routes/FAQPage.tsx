@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
-import { EditableText } from '../cms'
+import { EditableImage, EditableText } from '../cms'
 
 type QA = { q: string; a: string }
 type Glossary = { term: string; def: string }
@@ -94,7 +94,8 @@ export const FAQPage = () => {
         <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
           {/* Background image */}
           <div className="absolute inset-0 z-0">
-            <img
+            <EditableImage
+              id="faq.hero.background"
               src="/Assets_Website/Abécédaire-&-FAQ.png"
               alt="Support client"
               className="w-full h-full object-cover"

@@ -61,7 +61,7 @@ export const upsert = mutation({
   args: {
     contentId: v.string(),
     pageKey: v.string(),
-    type: v.union(v.literal("text"), v.literal("richtext")),
+    type: v.union(v.literal("text"), v.literal("richtext"), v.literal("image")),
     value: v.string(),
   },
   handler: async (ctx, args) => {
@@ -72,7 +72,7 @@ export const upsert = mutation({
     }
 
     const value = args.value.trim();
-    if (value.length > MAX_VALUE_LENGTH) {
+    if (args.type !== "image" && value.length > MAX_VALUE_LENGTH) {
       throw new Error(
         `Value too long (${value.length} > ${MAX_VALUE_LENGTH} chars)`,
       );

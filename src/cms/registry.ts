@@ -12,7 +12,7 @@
  *  - Supports `type: "text"` and `type: "richtext"`.
  */
 
-export type RegistryFieldType = "text" | "richtext";
+export type RegistryFieldType = "text" | "richtext" | "image";
 
 export interface RegistryEntry {
   id: string;
@@ -30,6 +30,7 @@ export type PageKey =
   | "capital-markets"
   | "investment-banking"
   | "mandate"
+  | "expertises"
   | "faq"
   | "publications"
   | "actualites";
@@ -43,6 +44,21 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "home.hero.ctaPrimary", label: "Hero primary CTA label", section: "Hero", type: "text" },
     { id: "home.hero.ctaSecondary", label: "Hero secondary CTA label", section: "Hero", type: "text" },
 
+    // Trust Strip — Partner Logos
+    { id: "home.trust.brvm", label: "BRVM — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.bdk", label: "BDK — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.etatSenegal", label: "État du Sénégal — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.kalia", label: "Kalia — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.bhs", label: "BHS — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.sunuGroup", label: "Sunu Group — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.bci", label: "BCI — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.bnde", label: "BNDE — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.boad", label: "BOAD — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.orabank", label: "Orabank — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.pagena", label: "Pagena — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.cde", label: "CDE — logo", section: "Trust Strip", type: "image" },
+    { id: "home.trust.villeDakar", label: "Ville de Dakar — logo", section: "Trust Strip", type: "image" },
+
     // Positioning
     { id: "home.positioning.badge", label: "Badge", section: "Positioning", type: "text" },
     { id: "home.positioning.title", label: "Title (line 1)", section: "Positioning", type: "text" },
@@ -54,6 +70,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "home.valueProps.title", label: "Title (line 1)", section: "Value Props", type: "text" },
     { id: "home.valueProps.titleAccent", label: "Title (line 2, gold)", section: "Value Props", type: "text" },
     { id: "home.valueProps.intro", label: "Intro paragraph", section: "Value Props", type: "text" },
+    { id: "home.valueProps.image", label: "Value Props — image", section: "Value Props", type: "image" },
 
     // Capacity
     { id: "home.capacity.badge", label: "Badge", section: "Capacity", type: "text" },
@@ -100,6 +117,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   ],
   about: [
     // Hero
+    { id: "about.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "about.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
     { id: "about.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "about.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
@@ -183,6 +201,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   ],
   "capital-markets": [
     // Hero
+    { id: "capital-markets.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "capital-markets.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "capital-markets.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
@@ -193,6 +212,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   ],
   "investment-banking": [
     // Hero
+    { id: "investment-banking.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "investment-banking.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "investment-banking.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
@@ -203,6 +223,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   ],
   mandate: [
     // Hero
+    { id: "mandate.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "mandate.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "mandate.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
@@ -211,8 +232,19 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "mandate.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
     { id: "mandate.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
   ],
+  expertises: [
+    // Marché des Titres Publics
+    { id: "expertises.mtp.image", label: "Marché des Titres Publics — image", section: "Marché des Titres Publics", type: "image" },
+    // Marché Financier Régional
+    { id: "expertises.mfr.image", label: "Marché Financier Régional — image", section: "Marché Financier Régional", type: "image" },
+    // Ingénierie Financière
+    { id: "expertises.ing.image", label: "Ingénierie Financière — image", section: "Ingénierie Financière", type: "image" },
+    // Private Office
+    { id: "expertises.po.image", label: "Private Office — image", section: "Private Office", type: "image" },
+  ],
   faq: [
     // Hero
+    { id: "faq.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "faq.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
     { id: "faq.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "faq.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
@@ -237,6 +269,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   ],
   actualites: [
     // Hero
+    { id: "actualites.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "actualites.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
     { id: "actualites.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "actualites.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
@@ -275,6 +308,7 @@ export const PAGE_KEYS: ReadonlyArray<PageKey> = [
   "capital-markets",
   "investment-banking",
   "mandate",
+  "expertises",
   "faq",
   "publications",
   "actualites",
@@ -290,6 +324,7 @@ export const PAGE_KEY_LABELS: Record<PageKey, string> = {
   "capital-markets": "Marché des titres publics",
   "investment-banking": "Ingénierie financière",
   mandate: "Gestion sous mandat",
+  expertises: "Expertises",
   faq: "FAQ",
   publications: "Publications",
   actualites: "Actualités",
@@ -305,6 +340,7 @@ export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
   "capital-markets": "/marche-capitaux",
   "investment-banking": "/ingenieurie-financiere",
   mandate: "/gestion-sous-mandat",
+  expertises: "/expertises",
   faq: "/faq",
   publications: "/publications",
   actualites: "/actualites",

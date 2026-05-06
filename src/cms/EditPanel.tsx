@@ -1,9 +1,69 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useCMS } from "./CMSProvider";
 import { MAX_VALUE_LENGTH, PAGE_KEY_LABELS, registry } from "./registry";
 import type { PageKey, RegistryEntry } from "./registry";
 import EnhancedRichTextEditor from "../components/CMS/Shared/EnhancedRichTextEditor";
+import { useR2Upload } from "../hooks/useR2Upload";
+
+function ImageFieldEditor({
+  value,
+  onChange,
+  disabled,
+}: {
+  value: string;
+  onChange: (url: string) => void;
+  disabled?: boolean;
+}) {
+  const { upload, isUploading, error: uploadError } = useR2Upload();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const { publicUrl } = await upload(file, "cms-images");
+      onChange(publicUrl);
+    } catch {
+      // error visible via uploadError
+    }
+    e.target.value = "";
+  };
+
+  return (
+    <div className="space-y-2">
+      {value && (
+        <div
+          className="relative overflow-hidden rounded-xl border border-[var(--mauve-10)] bg-[var(--command-surface)]"
+          style={{ aspectRatio: "16 / 6" }}
+        >
+          <img src={value} alt="Aperçu" className="h-full w-full object-cover" />
+        </div>
+      )}
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFile}
+        disabled={disabled || isUploading}
+      />
+      <button
+        type="button"
+        disabled={disabled || isUploading}
+        onClick={() => inputRef.current?.click()}
+        className="font-primary inline-flex min-h-[2.25rem] w-full items-center justify-center gap-2 rounded-xl border border-[var(--mauve-20)] bg-[var(--command-surface)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)] disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {isUploading ? "Téléversement…" : value ? "Changer l'image" : "Choisir une image"}
+      </button>
+      {uploadError && (
+        <p className="font-primary text-[11px] text-[color-mix(in_srgb,var(--mauve)_85%,#000)]">
+          {uploadError}
+        </p>
+      )}
+    </div>
+  );
+}
 
 interface FieldState {
   value: string;
@@ -203,7 +263,13 @@ export function EditPanel() {
                     {entry.id}
                   </div>
 
-                  {entry.type === "richtext" ? (
+                  {entry.type === "image" ? (
+                    <ImageFieldEditor
+                      value={field.value}
+                      onChange={(url) => handleChange(entry.id, url)}
+                      disabled={field.saving}
+                    />
+                  ) : entry.type === "richtext" ? (
                     <EnhancedRichTextEditor
                       value={field.value}
                       onChange={(val) => handleChange(entry.id, val)}

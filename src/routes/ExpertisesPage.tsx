@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { FiArrowRight } from 'react-icons/fi';
 import { useReveal } from '../components/Hooks/useReveal';
 import { HiArrowRight } from 'react-icons/hi2';
+import { EditableImage } from '../cms';
 
 type Expertise = {
   id: string;
@@ -12,6 +13,13 @@ type Expertise = {
   intro: string;
   approach: { label: string; text: string };
   bullets: string[];
+};
+
+const EXPERTISE_ID_TO_CMS: Record<string, string> = {
+  'marche-titres-publics': 'expertises.mtp.image',
+  'marche-financier-regional': 'expertises.mfr.image',
+  'ingenierie-financiere': 'expertises.ing.image',
+  'private-office': 'expertises.po.image',
 };
 
 const EXPERTISES: Array<Expertise> = [
@@ -175,7 +183,8 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
               imageLeft ? 'lg:order-1' : 'lg:order-2'
             }`}
           >
-            <img
+            <EditableImage
+              id={EXPERTISE_ID_TO_CMS[expertise.id] || ''}
               src={expertise.imageUrl}
               alt={expertise.imageAlt}
               className="absolute inset-0 h-full w-full object-cover"

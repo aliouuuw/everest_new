@@ -3,7 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useState } from 'react'
 import { useReveal } from '../Hooks/useReveal'
 import type { Department } from '../../data/departments'
-import { EditableText, useContent } from '../../cms'
+import { EditableImage, EditableText, useContent } from '../../cms'
 
 interface DepartmentPageProps {
   department: Department
@@ -38,6 +38,12 @@ const formatHeadline = (text: string) => {
   return <span style={{ color: 'var(--mauve)' }}>{text}</span>
 }
 
+const SLUG_TO_PAGEKEY: Record<string, string> = {
+  'marche-capitaux': 'capital-markets',
+  'ingenieurie-financiere': 'investment-banking',
+  'gestion-sous-mandat': 'mandate',
+}
+
 export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   const heroRef = useReveal<HTMLElement>()
   const metricsRef = useReveal<HTMLElement>()
@@ -67,6 +73,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
     cta_subtitle,
   } = department
 
+  const deptPageKey = SLUG_TO_PAGEKEY[slug] ?? slug
+  const heroBgOverride = useContent(`${deptPageKey}.hero.background`)
+  const resolvedHeroBg =
+    heroBgOverride?.value !== undefined && heroBgOverride.value !== ''
+      ? heroBgOverride.value
+      : hero_background
+
   const headlineOverride = useContent(`${slug}.hero.headline`)
   const resolvedHeadline =
     headlineOverride?.value !== undefined && headlineOverride.value !== ''
@@ -79,10 +92,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
       {/* ─── 1. Hero — Redesigned ─── */}
       <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-end pb-20 pt-40 bg-white border-b border-black/10">
-        {hero_background && (
+        {resolvedHeroBg && (
           <div className="absolute top-0 left-0 w-full h-[80%] z-0 overflow-hidden">
-            <img
-              src={hero_background}
+            <EditableImage
+              id={`${deptPageKey}.hero.background`}
+              src={resolvedHeroBg}
               alt={department_name}
               className="w-full h-full object-cover"
               style={{

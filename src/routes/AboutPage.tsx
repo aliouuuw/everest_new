@@ -1,6 +1,6 @@
 import { FiArrowRight } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
-import { EditableText } from '../cms'
+import { EditableImage, EditableText } from '../cms'
 
 /** Matches Outils / Expertises / Contact section hero typography (max 50px). */
 const sectionTitleStyle = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' } as const
@@ -28,7 +28,8 @@ export const AboutPage = () => {
         <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
           {/* Background image */}
           <div className="absolute inset-0 z-0">
-            <img
+            <EditableImage
+              id="about.hero.background"
               src="/Assets_Website/À-propos.png"
               alt="Everest Finance Bureau"
               className="w-full h-full object-cover"
