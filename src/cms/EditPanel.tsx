@@ -3,6 +3,7 @@ import { FiX } from "react-icons/fi";
 import { useCMS } from "./CMSProvider";
 import { MAX_VALUE_LENGTH, PAGE_KEY_LABELS, registry } from "./registry";
 import type { PageKey, RegistryEntry } from "./registry";
+import EnhancedRichTextEditor from "../components/CMS/Shared/EnhancedRichTextEditor";
 
 interface FieldState {
   value: string;
@@ -202,14 +203,23 @@ export function EditPanel() {
                     {entry.id}
                   </div>
 
-                  <textarea
-                    value={field.value}
-                    maxLength={MAX_VALUE_LENGTH}
-                    onChange={(e) => handleChange(entry.id, e.target.value)}
-                    placeholder={override !== undefined ? "" : "(texte par défaut du code)"}
-                    rows={3}
-                    className="font-primary w-full resize-y rounded-xl border border-[var(--mauve-15)] bg-[var(--pure-white)] px-3 py-2.5 text-sm leading-relaxed text-[var(--night)] placeholder:text-[var(--night-20)] transition-colors duration-300 focus:border-[var(--mauve)] focus:outline-none focus:ring-2 focus:ring-[var(--mauve-20)]"
-                  />
+                  {entry.type === "richtext" ? (
+                    <EnhancedRichTextEditor
+                      value={field.value}
+                      onChange={(val) => handleChange(entry.id, val)}
+                      placeholder={override !== undefined ? "" : "(texte par défaut du code)"}
+                      className="min-h-[12rem] w-full"
+                    />
+                  ) : (
+                    <textarea
+                      value={field.value}
+                      maxLength={MAX_VALUE_LENGTH}
+                      onChange={(e) => handleChange(entry.id, e.target.value)}
+                      placeholder={override !== undefined ? "" : "(texte par défaut du code)"}
+                      rows={3}
+                      className="font-primary w-full resize-y rounded-xl border border-[var(--mauve-15)] bg-[var(--pure-white)] px-3 py-2.5 text-sm leading-relaxed text-[var(--night)] placeholder:text-[var(--night-20)] transition-colors duration-300 focus:border-[var(--mauve)] focus:outline-none focus:ring-2 focus:ring-[var(--mauve-20)]"
+                    />
+                  )}
 
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
                     <div className="font-primary min-h-[1.25rem] text-[11px] text-[var(--night-60)]">

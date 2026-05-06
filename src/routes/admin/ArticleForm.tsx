@@ -128,15 +128,16 @@ export const ArticleForm = () => {
   // ── Upload handlers ─────────────────────────────────────────
   const handleCoverUpload = useCallback(async (file: File) => {
     try {
-      const url = await uploadToR2(file, 'covers');
-      field('imageUrl', url);
+      const { publicUrl } = await uploadToR2(file, 'covers');
+      field('imageUrl', publicUrl);
     } catch {
       // error already in uploadError state
     }
   }, [uploadToR2]);
 
   const handleInArticleUpload = useCallback(async (file: File): Promise<string> => {
-    return await uploadToR2(file, 'articles');
+    const { publicUrl } = await uploadToR2(file, 'articles');
+    return publicUrl;
   }, [uploadToR2]);
 
   const handleCoverFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

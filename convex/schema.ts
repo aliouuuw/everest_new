@@ -97,45 +97,6 @@ export default defineSchema({
     .index("by_uploader", ["uploadedBy"])
     .index("by_cloudflare_id", ["cloudflareId"]),
 
-  // Upload Sessions Table (for tracking uploads)
-  uploadSessions: defineTable({
-    // File information
-    fileKey: v.string(),
-    fileName: v.string(),
-    fileType: v.string(),
-    contentType: v.string(),
-
-    // Upload status
-    status: v.union(
-      v.literal("pending"),
-      v.literal("completed"),
-      v.literal("failed")
-    ),
-
-    // Cloudflare data (populated after upload)
-    cloudflareId: v.optional(v.string()),
-    cloudflareUrl: v.optional(v.string()),
-    fileSize: v.optional(v.number()),
-    variants: v.optional(v.object({
-      thumbnail: v.string(),
-      medium: v.string(),
-      large: v.string(),
-      webp: v.string(),
-    })),
-
-    // Relationships
-    publicationId: v.optional(v.id("publications")),
-    uploadedBy: v.id("users"),
-
-    // Timestamps
-    createdAt: v.number(),
-    completedAt: v.optional(v.number()),
-    failedAt: v.optional(v.number()),
-  })
-    .index("by_status", ["status"])
-    .index("by_uploader", ["uploadedBy"])
-    .index("by_file_key", ["fileKey"]),
-
   // Users Table
   users: defineTable({
     // Authentication
@@ -286,7 +247,7 @@ export default defineSchema({
   siteContent: defineTable({
     contentId: v.string(),                   // e.g. "home.hero.title"
     pageKey: v.string(),                     // e.g. "home"
-    type: v.literal("text"),                 // plain text only in v1
+    type: v.union(v.literal("text"), v.literal("richtext")),
     value: v.string(),
     updatedBy: v.id("users"),
     updatedAt: v.number(),

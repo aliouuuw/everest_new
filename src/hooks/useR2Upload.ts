@@ -24,7 +24,7 @@ export function useR2Upload() {
   const getUploadUrl = useAction(api.r2Upload.getUploadUrl);
 
   const upload = useCallback(
-    async (file: File, folder = "articles"): Promise<string> => {
+    async (file: File, folder = "articles"): Promise<{ fileKey: string; publicUrl: string }> => {
       setState({ isUploading: true, progress: 0, error: null });
 
       try {
@@ -58,7 +58,7 @@ export function useR2Upload() {
         }
 
         setState({ isUploading: false, progress: 100, error: null });
-        return publicUrl;
+        return { fileKey, publicUrl };
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Upload failed";
         setState({ isUploading: false, progress: 0, error: msg });

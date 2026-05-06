@@ -61,7 +61,7 @@ export const upsert = mutation({
   args: {
     contentId: v.string(),
     pageKey: v.string(),
-    type: v.literal("text"),
+    type: v.union(v.literal("text"), v.literal("richtext")),
     value: v.string(),
   },
   handler: async (ctx, args) => {

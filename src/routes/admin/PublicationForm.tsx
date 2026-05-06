@@ -5,7 +5,7 @@ import { useMutation, useQuery } from 'convex/react';
 import { useAuth } from '../../components/Auth/useAuth';
 import { api } from '../../../convex/_generated/api';
 import EnhancedRichTextEditor from '../../components/CMS/Shared/EnhancedRichTextEditor';
-import { uploadPublicationImage } from '../../utils/cloudflare';
+import { useR2Upload } from '../../hooks/useR2Upload';
 import type { Id } from '../../../convex/_generated/dataModel';
 
 interface PublicationFormData {
@@ -89,6 +89,7 @@ export const PublicationForm = () => {
   const [tagInput, setTagInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const { upload: uploadToR2 } = useR2Upload();
 
   // Function to get text content without HTML tags
   const getTextContent = (html: string): string => {
@@ -106,8 +107,8 @@ export const PublicationForm = () => {
   // Image upload handler for the rich text editor
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
-      const result = await uploadPublicationImage(file);
-      return result.url;
+      const { publicUrl } = await uploadToR2(file, 'publications');
+      return publicUrl;
     } catch (error) {
       console.error('Image upload failed:', error);
       throw new Error('Failed to upload image. Please try again.');

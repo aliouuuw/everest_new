@@ -4,14 +4,14 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { api } from "../../convex/_generated/api";
 import { useCurrentUser } from "../hooks/useAuth";
 import { usePageKey } from "./usePageKey";
-import type { PageKey } from "./registry";
+import { getRegistryEntry, type PageKey } from "./registry";
 import type { ReactNode } from "react";
 
 export interface SiteContentRow {
   _id: string;
   contentId: string;
   pageKey: string;
-  type: "text";
+  type: "text" | "richtext";
   value: string;
   updatedAt: number;
 }
@@ -129,10 +129,14 @@ export function CMSProvider({ children }: CMSProviderProps) {
       if (!pageKey) {
         throw new Error("Cannot save: unknown page key for current route");
       }
+      const entry = getRegistryEntry(contentId);
+      if (!entry) {
+        throw new Error(`Unknown contentId: ${contentId}`);
+      }
       await upsertMutation({
         contentId,
         pageKey,
-        type: "text",
+        type: entry.type,
         value,
       });
     },

@@ -9,10 +9,10 @@
  * Conventions:
  *  - `id` is `pageKey.section.field` (e.g. `home.hero.title`). Stable across
  *    refactors; never rename casually.
- *  - v1 supports only `type: "text"`. Rich text / media are phase 2.
+ *  - Supports `type: "text"` and `type: "richtext"`.
  */
 
-export type RegistryFieldType = "text";
+export type RegistryFieldType = "text" | "richtext";
 
 export interface RegistryEntry {
   id: string;
@@ -109,9 +109,9 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "about.mission.badge", label: "Mission — badge", section: "Mission & Vision", type: "text" },
     { id: "about.mission.sectionTitle", label: "Mission — titre de section", section: "Mission & Vision", type: "text" },
     { id: "about.mission.missionTitle", label: "Notre mission — titre", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.missionBody", label: "Notre mission — corps", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.missionBody", label: "Notre mission — corps", section: "Mission & Vision", type: "richtext" },
     { id: "about.mission.visionTitle", label: "Notre vision — titre", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.visionBody", label: "Notre vision — corps", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.visionBody", label: "Notre vision — corps", section: "Mission & Vision", type: "richtext" },
     // Philosophie
     { id: "about.philosophie.badge", label: "Philosophie — badge", section: "Philosophie", type: "text" },
     { id: "about.philosophie.title", label: "Philosophie — titre", section: "Philosophie", type: "text" },
@@ -138,15 +138,15 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "services.overview.intro", label: "Approches — intro", section: "Aperçu services", type: "text" },
     // Gestion Libre
     { id: "services.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
-    { id: "services.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "text" },
+    { id: "services.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "richtext" },
     { id: "services.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
     // Gestion Assistée
     { id: "services.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
-    { id: "services.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "text" },
+    { id: "services.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "richtext" },
     { id: "services.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
     // Gestion Sous-Mandat
     { id: "services.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
-    { id: "services.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "services.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "richtext" },
     { id: "services.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
   ],
   offres: [
@@ -162,15 +162,15 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "offres.overview.intro", label: "Approches — intro", section: "Aperçu offres", type: "text" },
     // Gestion Libre
     { id: "offres.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
-    { id: "offres.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "text" },
+    { id: "offres.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "richtext" },
     { id: "offres.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
     // Gestion Assistée
     { id: "offres.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
-    { id: "offres.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "text" },
+    { id: "offres.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "richtext" },
     { id: "offres.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
     // Gestion Sous-Mandat
     { id: "offres.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
-    { id: "offres.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "offres.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "richtext" },
     { id: "offres.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
   ],
   bourse: [
@@ -186,7 +186,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "capital-markets.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "capital-markets.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
-    { id: "capital-markets.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    { id: "capital-markets.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
     // CTA
     { id: "capital-markets.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
     { id: "capital-markets.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
@@ -196,7 +196,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "investment-banking.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "investment-banking.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
-    { id: "investment-banking.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    { id: "investment-banking.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
     // CTA
     { id: "investment-banking.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
     { id: "investment-banking.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
@@ -206,7 +206,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "mandate.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
     { id: "mandate.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Presentation
-    { id: "mandate.presentation", label: "Présentation", section: "Présentation", type: "text" },
+    { id: "mandate.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
     // CTA
     { id: "mandate.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
     { id: "mandate.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { FaDownload, FaEye, FaSearch, FaTrash, FaUpload } from 'react-icons/fa';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import { uploadMediaFile, validateMediaFile } from '../../utils/cloudflare';
+import { validateMediaFile } from '../../utils/cloudflare';
+import { useR2Upload } from '../../hooks/useR2Upload';
 import { useAuth } from '../../components/Auth/useAuth';
 import type { Id } from '../../../convex/_generated/dataModel';
 
@@ -17,6 +18,7 @@ export const MediaManagement = () => {
   const media = useQuery(api.media.getMedia);
   const deleteMedia = useMutation(api.media.deleteMedia);
   const linkMedia = useMutation(api.media.linkMediaToPublication);
+  const { upload: uploadToR2 } = useR2Upload();
 
   const filteredMedia = media?.filter(item => {
     const matchesSearch = item.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -117,21 +119,20 @@ export const MediaManagement = () => {
           continue;
         }
 
-        // Upload to Cloudflare (server-side)
-        const uploadResult = await uploadMediaFile(file);
+        // Upload to Cloudflare R2 via presigned URL
+        const { fileKey, publicUrl } = await uploadToR2(file, 'media');
 
         // Link to media database (standalone media, no publication)
         await linkMedia({
-          publicationId: undefined, // No publication for standalone media
-          cloudflareId: uploadResult.id,
-          cloudflareUrl: uploadResult.url,
+          publicationId: undefined,
+          cloudflareId: fileKey,
+          cloudflareUrl: publicUrl,
           fileName: file.name,
           fileType: file.type.startsWith('image/') ? 'image' :
                    file.type.startsWith('video/') ? 'video' : 'document',
           fileSize: file.size,
           mimeType: file.type,
-          variants: uploadResult.variants,
-          uploadedBy: user._id, // Use actual user ID
+          uploadedBy: user._id,
         });
       }
     } catch (error) {
