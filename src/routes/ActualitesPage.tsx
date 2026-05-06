@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
-import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiRefreshCw, FiSearch } from 'react-icons/fi';
+import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
 import { EditableText } from '../cms';
 import { gsap } from 'gsap';
-import { useQuery, useAction } from 'convex/react';
+import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 
 type Article = {
@@ -14,8 +14,6 @@ type Article = {
   readTime: string;
   imageUrl: string;
   slug?: string;
-  sourceName?: string;
-  sourceSlug?: string;
 };
 
 function estimateInternalReadTime(content: string): string {
@@ -23,15 +21,6 @@ function estimateInternalReadTime(content: string): string {
   return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
 
-const SOURCE_COLORS: Record<string, { bg: string; text: string; border: string }> = {
-  'sika-finance':  { bg: 'rgba(70,29,76,0.08)',  text: 'var(--mauve)',    border: 'rgba(70,29,76,0.2)'  },
-  'madis-invest':  { bg: 'rgba(202,148,47,0.1)', text: 'var(--jaune-or)', border: 'rgba(202,148,47,0.25)' },
-};
-
-function estimateReadTime(text: string): string {
-  const words = text.split(/\s+/).length;
-  return `${Math.max(1, Math.ceil(words / 200))} min`;
-}
 
 
 export const ActualitesPage = () => {
@@ -77,39 +66,9 @@ export const ActualitesPage = () => {
     };
   }, [rawInternalArticles]);
 
-  // ── External articles from Convex ────────────────────────────
-  const rawExternalArticles = useQuery(api.externalNews.getExternalArticles);
-  const triggerFetch = useAction(api.externalNews.fetchExternalNews);
-  const [isFetching, setIsFetching] = useState(false);
-
-  const handleRefresh = useCallback(async () => {
-    setIsFetching(true);
-    try { await triggerFetch({}); } catch (e) { console.error(e); }
-    finally { setIsFetching(false); }
-  }, [triggerFetch]);
-
-  useEffect(() => {
-    if (rawExternalArticles !== undefined && rawExternalArticles.length === 0) {
-      handleRefresh();
-    }
-  }, [rawExternalArticles]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const externalArticles: Article[] = useMemo(() => {
-    if (!rawExternalArticles) return [];
-    return rawExternalArticles.map((a) => ({
-      title: a.title,
-      excerpt: a.excerpt,
-      category: a.category,
-      date: new Date(a.publishedAt).toISOString().split('T')[0],
-      readTime: estimateReadTime(a.excerpt),
-      imageUrl: a.imageUrl,
-      slug: a.slug ?? undefined,
-      sourceName: a.sourceName,
-      sourceSlug: a.source,
-    }));
-  }, [rawExternalArticles]);
-
-  const ARTICLES = useMemo(() => [...internalArticles, ...externalArticles], [internalArticles, externalArticles]);
+  const ARTICLES = useMemo(() =>
+    [...internalArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+  [internalArticles]);
 
   const CATEGORIES = useMemo(() => {
     const cats = new Set(['Tout']);
@@ -311,24 +270,12 @@ export const ActualitesPage = () => {
             {/* Articles Feed */}
             <div className="lg:col-span-8">
               <div className="actu-reveal flex items-center justify-between mb-12">
-                <div className="flex items-center gap-4">
-                  <h3 className="font-primary font-bold text-2xl text-[var(--night)]">
-                    Publications récentes
-                  </h3>
-                  {rawExternalArticles !== undefined && externalArticles.length > 0 && (
-                    <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--mauve)]">
-                      {externalArticles.length} externes
-                    </span>
-                  )}
-                </div>
-                <button
-                  onClick={handleRefresh}
-                  disabled={isFetching}
-                  title="Rafraîchir les actualités externes"
-                  className="p-2 rounded-full border border-black/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] transition-all disabled:opacity-40"
-                >
-                  <FiRefreshCw size={14} className={`text-[var(--mauve)] ${isFetching ? 'animate-spin' : ''}`} />
-                </button>
+                <h3 className="font-primary font-bold text-2xl text-[var(--night)]">
+                  Publications récentes
+                  <span className="ml-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--mauve)]">
+                    {ARTICLES.length}
+                  </span>
+                </h3>
               </div>
 
               {filteredArticles.length === 0 ? (
@@ -355,7 +302,7 @@ export const ActualitesPage = () => {
                             />
                           ) : (
                             <div className="absolute inset-0 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex items-center justify-center">
-                              <span className="text-[var(--mauve)]/30 text-4xl font-bold">{article.sourceName?.[0]}</span>
+                              <span className="text-[var(--mauve)]/30 text-4xl font-bold">{article.title[0]}</span>
                             </div>
                           )}
                         </div>
@@ -373,18 +320,6 @@ export const ActualitesPage = () => {
                             <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
                               <FiClock className="text-[9px]" /> {article.readTime}
                             </span>
-                            {article.sourceName && article.sourceSlug && (
-                              <span
-                                className="px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-[0.1em] uppercase"
-                                style={{
-                                  background: SOURCE_COLORS[article.sourceSlug]?.bg ?? 'rgba(0,0,0,0.05)',
-                                  color: SOURCE_COLORS[article.sourceSlug]?.text ?? 'inherit',
-                                  border: `1px solid ${SOURCE_COLORS[article.sourceSlug]?.border ?? 'transparent'}`,
-                                }}
-                              >
-                                {article.sourceName}
-                              </span>
-                            )}
                           </div>
                           <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
                             {article.title}
@@ -401,31 +336,6 @@ export const ActualitesPage = () => {
                 </div>
               )}
 
-              {/* Load more / External sources credit */}
-              {externalArticles.length > 0 && (
-                <div className="actu-reveal flex items-center gap-3 mt-10 pt-6 border-t border-black/5">
-                  <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night)]/40">Sources externes :</span>
-                  {(['sika-finance', 'madis-invest'] as const).map(slug => {
-                    const count = externalArticles.filter(a => a.sourceSlug === slug).length;
-                    if (!count) return null;
-                    const colors = SOURCE_COLORS[slug];
-                    const name = slug === 'sika-finance' ? 'Sika Finance' : 'Madis Invest';
-                    const href = slug === 'sika-finance' ? 'https://www.sikafinance.com' : 'https://madisinvest.com';
-                    return (
-                      <a
-                        key={slug}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[9px] font-bold tracking-[0.1em] uppercase transition-opacity hover:opacity-70"
-                        style={{ background: colors.bg, color: colors.text, border: `1px solid ${colors.border}` }}
-                      >
-                        {name} <FiExternalLink size={9} />
-                      </a>
-                    );
-                  })}
-                </div>
-              )}
             </div>
 
             {/* ─── Sidebar ─── */}
