@@ -7,6 +7,7 @@ import {
   FiPhone,
 } from 'react-icons/fi';
 import { useReveal } from '../components/Hooks/useReveal';
+import { EditableText } from '../cms';
 
 const TOPICS = [
   { value: 'relation', label: 'Entrer en relation' },
@@ -56,13 +57,15 @@ export const ContactPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
               <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
-                Parlons de vos projets.
+                <EditableText id="contact.hero.title">Parlons de vos projets.</EditableText>
               </h1>
             </div>
             <div className="lg:col-span-4">
               <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
-                Nos équipes sont à votre disposition pour analyser vos besoins et vous
-                accompagner dans vos projets d&apos;investissement ou de financement.
+                <EditableText id="contact.hero.subtitle">
+                  Nos équipes sont à votre disposition pour analyser vos besoins et vous
+                  accompagner dans vos projets d&apos;investissement ou de financement.
+                </EditableText>
               </p>
             </div>
           </div>
@@ -79,10 +82,14 @@ export const ContactPage = () => {
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
             {/* Form */}
             <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">
-              <h2 className="luxury-heading mb-3">Envoyer un message.</h2>
+              <h2 className="luxury-heading mb-3">
+                <EditableText id="contact.form.title">Envoyer un message.</EditableText>
+              </h2>
               <p className="mb-8 max-w-lg text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
-                Décrivez brièvement votre demande — un conseiller prendra contact sous 24&nbsp;h
-                ouvrées pour cadrer l&apos;échange.
+                <EditableText id="contact.form.intro">
+                  Décrivez brièvement votre demande — un conseiller prendra contact sous 24&nbsp;h
+                  ouvrées pour cadrer l&apos;échange.
+                </EditableText>
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -152,14 +159,16 @@ export const ContactPage = () => {
                 </div>
                 <div className="flex flex-col items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
                   <p className="max-w-xs font-primary text-xs font-light leading-relaxed text-[var(--night-40)]">
-                    En envoyant ce message, vous acceptez que vos données soient utilisées pour
-                    répondre à votre demande.
+                    <EditableText id="contact.form.privacy">
+                      En envoyant ce message, vous acceptez que vos données soient utilisées pour
+                      répondre à votre demande.
+                    </EditableText>
                   </p>
                   <button
                     type="submit"
                     className="group inline-flex items-center gap-2 rounded-full bg-[var(--mauve)] px-6 py-3 font-primary text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#38163c]"
                   >
-                    Envoyer la demande
+                    <EditableText id="contact.form.submit" as="span">Envoyer la demande</EditableText>
                     <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>
                 </div>
@@ -181,10 +190,10 @@ export const ContactPage = () => {
                 />
                 <div className="relative">
                   <p className="mb-3 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
-                    Coordonnées
+                    <EditableText id="contact.info.badge">Coordonnées</EditableText>
                   </p>
                   <h3 className="mb-6 font-primary text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                    EVEREST Finance SGI
+                    <EditableText id="contact.info.company">EVEREST Finance SGI</EditableText>
                   </h3>
 
                   <ul className="space-y-5 text-white/75">
@@ -216,7 +225,7 @@ export const ContactPage = () => {
                       </a>
                     </InfoRow>
                     <InfoRow icon={FiBriefcase}>
-                      Agrément AMF-UMOA n° SGI/DA/2016/60
+                      <EditableText id="contact.info.license">Agrément AMF-UMOA n° SGI/DA/2016/60</EditableText>
                     </InfoRow>
                   </ul>
                 </div>
@@ -224,14 +233,16 @@ export const ContactPage = () => {
 
               <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-7">
                 <p className="mb-1.5 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-                  Horaires
+                  <EditableText id="contact.hours.badge">Horaires</EditableText>
                 </p>
                 <h4 className="mb-3 font-primary text-base font-semibold tracking-tight text-[var(--mauve)]">
-                  Lundi — Vendredi · 08h30 → 17h30 GMT
+                  <EditableText id="contact.hours.title">Lundi — Vendredi · 08h30 → 17h30 GMT</EditableText>
                 </h4>
                 <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
-                  Nous répondons en général sous 24&nbsp;h ouvrées. Pour les demandes urgentes
-                  relatives à une opération en cours, privilégiez le téléphone.
+                  <EditableText id="contact.hours.body">
+                    Nous répondons en général sous 24&nbsp;h ouvrées. Pour les demandes urgentes
+                    relatives à une opération en cours, privilégiez le téléphone.
+                  </EditableText>
                 </p>
               </div>
             </aside>

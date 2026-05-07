@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { FiArrowRight } from 'react-icons/fi';
 import { useReveal } from '../components/Hooks/useReveal';
 import { HiArrowRight } from 'react-icons/hi2';
-import { EditableImage } from '../cms';
+import { EditableImage, EditableText } from '../cms';
 
 type Expertise = {
   id: string;
@@ -113,14 +113,16 @@ export const ExpertisesPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
             <div className="lg:col-span-8">
               <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
-                Nos expertises.
+                <EditableText id="expertises.hero.title">Nos expertises.</EditableText>
               </h1>
             </div>
             <div className="lg:col-span-4">
               <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
-                À l&apos;interface des besoins de financement et des stratégies
-                d&apos;investissement — souveraine, BRVM, ingénierie et patrimoine dans la zone
-                UEMOA.
+                <EditableText id="expertises.hero.subtitle">
+                  À l&apos;interface des besoins de financement et des stratégies
+                  d&apos;investissement — souveraine, BRVM, ingénierie et patrimoine dans la zone
+                  UEMOA.
+                </EditableText>
               </p>
             </div>
           </div>
@@ -140,10 +142,14 @@ export const ExpertisesPage = () => {
                 className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
                 style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
               >
-                Besoin d'un accompagnement personnalisé ?
+                <EditableText id="expertises.cta.title">
+                  Besoin d'un accompagnement personnalisé ?
+                </EditableText>
               </h2>
               <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
-                Nos équipes vous aident à structurer une stratégie adaptée à votre profil et vos objectifs d'investissement.
+                <EditableText id="expertises.cta.subtitle">
+                  Nos équipes vous aident à structurer une stratégie adaptée à votre profil et vos objectifs d'investissement.
+                </EditableText>
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
@@ -151,7 +157,8 @@ export const ExpertisesPage = () => {
                 to="/contact"
                 className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit"
               >
-                Prendre rendez-vous <FiArrowRight className="text-lg" />
+                <EditableText id="expertises.cta.label" as="span">Prendre rendez-vous</EditableText>
+                <FiArrowRight className="text-lg" />
               </Link>
             </div>
           </div>
@@ -206,30 +213,40 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
             }`}
           >
             <h2 className="luxury-heading mb-4 max-w-xl">
-              {expertise.title} {expertise.titleSuffix}
+              <EditableText id={`expertises.${expertise.id}.title`}>
+                {expertise.title} {expertise.titleSuffix}
+              </EditableText>
             </h2>
             <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
-              {expertise.intro}
+              <EditableText id={`expertises.${expertise.id}.intro`}>
+                {expertise.intro}
+              </EditableText>
             </p>
 
             <div className="mb-6 max-w-xl pb-6">
               <p className="mb-2 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-                {expertise.approach.label}
+                <EditableText id={`expertises.${expertise.id}.approachLabel`}>
+                  {expertise.approach.label}
+                </EditableText>
               </p>
               <p className="text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
-                {expertise.approach.text}
+                <EditableText id={`expertises.${expertise.id}.approachText`}>
+                  {expertise.approach.text}
+                </EditableText>
               </p>
             </div>
 
             <ul className="max-w-xl divide-y divide-[var(--command-border)] border-b border-[var(--command-border)]">
-              {expertise.bullets.map((b) => (
+              {expertise.bullets.map((b, idx) => (
                 <li
                   key={b}
                   className="group flex items-center gap-3 py-5 md:gap-4 md:py-6 hover:pl-4 transition-all duration-300"
                 >
                   <HiArrowRight className="text-[var(--mauve)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
-                    {b}
+                    <EditableText id={`expertises.${expertise.id}.bullet${idx + 1}`}>
+                      {b}
+                    </EditableText>
                   </span>
                 </li>
               ))}

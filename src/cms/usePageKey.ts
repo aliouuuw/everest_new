@@ -17,6 +17,7 @@ const PATH_TO_PAGE_KEY: Array<{ match: (path: string) => boolean; key: PageKey }
   { match: (p) => p === "/ingenieurie-financiere", key: "investment-banking" },
   { match: (p) => p === "/gestion-sous-mandat", key: "mandate" },
   { match: (p) => p === "/expertises", key: "expertises" },
+  { match: (p) => p === "/contact", key: "contact" },
   { match: (p) => p === "/faq", key: "faq" },
   { match: (p) => p.startsWith("/publications"), key: "publications" },
   { match: (p) => p.startsWith("/actualites"), key: "actualites" },

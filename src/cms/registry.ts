@@ -31,6 +31,7 @@ export type PageKey =
   | "investment-banking"
   | "mandate"
   | "expertises"
+  | "contact"
   | "faq"
   | "publications"
   | "actualites";
@@ -209,14 +210,68 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "mandate.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
   ],
   expertises: [
+    // Hero
+    { id: "expertises.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "expertises.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     // Marché des Titres Publics
     { id: "expertises.mtp.image", label: "Marché des Titres Publics — image", section: "Marché des Titres Publics", type: "image" },
+    { id: "expertises.marche-titres-publics.title", label: "Marché des Titres Publics — titre", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.intro", label: "Marché des Titres Publics — intro", section: "Marché des Titres Publics", type: "richtext" },
+    { id: "expertises.marche-titres-publics.approachLabel", label: "Marché des Titres Publics — libellé approche", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.approachText", label: "Marché des Titres Publics — texte approche", section: "Marché des Titres Publics", type: "richtext" },
+    { id: "expertises.marche-titres-publics.bullet1", label: "Marché des Titres Publics — point 1", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.bullet2", label: "Marché des Titres Publics — point 2", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.bullet3", label: "Marché des Titres Publics — point 3", section: "Marché des Titres Publics", type: "text" },
     // Marché Financier Régional
     { id: "expertises.mfr.image", label: "Marché Financier Régional — image", section: "Marché Financier Régional", type: "image" },
+    { id: "expertises.marche-financier-regional.title", label: "Marché Financier Régional — titre", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.intro", label: "Marché Financier Régional — intro", section: "Marché Financier Régional", type: "richtext" },
+    { id: "expertises.marche-financier-regional.approachLabel", label: "Marché Financier Régional — libellé approche", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.approachText", label: "Marché Financier Régional — texte approche", section: "Marché Financier Régional", type: "richtext" },
+    { id: "expertises.marche-financier-regional.bullet1", label: "Marché Financier Régional — point 1", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.bullet2", label: "Marché Financier Régional — point 2", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.bullet3", label: "Marché Financier Régional — point 3", section: "Marché Financier Régional", type: "text" },
     // Ingénierie Financière
     { id: "expertises.ing.image", label: "Ingénierie Financière — image", section: "Ingénierie Financière", type: "image" },
+    { id: "expertises.ingenierie-financiere.title", label: "Ingénierie Financière — titre", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.intro", label: "Ingénierie Financière — intro", section: "Ingénierie Financière", type: "richtext" },
+    { id: "expertises.ingenierie-financiere.approachLabel", label: "Ingénierie Financière — libellé approche", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.approachText", label: "Ingénierie Financière — texte approche", section: "Ingénierie Financière", type: "richtext" },
+    { id: "expertises.ingenierie-financiere.bullet1", label: "Ingénierie Financière — point 1", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet2", label: "Ingénierie Financière — point 2", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet3", label: "Ingénierie Financière — point 3", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet4", label: "Ingénierie Financière — point 4", section: "Ingénierie Financière", type: "text" },
     // Private Office
     { id: "expertises.po.image", label: "Private Office — image", section: "Private Office", type: "image" },
+    { id: "expertises.private-office.title", label: "Private Office — titre", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.intro", label: "Private Office — intro", section: "Private Office", type: "richtext" },
+    { id: "expertises.private-office.approachLabel", label: "Private Office — libellé approche", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.approachText", label: "Private Office — texte approche", section: "Private Office", type: "richtext" },
+    { id: "expertises.private-office.bullet1", label: "Private Office — point 1", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet2", label: "Private Office — point 2", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet3", label: "Private Office — point 3", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet4", label: "Private Office — point 4", section: "Private Office", type: "text" },
+    // CTA
+    { id: "expertises.cta.title", label: "CTA — titre", section: "CTA", type: "text" },
+    { id: "expertises.cta.subtitle", label: "CTA — sous-titre", section: "CTA", type: "text" },
+    { id: "expertises.cta.label", label: "CTA — label bouton", section: "CTA", type: "text" },
+  ],
+  contact: [
+    // Hero
+    { id: "contact.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "contact.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Form
+    { id: "contact.form.title", label: "Formulaire — titre", section: "Formulaire", type: "text" },
+    { id: "contact.form.intro", label: "Formulaire — intro", section: "Formulaire", type: "richtext" },
+    { id: "contact.form.privacy", label: "Formulaire — confidentialité", section: "Formulaire", type: "richtext" },
+    { id: "contact.form.submit", label: "Formulaire — bouton", section: "Formulaire", type: "text" },
+    // Info panels
+    { id: "contact.info.badge", label: "Coordonnées — badge", section: "Coordonnées", type: "text" },
+    { id: "contact.info.company", label: "Coordonnées — société", section: "Coordonnées", type: "text" },
+    { id: "contact.info.license", label: "Coordonnées — agrément", section: "Coordonnées", type: "text" },
+    { id: "contact.hours.badge", label: "Horaires — badge", section: "Horaires", type: "text" },
+    { id: "contact.hours.title", label: "Horaires — titre", section: "Horaires", type: "text" },
+    { id: "contact.hours.body", label: "Horaires — texte", section: "Horaires", type: "richtext" },
   ],
   faq: [
     // Hero
@@ -284,6 +339,7 @@ export const PAGE_KEYS: ReadonlyArray<PageKey> = [
   "investment-banking",
   "mandate",
   "expertises",
+  "contact",
   "faq",
   "publications",
   "actualites",
@@ -300,6 +356,7 @@ export const PAGE_KEY_LABELS: Record<PageKey, string> = {
   "investment-banking": "Ingénierie financière",
   mandate: "Gestion sous mandat",
   expertises: "Expertises",
+  contact: "Contact",
   faq: "FAQ",
   publications: "Publications",
   actualites: "Actualités",
@@ -316,6 +373,7 @@ export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
   "investment-banking": "/ingenieurie-financiere",
   mandate: "/gestion-sous-mandat",
   expertises: "/expertises",
+  contact: "/contact",
   faq: "/faq",
   publications: "/publications",
   actualites: "/actualites",
