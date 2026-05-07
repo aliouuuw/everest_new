@@ -1,43 +1,48 @@
-import { useEffect, useRef, useState } from "react";
-import { FiX } from "react-icons/fi";
-import { useCMS } from "./CMSProvider";
-import { MAX_VALUE_LENGTH, PAGE_KEY_LABELS, registry } from "./registry";
-import type { PageKey, RegistryEntry } from "./registry";
-import EnhancedRichTextEditor from "../components/CMS/Shared/EnhancedRichTextEditor";
-import { useR2Upload } from "../hooks/useR2Upload";
+import { useEffect, useRef, useState } from 'react'
+import { FiX } from 'react-icons/fi'
+import EnhancedRichTextEditor from '../components/CMS/Shared/EnhancedRichTextEditor'
+import { useR2Upload } from '../hooks/useR2Upload'
+import { useCMS } from './CMSProvider'
+import { MAX_VALUE_LENGTH, PAGE_KEY_LABELS, registry } from './registry'
+import { TrustPartnersEditor } from './TrustPartnersEditor'
+import type { RegistryEntry } from './registry'
 
 function ImageFieldEditor({
   value,
   onChange,
   disabled,
 }: {
-  value: string;
-  onChange: (url: string) => void;
-  disabled?: boolean;
+  value: string
+  onChange: (url: string) => void
+  disabled?: boolean
 }) {
-  const { upload, isUploading, error: uploadError } = useR2Upload();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { upload, isUploading, error: uploadError } = useR2Upload()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const file = e.target.files?.[0]
+    if (!file) return
     try {
-      const { publicUrl } = await upload(file, "cms-images");
-      onChange(publicUrl);
+      const { publicUrl } = await upload(file, 'cms-images')
+      onChange(publicUrl)
     } catch {
       // error visible via uploadError
     }
-    e.target.value = "";
-  };
+    e.target.value = ''
+  }
 
   return (
     <div className="space-y-2">
       {value && (
         <div
           className="relative overflow-hidden rounded-xl border border-[var(--mauve-10)] bg-[var(--command-surface)]"
-          style={{ aspectRatio: "16 / 6" }}
+          style={{ aspectRatio: '16 / 6' }}
         >
-          <img src={value} alt="Aperçu" className="h-full w-full object-cover" />
+          <img
+            src={value}
+            alt="Aperçu"
+            className="h-full w-full object-cover"
+          />
         </div>
       )}
       <input
@@ -54,7 +59,11 @@ function ImageFieldEditor({
         onClick={() => inputRef.current?.click()}
         className="font-primary inline-flex min-h-[2.25rem] w-full items-center justify-center gap-2 rounded-xl border border-[var(--mauve-20)] bg-[var(--command-surface)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve-05)] disabled:cursor-not-allowed disabled:opacity-40"
       >
-        {isUploading ? "Téléversement…" : value ? "Changer l'image" : "Choisir une image"}
+        {isUploading
+          ? 'Téléversement…'
+          : value
+            ? "Changer l'image"
+            : 'Choisir une image'}
       </button>
       {uploadError && (
         <p className="font-primary text-[11px] text-[color-mix(in_srgb,var(--mauve)_85%,#000)]">
@@ -62,21 +71,21 @@ function ImageFieldEditor({
         </p>
       )}
     </div>
-  );
+  )
 }
 
 interface FieldState {
-  value: string;
-  saving: boolean;
-  error?: string;
-  status?: "saved" | "reset";
+  value: string
+  saving: boolean
+  error?: string
+  status?: 'saved' | 'reset'
 }
 
 const btnReset =
-  "font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border border-[var(--mauve-20)] bg-[var(--command-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--mauve-20)] disabled:hover:bg-[var(--command-surface)] disabled:hover:text-[var(--mauve)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve-30)] focus-visible:ring-offset-2";
+  'font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border border-[var(--mauve-20)] bg-[var(--command-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all duration-300 hover:border-[var(--mauve)] hover:bg-[var(--mauve)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--mauve-20)] disabled:hover:bg-[var(--command-surface)] disabled:hover:text-[var(--mauve)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--mauve-30)] focus-visible:ring-offset-2'
 
 const btnSave =
-  "font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border-0 bg-[var(--jaune-or)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(202,148,47,0.28)] transition-all duration-300 hover:-translate-y-px hover:brightness-105 hover:shadow-[0_6px_20px_rgba(202,148,47,0.35)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:brightness-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or-30)] focus-visible:ring-offset-2";
+  'font-primary inline-flex min-h-[2.25rem] items-center justify-center rounded-full border-0 bg-[var(--jaune-or)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(202,148,47,0.28)] transition-all duration-300 hover:-translate-y-px hover:brightness-105 hover:shadow-[0_6px_20px_rgba(202,148,47,0.35)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:brightness-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--jaune-or-30)] focus-visible:ring-offset-2'
 
 /**
  * Side panel listing every editable field defined for the current page. Only
@@ -86,103 +95,133 @@ const btnSave =
  * which removes the override and returns the block to its hardcoded fallback.
  */
 export function EditPanel() {
-  const { canEdit, editMode, panelOpen, pageKey, overrides, closeAll, saveContent, resetContent } = useCMS();
+  const {
+    canEdit,
+    editMode,
+    panelOpen,
+    pageKey,
+    overrides,
+    closeAll,
+    saveContent,
+    resetContent,
+  } = useCMS()
 
   const pageTitle =
     pageKey != null && pageKey in PAGE_KEY_LABELS
-      ? PAGE_KEY_LABELS[pageKey as PageKey]
-      : (pageKey ?? "Page");
+      ? PAGE_KEY_LABELS[pageKey]
+      : (pageKey ?? 'Page')
 
   const entries: ReadonlyArray<RegistryEntry> =
-    pageKey != null ? registry[pageKey] : [];
+    pageKey != null ? registry[pageKey] : []
 
-  const [state, setState] = useState<Partial<Record<string, FieldState>>>({});
+  const [state, setState] = useState<Partial<Record<string, FieldState>>>({})
 
   // Seed local state from overrides whenever the page / overrides change.
   useEffect(() => {
-    const next: Record<string, FieldState> = {};
+    const next: Record<string, FieldState> = {}
     for (const entry of entries) {
-      const row = overrides[entry.id];
+      const row = overrides[entry.id]
       next[entry.id] = {
-        value: row !== undefined ? row.value : "",
+        value: row !== undefined ? row.value : '',
         saving: false,
-      };
+      }
     }
-    setState(next);
-  }, [pageKey, overrides, entries]);
+    setState(next)
+  }, [pageKey, overrides, entries])
 
-  if (!canEdit || !editMode || !panelOpen) return null;
+  if (!canEdit || !editMode || !panelOpen) return null
 
   const handleChange = (id: string, value: string) => {
     setState((prev) => ({
       ...prev,
-      [id]: { ...(prev[id] ?? { saving: false, value: "" }), value, error: undefined, status: undefined },
-    }));
-  };
+      [id]: {
+        ...(prev[id] ?? { saving: false, value: '' }),
+        value,
+        error: undefined,
+        status: undefined,
+      },
+    }))
+  }
 
   const handleSave = async (entry: RegistryEntry) => {
-    const current = state[entry.id];
-    if (current === undefined) return;
+    const current = state[entry.id]
+    if (current === undefined) return
     setState((prev) => ({
       ...prev,
-      [entry.id]: { ...current, saving: true, error: undefined, status: undefined },
-    }));
+      [entry.id]: {
+        ...current,
+        saving: true,
+        error: undefined,
+        status: undefined,
+      },
+    }))
     try {
-      await saveContent({ contentId: entry.id, value: current.value });
+      await saveContent({ contentId: entry.id, value: current.value })
       setState((prev) => {
-        const prevField = prev[entry.id];
-        if (prevField === undefined) return prev;
-        return { ...prev, [entry.id]: { ...prevField, saving: false, status: "saved" } };
-      });
+        const prevField = prev[entry.id]
+        if (prevField === undefined) return prev
+        return {
+          ...prev,
+          [entry.id]: { ...prevField, saving: false, status: 'saved' },
+        }
+      })
     } catch (err) {
       setState((prev) => {
-        const prevField = prev[entry.id];
-        if (prevField === undefined) return prev;
+        const prevField = prev[entry.id]
+        if (prevField === undefined) return prev
         return {
           ...prev,
           [entry.id]: {
             ...prevField,
             saving: false,
-            error: err instanceof Error ? err.message : "Save failed",
+            error: err instanceof Error ? err.message : 'Save failed',
           },
-        };
-      });
+        }
+      })
     }
-  };
+  }
 
   const handleReset = async (entry: RegistryEntry) => {
-    const current = state[entry.id];
+    const current = state[entry.id]
     setState((prev) => ({
       ...prev,
-      [entry.id]: { ...(current !== undefined ? current : { value: "", saving: false }), saving: true, error: undefined, status: undefined },
-    }));
+      [entry.id]: {
+        ...(current !== undefined ? current : { value: '', saving: false }),
+        saving: true,
+        error: undefined,
+        status: undefined,
+      },
+    }))
     try {
-      await resetContent(entry.id);
+      await resetContent(entry.id)
       setState((prev) => ({
         ...prev,
-        [entry.id]: { value: "", saving: false, status: "reset" },
-      }));
+        [entry.id]: { value: '', saving: false, status: 'reset' },
+      }))
     } catch (err) {
       setState((prev) => ({
         ...prev,
         [entry.id]: {
-          ...(prev[entry.id] ?? { value: "", saving: false }),
+          ...(prev[entry.id] ?? { value: '', saving: false }),
           saving: false,
-          error: err instanceof Error ? err.message : "Reset failed",
+          error: err instanceof Error ? err.message : 'Reset failed',
         },
-      }));
+      }))
     }
-  };
+  }
 
   // Group entries by section for readability.
-  const sections = entries.reduce<Record<string, Array<RegistryEntry>>>((acc, entry) => {
-    const section = entry.section;
-    if (!Object.hasOwn(acc, section)) {
-      acc[section] = [];
-    }
-    acc[section].push(entry);
-    return acc;
-  }, {});
+  const sections = entries.reduce<Record<string, Array<RegistryEntry>>>(
+    (acc, entry) => {
+      const section = entry.section
+      if (!Object.hasOwn(acc, section)) {
+        acc[section] = []
+      }
+      acc[section].push(entry)
+      return acc
+    },
+    {},
+  )
 
   return (
     <aside
@@ -223,11 +262,11 @@ export function EditPanel() {
       >
         {entries.length === 0 && (
           <p className="font-primary text-sm leading-relaxed text-[var(--night-60)]">
-            Aucun champ éditable pour cette page. Ajoutez des entrées dans{" "}
+            Aucun champ éditable pour cette page. Ajoutez des entrées dans{' '}
             <code className="rounded-md bg-[var(--mauve-05)] px-1.5 py-0.5 font-mono text-xs text-[var(--mauve)]">
               src/cms/registry.ts
-            </code>{" "}
-            et enveloppez le texte avec{" "}
+            </code>{' '}
+            et enveloppez le texte avec{' '}
             <code className="rounded-md bg-[var(--mauve-05)] px-1.5 py-0.5 font-mono text-xs text-[var(--mauve)]">
               &lt;EditableText&gt;
             </code>
@@ -242,14 +281,12 @@ export function EditPanel() {
             </h3>
 
             {sectionEntries.map((entry) => {
-              const rawField = state[entry.id];
+              const rawField = state[entry.id]
               const field =
-                rawField !== undefined
-                  ? rawField
-                  : { value: "", saving: false };
-              const override = overrides[entry.id];
-              const overrideValue = override !== undefined ? override.value : "";
-              const dirty = overrideValue !== field.value;
+                rawField !== undefined ? rawField : { value: '', saving: false }
+              const override = overrides[entry.id]
+              const overrideValue = override !== undefined ? override.value : ''
+              const dirty = overrideValue !== field.value
 
               return (
                 <div
@@ -263,17 +300,27 @@ export function EditPanel() {
                     {entry.id}
                   </div>
 
-                  {entry.type === "image" ? (
+                  {entry.id === 'home.trust.partners' ? (
+                    <TrustPartnersEditor
+                      value={field.value}
+                      onChange={(json) => handleChange(entry.id, json)}
+                      disabled={field.saving}
+                    />
+                  ) : entry.type === 'image' ? (
                     <ImageFieldEditor
                       value={field.value}
                       onChange={(url) => handleChange(entry.id, url)}
                       disabled={field.saving}
                     />
-                  ) : entry.type === "richtext" ? (
+                  ) : entry.type === 'richtext' ? (
                     <EnhancedRichTextEditor
                       value={field.value}
                       onChange={(val) => handleChange(entry.id, val)}
-                      placeholder={override !== undefined ? "" : "(texte par défaut du code)"}
+                      placeholder={
+                        override !== undefined
+                          ? ''
+                          : '(texte par défaut du code)'
+                      }
                       className="min-h-[12rem] w-full"
                     />
                   ) : (
@@ -281,7 +328,11 @@ export function EditPanel() {
                       value={field.value}
                       maxLength={MAX_VALUE_LENGTH}
                       onChange={(e) => handleChange(entry.id, e.target.value)}
-                      placeholder={override !== undefined ? "" : "(texte par défaut du code)"}
+                      placeholder={
+                        override !== undefined
+                          ? ''
+                          : '(texte par défaut du code)'
+                      }
                       rows={3}
                       className="font-primary w-full resize-y rounded-xl border border-[var(--mauve-15)] bg-[var(--pure-white)] px-3 py-2.5 text-sm leading-relaxed text-[var(--night)] placeholder:text-[var(--night-20)] transition-colors duration-300 focus:border-[var(--mauve)] focus:outline-none focus:ring-2 focus:ring-[var(--mauve-20)]"
                     />
@@ -290,15 +341,23 @@ export function EditPanel() {
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
                     <div className="font-primary min-h-[1.25rem] text-[11px] text-[var(--night-60)]">
                       {field.error && (
-                        <span className="text-[color-mix(in_srgb,var(--mauve)_85%,#000)]">{field.error}</span>
+                        <span className="text-[color-mix(in_srgb,var(--mauve)_85%,#000)]">
+                          {field.error}
+                        </span>
                       )}
-                      {!field.error && field.status === "saved" && (
-                        <span className="font-semibold text-[var(--jaune-or)]">Enregistré</span>
+                      {!field.error && field.status === 'saved' && (
+                        <span className="font-semibold text-[var(--jaune-or)]">
+                          Enregistré
+                        </span>
                       )}
-                      {!field.error && field.status === "reset" && (
-                        <span className="text-[var(--mauve-60)]">Réinitialisé (texte par défaut)</span>
+                      {!field.error && field.status === 'reset' && (
+                        <span className="text-[var(--mauve-60)]">
+                          Réinitialisé (texte par défaut)
+                        </span>
                       )}
-                      {!field.error && !field.status && dirty && <span>Modifications non enregistrées</span>}
+                      {!field.error && !field.status && dirty && (
+                        <span>Modifications non enregistrées</span>
+                      )}
                     </div>
                     <div className="flex flex-shrink-0 gap-2">
                       <button
@@ -315,16 +374,16 @@ export function EditPanel() {
                         disabled={field.saving || !dirty}
                         className={btnSave}
                       >
-                        {field.saving ? "Enregistrement…" : "Enregistrer"}
+                        {field.saving ? 'Enregistrement…' : 'Enregistrer'}
                       </button>
                     </div>
                   </div>
                 </div>
-              );
+              )
             })}
           </section>
         ))}
       </div>
     </aside>
-  );
+  )
 }

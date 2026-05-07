@@ -9,7 +9,7 @@
  * Conventions:
  *  - `id` is `pageKey.section.field` (e.g. `home.hero.title`). Stable across
  *    refactors; never rename casually.
- *  - Supports `type: "text"` and `type: "richtext"`.
+ *  - Supports `type: "text"`, `type: "richtext"`, and `type: "image"`.
  */
 
 export type RegistryFieldType = "text" | "richtext" | "image";
@@ -44,20 +44,8 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "home.hero.ctaPrimary", label: "Hero primary CTA label", section: "Hero", type: "text" },
     { id: "home.hero.ctaSecondary", label: "Hero secondary CTA label", section: "Hero", type: "text" },
 
-    // Trust Strip — Partner Logos
-    { id: "home.trust.brvm", label: "BRVM — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.bdk", label: "BDK — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.etatSenegal", label: "État du Sénégal — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.kalia", label: "Kalia — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.bhs", label: "BHS — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.sunuGroup", label: "Sunu Group — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.bci", label: "BCI — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.bnde", label: "BNDE — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.boad", label: "BOAD — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.orabank", label: "Orabank — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.pagena", label: "Pagena — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.cde", label: "CDE — logo", section: "Trust Strip", type: "image" },
-    { id: "home.trust.villeDakar", label: "Ville de Dakar — logo", section: "Trust Strip", type: "image" },
+    // Trust Strip — Partner Logos (JSON array)
+    { id: "home.trust.partners", label: "Partenaires — logos", section: "Trust Strip", type: "text" },
 
     // Positioning
     { id: "home.positioning.badge", label: "Badge", section: "Positioning", type: "text" },
