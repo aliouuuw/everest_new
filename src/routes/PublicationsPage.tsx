@@ -381,8 +381,7 @@ export const PublicationsPage = () => {
                 <EditableText id="publications.hero.badge">Publications</EditableText>
               </span>
               <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
-                <EditableText id="publications.hero.title">Nos revues</EditableText>{' '}
-                <span style={{ color: 'var(--jaune-or)' }}><EditableText id="publications.hero.titleAccent">&amp; analyses.</EditableText></span>
+                <EditableText id="publications.hero.title">Nos revues &amp; analyses.</EditableText>
               </h1>
             </div>
 

@@ -13,28 +13,6 @@ const formatHeadline = (text: string) => {
   const parts = text.split('.').filter(p => p.trim() !== '')
   if (parts.length === 0) return text
 
-  if (parts.length === 2) {
-    return (
-      <>
-        <span style={{ color: 'var(--mauve)' }}>{parts[0].trim()}.</span>
-        <br />
-        <span style={{ color: 'var(--jaune-or)' }}>{parts[1].trim()}.</span>
-      </>
-    )
-  }
-
-  if (parts.length >= 3) {
-    // First part purple, rest gold
-    const rest = parts.slice(1).join('. ') + '.'
-    return (
-      <>
-        <span style={{ color: 'var(--mauve)' }}>{parts[0].trim()}.</span>
-        <br />
-        <span style={{ color: 'var(--jaune-or)' }}>{rest.trim()}</span>
-      </>
-    )
-  }
-
   return <span style={{ color: 'var(--mauve)' }}>{text}</span>
 }
 

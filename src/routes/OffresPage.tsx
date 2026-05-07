@@ -43,7 +43,7 @@ export const OffresPage = () => {
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-4 text-[var(--mauve)]"
                   style={sectionTitleStyle}
                 >
-                  <EditableText id="offres.hero.title">Votre partenaire pour investir sur la</EditableText> <span style={{ color: 'var(--jaune-or)' }}><EditableText id="offres.hero.titleAccent">BRVM.</EditableText></span>
+                  <EditableText id="offres.hero.title">Votre partenaire pour investir sur la BRVM.</EditableText>
                 </h1>
               </div>
               

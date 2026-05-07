@@ -131,24 +131,7 @@ export const HeroSectionMountain: React.FC = () => {
                   color: 'var(--pure-white)',
                 }}
               >
-                Accès stratégique aux marchés financiers
-              </EditableText>
-            </span>
-            <span className="mt-1 block overflow-hidden sm:mt-0.5">
-              <EditableText
-                id="home.hero.titleAccent"
-                as="span"
-                className="hero-title-line block"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)',
-                  lineHeight: 1.04,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--jaune-or)',
-                }}
-              >
-                de l&apos;UEMOA
+                Accès stratégique aux marchés financiers de l&apos;UEMOA
               </EditableText>
             </span>
           </h1>

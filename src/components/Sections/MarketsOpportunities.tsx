@@ -64,14 +64,7 @@ export const MarketsOpportunities: React.FC = () => {
             </div>
             <h2 className="luxury-heading">
               <EditableText id="home.markets.title" as="span">
-                Marchés
-              </EditableText>{' '}
-              <EditableText
-                id="home.markets.titleAccent"
-                as="span"
-                style={{ color: 'var(--jaune-or)' }}
-              >
-                &amp; opportunités.
+                Marchés &amp; opportunités.
               </EditableText>
             </h2>
             <EditableText

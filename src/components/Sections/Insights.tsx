@@ -100,11 +100,7 @@ export const Insights: React.FC = () => {
       <div className="page-container">
         <div className="mb-10 md:mb-12">
           <SectionHeader
-            heading={
-              <>
-                Publications <span style={{ color: 'var(--jaune-or)' }}>&amp; recherches.</span>
-              </>
-            }
+            heading="Publications & recherches."
             subtext="Synthèses hebdomadaires, mensuelles et semestrielles sur l'UEMOA et la BRVM, en PDF téléchargeable."
             align="left"
             dark={false}

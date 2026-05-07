@@ -140,15 +140,7 @@ export const ValueProps: React.FC = () => {
             </div>
             <h2 className="luxury-heading mb-4 max-w-xl">
               <EditableText id="home.valueProps.title" as="span">
-                Exécution rigoureuse,
-              </EditableText>
-              <br />
-              <EditableText
-                id="home.valueProps.titleAccent"
-                as="span"
-                style={{ color: 'var(--jaune-or)' }}
-              >
-                confiance durable.
+                Exécution rigoureuse, confiance durable.
               </EditableText>
             </h2>
             <EditableText

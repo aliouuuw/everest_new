@@ -119,8 +119,7 @@ export const HeroSectionPro: React.FC = () => {
             </div>
             
             <h1 className="hero-reveal luxury-heading mb-10 md:mb-0">
-              Élevez vos ambitions vers de nouveaux{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>sommets.</span>
+              Élevez vos ambitions vers de nouveaux sommets.
             </h1>
           </div>
           

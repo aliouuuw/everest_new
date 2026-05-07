@@ -60,12 +60,7 @@ export const NewsSection: React.FC = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div className="max-w-xl">
-            <h2 className="luxury-heading">
-              Dernières{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>
-                informations.
-              </span>
-            </h2>
+            <h2 className="luxury-heading">Dernières informations.</h2>
           </div>
           
           <Link

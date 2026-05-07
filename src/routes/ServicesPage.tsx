@@ -37,7 +37,7 @@ export const ServicesPage = () => {
                   </span>
                 </div>
                 <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
-                  <EditableText id="services.hero.title">Votre partenaire pour investir sur la</EditableText> <span style={{ color: 'var(--jaune-or)' }}><EditableText id="services.hero.titleAccent">BRVM.</EditableText></span>
+                  <EditableText id="services.hero.title">Votre partenaire pour investir sur la BRVM.</EditableText>
                 </h1>
               </div>
               

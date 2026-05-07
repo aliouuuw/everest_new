@@ -79,9 +79,7 @@ export const ContactPage = () => {
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
             {/* Form */}
             <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">
-              <h2 className="luxury-heading mb-3">
-                Envoyer un <span style={{ color: 'var(--jaune-or)' }}>message.</span>
-              </h2>
+              <h2 className="luxury-heading mb-3">Envoyer un message.</h2>
               <p className="mb-8 max-w-lg text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
                 Décrivez brièvement votre demande — un conseiller prendra contact sous 24&nbsp;h
                 ouvrées pour cadrer l&apos;échange.

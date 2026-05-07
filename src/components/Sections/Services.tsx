@@ -115,8 +115,9 @@ export const Services: React.FC = () => {
               </PillBadge>
             </div>
             <h2 className="luxury-heading" style={{ color: 'var(--everest-green)' }}>
-              <EditableText id="home.services.title" as="span">Nos expertises —</EditableText>{' '}
-              <EditableText id="home.services.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>marchés &amp; patrimoine.</EditableText>
+              <EditableText id="home.services.title" as="span">
+                Nos expertises — marchés &amp; patrimoine.
+              </EditableText>
             </h2>
           </div>
           <EditableText

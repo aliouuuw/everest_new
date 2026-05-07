@@ -38,8 +38,7 @@ export type PageKey =
 export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   home: [
     // Hero
-    { id: "home.hero.title", label: "Hero title (line 1)", section: "Hero", type: "text" },
-    { id: "home.hero.titleAccent", label: "Hero title (line 2, gold)", section: "Hero", type: "text" },
+    { id: "home.hero.title", label: "Hero title", section: "Hero", type: "text" },
     { id: "home.hero.subtitle", label: "Hero subtitle", section: "Hero", type: "text" },
     { id: "home.hero.ctaPrimary", label: "Hero primary CTA label", section: "Hero", type: "text" },
     { id: "home.hero.ctaSecondary", label: "Hero secondary CTA label", section: "Hero", type: "text" },
@@ -49,28 +48,23 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
 
     // Positioning
     { id: "home.positioning.badge", label: "Badge", section: "Positioning", type: "text" },
-    { id: "home.positioning.title", label: "Title (line 1)", section: "Positioning", type: "text" },
-    { id: "home.positioning.titleAccent", label: "Title (line 2, gold)", section: "Positioning", type: "text" },
+    { id: "home.positioning.title", label: "Title", section: "Positioning", type: "text" },
     { id: "home.positioning.intro", label: "Intro paragraph", section: "Positioning", type: "text" },
 
     // Value Props
     { id: "home.valueProps.badge", label: "Badge", section: "Value Props", type: "text" },
-    { id: "home.valueProps.title", label: "Title (line 1)", section: "Value Props", type: "text" },
-    { id: "home.valueProps.titleAccent", label: "Title (line 2, gold)", section: "Value Props", type: "text" },
+    { id: "home.valueProps.title", label: "Title", section: "Value Props", type: "text" },
     { id: "home.valueProps.intro", label: "Intro paragraph", section: "Value Props", type: "text" },
     { id: "home.valueProps.image", label: "Value Props — image", section: "Value Props", type: "image" },
 
     // Capacity
     { id: "home.capacity.badge", label: "Badge", section: "Capacity", type: "text" },
-    { id: "home.capacity.titleLead", label: "Title lead word", section: "Capacity", type: "text" },
-    { id: "home.capacity.titleAccent", label: "Title accent word (gold)", section: "Capacity", type: "text" },
-    { id: "home.capacity.titleSuffix", label: "Title suffix (second line)", section: "Capacity", type: "text" },
+    { id: "home.capacity.titleLead", label: "Title", section: "Capacity", type: "text" },
     { id: "home.capacity.intro", label: "Intro paragraph", section: "Capacity", type: "text" },
 
     // Services
     { id: "home.services.badge", label: "Badge", section: "Services", type: "text" },
-    { id: "home.services.title", label: "Title (line 1)", section: "Services", type: "text" },
-    { id: "home.services.titleAccent", label: "Title accent (gold)", section: "Services", type: "text" },
+    { id: "home.services.title", label: "Title", section: "Services", type: "text" },
     { id: "home.services.intro", label: "Intro paragraph", section: "Services", type: "text" },
 
     // Insights (Actualités + Publications on home)
@@ -83,23 +77,20 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
 
     // Markets & Opportunities
     { id: "home.markets.badge", label: "Badge", section: "Markets & Opportunities", type: "text" },
-    { id: "home.markets.title", label: "Title (line 1)", section: "Markets & Opportunities", type: "text" },
-    { id: "home.markets.titleAccent", label: "Title accent (gold)", section: "Markets & Opportunities", type: "text" },
+    { id: "home.markets.title", label: "Title", section: "Markets & Opportunities", type: "text" },
     { id: "home.markets.intro", label: "Intro paragraph", section: "Markets & Opportunities", type: "text" },
     { id: "home.markets.linkLabel", label: "Link: see all news", section: "Markets & Opportunities", type: "text" },
 
     // Contact CTA block
     { id: "home.cta.badge", label: "Badge", section: "Contact CTA", type: "text" },
-    { id: "home.cta.title", label: "Title (line 1)", section: "Contact CTA", type: "text" },
-    { id: "home.cta.titleAccent", label: "Title accent (gold)", section: "Contact CTA", type: "text" },
+    { id: "home.cta.title", label: "Title", section: "Contact CTA", type: "text" },
     { id: "home.cta.intro", label: "Intro paragraph", section: "Contact CTA", type: "text" },
     { id: "home.cta.primary", label: "Primary button label", section: "Contact CTA", type: "text" },
     { id: "home.cta.secondary", label: "Secondary button label", section: "Contact CTA", type: "text" },
 
     // FAQ
     { id: "home.faq.badge", label: "Badge", section: "FAQ", type: "text" },
-    { id: "home.faq.title", label: "Title (line 1)", section: "FAQ", type: "text" },
-    { id: "home.faq.titleSub", label: "Title (line 2)", section: "FAQ", type: "text" },
+    { id: "home.faq.title", label: "Title", section: "FAQ", type: "text" },
     { id: "home.faq.intro", label: "Intro paragraph", section: "FAQ", type: "text" },
     { id: "home.faq.linkLabel", label: "Link: see all questions", section: "FAQ", type: "text" },
   ],
@@ -108,7 +99,6 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "about.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
     { id: "about.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
     { id: "about.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
-    { id: "about.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
     { id: "about.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     { id: "about.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
     // Mission & Vision
@@ -134,8 +124,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   services: [
     // Hero
     { id: "services.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "services.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
-    { id: "services.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "services.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "services.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     { id: "services.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
     // Services Overview
@@ -158,8 +147,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   offres: [
     // Hero
     { id: "offres.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "offres.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
-    { id: "offres.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "offres.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "offres.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
     { id: "offres.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
     // Services Overview
@@ -251,8 +239,7 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   publications: [
     // Hero
     { id: "publications.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "publications.hero.title", label: "Hero — titre (line 1)", section: "Hero", type: "text" },
-    { id: "publications.hero.titleAccent", label: "Hero — accent titre (gold)", section: "Hero", type: "text" },
+    { id: "publications.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
     { id: "publications.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
   ],
   actualites: [

@@ -38,10 +38,7 @@ export const CTA: React.FC<{
             </div>
             <h2 className="luxury-heading mb-6">
               <EditableText id="home.cta.title" as="span">
-                Accéder à une expertise
-              </EditableText>{' '}
-              <EditableText id="home.cta.titleAccent" as="span" style={{ color: 'var(--mauve)' }}>
-                financière structurée.
+                Accéder à une expertise financière structurée.
               </EditableText>
             </h2>
             <EditableText

@@ -46,8 +46,7 @@ export const AboutPage = () => {
                   className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
                   style={sectionTitleStyle}
                 >
-                  <EditableText id="about.hero.title">Des idées et des valeurs au service de vos</EditableText>{' '}
-                  <span style={{ color: 'var(--jaune-or)' }}><EditableText id="about.hero.titleAccent">ambitions.</EditableText></span>
+                  <EditableText id="about.hero.title">Des idées et des valeurs au service de vos ambitions.</EditableText>
                 </h1>
               </div>
 
@@ -336,5 +335,4 @@ export const AboutPage = () => {
     </div>
   )
 }
-
 

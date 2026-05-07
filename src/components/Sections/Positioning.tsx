@@ -59,14 +59,8 @@ export const Positioning: React.FC = () => {
               </PillBadge>
             </div>
             <h2 className="luxury-heading">
-              <EditableText id="home.positioning.title" as="span">Un intermédiaire de référence</EditableText>
-              <br />
-              <EditableText
-                id="home.positioning.titleAccent"
-                as="span"
-                style={{ color: 'var(--jaune-or)' }}
-              >
-                au service des flux de capitaux régionaux.
+              <EditableText id="home.positioning.title" as="span">
+                Un intermédiaire de référence au service des flux de capitaux régionaux.
               </EditableText>
             </h2>
           </div>

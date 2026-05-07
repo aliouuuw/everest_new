@@ -7,7 +7,7 @@ import { EditableImage } from '../cms';
 type Expertise = {
   id: string;
   title: string;
-  titleAccent: string;
+  titleSuffix: string;
   imageUrl: string;
   imageAlt: string;
   intro: string;
@@ -26,7 +26,7 @@ const EXPERTISES: Array<Expertise> = [
   {
     id: 'marche-titres-publics',
     title: 'Marché des',
-    titleAccent: 'Titres Publics.',
+    titleSuffix: 'Titres Publics.',
     imageUrl: '/Assets_Website/mtp.jpg',
     imageAlt: 'Obligations souveraines et courbe de taux',
     intro:
@@ -44,7 +44,7 @@ const EXPERTISES: Array<Expertise> = [
   {
     id: 'marche-financier-regional',
     title: 'Marché Financier',
-    titleAccent: 'Régional.',
+    titleSuffix: 'Régional.',
     imageUrl: '/Assets_Website/mfr.jpg',
     imageAlt: 'Salle de marché et exécution boursière',
     intro:
@@ -62,7 +62,7 @@ const EXPERTISES: Array<Expertise> = [
   {
     id: 'ingenierie-financiere',
     title: 'Structuration &',
-    titleAccent: 'Ingénierie financière.',
+    titleSuffix: 'Ingénierie financière.',
     imageUrl: '/Assets_Website/s-&-if.jpg',
     imageAlt: 'Structuration financière et modélisation',
     intro:
@@ -81,7 +81,7 @@ const EXPERTISES: Array<Expertise> = [
   {
     id: 'private-office',
     title: 'Private',
-    titleAccent: 'Office.',
+    titleSuffix: 'Office.',
     imageUrl: '/Assets_Website/po.jpg',
     imageAlt: 'Conseil patrimonial personnalisé',
     intro:
@@ -206,8 +206,7 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
             }`}
           >
             <h2 className="luxury-heading mb-4 max-w-xl">
-              {expertise.title}{' '}
-              <span style={{ color: 'var(--jaune-or)' }}>{expertise.titleAccent}</span>
+              {expertise.title} {expertise.titleSuffix}
             </h2>
             <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
               {expertise.intro}

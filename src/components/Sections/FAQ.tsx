@@ -52,8 +52,7 @@ export const FAQ: React.FC = () => {
           {/* LEFT — Compact intro */}
           <div className="lg:sticky lg:top-28 lg:self-start">
             <h2 className="luxury-heading mb-6">
-              <EditableText id="home.faq.title" as="span">Questions</EditableText>{' '}
-              <EditableText id="home.faq.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>fréquentes.</EditableText>
+              <EditableText id="home.faq.title" as="span">Questions fréquentes.</EditableText>
             </h2>
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--mauve)] text-white">

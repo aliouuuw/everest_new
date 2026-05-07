@@ -73,10 +73,9 @@ export const Capacity: React.FC = () => {
               </PillBadge>
             </div>
             <h2 className="luxury-heading-dark">
-              <EditableText id="home.capacity.titleLead" as="span">Capacité</EditableText>{' '}
-              <EditableText id="home.capacity.titleAccent" as="span" style={{ color: 'var(--jaune-or)' }}>opérationnelle</EditableText>
-              <br />
-              <EditableText id="home.capacity.titleSuffix" as="span">&amp; relationnelle.</EditableText>
+              <EditableText id="home.capacity.titleLead" as="span">
+                Capacité opérationnelle &amp; relationnelle.
+              </EditableText>
             </h2>
           </div>
           <div className="lg:col-span-5">
