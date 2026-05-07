@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiArrowRight, FiBookOpen, FiCheck, FiDollarSign, FiInfo, FiPercent, FiTarget, FiTrendingUp } from 'react-icons/fi'
+import { FiArrowRight, FiDollarSign, FiPercent, FiTarget, FiTrendingUp } from 'react-icons/fi'
 import { CompoundInterestCalculator } from '../components/InvestorProfile/CompoundInterestCalculator'
 import { DividendCalculator } from '../components/InvestorProfile/DividendCalculator'
 import { InvestorProfileInline } from '../components/InvestorProfile/InvestorProfileInline'
@@ -30,41 +30,10 @@ const TOOL_META: Record<ToolId, { title: string; subtitle: string; icon: React.R
   },
 }
 
-const TOOL_TIPS: Record<ToolId, { title: string; items: Array<string> }> = {
-  profil: {
-    title: "Pourquoi connaître votre profil ?",
-    items: [
-      "Adaptez vos investissements à votre tolérance au risque",
-      "Évitez les décisions émotionnelles en période de volatilité",
-      "Construisez un portefeuille cohérent avec vos objectifs",
-      "Facilitez le dialogue avec votre conseiller",
-    ],
-  },
-  interets: {
-    title: "Règle des 72",
-    items: [
-      "À un taux de 5.00%, votre investissement doublera en environ 14.4 ans",
-      "Plus tôt vous commencez, plus l'effet de composition est puissant",
-      "Les petits montants réguliers génèrent des résultats surprenants",
-      "La patience est le meilleur allié de l'épargnant",
-    ],
-  },
-  dividendes: {
-    title: "Conseils sur les dividendes",
-    items: [
-      "Un rendement supérieur à 5% est considéré comme attractif sur la BRVM",
-      "Privilégiez les entreprises avec un historique stable de versement",
-      "Le réinvestissement des dividendes accélère la croissance du capital",
-      "Vérifiez le ratio de distribution (payout ratio) avant d'investir",
-    ],
-  },
-}
-
 export const SimulateurPage: React.FC = () => {
   const [activeTool, setActiveTool] = useState<ToolId>('profil')
 
   const meta = TOOL_META[activeTool]
-  const tips = TOOL_TIPS[activeTool]
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
