@@ -1,4 +1,4 @@
-type PillBadgeVariant = 'mauve' | 'gold';
+type PillBadgeVariant = 'mauve' | 'gold' | 'green';
 
 const variants: Record<PillBadgeVariant, { text: string; bg: string; border: string }> = {
   mauve: {
@@ -10,6 +10,11 @@ const variants: Record<PillBadgeVariant, { text: string; bg: string; border: str
     text: 'var(--jaune-or)',
     bg: 'var(--jaune-or-10)',
     border: 'var(--jaune-or-20)',
+  },
+  green: {
+    text: 'var(--everest-green)',
+    bg: 'var(--everest-green-10)',
+    border: 'var(--everest-green-20)',
   },
 };
 

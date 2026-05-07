@@ -81,7 +81,7 @@ export const HeroSectionMountain: React.FC = () => {
           style={{ display: 'block' }}
           onEnded={() => { setCloudVisible(true); startCloud(); }}
         >
-          <source src="/ai-hero-bg.mp4" type="video/mp4" />
+          <source src="/ai-hero-bg-1.mp4" type="video/mp4" />
         </video>
         <canvas
           ref={canvasRef}
@@ -93,16 +93,16 @@ export const HeroSectionMountain: React.FC = () => {
           }}
         />
         <div
-          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--mauve)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--mauve)_12%,transparent)] to-transparent"
+          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--everest-green)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--everest-green)_12%,transparent)] to-transparent"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--mauve)_58%,black_42%)] via-[color-mix(in_srgb,var(--mauve)_20%,transparent)] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--everest-green)_58%,black_42%)] via-[color-mix(in_srgb,var(--everest-green)_20%,transparent)] to-transparent pointer-events-none" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: 'radial-gradient(ellipse 60% 30% at 100% 100%, rgb(0, 0, 0) 0%, rgba(10, 10, 10, 0.98) 0% 30%, transparent 80%)',
           }}
         />
-        <div className="absolute inset-0 bg-[var(--mauve)]/[0.04] mix-blend-soft-light pointer-events-none" />
+        <div className="absolute inset-0 bg-[var(--everest-green)]/[0.04] mix-blend-soft-light pointer-events-none" />
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.035] mix-blend-overlay"
           style={{

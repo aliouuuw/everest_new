@@ -54,15 +54,15 @@ void main() {
   float f = fbm(uv + 4.0 * r + 0.07 * t);
   f = smoothstep(0.22, 0.78, f);
 
-  /* brand palette: deep-night → dark-mauve → mauve, gold shimmer */
-  vec3 c0   = vec3(0.082, 0.055, 0.110); /* #150e1c */
-  vec3 c1   = vec3(0.165, 0.075, 0.196); /* ~#2a1332 */
-  vec3 c2   = vec3(0.275, 0.114, 0.298); /* #461D4C  */
+  /* brand palette: deep-night → everest green → lifted green, gold shimmer */
+  vec3 c0   = vec3(0.016, 0.055, 0.052); /* #040e0d */
+  vec3 c1   = vec3(0.004, 0.176, 0.165); /* #012d2a */
+  vec3 c2   = vec3(0.024, 0.290, 0.267); /* ~#064a44 */
   vec3 gold = vec3(0.792, 0.580, 0.188); /* jaune-or */
 
   vec3 col = mix(c0, c1, f);
-  col = mix(col, c2, f * f * 0.45);
-  col += gold * 0.038 * smoothstep(0.62, 1.0, f);
+  col = mix(col, c2, f * f * 0.5);
+  col += gold * 0.032 * smoothstep(0.64, 1.0, f);
 
   gl_FragColor = vec4(col, 1.0);
 }

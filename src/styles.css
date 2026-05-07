@@ -11,6 +11,7 @@
   /* Core Brand Palette */
   --jaune-or: #cb9824;
   --mauve: #461D4C;
+  --everest-green: #012d2a;
   --night: #0a0a0a;
   
   /* Extended Opacity/Variations */
@@ -33,6 +34,11 @@
   --mauve-05: rgba(70, 29, 76, 0.05);
   --mauve-light: rgba(70, 29, 76, 0.05);
   --mauve-glow: rgba(70, 29, 76, 0.12);
+  --everest-green-60: rgba(1, 45, 42, 0.6);
+  --everest-green-30: rgba(1, 45, 42, 0.3);
+  --everest-green-20: rgba(1, 45, 42, 0.2);
+  --everest-green-10: rgba(1, 45, 42, 0.1);
+  --everest-green-05: rgba(1, 45, 42, 0.05);
   --gold-pale: rgba(202, 148, 47, 0.06);
   --gold-warm: rgba(202, 148, 47, 0.12);
   

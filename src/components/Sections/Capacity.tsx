@@ -42,14 +42,14 @@ export const Capacity: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden py-24 md:py-32 bg-[var(--mauve)]"
+      className="reveal relative overflow-hidden py-24 md:py-32 bg-[var(--everest-green)]"
     >
       {/* Footer-style atmospheric glow — bottom-centered, very subtle */}
       <div
         className="absolute inset-0 pointer-events-none opacity-25"
         style={{
           background:
-            'radial-gradient(ellipse 60% 40% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
+            'radial-gradient(ellipse 60% 40% at 50% 100%, var(--everest-green-10) 0%, transparent 70%)',
         }}
       />
       {/* Gold top-right atmospheric accent to echo brand warmth */}
