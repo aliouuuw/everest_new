@@ -24,24 +24,6 @@ const EXPERTISE_ID_TO_CMS: Record<string, string> = {
 
 const EXPERTISES: Array<Expertise> = [
   {
-    id: 'marche-titres-publics',
-    title: 'Marché des',
-    titleSuffix: 'Titres Publics.',
-    imageUrl: '/Assets_Website/mtp.jpg',
-    imageAlt: 'Obligations souveraines et courbe de taux',
-    intro:
-      "Nous accompagnons les investisseurs dans leur accès aux émissions souveraines de l'UEMOA, en intégrant une analyse fine des dynamiques de taux et des conditions de marché.",
-    approach: {
-      label: 'Notre approche',
-      text: 'Sélection rigoureuse des maturités, gestion active du risque de taux et optimisation du rendement dans un cadre maîtrisé.',
-    },
-    bullets: [
-      'Sélection rigoureuse des maturités',
-      'Gestion active du risque de taux',
-      'Optimisation du rendement dans un cadre maîtrisé',
-    ],
-  },
-  {
     id: 'marche-financier-regional',
     title: 'Marché Financier',
     titleSuffix: 'Régional.',
@@ -57,6 +39,24 @@ const EXPERTISES: Array<Expertise> = [
       "Capacité d'intermédiation fiable",
       'Analyse indépendante',
       'Accès structuré aux opportunités de marché',
+    ],
+  },
+  {
+    id: 'marche-titres-publics',
+    title: 'Marché des',
+    titleSuffix: 'Titres Publics.',
+    imageUrl: '/Assets_Website/mtp.jpg',
+    imageAlt: 'Obligations souveraines et courbe de taux',
+    intro:
+      "Nous accompagnons les investisseurs dans leur accès aux émissions souveraines de l'UEMOA, en intégrant une analyse fine des dynamiques de taux et des conditions de marché.",
+    approach: {
+      label: 'Notre approche',
+      text: 'Sélection rigoureuse des maturités, gestion active du risque de taux et optimisation du rendement dans un cadre maîtrisé.',
+    },
+    bullets: [
+      'Sélection rigoureuse des maturités',
+      'Gestion active du risque de taux',
+      'Optimisation du rendement dans un cadre maîtrisé',
     ],
   },
   {

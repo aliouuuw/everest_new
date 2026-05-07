@@ -196,8 +196,8 @@ export const Header: React.FC = () => {
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
   const expertisesItems: Array<DropdownItem> = [
-    { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
     { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
+    { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
     { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
     { label: 'Private Office', to: '/expertises', hash: 'private-office' },
   ];
@@ -205,6 +205,7 @@ export const Header: React.FC = () => {
   const marchesItems: Array<DropdownItem> = [
     { label: 'Actualités', to: '/actualites' },
     { label: 'Publications', to: '/publications' },
+    { label: 'Abécédaire / FAQ', to: '/faq' },
   ];
 
   const ressourcesItems: Array<DropdownItem> = [
@@ -215,7 +216,6 @@ export const Header: React.FC = () => {
 
   const societeItems: Array<DropdownItem> = [
     { label: 'À propos', to: '/about' },
-    { label: 'Abécédaire / FAQ', to: '/faq' },
     { label: 'Contact', to: '/contact' },
   ];
 
@@ -237,7 +237,7 @@ export const Header: React.FC = () => {
   const navLinkColor = 'rgba(255,255,255,0.75)';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
+    <header className={`fixed top-[40px] left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
       <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-4 flex items-center justify-between">
         {/* Logo only — larger */}
         <Link to="/" className="transition-opacity hover:opacity-85 flex items-center">
@@ -255,10 +255,10 @@ export const Header: React.FC = () => {
           </Link>
 
           <Dropdown
-            name="societe"
-            title="Société"
-            items={societeItems}
-            isOpen={openDropdown === 'societe'}
+            name="marches"
+            title="Insights"
+            items={marchesItems}
+            isOpen={openDropdown === 'marches'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
@@ -274,10 +274,10 @@ export const Header: React.FC = () => {
           />
 
           <Dropdown
-            name="marches"
-            title="Insights"
-            items={marchesItems}
-            isOpen={openDropdown === 'marches'}
+            name="societe"
+            title="Société"
+            items={societeItems}
+            isOpen={openDropdown === 'societe'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
@@ -359,10 +359,10 @@ export const Header: React.FC = () => {
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
               >
-                Société
+                Insights
               </div>
               <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {societeItems.map((item, index) => (
+                {marchesItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.to}
@@ -407,10 +407,10 @@ export const Header: React.FC = () => {
                 className="text-[10px] tracking-[0.2em] uppercase mb-3"
                 style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
               >
-                Insights
+                Société
               </div>
               <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {marchesItems.map((item, index) => (
+                {societeItems.map((item, index) => (
                   <Link
                     key={index}
                     to={item.to}

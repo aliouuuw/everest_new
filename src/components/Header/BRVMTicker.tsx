@@ -24,23 +24,10 @@ const mockBRVMData: Array<StockData> = [
 export const BRVMTicker: React.FC = () => {
   const location = useLocation();
   const [currentData, setCurrentData] = useState<Array<StockData>>(mockBRVMData);
-  const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
-
-  useEffect(() => {
-    // Show ticker after scrolling down from hero
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
-      setIsVisible(scrollY > heroHeight * 0.3);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     // Simulate live data updates every 30 seconds
@@ -76,11 +63,9 @@ export const BRVMTicker: React.FC = () => {
   const handlePause = () => setIsPaused(true);
   const handleResume = () => setIsPaused(false);
 
-  if (!isVisible) return null;
-
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-20 bg-[var(--pure-white)]/80 backdrop-blur supports-[backdrop-filter]:glassmorphism border-t border-black/5 py-2.5 [padding-bottom:env(safe-area-inset-bottom)]"
+      className="fixed top-0 left-0 right-0 z-[60] bg-[var(--pure-white)]/95 backdrop-blur supports-[backdrop-filter]:glassmorphism border-b border-black/5 py-2"
       role="region"
       aria-label="BRVM ticker"
     >

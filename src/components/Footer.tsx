@@ -13,13 +13,12 @@ const societeLinks: Array<FooterLink> = [
   { label: 'À propos', to: '/about' },
   { label: 'Vision & gouvernance', to: '/about', hash: 'gouvernance' },
   { label: 'Conformité & agrément', to: '/about', hash: 'conformite' },
-  { label: 'Abécédaire / FAQ', to: '/faq' },
   { label: 'Contact', to: '/contact' },
 ];
 
 const expertisesLinks: Array<FooterLink> = [
-  { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
   { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
+  { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
   { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
   { label: 'Private Office', to: '/expertises', hash: 'private-office' },
 ];
@@ -27,6 +26,7 @@ const expertisesLinks: Array<FooterLink> = [
 const marchesLinks: Array<FooterLink> = [
   { label: 'Actualités', to: '/actualites' },
   { label: 'Publications', to: '/publications' },
+  { label: 'Abécédaire / FAQ', to: '/faq' },
 ];
 
 const ressourcesLinks: Array<FooterLink> = [
@@ -75,12 +75,12 @@ export const Footer = () => {
   );
 
   return (
-    <footer className="relative bg-[var(--mauve)]" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-      {/* Subtle mauve ambient glow */}
+    <footer className="relative bg-[var(--everest-green)]" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      {/* Subtle green ambient glow */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20"
+        className="absolute inset-0 pointer-events-none opacity-25"
         style={{
-          background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--mauve-10) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--everest-green-10) 0%, transparent 70%)',
         }}
       />
       <div className="mx-auto max-w-6xl px-6 py-20 relative z-10">
@@ -122,10 +122,10 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Société */}
+          {/* Marchés & opportunités (Insights) */}
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Société</div>
-            {renderLinkList(societeLinks)}
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Marchés &amp; opportunités</div>
+            {renderLinkList(marchesLinks)}
           </div>
 
           {/* Expertises */}
@@ -134,39 +134,39 @@ export const Footer = () => {
             {renderLinkList(expertisesLinks)}
           </div>
 
-          {/* Marchés & Autres — one column, two groups */}
+          {/* Société */}
+          <div>
+            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Société</div>
+            {renderLinkList(societeLinks)}
+          </div>
+
+          {/* Autres & Contact — one column, two groups */}
           <div className="space-y-10">
-            <div>
-              <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Marchés &amp; opportunités</div>
-              {renderLinkList(marchesLinks)}
-            </div>
             <div>
               <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Autres</div>
               {renderLinkList(ressourcesLinks)}
             </div>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Contact</div>
-            <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
-              <li>
-                18 Boulevard de la République,<br />Dakar, Sénégal - BP: 11659-13000
-              </li>
-              <li>
-                <a href="mailto:contact@everestfin.com" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
-                  contact@everestfin.com
-                </a>
-              </li>
-              <li className="flex flex-col ">
-                <a href="tel:+221338228700" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
-                  +221 33 822 87 00
-                </a>
-                <a href="tel:+221338228701" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
-                  +221 33 822 87 01
-                </a>
-              </li>
-            </ul>
+            <div>
+              <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Contact</div>
+              <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
+                <li>
+                  18 Boulevard de la République,<br />Dakar, Sénégal - BP: 11659-13000
+                </li>
+                <li>
+                  <a href="mailto:contact@everestfin.com" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                    contact@everestfin.com
+                  </a>
+                </li>
+                <li className="flex flex-col ">
+                  <a href="tel:+221338228700" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                    +221 33 822 87 00
+                  </a>
+                  <a href="tel:+221338228701" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                    +221 33 822 87 01
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 

@@ -13,25 +13,25 @@ const services: Array<{
   index: string;
 }> = [
   {
-    icon: FiBarChart2,
-    kicker: 'Expertise I',
-    title: 'Marché des Titres Publics',
-    bullets: [
-      'Émissions souveraines & stratégie de taux',
-      'MTP UEMAO et pilotage de sensibilité',
-    ],
-    href: '/expertises#marche-titres-publics',
-    index: 'I',
-  },
-  {
     icon: FiGlobe,
-    kicker: 'Expertise II',
+    kicker: 'Expertise I',
     title: 'Marché financier régional (BRVM)',
     bullets: [
       'Actions & obligations sur place',
       "Intermédiation & conseil d'exécution",
     ],
     href: '/expertises#marche-financier-regional',
+    index: 'I',
+  },
+  {
+    icon: FiBarChart2,
+    kicker: 'Expertise II',
+    title: 'Marché des Titres Publics',
+    bullets: [
+      'Émissions souveraines & stratégie de taux',
+      'MTP UEMAO et pilotage de sensibilité',
+    ],
+    href: '/expertises#marche-titres-publics',
     index: 'II',
   },
   {

@@ -127,6 +127,9 @@ export const Layout = () => {
       <LenisWrapper>
         <CMSProvider>
           <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
+            {/* BRVM Live Ticker - Hide on dashboard */}
+            {!hideExtras && <BRVMTicker />}
+
             {/* Header - Fixed position overlay */}
             <Header />
 
@@ -134,9 +137,6 @@ export const Layout = () => {
             <main className="relative">
               <Outlet />
             </main>
-
-            {/* BRVM Live Ticker - Hide on dashboard */}
-            {!hideExtras && <BRVMTicker />}
 
             {/* Footer - Hide on dashboard */}
             {!hideExtras && <Footer />}

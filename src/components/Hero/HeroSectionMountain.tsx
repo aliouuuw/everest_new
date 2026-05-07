@@ -125,8 +125,8 @@ export const HeroSectionMountain: React.FC = () => {
                 style={{
                   fontFamily: 'var(--font-primary)',
                   fontWeight: 800,
-                  fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 4.25rem)',
-                  lineHeight: 1.04,
+                  fontSize: 'clamp(2rem, 3.5vw, 2.875rem)',
+                  lineHeight: 1.25,
                   letterSpacing: '-0.03em',
                   color: 'var(--pure-white)',
                 }}
