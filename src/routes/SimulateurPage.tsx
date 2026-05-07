@@ -8,7 +8,7 @@ type ToolId = 'profil' | 'interets' | 'dividendes'
 
 const TABS = [
   { id: 'profil' as ToolId, icon: <FiTarget size={18} />, label: "Profil d'Investisseur" },
-  { id: 'interets' as ToolId, icon: <FiPercent size={18} />, label: 'Intérêts Composés' },
+  { id: 'interets' as ToolId, icon: <FiPercent size={18} />, label: 'Simulateur' },
   { id: 'dividendes' as ToolId, icon: <FiDollarSign size={18} />, label: 'Calculateur Dividendes' },
 ] as const
 
@@ -19,7 +19,7 @@ const TOOL_META: Record<ToolId, { title: string; subtitle: string; icon: React.R
     icon: <FiTarget size={20} />,
   },
   interets: {
-    title: "Calculateur d'Intérêts Composés",
+    title: "Simulateur",
     subtitle: "Projettez la croissance de votre investissement grâce à la puissance des intérêts composés",
     icon: <FiTrendingUp size={20} />,
   },
@@ -69,7 +69,7 @@ export const SimulateurPage: React.FC = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
       {/* ─── 1. Hero — Mauve Banner (matches Bourse / Contact / Expertises) ─── */}
-      <section className="relative pt-[150px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]">
+      <section className="relative pt-[200px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--everest-green)]">
         <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
             <div className="md:col-span-8">
@@ -122,15 +122,12 @@ export const SimulateurPage: React.FC = () => {
           <div className="bg-[var(--pure-white)] rounded-2xl border border-black/10 shadow-sm overflow-hidden">
             {/* Tool Header */}
             <div className="px-6 md:px-10 py-6 border-b border-black/10">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[var(--mauve-10)] flex items-center justify-center text-[var(--mauve)] shrink-0">
-                  {meta.icon}
-                </div>
+              <div className="flex items-start justify-center gap-4">
                 <div>
-                  <h2 className="font-bold text-lg md:text-xl tracking-[0.08em] text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <h2 className="font-bold text-lg md:text-xl tracking-[0.08em] text-[var(--night)] text-center" style={{ fontFamily: 'var(--font-primary)' }}>
                     {meta.title}
                   </h2>
-                  <p className="text-base text-[var(--night-60)] mt-1" style={{ fontFamily: 'var(--font-primary)' }}>
+                  <p className="text-base text-[var(--night-60)] mt-1 text-center" style={{ fontFamily: 'var(--font-primary)' }}>
                     {meta.subtitle}
                   </p>
                 </div>
@@ -139,45 +136,12 @@ export const SimulateurPage: React.FC = () => {
 
             {/* Tool Body */}
             <div className="p-6 md:p-10">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+              <div>
                 {/* Main tool area */}
                 <div className="lg:col-span-2">
                   {activeTool === 'profil' && <InvestorProfileInline />}
                   {activeTool === 'interets' && <CompoundInterestCalculator />}
                   {activeTool === 'dividendes' && <DividendCalculator />}
-                </div>
-
-                {/* Sidebar tips */}
-                <div className="lg:col-span-1">
-                  <div className="bg-[var(--mauve-05)] rounded-xl p-6 border border-[var(--mauve-10)]">
-                    <div className="flex items-center gap-2 mb-4">
-                      <FiBookOpen size={18} className="text-[var(--mauve)]" />
-                      <h3 className="font-bold outils-invest-label tracking-[0.08em] text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
-                        {tips.title}
-                      </h3>
-                    </div>
-                    <ul className="space-y-3">
-                      {tips.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 outils-invest-label text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
-                          <FiCheck size={14} className="text-[var(--jaune-or)] mt-0.5 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Help box */}
-                  <div className="mt-4 bg-[var(--summit-ivory)] rounded-xl p-6 border border-[var(--mauve-10)]">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FiInfo size={16} className="text-[var(--night-40)]" />
-                      <span className="outils-invest-label font-semibold text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
-                        Note importante
-                      </span>
-                    </div>
-                    <p className="text-sm text-[var(--night-60)] leading-relaxed" style={{ fontFamily: 'var(--font-primary)' }}>
-                      Ces outils sont fournis à titre indicatif. Les performances passées ne garantissent pas les performances futures. Consultez un conseiller pour des recommandations personnalisées.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>

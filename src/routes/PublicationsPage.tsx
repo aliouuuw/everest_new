@@ -373,7 +373,7 @@ export const PublicationsPage = () => {
   return (
     <div className="bg-[var(--pure-white)] font-primary">
       {/* ─── Hero ─── */}
-      <section ref={heroRef} className="relative min-h-[55vh] flex items-end pb-16 pt-24 bg-[var(--mauve)]">
+      <section ref={heroRef} className="relative pt-[200px] pb-12 md:pb-16 flex items-end bg-[var(--everest-green)]">
         <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">

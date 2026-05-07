@@ -107,7 +107,7 @@ export const ExpertisesPage = () => {
       {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Contact) ─── */}
       <section
         ref={heroRef}
-        className="relative pt-[150px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--mauve)]"
+        className="relative pt-[200px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--everest-green)]"
       >
         <div className="relative z-10 page-container">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
