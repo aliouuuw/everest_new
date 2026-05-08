@@ -35,12 +35,12 @@ export const OffresPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-5 md:mb-6">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--night-80)]">
                     <EditableText id="offres.hero.badge">Services d'investissement</EditableText>
                   </span>
                 </div>
                 <h1
-                  className="font-primary font-bold leading-[0.95] tracking-tight mb-4 text-[var(--mauve)]"
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-4 text-[var(--night-80)]"
                   style={sectionTitleStyle}
                 >
                   <EditableText id="offres.hero.title">Votre partenaire pour investir sur la BRVM.</EditableText>

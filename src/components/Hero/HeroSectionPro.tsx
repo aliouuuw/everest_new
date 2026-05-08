@@ -168,7 +168,7 @@ export const HeroSectionPro: React.FC = () => {
           ].map((stat, i) => (
             <div key={i} className="hero-badge flex flex-col justify-end">
               <div className="flex items-baseline gap-2 mb-3">
-                <div className="font-primary font-bold text-5xl lg:text-6xl tracking-tighter text-[var(--mauve)] numeric-tabular">
+                <div className="font-primary font-bold text-5xl lg:text-6xl tracking-tighter text-[var(--night-80)] numeric-tabular">
                   {stat.value}
                 </div>
                 {stat.suffix && (

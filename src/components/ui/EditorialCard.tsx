@@ -18,7 +18,7 @@ type EditorialCardProps = {
 /** Icon frame — same structure as expertises (Services) cards; use on- or off-mauve surfaces. */
 export const EDITORIAL_ICON_WELL_LIGHT =
   'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-colors duration-500 ' +
-  'bg-[var(--mauve-05)] border-[var(--mauve-10)] text-[var(--mauve)] ' +
+  'bg-[var(--mauve-05)] border-[var(--mauve-10)] text-[var(--night-80)] ' +
   'group-hover:border-[var(--mauve)] group-hover:bg-[var(--mauve-10)]';
 
 export const EDITORIAL_ICON_WELL_DARK =
@@ -48,7 +48,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
       className={[
         'group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] p-7 md:p-8 transition-all duration-500',
         isDark
-          ? 'border border-white/[0.08] bg-[rgba(255,255,255,0.02)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_40px_-20px_rgba(70,29,76,0.5)] hover:-translate-y-1 backdrop-blur-2xl'
+          ? 'border border-white/[0.08] bg-[rgba(255,255,255,0.02)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_40px_-20px_rgba(1,45,42,0.5)] hover:-translate-y-1 backdrop-blur-2xl'
           : 'border border-[var(--mauve-10)] bg-[var(--pure-white)] shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)]',
         className,
       ].join(' ')}
@@ -75,7 +75,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
       </header>
 
       <h3
-        className="mb-4 font-primary text-base font-semibold leading-snug text-[var(--mauve)] md:text-lg"
+        className="mb-4 font-primary text-base font-semibold leading-snug text-[var(--night-80)] md:text-lg"
         style={isDark ? { color: 'var(--pure-white)' } : undefined}
       >
         {title}
@@ -103,7 +103,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
           'mt-auto inline-flex items-center gap-2 font-primary text-sm font-semibold transition-all duration-300',
           isDark
             ? 'text-[var(--jaune-or)] group-hover:gap-3'
-            : 'text-[var(--mauve)] group-hover:gap-3',
+            : 'text-[var(--night-80)] group-hover:gap-3',
         ].join(' ')}
         {...(isExternal
           ? { target: '_blank' as const, rel: 'noopener noreferrer' }

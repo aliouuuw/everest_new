@@ -458,11 +458,11 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
         {/* Header */}
         <div className="max-w-xl mb-14">
           <div className="mb-6">
-            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--mauve)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--night-80)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
               Outil de simulation
             </span>
           </div>
-          <h2 className="luxury-heading" style={{ color: 'var(--mauve)' }}>
+          <h2 className="luxury-heading" style={{ color: 'var(--night-80)' }}>
             Calculez vos projections.
           </h2>
         </div>

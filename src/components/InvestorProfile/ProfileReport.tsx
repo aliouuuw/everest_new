@@ -43,7 +43,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
             }
             .report-container { max-width: 210mm; margin: 0 auto; padding: 30px; }
             .header { 
-              background: linear-gradient(135deg, #461D4C 0%, #2a1435 100%);
+              background: linear-gradient(135deg, #012d2a 0%, #012d2a 100%);
               color: white;
               padding: 40px;
               border-radius: 16px;
@@ -80,7 +80,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
               font-weight: 700;
               text-transform: uppercase;
               letter-spacing: 0.1em;
-              color: #461D4C;
+              color: #012d2a;
               margin-bottom: 16px;
               padding-bottom: 8px;
               border-bottom: 2px solid #f0eee9;
@@ -206,24 +206,24 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
               font-size: 12px;
               color: #666;
             }
-            .footer strong { color: #461D4C; }
+            .footer strong { color: #012d2a; }
             .print-button {
               position: fixed;
               bottom: 30px;
               right: 30px;
               padding: 14px 28px;
-              background: #461D4C;
+              background: #012d2a;
               color: white;
               border: none;
               border-radius: 30px;
               font-size: 14px;
               font-weight: 600;
               cursor: pointer;
-              box-shadow: 0 4px 20px rgba(70,29,76,0.3);
+              box-shadow: 0 4px 20px rgba(1,45,42,0.3);
               transition: all 0.3s ease;
             }
             .print-button:hover {
-              background: #2a1435;
+              background: #012d2a;
               transform: translateY(-2px);
             }
             @media print {
@@ -382,7 +382,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
 
         <button
           onClick={handlePrint}
-          className="w-full mt-4 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 text-[12px] font-bold tracking-[0.1em] uppercase"
+          className="w-full mt-4 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 text-[12px] font-bold tracking-[0.1em] uppercase"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

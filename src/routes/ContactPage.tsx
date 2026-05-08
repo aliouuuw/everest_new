@@ -166,7 +166,7 @@ export const ContactPage = () => {
                   </p>
                   <button
                     type="submit"
-                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--mauve)] px-6 py-3 font-primary text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#38163c]"
+                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--jaune-or)] px-6 py-3 font-primary text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#062421]"
                   >
                     <EditableText id="contact.form.submit" as="span">Envoyer la demande</EditableText>
                     <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -178,7 +178,7 @@ export const ContactPage = () => {
             {/* Info panel */}
             <aside className="flex flex-col gap-4 lg:col-span-5">
               <div
-                className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-[var(--mauve)]"
+                className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-[var(--everest-green)]"
               >
                 <div
                   aria-hidden
@@ -235,7 +235,7 @@ export const ContactPage = () => {
                 <p className="mb-1.5 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
                   <EditableText id="contact.hours.badge">Horaires</EditableText>
                 </p>
-                <h4 className="mb-3 font-primary text-base font-semibold tracking-tight text-[var(--mauve)]">
+                <h4 className="mb-3 font-primary text-base font-semibold tracking-tight text-[var(--night-80)]">
                   <EditableText id="contact.hours.title">Lundi — Vendredi · 08h30 → 17h30 GMT</EditableText>
                 </h4>
                 <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">

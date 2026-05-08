@@ -167,7 +167,7 @@ export const InvestorProfileModal: React.FC<{
         {/* Desktop Close Button */}
         <button
           onClick={onClose}
-          className="hidden md:flex absolute top-6 right-6 z-[60] w-10 h-10 items-center justify-center rounded-full bg-[var(--night-05)] hover:bg-[var(--mauve-10)] text-[var(--night-60)] hover:text-[var(--mauve)] transition-all duration-200"
+          className="hidden md:flex absolute top-6 right-6 z-[60] w-10 h-10 items-center justify-center rounded-full bg-[var(--night-05)] hover:bg-[var(--mauve-10)] text-[var(--night-60)] hover:text-[var(--night-80)] transition-all duration-200"
           aria-label="Fermer"
         >
           <FiX size={20} />
@@ -232,7 +232,7 @@ export const InvestorProfileModal: React.FC<{
                       }`}
                     >
                       <div className={`w-6 h-6 rounded-full flex items-center justify-center border transition-colors ${
-                        i < currentCategoryIdx ? 'bg-[var(--jaune-or)] border-[var(--jaune-or)] text-[var(--mauve)]' : i === currentCategoryIdx ? 'border-white/50 bg-white/10 text-white' : 'border-white/20 text-white/50'
+                        i < currentCategoryIdx ? 'bg-[var(--jaune-or)] border-[var(--jaune-or)] text-[var(--night-80)]' : i === currentCategoryIdx ? 'border-white/50 bg-white/10 text-white' : 'border-white/20 text-white/50'
                       }`}>
                         {i < currentCategoryIdx ? <FiCheck size={12} strokeWidth={3} /> : <span className="text-[10px]">{i + 1}</span>}
                       </div>
@@ -263,7 +263,7 @@ export const InvestorProfileModal: React.FC<{
                     <div className="h-full bg-[var(--mauve)] transition-all duration-500" style={{ width: `${progress}%` }} />
                   </div>
                 </div>
-                <span className="text-[12px] font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                <span className="text-[12px] font-bold text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
                   {currentQuestion + 1}/{QUESTIONS.length}
                 </span>
               </div>
@@ -336,7 +336,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
   <div className="px-6 py-12 md:px-16 md:py-16 text-center md:text-left max-w-xl mx-auto md:mx-0 w-full ip-scale-in">
     {/* Mobile only icon */}
     <div className="md:hidden mx-auto mb-6 w-16 h-16 rounded-2xl bg-[var(--mauve-05)] flex items-center justify-center">
-      <FiTarget size={28} className="text-[var(--mauve)]" />
+      <FiTarget size={28} className="text-[var(--night-80)]" />
     </div>
 
     <h2 className="mb-4 font-bold text-3xl md:text-4xl text-[var(--night)] leading-tight" style={{ fontFamily: 'var(--font-primary)' }}>
@@ -353,7 +353,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
         { label: 'Résultat direct', icon: <FiZap /> },
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center md:items-start p-4 rounded-2xl bg-[var(--summit-ivory)] border border-[var(--night-05)]">
-          <div className="text-[var(--mauve)] mb-2 opacity-70">{stat.icon}</div>
+          <div className="text-[var(--night-80)] mb-2 opacity-70">{stat.icon}</div>
           <span className="text-[13px] font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</span>
         </div>
       ))}
@@ -361,7 +361,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
 
     <button
       onClick={onStart}
-      className="group w-full sm:w-auto inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(70,29,76,0.3)] active:scale-[0.98]"
+      className="group w-full sm:w-auto inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(1,45,42,0.3)] active:scale-[0.98]"
     >
       <span className="text-[14px] tracking-[0.1em] font-bold uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
         Démarrer le test
@@ -397,7 +397,7 @@ const QuizStep: React.FC<{
       <div className="hidden md:flex items-center justify-between mb-10">
         <button
           onClick={onBack}
-          className="flex items-center gap-2 text-[14px] font-semibold text-[var(--night-40)] hover:text-[var(--mauve)] transition-colors"
+          className="flex items-center gap-2 text-[14px] font-semibold text-[var(--night-40)] hover:text-[var(--night-80)] transition-colors"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           <FiArrowLeft size={18} /> Retour
@@ -425,7 +425,7 @@ const QuizStep: React.FC<{
               onClick={() => onAnswer(question.id, option.value)}
               className={`group relative w-full text-left p-5 md:p-6 rounded-2xl border-2 transition-all duration-300 active:scale-[0.99] ${
                 isSelected
-                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_4px_20px_rgba(70,29,76,0.08)] z-10'
+                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_4px_20px_rgba(1,45,42,0.08)] z-10'
                   : 'border-[var(--night-10)] bg-white hover:border-[var(--mauve-30)] hover:bg-[var(--summit-ivory)] hover:shadow-sm'
               }`}
               style={{ animationDelay: `${idx * 60}ms` }}
@@ -437,7 +437,7 @@ const QuizStep: React.FC<{
                   {isSelected && <FiCheck size={12} className="text-white" strokeWidth={3} />}
                 </div>
                 <span className={`text-[15px] md:text-[16px] leading-snug transition-colors duration-300 ${
-                  isSelected ? 'text-[var(--mauve)] font-semibold' : 'text-[var(--night-80)] font-medium'
+                  isSelected ? 'text-[var(--night-80)] font-semibold' : 'text-[var(--night-80)] font-medium'
                 }`} style={{ fontFamily: 'var(--font-primary)' }}>
                   {option.label}
                 </span>
@@ -532,7 +532,7 @@ const LeadStep: React.FC<{
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full mt-4 inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full mt-4 inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
       >
         <span className="text-[14px] font-bold tracking-[0.1em] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
           {isSubmitting ? 'Génération du rapport...' : 'Découvrir mon profil'}
@@ -625,7 +625,7 @@ const ResultStep: React.FC<{
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4">
-        <a href="/contact" className="flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all hover:shadow-lg">
+        <a href="/contact" className="flex-1 inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all hover:shadow-lg">
           <span className="text-[13px] font-bold tracking-[0.1em] uppercase" style={{ fontFamily: 'var(--font-primary)' }}>Prendre rendez-vous</span>
           <FiArrowRight size={16} />
         </a>

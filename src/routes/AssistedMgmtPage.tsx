@@ -56,8 +56,8 @@ export const AssistedMgmtPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Processus</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Processus</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Un cadre clair.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -68,9 +68,9 @@ export const AssistedMgmtPage = () => {
               <div className="lg:col-span-7">
                 <div className="border-t border-black/10">
                   <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                    <div className="font-primary font-bold text-2xl text-[var(--mauve)]/50 shrink-0">01.</div>
+                    <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">01.</div>
                     <div>
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--night-80)] transition-colors">
                         Diagnostic initial
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -79,9 +79,9 @@ export const AssistedMgmtPage = () => {
                     </div>
                   </div>
                   <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                    <div className="font-primary font-bold text-2xl text-[var(--mauve)]/50 shrink-0">02.</div>
+                    <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">02.</div>
                     <div>
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--night-80)] transition-colors">
                         Recommandations
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -90,9 +90,9 @@ export const AssistedMgmtPage = () => {
                     </div>
                   </div>
                   <div className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                    <div className="font-primary font-bold text-2xl text-[var(--mauve)]/50 shrink-0">03.</div>
+                    <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">03.</div>
                     <div>
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--night-80)] transition-colors">
                         Décision & suivi
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -171,8 +171,8 @@ export const AssistedMgmtPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Équipe</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Équipe</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Rencontrez nos conseillers.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -186,7 +186,7 @@ export const AssistedMgmtPage = () => {
                       <div className="w-16 h-16 rounded-2xl bg-[var(--mauve)] text-white flex items-center justify-center font-primary font-bold text-xl shrink-0">MD</div>
                       <div>
                         <div className="font-primary font-bold text-2xl mb-1 text-[var(--night)]">Marie-Louise Diop</div>
-                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--mauve)] uppercase mb-4">Conseillère Senior • 12 ans d'expérience</div>
+                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--night-80)] uppercase mb-4">Conseillère Senior • 12 ans d'expérience</div>
                         <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed mb-4">Spécialiste des stratégies d'investissement à long terme pour les particuliers.</p>
                         <div className="flex gap-2 text-xs">
                           <span className="border border-black/20 rounded-full px-3 py-1">Actions BRVM</span>
@@ -200,7 +200,7 @@ export const AssistedMgmtPage = () => {
                       <div className="w-16 h-16 rounded-2xl bg-[var(--mauve)] text-white flex items-center justify-center font-primary font-bold text-xl shrink-0">AF</div>
                       <div>
                         <div className="font-primary font-bold text-2xl mb-1 text-[var(--night)]">Amadou Faye</div>
-                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--mauve)] uppercase mb-4">Conseiller Principal • 15 ans d'expérience</div>
+                        <div className="text-[10px] font-bold tracking-[0.2em] text-[var(--night-80)] uppercase mb-4">Conseiller Principal • 15 ans d'expérience</div>
                         <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed mb-4">Expert en analyse de marché et en construction de portefeuilles équilibrés.</p>
                         <div className="flex gap-2 text-xs">
                           <span className="border border-black/20 rounded-full px-3 py-1">Analyse technique</span>

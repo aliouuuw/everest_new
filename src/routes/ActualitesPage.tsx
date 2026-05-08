@@ -164,8 +164,8 @@ export const ActualitesPage = () => {
                     onClick={() => setActiveCategory(cat)}
                     className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-300 border font-primary rounded-full ${
                       isActive 
-                        ? 'font-bold text-[var(--pure-white)] bg-[var(--mauve)] border-[var(--mauve)] shadow-sm' 
-                        : 'font-bold text-[var(--mauve)] bg-white border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] shadow-sm'
+                        ? 'font-bold text-[var(--pure-white)] bg-[var(--jaune-or)] border-[var(--jaune-or)] shadow-sm' 
+                        : 'font-bold text-[var(--night-80)] bg-white border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] shadow-sm'
                     }`}
                   >
                     {cat}
@@ -177,7 +177,7 @@ export const ActualitesPage = () => {
             {/* Right side: Search + Selectors */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
               <div className="relative w-full sm:w-64">
-                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--mauve)]/40" size={16} />
+                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-80)]/40" size={16} />
                 <input
                   type="text"
                   placeholder="Rechercher..."
@@ -220,7 +220,7 @@ export const ActualitesPage = () => {
       {featuredArticle && (
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
         <div className="page-container">
-          <Link to="/actualites/$slug" params={{ slug: featuredArticle.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(70,29,76,0.1)]">
+          <Link to="/actualites/$slug" params={{ slug: featuredArticle.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(1,45,42,0.1)]">
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
                 <img
@@ -232,14 +232,14 @@ export const ActualitesPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
               </div>
               <div className="absolute top-6 left-6 z-10">
-                <span className="inline-block bg-[var(--mauve)] px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-white rounded-full">
+                <span className="inline-block bg-[var(--jaune-or)] px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-white rounded-full">
                   À la une
                 </span>
               </div>
             </div>
             <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-center bg-[var(--white-smoke)]/30">
               <div className="flex items-center gap-4 mb-6">
-                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--mauve)]">
+                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night-80)]">
                   {featuredArticle.category}
                 </span>
                 <span className="w-1 h-1 bg-[rgba(10,10,10,0.3)] rounded-full" />
@@ -247,13 +247,13 @@ export const ActualitesPage = () => {
                   <FiCalendar className="text-xs" /> {new Date(featuredArticle.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </span>
               </div>
-              <h2 className="mb-6 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-3xl md:text-4xl leading-[1.2] text-[var(--night)]">
+              <h2 className="mb-6 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-3xl md:text-4xl leading-[1.2] text-[var(--night)]">
                 {featuredArticle.title}
               </h2>
               <p className="mb-8 font-light text-base leading-[1.7] text-[rgba(10,10,10,0.7)]">
                 {featuredArticle.excerpt}
               </p>
-              <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase group-hover:gap-4 group-hover:text-[var(--mauve)] transition-all duration-300 font-bold text-[var(--night)]">
+              <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase group-hover:gap-4 group-hover:text-[var(--night-80)] transition-all duration-300 font-bold text-[var(--night)]">
                 Lire le communiqué
                 <span className="inline-block w-6 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
               </span>
@@ -273,7 +273,7 @@ export const ActualitesPage = () => {
               <div className="actu-reveal flex items-center justify-between mb-12">
                 <h3 className="font-primary font-bold text-2xl text-[var(--night)]">
                   Publications récentes
-                  <span className="ml-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--mauve)]">
+                  <span className="ml-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--night-80)]">
                     {ARTICLES.length}
                   </span>
                 </h3>
@@ -303,7 +303,7 @@ export const ActualitesPage = () => {
                             />
                           ) : (
                             <div className="absolute inset-0 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex items-center justify-center">
-                              <span className="text-[var(--mauve)]/30 text-4xl font-bold">{article.title[0]}</span>
+                              <span className="text-[var(--night-80)]/30 text-4xl font-bold">{article.title[0]}</span>
                             </div>
                           )}
                         </div>
@@ -311,7 +311,7 @@ export const ActualitesPage = () => {
                         {/* Content */}
                         <div className="flex flex-col justify-center">
                           <div className="flex flex-wrap items-center gap-2 mb-4">
-                            <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--mauve)]">
+                            <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--night-80)]">
                               {article.category}
                             </span>
                             <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
@@ -322,13 +322,13 @@ export const ActualitesPage = () => {
                               <FiClock className="text-[9px]" /> {article.readTime}
                             </span>
                           </div>
-                          <h4 className="mb-3 group-hover:text-[var(--mauve)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
+                          <h4 className="mb-3 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
                             {article.title}
                           </h4>
                           <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
                             {article.excerpt}
                           </p>
-                          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 font-bold">
+                          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--night-80)] group-hover:gap-3 transition-all duration-300 font-bold">
                             Lire <FiArrowRight />
                           </span>
                         </div>
@@ -359,7 +359,7 @@ export const ActualitesPage = () => {
                   </p>
                   <a
                     href="https://everest-account-opening.vercel.app/new-home"
-                    className="inline-flex items-center gap-2 bg-[var(--jaune-or)] text-[var(--night)] px-6 py-3 rounded-full text-[11px] tracking-[0.12em] uppercase font-bold hover:bg-white transition-colors duration-300"
+                    className="inline-flex items-center gap-2 bg-[var(--jaune-or)] text-[var(--pure-white)] px-6 py-3 rounded-full text-[11px] tracking-[0.12em] uppercase font-bold hover:bg-white transition-colors duration-300"
                   >
                     Commencer <FiExternalLink />
                   </a>
@@ -376,7 +376,7 @@ export const ActualitesPage = () => {
                     <li key={i}>
                       <a
                         href="#"
-                        className="flex justify-between items-center py-3 text-sm hover:text-[var(--mauve)] transition-colors duration-200 border-b border-black/5 last:border-0 font-normal text-[var(--night)] group"
+                        className="flex justify-between items-center py-3 text-sm hover:text-[var(--night-80)] transition-colors duration-200 border-b border-black/5 last:border-0 font-normal text-[var(--night)] group"
                       >
                         <span>{cat}</span>
                         <FiArrowRight className="text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
@@ -402,7 +402,7 @@ export const ActualitesPage = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-[var(--mauve)] rounded-full text-white px-5 py-3 text-[11px] tracking-[0.12em] uppercase hover:bg-[var(--night)] hover:text-white transition-colors duration-300 font-bold"
+                    className="bg-[var(--jaune-or)] rounded-full text-white px-5 py-3 text-[11px] tracking-[0.12em] uppercase hover:bg-[#b5832a] hover:text-white transition-colors duration-300 font-bold"
                   >
                     S'abonner
                   </button>

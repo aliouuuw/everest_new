@@ -58,7 +58,7 @@ export const ArticlePage = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
-        <FiLoader className="animate-spin text-[var(--mauve)] w-8 h-8" />
+        <FiLoader className="animate-spin text-[var(--night-80)] w-8 h-8" />
       </div>
     )
   }
@@ -69,7 +69,7 @@ export const ArticlePage = () => {
       <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--mauve)]/10 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[var(--mauve)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 text-[var(--night-80)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
@@ -77,7 +77,7 @@ export const ArticlePage = () => {
           <p className="text-[rgba(10,10,10,0.6)] mb-4">L'article que vous recherchez n'existe pas ou a été supprimé.</p>
           <button
             onClick={() => navigate({ to: '/actualites' })}
-            className="px-4 py-2 bg-[var(--mauve)] text-white rounded-full hover:bg-[var(--night)] transition-colors"
+            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded-full hover:bg-[#b5832a] transition-colors"
           >
             Retour aux actualités
           </button>
@@ -106,7 +106,7 @@ export const ArticlePage = () => {
               {/* Back button */}
               <button
                 onClick={() => navigate({ to: '/actualites' })}
-                className="inline-flex items-center gap-2 text-[var(--night)]/50 hover:text-[var(--mauve)] transition-colors mb-8 group text-sm font-bold tracking-[0.1em] uppercase"
+                className="inline-flex items-center gap-2 text-[var(--night)]/50 hover:text-[var(--night-80)] transition-colors mb-8 group text-sm font-bold tracking-[0.1em] uppercase"
               >
                 <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
                 Retour aux actualités
@@ -114,7 +114,7 @@ export const ArticlePage = () => {
 
               {/* Meta Info */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-6">
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase bg-[var(--mauve)]/10 text-[var(--mauve)]">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase bg-[var(--mauve)]/10 text-[var(--night-80)]">
                   {article.category}
                 </span>
                 <div className="flex items-center gap-2 text-sm text-[var(--night)]/50">
@@ -151,7 +151,7 @@ export const ArticlePage = () => {
             {/* Content Body */}
             <div ref={contentRef}>
               <div 
-                className="prose prose-lg md:prose-xl max-w-none text-[rgba(10,10,10,0.85)] prose-headings:font-primary prose-headings:font-bold prose-headings:text-[var(--night)] prose-headings:tracking-tight prose-a:text-[var(--mauve)] prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-hr:border-black/10 article-content"
+                className="prose prose-lg md:prose-xl max-w-none text-[rgba(10,10,10,0.85)] prose-headings:font-primary prose-headings:font-bold prose-headings:text-[var(--night)] prose-headings:tracking-tight prose-a:text-[var(--night-80)] prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-hr:border-black/10 article-content"
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
 
@@ -170,7 +170,7 @@ export const ArticlePage = () => {
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--pure-white)] border border-[var(--mauve)]/20 text-[var(--mauve)] rounded-full hover:bg-[var(--mauve)] hover:text-white transition-colors text-[11px] tracking-[0.1em] uppercase font-bold whitespace-nowrap"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 text-[var(--night-80)] rounded-full hover:bg-[var(--jaune-or)] hover:text-white transition-colors text-[11px] tracking-[0.1em] uppercase font-bold whitespace-nowrap"
                   >
                     Lire sur le site original <FiExternalLink size={14} />
                   </a>
@@ -181,7 +181,7 @@ export const ArticlePage = () => {
               <div className="mt-16 pt-8 border-t border-black/10 text-center">
                 <button
                   onClick={() => navigate({ to: '/actualites' })}
-                  className="inline-flex items-center gap-2 text-[var(--night)] hover:text-[var(--mauve)] transition-colors font-bold text-sm tracking-[0.1em] uppercase group"
+                  className="inline-flex items-center gap-2 text-[var(--night)] hover:text-[var(--night-80)] transition-colors font-bold text-sm tracking-[0.1em] uppercase group"
                 >
                   <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
                   Retour aux actualités
@@ -193,7 +193,7 @@ export const ArticlePage = () => {
           {/* Right Sidebar */}
           <aside className="lg:col-span-4 flex flex-col gap-8">
             {/* Promotional Banner */}
-            <div className="p-8 bg-gradient-to-br from-[var(--mauve)] to-[rgba(70,29,76,0.8)] rounded-2xl text-white overflow-hidden relative">
+            <div className="p-8 bg-gradient-to-br from-[var(--mauve)] to-[rgba(1,45,42,0.8)] rounded-2xl text-white overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
               <div className="relative z-10">
                 <span className="inline-block px-3 py-1 mb-4 text-[9px] tracking-[0.2em] uppercase font-bold text-white/70 bg-white/10 rounded-full">
@@ -207,7 +207,7 @@ export const ArticlePage = () => {
                 </p>
                 <a
                   href="https://everest-account-opening.vercel.app/new-home"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[var(--mauve)] rounded-full hover:bg-white/90 transition-colors text-[11px] tracking-[0.1em] uppercase font-bold"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[var(--night-80)] rounded-full hover:bg-white/90 transition-colors text-[11px] tracking-[0.1em] uppercase font-bold"
                 >
                   Commencer <FiArrowRight size={14} />
                 </a>
@@ -240,10 +240,10 @@ export const ArticlePage = () => {
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--mauve)] mb-1">
+                          <p className="text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night-80)] mb-1">
                             {relArticle.category}
                           </p>
-                          <h4 className="text-sm font-primary font-bold text-[var(--night)] line-clamp-2 group-hover:text-[var(--mauve)] transition-colors">
+                          <h4 className="text-sm font-primary font-bold text-[var(--night)] line-clamp-2 group-hover:text-[var(--night-80)] transition-colors">
                             {relArticle.title}
                           </h4>
                           <p className="text-[11px] text-[var(--night)]/50 mt-1">

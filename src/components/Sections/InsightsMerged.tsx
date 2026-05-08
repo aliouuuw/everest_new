@@ -142,7 +142,7 @@ export const InsightsMerged: React.FC = () => {
             </p>
             <Link
               to="/actualites"
-              className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--mauve)] transition-all duration-300 hover:gap-3"
+              className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--night-80)] transition-all duration-300 hover:gap-3"
             >
               <EditableText id="home.insights.actualitesLink" as="span">
                 Toutes les actualités
@@ -170,7 +170,7 @@ export const InsightsMerged: React.FC = () => {
                     className="h-full w-full transform object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                   />
                   <div className="absolute left-5 top-5 z-20">
-                    <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--mauve)] backdrop-blur-sm">
+                    <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] backdrop-blur-sm">
                       {article.category}
                     </span>
                   </div>
@@ -196,7 +196,7 @@ export const InsightsMerged: React.FC = () => {
                   </div>
 
                   <h3
-                    className="mb-3 transition-colors duration-300 group-hover:text-[var(--mauve)]"
+                    className="mb-3 transition-colors duration-300 group-hover:text-[var(--night-80)]"
                     style={{
                       fontFamily: 'var(--font-primary)',
                       fontWeight: 700,
@@ -222,7 +222,7 @@ export const InsightsMerged: React.FC = () => {
                   </p>
 
                   <span
-                    className="mt-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--mauve)]"
+                    className="mt-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--night-80)]"
                     style={{
                       fontFamily: 'var(--font-primary)',
                       fontWeight: 600,
@@ -248,7 +248,7 @@ export const InsightsMerged: React.FC = () => {
             </p>
             <Link
               to="/publications"
-              className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--mauve)] transition-all duration-300 hover:gap-3"
+              className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--night-80)] transition-all duration-300 hover:gap-3"
             >
               <EditableText id="home.insights.publicationsLink" as="span">
                 Toutes les publications
@@ -261,7 +261,7 @@ export const InsightsMerged: React.FC = () => {
             <a
               href={featured.fileUrl}
               download
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-[var(--mauve)] p-7 md:p-9 lg:col-span-7 lg:min-h-[360px]"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-[var(--everest-green)] p-7 md:p-9 lg:col-span-7 lg:min-h-[360px]"
             >
               <div className="relative z-10">
                 <span
@@ -323,7 +323,7 @@ export const InsightsMerged: React.FC = () => {
                   <p className="mb-4 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
                     Note de recherche · {FREQUENCY_LABELS[secondary[0].frequency]}
                   </p>
-                  <h4 className="mb-4 font-primary text-lg font-bold leading-snug tracking-tight text-[var(--mauve)] md:text-xl">
+                  <h4 className="mb-4 font-primary text-lg font-bold leading-snug tracking-tight text-[var(--night-80)] md:text-xl">
                     {secondary[0].title}
                   </h4>
                   <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
@@ -348,7 +348,7 @@ export const InsightsMerged: React.FC = () => {
                       </>
                     )}
                   </div>
-                  <span className="inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mauve)] transition-all duration-300 group-hover:gap-3">
+                  <span className="inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--night-80)] transition-all duration-300 group-hover:gap-3">
                     Lire
                     <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
                   </span>
@@ -367,14 +367,14 @@ export const InsightsMerged: React.FC = () => {
                   >
                     <div>
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--night-80)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
                           <FiFileText className="text-base" aria-hidden />
                         </div>
                         <div className="min-w-0 flex-1">
                           <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
                             Note de recherche · {FREQUENCY_LABELS[it.frequency]}
                           </p>
-                          <h4 className="font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--mauve)] md:text-base">
+                          <h4 className="font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--night-80)] md:text-base">
                             {it.title}
                           </h4>
                         </div>
@@ -399,7 +399,7 @@ export const InsightsMerged: React.FC = () => {
                         )}
                       </div>
                       <FiArrowRight
-                        className="shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--mauve)]"
+                        className="shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--night-80)]"
                         aria-hidden
                       />
                     </div>

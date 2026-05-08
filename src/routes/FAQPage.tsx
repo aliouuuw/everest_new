@@ -139,9 +139,9 @@ export const FAQPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="faq.qa.badge">Support</EditableText></span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="faq.qa.badge">Support</EditableText></span>
                   <h2
-                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
                     style={sectionTitleStyle}
                   >
                     <EditableText id="faq.qa.title">Questions fréquentes.</EditableText>
@@ -154,7 +154,7 @@ export const FAQPage = () => {
                   {qas.map((item) => (
                     <div key={item.q} className="relative">
                       <div className="w-8 h-px bg-[var(--mauve)] mb-5" />
-                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-[var(--mauve)]">
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-[var(--night-80)]">
                         {item.q}
                       </h3>
                       <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -175,9 +175,9 @@ export const FAQPage = () => {
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32 flex flex-col border-t border-[var(--mauve)]/10">
                   <div className="py-5 border-b border-[var(--mauve)]/10">
-                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="faq.glossary.badge">Définitions</EditableText></span>
+                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="faq.glossary.badge">Définitions</EditableText></span>
                     <h2
-                      className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)] mb-4"
+                      className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)] mb-4"
                       style={sectionTitleStyle}
                     >
                       <EditableText id="faq.glossary.title">Abécédaire</EditableText>
@@ -195,7 +195,7 @@ export const FAQPage = () => {
                         <button
                           type="button"
                           onClick={() => setActiveLetter('')}
-                          className={`text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === '' ? 'border-[var(--mauve)] bg-[var(--mauve)] text-white' : 'border-[var(--mauve)]/10 text-[var(--mauve)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                          className={`text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === '' ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                         >
                           Tous
                         </button>
@@ -204,7 +204,7 @@ export const FAQPage = () => {
                             key={l}
                             type="button"
                             onClick={() => setActiveLetter(l)}
-                            className={`text-xs font-bold uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === l ? 'border-[var(--mauve)] bg-[var(--mauve)] text-white' : 'border-[var(--mauve)]/10 text-[var(--mauve)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                            className={`text-xs font-bold uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === l ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                           >
                             {l}
                           </button>
@@ -222,13 +222,13 @@ export const FAQPage = () => {
                   )}
                   {grouped.map(([letter, terms]) => (
                     <div key={letter} className="group py-5 md:py-6 border-b border-[var(--mauve)]/10">
-                      <div className="font-primary font-bold text-3xl md:text-4xl text-[var(--mauve)] mb-5">
+                      <div className="font-primary font-bold text-3xl md:text-4xl text-[var(--night-80)] mb-5">
                         {letter}
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                         {terms.map((g) => (
                           <div key={g.term}>
-                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--mauve)]">
+                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--night-80)]">
                               {g.term}
                             </h3>
                             <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
@@ -271,5 +271,4 @@ export const FAQPage = () => {
     </div>
   )
 }
-
 

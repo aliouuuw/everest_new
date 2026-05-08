@@ -57,8 +57,8 @@ export const DiscretionaryMgmtPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Cadre</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Cadre</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Approche et univers d'investissement.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -179,8 +179,8 @@ export const DiscretionaryMgmtPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Avantages</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Avantages</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Pourquoi choisir ce mandat ?
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -214,29 +214,29 @@ export const DiscretionaryMgmtPage = () => {
         <section ref={processSectionRef} className="reveal py-24 md:py-40 bg-[var(--white-smoke)] border-b border-black/10">
           <div className="page-container">
             <div className="mb-20">
-              <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Processus</span>
-              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--mauve)]">
+              <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Processus</span>
+              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--night-80)]">
                 Comment ça fonctionne.
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
               <div className="relative border-t border-[var(--mauve)] pt-8">
-                <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-6">01.</div>
+                <div className="font-primary font-bold text-4xl text-[var(--night-80)] mb-6">01.</div>
                 <h3 className="font-primary font-bold text-xl mb-4 text-[var(--night)]">Ouverture compte</h3>
                 <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Remplissez le formulaire en ligne et signez électroniquement.</p>
               </div>
               <div className="relative border-t border-[var(--mauve)] pt-8">
-                <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-6">02.</div>
+                <div className="font-primary font-bold text-4xl text-[var(--night-80)] mb-6">02.</div>
                 <h3 className="font-primary font-bold text-xl mb-4 text-[var(--night)]">Définition profil</h3>
                 <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Établissez vos objectifs, contraintes et niveau de risque.</p>
               </div>
               <div className="relative border-t border-[var(--mauve)] pt-8">
-                <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-6">03.</div>
+                <div className="font-primary font-bold text-4xl text-[var(--night-80)] mb-6">03.</div>
                 <h3 className="font-primary font-bold text-xl mb-4 text-[var(--night)]">Premier dépôt</h3>
                 <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Effectuez votre premier versement selon vos moyens.</p>
               </div>
               <div className="relative border-t border-[var(--mauve)] pt-8">
-                <div className="font-primary font-bold text-4xl text-[var(--mauve)] mb-6">04.</div>
+                <div className="font-primary font-bold text-4xl text-[var(--night-80)] mb-6">04.</div>
                 <h3 className="font-primary font-bold text-xl mb-4 text-[var(--night)]">Prise de contrôle</h3>
                 <p className="text-[rgba(10, 10, 10, 0.8)] font-light leading-relaxed">Commencez à passer vos ordres via notre plateforme.</p>
               </div>

@@ -126,7 +126,7 @@ export const InvestorProfileInline: React.FC = () => {
             <span className="outils-invest-label font-semibold text-[var(--night-60)] uppercase tracking-wider" style={{ fontFamily: 'var(--font-primary)' }}>
               {step === 'quiz' ? `Question ${currentQuestion + 1} sur ${QUESTIONS.length}` : 'Presque terminé'}
             </span>
-            <span className="outils-invest-label font-bold text-[var(--mauve)]" style={{ fontFamily: 'var(--font-primary)' }}>
+            <span className="outils-invest-label font-bold text-[var(--night-80)]" style={{ fontFamily: 'var(--font-primary)' }}>
               {Math.round(progress)}%
             </span>
           </div>
@@ -171,7 +171,7 @@ export const InvestorProfileInline: React.FC = () => {
 const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
   <div className="text-center py-8">
     <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-[var(--mauve-10)] flex items-center justify-center">
-      <FiTarget size={32} className="text-[var(--mauve)]" />
+      <FiTarget size={32} className="text-[var(--night-80)]" />
     </div>
     <h3 className="font-bold text-xl text-[var(--night)] mb-3" style={{ fontFamily: 'var(--font-primary)' }}>
       Découvrez votre profil d'investisseur
@@ -187,7 +187,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
         { label: 'Résultat direct', icon: <FiLightning /> },
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center">
-          <div className="text-[var(--mauve)] mb-1 opacity-70">{stat.icon}</div>
+          <div className="text-[var(--night-80)] mb-1 opacity-70">{stat.icon}</div>
           <span className="outils-invest-label font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>{stat.label}</span>
         </div>
       ))}
@@ -195,7 +195,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
 
     <button
       onClick={onStart}
-      className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all duration-300 font-semibold text-sm"
+      className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 font-semibold text-sm"
       style={{ fontFamily: 'var(--font-primary)' }}
     >
       Démarrer le test <FiArrowRight size={16} />
@@ -227,7 +227,7 @@ const QuizStep: React.FC<{
     >
       {/* Category indicator */}
       <div className="flex items-center gap-2 mb-6">
-        <span className="outils-invest-label font-semibold text-[var(--mauve)] bg-[var(--mauve-10)] px-3 py-1 rounded-full" style={{ fontFamily: 'var(--font-primary)' }}>
+        <span className="outils-invest-label font-semibold text-[var(--night-80)] bg-[var(--mauve-10)] px-3 py-1 rounded-full" style={{ fontFamily: 'var(--font-primary)' }}>
           {STEP_ICONS[currentCategoryIdx]?.label || 'Profil'}
         </span>
       </div>
@@ -261,7 +261,7 @@ const QuizStep: React.FC<{
                   {isSelected && <FiCheck size={12} className="text-white" />}
                 </div>
                 <span className={`outils-invest-label leading-snug ${
-                  isSelected ? 'text-[var(--mauve)] font-semibold' : 'text-[var(--night-80)]'
+                  isSelected ? 'text-[var(--night-80)] font-semibold' : 'text-[var(--night-80)]'
                 }`} style={{ fontFamily: 'var(--font-primary)' }}>
                   {option.label}
                 </span>
@@ -274,7 +274,7 @@ const QuizStep: React.FC<{
       {questionIndex > 0 && (
         <button
           onClick={onBack}
-          className="mt-6 flex items-center gap-2 outils-invest-label text-[var(--night-60)] hover:text-[var(--mauve)] transition-colors"
+          className="mt-6 flex items-center gap-2 outils-invest-label text-[var(--night-60)] hover:text-[var(--night-80)] transition-colors"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           <FiArrowLeft size={16} /> Retour
@@ -293,7 +293,7 @@ const PersonalStep: React.FC<{
   <div className="py-4">
     <div className="text-center mb-8">
       <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-[var(--mauve-10)] flex items-center justify-center">
-        <FiUser size={28} className="text-[var(--mauve)]" />
+        <FiUser size={28} className="text-[var(--night-80)]" />
       </div>
       <h3 className="font-bold text-xl text-[var(--night)] mb-2" style={{ fontFamily: 'var(--font-primary)' }}>
         Vos informations personnelles
@@ -362,7 +362,7 @@ const PersonalStep: React.FC<{
 
       <button
         type="submit"
-        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all font-semibold text-sm"
+        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all font-semibold text-sm"
         style={{ fontFamily: 'var(--font-primary)' }}
       >
         Continuer le questionnaire <FiArrowRight size={16} />
@@ -389,7 +389,7 @@ const ResultStep: React.FC<{
       {isSubmitting && (
         <div className="flex items-center justify-center gap-2 mb-4 py-2 px-4 rounded-lg bg-[var(--mauve-05)] border border-[var(--mauve-10)]">
           <span className="w-4 h-4 border-2 border-[var(--mauve-30)] border-t-[var(--mauve)] rounded-full animate-spin" />
-          <span className="outils-invest-label text-[var(--mauve)] font-medium" style={{ fontFamily: 'var(--font-primary)' }}>Enregistrement en cours...</span>
+          <span className="outils-invest-label text-[var(--night-80)] font-medium" style={{ fontFamily: 'var(--font-primary)' }}>Enregistrement en cours...</span>
         </div>
       )}
       <div className="mb-6 flex items-center gap-4">
@@ -451,7 +451,7 @@ const ResultStep: React.FC<{
       {/* PDF Report */}
       <ProfileReport result={result} firstName={lead.firstName} lastName={lead.lastName} email={lead.email} generatedAt={generatedAt} />
 
-      <a href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-all font-semibold text-sm w-full" style={{ fontFamily: 'var(--font-primary)' }}>
+      <a href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all font-semibold text-sm w-full" style={{ fontFamily: 'var(--font-primary)' }}>
         Prendre rendez-vous <FiArrowRight size={16} />
       </a>
     </div>

@@ -60,7 +60,7 @@ export const CEOMessagePage = () => {
                     />
                   </div>
                   <h3 className="font-primary font-bold text-2xl mb-2 text-[var(--night)]">Khady Diouf</h3>
-                  <p className="text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase mb-8">Directrice Générale</p>
+                  <p className="text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase mb-8">Directrice Générale</p>
                   
                   <div className="space-y-4 pt-8 border-t border-black/10">
                     <div className="flex items-center justify-between text-sm">

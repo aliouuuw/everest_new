@@ -108,7 +108,7 @@ export const MarketsOpportunities: React.FC = () => {
                   className="h-full w-full transform object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                 />
                 <div className="absolute left-5 top-5 z-20">
-                  <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--mauve)] backdrop-blur-sm">
+                  <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] backdrop-blur-sm">
                     {article.category}
                   </span>
                 </div>
@@ -134,7 +134,7 @@ export const MarketsOpportunities: React.FC = () => {
                 </div>
 
                 <h3
-                  className="mb-3 transition-colors duration-300 group-hover:text-[var(--mauve)]"
+                  className="mb-3 transition-colors duration-300 group-hover:text-[var(--night-80)]"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 700,
@@ -160,7 +160,7 @@ export const MarketsOpportunities: React.FC = () => {
                 </p>
 
                 <span
-                  className="mt-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--mauve)]"
+                  className="mt-auto inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.12em] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--night-80)]"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 600,

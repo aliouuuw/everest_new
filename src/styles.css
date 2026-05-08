@@ -10,7 +10,7 @@
   
   /* Core Brand Palette */
   --jaune-or: #cb9824;
-  --mauve: #461D4C;
+  --mauve: #012d2a;
   --everest-green: #012d2a;
   --night: #0a0a0a;
   
@@ -24,16 +24,16 @@
   --jaune-or-30: rgba(202, 148, 47, 0.3);
   --jaune-or-20: rgba(202, 148, 47, 0.2);
   --jaune-or-10: rgba(202, 148, 47, 0.1);
-  --mauve-80: rgba(70, 29, 76, 0.8);
-  --mauve-60: rgba(70, 29, 76, 0.6);
-  --mauve-40: rgba(70, 29, 76, 0.4);
-  --mauve-30: rgba(70, 29, 76, 0.3);
-  --mauve-20: rgba(70, 29, 76, 0.2);
-  --mauve-15: rgba(70, 29, 76, 0.15);
-  --mauve-10: rgba(70, 29, 76, 0.1);
-  --mauve-05: rgba(70, 29, 76, 0.05);
-  --mauve-light: rgba(70, 29, 76, 0.05);
-  --mauve-glow: rgba(70, 29, 76, 0.12);
+  --mauve-80: rgba(1, 45, 42, 0.8);
+  --mauve-60: rgba(1, 45, 42, 0.6);
+  --mauve-40: rgba(1, 45, 42, 0.4);
+  --mauve-30: rgba(1, 45, 42, 0.3);
+  --mauve-20: rgba(1, 45, 42, 0.2);
+  --mauve-15: rgba(1, 45, 42, 0.15);
+  --mauve-10: rgba(1, 45, 42, 0.1);
+  --mauve-05: rgba(1, 45, 42, 0.05);
+  --mauve-light: rgba(1, 45, 42, 0.05);
+  --mauve-glow: rgba(1, 45, 42, 0.12);
   --everest-green-60: rgba(1, 45, 42, 0.6);
   --everest-green-30: rgba(1, 45, 42, 0.3);
   --everest-green-20: rgba(1, 45, 42, 0.2);
@@ -53,17 +53,17 @@
   /* Atmospheric Surfaces */
   --summit-ivory: #faf8f4;
   --summit-fog: #f0eee9;
-  --summit-haze: rgba(70, 29, 76, 0.04);
-  --summit-depth: rgba(70, 29, 76, 0.08);
+  --summit-haze: rgba(1, 45, 42, 0.04);
+  --summit-depth: rgba(1, 45, 42, 0.08);
   --summit-warm: rgba(202, 148, 47, 0.06);
   --summit-glass: rgba(255, 255, 255, 0.7);
   --summit-glass-strong: rgba(255, 255, 255, 0.85);
 
   /* Command Center Tokens */
   --command-border: rgba(10, 10, 10, 0.06);
-  --command-border-hover: rgba(70, 29, 76, 0.2);
+  --command-border-hover: rgba(1, 45, 42, 0.2);
   --command-surface: #f7f6f3;
-  --command-surface-hover: rgba(70, 29, 76, 0.03);
+  --command-surface-hover: rgba(1, 45, 42, 0.03);
 
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -77,16 +77,16 @@
   --duration-reveal: 900ms;
 
   /* Gradients */
-  --gradient-dark-section: linear-gradient(170deg, #2a1435 0%, #1e1028 40%, #150e1c 100%);
-  --gradient-image-overlay: linear-gradient(180deg, rgba(42,20,53,0.35) 0%, rgba(30,16,40,0.55) 100%);
-  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(70,29,76,0.6) 0%, rgba(21,14,28,0.8) 100%);
+  --gradient-dark-section: linear-gradient(170deg, #012d2a 0%, #062421 40%, #071a18 100%);
+  --gradient-image-overlay: linear-gradient(180deg, rgba(1,45,42,0.35) 0%, rgba(7,26,24,0.55) 100%);
+  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(1,45,42,0.6) 0%, rgba(7,26,24,0.8) 100%);
   --gradient-light-section: linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%);
   --gradient-ivory-section: linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%);
 
   /* Shadows */
   --shadow-card-float: 0 40px 80px rgba(0,0,0,0.3);
-  --shadow-card-lift: 0 8px 24px rgba(70,29,76,0.1);
-  --shadow-card-hover: 0 20px 40px rgba(70,29,76,0.15);
+  --shadow-card-lift: 0 8px 24px rgba(1,45,42,0.1);
+  --shadow-card-hover: 0 20px 40px rgba(1,45,42,0.15);
 
   /* Border Radius */
   --radius-card: 1rem;
@@ -163,7 +163,7 @@ h1, h2 {
   background: var(--pure-white);
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(70, 29, 76, 0.06);
+    0 12px 32px rgba(1,45,42, 0.06);
 }
 
 @utility soft-panel-muted {
@@ -259,7 +259,7 @@ h1, h2 {
   left: 0;
   width: 55%;
   height: 90%;
-  background: radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%);
+  background: radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -271,7 +271,7 @@ h1, h2 {
   right: 0;
   width: 45%;
   height: 70%;
-  background: radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%);
+  background: radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -284,7 +284,7 @@ h1, h2 {
 .section-bg-light h5,
 .section-bg-light h6,
 .section-bg-light .luxury-heading-dark {
-  color: var(--mauve);
+  color: var(--night-80);
 }
 
 .section-bg-light p,
@@ -301,7 +301,7 @@ h1, h2 {
    Exclude a/button elements that carry their own bg (e.g. CTA buttons)
    by wrapping the override in :not(). Only non-interactive elements
    and bare links without a background get inverted.             */
-.section-bg-light .text-white:not(a[class*="bg-"]):not(button[class*="bg-"]) { color: var(--mauve) !important; }
+.section-bg-light .text-white:not(a[class*="bg-"]):not(button[class*="bg-"]) { color: var(--night-80) !important; }
 /* Protect white text inside gold/coloured buttons */
 .section-bg-light a[class*="bg-"] .text-white,
 .section-bg-light a[class*="bg-"] span { color: inherit !important; }
@@ -320,8 +320,8 @@ h1, h2 {
 .section-bg-light .border-white\/20 { border-color: rgba(0,0,0,0.1) !important; }
 
 /* ── Invert white bg utilities to subtle light equivalents ── */
-.section-bg-light .bg-white\/5 { background-color: rgba(70,29,76,0.04) !important; }
-.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(70,29,76,0.03) !important; }
+.section-bg-light .bg-white\/5 { background-color: rgba(1,45,42,0.04) !important; }
+.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(1,45,42,0.03) !important; }
 
 /* ── btn-primary-dark → gold CTA in light sections ── */
 .section-bg-light .btn-primary-dark {
@@ -481,7 +481,7 @@ h1, h2 {
   font-size: clamp(2rem, 2.8vw, 2.2rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--mauve);
+  color: var(--night-80);
 }
 
 .luxury-subheading {
@@ -549,7 +549,7 @@ h1, h2 {
 /* Enhanced Button Styles */
 .btn-primary {
   @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
-  background: var(--mauve);
+  background: var(--jaune-or);
   color: var(--pure-white);
   border: 0;
   transform: translateY(0);
@@ -557,7 +557,7 @@ h1, h2 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(70,29,76,0.3);
+  box-shadow: 0 8px 24px rgba(203,152,36,0.28);
   filter: brightness(1.1);
 }
 
@@ -575,10 +575,10 @@ h1, h2 {
 }
 
 .btn-secondary:hover {
-  background: var(--mauve);
+  background: var(--jaune-or);
   color: var(--pure-white);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(70,29,76,0.2);
+  box-shadow: 0 8px 24px rgba(203,152,36,0.22);
 }
 
 .btn-secondary:active {
@@ -629,7 +629,7 @@ h1, h2 {
 /* Accessible gold-tinted focus rings */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--mauve-20), 0 0 0 1px var(--mauve);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-secondary:focus-visible {
@@ -714,8 +714,8 @@ h1, h2 {
 }
 
 .btn-cta-pill--mauve {
-  border-color: var(--mauve);
-  background: var(--mauve);
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
 }
 
 .btn-cta-pill--mauve .btn-cta-pill__label {
@@ -727,7 +727,7 @@ h1, h2 {
 }
 
 .btn-cta-pill--mauve:hover .btn-cta-pill__label {
-  color: var(--mauve);
+  color: var(--night-80);
 }
 
 /* Mauve / dark card — primary line legible on mauve background */
@@ -757,7 +757,7 @@ h1, h2 {
   background: var(--pure-white);
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.04),
-    0 16px 48px -12px rgba(70, 29, 76, 0.14);
+    0 16px 48px -12px rgba(1,45,42, 0.14);
 }
 
 .cms-editor-dock::after {
@@ -834,14 +834,14 @@ h1, h2 {
 }
 
 .cms-editor-pill--mauveSolid {
-  border-color: var(--mauve);
-  background: var(--mauve);
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
   color: var(--pure-white);
-  box-shadow: 0 6px 20px -6px rgba(70, 29, 76, 0.45);
+  box-shadow: 0 6px 20px -6px rgba(203, 152, 36, 0.45);
 }
 
 .cms-editor-pill--mauveSolid:hover {
-  box-shadow: 0 8px 28px -6px rgba(70, 29, 76, 0.5);
+  box-shadow: 0 8px 28px -6px rgba(203, 152, 36, 0.5);
   filter: brightness(1.04);
 }
 
@@ -879,7 +879,7 @@ h1, h2 {
 }
 
 .cms-editor-pill--goldSolid .cms-editor-pill__disc {
-  background: rgba(70, 29, 76, 0.12);
+  background: rgba(1,45,42, 0.12);
   color: var(--pure-white);
 }
 

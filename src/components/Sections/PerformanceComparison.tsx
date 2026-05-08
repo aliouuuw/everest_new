@@ -172,7 +172,7 @@ export const PerformanceComparison: React.FC = () => {
       <div className="page-container">
         <div className="mb-20">
           <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase block mb-8">Performance</span>
-          <h2 className="font-display-aptos font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-8 text-[var(--mauve)]">
+          <h2 className="font-display-aptos font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mb-8 text-[var(--night-80)]">
             Comparaison des performances.
           </h2>
           <p className="text-lg text-[rgba(10, 10, 10, 0.8)] font-light max-w-2xl">

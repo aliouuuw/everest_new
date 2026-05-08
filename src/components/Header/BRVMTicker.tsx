@@ -65,7 +65,7 @@ export const BRVMTicker: React.FC = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[60] bg-[var(--pure-white)]/95 backdrop-blur supports-[backdrop-filter]:glassmorphism border-b border-black/5 py-2"
+      className="fixed top-0 left-0 right-0 z-[60] bg-[var(--pure-white)] border-b border-black/5 py-2"
       role="region"
       aria-label="BRVM ticker"
     >

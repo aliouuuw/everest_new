@@ -72,9 +72,9 @@ export const AboutPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.mission.badge">Notre raison d'être</EditableText></span>
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.mission.badge">Notre raison d'être</EditableText></span>
                 <h2
-                  className="font-primary font-bold leading-[0.95] tracking-tight mb-0 text-[var(--mauve)]"
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-0 text-[var(--night-80)]"
                   style={sectionTitleStyle}
                 >
                   <EditableText id="about.mission.sectionTitle">Mission & Vision</EditableText>
@@ -84,7 +84,7 @@ export const AboutPage = () => {
               <div className="lg:col-span-7">
                 <div className="border-t border-black/10">
                   <div className="group py-5 md:py-6 border-b border-black/10">
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--night-80)] transition-colors text-[var(--night-80)]">
                       <EditableText id="about.mission.missionTitle">Notre mission</EditableText>
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -92,7 +92,7 @@ export const AboutPage = () => {
                     </p>
                   </div>
                   <div className="group py-5 md:py-6 border-b border-black/10">
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--mauve)] transition-colors text-[var(--mauve)]">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--night-80)] transition-colors text-[var(--night-80)]">
                       <EditableText id="about.mission.visionTitle">Notre vision</EditableText>
                     </h3>
                     <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -163,7 +163,7 @@ export const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="py-10 md:py-12 border-b md:border-b-0 md:border-r border-black/10 md:pr-10 lg:pr-12">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--mauve)]">
+                  <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night-80)]">
                     11
                   </div>
                   <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">ans</div>
@@ -174,7 +174,7 @@ export const AboutPage = () => {
               </div>
               <div className="py-10 md:py-12 border-b md:border-b-0 md:border-r border-black/10 md:px-10 lg:px-12">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--mauve)]">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night-80)]">
                     500
                   </div>
                   <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
@@ -185,7 +185,7 @@ export const AboutPage = () => {
               </div>
               <div className="py-10 md:py-12 md:pl-10 lg:pl-12">
                 <div className="flex items-baseline gap-2 mb-4">
-                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--mauve)]">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night-80)]">
                     200
                   </div>
                   <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
@@ -201,9 +201,9 @@ export const AboutPage = () => {
         {/* ─── 5. Histoire — Timeline ─── */}
         <section ref={histoireRef} id="histoire" className="reveal py-12 md:py-20 border-b border-black/10">
           <div className="page-container">
-            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.histoire.badge">Parcours</EditableText></span>
+            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.histoire.badge">Parcours</EditableText></span>
             <h2
-              className="font-primary font-bold leading-[0.95] tracking-tight max-w-3xl mb-7 md:mb-8 text-[var(--mauve)]"
+              className="font-primary font-bold leading-[0.95] tracking-tight max-w-3xl mb-7 md:mb-8 text-[var(--night-80)]"
               style={sectionTitleStyle}
             >
               <EditableText id="about.histoire.title">Notre histoire</EditableText>
@@ -212,7 +212,7 @@ export const AboutPage = () => {
             <div className="border-t border-black/10">
               {timelineItems.map((item) => (
                 <div key={item.year} className="group py-5 md:py-6 border-b border-black/10 flex flex-col md:flex-row gap-3 md:gap-8">
-                  <div className="font-primary font-bold text-2xl text-[var(--mauve)]/50 shrink-0">
+                  <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">
                     {item.year}
                   </div>
                   <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-2xl group-hover:text-[var(--night)] transition-colors">
@@ -229,9 +229,9 @@ export const AboutPage = () => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.equipe.badge">Leadership</EditableText></span>
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.equipe.badge">Leadership</EditableText></span>
                 <h2
-                  className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
+                  className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
                   style={sectionTitleStyle}
                 >
                   <EditableText id="about.equipe.title">Équipe dirigeante</EditableText>
@@ -262,21 +262,21 @@ export const AboutPage = () => {
           {/* Soft mauve orb — top right */}
           <div
             className="absolute top-0 right-0 w-[50%] h-[80%] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at top right, rgba(70,29,76,0.07) 0%, rgba(203,152,36,0.03) 45%, transparent 65%)' }}
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(1,45,42,0.07) 0%, rgba(203,152,36,0.03) 45%, transparent 65%)' }}
           />
           {/* Soft gold orb — bottom left */}
           <div
             className="absolute bottom-0 left-0 w-[45%] h-[75%] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 50%, transparent 70%)' }}
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 50%, transparent 70%)' }}
           />
 
           <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
               <div className="lg:col-span-4">
                 <div className="sticky top-28 md:top-32">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-4"><EditableText id="about.conformite.badge">Réglementation</EditableText></span>
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.conformite.badge">Réglementation</EditableText></span>
                   <h2
-                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--mauve)]"
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
                     style={sectionTitleStyle}
                   >
                     <EditableText id="about.conformite.title">Conformité & Sécurité</EditableText>
@@ -288,28 +288,28 @@ export const AboutPage = () => {
                 <div className="space-y-6 md:space-y-8">
                   <div>
                     <div className="w-8 h-px bg-[var(--jaune-or)] mb-4 md:mb-5" />
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--mauve)]">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night-80)]">
                       Cadre réglementaire
                     </h3>
                     <div className="space-y-2 text-[rgba(10, 10, 10, 0.6)]">
                       <div className="flex justify-between py-2.5 border-b border-black/10">
                         <span>Licence AMF-UMOA</span>
-                        <span className="font-primary font-bold text-[var(--mauve)]">SGI/DA/2016/60</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">SGI/DA/2016/60</span>
                       </div>
                       <div className="flex justify-between py-2.5 border-b border-black/10">
                         <span>Date d'obtention</span>
-                        <span className="font-primary font-bold text-[var(--mauve)]">30 mars 2016</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">30 mars 2016</span>
                       </div>
                       <div className="flex justify-between py-2.5 border-b border-black/10">
                         <span>Juridiction</span>
-                        <span className="font-primary font-bold text-[var(--mauve)]">UEMOA</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">UEMOA</span>
                       </div>
                     </div>
                   </div>
 
                   <div>
                     <div className="w-8 h-px bg-[var(--jaune-or)] mb-4 md:mb-5" />
-                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--mauve)]">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night-80)]">
                       Contrôles & Sécurité
                     </h3>
                     <ul className="space-y-3 text-[rgba(10, 10, 10, 0.6)]">

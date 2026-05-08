@@ -74,7 +74,7 @@ export const NewsSection: React.FC = () => {
               Toutes les actualités
               <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--mauve)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
             </span>
-            <FiArrowRight className="text-xs text-[var(--night-60)] group-hover:text-[var(--mauve)] transition-colors duration-500" />
+            <FiArrowRight className="text-xs text-[var(--night-60)] group-hover:text-[var(--night-80)] transition-colors duration-500" />
           </Link>
         </div>
 
@@ -96,7 +96,7 @@ export const NewsSection: React.FC = () => {
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 />
                 <div className="absolute top-5 left-5 z-20">
-                  <span className="inline-block px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--mauve)] bg-white/90 backdrop-blur-sm border border-[var(--mauve-15)]">
+                  <span className="inline-block px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] bg-white/90 backdrop-blur-sm border border-[var(--mauve-15)]">
                     {article.category}
                   </span>
                 </div>
@@ -115,7 +115,7 @@ export const NewsSection: React.FC = () => {
                 </div>
 
                 <h3
-                  className="mb-3 transition-colors duration-300 group-hover:text-[var(--mauve)]"
+                  className="mb-3 transition-colors duration-300 group-hover:text-[var(--night-80)]"
                   style={{
                     fontFamily: 'var(--font-primary)',
                     fontWeight: 700,
@@ -141,7 +141,7 @@ export const NewsSection: React.FC = () => {
                 </p>
 
                 <span
-                  className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase group-hover:text-[var(--mauve)] group-hover:gap-3 transition-all duration-300 mt-auto"
+                  className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase group-hover:text-[var(--night-80)] group-hover:gap-3 transition-all duration-300 mt-auto"
                   style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night)' }}
                 >
                   Lire l'article

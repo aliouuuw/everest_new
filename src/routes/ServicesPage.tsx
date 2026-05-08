@@ -32,11 +32,11 @@ export const ServicesPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
               <div className="md:col-span-8">
                 <div className="flex items-center gap-4 mb-12">
-                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--mauve)]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--night-80)]">
                     <EditableText id="services.hero.badge">Services d'investissement</EditableText>
                   </span>
                 </div>
-                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--mauve)]">
+                <h1 className="font-primary font-bold text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8 text-[var(--night-80)]">
                   <EditableText id="services.hero.title">Votre partenaire pour investir sur la BRVM.</EditableText>
                 </h1>
               </div>

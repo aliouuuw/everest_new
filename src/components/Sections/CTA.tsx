@@ -64,7 +64,7 @@ export const CTA: React.FC<{
             )}
             <a
               href={primaryHref}
-              className="group inline-flex items-center justify-center gap-3 rounded-full border-2 border-[var(--mauve)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-[var(--mauve)] transition-all duration-300 hover:bg-[var(--mauve)] hover:text-white sm:justify-start"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#012d2a] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#014542] hover:shadow-lg sm:justify-start"
             >
               <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
               <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />

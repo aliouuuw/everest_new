@@ -80,7 +80,7 @@ function AnimatedStatRow({ prefix, value, suffix, unit, label, icon: Icon, delay
       </div>
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex items-baseline gap-2">
-          <span className="font-primary text-3xl font-bold leading-none tracking-tight text-[var(--mauve)] numeric-tabular md:text-[2.25rem]">
+          <span className="font-primary text-3xl font-bold leading-none tracking-tight text-[var(--night-80)] numeric-tabular md:text-[2.25rem]">
             {prefix}
             {count}
             {suffix}
@@ -121,7 +121,7 @@ export const ValueProps: React.FC = () => {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(180deg, transparent 55%, rgba(70,29,76,0.35) 100%)',
+                  'linear-gradient(180deg, transparent 55%, rgba(1,45,42,0.35) 100%)',
               }}
             />
           </div>

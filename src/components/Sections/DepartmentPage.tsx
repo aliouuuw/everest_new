@@ -13,7 +13,7 @@ const formatHeadline = (text: string) => {
   const parts = text.split('.').filter(p => p.trim() !== '')
   if (parts.length === 0) return text
 
-  return <span style={{ color: 'var(--mauve)' }}>{text}</span>
+  return <span style={{ color: 'var(--night-80)' }}>{text}</span>
 }
 
 const SLUG_TO_PAGEKEY: Record<string, string> = {
@@ -129,7 +129,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               {metrics.map((metric, i) => (
                 <div key={i} className={`py-16 md:py-24 ${i < metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-black/10' : ''} ${i === 1 ? 'md:px-16' : i === 2 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="flex items-baseline gap-2 mb-4">
-                    <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--mauve)]">
+                    <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night-80)]">
                       {metric.value}
                     </div>
                     {metric.suffix && (
@@ -152,8 +152,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Audience cible</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Audience cible</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Conçu pour vos enjeux spécifiques.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
@@ -165,11 +165,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="border-t border-black/10">
                   {target_personas.map((persona, i) => (
                     <div key={i} className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                      <div className="font-primary font-bold text-2xl text-[var(--mauve)]/50 shrink-0">
+                      <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">
                         {String(i + 1).padStart(2, '0')}.
                       </div>
                       <div>
-                        <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--mauve)] transition-colors">
+                        <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--night-80)] transition-colors">
                           {persona.label}
                         </h3>
                         <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
@@ -224,8 +224,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         <section id="solutions" ref={solutionsRef} className="reveal py-24 md:py-40 border-b border-black/10">
           <div className="page-container">
             <div className="mb-20 md:mb-32">
-              <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Nos solutions</span>
-              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--mauve)]">
+              <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Nos solutions</span>
+              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--night-80)]">
                 Une expertise financière sur mesure.
               </h2>
             </div>
@@ -242,7 +242,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                         activeSolution === i ? 'text-[var(--night)]' : 'text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)]'
                       }`}
                     >
-                      <span className={`font-primary font-bold text-sm ${activeSolution === i ? 'text-[var(--mauve)]' : 'text-black/30'}`}>
+                      <span className={`font-primary font-bold text-sm ${activeSolution === i ? 'text-[var(--night-80)]' : 'text-black/30'}`}>
                         {String(solution.solution_number).padStart(2, '0')}
                       </span>
                       <h3 className="font-primary font-bold text-xl md:text-2xl">
@@ -267,7 +267,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                     <div className="space-y-12">
                       {expertise_solutions[activeSolution].client_problem && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase mb-4">
                             L'enjeu
                           </div>
                           <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light">
@@ -278,7 +278,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       
                       {expertise_solutions[activeSolution].value_proposition && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase mb-4">
                             Notre réponse
                           </div>
                           <p className="text-[var(--night)] leading-relaxed text-lg font-medium">
@@ -346,8 +346,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Méthodologie</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Méthodologie</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Un processus rigoureux.
                 </h2>
                 {approach_methodology && !method_steps && (
@@ -362,7 +362,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                     {method_steps.map((step, i) => (
                       <div key={i} className="relative">
-                        <div className="font-primary font-bold text-4xl text-[var(--mauve)]/50 mb-6">
+                        <div className="font-primary font-bold text-4xl text-[var(--night-80)]/50 mb-6">
                           {String(i + 1).padStart(2, '0')}.
                         </div>
                         <h3 className="font-primary font-bold text-2xl mb-4 text-[var(--night)]">
@@ -387,8 +387,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Interventions</span>
-                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--mauve)]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Interventions</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--night-80)]">
                   Périmètre d'action.
                 </h2>
               </div>
@@ -396,7 +396,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <ul className="border-t border-black/10">
                   {operations_selected.map((operation, i) => (
                     <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-primary font-bold text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
-                      <FiArrowRight className="text-[var(--mauve)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <FiArrowRight className="text-[var(--night-80)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       {operation}
                     </li>
                   ))}
@@ -412,18 +412,18 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         {/* Soft mauve orb — top left */}
         <div
           className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at top left, rgba(70,29,76,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
         />
         {/* Soft gold orb — bottom right */}
         <div
           className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(70,29,76,0.04) 45%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%)' }}
         />
 
         <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--mauve)]">
+              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--night-80)]">
                 <EditableText id={`${slug}.cta.text`}>{cta_text}</EditableText>
               </h2>
               <p className="text-xl md:text-2xl text-[rgba(10, 10, 10, 0.6)] font-light max-w-2xl">

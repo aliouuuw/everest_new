@@ -187,14 +187,14 @@ export const Insights: React.FC = () => {
                 download
                 className="group flex items-start gap-4 rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-5 transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] md:p-6"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--mauve)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--night-80)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
                   <FiFileText className="text-base" aria-hidden />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="mb-1 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
                     Note de recherche · {FREQUENCY_LABELS[it.frequency]}
                   </p>
-                  <h4 className="mb-2 font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--mauve)] md:text-base">
+                  <h4 className="mb-2 font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--night-80)] md:text-base">
                     {it.title}
                   </h4>
                   <div className="flex items-center gap-3 font-primary text-[11px] font-light text-[var(--night-40)]">
@@ -216,7 +216,7 @@ export const Insights: React.FC = () => {
                   </div>
                 </div>
                 <FiArrowRight
-                  className="mt-2 shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--mauve)]"
+                  className="mt-2 shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--night-80)]"
                   aria-hidden
                 />
               </a>

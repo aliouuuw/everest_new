@@ -317,12 +317,12 @@ export const ArticleForm = () => {
                 >
                   {isUploading ? (
                     <>
-                      <FaSpinner className="w-6 h-6 text-[var(--mauve)] animate-spin" />
+                      <FaSpinner className="w-6 h-6 text-[var(--night-80)] animate-spin" />
                       <span className="text-xs text-secondary">Upload… {progress}%</span>
                     </>
                   ) : (
                     <>
-                      <FaCloudUploadAlt className="w-6 h-6 text-[var(--mauve)]/60" />
+                      <FaCloudUploadAlt className="w-6 h-6 text-[var(--night-80)]/60" />
                       <span className="text-xs text-secondary text-center">Glissez une image ici ou cliquez pour parcourir</span>
                     </>
                   )}
@@ -364,7 +364,7 @@ export const ArticleForm = () => {
               </div>
               <div className="flex flex-wrap gap-2">
                 {formData.tags.map(tag => (
-                  <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--mauve)]/10 text-[var(--mauve)] text-xs rounded-full">
+                  <span key={tag} className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--mauve)]/10 text-[var(--night-80)] text-xs rounded-full">
                     {tag}
                     <button type="button" onClick={() => setFormData(p => ({ ...p, tags: p.tags.filter(t => t !== tag) }))} className="hover:text-red-500">×</button>
                   </span>

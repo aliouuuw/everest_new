@@ -107,7 +107,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
               to={item.to}
               {...(item.search ? { search: item.search } : {})}
               {...(item.hash ? { hash: item.hash } : {})}
-              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--mauve-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
+              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--night-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
               style={{ fontFamily: 'var(--font-primary)', }}
             >
               {item.label}
@@ -227,8 +227,8 @@ export const Header: React.FC = () => {
   // Header background: darker mauve/purple on all pages
   const headerBg = isLightBackgroundPage
     ? shouldUseScrolledStyle
-      ? 'bg-[#2a1435]'
-      : 'bg-[#2a1435]'
+      ? 'bg-[#012d2a]'
+      : 'bg-[#012d2a]'
     : shouldUseScrolledStyle
       ? 'bg-[#6c786eba]/90 backdrop-blur-xl'
       : '';
@@ -460,7 +460,7 @@ export const Header: React.FC = () => {
               >
                 <span
                   className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--night)' }}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
                 >
                   Ouvrir un compte
                 </span>

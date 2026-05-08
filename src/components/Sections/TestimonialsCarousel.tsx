@@ -238,14 +238,14 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
             <>
               <button
                 onClick={prevSlide}
-                className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--mauve)]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:text-[var(--night)] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
+                className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--jaune-or)]/90 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[#b5832a] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Previous testimonials"
               >
                 <FiChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--mauve)]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[var(--jaune-or)] hover:text-[var(--night)] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
+                className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--jaune-or)]/90 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[#b5832a] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Next testimonials"
               >
                 <FiChevronRight className="w-5 h-5" />

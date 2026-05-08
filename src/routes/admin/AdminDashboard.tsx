@@ -38,7 +38,7 @@ export const AdminDashboard = () => {
       description: 'Textes des pages vitrine (hero, sections, CTA)',
       icon: FaGlobe,
       href: '/admin/site-content',
-      color: 'bg-[var(--mauve)] hover:bg-[var(--mauve)]',
+      color: 'bg-[var(--jaune-or)] hover:bg-[#b5832a]',
     },
     {
       title: 'Create Publication',

@@ -201,7 +201,7 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(180deg, transparent 55%, rgba(70,29,76,0.35) 100%)',
+                  'linear-gradient(180deg, transparent 55%, rgba(1,45,42,0.35) 100%)',
               }}
             />
           </div>
@@ -242,7 +242,7 @@ const ExpertiseSection: React.FC<{ expertise: Expertise; imageLeft: boolean }> =
                   key={b}
                   className="group flex items-center gap-3 py-5 md:gap-4 md:py-6 hover:pl-4 transition-all duration-300"
                 >
-                  <HiArrowRight className="text-[var(--mauve)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                  <HiArrowRight className="text-[var(--night-80)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   <span className="font-primary text-sm font-light leading-relaxed text-[var(--night-80)] md:text-base">
                     <EditableText id={`expertises.${expertise.id}.bullet${idx + 1}`}>
                       {b}

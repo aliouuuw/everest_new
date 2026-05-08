@@ -132,8 +132,8 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
       <div className="page-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           <div className="lg:col-span-4">
-            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">FAQ</span>
-            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--mauve)]">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">FAQ</span>
+            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
               Questions fréquentes.
             </h2>
             <p className="text-lg text-[rgba(10,10,10,0.8)] font-light mb-12">
@@ -141,10 +141,10 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
             </p>
 
             {/* Contact CTA */}
-            <div className="border border-[var(--mauve)]/10 p-6 rounded-2xl hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] transition-all duration-300">
+            <div className="border border-[var(--mauve)]/10 p-6 rounded-2xl hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-[var(--mauve-10)] flex items-center justify-center shrink-0">
-                  <FiHelpCircle className="text-[var(--mauve)] text-xl" />
+                  <FiHelpCircle className="text-[var(--night-80)] text-xl" />
                 </div>
                 <div>
                   <div className="font-primary font-bold text-lg text-[var(--night)] mb-1">Vous avez d'autres questions ?</div>
@@ -169,15 +169,15 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
                 >
                   <button
                     onClick={() => toggleItem(index)}
-                    className="w-full py-6 text-left flex items-center justify-between hover:text-[var(--mauve)] transition-colors group"
+                    className="w-full py-6 text-left flex items-center justify-between hover:text-[var(--night-80)] transition-colors group"
                   >
-                    <h3 className="font-primary font-bold text-xl text-[var(--night)] group-hover:text-[var(--mauve)] transition-colors pr-8">
+                    <h3 className="font-primary font-bold text-xl text-[var(--night)] group-hover:text-[var(--night-80)] transition-colors pr-8">
                       {faq.question}
                     </h3>
                     <div className={`transform transition-transform duration-200 flex-shrink-0 ${
                       openItems.has(index) ? 'rotate-180' : ''
                     }`}>
-                      <FiChevronDown className="w-5 h-5 text-[var(--mauve)]" />
+                      <FiChevronDown className="w-5 h-5 text-[var(--night-80)]" />
                     </div>
                   </button>
 

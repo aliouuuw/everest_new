@@ -214,7 +214,7 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
   return (
     <div
       ref={cardRef}
-      className="border border-black/10 p-8 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
+      className="border border-black/10 p-8 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -270,7 +270,7 @@ const CryptoAssetRow: React.FC<{ asset: CryptoAsset; delay?: number }> = ({ asse
 
         {/* Name & Symbol */}
         <div className="col-span-3 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[var(--mauve-10)] flex items-center justify-center text-[var(--mauve)]">
+          <div className="w-8 h-8 rounded-full bg-[var(--mauve-10)] flex items-center justify-center text-[var(--night-80)]">
             <span className="font-bold text-[10px]">{asset.symbol.slice(0, 3)}</span>
           </div>
           <div>
@@ -329,7 +329,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
   return (
     <div
       ref={cardRef}
-      className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
+      className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-center gap-2 mb-6">
@@ -339,7 +339,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
         {assets.map((asset, index) => (
           <div key={asset.symbol} className="flex items-center justify-between py-2 border-b border-[var(--mauve)]/5 last:border-0 hover:bg-[var(--mauve)]/5 px-2 -mx-2 rounded-lg transition-colors">
             <div className="flex items-center gap-3">
-              <span className="text-[var(--mauve)]/50 font-mono text-xs font-bold">#{index + 1}</span>
+              <span className="text-[var(--night-80)]/50 font-mono text-xs font-bold">#{index + 1}</span>
               <div>
                 <div className="font-primary font-bold text-[var(--night)] text-sm">{asset.symbol}</div>
                 <div className="text-[var(--night-60)] text-xs font-medium">{formatPrice(asset.price)}</div>
@@ -493,7 +493,7 @@ export const BoursePage: React.FC = () => {
                 {/* Header with controls */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                   <div>
-                    <h2 className="font-primary font-bold text-3xl text-[var(--mauve)]"><EditableText id="bourse.assets.title">Cours des Actions BRVM</EditableText></h2>
+                    <h2 className="font-primary font-bold text-3xl text-[var(--night-80)]"><EditableText id="bourse.assets.title">Cours des Actions BRVM</EditableText></h2>
                     <p className="text-[var(--night-60)] font-medium mt-1"><EditableText id="bourse.assets.subtitle">Données de marché temps réel</EditableText></p>
                   </div>
 
@@ -504,8 +504,8 @@ export const BoursePage: React.FC = () => {
                         onClick={() => setFilterBy('all')}
                         className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all border ${
                           filterBy === 'all'
-                            ? 'bg-[var(--mauve)] text-white border-[var(--mauve)]'
-                            : 'bg-transparent text-[var(--night-60)] border-black/10 hover:border-[var(--mauve)] hover:text-[var(--mauve)]'
+                            ? 'bg-[var(--jaune-or)] text-white border-[var(--jaune-or)]'
+                            : 'bg-transparent text-[var(--night-60)] border-black/10 hover:border-[var(--mauve)] hover:text-[var(--night-80)]'
                         }`}
                       >
                         Toutes
@@ -571,7 +571,7 @@ export const BoursePage: React.FC = () => {
               </div>
 
               {/* Market Insights */}
-              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] transition-all duration-300">
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
                 <div className="flex items-center gap-3 mb-6">
                   <h3 className="font-primary font-bold text-[var(--night)] text-xl">Analyse Marché</h3>
                 </div>
@@ -586,20 +586,20 @@ export const BoursePage: React.FC = () => {
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="text-[var(--night-60)] font-medium">Secteur Dominant</span>
-                    <span className="text-[var(--mauve)] font-bold bg-[var(--mauve-10)] px-2 py-0.5 rounded-full">Banques</span>
+                    <span className="text-[var(--night-80)] font-bold bg-[var(--mauve-10)] px-2 py-0.5 rounded-full">Banques</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Actions */}
-              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(70,29,76,0.06)] transition-all duration-300">
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
                 <h3 className="font-primary font-bold text-[var(--night)] text-xl mb-6">Actions Rapides</h3>
                 <div className="space-y-3">
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--mauve)] hover:bg-[var(--night)] text-white transition-colors font-bold text-sm tracking-wide">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-colors font-bold text-sm tracking-wide">
                     <FiEye className="w-4 h-4" />
                     Liste de Surveillance
                   </button>
-                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-[var(--mauve)]/20 hover:border-[var(--mauve)] hover:bg-[var(--mauve-10)] text-[var(--mauve)] transition-colors font-bold text-sm tracking-wide">
+                  <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-[var(--jaune-or)]/30 hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)] hover:text-white text-[var(--night-80)] transition-colors font-bold text-sm tracking-wide">
                     <FiBarChart className="w-4 h-4" />
                     Portefeuille
                   </button>
@@ -612,5 +612,3 @@ export const BoursePage: React.FC = () => {
     </div>
   )
 }
-
-

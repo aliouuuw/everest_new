@@ -98,7 +98,7 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--mauve)]/10">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--mauve-10)' }}>
-              <FiFileText className="text-[var(--mauve)]" size={18} />
+              <FiFileText className="text-[var(--night-80)]" size={18} />
             </div>
             <div className="min-w-0">
               <h3 className="font-primary font-bold text-base text-[var(--night)] truncate">{pub.title}</h3>
@@ -192,7 +192,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
   }, [pub.fileUrl])
 
   return (
-    <article className="group relative flex flex-col h-full border border-[var(--mauve)]/10 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(70,29,76,0.08)] hover:border-[var(--mauve)]/20">
+    <article className="group relative flex flex-col h-full border border-[var(--mauve)]/10 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(1,45,42,0.08)] hover:border-[var(--mauve)]/20">
       {/* PDF visual preview area */}
       <button
         type="button"
@@ -217,7 +217,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
               <div className="w-5 h-0.5 bg-[var(--mauve)]/10 rounded mb-1" />
               <div className="w-7 h-0.5 bg-[var(--mauve)]/15 rounded" />
             </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--mauve)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300">
               <FiEye size={12} />
               Aperçu
             </span>
@@ -242,7 +242,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
           <span>· {pub.fileSize}</span>
         </div>
 
-        <h3 className="font-primary font-bold text-lg text-[var(--night)] mb-2 leading-snug group-hover:text-[var(--mauve)] transition-colors duration-300">
+        <h3 className="font-primary font-bold text-lg text-[var(--night)] mb-2 leading-snug group-hover:text-[var(--night-80)] transition-colors duration-300">
           {pub.title}
         </h3>
         <p className="text-sm text-[var(--night)]/60 leading-relaxed font-primary mb-6 flex-1">
@@ -400,7 +400,7 @@ export const PublicationsPage = () => {
           <div ref={filtersRef} className="reveal flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Search */}
             <div className="relative w-full sm:max-w-sm">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--mauve)]/40" size={16} />
+              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-80)]/40" size={16} />
               <input
                 type="text"
                 placeholder="Rechercher une revue..."
@@ -421,8 +421,8 @@ export const PublicationsPage = () => {
                     onClick={() => goToFilter(cat)}
                     className={`px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow ${
                       isActive
-                        ? 'bg-[var(--mauve)] text-white border-[var(--mauve)]'
-                        : 'bg-white text-[var(--mauve)] border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'
+                        ? 'bg-[var(--jaune-or)] text-white border-[var(--jaune-or)]'
+                        : 'bg-white text-[var(--night-80)] border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'
                     }`}
                     aria-pressed={isActive}
                   >
@@ -466,7 +466,7 @@ export const PublicationsPage = () => {
           {filtered.length === 0 ? (
             <div className="text-center py-20">
               <div className="w-16 h-16 mx-auto mb-4 bg-[var(--mauve-10)] rounded-full flex items-center justify-center">
-                <FiFileText className="w-7 h-7 text-[var(--mauve)]" />
+                <FiFileText className="w-7 h-7 text-[var(--night-80)]" />
               </div>
               <h3 className="text-lg font-primary font-bold text-[var(--night)] mb-2">Aucune publication trouvée</h3>
               <p className="text-sm text-[var(--night)]/50 font-primary">Essayez de modifier vos filtres ou votre recherche.</p>

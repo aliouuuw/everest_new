@@ -103,7 +103,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
     }
     return (
       <span className={`text-sm font-bold ${
-        currentService === service ? 'text-[var(--mauve)]' : 'text-[var(--night)]'
+        currentService === service ? 'text-[var(--night-80)]' : 'text-[var(--night)]'
       }`}>
         {value}
       </span>
@@ -139,8 +139,8 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   const content = (
     <div className={`${variant === 'modal' ? 'p-6' : 'page-container'}`}>
       <div className="mb-20 text-center">
-        <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--mauve)] uppercase inline-block mb-8">Comparaison des services</span>
-        <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mx-auto text-[var(--mauve)]">
+        <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Comparaison des services</span>
+        <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mx-auto text-[var(--night-80)]">
           Choisissez le service qui vous convient.
         </h2>
       </div>
@@ -162,7 +162,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
               </div>
               <h3 className="font-primary font-bold text-xl">{getServiceTitle(service)}</h3>
               {currentService === service && (
-                <span className="ml-auto text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--mauve)] text-white px-3 py-1 rounded-full">
+                <span className="ml-auto text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--jaune-or)] text-white px-3 py-1 rounded-full">
                   Actif
                 </span>
               )}
@@ -206,7 +206,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
                   </div>
                   <span className="font-primary font-bold text-xl">{getServiceTitle(service)}</span>
                   {currentService === service && (
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--mauve)] text-white px-4 py-1.5 rounded-full">
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--jaune-or)] text-white px-4 py-1.5 rounded-full">
                       Actif
                     </span>
                   )}

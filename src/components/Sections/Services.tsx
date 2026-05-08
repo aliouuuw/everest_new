@@ -114,7 +114,7 @@ export const Services: React.FC = () => {
                 </EditableText>
               </PillBadge>
             </div>
-            <h2 className="luxury-heading" style={{ color: 'var(--everest-green)' }}>
+            <h2 className="luxury-heading" style={{ color: 'var(--night-80)' }}>
               <EditableText id="home.services.title" as="span">
                 Nos expertises — marchés &amp; patrimoine.
               </EditableText>
@@ -167,10 +167,10 @@ export const Services: React.FC = () => {
                   />
 
                   <div className="mb-10 flex items-center justify-between gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--everest-green-10)] bg-[var(--everest-green-05)] text-[var(--everest-green)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--everest-green-10)] bg-[var(--everest-green-05)] text-[var(--night-80)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]">
                       <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
                     </div>
-                    <span className="font-primary text-xs font-bold tracking-[0.16em] text-[var(--everest-green-30)] transition-colors duration-500 group-hover:text-white/35">
+                    <span className="font-primary text-xs font-bold tracking-[0.16em] text-[var(--night-40)] transition-colors duration-500 group-hover:text-white/35">
                       {s.index}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export const Services: React.FC = () => {
                     {s.kicker}
                   </p>
 
-                  <h3 className="mb-4 font-primary text-xl font-bold leading-tight tracking-tight text-[var(--everest-green)] transition-colors duration-500 group-hover:text-white md:text-2xl">
+                  <h3 className="mb-4 font-primary text-xl font-bold leading-tight tracking-tight text-[var(--night-80)] transition-colors duration-500 group-hover:text-white md:text-2xl">
                     {s.title}
                   </h3>
 
@@ -187,7 +187,7 @@ export const Services: React.FC = () => {
                     {s.bullets.map((bullet) => (
                       <li key={bullet} className="flex gap-2.5 pl-0.5">
                         <span
-                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--everest-green)] transition-colors duration-500 group-hover:bg-[var(--jaune-or)]"
+                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--night-80)] transition-colors duration-500 group-hover:bg-[var(--jaune-or)]"
                           aria-hidden
                         />
                         <span>{bullet}</span>
@@ -195,7 +195,7 @@ export const Services: React.FC = () => {
                     ))}
                   </ul>
 
-                  <span className="mt-auto inline-flex items-center gap-2 font-primary text-sm font-semibold text-[var(--everest-green)] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--jaune-or)]">
+                  <span className="mt-auto inline-flex items-center gap-2 font-primary text-sm font-semibold text-[var(--night-80)] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--jaune-or)]">
                     Découvrir l&apos;expertise
                     <FiArrowRight className="text-base opacity-80 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </span>

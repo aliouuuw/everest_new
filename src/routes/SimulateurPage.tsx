@@ -73,7 +73,7 @@ export const SimulateurPage: React.FC = () => {
                   }`}
                   style={{ fontFamily: 'var(--font-primary)' }}
                 >
-                  <span className={isActive ? 'text-[var(--mauve)]' : 'text-[var(--night-40)] group-hover:text-[var(--night-60)]'}>
+                  <span className={isActive ? 'text-[var(--night-80)]' : 'text-[var(--night-40)] group-hover:text-[var(--night-60)]'}>
                     {tab.icon}
                   </span>
                   {tab.label}

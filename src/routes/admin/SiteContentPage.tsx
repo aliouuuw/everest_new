@@ -342,7 +342,7 @@ export function SiteContentPage() {
         <p className="rounded-xl border border-dashed border-[var(--night)]/15 bg-[var(--white-smoke)]/50 p-6 text-sm text-[var(--night-60)]">
           Aucun champ éditable n’est enregistré pour cette page. Ajoutez des
           entrées dans{' '}
-          <code className="rounded bg-[var(--mauve-05)] px-1.5 py-0.5 font-mono text-xs text-[var(--mauve)]">
+          <code className="rounded bg-[var(--mauve-05)] px-1.5 py-0.5 font-mono text-xs text-[var(--night-80)]">
             src/cms/registry.ts
           </code>
           .
@@ -362,7 +362,7 @@ export function SiteContentPage() {
             open
             className="group rounded-2xl border border-[var(--night)]/10 bg-white/90 shadow-sm"
           >
-            <summary className="cursor-pointer list-none rounded-t-2xl border-b border-[var(--night)]/5 bg-[var(--summit-ivory)] px-4 py-3 font-primary text-xs font-bold uppercase tracking-[0.18em] text-[var(--mauve)] marker:content-none [&::-webkit-details-marker]:hidden">
+            <summary className="cursor-pointer list-none rounded-t-2xl border-b border-[var(--night)]/5 bg-[var(--summit-ivory)] px-4 py-3 font-primary text-xs font-bold uppercase tracking-[0.18em] text-[var(--night-80)] marker:content-none [&::-webkit-details-marker]:hidden">
               <span className="flex items-center justify-between gap-2">
                 {section}
                 <span className="text-[10px] font-normal normal-case tracking-normal text-[var(--night-40)]">
@@ -393,7 +393,7 @@ export function SiteContentPage() {
                   >
                     <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
                       <div>
-                        <label className="font-primary text-sm font-semibold text-[var(--mauve)]">
+                        <label className="font-primary text-sm font-semibold text-[var(--night-80)]">
                           {entry.label}
                         </label>
                         <div className="mt-0.5 break-all font-mono text-[10px] leading-snug text-[var(--night-20)]">
@@ -467,7 +467,7 @@ export function SiteContentPage() {
                           type="button"
                           onClick={() => handleReset(entry)}
                           disabled={field.saving || override === undefined}
-                          className="rounded-full border border-[var(--mauve-20)] bg-[var(--pure-white)] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--mauve)] transition-all hover:border-[var(--mauve)] hover:bg-[var(--mauve)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--mauve-20)] disabled:hover:bg-[var(--pure-white)] disabled:hover:text-[var(--mauve)]"
+                          className="rounded-full border border-[var(--jaune-or)]/30 bg-[var(--pure-white)] px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--night-80)] transition-all hover:border-[var(--jaune-or)] hover:bg-[var(--jaune-or)] hover:text-[var(--pure-white)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[var(--jaune-or)]/30 disabled:hover:bg-[var(--pure-white)] disabled:hover:text-[var(--night-80)]"
                         >
                           Réinitialiser
                         </button>
