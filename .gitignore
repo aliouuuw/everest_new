@@ -7,3 +7,10 @@ count.txt
 .env
 .nitro
 .tanstack
+*.tsbuildinfo
+
+# Migration apps
+apps/web/dist
+apps/web/.astro
+apps/cms/.next
+apps/cms/media

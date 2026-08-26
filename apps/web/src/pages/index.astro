@@ -1,0 +1,43 @@
+---
+import '../styles/global.css'
+
+const payloadUrl = import.meta.env.PAYLOAD_URL || 'http://localhost:3001'
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Everest Finance — Gestion de patrimoine et marchés de capitaux" />
+    <title>Everest Finance</title>
+  </head>
+  <body>
+    <main class="min-h-screen px-6 py-16">
+      <section class="mx-auto max-w-3xl rounded-2xl border border-border bg-surface p-10 shadow-sm">
+        <p class="text-sm font-medium tracking-[0.2em] text-secondary uppercase">
+          Phase 0 — Astro scaffold
+        </p>
+        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-primary">
+          Everest Finance
+        </h1>
+        <p class="mt-4 text-lg text-on-surface/80">
+          Static marketing site shell. Content will load from Payload at build time in Phase 1.
+        </p>
+        <dl class="mt-8 grid gap-4 text-sm">
+          <div class="flex justify-between gap-4 border-b border-border pb-3">
+            <dt class="text-on-surface/60">Public site</dt>
+            <dd class="font-medium">http://localhost:4321</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-border pb-3">
+            <dt class="text-on-surface/60">CMS admin</dt>
+            <dd class="font-medium">http://localhost:3001/admin</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-on-surface/60">Payload API</dt>
+            <dd class="font-medium">{payloadUrl}</dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+  </body>
+</html>

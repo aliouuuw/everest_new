@@ -1,11 +1,16 @@
 {
-  "name": ".",
+  "name": "everest-new-lp",
   "private": true,
   "type": "module",
+  "workspaces": ["apps/*"],
   "scripts": {
     "dev": "vite --port 3000",
-    "start": "vite --port 3000",
+    "dev:legacy": "vite --port 8000",
+    "dev:web": "bun run --cwd apps/web dev",
+    "dev:cms": "bun run --cwd apps/cms dev",
+    "dev:migration": "concurrently -n cms,web -c blue,green \"bun run dev:cms\" \"bun run dev:web\"",
     "build": "vite build && tsc",
+    "build:web": "bun run --cwd apps/web build",
     "build:analyze": "vite build --mode analyze",
     "serve": "vite preview",
     "preview": "vite preview",
@@ -13,6 +18,10 @@
     "lint": "eslint",
     "format": "prettier",
     "check": "prettier --write . && eslint --fix",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f postgres",
+    "seed:admin": "bun run --cwd apps/cms seed:admin",
     "performance": "echo '🚀 Performance optimizations applied!' && echo '📊 Bundle analysis: dist/stats.html' && echo '🔍 Check browser dev tools for performance metrics'",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
@@ -64,5 +73,8 @@
     "vite": "^6.3.5",
     "vitest": "^3.0.5",
     "web-vitals": "^4.2.4"
+  },
+  "overrides": {
+    "cookie": "1.1.1"
   }
 }
