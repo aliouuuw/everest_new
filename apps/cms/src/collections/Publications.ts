@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { isEditorOrAdmin, publishedOrStaff } from '../access'
 import { slugField } from '../fields/slug'
+import { triggerSiteRebuild } from '../hooks/triggerSiteRebuild'
 
 const publicationCategories = [
   { label: 'Revues hebdo', value: 'revues-hebdo' },
@@ -27,6 +28,9 @@ export const Publications: CollectionConfig = {
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,
+  },
+  hooks: {
+    afterChange: [triggerSiteRebuild],
   },
   fields: [
     { name: 'title', type: 'text', required: true },

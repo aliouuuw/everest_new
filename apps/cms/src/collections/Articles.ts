@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { isEditorOrAdmin, publishedOrStaff } from '../access'
 import { slugField } from '../fields/slug'
+import { triggerSiteRebuild } from '../hooks/triggerSiteRebuild'
 
 const articleCategories = [
   'Marchés',
@@ -22,6 +23,9 @@ export const Articles: CollectionConfig = {
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,
+  },
+  hooks: {
+    afterChange: [triggerSiteRebuild],
   },
   fields: [
     { name: 'title', type: 'text', required: true },

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isAdmin, publicRead } from '../access'
+import { triggerSiteRebuild } from '../hooks/triggerSiteRebuild'
 
 export const ExternalArticles: CollectionConfig = {
   slug: 'external-articles',
@@ -12,6 +13,9 @@ export const ExternalArticles: CollectionConfig = {
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [triggerSiteRebuild],
   },
   fields: [
     { name: 'guid', type: 'text', required: true, unique: true, index: true },

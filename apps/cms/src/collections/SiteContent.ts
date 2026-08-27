@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isEditorOrAdmin, publicRead } from '../access'
+import { triggerSiteRebuild } from '../hooks/triggerSiteRebuild'
 
 export const SiteContent: CollectionConfig = {
   slug: 'site-content',
@@ -12,6 +13,9 @@ export const SiteContent: CollectionConfig = {
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,
+  },
+  hooks: {
+    afterChange: [triggerSiteRebuild],
   },
   fields: [
     {
