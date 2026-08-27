@@ -1,7 +1,28 @@
 ---
 import '../styles/global.css'
+import {
+  fetchPublishedArticles,
+  fetchPublishedPublications,
+  fetchSiteContent,
+} from '../lib/payload'
 
-const payloadUrl = import.meta.env.PAYLOAD_URL || 'http://localhost:3001'
+let heroTitle = 'Everest Finance'
+let publications: Awaited<ReturnType<typeof fetchPublishedPublications>>['docs'] = []
+let articles: Awaited<ReturnType<typeof fetchPublishedArticles>>['docs'] = []
+
+try {
+  const [site, pubs, news] = await Promise.all([
+    fetchSiteContent('home'),
+    fetchPublishedPublications(6),
+    fetchPublishedArticles(6),
+  ])
+  heroTitle =
+    site.docs.find((item) => item.contentId === 'home.hero.title')?.value ?? heroTitle
+  publications = pubs.docs
+  articles = news.docs
+} catch (error) {
+  console.error('Payload fetch failed. Start the CMS on :3001.', error)
+}
 ---
 
 <html lang="fr">
@@ -13,30 +34,51 @@ const payloadUrl = import.meta.env.PAYLOAD_URL || 'http://localhost:3001'
   </head>
   <body>
     <main class="min-h-screen px-6 py-16">
-      <section class="mx-auto max-w-3xl rounded-2xl border border-border bg-surface p-10 shadow-sm">
+      <section class="mx-auto max-w-4xl">
         <p class="text-sm font-medium tracking-[0.2em] text-secondary uppercase">
-          Phase 0 — Astro scaffold
+          Accueil
         </p>
         <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-primary">
-          Everest Finance
+          {heroTitle}
         </h1>
-        <p class="mt-4 text-lg text-on-surface/80">
-          Static marketing site shell. Content will load from Payload at build time in Phase 1.
-        </p>
-        <dl class="mt-8 grid gap-4 text-sm">
-          <div class="flex justify-between gap-4 border-b border-border pb-3">
-            <dt class="text-on-surface/60">Public site</dt>
-            <dd class="font-medium">http://localhost:4321</dd>
-          </div>
-          <div class="flex justify-between gap-4 border-b border-border pb-3">
-            <dt class="text-on-surface/60">CMS admin</dt>
-            <dd class="font-medium">http://localhost:3001/admin</dd>
-          </div>
-          <div class="flex justify-between gap-4">
-            <dt class="text-on-surface/60">Payload API</dt>
-            <dd class="font-medium">{payloadUrl}</dd>
-          </div>
-        </dl>
+        <nav class="mt-6 flex gap-6 text-sm font-medium text-primary">
+          <a href="/publications">Publications</a>
+          <a href="/actualites">Actualités</a>
+        </nav>
+      </section>
+
+      <section class="mx-auto mt-14 max-w-4xl">
+        <h2 class="text-2xl font-bold text-primary">Publications</h2>
+        <ul class="mt-6 grid gap-4">
+          {publications.map((item) => (
+            <li class="rounded-xl border border-border bg-surface p-5">
+              <a href={`/publications/${item.slug}`} class="text-lg font-semibold text-primary">
+                {item.title}
+              </a>
+              <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
+            </li>
+          ))}
+          {publications.length === 0 && (
+            <li class="text-sm text-on-surface/60">No published publications yet.</li>
+          )}
+        </ul>
+      </section>
+
+      <section class="mx-auto mt-14 max-w-4xl">
+        <h2 class="text-2xl font-bold text-primary">Actualités</h2>
+        <ul class="mt-6 grid gap-4">
+          {articles.map((item) => (
+            <li class="rounded-xl border border-border bg-surface p-5">
+              <a href={`/actualites/${item.slug}`} class="text-lg font-semibold text-primary">
+                {item.title}
+              </a>
+              <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
+            </li>
+          ))}
+          {articles.length === 0 && (
+            <li class="text-sm text-on-surface/60">No published articles yet.</li>
+          )}
+        </ul>
       </section>
     </main>
   </body>

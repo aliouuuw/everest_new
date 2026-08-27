@@ -22,6 +22,8 @@
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f postgres",
     "seed:admin": "bun run --cwd apps/cms seed:admin",
+    "migrate:export": "bunx convex export --path scripts/migration/.exports/convex-dev.zip",
+    "migrate:import": "bun run --cwd apps/cms import:convex",
     "performance": "echo '🚀 Performance optimizations applied!' && echo '📊 Bundle analysis: dist/stats.html' && echo '🔍 Check browser dev tools for performance metrics'",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",

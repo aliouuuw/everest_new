@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isEditorOrAdmin, isStaff } from '../access'
+import { isEditorOrAdmin, publishedOrStaff } from '../access'
 import { slugField } from '../fields/slug'
 
 const articleCategories = [
@@ -18,7 +18,7 @@ export const Articles: CollectionConfig = {
     defaultColumns: ['title', 'category', 'status', 'publishedAt'],
   },
   access: {
-    read: isStaff,
+    read: publishedOrStaff,
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,

@@ -1,0 +1,44 @@
+---
+import '../../styles/global.css'
+import {
+  fetchArticleBySlug,
+  fetchPublishedArticles,
+  lexicalToHtml,
+} from '../../lib/payload'
+
+export async function getStaticPaths() {
+  const { docs } = await fetchPublishedArticles(100)
+  return docs.map((item) => ({ params: { slug: item.slug } }))
+}
+
+const { slug } = Astro.params
+const article = slug ? await fetchArticleBySlug(slug) : null
+if (!article) {
+  return Astro.redirect('/actualites')
+}
+
+const html = lexicalToHtml(article.content)
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={article.excerpt} />
+    <title>{article.title} — Everest Finance</title>
+  </head>
+  <body>
+    <main class="min-h-screen px-6 py-16">
+      <article class="mx-auto max-w-3xl">
+        <a href="/actualites" class="text-sm text-secondary">Actualités</a>
+        <p class="mt-6 text-xs uppercase tracking-wide text-secondary">{article.category}</p>
+        <h1 class="mt-2 text-4xl font-extrabold text-primary">{article.title}</h1>
+        {article.imageUrl && (
+          <img src={article.imageUrl} alt="" class="mt-6 w-full rounded-xl" />
+        )}
+        <p class="mt-4 text-lg text-on-surface/70">{article.excerpt}</p>
+        <div class="mt-8 text-base leading-7 text-on-surface" set:html={html} />
+      </article>
+    </main>
+  </body>
+</html>

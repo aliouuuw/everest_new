@@ -14,3 +14,6 @@ apps/web/dist
 apps/web/.astro
 apps/cms/.next
 apps/cms/media
+
+# Convex snapshot exports (local only)
+scripts/migration/.exports/

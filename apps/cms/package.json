@@ -14,6 +14,7 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "seed:admin": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env src/seed/admin.ts",
+    "import:convex": "cross-env NODE_OPTIONS=--no-deprecation tsx --env-file=.env src/seed/import-convex.ts",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start -p 3001",
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },

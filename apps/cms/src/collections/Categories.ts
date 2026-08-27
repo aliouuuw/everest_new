@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isEditorOrAdmin, isStaff } from '../access'
+import { isEditorOrAdmin, publicRead } from '../access'
 import { slugField } from '../fields/slug'
 
 export const Categories: CollectionConfig = {
@@ -9,7 +9,7 @@ export const Categories: CollectionConfig = {
     defaultColumns: ['name', 'slug', 'order', 'isActive'],
   },
   access: {
-    read: isStaff,
+    read: publicRead,
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,

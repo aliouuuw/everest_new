@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isAdmin, isStaff } from '../access'
+import { isAdmin, publicRead } from '../access'
 
 export const ExternalArticles: CollectionConfig = {
   slug: 'external-articles',
@@ -8,7 +8,7 @@ export const ExternalArticles: CollectionConfig = {
     defaultColumns: ['title', 'source', 'publishedAt', 'fetchedAt'],
   },
   access: {
-    read: isStaff,
+    read: publicRead,
     create: isAdmin,
     update: isAdmin,
     delete: isAdmin,

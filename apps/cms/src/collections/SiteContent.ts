@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-import { isEditorOrAdmin, isStaff } from '../access'
+import { isEditorOrAdmin, publicRead } from '../access'
 
 export const SiteContent: CollectionConfig = {
   slug: 'site-content',
@@ -8,7 +8,7 @@ export const SiteContent: CollectionConfig = {
     defaultColumns: ['contentId', 'pageKey', 'type', 'updatedAt'],
   },
   access: {
-    read: isStaff,
+    read: publicRead,
     create: isEditorOrAdmin,
     update: isEditorOrAdmin,
     delete: isEditorOrAdmin,
