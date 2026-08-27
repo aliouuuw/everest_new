@@ -1,34 +1,23 @@
 import type { Access } from 'payload'
 
-type UserWithRole = {
-  role?: 'admin' | 'editor' | 'viewer' | 'client'
-}
+type Role = 'admin' | 'editor' | 'viewer' | 'client'
 
-export const isLoggedIn: Access = ({ req: { user } }) => Boolean(user)
+const staffRoles: Role[] = ['admin', 'editor', 'viewer']
 
-export const isAdmin: Access = ({ req: { user } }) => {
-  const role = (user as UserWithRole | null)?.role
-  return role === 'admin'
-}
+const hasRole =
+  (...roles: Role[]): Access =>
+  ({ req: { user } }) =>
+    user !== null && roles.includes(user.role)
 
-export const isEditorOrAdmin: Access = ({ req: { user } }) => {
-  const role = (user as UserWithRole | null)?.role
-  return role === 'admin' || role === 'editor'
-}
-
-export const isStaff: Access = ({ req: { user } }) => {
-  const role = (user as UserWithRole | null)?.role
-  return role === 'admin' || role === 'editor' || role === 'viewer'
-}
+export const isLoggedIn: Access = ({ req: { user } }) => user !== null
+export const isAdmin = hasRole('admin')
+export const isEditorOrAdmin = hasRole('admin', 'editor')
+export const isStaff = hasRole(...staffRoles)
 
 export const publicRead: Access = () => true
 
+/** Anonymous visitors see published documents only; staff see every draft. */
 export const publishedOrStaff: Access = ({ req: { user } }) => {
-  const role = (user as UserWithRole | null)?.role
-  if (role === 'admin' || role === 'editor' || role === 'viewer') return true
-  return {
-    status: {
-      equals: 'published',
-    },
-  }
+  if (user !== null && staffRoles.includes(user.role)) return true
+  return { status: { equals: 'published' } }
 }

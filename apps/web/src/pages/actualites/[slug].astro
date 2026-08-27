@@ -1,22 +1,16 @@
 ---
 import '../../styles/global.css'
-import {
-  fetchArticleBySlug,
-  fetchPublishedArticles,
-  lexicalToHtml,
-} from '../../lib/payload'
+import { fetchPublishedArticles, lexicalToHtml } from '../../lib/payload'
 
 export async function getStaticPaths() {
   const { docs } = await fetchPublishedArticles(100)
-  return docs.map((item) => ({ params: { slug: item.slug } }))
+  return docs.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }))
 }
 
-const { slug } = Astro.params
-const article = slug ? await fetchArticleBySlug(slug) : null
-if (!article) {
-  return Astro.redirect('/actualites')
-}
-
+const { article } = Astro.props
 const html = lexicalToHtml(article.content)
 ---
 

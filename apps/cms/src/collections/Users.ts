@@ -1,9 +1,11 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 import { isAdmin } from '../access'
 
-type UserWithRole = {
-  id: string
-  role?: 'admin' | 'editor' | 'viewer' | 'client'
+/** Admins manage everyone; everyone else is scoped to their own record. */
+const selfOrAdmin: Access = ({ req: { user } }) => {
+  if (user === null) return false
+  if (user.role === 'admin') return true
+  return { id: { equals: user.id } }
 }
 
 export const Users: CollectionConfig = {
@@ -14,17 +16,9 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   access: {
-    read: ({ req: { user } }) => {
-      if (!user) return false
-      if ((user as UserWithRole).role === 'admin') return true
-      return { id: { equals: user.id } }
-    },
+    read: selfOrAdmin,
     create: isAdmin,
-    update: ({ req: { user } }) => {
-      if (!user) return false
-      if ((user as UserWithRole).role === 'admin') return true
-      return { id: { equals: user.id } }
-    },
+    update: selfOrAdmin,
     delete: isAdmin,
   },
   fields: [

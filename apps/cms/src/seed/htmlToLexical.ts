@@ -28,56 +28,54 @@ export type LexicalDocument = {
   }
 }
 
-function textNode(text: string): LexicalTextNode {
-  return {
-    type: 'text',
-    text,
-    format: 0,
-    detail: 0,
-    mode: 'normal',
-    style: '',
-    version: 1,
-  }
-}
-
-function paragraph(text: string): LexicalParagraph {
-  return {
-    type: 'paragraph',
-    children: text ? [textNode(text)] : [],
-    direction: 'ltr',
-    format: '',
-    indent: 0,
-    version: 1,
-  }
-}
-
-function decodeEntities(value: string): string {
+export function decodeEntities(value: string): string {
   return value
     .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
     .replace(/&lt;/gi, '<')
     .replace(/&gt;/gi, '>')
     .replace(/&quot;/gi, '"')
-    .replace(/&#39;/g, "'")
+    .replace(/&(?:apos|#x27|#39);/gi, "'")
+    .replace(/&#(\d+);/g, (_, code: string) =>
+      String.fromCharCode(Number.parseInt(code, 10)),
+    )
+    .replace(/&amp;/gi, '&')
+}
+
+function paragraph(text: string): LexicalParagraph {
+  const children: LexicalTextNode[] = text
+    ? [
+        {
+          type: 'text',
+          text,
+          format: 0,
+          detail: 0,
+          mode: 'normal',
+          style: '',
+          version: 1,
+        },
+      ]
+    : []
+
+  return { type: 'paragraph', children, direction: 'ltr', format: '', indent: 0, version: 1 }
 }
 
 function stripTags(html: string): string {
-  return decodeEntities(html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim())
+  return decodeEntities(html.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim()
 }
 
+// ponytail: block-level split only, so bold/links/lists flatten to plain
+// paragraphs. Upgrade path is Payload's HTML-to-Lexical converter if editors
+// need the original formatting preserved.
 export function htmlToLexical(html: string | undefined | null): LexicalDocument {
-  const source = html ?? ''
-  const blocks = source
+  const blocks = (html ?? '')
     .split(/<\/p>|<\/h[1-6]>|<br\s*\/?>/i)
-    .map((chunk) => stripTags(chunk))
+    .map(stripTags)
     .filter(Boolean)
-
-  const children = (blocks.length > 0 ? blocks : ['']).map((block) => paragraph(block))
 
   return {
     root: {
       type: 'root',
-      children,
+      children: (blocks.length > 0 ? blocks : ['']).map(paragraph),
       direction: 'ltr',
       format: '',
       indent: 0,

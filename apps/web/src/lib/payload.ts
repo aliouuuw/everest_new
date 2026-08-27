@@ -50,105 +50,46 @@ export type SiteContent = {
   value: string
 }
 
-export async function fetchPayload<T>(
-  path: string,
-  init?: RequestInit,
-): Promise<T> {
-  const response = await fetch(`${payloadUrl}${path}`, {
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...init?.headers,
-    },
-  })
+async function fetchList<T>(
+  collection: string,
+  params: Record<string, string>,
+): Promise<PayloadListResponse<T>> {
+  const query = new URLSearchParams(params).toString()
+  const response = await fetch(`${payloadUrl}/api/${collection}?${query}`)
 
   if (!response.ok) {
-    throw new Error(`Payload request failed (${response.status}): ${path}`)
+    throw new Error(
+      `Payload request failed (${response.status}): ${collection}?${query}`,
+    )
   }
 
-  return (await response.json()) as T
+  return (await response.json()) as PayloadListResponse<T>
 }
 
-export async function fetchPublishedPublications(limit = 20) {
-  const params = new URLSearchParams({
-    'where[status][equals]': 'published',
-    limit: String(limit),
-    sort: '-publishedAt',
-    depth: '1',
-  })
-  return fetchPayload<PayloadListResponse<Publication>>(
-    `/api/publications?${params.toString()}`,
-  )
-}
+const publishedList = (limit: number) => ({
+  'where[status][equals]': 'published',
+  limit: String(limit),
+  sort: '-publishedAt',
+  depth: '1',
+})
 
-export async function fetchPublicationBySlug(slug: string) {
-  const params = new URLSearchParams({
-    'where[slug][equals]': slug,
-    'where[status][equals]': 'published',
-    limit: '1',
-    depth: '1',
-  })
-  const result = await fetchPayload<PayloadListResponse<Publication>>(
-    `/api/publications?${params.toString()}`,
-  )
-  return result.docs[0] ?? null
-}
+export const fetchPublishedPublications = (limit = 20) =>
+  fetchList<Publication>('publications', publishedList(limit))
 
-export async function fetchPublishedArticles(limit = 20) {
-  const params = new URLSearchParams({
-    'where[status][equals]': 'published',
-    limit: String(limit),
-    sort: '-publishedAt',
-    depth: '1',
-  })
-  return fetchPayload<PayloadListResponse<Article>>(
-    `/api/articles?${params.toString()}`,
-  )
-}
+export const fetchPublishedArticles = (limit = 20) =>
+  fetchList<Article>('articles', publishedList(limit))
 
-export async function fetchArticleBySlug(slug: string) {
-  const params = new URLSearchParams({
-    'where[slug][equals]': slug,
-    'where[status][equals]': 'published',
-    limit: '1',
-    depth: '1',
-  })
-  const result = await fetchPayload<PayloadListResponse<Article>>(
-    `/api/articles?${params.toString()}`,
-  )
-  return result.docs[0] ?? null
-}
-
-export async function fetchSiteContent(pageKey: string) {
-  const params = new URLSearchParams({
+export const fetchSiteContent = (pageKey: string) =>
+  fetchList<SiteContent>('site-content', {
     'where[pageKey][equals]': pageKey,
     limit: '100',
   })
-  return fetchPayload<PayloadListResponse<SiteContent>>(
-    `/api/site-content?${params.toString()}`,
-  )
-}
 
 type LexicalNode = {
   type?: string
+  tag?: string
   text?: string
   children?: LexicalNode[]
-}
-
-export function lexicalToHtml(value: unknown): string {
-  if (!value || typeof value !== 'object') return ''
-  const root = (value as { root?: LexicalNode }).root
-  if (!root?.children) return ''
-
-  const walk = (node: LexicalNode): string => {
-    if (node.type === 'text') return escapeHtml(node.text ?? '')
-    const inner = (node.children ?? []).map(walk).join('')
-    if (node.type === 'paragraph') return `<p>${inner}</p>`
-    if (node.type === 'heading') return `<p>${inner}</p>`
-    return inner
-  }
-
-  return root.children.map(walk).join('')
 }
 
 function escapeHtml(text: string): string {
@@ -156,4 +97,29 @@ function escapeHtml(text: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+const headingTags = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+
+function renderNode(node: LexicalNode): string {
+  if (node.type === 'text') return escapeHtml(node.text ?? '')
+  if (node.type === 'linebreak') return '<br />'
+
+  const inner = (node.children ?? []).map(renderNode).join('')
+  if (node.type === 'paragraph') return `<p>${inner}</p>`
+  if (node.type === 'heading') {
+    const tag = headingTags.has(node.tag ?? '') ? node.tag : 'h2'
+    return `<${tag}>${inner}</${tag}>`
+  }
+  return inner
+}
+
+// ponytail: handles the node types our content actually uses. Swap in
+// @payloadcms/richtext-lexical's convertLexicalToHTML if editors start using
+// lists, tables, or uploads.
+export function lexicalToHtml(value: unknown): string {
+  const root = (value as { root?: LexicalNode } | null)?.root
+  if (!root?.children) return ''
+  return root.children.map(renderNode).join('')
 }
