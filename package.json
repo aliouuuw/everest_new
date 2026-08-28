@@ -27,7 +27,6 @@
     "migrate:export": "bunx convex export --path scripts/migration/.exports/convex-dev.zip",
     "migrate:import": "bun run --cwd apps/cms import:convex",
     "jobs:fetch-news": "bun run --cwd apps/cms jobs:fetch-news",
-    "performance": "echo '🚀 Performance optimizations applied!' && echo '📊 Bundle analysis: dist/stats.html' && echo '🔍 Check browser dev tools for performance metrics'",
     "convex:dev": "convex dev",
     "convex:deploy": "convex deploy",
     "cms:dev": "concurrently \"npm run convex:dev\" \"npm run dev\""
