@@ -50,6 +50,29 @@ export type SiteContent = {
   value: string
 }
 
+export type ExternalArticle = {
+  id: number | string
+  guid: string
+  slug?: string | null
+  title: string
+  excerpt: string
+  url: string
+  imageUrl: string
+  publishedAt: string
+  sourceName: string
+  category: string
+}
+
+export type NewsItem = {
+  href: string
+  title: string
+  excerpt: string
+  category: string
+  sourceName: string
+  publishedAt: string | null
+  external: boolean
+}
+
 async function fetchList<T>(
   collection: string,
   params: Record<string, string>,
@@ -84,6 +107,57 @@ export const fetchSiteContent = (pageKey: string) =>
     'where[pageKey][equals]': pageKey,
     limit: '100',
   })
+
+export const fetchExternalArticles = (limit = 20) =>
+  fetchList<ExternalArticle>('external-articles', {
+    limit: String(limit),
+    sort: '-publishedAt',
+  })
+
+export function articleToNews(article: Article): NewsItem {
+  return {
+    href: `/actualites/${article.slug}`,
+    title: article.title,
+    excerpt: article.excerpt,
+    category: article.category,
+    sourceName: 'Everest Finance',
+    publishedAt: article.publishedAt ?? null,
+    external: false,
+  }
+}
+
+export function externalToNews(item: ExternalArticle): NewsItem {
+  return {
+    href: item.url,
+    title: item.title,
+    excerpt: item.excerpt,
+    category: item.category,
+    sourceName: item.sourceName,
+    publishedAt: item.publishedAt,
+    external: true,
+  }
+}
+
+// ponytail: two list queries, merge in memory. Fine while each side is
+// tens of items. Upgrade to a single SQL union if the feed grows past ~200.
+export function mergeNews(items: NewsItem[]): NewsItem[] {
+  return [...items].sort((a, b) => {
+    const timeA = Date.parse(a.publishedAt ?? '') || 0
+    const timeB = Date.parse(b.publishedAt ?? '') || 0
+    return timeB - timeA
+  })
+}
+
+export async function fetchNewsFeed(eachLimit = 50): Promise<NewsItem[]> {
+  const [articles, externals] = await Promise.all([
+    fetchPublishedArticles(eachLimit),
+    fetchExternalArticles(eachLimit),
+  ])
+  return mergeNews([
+    ...articles.docs.map(articleToNews),
+    ...externals.docs.map(externalToNews),
+  ])
+}
 
 type LexicalNode = {
   type?: string

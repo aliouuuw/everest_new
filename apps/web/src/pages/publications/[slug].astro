@@ -1,5 +1,5 @@
 ---
-import '../../styles/global.css'
+import Layout from '../../layouts/Layout.astro'
 import { fetchPublishedPublications, lexicalToHtml } from '../../lib/payload'
 
 export async function getStaticPaths() {
@@ -16,22 +16,12 @@ const title = publication.seoTitle || publication.title
 const description = publication.seoDescription || publication.excerpt
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <title>{title} — Everest Finance</title>
-  </head>
-  <body>
-    <main class="min-h-screen px-6 py-16">
-      <article class="mx-auto max-w-3xl">
-        <a href="/publications" class="text-sm text-secondary">Publications</a>
-        <p class="mt-6 text-xs uppercase tracking-wide text-secondary">{publication.category}</p>
-        <h1 class="mt-2 text-4xl font-extrabold text-primary">{publication.title}</h1>
-        <p class="mt-4 text-lg text-on-surface/70">{publication.excerpt}</p>
-        <div class="mt-8 text-base leading-7 text-on-surface" set:html={html} />
-      </article>
-    </main>
-  </body>
-</html>
+<Layout title={`${title} — Everest Finance`} description={description}>
+  <article class="mx-auto max-w-3xl">
+    <a href="/publications" class="text-sm text-secondary">Publications</a>
+    <p class="mt-6 text-xs uppercase tracking-wide text-secondary">{publication.category}</p>
+    <h1 class="mt-2 text-4xl font-extrabold text-primary">{publication.title}</h1>
+    <p class="mt-4 text-lg text-on-surface/70">{publication.excerpt}</p>
+    <div class="mt-8 text-base leading-7 text-on-surface" set:html={html} />
+  </article>
+</Layout>

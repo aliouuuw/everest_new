@@ -1,85 +1,66 @@
 ---
-import '../styles/global.css'
+import Layout from '../layouts/Layout.astro'
+import NewsList from '../components/NewsList.astro'
 import {
-  fetchPublishedArticles,
+  fetchNewsFeed,
   fetchPublishedPublications,
   fetchSiteContent,
 } from '../lib/payload'
 
 let heroTitle = 'Everest Finance'
 let publications: Awaited<ReturnType<typeof fetchPublishedPublications>>['docs'] = []
-let articles: Awaited<ReturnType<typeof fetchPublishedArticles>>['docs'] = []
+let news: Awaited<ReturnType<typeof fetchNewsFeed>> = []
 
 try {
-  const [site, pubs, news] = await Promise.all([
+  const [site, pubs, feed] = await Promise.all([
     fetchSiteContent('home'),
     fetchPublishedPublications(6),
-    fetchPublishedArticles(6),
+    fetchNewsFeed(20),
   ])
   heroTitle =
     site.docs.find((item) => item.contentId === 'home.hero.title')?.value ?? heroTitle
   publications = pubs.docs
-  articles = news.docs
+  news = feed.slice(0, 6)
 } catch (error) {
   console.error('Payload fetch failed. Start the CMS on :3001.', error)
 }
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Everest Finance — Gestion de patrimoine et marchés de capitaux" />
-    <title>Everest Finance</title>
-  </head>
-  <body>
-    <main class="min-h-screen px-6 py-16">
-      <section class="mx-auto max-w-4xl">
-        <p class="text-sm font-medium tracking-[0.2em] text-secondary uppercase">
-          Accueil
-        </p>
-        <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-primary">
-          {heroTitle}
-        </h1>
-        <nav class="mt-6 flex gap-6 text-sm font-medium text-primary">
-          <a href="/publications">Publications</a>
-          <a href="/actualites">Actualités</a>
-        </nav>
-      </section>
+<Layout title="Everest Finance">
+  <section class="mx-auto max-w-4xl">
+    <p class="text-sm font-medium tracking-[0.2em] text-secondary uppercase">
+      Accueil
+    </p>
+    <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-primary">
+      {heroTitle}
+    </h1>
+  </section>
 
-      <section class="mx-auto mt-14 max-w-4xl">
-        <h2 class="text-2xl font-bold text-primary">Publications</h2>
-        <ul class="mt-6 grid gap-4">
-          {publications.map((item) => (
-            <li class="rounded-xl border border-border bg-surface p-5">
-              <a href={`/publications/${item.slug}`} class="text-lg font-semibold text-primary">
-                {item.title}
-              </a>
-              <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
-            </li>
-          ))}
-          {publications.length === 0 && (
-            <li class="text-sm text-on-surface/60">No published publications yet.</li>
-          )}
-        </ul>
-      </section>
+  <section class="mx-auto mt-14 max-w-4xl">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-2xl font-bold text-primary">Publications</h2>
+      <a href="/publications" class="text-sm text-secondary">Voir tout</a>
+    </div>
+    <ul class="mt-6 grid gap-4">
+      {publications.map((item) => (
+        <li class="rounded-xl border border-border bg-surface p-5">
+          <a href={`/publications/${item.slug}`} class="text-lg font-semibold text-primary">
+            {item.title}
+          </a>
+          <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
+        </li>
+      ))}
+      {publications.length === 0 && (
+        <li class="text-sm text-on-surface/60">Aucune publication pour le moment.</li>
+      )}
+    </ul>
+  </section>
 
-      <section class="mx-auto mt-14 max-w-4xl">
-        <h2 class="text-2xl font-bold text-primary">Actualités</h2>
-        <ul class="mt-6 grid gap-4">
-          {articles.map((item) => (
-            <li class="rounded-xl border border-border bg-surface p-5">
-              <a href={`/actualites/${item.slug}`} class="text-lg font-semibold text-primary">
-                {item.title}
-              </a>
-              <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
-            </li>
-          ))}
-          {articles.length === 0 && (
-            <li class="text-sm text-on-surface/60">No published articles yet.</li>
-          )}
-        </ul>
-      </section>
-    </main>
-  </body>
-</html>
+  <section class="mx-auto mt-14 max-w-4xl">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-2xl font-bold text-primary">Actualités</h2>
+      <a href="/actualites" class="text-sm text-secondary">Voir tout</a>
+    </div>
+    <NewsList items={news} empty="Aucune actualité pour le moment." />
+  </section>
+</Layout>

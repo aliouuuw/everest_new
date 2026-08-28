@@ -23,6 +23,7 @@
     "db:logs": "docker compose logs -f postgres",
     "lint:cms": "bun run --cwd apps/cms lint",
     "check:seed": "bun run --cwd apps/cms check:seed",
+    "check:news": "bun run --cwd apps/web check:news",
     "seed:admin": "bun run --cwd apps/cms seed:admin",
     "migrate:export": "bunx convex export --path scripts/migration/.exports/convex-dev.zip",
     "migrate:import": "bun run --cwd apps/cms import:convex",
