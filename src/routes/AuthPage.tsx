@@ -13,7 +13,8 @@ export const AuthPage = () => {
     <div>
       {/* Hero — Compact Centered */}
       <section ref={heroRef} className="reveal pt-34 pb-8 sm:pt-28">
-        <div className="mx-auto max-w-6xl px-6 text-center">
+        <div className="page-container">
+          <div className="mx-auto max-w-6xl text-center">
           <span className="kicker text-gradient-gold">Accès Client</span>
           <h1 className="luxury-heading mt-3">
             {/* {authMode === 'signin' ? 'Connectez-vous à votre espace' : 'Créez votre compte en toute sécurité'} */}
@@ -25,21 +26,23 @@ export const AuthPage = () => {
               : 'Rejoignez notre plateforme de gestion financière sécurisée.' */}
             Un accès simple et sécurisé à votre portefeuille et vos documents.
           </p>
+          </div>
         </div>
       </section>
 
       {/* Formulaire d'authentification */}
       <section id="auth" ref={formSectionRef} className="reveal pb-14 sm:pb-18">
-        <div className="mx-auto max-w-2xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-2xl">
           {/* Mode switcher */}
           {/* <div className="flex justify-center mb-8">
-            <div className="inline-flex rounded-lg border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-1">
+            <div className="inline-flex rounded-lg border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-1">
               <button
                 onClick={() => setAuthMode('signin')}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   authMode === 'signin'
-                    ? 'bg-[var(--gold-metallic)]/20 text-[var(--night)]'
-                    : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'
+                    ? 'bg-[var(--jaune-or)]/20 text-[var(--night)]'
+                    : 'text-[rgba(10, 10, 10, 0.8)]/80 hover:text-[var(--night)]'
                 }`}
               >
                 Se connecter
@@ -48,8 +51,8 @@ export const AuthPage = () => {
                 onClick={() => setAuthMode('signup')}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   authMode === 'signup'
-                    ? 'bg-[var(--gold-metallic)]/20 text-[var(--night)]'
-                    : 'text-[var(--night-80)]/80 hover:text-[var(--night)]'
+                    ? 'bg-[var(--jaune-or)]/20 text-[var(--night)]'
+                    : 'text-[rgba(10, 10, 10, 0.8)]/80 hover:text-[var(--night)]'
                 }`}
               >
                 S'inscrire
@@ -68,53 +71,56 @@ export const AuthPage = () => {
                 href="https://everest-account-opening.vercel.app/new-home"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--gold-dark)] hover:text-[var(--gold-metallic)] font-medium transition-colors underline underline-offset-2"
+                className="text-[var(--jaune-or)] hover:text-[var(--jaune-or)] font-medium transition-colors underline underline-offset-2"
               >
                 Ouvrir un compte
               </a>
             </p>
+          </div>
           </div>
         </div>
       </section>
 
       {/* Avantages */}
       <section ref={benefitsSectionRef} className="reveal py-14 sm:py-18">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="page-container">
+          <div className="mx-auto max-w-6xl">
           <div className="text-center max-w-2xl mx-auto">
             <span className="kicker text-gradient-gold">Avantages</span>
             <h2 className="luxury-heading mt-3">Un portail pensé pour vous</h2>
           </div>
           <div ref={benefitsGridRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiTrendingUp /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Suivi en temps réel</div>
+                  <div className="font-display-aptos text-lg mb-1">Suivi en temps réel</div>
                   <p className="text-secondary text-sm">Positions, performance et mouvements à jour.</p>
                 </div>
               </div>
             </div>
-            <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiStar /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Documents centralisés</div>
+                  <div className="font-display-aptos text-lg mb-1">Documents centralisés</div>
                   <p className="text-secondary text-sm">Relevés, avis d'opérés et reporting en un endroit.</p>
                 </div>
               </div>
             </div>
-            <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div className="group relative overflow-hidden rounded-2xl border border-[var(--jaune-or)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
+              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--jaune-or-10)] blur-2xl" />
               <div className="flex items-start gap-5">
                 <div className="icon-badge text-[var(--night)] text-xl"><FiZap /></div>
                 <div>
-                  <div className="font-display text-lg mb-1">Alertes personnalisées</div>
+                  <div className="font-display-aptos text-lg mb-1">Alertes personnalisées</div>
                   <p className="text-secondary text-sm">Notifications sur seuils, opérations et échéances.</p>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>

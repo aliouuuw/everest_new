@@ -1,78 +1,165 @@
-import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
-import { useReveal } from "../Hooks/useReveal";
-import type { IconType } from "react-icons";
+import { useEffect, useRef, useState } from 'react';
+import { FiCalendar, FiDatabase, FiUsers } from 'react-icons/fi';
+import { useReveal } from '../Hooks/useReveal';
+import { EDITORIAL_ICON_WELL_LIGHT } from '../ui/EditorialCard';
+import { PillBadge } from '../ui';
+import { EditableImage, EditableText } from '../../cms';
 
-type Feature = {
-  icon: IconType;
-  title: string;
-  description: string;
-};
+const STATS = [
+  {
+    prefix: '',
+    value: 10,
+    suffix: '+',
+    unit: 'ans',
+    label: "d'expérience au service des émetteurs et investisseurs institutionnels de l'UEMOA.",
+    icon: FiCalendar,
+  },
+  {
+    prefix: '+',
+    value: 500,
+    suffix: '',
+    unit: 'Mds F CFA',
+    label: "levés par émissions d'obligations, titres de capital et fonds communs de titrisation.",
+    icon: FiDatabase,
+  },
+  {
+    prefix: '+',
+    value: 200,
+    suffix: '',
+    unit: 'Mds F CFA',
+    label: "de transactions intermédiées sur le marché financier régional.",
+    icon: FiUsers,
+  },
+];
 
-const FeatureItem: React.FC<Feature> = ({ icon: Icon, title, description }) => {
+function useCounter(target: number, duration = 1600, started = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!started) return;
+    let start: number | null = null;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+      else setCount(target);
+    };
+    requestAnimationFrame(step);
+  }, [started, target, duration]);
+  return count;
+}
+
+type StatRowProps = (typeof STATS)[number] & { delay?: number };
+
+function AnimatedStatRow({ prefix, value, suffix, unit, label, icon: Icon, delay = 0 }: StatRowProps) {
+  const ref = useRef<HTMLLIElement>(null);
+  const [started, setStarted] = useState(false);
+  const count = useCounter(value, 1600, started);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setStarted(true), delay);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [delay]);
+
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover flex items-start gap-5">
-      {/* Decorative gold glow */}
-      <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 rounded-full bg-[var(--gold-metallic-10)] blur-xl" />
-      <div className="relative shrink-0">
-        {/* Outer subtle disc */}
-        <div className="w-24 h-24 rounded-full bg-[var(--pure-white)] border border-[var(--gold-metallic)]/30 shadow-sm grid place-content-center">
-          {/* Inner badge for icon */}
-          <div className="w-16 h-16 rounded-full bg-[var(--white-smoke)]/80 border border-[var(--timberwolf)] grid place-content-center text-[var(--night)] text-3xl transition-transform duration-300 group-hover:scale-110">
-            <Icon />
-          </div>
+    <li ref={ref} className="group flex items-center gap-4 py-5 md:gap-5 md:py-6">
+      <div className={`shrink-0 ${EDITORIAL_ICON_WELL_LIGHT}`}>
+        <Icon className="text-lg" aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 flex items-baseline gap-2">
+          <span className="font-primary text-3xl font-bold leading-none tracking-tight text-[var(--night-80)] numeric-tabular md:text-[2.25rem]">
+            {prefix}
+            {count}
+            {suffix}
+          </span>
+          <span className="font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)] md:text-[13px]">
+            {unit}
+          </span>
         </div>
-        <div className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-[var(--gold-metallic-10)]" />
+        <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
+          {label}
+        </p>
       </div>
-
-      <div>
-        <div className="font-display text-lg mb-1">{title}</div>
-        <div className="text-secondary text-sm">{description}</div>
-      </div>
-    </div>
+    </li>
   );
-};
+}
 
 export const ValueProps: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
-  const listRef = useReveal<HTMLDivElement>();
-
-  const features: Array<Feature> = [
-    { icon: FaShieldAlt, title: "Sécurité", description: "Conformité et garde des actifs." },
-    { icon: FaHandshake, title: "Accompagnement", description: "Conseil dédié et transparent." },
-    { icon: FaChartLine, title: "Performance", description: "Allocation et exécution précises." },
-  ];
+  const contentRef = useReveal<HTMLDivElement>();
 
   return (
-    <section ref={sectionRef} className="reveal py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Text */}
-          <div>
-            <span className="kicker text-gradient-gold">Pourquoi Everest Finance</span>
-            <h2 className="luxury-heading mt-3 mb-5">Exécution rigoureuse, confiance durable</h2>
-            <p className="luxury-subheading">Nous allions discipline de marché, ingénierie financière et accompagnement client pour créer de la valeur sur le long terme.</p>
-          </div>
-
-          {/* Visual side */}
-          <div className="relative w-full h-[360px] rounded-2xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
-            <img 
-              src="/value_props.jpg" 
-              alt="Salle de conférence moderne avec table de réunion et chaises roses dans un style industriel" 
-              className="w-full h-full object-cover"
+    <section
+      ref={sectionRef}
+      className="reveal relative overflow-hidden bg-[var(--pure-white)] py-16 md:py-20"
+    >
+      <div className="page-container">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
+          {/* Left — image */}
+          <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">
+            <EditableImage
+              id="home.valueProps.image"
+              src="/Assets_Website/Valueprops1.png"
+              alt="Everest Finance — engagement régional"
+              className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--night-20)] to-transparent" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, transparent 55%, rgba(1,45,42,0.35) 100%)',
+              }}
+            />
           </div>
-        </div>
 
-        {/* Features strip spanning full width */}
-        <div ref={listRef} className="reveal-stagger mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((feature) => (
-            <FeatureItem key={feature.title} {...feature} />
-          ))}
+          {/* Right — heading + animated stats list */}
+          <div
+            ref={contentRef}
+            className="reveal flex flex-col justify-center lg:col-span-7"
+          >
+            <div className="mb-4">
+              <PillBadge>
+                <EditableText id="home.valueProps.badge" as="span">
+                  Pourquoi Everest Finance
+                </EditableText>
+              </PillBadge>
+            </div>
+            <h2 className="luxury-heading mb-4 max-w-xl">
+              <EditableText id="home.valueProps.title" as="span">
+                Exécution rigoureuse, confiance durable.
+              </EditableText>
+            </h2>
+            <EditableText
+              id="home.valueProps.intro"
+              as="p"
+              className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base"
+            >
+              SGI agréée AMF-UMOA (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
+              d&apos;exécution et relations institutionnelles au service de nos mandats.
+            </EditableText>
+
+            <ul className="divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
+              {STATS.map((s, i) => (
+                <AnimatedStatRow key={s.label} {...s} delay={i * 180} />
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   );
 };
-
-

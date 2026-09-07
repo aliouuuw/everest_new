@@ -1,198 +1,229 @@
-import { useMemo, useState } from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { useQuery } from "convex/react";
-import { useReveal } from "../Hooks/useReveal";
-import { api } from "../../../convex/_generated/api";
+import { FiArrowRight, FiFileText } from 'react-icons/fi';
+import { useReveal } from '../Hooks/useReveal';
+import { SectionHeader } from '../ui';
 
-type PublicationCategory = "revues-hebdo" | "revues-mensuelles" | "teaser-dividende" | "marches" | "analyses";
+type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle';
 
-type PublicationItem = {
+type Publication = {
+  id: string;
   title: string;
   desc: string;
-  href: string;
-  category: PublicationCategory;
-  date: string; // ISO string for ordering
+  frequency: Frequency;
+  date: string;
+  fileUrl: string;
+  fileSize: string;
+  pages?: number;
 };
 
-const ALL_LABEL = "tout" as const;
-const CATEGORY_LABELS: Record<PublicationCategory | typeof ALL_LABEL, string> = {
-  [ALL_LABEL]: "Tout",
-  "revues-hebdo": "Revues hebdomadaires",
-  "revues-mensuelles": "Revues mensuelles",
-  "teaser-dividende": "Teaser des dividendes",
-  "marches": "Marchés",
-  "analyses": "Analyses",
+const FREQUENCY_LABELS: Record<Frequency, string> = {
+  hebdomadaire: 'Hebdomadaire',
+  mensuelle: 'Mensuelle',
+  semestrielle: 'Semestrielle',
 };
+
+const PUBLICATIONS: Array<Publication> = [
+  {
+    id: 'revue-souveraine-mai-2024',
+    title: 'Revue de la dette souveraine UEMOA — Mai 2024',
+    desc: "Analyse des conditions de marché, des spreads et des perspectives de financement pour les émetteurs souverains de l'union.",
+    frequency: 'semestrielle',
+    date: '2024-05-15',
+    fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
+    fileSize: '10.5 MB',
+    pages: 28,
+  },
+  {
+    id: 'brvm-monthly-avril-2024',
+    title: 'BRVM Monthly Highlights — Avril 2024',
+    desc: "Synthèse mensuelle des performances du marché boursier régional.",
+    frequency: 'mensuelle',
+    date: '2024-04-30',
+    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
+    fileSize: '6.1 MB',
+    pages: 14,
+  },
+  {
+    id: 'focus-secteur-bancaire-avril-2024',
+    title: 'Focus Secteur — Bancaire UEMOA — Avril 2024',
+    desc: "Lecture structurée des dynamiques du secteur bancaire régional.",
+    frequency: 'mensuelle',
+    date: '2024-04-12',
+    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
+    fileSize: '4.8 MB',
+    pages: 10,
+  },
+];
+
+/* Decorative chart line SVG for the featured dark card */
+const ChartLine = () => (
+  <svg
+    aria-hidden
+    viewBox="0 0 600 200"
+    className="absolute inset-x-0 bottom-0 h-[55%] w-full opacity-[0.18]"
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient id="insights-line" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stopColor="rgba(255,255,255,0.0)" />
+        <stop offset="35%" stopColor="rgba(255,255,255,0.7)" />
+        <stop offset="100%" stopColor="var(--jaune-or)" />
+      </linearGradient>
+      <linearGradient id="insights-fill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="rgba(202,152,36,0.25)" />
+        <stop offset="100%" stopColor="rgba(202,152,36,0)" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M0,160 C60,140 100,150 160,120 C220,90 260,110 320,90 C380,70 420,60 480,50 C540,40 580,35 600,28 L600,200 L0,200 Z"
+      fill="url(#insights-fill)"
+    />
+    <path
+      d="M0,160 C60,140 100,150 160,120 C220,90 260,110 320,90 C380,70 420,60 480,50 C540,40 580,35 600,28"
+      fill="none"
+      stroke="url(#insights-line)"
+      strokeWidth="2"
+    />
+  </svg>
+);
 
 export const Insights: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
-  const listRef = useReveal<HTMLDivElement>();
-  const filtersRef = useReveal<HTMLDivElement>();
 
-  const [activeCategory, setActiveCategory] = useState<PublicationCategory | typeof ALL_LABEL>(ALL_LABEL);
-
-  // Fetch publications from Convex
-  const publications = useQuery(api.publications.getPublications, { 
-    limit: 3, // Show only 6 publications in insights section
-    status: 'published' // Only show published publications
-  });
-
-  // Transform Convex data to match our component's expected format
-  const items: Array<PublicationItem> = useMemo(() => {
-    if (!publications?.page) return []
-    
-    // Sort by featured first, then by creation date (newest first)
-    const sortedPublications = [...publications.page].sort((a, b) => {
-      if (a.featured && !b.featured) return -1
-      if (!a.featured && b.featured) return 1
-      return (b.createdAt || 0) - (a.createdAt || 0)
-    })
-    
-    return sortedPublications.map(pub => ({
-      title: pub.title,
-      desc: pub.description,
-      href: `/publications/${pub.slug}`,
-      category: pub.category as PublicationCategory,
-      date: new Date(pub.createdAt || 0).toISOString().split('T')[0] // Convert timestamp to date string
-    }))
-  }, [publications]);
-
-  const categories: Array<PublicationCategory | typeof ALL_LABEL> = useMemo(
-    () => [ALL_LABEL, "revues-hebdo", "revues-mensuelles", "teaser-dividende", "marches", "analyses"],
-    []
-  );
-
-  const filtered = useMemo(() => {
-    const sorted = [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
-    if (activeCategory === ALL_LABEL) return sorted;
-    return sorted.filter((it) => it.category === activeCategory);
-  }, [items, activeCategory]);
+  const featured = PUBLICATIONS[0];
+  const secondary = PUBLICATIONS.slice(1, 3);
 
   return (
-    <section ref={sectionRef} className="reveal py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="kicker text-gradient-gold">Publications</span>
-          <h2 className="luxury-heading mt-3">Restez informé des marchés</h2>
+    <section
+      ref={sectionRef}
+      className="reveal relative bg-[var(--pure-white)] py-16 md:py-20"
+    >
+      <div className="page-container">
+        <div className="mb-10 md:mb-12">
+          <SectionHeader
+            heading="Publications & recherches."
+            subtext="Synthèses hebdomadaires, mensuelles et semestrielles sur l'UEMOA et la BRVM, en PDF téléchargeable."
+            align="left"
+            dark={false}
+            action={{
+              label: 'Voir toutes les publications',
+              href: '/publications',
+              variant: 'primary',
+            }}
+          />
         </div>
 
-        <div ref={filtersRef} className="reveal-stagger mt-10 flex flex-wrap items-center justify-center gap-2">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                className={`${isActive ? "btn-primary" : "btn-secondary"} inline-flex items-center justify-center text-xs px-4 py-2 rounded-full font-display tracking-wide`}
-                aria-pressed={isActive}
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+          {/* FEATURED — dark mauve card with chart background */}
+          <a
+            href={featured.fileUrl}
+            download
+            className="group relative flex flex-col justify-between overflow-hidden rounded-2xl p-7 md:p-9 lg:col-span-7 lg:min-h-[360px]"
+            style={{ background: 'var(--gradient-dark-section)' }}
+          >
+            <ChartLine />
+            {/* Subtle gold wash top-right */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute right-0 top-0 h-[60%] w-[60%] opacity-70"
+              style={{
+                background:
+                  'radial-gradient(ellipse at top right, rgba(202,152,36,0.12) 0%, transparent 65%)',
+              }}
+            />
+
+            <div className="relative">
+              <span
+                className="mb-6 inline-flex items-center gap-2 rounded-full px-3 py-1 font-primary text-[10px] font-semibold uppercase tracking-[0.2em]"
+                style={{
+                  color: 'var(--jaune-or)',
+                  border: '1px solid rgba(202,152,36,0.35)',
+                  background: 'rgba(202,152,36,0.08)',
+                }}
               >
-                {CATEGORY_LABELS[cat]}
-              </button>
-            );
-          })}
-        </div>
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--jaune-or)]" aria-hidden />
+                Publication à la une
+              </span>
 
-        {publications === undefined ? (
-          // Loading state
-          <div className="text-center py-16">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto mb-4"></div>
-            <p className="text-[var(--night-80)]">Chargement des publications...</p>
-          </div>
-        ) : filtered.length === 0 ? (
-          // Empty state
-          <div className="text-center py-16">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--gold-metallic-10)] flex items-center justify-center">
-              <svg className="w-8 h-8 text-[var(--gold-metallic)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+              <h3 className="mb-3 max-w-xl font-primary text-xl font-bold leading-snug tracking-tight text-white md:text-2xl">
+                {featured.title}
+              </h3>
+
+              <p className="max-w-xl font-primary text-sm font-light leading-relaxed text-white/70 md:text-[15px]">
+                {featured.desc}
+              </p>
             </div>
-            <h3 className="text-lg font-medium text-[var(--night)] mb-2">Aucune publication trouvée</h3>
-            <p className="text-[var(--night-80)]">Aucune publication ne correspond aux critères sélectionnés.</p>
-          </div>
-        ) : (
-          <div ref={listRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-            {filtered.map((it) => (
-            <a key={`${it.title}-${it.date}`} href={it.href} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all duration-300 hover:shadow-lg hover:border-[var(--gold-light)]/30 group-hover:bg-white/70 block">
-              {/* Background blur effect */}
-              <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
 
-              {/* Cover image placeholder */}
-              <div className="h-36 edge-media bg-gradient-to-br from-[var(--white-smoke)]/80 to-[var(--gold-light)]/20 flex items-center justify-center text-secondary mb-5 rounded-xl border border-[var(--gold-metallic)]/10">
-                <div className="text-center">
-                  <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-[var(--gold-light)]/20 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[var(--gold-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <span className="text-xs font-medium">Publication</span>
-                </div>
+            <div className="relative mt-8 flex items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-primary text-xs font-light tracking-wide text-white/50">
+                <span>
+                  {new Date(featured.date).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </span>
+                <span aria-hidden>·</span>
+                <span>{FREQUENCY_LABELS[featured.frequency]}</span>
+                {featured.pages && (
+                  <>
+                    <span aria-hidden>·</span>
+                    <span>{featured.pages} pages</span>
+                  </>
+                )}
               </div>
+              <span className="inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--jaune-or)] transition-all duration-300 group-hover:gap-3">
+                Lire la publication
+                <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
+              </span>
+            </div>
+          </a>
 
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--gold-light)]/10 text-[var(--gold-dark)] border border-[var(--gold-light)]/20">
-                      {CATEGORY_LABELS[it.category]}
+          {/* SECONDARY — two clean file rows */}
+          <div className="flex flex-col gap-4 lg:col-span-5">
+            {secondary.map((it) => (
+              <a
+                key={it.id}
+                href={it.fileUrl}
+                download
+                className="group flex items-start gap-4 rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-5 transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] md:p-6"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--mauve-05)] text-[var(--night-80)] transition-colors duration-300 group-hover:bg-[var(--mauve)] group-hover:text-[var(--pure-white)]">
+                  <FiFileText className="text-base" aria-hidden />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="mb-1 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
+                    Note de recherche · {FREQUENCY_LABELS[it.frequency]}
+                  </p>
+                  <h4 className="mb-2 font-primary text-sm font-semibold leading-snug tracking-tight text-[var(--night-80)] md:text-base">
+                    {it.title}
+                  </h4>
+                  <div className="flex items-center gap-3 font-primary text-[11px] font-light text-[var(--night-40)]">
+                    <span>
+                      {new Date(it.date).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
                     </span>
-                    {/* Featured indicator */}
-                    {publications.page.find(pub => 
-                      pub.title === it.title && 
-                      new Date(pub.createdAt || 0).toISOString().split('T')[0] === it.date
-                    )?.featured && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--gold-metallic)]/20 text-[var(--gold-metallic)] border border-[var(--gold-metallic)]/30">
-                        ⭐ En vedette
-                      </span>
+                    <span aria-hidden>·</span>
+                    <span>{it.fileSize}</span>
+                    {it.pages && (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span>{it.pages} p.</span>
+                      </>
                     )}
                   </div>
-                  <time className="text-xs text-secondary font-medium" dateTime={it.date}>
-                    {new Date(it.date).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric'
-                    })}
-                  </time>
                 </div>
-                
-                <h3 className="font-display text-lg font-semibold text-[var(--night)] mb-3 group-hover:text-[var(--gold-dark)] transition-colors leading-tight">
-                  {it.title}
-                </h3>
-                
-                <p className="text-secondary text-sm leading-relaxed mb-4">
-                  {it.desc}
-                </p>
-
-                {/* Divider */}
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent mb-4" />
-
-                {/* Read more indicator */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-[var(--gold-dark)] group-hover:text-[var(--gold-dark)] transition-colors">
-                    Lire la suite
-                  </span>
-                  <svg className="w-4 h-4 text-[var(--gold-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          ))}
+                <FiArrowRight
+                  className="mt-2 shrink-0 text-sm text-[var(--mauve-40)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[var(--night-80)]"
+                  aria-hidden
+                />
+              </a>
+            ))}
           </div>
-        )}
-
-        <div className="mt-10 text-center">
-          <a
-            href="/publications"
-            className="btn-secondary inline-flex items-center gap-2 font-display tracking-wide"
-          >
-            Voir toutes les publications
-            <FaExternalLinkAlt />
-          </a>
         </div>
       </div>
     </section>
   );
 };
-
-

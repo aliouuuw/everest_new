@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
-import { FaQuoteLeft } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -178,7 +177,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
       <FiStar
         key={i}
         className={`w-4 h-4 ${
-          i < rating ? 'fill-[var(--gold-metallic)] text-[var(--gold-metallic)]' : 'text-gray-300'
+          i < rating ? 'fill-[var(--jaune-or)] text-[var(--jaune-or)]' : 'text-gray-600'
         }`}
       />
     ));
@@ -202,28 +201,51 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--white-smoke)]">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">{title}</span>
-          <h2 className="luxury-heading mt-3">Ils nous font confiance</h2>
-          <p className="luxury-subheading mt-5 pt-8">{subtitle}</p>
+    <section ref={sectionRef} className="reveal py-24 md:py-40 section-bg-light text-white relative font-primary">
+      <div className="page-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 mb-16">
+          <div className="lg:col-span-5">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">{title}</span>
+            <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-white">
+              Ils nous font confiance.
+            </h2>
+            <p className="text-white/70 leading-relaxed font-light text-lg">
+              {subtitle}
+            </p>
+          </div>
+          <div className="lg:col-span-7">
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap md:flex-nowrap items-center gap-12 pt-8 border-t border-white/10">
+              <div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{clientsCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Clients satisfaits</div>
+              </div>
+              <div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{ratingCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Note moyenne</div>
+              </div>
+              <div>
+                <div className="font-primary font-bold text-4xl text-[var(--jaune-or)] mb-2">{satisfactionCounter.value}</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-white/50 font-bold">Recommandation</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative">
+        <div className="relative border-t border-white/10 pt-12">
           {/* Navigation Buttons */}
           {filteredTestimonials.length > itemsPerView && (
             <>
               <button
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-full shadow-lg hover:bg-[var(--gold-light)]/10 transition-all"
+                className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--jaune-or)]/90 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[#b5832a] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Previous testimonials"
               >
                 <FiChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white/90 backdrop-blur-sm border border-[var(--gold-metallic)]/25 rounded-full shadow-lg hover:bg-[var(--gold-light)]/10 transition-all"
+                className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-[var(--jaune-or)]/90 backdrop-blur-sm border border-white/10 flex items-center justify-center hover:bg-[#b5832a] hover:border-[var(--jaune-or)] transition-all shadow-lg text-white"
                 aria-label="Next testimonials"
               >
                 <FiChevronRight className="w-5 h-5" />
@@ -234,7 +256,7 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
           {/* Testimonials Container */}
           <div className="overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out gap-6"
+              className="flex transition-transform duration-500 ease-in-out"
               style={{
                 transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
                 width: `${(filteredTestimonials.length / itemsPerView) * 100}%`
@@ -243,44 +265,42 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
               {filteredTestimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3"
+                  className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-3"
                 >
-                  <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover h-full">
-                    <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
+                  <div className="group border border-white/10 p-8 rounded-2xl bg-white/5 backdrop-blur-sm h-full hover:border-[var(--jaune-or)]/50 transition-colors flex flex-col">
                     {/* Quote Icon */}
-                    <div className="flex items-center justify-between mb-4">
-                      <FaQuoteLeft className="text-2xl text-[var(--gold-metallic)] opacity-60" />
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-8 h-px bg-[var(--jaune-or)]" />
                       {testimonial.service !== 'all' && (
-                        <span className="text-xs bg-[var(--gold-light)]/20 text-[var(--gold-dark)] px-2 py-1 rounded-full">
+                        <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--jaune-or)]">
                           {getServiceLabel(testimonial.service)}
                         </span>
                       )}
                     </div>
 
                     {/* Rating */}
-                    <div className="flex items-center gap-1 mb-4">
+                    <div className="flex items-center gap-1 mb-6">
                       {renderStars(testimonial.rating)}
                     </div>
 
                     {/* Content */}
-                    <blockquote className="text-secondary text-sm leading-relaxed mb-6">
+                    <blockquote className="text-white/80 font-light leading-relaxed mb-8 text-lg flex-1">
                       "{testimonial.content}"
                     </blockquote>
 
                     {/* Author */}
-                    <div className="border-t border-[var(--gold-metallic)]/25 pt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[var(--gold-light)]/30 flex items-center justify-center">
-                          <span className="text-sm font-display text-[var(--gold-dark)]">
+                    <div className="border-t border-white/10 pt-6 mt-auto">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                          <span className="text-lg font-primary font-bold text-[var(--jaune-or)]">
                             {testimonial.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                         <div>
-                          <div className="font-display text-sm text-[var(--night)]">
+                          <div className="font-primary font-bold text-base text-white mb-1">
                             {testimonial.name}
                           </div>
-                          <div className="text-xs text-secondary">
+                          <div className="text-xs text-white/50 font-medium">
                             {testimonial.role} • {testimonial.company}
                           </div>
                         </div>
@@ -294,41 +314,21 @@ export const TestimonialsCarousel: React.FC<TestimonialsCarouselProps> = ({
 
           {/* Dots Indicator */}
           {filteredTestimonials.length > itemsPerView && (
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-3 mt-12">
               {Array.from({ length: maxIndex + 1 }, (_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-1.5 rounded-full transition-all ${
                     i === currentIndex
-                      ? 'bg-[var(--gold-metallic)] w-6'
-                      : 'bg-[var(--gold-metallic)]/30'
+                      ? 'bg-[var(--jaune-or)] w-8'
+                      : 'bg-white/30 w-4 hover:bg-white/50'
                   }`}
                   aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
             </div>
           )}
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-4 px-6 py-3 bg-[var(--pure-white)]/60 backdrop-blur-sm rounded-xl border border-[var(--gold-metallic)]/25">
-            <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{clientsCounter.value}</div>
-              <div className="text-xs text-secondary">Clients satisfaits</div>
-            </div>
-            <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
-            <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{ratingCounter.value}</div>
-              <div className="text-xs text-secondary">Note moyenne</div>
-            </div>
-            <div className="w-px h-8 bg-[var(--gold-metallic)]/25" />
-            <div className="text-center">
-              <div className="font-display text-xl text-[var(--gold-dark)]">{satisfactionCounter.value}</div>
-              <div className="text-xs text-secondary">Recommandation</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -6,7 +6,7 @@ import EnhancedRichTextEditor from '@/components/CMS/Shared/EnhancedRichTextEdit
 import { useCreatePublication, usePublication, useUpdatePublication } from '@/hooks/useCMS';
 import { useCurrentUser } from '@/hooks/useAuth';
 import { PUBLICATION_CATEGORIES, PUBLICATION_STATUS } from '@/utils/cms/constants';
-import { uploadMediaFile, uploadPublicationImage } from '@/utils/cloudflare';
+import { useR2Upload } from '@/hooks/useR2Upload';
 
 type PublicationCategory = 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses';
 type PublicationStatus = 'draft' | 'published' | 'archived';
@@ -42,6 +42,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
   // Mutations
   const createPublication = useCreatePublication();
   const updatePublication = useUpdatePublication();
+  const { upload: uploadToR2 } = useR2Upload();
 
   if (currentUser === undefined) {
     return (
@@ -116,8 +117,8 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
 
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
-      const result = await uploadPublicationImage(file);
-      return result.url;
+      const { publicUrl } = await uploadToR2(file, 'publications');
+      return publicUrl;
     } catch (error) {
       console.error('Image upload failed:', error);
       throw new Error('Failed to upload image. Please try again.');
@@ -126,18 +127,18 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ publicationId, onClos
 
   const handleAttachmentUpload = async (file: File) => {
     try {
-      const result = await uploadMediaFile(file);
+      const { fileKey, publicUrl } = await uploadToR2(file, 'attachments');
       const newAttachment = {
-        id: result.id,
+        id: fileKey,
         fileName: file.name,
         fileSize: file.size,
         fileType: file.type,
-        url: result.url,
+        url: publicUrl,
       };
       setAttachments(prev => [...prev, newAttachment]);
       setFormData(prev => ({
         ...prev,
-        attachmentIds: [...prev.attachmentIds, result.id as any],
+        attachmentIds: [...prev.attachmentIds, fileKey as any],
       }));
     } catch (error) {
       console.error('Attachment upload failed:', error);

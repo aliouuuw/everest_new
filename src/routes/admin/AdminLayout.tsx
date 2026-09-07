@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from '@tanstack/react-router';
-import { FaBars, FaCog, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
+import { Link, Outlet, useLocation, useNavigate } from '@tanstack/react-router';
+import { FaBars, FaCog, FaFeather, FaGlobe, FaHome, FaImages, FaNewspaper, FaSearch, FaSignOutAlt, FaTachometerAlt, FaUsers } from 'react-icons/fa';
 import { useAuth } from '../../components/Auth/useAuth';
+
+function isNavActive(pathname: string, href: string): boolean {
+  if (href === '/admin') {
+    return pathname === '/admin' || pathname === '/admin/';
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 const AdminLayout: React.FC = () => {
   const { signOut, isTransitioning } = useAuth();
   const navigate = useNavigate();
+  const pathname = useLocation({ select: (l) => l.pathname });
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [activeView, setActiveView] = useState('dashboard');
 
   const navigationItems = [
-    { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: activeView === 'dashboard' },
-    { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: activeView === 'publications' },
-    { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: activeView === 'media' },
-    { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: activeView === 'users' },
-    { icon: <FaCog />, label: "Settings", id: 'settings', href: '/admin/settings', active: activeView === 'settings' },
+    { icon: <FaTachometerAlt />, label: "Dashboard", id: 'dashboard', href: '/admin', active: isNavActive(pathname, '/admin') },
+    { icon: <FaGlobe />, label: "Contenu site", id: 'site-content', href: '/admin/site-content', active: isNavActive(pathname, '/admin/site-content') },
+    { icon: <FaFeather />, label: "Actualités", id: 'articles', href: '/admin/articles', active: isNavActive(pathname, '/admin/articles') },
+    { icon: <FaNewspaper />, label: "Publications", id: 'publications', href: '/admin/publications', active: isNavActive(pathname, '/admin/publications') },
+    { icon: <FaImages />, label: "Media", id: 'media', href: '/admin/media', active: isNavActive(pathname, '/admin/media') },
+    { icon: <FaUsers />, label: "Users", id: 'users', href: '/admin/users', active: isNavActive(pathname, '/admin/users') },
+    { icon: <FaCog />, label: "Settings", id: 'settings', href: '/admin/settings', active: isNavActive(pathname, '/admin/settings') },
   ];
 
   const handleLogout = async () => {
@@ -51,12 +60,20 @@ const AdminLayout: React.FC = () => {
             className="lg:hidden p-2 hover:bg-[var(--night)]/5 rounded-lg transition-colors"
             aria-label="Toggle sidebar"
           >
-            <FaBars className="text-lg text-[var(--night-80)]" />
+            <FaBars className="text-lg text-[rgba(10, 10, 10, 0.8)]" />
           </button>
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
-          <div className="text-sm font-display">CMS Admin</div>
+          <div className="text-sm font-display-aptos">CMS Admin</div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Link
+            to="/"
+            aria-label="Retour au site vitrine (accueil)"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[var(--mauve)] hover:bg-[var(--mauve-05)] rounded-lg transition-colors border border-transparent hover:border-[var(--mauve-15)]"
+          >
+            <FaHome className="text-base shrink-0 opacity-90" aria-hidden />
+            <span className="hidden sm:inline">Site vitrine</span>
+          </Link>
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
             <FaSearch className="text-secondary" />
             <input aria-label="Rechercher" placeholder="Rechercher…" className="bg-transparent text-sm outline-none placeholder:text-secondary/70" />
@@ -84,7 +101,6 @@ const AdminLayout: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => {
-                    setActiveView(item.id);
                     navigate({ to: item.href });
                   }}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
@@ -100,9 +116,9 @@ const AdminLayout: React.FC = () => {
             </nav>
 
           {/* System Status Card */}
-          <div className="mt-8 p-4 rounded-lg bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20">
+          <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">System Status</div>
-            <div className="font-display text-sm text-[var(--night)]">Online</div>
+            <div className="font-display-aptos text-sm text-[var(--night)]">Online</div>
             <div className="text-xs text-secondary mt-1">All systems operational</div>
           </div>
         </aside>

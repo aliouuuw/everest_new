@@ -124,7 +124,7 @@ export const PerformanceDashboard: React.FC = () => {
               return (
                 <div key={i} className="glass-card-dark glass-card-hover">
                   <div className="text-secondary-dark text-xs mb-2">{k.label}</div>
-                  <div className="font-display text-lg flex items-center gap-2">
+                  <div className="font-display-aptos text-lg flex items-center gap-2">
                     {k.positive ? (
                       <FaArrowUp className="text-emerald-400" />
                     ) : (
@@ -139,18 +139,18 @@ export const PerformanceDashboard: React.FC = () => {
 
           {/* Allocation */}
           <div className="glass-card-dark">
-            <div className="font-display text-[var(--pure-white)] mb-4">Allocation d'actifs</div>
+            <div className="font-display-aptos text-[var(--pure-white)] mb-4">Allocation d'actifs</div>
             <div className="space-y-4">
               {allocation.map((a, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-28 h-2.5 rounded-full bg-[var(--night-20)] overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-light)] rounded-full"
+                      className="h-full bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)] rounded-full"
                       style={{ width: `${a.value}%` }}
                     />
                   </div>
                   <div className="text-sm text-secondary-dark flex-1">{a.label}</div>
-                  <div className="font-display text-sm text-[var(--pure-white)]">{a.value}%</div>
+                  <div className="font-display-aptos text-sm text-[var(--pure-white)]">{a.value}%</div>
                 </div>
               ))}
             </div>
@@ -160,7 +160,7 @@ export const PerformanceDashboard: React.FC = () => {
                 {topHoldings.map((h, i) => (
                   <li key={i} className="flex justify-between text-sm">
                     <span className="text-secondary-dark">{h.name}</span>
-                    <span className="font-display text-[var(--pure-white)]">{h.weight}%</span>
+                    <span className="font-display-aptos text-[var(--pure-white)]">{h.weight}%</span>
                   </li>
                 ))}
               </ul>
@@ -172,7 +172,7 @@ export const PerformanceDashboard: React.FC = () => {
         <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="glass-card-dark lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <div className="font-display text-[var(--pure-white)]">Portefeuille vs BRVM</div>
+              <div className="font-display-aptos text-[var(--pure-white)]">Portefeuille vs BRVM</div>
               <div className="flex gap-2">
                 {["YTD", "1Y", "3Y"].map((r) => (
                   <button
@@ -180,8 +180,8 @@ export const PerformanceDashboard: React.FC = () => {
                     onClick={() => setRange(r as TimeRange)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                       range === r
-                        ? "bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg"
-                        : "border border-[var(--gold-metallic-20)] text-[var(--pure-white)] hover:bg-[var(--night-20)] hover:border-[var(--gold-metallic)]"
+                        ? "bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or)] text-[var(--pure-white)] shadow-lg"
+                        : "border border-[var(--jaune-or-20)] text-[var(--pure-white)] hover:bg-[var(--night-20)] hover:border-[var(--jaune-or)]"
                     }`}
                     aria-pressed={range === r}
                   >
@@ -194,8 +194,8 @@ export const PerformanceDashboard: React.FC = () => {
               <svg viewBox="0 0 540 180" className="w-full h-48">
                 <defs>
                   <linearGradient id="gradPortfolioDark" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--gold-light)" stopOpacity="0.9" />
-                    <stop offset="100%" stopColor="var(--gold-metallic)" stopOpacity="0.4" />
+                    <stop offset="0%" stopColor="var(--jaune-or-light)" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="var(--jaune-or)" stopOpacity="0.4" />
                   </linearGradient>
                   <linearGradient id="gradBenchmarkDark" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#64748b" stopOpacity="0.8" />
@@ -206,7 +206,7 @@ export const PerformanceDashboard: React.FC = () => {
                 {/* Grid */}
                 <rect x="0" y="0" width="540" height="180" fill="transparent" />
                 {[...Array(6)].map((_, i) => (
-                  <line key={i} x1="0" x2="540" y1={i * 30} y2={i * 30} stroke="var(--gold-metallic-10)" />
+                  <line key={i} x1="0" x2="540" y1={i * 30} y2={i * 30} stroke="var(--jaune-or-10)" />
                 ))}
 
                 {/* Benchmark */}
@@ -217,7 +217,7 @@ export const PerformanceDashboard: React.FC = () => {
             </div>
             <div className="mt-2 flex items-center gap-4 text-xs text-secondary-dark">
               <div className="flex items-center gap-2">
-                <span className="inline-block w-3 h-3 rounded-full bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-light)]" />
+                <span className="inline-block w-3 h-3 rounded-full bg-gradient-to-r from-[var(--jaune-or)] to-[var(--jaune-or-light)]" />
                 <span className="text-[var(--pure-white)]">Portefeuille</span>
               </div>
               <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ export const PerformanceDashboard: React.FC = () => {
 
           {/* Notes */}
           <div className="glass-card-dark">
-            <div className="font-display text-[var(--pure-white)] mb-4">Notes méthodologiques</div>
+            <div className="font-display-aptos text-[var(--pure-white)] mb-4">Notes méthodologiques</div>
             <ul className="text-sm text-secondary-dark list-disc pl-5 space-y-3">
               <li className="text-[var(--pure-white)]/80">Données simulées pour démonstration visuelle uniquement.</li>
               <li className="text-[var(--pure-white)]/80">Benchmark utilisé: indice composite BRVM (approximation).</li>

@@ -1,0 +1,380 @@
+/**
+ * Light CMS editable-content registry.
+ *
+ * Single source of truth for editable blocks on marketing pages. Used by:
+ *  - The edit panel to render the list of controls for the current page.
+ *  - The Convex `siteContent.upsert` / `remove` mutations to enforce an
+ *    allowlist of mutable content IDs (unknown IDs are rejected server-side).
+ *
+ * Conventions:
+ *  - `id` is `pageKey.section.field` (e.g. `home.hero.title`). Stable across
+ *    refactors; never rename casually.
+ *  - Supports `type: "text"`, `type: "richtext"`, and `type: "image"`.
+ */
+
+export type RegistryFieldType = "text" | "richtext" | "image";
+
+export interface RegistryEntry {
+  id: string;
+  label: string;
+  section: string;
+  type: RegistryFieldType;
+}
+
+export type PageKey =
+  | "home"
+  | "about"
+  | "services"
+  | "offres"
+  | "bourse"
+  | "capital-markets"
+  | "investment-banking"
+  | "mandate"
+  | "expertises"
+  | "contact"
+  | "faq"
+  | "publications"
+  | "actualites";
+
+export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
+  home: [
+    // Hero
+    { id: "home.hero.title", label: "Hero title", section: "Hero", type: "text" },
+    { id: "home.hero.subtitle", label: "Hero subtitle", section: "Hero", type: "text" },
+    { id: "home.hero.ctaPrimary", label: "Hero primary CTA label", section: "Hero", type: "text" },
+    { id: "home.hero.ctaSecondary", label: "Hero secondary CTA label", section: "Hero", type: "text" },
+
+    // Trust Strip — Partner Logos (JSON array)
+    { id: "home.trust.partners", label: "Partenaires — logos", section: "Trust Strip", type: "text" },
+
+    // Positioning
+    { id: "home.positioning.badge", label: "Badge", section: "Positioning", type: "text" },
+    { id: "home.positioning.title", label: "Title", section: "Positioning", type: "text" },
+    { id: "home.positioning.intro", label: "Intro paragraph", section: "Positioning", type: "text" },
+
+    // Value Props
+    { id: "home.valueProps.badge", label: "Badge", section: "Value Props", type: "text" },
+    { id: "home.valueProps.title", label: "Title", section: "Value Props", type: "text" },
+    { id: "home.valueProps.intro", label: "Intro paragraph", section: "Value Props", type: "text" },
+    { id: "home.valueProps.image", label: "Value Props — image", section: "Value Props", type: "image" },
+
+    // Capacity
+    { id: "home.capacity.badge", label: "Badge", section: "Capacity", type: "text" },
+    { id: "home.capacity.titleLead", label: "Title", section: "Capacity", type: "text" },
+    { id: "home.capacity.intro", label: "Intro paragraph", section: "Capacity", type: "text" },
+
+    // Services
+    { id: "home.services.badge", label: "Badge", section: "Services", type: "text" },
+    { id: "home.services.title", label: "Title", section: "Services", type: "text" },
+    { id: "home.services.intro", label: "Intro paragraph", section: "Services", type: "text" },
+
+    // Insights (Actualités + Publications on home)
+    { id: "home.insights.title", label: "Section title", section: "Insights", type: "text" },
+    { id: "home.insights.subtext", label: "Section intro", section: "Insights", type: "text" },
+    { id: "home.insights.actualitesKicker", label: "Actualités — kicker", section: "Insights", type: "text" },
+    { id: "home.insights.actualitesLink", label: "Actualités — voir tout", section: "Insights", type: "text" },
+    { id: "home.insights.publicationsKicker", label: "Publications — kicker", section: "Insights", type: "text" },
+    { id: "home.insights.publicationsLink", label: "Publications — voir tout", section: "Insights", type: "text" },
+
+    // Markets & Opportunities
+    { id: "home.markets.badge", label: "Badge", section: "Markets & Opportunities", type: "text" },
+    { id: "home.markets.title", label: "Title", section: "Markets & Opportunities", type: "text" },
+    { id: "home.markets.intro", label: "Intro paragraph", section: "Markets & Opportunities", type: "text" },
+    { id: "home.markets.linkLabel", label: "Link: see all news", section: "Markets & Opportunities", type: "text" },
+
+    // Contact CTA block
+    { id: "home.cta.badge", label: "Badge", section: "Contact CTA", type: "text" },
+    { id: "home.cta.title", label: "Title", section: "Contact CTA", type: "text" },
+    { id: "home.cta.intro", label: "Intro paragraph", section: "Contact CTA", type: "text" },
+    { id: "home.cta.primary", label: "Primary button label", section: "Contact CTA", type: "text" },
+    { id: "home.cta.secondary", label: "Secondary button label", section: "Contact CTA", type: "text" },
+
+    // FAQ
+    { id: "home.faq.badge", label: "Badge", section: "FAQ", type: "text" },
+    { id: "home.faq.title", label: "Title", section: "FAQ", type: "text" },
+    { id: "home.faq.intro", label: "Intro paragraph", section: "FAQ", type: "text" },
+    { id: "home.faq.linkLabel", label: "Link: see all questions", section: "FAQ", type: "text" },
+  ],
+  about: [
+    // Hero
+    { id: "about.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "about.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "about.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "about.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "about.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Mission & Vision
+    { id: "about.mission.badge", label: "Mission — badge", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.sectionTitle", label: "Mission — titre de section", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.missionTitle", label: "Notre mission — titre", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.missionBody", label: "Notre mission — corps", section: "Mission & Vision", type: "richtext" },
+    { id: "about.mission.visionTitle", label: "Notre vision — titre", section: "Mission & Vision", type: "text" },
+    { id: "about.mission.visionBody", label: "Notre vision — corps", section: "Mission & Vision", type: "richtext" },
+    // Philosophie
+    { id: "about.philosophie.badge", label: "Philosophie — badge", section: "Philosophie", type: "text" },
+    { id: "about.philosophie.title", label: "Philosophie — titre", section: "Philosophie", type: "text" },
+    // Histoire
+    { id: "about.histoire.badge", label: "Histoire — badge", section: "Histoire", type: "text" },
+    { id: "about.histoire.title", label: "Histoire — titre", section: "Histoire", type: "text" },
+    // Équipe
+    { id: "about.equipe.badge", label: "Équipe — badge", section: "Équipe", type: "text" },
+    { id: "about.equipe.title", label: "Équipe — titre", section: "Équipe", type: "text" },
+    // Conformité
+    { id: "about.conformite.badge", label: "Conformité — badge", section: "Conformité", type: "text" },
+    { id: "about.conformite.title", label: "Conformité — titre", section: "Conformité", type: "text" },
+  ],
+  services: [
+    // Hero
+    { id: "services.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "services.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "services.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "services.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Services Overview
+    { id: "services.overview.badge", label: "Approches — badge", section: "Aperçu services", type: "text" },
+    { id: "services.overview.title", label: "Approches — titre", section: "Aperçu services", type: "text" },
+    { id: "services.overview.intro", label: "Approches — intro", section: "Aperçu services", type: "text" },
+    // Gestion Libre
+    { id: "services.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
+    { id: "services.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "richtext" },
+    { id: "services.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
+    // Gestion Assistée
+    { id: "services.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
+    { id: "services.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "richtext" },
+    { id: "services.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
+    // Gestion Sous-Mandat
+    { id: "services.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "services.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "richtext" },
+    { id: "services.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
+  ],
+  offres: [
+    // Hero
+    { id: "offres.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "offres.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "offres.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "offres.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Services Overview
+    { id: "offres.overview.badge", label: "Approches — badge", section: "Aperçu offres", type: "text" },
+    { id: "offres.overview.title", label: "Approches — titre", section: "Aperçu offres", type: "text" },
+    { id: "offres.overview.intro", label: "Approches — intro", section: "Aperçu offres", type: "text" },
+    // Gestion Libre
+    { id: "offres.libre.title", label: "Gestion Libre — titre", section: "Gestion Libre", type: "text" },
+    { id: "offres.libre.description", label: "Gestion Libre — description", section: "Gestion Libre", type: "richtext" },
+    { id: "offres.libre.fees", label: "Gestion Libre — frais", section: "Gestion Libre", type: "text" },
+    // Gestion Assistée
+    { id: "offres.assistee.title", label: "Gestion Assistée — titre", section: "Gestion Assistée", type: "text" },
+    { id: "offres.assistee.description", label: "Gestion Assistée — description", section: "Gestion Assistée", type: "richtext" },
+    { id: "offres.assistee.fees", label: "Gestion Assistée — frais", section: "Gestion Assistée", type: "text" },
+    // Gestion Sous-Mandat
+    { id: "offres.mandat.title", label: "Gestion Sous-Mandat — titre", section: "Gestion Sous-Mandat", type: "text" },
+    { id: "offres.mandat.description", label: "Gestion Sous-Mandat — description", section: "Gestion Sous-Mandat", type: "richtext" },
+    { id: "offres.mandat.fees", label: "Gestion Sous-Mandat — frais", section: "Gestion Sous-Mandat", type: "text" },
+  ],
+  bourse: [
+    // Hero
+    { id: "bourse.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "bourse.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Section headers
+    { id: "bourse.assets.title", label: "Section cours — titre", section: "Cours BRVM", type: "text" },
+    { id: "bourse.assets.subtitle", label: "Section cours — sous-titre", section: "Cours BRVM", type: "text" },
+  ],
+  "capital-markets": [
+    // Hero
+    { id: "capital-markets.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "capital-markets.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "capital-markets.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "capital-markets.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
+    // CTA
+    { id: "capital-markets.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "capital-markets.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  "investment-banking": [
+    // Hero
+    { id: "investment-banking.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "investment-banking.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "investment-banking.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "investment-banking.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
+    // CTA
+    { id: "investment-banking.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "investment-banking.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  mandate: [
+    // Hero
+    { id: "mandate.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "mandate.hero.headline", label: "Hero — titre principal", section: "Hero", type: "text" },
+    { id: "mandate.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Presentation
+    { id: "mandate.presentation", label: "Présentation", section: "Présentation", type: "richtext" },
+    // CTA
+    { id: "mandate.cta.text", label: "CTA — texte principal", section: "CTA", type: "text" },
+    { id: "mandate.cta.subtitle", label: "CTA — sous-texte", section: "CTA", type: "text" },
+  ],
+  expertises: [
+    // Hero
+    { id: "expertises.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "expertises.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Marché des Titres Publics
+    { id: "expertises.mtp.image", label: "Marché des Titres Publics — image", section: "Marché des Titres Publics", type: "image" },
+    { id: "expertises.marche-titres-publics.title", label: "Marché des Titres Publics — titre", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.intro", label: "Marché des Titres Publics — intro", section: "Marché des Titres Publics", type: "richtext" },
+    { id: "expertises.marche-titres-publics.approachLabel", label: "Marché des Titres Publics — libellé approche", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.approachText", label: "Marché des Titres Publics — texte approche", section: "Marché des Titres Publics", type: "richtext" },
+    { id: "expertises.marche-titres-publics.bullet1", label: "Marché des Titres Publics — point 1", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.bullet2", label: "Marché des Titres Publics — point 2", section: "Marché des Titres Publics", type: "text" },
+    { id: "expertises.marche-titres-publics.bullet3", label: "Marché des Titres Publics — point 3", section: "Marché des Titres Publics", type: "text" },
+    // Marché Financier Régional
+    { id: "expertises.mfr.image", label: "Marché Financier Régional — image", section: "Marché Financier Régional", type: "image" },
+    { id: "expertises.marche-financier-regional.title", label: "Marché Financier Régional — titre", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.intro", label: "Marché Financier Régional — intro", section: "Marché Financier Régional", type: "richtext" },
+    { id: "expertises.marche-financier-regional.approachLabel", label: "Marché Financier Régional — libellé approche", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.approachText", label: "Marché Financier Régional — texte approche", section: "Marché Financier Régional", type: "richtext" },
+    { id: "expertises.marche-financier-regional.bullet1", label: "Marché Financier Régional — point 1", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.bullet2", label: "Marché Financier Régional — point 2", section: "Marché Financier Régional", type: "text" },
+    { id: "expertises.marche-financier-regional.bullet3", label: "Marché Financier Régional — point 3", section: "Marché Financier Régional", type: "text" },
+    // Ingénierie Financière
+    { id: "expertises.ing.image", label: "Ingénierie Financière — image", section: "Ingénierie Financière", type: "image" },
+    { id: "expertises.ingenierie-financiere.title", label: "Ingénierie Financière — titre", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.intro", label: "Ingénierie Financière — intro", section: "Ingénierie Financière", type: "richtext" },
+    { id: "expertises.ingenierie-financiere.approachLabel", label: "Ingénierie Financière — libellé approche", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.approachText", label: "Ingénierie Financière — texte approche", section: "Ingénierie Financière", type: "richtext" },
+    { id: "expertises.ingenierie-financiere.bullet1", label: "Ingénierie Financière — point 1", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet2", label: "Ingénierie Financière — point 2", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet3", label: "Ingénierie Financière — point 3", section: "Ingénierie Financière", type: "text" },
+    { id: "expertises.ingenierie-financiere.bullet4", label: "Ingénierie Financière — point 4", section: "Ingénierie Financière", type: "text" },
+    // Private Office
+    { id: "expertises.po.image", label: "Private Office — image", section: "Private Office", type: "image" },
+    { id: "expertises.private-office.title", label: "Private Office — titre", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.intro", label: "Private Office — intro", section: "Private Office", type: "richtext" },
+    { id: "expertises.private-office.approachLabel", label: "Private Office — libellé approche", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.approachText", label: "Private Office — texte approche", section: "Private Office", type: "richtext" },
+    { id: "expertises.private-office.bullet1", label: "Private Office — point 1", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet2", label: "Private Office — point 2", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet3", label: "Private Office — point 3", section: "Private Office", type: "text" },
+    { id: "expertises.private-office.bullet4", label: "Private Office — point 4", section: "Private Office", type: "text" },
+    // CTA
+    { id: "expertises.cta.title", label: "CTA — titre", section: "CTA", type: "text" },
+    { id: "expertises.cta.subtitle", label: "CTA — sous-titre", section: "CTA", type: "text" },
+    { id: "expertises.cta.label", label: "CTA — label bouton", section: "CTA", type: "text" },
+  ],
+  contact: [
+    // Hero
+    { id: "contact.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "contact.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Form
+    { id: "contact.form.title", label: "Formulaire — titre", section: "Formulaire", type: "text" },
+    { id: "contact.form.intro", label: "Formulaire — intro", section: "Formulaire", type: "richtext" },
+    { id: "contact.form.privacy", label: "Formulaire — confidentialité", section: "Formulaire", type: "richtext" },
+    { id: "contact.form.submit", label: "Formulaire — bouton", section: "Formulaire", type: "text" },
+    // Info panels
+    { id: "contact.info.badge", label: "Coordonnées — badge", section: "Coordonnées", type: "text" },
+    { id: "contact.info.company", label: "Coordonnées — société", section: "Coordonnées", type: "text" },
+    { id: "contact.info.license", label: "Coordonnées — agrément", section: "Coordonnées", type: "text" },
+    { id: "contact.hours.badge", label: "Horaires — badge", section: "Horaires", type: "text" },
+    { id: "contact.hours.title", label: "Horaires — titre", section: "Horaires", type: "text" },
+    { id: "contact.hours.body", label: "Horaires — texte", section: "Horaires", type: "richtext" },
+  ],
+  faq: [
+    // Hero
+    { id: "faq.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "faq.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "faq.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "faq.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    { id: "faq.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
+    // Q&A section
+    { id: "faq.qa.badge", label: "FAQ — badge", section: "FAQ", type: "text" },
+    { id: "faq.qa.title", label: "FAQ — titre de section", section: "FAQ", type: "text" },
+    // Glossary
+    { id: "faq.glossary.badge", label: "Abécédaire — badge", section: "Abécédaire", type: "text" },
+    { id: "faq.glossary.title", label: "Abécédaire — titre", section: "Abécédaire", type: "text" },
+    // CTA
+    { id: "faq.cta.title", label: "CTA — titre", section: "CTA", type: "text" },
+    { id: "faq.cta.subtitle", label: "CTA — sous-titre", section: "CTA", type: "text" },
+    { id: "faq.cta.ctaLabel", label: "CTA — label bouton", section: "CTA", type: "text" },
+  ],
+  publications: [
+    // Hero
+    { id: "publications.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "publications.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "publications.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+  ],
+  actualites: [
+    // Hero
+    { id: "actualites.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
+    { id: "actualites.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
+    { id: "actualites.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
+    { id: "actualites.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+  ],
+};
+
+/** Flat set of every known content ID across all pages. */
+export const registryIds: ReadonlySet<string> = new Set(
+  Object.values(registry).flatMap((entries) => entries.map((e) => e.id)),
+);
+
+/** Lookup a registry entry by content ID (returns undefined if unknown). */
+export function getRegistryEntry(contentId: string): RegistryEntry | undefined {
+  for (const entries of Object.values(registry)) {
+    const hit = entries.find((e) => e.id === contentId);
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
+/** Whether the given ID is in the registry allowlist. */
+export function isKnownContentId(contentId: string): boolean {
+  return registryIds.has(contentId);
+}
+
+/** Max length for a single text value (characters). */
+export const MAX_VALUE_LENGTH = 5000;
+
+/** Stable order for admin page picker and tooling. */
+export const PAGE_KEYS: ReadonlyArray<PageKey> = [
+  "home",
+  "about",
+  "services",
+  "offres",
+  "bourse",
+  "capital-markets",
+  "investment-banking",
+  "mandate",
+  "expertises",
+  "contact",
+  "faq",
+  "publications",
+  "actualites",
+];
+
+/** Human-readable labels for the admin content editor. */
+export const PAGE_KEY_LABELS: Record<PageKey, string> = {
+  home: "Accueil",
+  about: "À propos",
+  services: "Services",
+  offres: "Offres",
+  bourse: "Bourse (BRVM)",
+  "capital-markets": "Marché des titres publics",
+  "investment-banking": "Ingénierie financière",
+  mandate: "Gestion sous mandat",
+  expertises: "Expertises",
+  contact: "Contact",
+  faq: "FAQ",
+  publications: "Publications",
+  actualites: "Actualités",
+};
+
+/** Public path to open a preview of the page (marketing site). */
+export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
+  home: "/",
+  about: "/about",
+  services: "/services",
+  offres: "/offres",
+  bourse: "/bourse",
+  "capital-markets": "/marche-capitaux",
+  "investment-banking": "/ingenieurie-financiere",
+  mandate: "/gestion-sous-mandat",
+  expertises: "/expertises",
+  contact: "/contact",
+  faq: "/faq",
+  publications: "/publications",
+  actualites: "/actualites",
+};

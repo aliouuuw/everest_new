@@ -1,4 +1,9 @@
-import { useReveal } from "../Hooks/useReveal";
+import { useState } from 'react';
+import { useReveal } from '../Hooks/useReveal';
+import { FiArrowRight } from 'react-icons/fi';
+import { InvestorProfileModal } from '../InvestorProfile';
+import { EditableText } from '../../cms';
+import { PillBadge } from '../ui';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
 
@@ -7,95 +12,73 @@ export const CTA: React.FC<{
   primaryHref?: string;
   primaryLabel?: string;
   secondaryHref?: string;
-  secondaryLabel?: string;
-}> = ({ scheme = 'ivory', primaryHref = '#contact', primaryLabel = 'Nous contacter', secondaryHref = '#offres', secondaryLabel = 'Découvrir nos offres' }) => {
+  secondaryLabel?: string | null;
+}> = ({ primaryHref = '/contact', primaryLabel = 'Nous contacter', secondaryLabel = 'Découvrir nos offres' }) => {
   const sectionRef = useReveal<HTMLElement>();
-
-  const schemes: Record<CtaScheme, {
-    card: string;
-    bar: string;
-    title: string;
-    body: string;
-    primaryBtn: string;
-    secondaryBtn: string;
-    gridOpacity: number;
-  }> = {
-    ivory: {
-      card: 'bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 shadow-sm',
-      bar: 'bg-[var(--gold-metallic)]',
-      title: 'text-[var(--night)]',
-      body: 'text-secondary',
-      primaryBtn: 'px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg rounded-lg',
-      secondaryBtn: 'px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 bg-[var(--white-smoke)]/80 hover:bg-[var(--night)]/5 rounded-lg',
-      gridOpacity: 0.12,
-    },
-    ink: {
-      card: 'bg-[var(--night)] border border-[var(--night-20)] shadow-sm',
-      bar: 'bg-[var(--gold-metallic)]',
-      title: 'text-[var(--pure-white)]',
-      body: 'text-[var(--pure-white)]/80',
-      primaryBtn: 'px-7 py-3.5 bg-[var(--gold-metallic)] text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--gold-light)] hover:shadow-lg rounded-lg border-0',
-      secondaryBtn: 'px-7 py-3.5 bg-transparent border border-[var(--pure-white)]/30 text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--pure-white)]/10 hover:border-[var(--pure-white)]/50 rounded-lg',
-      gridOpacity: 0.08,
-    },
-    sand: {
-      card: 'bg-[var(--gold-light)]/35 border border-[var(--gold-metallic)]/30 shadow-sm',
-      bar: 'bg-[var(--gold-dark)]',
-      title: 'text-[var(--night)]',
-      body: 'text-[var(--night)]/80',
-      primaryBtn: 'px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg rounded-lg',
-      secondaryBtn: 'px-7 py-3.5 border border-[var(--gold-dark)]/40 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--gold-dark)]/60 bg-[var(--pure-white)]/60 hover:bg-[var(--pure-white)]/80 rounded-lg',
-      gridOpacity: 0.10,
-    },
-    metallic: {
-      card: 'relative bg-gradient-to-br from-[#ca942f] via-[#e9d89c] to-[#ca942f] border border-[#b8860b]/40 shadow-2xl shadow-[#d4af37]/30 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:animate-pulse',
-      bar: 'bg-gradient-to-b from-[#ffd700] to-[#b8860b]',
-      title: 'text-[#2c1810] drop-shadow-sm',
-      body: 'text-[#2c1810]/90 drop-shadow-sm',
-      primaryBtn: 'px-7 py-3.5 bg-gradient-to-r from-[#2c1810] to-[#1a0f08] text-[#f4e6b8] font-medium text-sm tracking-wide transition-all duration-300 hover:from-[#1a0f08] hover:to-[#0d0704] hover:shadow-lg hover:shadow-[#2c1810]/30 rounded-lg border border-[#b8860b]/30',
-      secondaryBtn: 'px-7 py-3.5 border-2 border-[#b8860b]/50 text-[#2c1810] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[#b8860b]/70 bg-[#f4e6b8]/20 hover:bg-[#f4e6b8]/40 rounded-lg backdrop-blur-sm',
-      gridOpacity: 0.04,
-    },
-  };
-
-  const s = schemes[scheme];
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <section ref={sectionRef} className="reveal py-24" id="contact">
-      <div className="mx-auto max-w-6xl px-6 ">
-        <div className={`rounded-2xl ${s.card} relative overflow-hidden p-10 sm:p-14 transition-all card-hover ${scheme === 'metallic' ? 'metallic-card' : ''}`}>
-          {/* Metallic shine effect */}
-          {scheme === 'metallic' && (
-            <>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 translate-x-[-100%] animate-shine" />
-              <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-black/20 to-transparent" />
-            </>
-          )}
-
-          {/* Decorative gold glow */}
-          <div className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#var(--gold-light)] blur-3xl" />
-          {/* left gold bar accent */}
-          <div className={`absolute left-0 top-0 bottom-0 w-1 ${s.bar} ${scheme === 'metallic' ? 'metallic-bar' : ''}`} />
-          {/* subtle grid pattern */}
-          {/* <div className="absolute inset-0 pointer-events-none" style={{ opacity: s.gridOpacity }}>
-            <div className="w-full h-full" style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '48px 48px' }} />
-          </div> */}
-
-          <div className="relative z-10 text-left">
-            <span className="kicker">Prise de contact</span>
-            <h3 className={`heading-display ${s.title} text-2xl sm:text-3xl mt-3`}>Prêts à franchir un cap ?</h3>
-            <p className={`${s.body} mt-3 max-w-2xl`}>Échangeons autour de vos objectifs d&apos;investissement et de la meilleure manière de les atteindre.</p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <a href={primaryHref} className={`${s.primaryBtn} font-display`}>{primaryLabel}</a>
-              {secondaryHref && (
-                <a href={secondaryHref} className={`${s.secondaryBtn} font-display`}>{secondaryLabel}</a>
-              )}
+    <>
+    <section
+      ref={sectionRef}
+      className="reveal relative py-16 md:py-20 bg-[var(--pure-white)]"
+      id="contact"
+    >
+      <div className="page-container">
+        <div
+          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
+        >
+          <div className="relative z-10 lg:w-3/5">
+            <div className="mb-6">
+              <PillBadge>
+                <EditableText id="home.cta.badge" as="span">
+                  Prise de contact
+                </EditableText>
+              </PillBadge>
             </div>
+            <h2 className="luxury-heading mb-6">
+              <EditableText id="home.cta.title" as="span">
+                Accéder à une expertise financière structurée.
+              </EditableText>
+            </h2>
+            <EditableText
+              id="home.cta.intro"
+              as="p"
+              className="max-w-md font-primary text-sm md:text-base font-light leading-[1.7] text-[var(--night-70)]"
+            >
+              Échangeons sur vos objectifs — rendement, horizon, contraintes réglementaires — et sur la formule
+              la plus adaptée : courtage, conseil ou gestion sous mandat.
+            </EditableText>
           </div>
+
+          <div className="relative z-10 flex w-full flex-col items-start gap-6 lg:w-2/5 lg:items-end">
+            {secondaryLabel && (
+              <button
+                type="button"
+                onClick={() => setIsProfileOpen(true)}
+                className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
+              >
+                <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
+                <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+              </button>
+            )}
+            <a
+              href={primaryHref}
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#012d2a] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#014542] hover:shadow-lg sm:justify-start"
+            >
+              <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
+              <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
+
+    <InvestorProfileModal
+      isOpen={isProfileOpen}
+      onClose={() => setIsProfileOpen(false)}
+    />
+    </>
   );
 };

@@ -26,11 +26,11 @@ import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
 import { MandateMgmtPage } from './routes/MandateMgmtPage'
 import { ServicesPage } from './routes/ServicesPage'
+import { OffresPage } from './routes/OffresPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
-// SimulateurPage deprecated - calculator moved to landing page
-// import { SimulateurPage } from './routes/SimulateurPage'
+import { SimulateurPage } from './routes/SimulateurPage'
 import ProtectedAdminLayout from './routes/admin/ProtectedAdminLayout.tsx'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
 import { PublicationsList } from './routes/admin/PublicationsList'
@@ -39,14 +39,36 @@ import { MediaManagement } from './routes/admin/MediaManagement'
 import { UserManagement } from './routes/admin/UserManagement'
 import UserFormPage from './routes/admin/UserFormPage'
 import { Settings } from './routes/admin/Settings'
+import { SiteContentPage } from './routes/admin/SiteContentPage'
+import { ArticlesList } from './routes/admin/ArticlesList'
+import { ArticleForm } from './routes/admin/ArticleForm'
 import { AuthPage } from './routes/AuthPage'
+import { ActualitesPage } from './routes/ActualitesPage'
+import { ArticlePage } from './routes/ArticlePage'
+import { ContactPage } from './routes/ContactPage'
+import { ExpertisesPage } from './routes/ExpertisesPage'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
 
+const redirectTo = (target: string) => () => {
+  window.location.replace(target)
+  return null
+}
+
 
 const rootRoute = createRootRoute({
   component: Layout,
+  validateSearch: (raw: Record<string, unknown>) => {
+    const out: { edit?: boolean; panel?: boolean } = {}
+    if (raw.edit === true || raw.edit === 'true' || raw.edit === 1 || raw.edit === '1') {
+      out.edit = true
+    }
+    if (raw.panel === true || raw.panel === 'true' || raw.panel === 1 || raw.panel === '1') {
+      out.panel = true
+    }
+    return out
+  },
 })
 
 const indexRoute = createRoute({
@@ -64,13 +86,50 @@ const aboutRoute = createRoute({
 const publicationsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications',
+  validateSearch: (raw: Record<string, unknown>) => {
+    const f = raw.frequency
+    if (f === 'hebdomadaire' || f === 'mensuelle' || f === 'semestrielle') {
+      return { frequency: f }
+    }
+    return {}
+  },
   component: PublicationsPage,
+})
+
+const actualitesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/actualites',
+  component: ActualitesPage,
+})
+
+const marchesOpportunitesRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/marches-opportunites',
+  component: redirectTo('/actualites'),
+})
+
+const articleRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/actualites/$slug',
+  component: ArticlePage,
 })
 
 const publicationRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications/$slug',
   component: PublicationPage,
+})
+
+const insightsRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/insights',
+  component: redirectTo('/publications'),
+})
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: ContactPage,
 })
 
 const faqRoute = createRoute({
@@ -101,6 +160,36 @@ const ibRoute = createRoute({
   component: InvestmentBankingPage,
 })
 
+const expertisesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises',
+  component: ExpertisesPage,
+})
+
+const expertiseMtpRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/marche-titres-publics',
+  component: redirectTo('/expertises#marche-titres-publics'),
+})
+
+const expertiseBrvmRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/marche-financier-regional',
+  component: redirectTo('/expertises#marche-financier-regional'),
+})
+
+const expertiseEngineeringRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/ingenierie-financiere',
+  component: redirectTo('/expertises#ingenierie-financiere'),
+})
+
+const expertisePrivateOfficeRedirectRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/expertises/private-office',
+  component: redirectTo('/expertises#private-office'),
+})
+
 const mandateRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-sous-mandat',
@@ -111,6 +200,12 @@ const servicesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/services',
   component: ServicesPage,
+})
+
+const offresRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/offres',
+  component: OffresPage,
 })
 
 const gestionLibreRoute = createRoute({
@@ -131,14 +226,10 @@ const bourseRoute = createRoute({
   component: BoursePage,
 })
 
-// Simulateur route deprecated - redirects to home
 const simulateurRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/simulateur',
-  component: () => {
-    window.location.href = '/';
-    return null;
-  },
+  path: '/outils-investisseur',
+  component: SimulateurPage,
 })
 
 const portalRoute = createRoute({
@@ -213,6 +304,30 @@ const adminSettingsRoute = createRoute({
   component: Settings,
 })
 
+const adminSiteContentRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/site-content',
+  component: SiteContentPage,
+})
+
+const adminArticlesRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles',
+  component: ArticlesList,
+})
+
+const adminNewArticleRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles/new',
+  component: ArticleForm,
+})
+
+const adminEditArticleRoute = createRoute({
+  getParentRoute: () => adminLayoutRoute,
+  path: '/articles/$id/edit',
+  component: ArticleForm,
+})
+
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
@@ -241,14 +356,25 @@ const notFoundRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
+  actualitesRoute,
+  marchesOpportunitesRedirectRoute,
+  articleRoute,
   publicationsRoute,
   publicationRoute,
+  insightsRedirectRoute,
+  contactRoute,
   faqRoute,
   ceoRoute,
   capitalMarketsRoute,
   ibRoute,
+  expertisesRoute,
+  expertiseMtpRedirectRoute,
+  expertiseBrvmRedirectRoute,
+  expertiseEngineeringRedirectRoute,
+  expertisePrivateOfficeRedirectRoute,
   mandateRoute,
   servicesRoute,
+  offresRoute,
   gestionLibreRoute,
   gestionAssisteeRoute,
   bourseRoute,
@@ -257,6 +383,9 @@ const routeTree = rootRoute.addChildren([
   dashboardRoute,
   adminLayoutRoute.addChildren([
     adminDashboardRoute,
+    adminArticlesRoute,
+    adminNewArticleRoute,
+    adminEditArticleRoute,
     adminPublicationsRoute,
     adminNewPublicationRoute,
     adminEditPublicationRoute,
@@ -265,6 +394,7 @@ const routeTree = rootRoute.addChildren([
     adminNewUserRoute,
     adminEditUserRoute,
     adminSettingsRoute,
+    adminSiteContentRoute,
   ]),
   authRoute,
   notFoundRoute,

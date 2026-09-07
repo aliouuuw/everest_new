@@ -97,45 +97,6 @@ export default defineSchema({
     .index("by_uploader", ["uploadedBy"])
     .index("by_cloudflare_id", ["cloudflareId"]),
 
-  // Upload Sessions Table (for tracking uploads)
-  uploadSessions: defineTable({
-    // File information
-    fileKey: v.string(),
-    fileName: v.string(),
-    fileType: v.string(),
-    contentType: v.string(),
-
-    // Upload status
-    status: v.union(
-      v.literal("pending"),
-      v.literal("completed"),
-      v.literal("failed")
-    ),
-
-    // Cloudflare data (populated after upload)
-    cloudflareId: v.optional(v.string()),
-    cloudflareUrl: v.optional(v.string()),
-    fileSize: v.optional(v.number()),
-    variants: v.optional(v.object({
-      thumbnail: v.string(),
-      medium: v.string(),
-      large: v.string(),
-      webp: v.string(),
-    })),
-
-    // Relationships
-    publicationId: v.optional(v.id("publications")),
-    uploadedBy: v.id("users"),
-
-    // Timestamps
-    createdAt: v.number(),
-    completedAt: v.optional(v.number()),
-    failedAt: v.optional(v.number()),
-  })
-    .index("by_status", ["status"])
-    .index("by_uploader", ["uploadedBy"])
-    .index("by_file_key", ["fileKey"]),
-
   // Users Table
   users: defineTable({
     // Authentication
@@ -180,4 +141,117 @@ export default defineSchema({
   })
     .index("by_slug", ["slug"])
     .index("by_order", ["order"]),
+
+  // Investor Profile Leads Table
+  investorProfileLeads: defineTable({
+    // Personal Information
+    firstName: v.string(),
+    lastName: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+
+    // Profile Results
+    profileType: v.union(
+      v.literal("conservative"),
+      v.literal("moderate"),
+      v.literal("balanced"),
+      v.literal("growth"),
+      v.literal("aggressive")
+    ),
+    profileTitle: v.string(),
+    riskLevel: v.number(),
+
+    // Quiz Answers (stored as JSON)
+    answers: v.array(v.object({
+      questionId: v.string(),
+      value: v.number(),
+    })),
+
+    // Investment Amount (from quiz)
+    investmentAmount: v.optional(v.number()), // 1-4 scale
+
+    // Email Status
+    emailSent: v.boolean(),
+    emailSentAt: v.optional(v.number()),
+    emailError: v.optional(v.string()),
+
+    // PDF Report
+    pdfGenerated: v.boolean(),
+    pdfUrl: v.optional(v.string()),
+
+    // Source tracking
+    source: v.optional(v.string()), // 'cta_button', 'auto_trigger', etc.
+    userAgent: v.optional(v.string()),
+
+    // Timestamps
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_profile_type", ["profileType"])
+    .index("by_created_at", ["createdAt"]),
+
+  // External Articles Table (scraped from sikafinance.com & madisinvest.com)
+  externalArticles: defineTable({
+    guid: v.string(),
+    slug: v.optional(v.string()),
+    title: v.string(),
+    excerpt: v.string(),
+    content: v.optional(v.string()),   // Full article HTML content
+    url: v.string(),          // Original source URL
+    imageUrl: v.string(),
+    publishedAt: v.number(),
+    source: v.string(),       // "sika-finance" | "madis-invest"
+    sourceName: v.string(),   // "Sika Finance" | "Madis Invest"
+    category: v.string(),
+    fetchedAt: v.number(),
+  })
+    .index("by_source", ["source"])
+    .index("by_guid", ["guid"])
+    .index("by_published", ["publishedAt"])
+    .index("by_slug", ["slug"]),
+
+  // Internal News Articles Table (written by admins, shown on /actualites)
+  articles: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    excerpt: v.string(),
+    content: v.string(),
+    imageUrl: v.optional(v.string()),
+    category: v.union(
+      v.literal("Marchés"),
+      v.literal("Obligations"),
+      v.literal("Finance"),
+      v.literal("Économie"),
+      v.literal("BRVM"),
+      v.literal("Analyses")
+    ),
+    status: v.union(
+      v.literal("draft"),
+      v.literal("published"),
+      v.literal("archived")
+    ),
+    featured: v.boolean(),
+    authorId: v.id("users"),
+    tags: v.array(v.string()),
+    publishedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_status", ["status"])
+    .index("by_featured", ["featured"])
+    .index("by_published", ["publishedAt"]),
+
+  // Site Content Table (Light CMS overrides for marketing pages)
+  siteContent: defineTable({
+    contentId: v.string(),                   // e.g. "home.hero.title"
+    pageKey: v.string(),                     // e.g. "home"
+    type: v.union(v.literal("text"), v.literal("richtext"), v.literal("image")),
+    value: v.string(),
+    updatedBy: v.id("users"),
+    updatedAt: v.number(),
+  })
+    .index("by_contentId", ["contentId"])
+    .index("by_page", ["pageKey"]),
 });

@@ -1,19 +1,37 @@
-import { HeroSection } from './components/Hero';
-import { CTA, ClientPortalPreview, Insights, MountainTransition, Services, ValueProps } from './components/Sections';
-import { InvestmentCalculator } from './components/Sections/InvestmentCalculator';
+import { HeroSectionMountain } from './components/Hero';
+import {
+  Capacity,
+  CTA,
+  FAQ,
+  InsightsMerged,
+  Positioning,
+  Services,
+  TrustStrip,
+  ValueProps,
+} from './components/Sections';
 
 function App() {
   return (
     <>
       {/* Hero Section - Full viewport background */}
-      <HeroSection />
+      <HeroSectionMountain />
+      <TrustStrip />
+      {/* PM §2 — Positionnement (new) */}
+      <Positioning />
+      {/* ValueProps — image + animated stats (proof) */}
       <ValueProps />
+      {/* PM §3 — Capacité d'intervention (new) */}
+      <Capacity />
+      {/* PM §4 — Nos expertises */}
       <Services />
-      <Insights />
-      <MountainTransition />
-      <InvestmentCalculator calculatorOnly />
-      <ClientPortalPreview />
-      <CTA scheme="metallic" secondaryHref="https://everest-account-opening.vercel.app/new-home" secondaryLabel="Ouvrir un compte" />
+      {/* PM §5-6 — Insights : actualités & publications */}
+      <InsightsMerged />
+      <CTA
+        scheme="ivory"
+        secondaryHref="https://everest-account-opening.vercel.app/new-home"
+        secondaryLabel="Évaluer mon profil d'investisseur"
+      />
+      <FAQ />
     </>
   );
 }

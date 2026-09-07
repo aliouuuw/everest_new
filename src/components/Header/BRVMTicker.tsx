@@ -24,23 +24,10 @@ const mockBRVMData: Array<StockData> = [
 export const BRVMTicker: React.FC = () => {
   const location = useLocation();
   const [currentData, setCurrentData] = useState<Array<StockData>>(mockBRVMData);
-  const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
-
-  useEffect(() => {
-    // Show ticker after scrolling down from hero
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const heroHeight = window.innerHeight;
-      setIsVisible(scrollY > heroHeight * 0.3);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     // Simulate live data updates every 30 seconds
@@ -76,11 +63,9 @@ export const BRVMTicker: React.FC = () => {
   const handlePause = () => setIsPaused(true);
   const handleResume = () => setIsPaused(false);
 
-  if (!isVisible) return null;
-
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-20 bg-[var(--pure-white)]/80 backdrop-blur supports-[backdrop-filter]:glassmorphism border-t border-black/5 py-2.5 [padding-bottom:env(safe-area-inset-bottom)]"
+      className="fixed top-0 left-0 right-0 z-[60] bg-[var(--pure-white)] border-b border-black/5 py-2"
       role="region"
       aria-label="BRVM ticker"
     >
@@ -88,8 +73,8 @@ export const BRVMTicker: React.FC = () => {
         <div className="flex items-center justify-between pb-2">
           {/* BRVM Label - visible on all screen sizes */}
           <div className="flex items-center gap-2 text-secondary">
-            <div className="w-2 h-2 bg-[var(--gold-dark)] rounded-full animate-pulse" aria-hidden="true"></div>
-            <span className="kicker text-[var(--gold-dark)] pr-2">BRVM</span>
+            <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full animate-pulse" aria-hidden="true"></div>
+            <span className="kicker text-[var(--jaune-or)] pr-2">BRVM</span>
           </div>
 
           {/* Desktop Ticker - hidden on mobile */}
@@ -104,7 +89,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -132,7 +117,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.map((stock) => (
                 <div key={`${stock.symbol}-duplicate`} className="flex items-center gap-3 whitespace-nowrap min-w-[140px] max-w-[180px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -171,7 +156,7 @@ export const BRVMTicker: React.FC = () => {
               {currentData.slice(0, 5).map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-2 whitespace-nowrap min-w-[120px] max-w-[150px]">
                   <div className="text-xs">
-                    <div className="font-medium font-display truncate">{stock.symbol}</div>
+                    <div className="font-medium font-display-aptos truncate">{stock.symbol}</div>
                     <div className="opacity-80 numeric-tabular">{stock.price.toLocaleString()}</div>
                   </div>
                   <div
@@ -211,7 +196,7 @@ export const BRVMTicker: React.FC = () => {
             >
               {currentData.slice(0, 4).map((stock) => (
                 <div key={stock.symbol} className="flex items-center gap-1.5 whitespace-nowrap min-w-[80px] max-w-[100px]">
-                  <span className="font-medium font-display truncate">{stock.symbol}</span>
+                  <span className="font-medium font-display-aptos truncate">{stock.symbol}</span>
                   <span className="opacity-80 numeric-tabular truncate">{stock.price.toLocaleString()}</span>
                   <span
                     className={`truncate ${

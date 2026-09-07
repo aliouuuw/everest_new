@@ -1,11 +1,25 @@
-import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useState } from 'react'
 import { useReveal } from '../Hooks/useReveal'
 import type { Department } from '../../data/departments'
+import { EditableImage, EditableText, useContent } from '../../cms'
 
 interface DepartmentPageProps {
   department: Department
+}
+
+const formatHeadline = (text: string) => {
+  const parts = text.split('.').filter(p => p.trim() !== '')
+  if (parts.length === 0) return text
+
+  return <span style={{ color: 'var(--night-80)' }}>{text}</span>
+}
+
+const SLUG_TO_PAGEKEY: Record<string, string> = {
+  'marche-capitaux': 'capital-markets',
+  'ingenieurie-financiere': 'investment-banking',
+  'gestion-sous-mandat': 'mandate',
 }
 
 export const DepartmentPage = ({ department }: DepartmentPageProps) => {
@@ -19,9 +33,11 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
   const ctaRef = useReveal<HTMLElement>()
 
   const {
+    slug,
     department_name,
     hero_headline,
     hero_subtitle,
+    hero_highlight,
     presentation,
     metrics,
     differentiators,
@@ -35,46 +51,71 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
     cta_subtitle,
   } = department
 
+  const deptPageKey = SLUG_TO_PAGEKEY[slug] ?? slug
+  const heroBgOverride = useContent(`${deptPageKey}.hero.background`)
+  const resolvedHeroBg =
+    heroBgOverride?.value !== undefined && heroBgOverride.value !== ''
+      ? heroBgOverride.value
+      : hero_background
+
+  const headlineOverride = useContent(`${slug}.hero.headline`)
+  const resolvedHeadline =
+    headlineOverride?.value !== undefined && headlineOverride.value !== ''
+      ? headlineOverride.value
+      : hero_headline
+
   const [activeSolution, setActiveSolution] = useState(0)
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--gold-metallic)] selection:text-white">
-      {/* ─── 1. Hero — Editorial & Asymmetrical ─── */}
-      <section ref={heroRef} className="reveal relative min-h-screen flex items-end pb-20 pt-40 border-b border-black/10">
-        {hero_background && (
-          <div className="absolute top-0 right-0 w-full md:w-2/3 h-[70vh] z-0 overflow-hidden">
-            <img
-              src={hero_background}
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
+      {/* ─── 1. Hero — Redesigned ─── */}
+      <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-end pb-20 pt-40 bg-white border-b border-black/10">
+        {resolvedHeroBg && (
+          <div className="absolute top-0 left-0 w-full h-[80%] z-0 overflow-hidden">
+            <EditableImage
+              id={`${deptPageKey}.hero.background`}
+              src={resolvedHeroBg}
               alt={department_name}
-              className="w-full h-full object-cover opacity-60 contrast-125"
+              className="w-full h-full object-cover"
+              style={{
+                maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
+              }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--pure-white)] via-[var(--pure-white)]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--pure-white)] via-transparent to-transparent" />
+            {/* Soft gradient to blend */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white pointer-events-none" />
           </div>
         )}
         
-        <div className="relative z-10 w-full px-6 md:px-12 mx-auto max-w-[1600px]">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-            <div className="md:col-span-8">
-              <div className="flex items-center gap-4 mb-12">
-                <div className="w-12 h-px bg-[var(--gold-dark)]" />
-                <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--gold-dark)]">
+        <div className="relative z-10 w-full page-container mt-auto pt-32">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+            <div className="lg:col-span-7">
+              <div className="mb-6">
+                <span className="px-6 py-2.5 rounded-full bg-[var(--jaune-or)] text-white text-sm font-bold tracking-wide shadow-sm inline-block">
                   {department_name}
                 </span>
               </div>
-              <h1 className="font-display text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.95] tracking-tight mb-8">
-                {hero_headline}
+              <h1 className="font-primary font-bold text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] tracking-tight">
+                {formatHeadline(resolvedHeadline)}
               </h1>
+              {hero_highlight && hero_highlight.length > 0 && (
+                <div className="mt-8 inline-flex flex-col gap-1 px-6 py-4 rounded-2xl border border-[var(--jaune-or)]/30 bg-[var(--jaune-or)]/10">
+                  {hero_highlight.map((line, i) => (
+                    <span key={i} className="font-primary font-bold text-lg text-[var(--jaune-or)]">{line}</span>
+                  ))}
+                </div>
+              )}
             </div>
             
-            <div className="md:col-span-4 pb-4">
-              <p className="text-lg md:text-xl leading-relaxed text-[var(--night-80)] font-light mb-10 border-l border-[var(--gold-metallic)] pl-6">
-                {hero_subtitle}
-              </p>
-              <a href="#solutions" className="btn-primary group inline-flex items-center justify-center gap-4 px-8 py-4 text-xs font-bold tracking-[0.2em] uppercase transition-all mt-4 w-fit">
-                <span>Découvrir les solutions</span>
-                <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
-              </a>
+            <div className="lg:col-span-5 pb-2">
+              <div className="border-l-[3px] border-[var(--jaune-or)] pl-6 lg:pl-8">
+                <p className="text-xl md:text-2xl leading-relaxed text-[var(--night)] font-medium mb-8">
+                  <EditableText id={`${slug}.hero.subtitle`}>{hero_subtitle}</EditableText>
+                </p>
+                <a href="#solutions" className="bg-[var(--jaune-or)] hover:bg-[#b07d24] text-white rounded-full px-8 py-4 text-sm font-bold transition-all inline-block shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                  Découvrir nos solutions
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -83,19 +124,19 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 2. Metrics — Stark & Engineered ─── */}
       {metrics && metrics.length > 0 && (
         <section ref={metricsRef} className="reveal border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 md:grid-cols-3">
               {metrics.map((metric, i) => (
                 <div key={i} className={`py-16 md:py-24 ${i < metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-black/10' : ''} ${i === 1 ? 'md:px-16' : i === 2 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="flex items-baseline gap-2 mb-4">
-                    <div className="font-display text-6xl md:text-8xl tracking-tighter text-[var(--night)]">
+                    <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night-80)]">
                       {metric.value}
                     </div>
                     {metric.suffix && (
-                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--gold-dark)] uppercase">{metric.suffix}</div>
+                      <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">{metric.suffix}</div>
                     )}
                   </div>
-                  <div className="text-[11px] font-bold tracking-[0.2em] text-[var(--night-80)] uppercase">
+                  <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
                     {metric.label}
                   </div>
                 </div>
@@ -108,15 +149,15 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 3. "Who is this for?" — Raw Editorial List ─── */}
       {target_personas.length > 0 && (
         <section ref={personasRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Audience cible</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Audience cible</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Conçu pour vos enjeux spécifiques.
                 </h2>
-                <p className="text-lg text-[var(--night-80)] leading-relaxed font-light">
-                  {presentation}
+                <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
+                  <EditableText id={`${slug}.presentation`}>{presentation}</EditableText>
                 </p>
               </div>
               
@@ -124,14 +165,14 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="border-t border-black/10">
                   {target_personas.map((persona, i) => (
                     <div key={i} className="group py-10 border-b border-black/10 flex flex-col md:flex-row gap-6 md:gap-12">
-                      <div className="font-display text-2xl text-[var(--gold-metallic)]/50 shrink-0">
+                      <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">
                         {String(i + 1).padStart(2, '0')}.
                       </div>
                       <div>
-                        <h3 className="font-display text-2xl md:text-3xl mb-4 group-hover:text-[var(--gold-dark)] transition-colors">
+                        <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 group-hover:text-[var(--night-80)] transition-colors">
                           {persona.label}
                         </h3>
-                        <p className="text-[var(--night-80)] leading-relaxed text-lg font-light max-w-xl">
+                        <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
                           {persona.description}
                         </p>
                       </div>
@@ -146,13 +187,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
 
       {/* ─── 4. "Why Everest" — Stark Grid ─── */}
       {differentiators.length > 0 && (
-        <section ref={diffRef} className="reveal py-24 md:py-40 bg-[var(--night)] text-white">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <section ref={diffRef} className="reveal py-24 md:py-40 section-bg-light">
+          <div className="page-container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-4">
                 <div className="sticky top-32">
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-metallic)] uppercase block mb-8">La différence Everest</span>
-                  <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-8">La différence Everest</span>
+                  <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-white">
                     Notre engagement envers l'excellence.
                   </h2>
                 </div>
@@ -162,8 +203,8 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
                   {differentiators.map((diff, i) => (
                     <div key={i} className="relative">
-                      <div className="w-8 h-px bg-[var(--gold-metallic)] mb-8" />
-                      <h3 className="font-display text-2xl md:text-3xl mb-4 text-white">
+                      <div className="w-8 h-px bg-[var(--jaune-or)] mb-8" />
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-white">
                         {diff.title}
                       </h3>
                       <p className="text-white/60 leading-relaxed font-light text-lg">
@@ -181,10 +222,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 5. Solutions — Engineered Display ─── */}
       {expertise_solutions.length > 0 && (
         <section id="solutions" ref={solutionsRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="mb-20 md:mb-32">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Nos solutions</span>
-              <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+              <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Nos solutions</span>
+              <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl text-[var(--night-80)]">
                 Une expertise financière sur mesure.
               </h2>
             </div>
@@ -198,13 +239,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       key={solution.solution_number}
                       onClick={() => setActiveSolution(i)}
                       className={`text-left py-6 border-b border-black/10 transition-colors group flex items-baseline gap-4 ${
-                        activeSolution === i ? 'text-[var(--night)]' : 'text-[var(--night-80)] hover:text-[var(--night)]'
+                        activeSolution === i ? 'text-[var(--night)]' : 'text-[rgba(10, 10, 10, 0.8)] hover:text-[var(--night)]'
                       }`}
                     >
-                      <span className={`font-display text-sm ${activeSolution === i ? 'text-[var(--gold-dark)]' : 'text-black/30'}`}>
+                      <span className={`font-primary font-bold text-sm ${activeSolution === i ? 'text-[var(--night-80)]' : 'text-black/30'}`}>
                         {String(solution.solution_number).padStart(2, '0')}
                       </span>
-                      <h3 className="font-display text-xl md:text-2xl">
+                      <h3 className="font-primary font-bold text-xl md:text-2xl">
                         {solution.name}
                       </h3>
                     </button>
@@ -215,10 +256,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
               {/* Stark Content Area */}
               <div className="lg:col-span-8">
                 <div className="min-h-[600px] animate-fadeIn">
-                  <h3 className="font-display text-4xl md:text-5xl mb-8">
+                  <h3 className="font-primary font-bold text-4xl md:text-5xl mb-8">
                     {expertise_solutions[activeSolution].name}
                   </h3>
-                  <p className="text-xl md:text-2xl leading-relaxed text-[var(--night-80)] font-light mb-16 max-w-3xl">
+                  <p className="text-xl md:text-2xl leading-relaxed text-[rgba(10, 10, 10, 0.8)] font-light mb-16 max-w-3xl">
                     {expertise_solutions[activeSolution].description}
                   </p>
 
@@ -226,10 +267,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                     <div className="space-y-12">
                       {expertise_solutions[activeSolution].client_problem && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase mb-4">
                             L'enjeu
                           </div>
-                          <p className="text-[var(--night-80)] leading-relaxed text-lg font-light">
+                          <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light">
                             {expertise_solutions[activeSolution].client_problem}
                           </p>
                         </div>
@@ -237,7 +278,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                       
                       {expertise_solutions[activeSolution].value_proposition && (
                         <div>
-                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase mb-4">
+                          <div className="text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase mb-4">
                             Notre réponse
                           </div>
                           <p className="text-[var(--night)] leading-relaxed text-lg font-medium">
@@ -282,10 +323,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                           {expertise_solutions[activeSolution].allocation.map((item, idx) => (
                             <div key={idx} className="flex items-center justify-between text-sm font-medium text-[var(--night)]">
                               <div className="flex items-center gap-3">
-                                <span className="w-3 h-3 block" style={{ backgroundColor: item.color }} />
+                                <span className="w-3 h-3 block rounded-full" style={{ backgroundColor: item.color }} />
                                 {item.name}
                               </div>
-                              <span className="font-display">{item.value}%</span>
+                              <span className="font-primary font-bold">{item.value}%</span>
                             </div>
                           ))}
                         </div>
@@ -302,15 +343,15 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 6. Methodology — Brutalist Sequence ─── */}
       {(approach_methodology || method_steps) && (
         <section ref={approachRef} className="reveal py-24 md:py-40 border-b border-black/10">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Méthodologie</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-8">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Méthodologie</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] mb-8 text-[var(--night-80)]">
                   Un processus rigoureux.
                 </h2>
                 {approach_methodology && !method_steps && (
-                  <p className="text-lg text-[var(--night-80)] leading-relaxed font-light">
+                  <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
                     {approach_methodology}
                   </p>
                 )}
@@ -321,13 +362,13 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                     {method_steps.map((step, i) => (
                       <div key={i} className="relative">
-                        <div className="font-display text-4xl text-[var(--gold-metallic)] mb-6">
+                        <div className="font-primary font-bold text-4xl text-[var(--night-80)]/50 mb-6">
                           {String(i + 1).padStart(2, '0')}.
                         </div>
-                        <h3 className="font-display text-2xl mb-4 text-[var(--night)]">
+                        <h3 className="font-primary font-bold text-2xl mb-4 text-[var(--night)]">
                           {step.title}
                         </h3>
-                        <p className="text-[var(--night-80)] leading-relaxed font-light text-lg">
+                        <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
                           {step.description}
                         </p>
                       </div>
@@ -343,19 +384,19 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       {/* ─── 7. Operations — Minimalist Grid ─── */}
       {operations_selected.length > 0 && (
         <section ref={operationsRef} className="reveal py-24 md:py-40">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+          <div className="page-container">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
               <div className="lg:col-span-5">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[var(--gold-dark)] uppercase block mb-8">Interventions</span>
-                <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Interventions</span>
+                <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] text-[var(--night-80)]">
                   Périmètre d'action.
                 </h2>
               </div>
               <div className="lg:col-span-7">
                 <ul className="border-t border-black/10">
                   {operations_selected.map((operation, i) => (
-                    <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-display text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
-                      <FiArrowRight className="text-[var(--gold-metallic)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <li key={i} className="py-8 border-b border-black/10 text-xl md:text-2xl font-primary font-bold text-[var(--night)] flex items-center gap-6 group hover:pl-4 transition-all duration-300">
+                      <FiArrowRight className="text-[var(--night-80)] opacity-0 group-hover:opacity-100 transition-opacity" />
                       {operation}
                     </li>
                   ))}
@@ -366,21 +407,35 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         </section>
       )}
 
-      {/* ─── 8. CTA — Editorial Footer Block ─── */}
-      <section ref={ctaRef} className="reveal bg-[var(--night)] text-white py-24 md:py-32">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+      {/* ─── 8. CTA — Light Section with Soft Orbs ─── */}
+      <section ref={ctaRef} className="reveal relative py-24 md:py-32 overflow-hidden" style={{ background: 'var(--summit-ivory)' }}>
+        {/* Soft mauve orb — top left */}
+        <div
+          className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
+        />
+        {/* Soft gold orb — bottom right */}
+        <div
+          className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%)' }}
+        />
+
+        <div className="page-container relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
-              <h2 className="font-display text-5xl md:text-7xl leading-[1.05] mb-6">
-                {cta_text}
+              <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--night-80)]">
+                <EditableText id={`${slug}.cta.text`}>{cta_text}</EditableText>
               </h2>
-              <p className="text-xl md:text-2xl text-white/60 font-light max-w-2xl">
-                {cta_subtitle}
+              <p className="text-xl md:text-2xl text-[rgba(10, 10, 10, 0.6)] font-light max-w-2xl">
+                <EditableText id={`${slug}.cta.subtitle`}>{cta_subtitle}</EditableText>
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
-              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold">
-                Prendre rendez-vous <FiArrowRight className="text-lg" />
+              <a href="/contact" className="group inline-flex items-center justify-center gap-4 pl-6 pr-3 py-3 rounded-full border-2 border-[var(--jaune-or)] bg-[var(--jaune-or)] hover:bg-transparent transition-all duration-500 text-xs uppercase tracking-[0.2em] font-bold">
+                <span className="text-white group-hover:text-[var(--jaune-or)] transition-colors duration-500">Prendre rendez-vous</span>
+                <span className="bg-white rounded-full p-2 group-hover:translate-x-[2px] transition-all duration-500">
+                  <FiArrowRight className="text-lg text-[var(--jaune-or)]" />
+                </span>
               </a>
             </div>
           </div>

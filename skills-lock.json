@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "adapt": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "computedHash": "fb7cca7602be381b7b486e731fdcd480335cbb9b925e1911276f5bb9352c6b2f"
+    },
+    "frontend-ui-ux-engineer": {
+      "source": "404kidwiz/claude-supercode-skills",
+      "sourceType": "github",
+      "computedHash": "074176a7c86baeea322124c5d3dd0104561d752ca408ff994ae742b61c19ca66"
+    },
+    "webgl-expert": {
+      "source": "ronnycoding/.claude",
+      "sourceType": "github",
+      "computedHash": "4e73011c4f7422c369c8c0d89f99340e0bcf37f4379d78767ebf333cda87853a"
+    }
+  }
+}

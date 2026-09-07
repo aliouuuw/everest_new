@@ -81,12 +81,41 @@ export const ClientPortalPreview: React.FC = () => {
   }, [sectionRef, countersTriggered]);
 
   return (
-    <section ref={sectionRef} id="portal-preview" className="reveal py-24">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="kicker text-gradient-gold">Aperçu du portail client</span>
-          <h2 className="luxury-heading mt-3">Un portail pensé pour la gestion patrimoniale</h2>
-          <p className="luxury-subheading mt-5 pt-8">Démonstration réaliste d’interface. Les données ci‑dessous sont fictives mais représentatives.</p>
+    <section
+      ref={sectionRef}
+      id="portal-preview"
+      className="reveal relative py-28 md:py-36"
+      style={{ background: 'var(--white-smoke)' }}
+    >
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+        <div className="max-w-2xl mb-14">
+          <span
+            className="block text-[10px] tracking-[0.3em] uppercase mb-5"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--jaune-or)' }}
+          >
+            Aperçu du portail client
+          </span>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display-aptos)',
+              fontWeight: 400,
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)',
+              lineHeight: 1.0,
+              letterSpacing: '-0.02em',
+              color: 'var(--night)',
+            }}
+          >
+            Un portail pensé pour la{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--jaune-or)' }}>
+              gestion patrimoniale.
+            </em>
+          </h2>
+          <p
+            className="mt-6 max-w-lg"
+            style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.9rem', lineHeight: 1.75, color: 'var(--night-60)' }}
+          >
+            Démonstration réaliste d'interface. Les données ci‑dessous sont fictives mais représentatives.
+          </p>
         </div>
 
         {/* App window */}
@@ -111,7 +140,7 @@ export const ClientPortalPreview: React.FC = () => {
           <div className="grid grid-cols-12">
             {/* Sidebar */}
             <aside className="col-span-3 lg:col-span-2 border-r border-[var(--night)]/10 bg-[var(--white-smoke)]/50 p-3">
-              <div className="font-display text-sm mb-3">Navigation</div>
+              <div className="font-display-aptos text-sm mb-3">Navigation</div>
               <nav className="space-y-1 text-sm">
                 {[
                   { icon: <FaHome />, label: "Tableau de bord", active: true },
@@ -126,8 +155,8 @@ export const ClientPortalPreview: React.FC = () => {
                     key={i}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-default ${
                       item.active
-                        ? 'bg-[var(--night)] text-[var(--pure-white)]'
-                        : 'hover:bg-[var(--white-smoke)] text-secondary'
+                        ? 'bg-[var(--night)] text-[var(--pure-white)] border-l-2 border-l-[var(--mauve)]'
+                        : 'hover:bg-[var(--white-smoke)] text-secondary border-l-2 border-l-transparent'
                     }`}
                   >
                     <span className="opacity-80">{item.icon}</span>
@@ -139,7 +168,7 @@ export const ClientPortalPreview: React.FC = () => {
               <div className="mt-6 p-3 rounded-lg bg-white/70 border border-[var(--night)]/10">
                 <div className="text-xs text-secondary">Solde espèces</div>
                 {/* eslint-disable-next-line no-irregular-whitespace */}
-                <div className="font-display text-lg">{cashBalanceCounter.value}</div>
+                <div className="font-display-aptos text-lg">{cashBalanceCounter.value}</div>
               </div>
             </aside>
 
@@ -147,7 +176,7 @@ export const ClientPortalPreview: React.FC = () => {
             <div className="col-span-9 lg:col-span-10 p-4">
               {/* Header row */}
               <div className="flex items-center justify-between mb-4">
-                <div className="font-display">Tableau de bord</div>
+                <div className="font-display-aptos">Tableau de bord</div>
                 <div className="flex items-center gap-3 text-xs text-secondary">
                   <div>Compte: 00012345</div>
                   <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[var(--white-smoke)] border border-[var(--night)]/10">
@@ -168,7 +197,7 @@ export const ClientPortalPreview: React.FC = () => {
                   <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10">
                     <div className="text-secondary text-xs">{k.label}</div>
                     <div className="flex items-end justify-between mt-1">
-                      <div className="font-display text-lg">{k.counter ? k.counter.value : k.value}</div>
+                      <div className="font-display-aptos text-lg">{k.counter ? k.counter.value : k.value}</div>
                       <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
                     </div>
                     <div className="mt-2 opacity-80">
@@ -183,7 +212,7 @@ export const ClientPortalPreview: React.FC = () => {
                 {/* Positions table */}
                 <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="text-sm font-display">Positions</div>
+                    <div className="text-sm font-display-aptos">Positions</div>
                     <div className="text-xs text-secondary">Mise à jour: il y a 5 min</div>
                   </div>
                   <div className="overflow-x-auto">
@@ -213,7 +242,7 @@ export const ClientPortalPreview: React.FC = () => {
                             <td className={`py-2 ${row.perfCounter.value.startsWith('-') ? 'text-red-600' : 'text-emerald-600'}`}>{row.perfCounter.value}</td>
                             <td className="py-2">
                               <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
-                                <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--gold-metallic)' }} />
+                                <div className="h-1.5 rounded" style={{ width: `${row.a}%`, background: 'var(--jaune-or)' }} />
                               </div>
                             </td>
                           </tr>
@@ -225,18 +254,18 @@ export const ClientPortalPreview: React.FC = () => {
 
                 {/* Allocation donut + activity */}
                 <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-                  <div className="text-sm font-display mb-3">Répartition</div>
+                  <div className="text-sm font-display-aptos mb-3">Répartition</div>
                   <div className="flex items-center gap-4">
                     <div className="relative w-28 h-28 shrink-0 rounded-full"
                          style={{
-                           background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
+                           background: 'conic-gradient(var(--jaune-or) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
                            mask: 'radial-gradient(circle 20px at center, transparent 20px, black 21px)'
                          }}
                     />
                     <div className="text-sm">
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: {stocksAllocCounter.value}</div>
-                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: {bondsAllocCounter.value}</div>
-                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: {cashAllocCounter.value}</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]" /> Actions: {stocksAllocCounter.value}</div>
+                      <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/40" /> Obligations: {bondsAllocCounter.value}</div>
+                      <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/20" /> Monétaire: {cashAllocCounter.value}</div>
                     </div>
                   </div>
                   <div className="mt-4 text-xs text-secondary">Profil de risque: Modéré • Devise: FCFA</div>
@@ -246,7 +275,7 @@ export const ClientPortalPreview: React.FC = () => {
               {/* Transactions */}
               <div className="mt-4 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-sm font-display">Dernières transactions</div>
+                  <div className="text-sm font-display-aptos">Dernières transactions</div>
                   <a href="#" className="text-xs text-secondary hover:underline">Voir tout</a>
                 </div>
                 <div className="overflow-x-auto">
@@ -292,9 +321,30 @@ export const ClientPortalPreview: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/auth" className="btn-primary font-display">Accès Client</a>
-          <a href="#contact" className="btn-secondary font-display">Demander une démo</a>
+        <div className="mt-12 flex flex-col sm:flex-row gap-6 items-center">
+          <a
+            href="/auth"
+            className="group inline-flex items-center gap-3 px-6 py-3 border border-[var(--night)] transition-all duration-500 hover:bg-[var(--night)] hover:text-white"
+          >
+            <span
+              className="text-[11px] tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500 }}
+            >
+              Accès Client
+            </span>
+          </a>
+          <a
+            href="/contact"
+            className="group inline-flex items-center gap-3"
+          >
+            <span
+              className="relative overflow-hidden text-[11px] tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'var(--night-60)' }}
+            >
+              Demander une démo
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--jaune-or)] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)]" />
+            </span>
+          </a>
         </div>
       </div>
     </section>

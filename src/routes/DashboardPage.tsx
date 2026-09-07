@@ -160,10 +160,10 @@ const DashboardPageContent = () => {
           <div key={i} className="rounded-lg p-4 bg-[var(--white-smoke)] border border-[var(--night)]/10 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <div className="text-secondary text-xs">{k.label}</div>
-              <div className="text-[var(--gold-metallic)]">{k.icon}</div>
+              <div className="text-[var(--jaune-or)]">{k.icon}</div>
             </div>
             <div className="flex items-end justify-between mt-1">
-              <div className="font-display text-lg">{k.value}</div>
+              <div className="font-display-aptos text-lg">{k.value}</div>
               <div className="text-[10px] px-1.5 py-0.5 rounded bg-white/80 border border-[var(--night)]/10 text-secondary">{k.delta}</div>
             </div>
             <div className="mt-2 opacity-80">
@@ -178,7 +178,7 @@ const DashboardPageContent = () => {
         {/* Positions table */}
         <div className="xl:col-span-2 rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
           <div className="flex items-center justify-between mb-4">
-            <div className="text-sm font-display">Positions</div>
+            <div className="text-sm font-display-aptos">Positions</div>
             <div className="flex items-center gap-2">
               <button className="btn-secondary text-xs px-3 py-1">
                 <FaPlus className="inline mr-1" />
@@ -214,12 +214,12 @@ const DashboardPageContent = () => {
                     </td>
                     <td className="py-3">
                       <div className="w-20 h-1.5 rounded bg-[var(--white-smoke)]">
-                        <div className="h-1.5 rounded" style={{ width: `${pos.allocation}%`, background: 'var(--gold-metallic)' }} />
+                        <div className="h-1.5 rounded" style={{ width: `${pos.allocation}%`, background: 'var(--jaune-or)' }} />
                       </div>
                     </td>
                     <td className="py-3">
                       <div className="flex gap-1">
-                        <button className="p-1 text-[var(--gold-metallic)] hover:bg-[var(--gold-metallic)]/10 rounded">
+                        <button className="p-1 text-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/10 rounded">
                           <FaPlus className="text-xs" />
                         </button>
                         <button className="p-1 text-red-600 hover:bg-red-50 rounded">
@@ -237,18 +237,18 @@ const DashboardPageContent = () => {
         {/* Allocation donut + alerts */}
         <div className="space-y-4">
           <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-            <div className="text-sm font-display mb-3">Répartition</div>
+            <div className="text-sm font-display-aptos mb-3">Répartition</div>
             <div className="flex items-center gap-4">
               <div className="relative w-28 h-28 shrink-0 rounded-full"
                    style={{
-                     background: 'conic-gradient(var(--gold-metallic) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
+                     background: 'conic-gradient(var(--jaune-or) 0 58%, rgba(182,141,64,0.25) 58% 92%, rgba(182,141,64,0.12) 92% 100%)',
                      mask: 'radial-gradient(circle 20px at center, transparent 20px, black 21px)'
                    }}
               />
               <div className="text-sm flex-1">
-                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]" /> Actions: 58%</div>
-                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/40" /> Obligations: 34%</div>
-                <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--gold-metallic)]/20" /> Monétaire: 8%</div>
+                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]" /> Actions: 58%</div>
+                <div className="flex items-center gap-2 mb-1"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/40" /> Obligations: 34%</div>
+                <div className="flex items-center gap-2"><span className="inline-block w-3 h-3 rounded bg-[var(--jaune-or)]/20" /> Monétaire: 8%</div>
               </div>
             </div>
             <div className="mt-4 text-xs text-secondary">Profil de risque: {user.riskProfile} • Devise: FCFA</div>
@@ -256,7 +256,7 @@ const DashboardPageContent = () => {
 
           {/* Recent alerts */}
           <div className="rounded-xl p-4 border border-[var(--night)]/10 bg-white/70">
-            <div className="text-sm font-display mb-3">Alertes récentes</div>
+            <div className="text-sm font-display-aptos mb-3">Alertes récentes</div>
             <div className="space-y-2">
               {alerts.slice(0, 3).map((alert) => (
                 <div key={alert.id} className={`flex items-start gap-2 p-2 rounded text-xs ${
@@ -292,13 +292,13 @@ const DashboardPageContent = () => {
               placeholder="Rechercher un instrument..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--gold-metallic)]/30 outline-none"
+              className="pl-10 pr-4 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
             />
           </div>
           <select
             value={transactionFilter}
             onChange={(e) => setTransactionFilter(e.target.value)}
-            className="px-3 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--gold-metallic)]/30 outline-none"
+            className="px-3 py-2 border border-[var(--night)]/10 rounded-lg bg-white/70 text-sm focus:ring-2 focus:ring-[var(--jaune-or)]/30 outline-none"
           >
             <option value="all">Tous les types</option>
             <option value="achat">Achats</option>
@@ -369,7 +369,7 @@ const DashboardPageContent = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--pure-white)] to-[var(--white-smoke)]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
           <p className="mt-4 text-secondary">Chargement...</p>
         </div>
       </div>
@@ -382,7 +382,7 @@ const DashboardPageContent = () => {
       <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--night)]/10 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <img src="/logo-everest.png" alt="Everest" className="h-6" />
-          <div className="text-sm font-display">Portail Client</div>
+          <div className="text-sm font-display-aptos">Portail Client</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--white-smoke)]/60 border border-[var(--night)]/10">
@@ -426,9 +426,9 @@ const DashboardPageContent = () => {
             ))}
           </nav>
 
-          <div className="mt-8 p-4 rounded-lg bg-[var(--gold-metallic)]/10 border border-[var(--gold-metallic)]/20">
+          <div className="mt-8 p-4 rounded-lg bg-[var(--jaune-or)]/10 border border-[var(--jaune-or)]/20">
             <div className="text-xs text-secondary mb-1">Solde espèces</div>
-            <div className="font-display text-lg">
+            <div className="font-display-aptos text-lg">
               {showBalance ? formatCurrency(user.balance) : '••••••••'}
             </div>
             <div className="text-xs text-secondary mt-1">Compte: {user.account}</div>
@@ -439,7 +439,7 @@ const DashboardPageContent = () => {
         <div className="col-span-12 lg:col-span-10 p-6">
           {/* Header row */}
           <div className="flex items-center justify-between mb-6">
-            <div className="font-display text-xl">
+            <div className="font-display-aptos text-xl">
               {navigationItems.find(item => item.id === activeView)?.label || 'Tableau de bord'}
             </div>
             <div className="flex items-center gap-3 text-xs text-secondary">
@@ -458,7 +458,7 @@ const DashboardPageContent = () => {
           {activeView === 'reports' && (
             <div className="text-center py-12">
               <FaFileInvoice className="text-4xl text-secondary mx-auto mb-4" />
-              <h3 className="text-lg font-display mb-2">Relevés et rapports</h3>
+              <h3 className="text-lg font-display-aptos mb-2">Relevés et rapports</h3>
               <p className="text-secondary mb-6">Téléchargez vos relevés mensuels et rapports de performance.</p>
               <button className="btn-primary">
                 <FaDownload className="inline mr-2" />
@@ -469,7 +469,7 @@ const DashboardPageContent = () => {
           {activeView === 'downloads' && (
             <div className="text-center py-12">
               <FaCloudDownloadAlt className="text-4xl text-secondary mx-auto mb-4" />
-              <h3 className="text-lg font-display mb-2">Centre de téléchargement</h3>
+              <h3 className="text-lg font-display-aptos mb-2">Centre de téléchargement</h3>
               <p className="text-secondary mb-6">Accédez à tous vos documents et fichiers.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
                 <button className="btn-secondary p-4 text-left">
@@ -485,7 +485,7 @@ const DashboardPageContent = () => {
           )}
           {activeView === 'alerts' && (
             <div className="space-y-4">
-              <h3 className="text-lg font-display mb-4">Centre de notifications</h3>
+              <h3 className="text-lg font-display-aptos mb-4">Centre de notifications</h3>
               {alerts.map((alert) => (
                 <div key={alert.id} className={`p-4 rounded-lg border ${
                   alert.type === 'warning' ? 'bg-amber-50 border-amber-200' :
@@ -513,28 +513,28 @@ const DashboardPageContent = () => {
           )}
           {activeView === 'settings' && (
             <div className="max-w-2xl">
-              <h3 className="text-lg font-display mb-6">Préférences</h3>
+              <h3 className="text-lg font-display-aptos mb-6">Préférences</h3>
               <div className="space-y-6">
                 <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                  <h4 className="font-display mb-3">Notifications</h4>
+                  <h4 className="font-display-aptos mb-3">Notifications</h4>
                   <div className="space-y-3">
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" defaultChecked className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" defaultChecked className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Alertes de performance</span>
                     </label>
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" defaultChecked className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" defaultChecked className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Notifications de transactions</span>
                     </label>
                     <label className="flex items-center gap-3">
-                      <input type="checkbox" className="accent-[var(--gold-metallic)]" />
+                      <input type="checkbox" className="accent-[var(--jaune-or)]" />
                       <span className="text-sm">Rapports mensuels par email</span>
                     </label>
                   </div>
                 </div>
 
                 <div className="p-4 rounded-lg bg-white/70 border border-[var(--night)]/10">
-                  <h4 className="font-display mb-3">Sécurité</h4>
+                  <h4 className="font-display-aptos mb-3">Sécurité</h4>
                   <div className="space-y-3">
                     <button className="btn-secondary text-sm">
                       <FaUserShield className="inline mr-2" />

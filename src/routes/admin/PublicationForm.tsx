@@ -5,7 +5,7 @@ import { useMutation, useQuery } from 'convex/react';
 import { useAuth } from '../../components/Auth/useAuth';
 import { api } from '../../../convex/_generated/api';
 import EnhancedRichTextEditor from '../../components/CMS/Shared/EnhancedRichTextEditor';
-import { uploadPublicationImage } from '../../utils/cloudflare';
+import { useR2Upload } from '../../hooks/useR2Upload';
 import type { Id } from '../../../convex/_generated/dataModel';
 
 interface PublicationFormData {
@@ -48,8 +48,8 @@ export const PublicationForm = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--gold-metallic)] mx-auto"></div>
-          <p className="mt-2 text-sm text-[var(--night-80)]/80">Checking authentication...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--jaune-or)] mx-auto"></div>
+          <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]/80">Checking authentication...</p>
         </div>
       </div>
     );
@@ -89,6 +89,7 @@ export const PublicationForm = () => {
   const [tagInput, setTagInput] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const { upload: uploadToR2 } = useR2Upload();
 
   // Function to get text content without HTML tags
   const getTextContent = (html: string): string => {
@@ -106,8 +107,8 @@ export const PublicationForm = () => {
   // Image upload handler for the rich text editor
   const handleImageUpload = async (file: File): Promise<string> => {
     try {
-      const result = await uploadPublicationImage(file);
-      return result.url;
+      const { publicUrl } = await uploadToR2(file, 'publications');
+      return publicUrl;
     } catch (error) {
       console.error('Image upload failed:', error);
       throw new Error('Failed to upload image. Please try again.');
@@ -228,12 +229,12 @@ export const PublicationForm = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex justify-between items-center border-b border-[var(--gold-metallic)]/20 pb-6">
+      <div className="flex justify-between items-center border-b border-[var(--jaune-or)]/20 pb-6">
         <div>
-          <h1 className="text-4xl font-display font-semibold text-[var(--night)]">
+          <h1 className="text-4xl font-display-aptos font-semibold text-[var(--night)]">
             {isEditing ? 'Edit Publication' : 'New Publication'}
           </h1>
-          <p className="text-[var(--night-80)] mt-3 text-lg">
+          <p className="text-[rgba(10, 10, 10, 0.8)] mt-3 text-lg">
             {isEditing ? 'Update your publication details' : 'Create a new publication or blog post'}
           </p>
         </div>
@@ -277,8 +278,8 @@ export const PublicationForm = () => {
                 id="title"
                 value={formData.title}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
-                  errors.title ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.title ? 'border-[var(--error-red)]' : 'border-[var(--jaune-or)]/20'
                 }`}
                 placeholder="Enter publication title"
               />
@@ -295,8 +296,8 @@ export const PublicationForm = () => {
                 value={formData.description}
                 onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                 rows={3}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
-                  errors.description ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.description ? 'border-[var(--error-red)]' : 'border-[var(--jaune-or)]/20'
                 }`}
                 placeholder="Brief description of the publication"
               />
@@ -314,7 +315,7 @@ export const PublicationForm = () => {
                 onImageUpload={handleImageUpload}
               />
               {errors.content && <p className="mt-2 text-sm text-[var(--error-red)]">{errors.content}</p>}
-              <p className="mt-2 text-sm text-[var(--night-80)]">
+              <p className="mt-2 text-sm text-[rgba(10, 10, 10, 0.8)]">
                 {getCharacterCount(formData.content)} characters
               </p>
             </div>
@@ -329,8 +330,8 @@ export const PublicationForm = () => {
                 value={formData.excerpt}
                 onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
                 rows={3}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
-                  errors.excerpt ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.excerpt ? 'border-[var(--error-red)]' : 'border-[var(--jaune-or)]/20'
                 }`}
                 placeholder="Short excerpt for previews"
               />
@@ -349,8 +350,8 @@ export const PublicationForm = () => {
                 id="category"
                 value={formData.category}
                 onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value as 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses' }))}
-                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors ${
-                  errors.category ? 'border-[var(--error-red)]' : 'border-[var(--gold-metallic)]/20'
+                className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors ${
+                  errors.category ? 'border-[var(--error-red)]' : 'border-[var(--jaune-or)]/20'
                 }`}
               >
                 <option value="revues-hebdo">Weekly Reviews</option>
@@ -371,7 +372,7 @@ export const PublicationForm = () => {
                 id="status"
                 value={formData.status}
                 onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as any }))}
-                className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+                className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -386,7 +387,7 @@ export const PublicationForm = () => {
                 id="featured"
                 checked={formData.featured}
                 onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
-                className="h-4 w-4 text-[var(--gold-metallic)] focus:ring-[var(--gold-metallic)]/20 border-[var(--gold-metallic)]/30 rounded"
+                className="h-4 w-4 text-[var(--jaune-or)] focus:ring-[var(--jaune-or)]/20 border-[var(--jaune-or)]/30 rounded"
               />
               <label htmlFor="featured" className="ml-3 block text-sm text-[var(--night)]">
                 Featured Publication
@@ -405,12 +406,12 @@ export const PublicationForm = () => {
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Add a tag"
-                  className="flex-1 px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+                  className="flex-1 px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
                 />
                 <button
                   type="button"
                   onClick={handleAddTag}
-                  className="px-4 py-3 bg-[var(--night)] text-white rounded-xl hover:bg-[var(--night-80)] transition-colors border border-[var(--night)]/20"
+                  className="px-4 py-3 bg-[var(--night)] text-white rounded-xl hover:bg-[rgba(10, 10, 10, 0.8)] transition-colors border border-[var(--night)]/20"
                 >
                   Add
                 </button>
@@ -419,13 +420,13 @@ export const PublicationForm = () => {
                 {formData.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center px-3 py-1 bg-[var(--gold-metallic-10)] text-[var(--gold-dark)] text-sm rounded-full border border-[var(--gold-metallic)]/20"
+                    className="inline-flex items-center px-3 py-1 bg-[var(--jaune-or-10)] text-[var(--jaune-or)] text-sm rounded-full border border-[var(--jaune-or)]/20"
                   >
                     {tag}
                     <button
                       type="button"
                       onClick={() => handleRemoveTag(tag)}
-                      className="ml-2 text-[var(--gold-dark)] hover:text-[var(--gold-metallic)] transition-colors"
+                      className="ml-2 text-[var(--jaune-or)] hover:text-[var(--jaune-or)] transition-colors"
                     >
                       ×
                     </button>
@@ -435,8 +436,8 @@ export const PublicationForm = () => {
             </div>
 
             {/* SEO */}
-            <div className="border-t border-[var(--gold-metallic)]/20 pt-6">
-              <h3 className="text-lg font-display font-medium text-[var(--night)] mb-6">SEO Settings</h3>
+            <div className="border-t border-[var(--jaune-or)]/20 pt-6">
+              <h3 className="text-lg font-display-aptos font-medium text-[var(--night)] mb-6">SEO Settings</h3>
               
               <div className="space-y-6">
                 <div>
@@ -448,7 +449,7 @@ export const PublicationForm = () => {
                     id="seoTitle"
                     value={formData.seoTitle}
                     onChange={(e) => setFormData(prev => ({ ...prev, seoTitle: e.target.value }))}
-                    className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+                    className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
                     placeholder="SEO optimized title"
                   />
                 </div>
@@ -462,7 +463,7 @@ export const PublicationForm = () => {
                     value={formData.seoDescription}
                     onChange={(e) => setFormData(prev => ({ ...prev, seoDescription: e.target.value }))}
                     rows={3}
-                    className="w-full px-4 py-3 border border-[var(--gold-metallic)]/20 rounded-xl focus:ring-2 focus:ring-[var(--gold-metallic)]/20 focus:border-[var(--gold-metallic)]/40 bg-[var(--pure-white)]/50 transition-colors"
+                    className="w-full px-4 py-3 border border-[var(--jaune-or)]/20 rounded-xl focus:ring-2 focus:ring-[var(--jaune-or)]/20 focus:border-[var(--jaune-or)]/40 bg-[var(--pure-white)]/50 transition-colors"
                     placeholder="SEO meta description"
                   />
                 </div>
@@ -472,7 +473,7 @@ export const PublicationForm = () => {
         </div>
 
         {/* Form Actions */}
-        <div className="flex justify-end space-x-4 pt-8 border-t border-[var(--gold-metallic)]/20">
+        <div className="flex justify-end space-x-4 pt-8 border-t border-[var(--jaune-or)]/20">
           <button
             type="button"
             onClick={() => navigate({ to: '/admin/publications' })}

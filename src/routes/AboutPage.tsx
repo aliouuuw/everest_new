@@ -1,305 +1,331 @@
-import { FiCheckCircle, FiGlobe, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
-import { useGsapStepAnimation } from '../components/Hooks/useGsapStepAnimation'
-import { StatsSection } from '../components/Sections/StatsSection'
+import { EditableImage, EditableText } from '../cms'
+
+/** Matches Outils / Expertises / Contact section hero typography (max 50px). */
+const sectionTitleStyle = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' } as const
 
 export const AboutPage = () => {
+  const heroRef = useReveal<HTMLElement>()
+  const missionRef = useReveal<HTMLElement>()
+  const philosophieRef = useReveal<HTMLElement>()
+  const metricsRef = useReveal<HTMLElement>()
+  const histoireRef = useReveal<HTMLElement>()
+  const equipeRef = useReveal<HTMLElement>()
+  const conformiteRef = useReveal<HTMLElement>()
+
   const timelineItems = [
     { year: '2013', text: "Création d'Everest Finance SGI à Dakar." },
-    { year: '2016', text: 'Licence CREPMF SGI/DA/2016/60 obtenue.' },
+    { year: '2016', text: 'Licence AMF-UMOA SGI/DA/2016/60 obtenue.' },
     { year: '2018', text: 'Premières opérations structurantes sur le marché primaire.' },
     { year: '2021', text: 'Plateforme client modernisée et renforcement de la recherche.' },
     { year: '2024', text: 'Consolidation du leadership régional sur la BRVM.' },
   ]
 
-  // Sub-navigation removed from hero to create a cleaner, more distinctive intro
-
-  // Reveal refs to align interactions with home
-  const heroRef = useReveal<HTMLElement>()
-  const missionVisionRef = useReveal<HTMLElement>()
-  const missionVisionGridRef = useReveal<HTMLDivElement>()
-  const philosophieRef = useReveal<HTMLElement>()
-  const philosophieGridRef = useReveal<HTMLDivElement>()
-
-  const histoireRef = useReveal<HTMLElement>()
-  const histoireListRef = useGsapStepAnimation()
-  const equipeRef = useReveal<HTMLElement>()
-  const equipeGridRef = useReveal<HTMLDivElement>()
-  const conformiteRef = useReveal<HTMLElement>()
-  const conformiteGridRef = useReveal<HTMLDivElement>()
-
-
-
   return (
-    <div>
-        {/* Hero */}
-        <section ref={heroRef} className="reveal relative overflow-hidden">
-          {/* Background treatments */}
-          <div className="absolute inset-0 gradient-gold-subtle" />
-          <div className="absolute inset-0" style={{ opacity: 0.06 }}>
-            <div
-              className="w-full h-full"
-              style={{
-                backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`,
-                backgroundSize: '64px 64px'
-              }}
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
+        {/* ─── 1. Hero — Dark Image with Overlay ─── */}
+        <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
+            <EditableImage
+              id="about.hero.background"
+              src="/Assets_Website/À-propos.png"
+              alt="Everest Finance Bureau"
+              className="w-full h-full object-cover"
             />
           </div>
 
-          <div className="relative">
-            <div className="mx-auto max-w-6xl px-6 py-34 md:py-32">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                {/* Left: Text */}
-                <div>
-                  <span className="kicker text-gradient-gold">À propos</span>
-                  <h1 className="luxury-heading mt-3">Des idées et des valeurs au service de vos ambitions</h1>
-                  <p className="luxury-subheading mt-5 pt-8">
-                    Société de Gestion et d'Intermédiation licenciée CREPMF. Nous allions discipline de marché, ingénierie financière et proximité client pour créer de la valeur durable sur la BRVM.
+          <div className="relative z-10 w-full page-container">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
+              <div className="md:col-span-7">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-3">
+                  <EditableText id="about.hero.badge">À propos</EditableText>
+                </span>
+                <h1
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
+                  style={sectionTitleStyle}
+                >
+                  <EditableText id="about.hero.title">Des idées et des valeurs au service de vos ambitions.</EditableText>
+                </h1>
+              </div>
+
+              <div className="md:col-span-5 pb-2">
+                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-5">
+                  <EditableText id="about.hero.subtitle">Société de Gestion et d'Intermédiation agréée AMF-UMOA. Nous allions discipline de marché, ingénierie financière et proximité client.</EditableText>
+                </p>
+                <a
+                  href="#gouvernance"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
+                  style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
+                >
+                  <span><EditableText id="about.hero.ctaLabel">Notre mission</EditableText></span>
+                  <FiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 2. Mission & Vision — Editorial List ─── */}
+        <section ref={missionRef} id="gouvernance" className="reveal py-12 md:py-20 border-b border-black/10">
+          <div className="page-container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-5">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.mission.badge">Notre raison d'être</EditableText></span>
+                <h2
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-0 text-[var(--night-80)]"
+                  style={sectionTitleStyle}
+                >
+                  <EditableText id="about.mission.sectionTitle">Mission & Vision</EditableText>
+                </h2>
+              </div>
+              
+              <div className="lg:col-span-7">
+                <div className="border-t border-black/10">
+                  <div className="group py-5 md:py-6 border-b border-black/10">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--night-80)] transition-colors text-[var(--night-80)]">
+                      <EditableText id="about.mission.missionTitle">Notre mission</EditableText>
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                      <EditableText id="about.mission.missionBody">Proposer des solutions d'investissement performantes et responsables, fondées sur la transparence, l'expertise et la proximité.</EditableText>
+                    </p>
+                  </div>
+                  <div className="group py-5 md:py-6 border-b border-black/10">
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 group-hover:text-[var(--night-80)] transition-colors text-[var(--night-80)]">
+                      <EditableText id="about.mission.visionTitle">Notre vision</EditableText>
+                    </h3>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-xl">
+                      <EditableText id="about.mission.visionBody">Devenir un partenaire de référence en Afrique de l'Ouest pour la gestion de patrimoine et l'accès aux marchés financiers.</EditableText>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 3. Philosophie — Stark Grid ─── */}
+        <section ref={philosophieRef} id="philosophie" className="reveal py-12 md:py-20 section-bg-light">
+          <div className="page-container relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="sticky top-28 md:top-32">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase inline-block mb-4"><EditableText id="about.philosophie.badge">Philosophie</EditableText></span>
+                  <h2
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-white"
+                    style={sectionTitleStyle}
+                  >
+                    <EditableText id="about.philosophie.title">Notre approche d'investissement.</EditableText>
+                  </h2>
+                </div>
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-8 md:gap-y-10">
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-5" />
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-white">
+                      Approche disciplinée
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-3">
+                      Processus d'analyse rigoureux combinant analyse fondamentale et technique.
+                    </p>
+                    <ul className="text-white/50 text-sm space-y-2">
+                      <li>• Due diligence approfondie</li>
+                      <li>• Évaluation sectorielle</li>
+                      <li>• Analyse de marché</li>
+                    </ul>
+                  </div>
+                  <div className="relative">
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-5" />
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-white">
+                      Gestion du risque
+                    </h3>
+                    <p className="text-white/60 leading-relaxed font-light text-lg mb-3">
+                      Framework adapté aux spécificités du marché UEMOA.
+                    </p>
+                    <ul className="text-white/50 text-sm space-y-2">
+                      <li>• Diversification sectorielle</li>
+                      <li>• Limites de concentration</li>
+                      <li>• Stress tests réguliers</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 4. Metrics — Stark & Engineered ─── */}
+        <section ref={metricsRef} className="reveal border-b border-black/10">
+          <div className="page-container">
+            <div className="grid grid-cols-1 md:grid-cols-3">
+              <div className="py-10 md:py-12 border-b md:border-b-0 md:border-r border-black/10 md:pr-10 lg:pr-12">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-primary font-bold text-6xl md:text-8xl tracking-tighter text-[var(--night-80)]">
+                    11
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">ans</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  D'existence
+                </div>
+              </div>
+              <div className="py-10 md:py-12 border-b md:border-b-0 md:border-r border-black/10 md:px-10 lg:px-12">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night-80)]">
+                    500
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  Levée de fonds
+                </div>
+              </div>
+              <div className="py-10 md:py-12 md:pl-10 lg:pl-12">
+                <div className="flex items-baseline gap-2 mb-4">
+                  <div className="font-primary font-bold text-5xl md:text-6xl tracking-tighter text-[var(--night-80)]">
+                    200
+                  </div>
+                  <div className="text-sm font-bold tracking-[0.2em] text-[var(--jaune-or)] uppercase">Mds</div>
+                </div>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-[rgba(10, 10, 10, 0.8)] uppercase">
+                  Transactions marché
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── 5. Histoire — Timeline ─── */}
+        <section ref={histoireRef} id="histoire" className="reveal py-12 md:py-20 border-b border-black/10">
+          <div className="page-container">
+            <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.histoire.badge">Parcours</EditableText></span>
+            <h2
+              className="font-primary font-bold leading-[0.95] tracking-tight max-w-3xl mb-7 md:mb-8 text-[var(--night-80)]"
+              style={sectionTitleStyle}
+            >
+              <EditableText id="about.histoire.title">Notre histoire</EditableText>
+            </h2>
+
+            <div className="border-t border-black/10">
+              {timelineItems.map((item) => (
+                <div key={item.year} className="group py-5 md:py-6 border-b border-black/10 flex flex-col md:flex-row gap-3 md:gap-8">
+                  <div className="font-primary font-bold text-2xl text-[var(--night-80)]/50 shrink-0">
+                    {item.year}
+                  </div>
+                  <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed text-lg font-light max-w-2xl group-hover:text-[var(--night)] transition-colors">
+                    {item.text}
                   </p>
-
-                  <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                    <a href="#mission-vision" className="btn-primary font-display tracking-wide">Notre mission</a>
-                    <a href="#histoire" className="btn-secondary font-display tracking-wide">Notre histoire</a>
-                  </div>
                 </div>
-
-                {/* Right: Visual card */}
-                <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6">
-                  <div className="pointer-events-none absolute -top-12 -right-12 w-56 h-56 rounded-full bg-[var(--gold-metallic-10)] blur-3xl" />
-                  <div className="relative w-full h-[280px] rounded-xl overflow-hidden border border-[var(--gold-metallic)]/25 bg-[var(--white-smoke)]/80">
-                    <div
-                      className="absolute inset-0"
-                      style={{ backgroundImage: `linear-gradient(var(--night-10) 1px, transparent 1px), linear-gradient(90deg, var(--night-10) 1px, transparent 1px)`, backgroundSize: '24px 24px' }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center text-secondary">Everest Finance SGI — Dakar</div>
-                  </div>
-                  <div className="mt-5 grid grid-cols-3 gap-3 text-center text-xs">
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display">2013</div>
-                      <div className="text-secondary">Création</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display">CREPMF</div>
-                      <div className="text-secondary">Licence</div>
-                    </div>
-                    <div className="rounded-lg bg-[var(--white-smoke)]/60 p-3">
-                      <div className="font-display">BRVM</div>
-                      <div className="text-secondary">Marchés</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Mission & Vision */}
-        <section ref={missionVisionRef} id="mission-vision" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
-          <div className="mx-auto max-w-6xl px-6">
-            <div ref={missionVisionGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <div className="flex items-start gap-3">
-                  <FiTrendingUp className="text-[var(--gold-dark)] mt-1" />
-                  <div>
-                    <h2 className="font-display text-xl mb-2">Notre mission</h2>
-                    <p className="text-secondary">Proposer des solutions d’investissement performantes et responsables, fondées sur la transparence, l’expertise et la proximité.</p>
-                  </div>
-                </div>
+        {/* ─── 6. Équipe — Minimalist Grid ─── */}
+        <section ref={equipeRef} id="equipe" className="reveal py-12 md:py-20">
+          <div className="page-container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-5">
+                <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.equipe.badge">Leadership</EditableText></span>
+                <h2
+                  className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
+                  style={sectionTitleStyle}
+                >
+                  <EditableText id="about.equipe.title">Équipe dirigeante</EditableText>
+                </h2>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <div className="flex items-start gap-3">
-                  <FiGlobe className="text-[var(--gold-dark)] mt-1" />
-                  <div>
-                    <h2 className="font-display text-xl mb-2">Notre vision</h2>
-                    <p className="text-secondary">Devenir un partenaire de référence en Afrique de l’Ouest pour la gestion de patrimoine et l’accès aux marchés financiers.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Philosophie d'investissement */}
-        <section ref={philosophieRef} id="philosophie" className="reveal py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Philosophie d'investissement</h2>
-            <div ref={philosophieGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <h3 className="font-display mb-3">Approche disciplinée</h3>
-                <p className="text-secondary mb-4">Processus d'analyse rigoureux combinant analyse fondamentale et technique pour identifier les opportunités sur la BRVM.</p>
-                <ul className="text-secondary text-sm space-y-1">
-                  <li>• Due diligence approfondie des émetteurs</li>
-                  <li>• Évaluation des fondamentaux sectoriels</li>
-                  <li>• Analyse des conditions de marché</li>
-                </ul>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                <h3 className="font-display mb-3">Gestion du risque</h3>
-                <p className="text-secondary mb-4">Framework de gestion des risques adapté aux spécificités du marché UEMOA et aux profils de nos clients.</p>
-                <ul className="text-secondary text-sm space-y-1">
-                  <li>• Diversification sectorielle et géographique</li>
-                  <li>• Limites de concentration par émetteur</li>
-                  <li>• Stress tests et scénarios de marché</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <StatsSection
-          id="chiffres"
-          title="Chiffres clés"
-          background="light"
-          columns={3}
-          stats={[
-            { value: "11", label: "ans d'existence", animateWithUnits: false },
-            { value: "500 Mds F CFA", label: "Levée de fonds (obligations, titres de capital, FCT)", animateWithUnits: false },
-            { value: "200 Mds F CFA", label: "Transactions au marché financier", animateWithUnits: false }
-          ]}
-        />
-
-        {/* Histoire */}
-        <section ref={histoireRef} id="histoire" className="reveal py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Notre histoire</h2>
-            <div className="relative">
-              <div className="absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-px bg-[var(--night)]/10" />
-              <ul ref={histoireListRef} className="space-y-8">
-                {timelineItems.map((item, index) => (
-                  <li key={item.year} className="relative">
-                    <div className={`flex flex-col sm:flex-row ${index % 2 === 0 ? 'sm:flex-row-reverse' : ''} sm:items-start sm:justify-between gap-4`}>
-                      <div className="sm:w-1/2 group relative overflow-hidden rounded-xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-5 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                        <div className="font-display text-[var(--gold-dark)]">{item.year}</div>
-                        <p className="text-secondary mt-1">{item.text}</p>
-                      </div>
-                      <div className="hidden sm:block sm:w-1/2" />
-                    </div>
-                    <span className="absolute left-4 sm:left-1/2 sm:-translate-x-1/2 top-5 inline-block h-3 w-3 rounded-full bg-[var(--gold-dark)] shadow" />
+              <div className="lg:col-span-7">
+                <ul className="border-t border-black/10">
+                  <li className="py-5 md:py-6 border-b border-black/10">
+                    <div className="font-primary font-bold text-xl md:text-2xl mb-2">Direction Générale</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Vision stratégique et développement commercial</p>
                   </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Équipe dirigeante */}
-        <section ref={equipeRef} id="equipe" className="reveal py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Équipe dirigeante</h2>
-            <div ref={equipeGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <h3 className="font-display mb-3">Leadership expérimenté</h3>
-                <p className="text-secondary mb-4">Plus de 30 ans d'expérience cumulée dans les marchés financiers africains et l'intermédiation financière.</p>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <FiUsers className="text-[var(--gold-dark)] mt-1" />
-                    <div>
-                      <div className="font-display text-sm">Direction Générale</div>
-                      <p className="text-secondary text-xs">Vision stratégique et développement commercial</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FiTrendingUp className="text-[var(--gold-dark)] mt-1" />
-                    <div>
-                      <div className="font-display text-sm">Direction des Marchés</div>
-                      <p className="text-secondary text-xs">Recherche, analyse et exécution</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FiShield className="text-[var(--gold-dark)] mt-1" />
-                    <div>
-                      <div className="font-display text-sm">Direction des Opérations</div>
-                      <p className="text-secondary text-xs">Conformité, risques et middle office</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                <h3 className="font-display mb-3">Expertise métier</h3>
-                <p className="text-secondary mb-4">Spécialistes reconnus des marchés BRVM et des enjeux d'investissement en Afrique de l'Ouest.</p>
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display">CFA</div>
-                    <div className="text-secondary text-xs">Certifications</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display">MBA</div>
-                    <div className="text-secondary text-xs">Finance</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display">15+</div>
-                    <div className="text-secondary text-xs">Ans BRVM</div>
-                  </div>
-                  <div className="text-center p-3 bg-[var(--white-smoke)]/60 rounded">
-                    <div className="font-display">Bilingue</div>
-                    <div className="text-secondary text-xs">FR/EN</div>
-                  </div>
-                </div>
+                  <li className="py-5 md:py-6 border-b border-black/10">
+                    <div className="font-primary font-bold text-xl md:text-2xl mb-2">Direction des Marchés</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Recherche, analyse et exécution</p>
+                  </li>
+                  <li className="py-5 md:py-6 border-b border-black/10">
+                    <div className="font-primary font-bold text-xl md:text-2xl mb-2">Direction des Opérations</div>
+                    <p className="text-[rgba(10, 10, 10, 0.8)] font-light">Conformité, risques et middle office</p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Conformité & Réglementation */}
-        <section ref={conformiteRef} id="conformite" className="reveal py-12 sm:py-16 bg-[var(--white-smoke)]/60 border-y border-[var(--night)]/5">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="luxury-heading mb-6">Conformité & Réglementation</h2>
-            <div ref={conformiteGridRef} className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 p-6">
-                <h3 className="font-display mb-3 flex items-center gap-2">
-                  <FiCheckCircle className="text-[var(--gold-dark)]" />
-                  Cadre réglementaire
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Licence CREPMF</span>
-                    <span className="font-display">SGI/DA/2016/60</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Date d'obtention</span>
-                    <span className="font-display">30 mars 2016</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[var(--night)]/5 pb-2">
-                    <span className="text-secondary">Juridiction</span>
-                    <span className="font-display">UEMOA</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-secondary">Activités autorisées</span>
-                    <span className="font-display text-xs">Gestion, Intermédiation</span>
-                  </div>
+        {/* ─── 7. Conformité — Light Section with Soft Orbs ─── */}
+        <section ref={conformiteRef} id="conformite" className="reveal relative py-12 md:py-20 overflow-hidden" style={{ background: 'var(--summit-ivory)' }}>
+          {/* Soft mauve orb — top right */}
+          <div
+            className="absolute top-0 right-0 w-[50%] h-[80%] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(1,45,42,0.07) 0%, rgba(203,152,36,0.03) 45%, transparent 65%)' }}
+          />
+          {/* Soft gold orb — bottom left */}
+          <div
+            className="absolute bottom-0 left-0 w-[45%] h-[75%] pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 50%, transparent 70%)' }}
+          />
+
+          <div className="page-container relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="sticky top-28 md:top-32">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="about.conformite.badge">Réglementation</EditableText></span>
+                  <h2
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
+                    style={sectionTitleStyle}
+                  >
+                    <EditableText id="about.conformite.title">Conformité & Sécurité</EditableText>
+                  </h2>
                 </div>
               </div>
-              <div className="group relative overflow-hidden rounded-2xl bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/25 p-6">
-                <h3 className="font-display mb-3 flex items-center gap-2">
-                  <FiShield className="text-[var(--gold-dark)]" />
-                  Contrôles & Sécurité
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
-                    <div>
-                      <div className="font-display text-sm">Ségrégation des actifs</div>
-                      <p className="text-secondary text-xs">Comptes dédiés et dépositaire central BRVM</p>
+              
+              <div className="lg:col-span-8">
+                <div className="space-y-6 md:space-y-8">
+                  <div>
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-4 md:mb-5" />
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night-80)]">
+                      Cadre réglementaire
+                    </h3>
+                    <div className="space-y-2 text-[rgba(10, 10, 10, 0.6)]">
+                      <div className="flex justify-between py-2.5 border-b border-black/10">
+                        <span>Licence AMF-UMOA</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">SGI/DA/2016/60</span>
+                      </div>
+                      <div className="flex justify-between py-2.5 border-b border-black/10">
+                        <span>Date d'obtention</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">30 mars 2016</span>
+                      </div>
+                      <div className="flex justify-between py-2.5 border-b border-black/10">
+                        <span>Juridiction</span>
+                        <span className="font-primary font-bold text-[var(--night-80)]">UEMOA</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
-                    <div>
-                      <div className="font-display text-sm">KYC/AML renforcé</div>
-                      <p className="text-secondary text-xs">Procédures anti-blanchiment conformes CENTIF</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--gold-dark)] mt-2"></div>
-                    <div>
-                      <div className="font-display text-sm">Reporting réglementaire</div>
-                      <p className="text-secondary text-xs">Déclarations périodiques CREPMF et BCEAO</p>
-                    </div>
+
+                  <div>
+                    <div className="w-8 h-px bg-[var(--jaune-or)] mb-4 md:mb-5" />
+                    <h3 className="font-primary font-bold text-2xl md:text-3xl mb-4 text-[var(--night-80)]">
+                      Contrôles & Sécurité
+                    </h3>
+                    <ul className="space-y-3 text-[rgba(10, 10, 10, 0.6)]">
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>Ségrégation des actifs — Comptes dédiés et dépositaire central BRVM</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>KYC/AML renforcé — Procédures conformes CENTIF</span>
+                      </li>
+                      <li className="flex items-start gap-4">
+                        <FiArrowRight className="text-[var(--jaune-or)] mt-1 shrink-0" />
+                        <span>Reporting réglementaire — Déclarations AMF-UMOA et BCEAO</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -309,5 +335,4 @@ export const AboutPage = () => {
     </div>
   )
 }
-
 

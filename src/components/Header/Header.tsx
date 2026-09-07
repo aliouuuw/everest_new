@@ -15,19 +15,22 @@ const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-
 
 interface DropdownItem {
   label: string;
-  href: string;
+  to: string;
+  search?: { frequency?: 'hebdomadaire' | 'mensuelle' | 'semestrielle' };
+  hash?: string;
 }
 
 interface DropdownProps {
   name: string;
   title: string;
+  titleTo?: string;
   items: Array<DropdownItem>;
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen, onClose }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen, onOpen, onClose }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -59,28 +62,53 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, items, isOpen, onOpen,
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button
-        className="flex items-center gap-1 text-sm text-secondary transition-colors hover:text-[var(--gold-dark)] group"
-        aria-expanded={isOpen}
-      >
-        {title}
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {titleTo ? (
+        <Link
+          to={titleTo}
+          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+          {title}
+          <svg
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </Link>
+      ) : (
+        <button
+          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
+        >
+          {title}
+          <svg
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      )}
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-sm border border-black/10 rounded-xl shadow-lg py-2 z-50">
+        <div className="absolute top-full left-0 mt-4 w-64 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
           {items.map((item, index) => (
             <Link
               key={index}
-              to={item.href}
-              className="block px-4 py-3 text-sm text-secondary hover:text-[var(--gold-dark)] hover:bg-[var(--gold-light)]/10 transition-colors"
+              to={item.to}
+              {...(item.search ? { search: item.search } : {})}
+              {...(item.hash ? { hash: item.hash } : {})}
+              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--night-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
+              style={{ fontFamily: 'var(--font-primary)', }}
             >
               {item.label}
             </Link>
@@ -95,7 +123,18 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Track scroll to add header background for contrast on light pages
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const openDropdownByName = (dropdownName: string) => {
     if (closeTimeoutRef.current) {
@@ -142,19 +181,42 @@ export const Header: React.FC = () => {
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
 
+  // Pages with light backgrounds need immediate dark backdrop for nav contrast
+  const lightBackgroundPaths = ['/test'];
+  const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path));
+
+  // Force "scrolled" header appearance on selected routes from first paint
+  const forceScrolledStylePaths = [ '/offres', '/auth' ];
+  const isForcedScrolledStyle = forceScrolledStylePaths.some(path =>
+      location.pathname.startsWith(path),
+    ) || (location.pathname.startsWith('/actualites/') && location.pathname !== '/actualites');
+  const shouldUseScrolledStyle = isScrolled || isForcedScrolledStyle;
+
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  const societeItems: Array<DropdownItem> = [
-    { label: 'À propos', href: '/about' },
-    { label: 'Publications', href: '/publications' },
-    { label: 'Abécédaire / FAQ', href: '/faq' },
+  const expertisesItems: Array<DropdownItem> = [
+    { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
+    { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
+    { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
+    { label: 'Private Office', to: '/expertises', hash: 'private-office' },
   ];
 
-  const servicesItems: Array<DropdownItem> = [
-    { label: 'Marché des capitaux', href: '/marche-capitaux' },
-    { label: 'Ingénieurie financière', href: '/ingenieurie-financiere' },
-    { label: 'Gestion sous-mandat', href: '/gestion-sous-mandat' },
+  const marchesItems: Array<DropdownItem> = [
+    { label: 'Actualités', to: '/actualites' },
+    { label: 'Publications', to: '/publications' },
+    { label: 'Abécédaire / FAQ', to: '/faq' },
+  ];
+
+  const ressourcesItems: Array<DropdownItem> = [
+    { label: 'Opportunités en cours', to: '/offres' },
+    { label: 'BRVM / Marché régional', to: '/bourse' },
+    { label: 'Outils investisseur', to: '/outils-investisseur' },
+  ];
+
+  const societeItems: Array<DropdownItem> = [
+    { label: 'À propos', to: '/about' },
+    { label: 'Contact', to: '/contact' },
   ];
 
   // Return null without violating hooks rules
@@ -162,25 +224,55 @@ export const Header: React.FC = () => {
     return null;
   }
 
+  // Header background: darker mauve/purple on all pages
+  const headerBg = isLightBackgroundPage
+    ? shouldUseScrolledStyle
+      ? 'bg-[#012d2a]'
+      : 'bg-[#012d2a]'
+    : shouldUseScrolledStyle
+      ? 'bg-[#6c786eba]/90 backdrop-blur-xl'
+      : '';
+
+  // Nav link color: always white on mauve bg
+  const navLinkColor = 'rgba(255,255,255,0.75)';
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-20">
-      <div className="mx-auto max-w-5xl px-8 py-1 mt-5 rounded-xl flex items-center justify-between bg-white/90 backdrop-blur supports-[backdrop-filter]:glassmorphism border border-black/5">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <Link to="/" className="transition-opacity hover:opacity-80">
-            <img src="/logo-everest.png" alt="Everest Finance" className="h-16 w-18" />
-          </Link>
-        </div>
+    <header className={`fixed top-[40px] left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
+      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-4 flex items-center justify-between">
+        {/* Logo only — larger */}
+        <Link to="/" className="transition-opacity hover:opacity-85 flex items-center">
+          <img src="/logo-everest.png" alt="Everest Finance" className="h-16 w-auto" />
+        </Link>
 
         {/* Navigation */}
-        <nav className="hidden lg:flex items-center gap-6 text-sm text-secondary">
-          <Link 
-            to="/" 
-            className="transition-colors hover:text-[var(--gold-dark)]"
+        <nav className="hidden lg:flex items-center gap-8">
+          <Link
+            to="/"
+            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
+            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
           >
             Accueil
           </Link>
-          
+
+          <Dropdown
+            name="marches"
+            title="Insights"
+            items={marchesItems}
+            isOpen={openDropdown === 'marches'}
+            onOpen={openDropdownByName}
+            onClose={closeDropdownByName}
+          />
+
+          <Dropdown
+            name="expertises"
+            title="Expertises"
+            titleTo="/expertises"
+            items={expertisesItems}
+            isOpen={openDropdown === 'expertises'}
+            onOpen={openDropdownByName}
+            onClose={closeDropdownByName}
+          />
+
           <Dropdown
             name="societe"
             title="Société"
@@ -189,56 +281,60 @@ export const Header: React.FC = () => {
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
-          
+
           <Dropdown
-            name="services"
-            title="Services"
-            items={servicesItems}
-            isOpen={openDropdown === 'services'}
+            name="ressources"
+            title="Ressources"
+            items={ressourcesItems}
+            isOpen={openDropdown === 'ressources'}
             onOpen={openDropdownByName}
             onClose={closeDropdownByName}
           />
-
-          <Link 
-            to="/services" 
-            className="transition-colors hover:text-[var(--gold-dark)]"
-          >
-            Offres
-          </Link>
-
-          <Link 
-            to="/bourse" 
-            className="transition-colors hover:text-[var(--gold-dark)]"
-          >
-            Bourse
-          </Link>
         </nav>
 
-        {/* Connexion Button */}
-        <div className="hidden lg:block">
+        {/* CTA */}
+        <div className="hidden lg:flex items-center gap-3">
+          <a
+            href="https://everest-account-opening.vercel.app/new-home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--jaune-or)] rounded-full transition-all duration-500 hover:bg-[var(--jaune-or)]/90"
+          >
+            <span
+              className="text-[11px] tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
+            >
+              Ouvrir un compte
+            </span>
+          </a>
           <Link
             to="/auth"
-            className="btn-primary inline-flex items-center gap-2.5 font-display tracking-wide"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full transition-all duration-500 hover:border-white/70 hover:bg-white/10"
           >
-            <FingerprintIcon className="w-4 h-4 text-white transition-transform duration-300 hover:scale-110" />
-            <span className="tracking-wide">Accès Client</span>
+            <FingerprintIcon className="w-3.5 h-3.5 text-white/70 transition-transform duration-300 group-hover:scale-110 group-hover:text-white" />
+            <span
+              className="text-[11px] tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
+            >
+              Accès Client
+            </span>
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
-          <button 
+          <button
             onClick={toggleMobileMenu}
-            className="p-2 text-secondary hover:text-[var(--gold-dark)] transition-colors"
+            className="p-2 text-white/70 hover:text-white transition-colors"
             aria-label="Menu"
           >
             {isMobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>
@@ -247,26 +343,81 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white/95 backdrop-blur-sm border border-black/10 rounded-xl shadow-lg py-4 z-50">
-          <div className="px-4 space-y-4">
-            {/* Accueil Link */}
-            <Link 
-              to="/" 
-              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-[var(--mauve-80)] border-t border-white/[0.12] py-6 z-50 shadow-2xl shadow-black/40">
+          <div className="px-6 space-y-5">
+            <Link
+              to="/"
+              className="block text-sm transition-colors hover:text-white"
+              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Accueil
             </Link>
 
-            {/* Société Section */}
             <div>
-              <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Société</div>
-              <div className="space-y-2 pl-3">
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Insights
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
+                {marchesItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Expertises
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
+                {expertisesItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Société
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
                 {societeItems.map((item, index) => (
                   <Link
                     key={index}
-                    to={item.href}
-                    className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -275,15 +426,22 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Services Section */}
             <div>
-              <div className="font-medium text-sm text-[var(--gold-dark)] mb-2">Services</div>
-              <div className="space-y-2 pl-3">
-                {servicesItems.map((item, index) => (
+              <div
+                className="text-[10px] tracking-[0.2em] uppercase mb-3"
+                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
+              >
+                Ressources
+              </div>
+              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
+                {ressourcesItems.map((item, index) => (
                   <Link
                     key={index}
-                    to={item.href}
-                    className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors"
+                    to={item.to}
+                    {...(item.search ? { search: item.search } : {})}
+                    {...(item.hash ? { hash: item.hash } : {})}
+                    className="block text-sm transition-colors hover:text-white"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -292,33 +450,33 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Offres Link */}
-            <Link 
-              to="/services" 
-              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Offres
-            </Link>
-
-            {/* Bourse Link */}
-            <Link 
-              to="/bourse" 
-              className="block text-sm text-secondary hover:text-[var(--gold-dark)] transition-colors font-medium"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Bourse
-            </Link>
-
-            {/* Connexion Button */}
-            <div className="pt-4 border-t border-black/10">
-              <Link
-                to="/auth"
-                className="btn-primary inline-flex items-center justify-center gap-2.5 w-full font-display tracking-wide"
+            <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
+              <a
+                href="https://everest-account-opening.vercel.app/new-home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-2.5 bg-[var(--jaune-or)] rounded-full w-full transition-all duration-300 hover:bg-[var(--jaune-or)]/90"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-4 h-4 text-white transition-transform duration-300 hover:scale-110" />
-                <span className="tracking-wide">Accès Client</span>
+                <span
+                  className="text-[11px] tracking-[0.15em] uppercase"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
+                >
+                  Ouvrir un compte
+                </span>
+              </a>
+              <Link
+                to="/auth"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full w-full justify-center transition-all duration-300 hover:border-white/70 hover:bg-white/10"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FingerprintIcon className="w-3.5 h-3.5 text-white/70" />
+                <span
+                  className="text-[11px] tracking-[0.15em] uppercase"
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
+                >
+                  Accès Client
+                </span>
               </Link>
             </div>
           </div>

@@ -1,14 +1,18 @@
 import { useMemo, useState } from 'react'
+import { FiArrowRight, FiArrowDown } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
+import { EditableImage, EditableText } from '../cms'
 
 type QA = { q: string; a: string }
 type Glossary = { term: string; def: string }
+
+/** Matches À propos / Outils — section & hero titles max 50px. */
+const sectionTitleStyle = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' } as const
 
 export const FAQPage = () => {
   const heroRef = useReveal<HTMLElement>()
   const qaRef = useReveal<HTMLDivElement>()
   const glossaryRef = useReveal<HTMLDivElement>()
-  const indexRef = useReveal<HTMLDivElement>()
 
   const qas: Array<QA> = [
     { q: 'Comment ouvrir un compte ?', a: 'Remplissez le formulaire en ligne, notre équipe vous accompagne pour la suite.' },
@@ -85,116 +89,186 @@ export const FAQPage = () => {
   }, [filteredGlossary])
 
   return (
-    <div>
-        {/* Hero: Compact Centered */}
-        <section ref={heroRef} className="reveal py-34 sm:py-28">
-          <div className="mx-auto max-w-6xl px-6 text-center">
-            <span className="kicker text-gradient-gold">Abécédaire & FAQ</span>
-            <h1 className="luxury-heading mt-3">Comprendre nos services</h1>
-            <p className="luxury-subheading mt-5 pt-8">Questions fréquentes et définitions clés pour mieux décider.</p>
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary selection:bg-[var(--mauve)] selection:text-white">
+        {/* ─── 1. Hero — Dark Image with Overlay ─── */}
+        <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
+          {/* Background image */}
+          <div className="absolute inset-0 z-0">
+            <EditableImage
+              id="faq.hero.background"
+              src="/Assets_Website/Abécédaire-&-FAQ.png"
+              alt="Support client"
+              className="w-full h-full object-cover"
+            />
           </div>
-        </section>
 
-        {/* Q&A Section */}
-        <section className="py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="font-display text-lg mb-4">Questions fréquentes</h2>
-            <div ref={qaRef} className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {qas.map((item) => (
-                <div key={item.q} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                  <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                  <div className="font-display mb-2">{item.q}</div>
-                  <div className="text-secondary text-sm">{item.a}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Abécédaire (Glossary) */}
-        <section className="py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6">
-            <div className="flex flex-col items-center text-center">
-              <h2 className="font-display text-lg mb-2">Abécédaire</h2>
-              <p className="text-secondary mb-6">Jargon et termes clés de nos métiers.</p>
-              <div className="w-full max-w-2xl flex items-center gap-3">
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Rechercher un terme ou une définition..."
-                  aria-label="Rechercher dans l’abécédaire"
-                  className="flex-1 px-4 py-3 rounded-lg border border-[var(--night)]/15 bg-[var(--white-smoke)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--gold-metallic-20)]"
-                />
-                <button
-                  type="button"
-                  onClick={() => { setQuery(''); setActiveLetter('') }}
-                  className="btn-secondary text-xs"
+          <div className="relative z-10 w-full page-container">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-end">
+              <div className="md:col-span-7">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-3">
+                  <EditableText id="faq.hero.badge">Abécédaire & FAQ</EditableText>
+                </span>
+                <h1
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-3 text-white"
+                  style={sectionTitleStyle}
                 >
-                  Effacer
-                </button>
+                  <EditableText id="faq.hero.title">Comprendre nos services.</EditableText>
+                </h1>
+              </div>
+
+              <div className="md:col-span-5 pb-2">
+                <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-5">
+                  <EditableText id="faq.hero.subtitle">Questions fréquentes et définitions clés pour mieux décider.</EditableText>
+                </p>
+                <a
+                  href="#faq"
+                  className="group inline-flex items-center justify-center gap-3 px-7 py-3 rounded-full text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
+                  style={{ background: 'var(--jaune-or)', color: 'var(--pure-white)' }}
+                >
+                  <span><EditableText id="faq.hero.ctaLabel">Voir les questions</EditableText></span>
+                  <FiArrowDown className="text-lg group-hover:translate-y-1 transition-transform" />
+                </a>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* A–Z Index */}
-            <div ref={indexRef} className="reveal-stagger mt-6 flex flex-wrap items-center justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveLetter('')}
-                className={`${activeLetter === '' ? 'btn-primary' : 'btn-secondary'} text-xs px-3 py-2 rounded-full`}
-                aria-pressed={activeLetter === ''}
-              >
-                Tous
-              </button>
-              {letters.map((l) => (
-                <a
-                  key={l}
-                  href={`#letter-${l}`}
-                  onClick={() => setActiveLetter(l)}
-                  className={`${activeLetter === l ? 'btn-primary' : 'btn-secondary'} text-xs px-3 py-2 rounded-full`}
-                  aria-label={`Aller à la lettre ${l}`}
-                >
-                  {l}
-                </a>
-              ))}
-            </div>
-
-            {/* Grouped terms */}
-            <div ref={glossaryRef} className="reveal mt-10 space-y-10">
-              {grouped.length === 0 && (
-                <div className="text-center text-secondary">Aucun résultat.</div>
-              )}
-              {grouped.map(([letter, terms]) => (
-                <div key={letter} id={`letter-${letter}`} className="scroll-mt-24">
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <div className="font-display text-2xl">{letter}</div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--gold-metallic-10)] to-transparent" />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {terms.map((g) => (
-                      <div key={g.term} className="group relative overflow-hidden rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm p-6 transition-all card-hover">
-                        <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-                        <div className="font-display mb-1">{g.term}</div>
-                        <div className="text-secondary text-sm">{g.def}</div>
-                      </div>
-                    ))}
-                  </div>
+        {/* ─── 2. Q&A Section — Stark Grid ─── */}
+        <section id="faq" className="py-12 md:py-20 border-b border-black/10">
+          <div className="page-container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="sticky top-28 md:top-32">
+                  <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="faq.qa.badge">Support</EditableText></span>
+                  <h2
+                    className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)]"
+                    style={sectionTitleStyle}
+                  >
+                    <EditableText id="faq.qa.title">Questions fréquentes.</EditableText>
+                  </h2>
                 </div>
-              ))}
+              </div>
+              
+              <div className="lg:col-span-8">
+                <div ref={qaRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 md:gap-x-8 gap-y-8 md:gap-y-10">
+                  {qas.map((item) => (
+                    <div key={item.q} className="relative">
+                      <div className="w-8 h-px bg-[var(--mauve)] mb-5" />
+                      <h3 className="font-primary font-bold text-2xl md:text-3xl mb-3 text-[var(--night-80)]">
+                        {item.q}
+                      </h3>
+                      <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
+                        {item.a}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Contact CTA */}
-        <section className="py-14 sm:py-18">
-          <div className="mx-auto max-w-6xl px-6 text-center">
-            <div className="inline-flex items-center gap-3 p-6 rounded-2xl border border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm">
-              <div className="text-secondary">Besoin d’aide supplémentaire ?</div>
-              <a href="#contact" className="btn-primary font-display tracking-wide">Nous contacter</a>
+        {/* ─── 3. Abécédaire (Glossary) — Editorial List ─── */}
+        <section id="glossary" className="py-12 md:py-20 bg-[var(--white-smoke)]">
+          <div className="page-container">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+              <div className="lg:col-span-4">
+                <div className="sticky top-28 md:top-32 flex flex-col border-t border-[var(--mauve)]/10">
+                  <div className="py-5 border-b border-[var(--mauve)]/10">
+                    <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-4"><EditableText id="faq.glossary.badge">Définitions</EditableText></span>
+                    <h2
+                      className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--night-80)] mb-4"
+                      style={sectionTitleStyle}
+                    >
+                      <EditableText id="faq.glossary.title">Abécédaire</EditableText>
+                    </h2>
+                    
+                    <div className="flex flex-col gap-3 mt-6">
+                      <input
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Rechercher..."
+                        className="w-full px-4 py-3 bg-white border border-[var(--mauve)]/20 focus:border-[var(--mauve)] outline-none font-primary text-lg transition-colors rounded-full"
+                      />
+                      
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        <button
+                          type="button"
+                          onClick={() => setActiveLetter('')}
+                          className={`text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === '' ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                        >
+                          Tous
+                        </button>
+                        {letters.map((l) => (
+                          <button
+                            key={l}
+                            type="button"
+                            onClick={() => setActiveLetter(l)}
+                            className={`text-xs font-bold uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === l ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                          >
+                            {l}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-8">
+                <div ref={glossaryRef} className="border-t border-black/10">
+                  {grouped.length === 0 && (
+                    <div className="py-8 text-[rgba(10, 10, 10, 0.8)] font-light text-lg">Aucun résultat.</div>
+                  )}
+                  {grouped.map(([letter, terms]) => (
+                    <div key={letter} className="group py-5 md:py-6 border-b border-[var(--mauve)]/10">
+                      <div className="font-primary font-bold text-3xl md:text-4xl text-[var(--night-80)] mb-5">
+                        {letter}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        {terms.map((g) => (
+                          <div key={g.term}>
+                            <h3 className="font-primary font-bold text-xl md:text-2xl mb-2 text-[var(--night-80)]">
+                              {g.term}
+                            </h3>
+                            <p className="text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light text-lg">
+                              {g.def}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-      </section>
+        </section>
+
+        {/* ─── 4. CTA — Editorial Footer Block ─── */}
+        <section className="section-bg-light py-12 md:py-20">
+          <div className="page-container relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+              <div className="md:col-span-7">
+                <h2
+                  className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
+                  style={sectionTitleStyle}
+                >
+                  <EditableText id="faq.cta.title">Besoin d'aide supplémentaire ?</EditableText>
+                </h2>
+                <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
+                  <EditableText id="faq.cta.subtitle">Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.</EditableText>
+                </p>
+              </div>
+              <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
+                <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit">
+                  <EditableText id="faq.cta.ctaLabel">Nous contacter</EditableText> <FiArrowRight className="text-lg" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
     </div>
   )
 }
-
 

@@ -1,39 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=General+Sans:ital,wght@0,200..800;1,200..800&family=Fraunces:opsz,wght@9..144,200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors - Classic White & Gold */
+  /* Brand Colors - Everest Finance Option 2 */
   --pure-white: #FFFFFF;
-  --white-smoke: #f5f5f7; /* A very light grey for subtle contrast */
-  --timberwolf: #e0e0e0; /* A slightly darker grey for borders */
+  --white-smoke: #f0eee9;
+  --timberwolf: #dcdad2;
   --line-soft: #eeeeee;
-  /* Accent kept subtle for a minimalist, tech-forward feel */
-  --gold-metallic: #ca942f;
-  --gold-light: #e9e1cb;
-  --gold-dark: #ad7e28;
-  --night: #0f1115; /* Deep, neutral ink */
-  --night-80: rgba(15, 17, 21, 0.8);
   
-  /* Extended Palette */
-  --success-green: #10b981;
-  --error-red: #ef4444;
+  /* Core Brand Palette */
+  --jaune-or: #cb9824;
+  --mauve: #012d2a;
+  --everest-green: #012d2a;
+  --night: #0a0a0a;
   
-  /* Opacity Variations */
-  --white-smoke-80: rgba(245, 245, 245, 0.8);
-  --night-10: rgba(15, 17, 21, 0.08);
-  --night-20: rgba(15, 17, 21, 0.16);
-  --gold-metallic-20: rgba(199, 164, 105, 0.2);
-  --gold-metallic-10: rgba(199, 164, 105, 0.1);
+  /* Extended Opacity/Variations */
+  --night-80: rgba(10, 10, 10, 0.8);
+  --night-60: rgba(10, 10, 10, 0.6);
+  --night-20: rgba(10, 10, 10, 0.2);
+  --night-40: rgba(10, 10, 10, 0.4);
+  --night-10: rgba(10, 10, 10, 0.1);
+  --jaune-or-light: rgba(202, 148, 47, 0.4);
+  --jaune-or-30: rgba(202, 148, 47, 0.3);
+  --jaune-or-20: rgba(202, 148, 47, 0.2);
+  --jaune-or-10: rgba(202, 148, 47, 0.1);
+  --mauve-80: rgba(1, 45, 42, 0.8);
+  --mauve-60: rgba(1, 45, 42, 0.6);
+  --mauve-40: rgba(1, 45, 42, 0.4);
+  --mauve-30: rgba(1, 45, 42, 0.3);
+  --mauve-20: rgba(1, 45, 42, 0.2);
+  --mauve-15: rgba(1, 45, 42, 0.15);
+  --mauve-10: rgba(1, 45, 42, 0.1);
+  --mauve-05: rgba(1, 45, 42, 0.05);
+  --mauve-light: rgba(1, 45, 42, 0.05);
+  --mauve-glow: rgba(1, 45, 42, 0.12);
+  --everest-green-60: rgba(1, 45, 42, 0.6);
+  --everest-green-30: rgba(1, 45, 42, 0.3);
+  --everest-green-20: rgba(1, 45, 42, 0.2);
+  --everest-green-10: rgba(1, 45, 42, 0.1);
+  --everest-green-05: rgba(1, 45, 42, 0.05);
+  --gold-pale: rgba(202, 148, 47, 0.06);
+  --gold-warm: rgba(202, 148, 47, 0.12);
   
   /* Typography */
-  --font-primary: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  /* Prefer a single, modern sans for a cleaner tech tone */
-  --font-display: 'General Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  
+  --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Backgrounds */
+  --cream: #faf6ef;
+
+  /* Atmospheric Surfaces */
+  --summit-ivory: #faf8f4;
+  --summit-fog: #f0eee9;
+  --summit-haze: rgba(1, 45, 42, 0.04);
+  --summit-depth: rgba(1, 45, 42, 0.08);
+  --summit-warm: rgba(202, 148, 47, 0.06);
+  --summit-glass: rgba(255, 255, 255, 0.7);
+  --summit-glass-strong: rgba(255, 255, 255, 0.85);
+
+  /* Command Center Tokens */
+  --command-border: rgba(10, 10, 10, 0.06);
+  --command-border-hover: rgba(1, 45, 42, 0.2);
+  --command-surface: #f7f6f3;
+  --command-surface-hover: rgba(1, 45, 42, 0.03);
+
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
   --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+  --duration-reveal: 900ms;
+
+  /* Gradients */
+  --gradient-dark-section: linear-gradient(170deg, #012d2a 0%, #062421 40%, #071a18 100%);
+  --gradient-image-overlay: linear-gradient(180deg, rgba(1,45,42,0.35) 0%, rgba(7,26,24,0.55) 100%);
+  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(1,45,42,0.6) 0%, rgba(7,26,24,0.8) 100%);
+  --gradient-light-section: linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%);
+  --gradient-ivory-section: linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%);
+
+  /* Shadows */
+  --shadow-card-float: 0 40px 80px rgba(0,0,0,0.3);
+  --shadow-card-lift: 0 8px 24px rgba(1,45,42,0.1);
+  --shadow-card-hover: 0 20px 40px rgba(1,45,42,0.15);
+
+  /* Border Radius */
+  --radius-card: 1rem;
+  --radius-card-lg: 2rem;
+  --radius-pill: 9999px;
+
+  /* Section Spacing */
+  --hero-py: clamp(7rem, 12vw, 9rem);
+  --section-gap: clamp(6rem, 10vw, 9rem);
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -74,6 +136,18 @@ html {
   scroll-restoration: manual;
 }
 
+h1, h2 {
+  line-height: 1 !important;
+} 
+
+.section-py {
+  @apply py-14 sm:py-18 lg:py-20;
+}
+
+.section-py-sm {
+  @apply py-12 sm:py-16;
+}
+
 /* Custom Utilities */
 @utility glassmorphism {
   background: rgba(255, 255, 255, 0.6);
@@ -82,19 +156,181 @@ html {
   box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 
+/* Soft container system — rounded panels, shared across landing sections */
+@utility soft-panel {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid var(--command-border);
+  background: var(--pure-white);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(1,45,42, 0.06);
+}
+
+@utility soft-panel-muted {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid var(--command-border);
+  background: var(--command-surface);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+@utility soft-panel-glass {
+  border-radius: var(--radius-card-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Main column width + horizontal insets — matches `Header` bar (max-w 1400, px-6 / md:px-16 / lg:px-24) */
+@utility page-container {
+  @apply mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24;
+}
+
+/* Outils investisseur — label scale: 14px (sm) → 16px (md) → 18px (lg) */
+@utility outils-invest-label {
+  @apply text-sm md:text-base lg:text-[18px];
+}
+
 @utility gradient-gold {
-  background: linear-gradient(120deg, var(--gold-light) 0%, var(--gold-metallic) 55%, var(--gold-dark) 100%);
+  background: linear-gradient(120deg, var(--jaune-or-light) 0%, var(--jaune-or) 55%, var(--jaune-or) 100%);
 }
 
 @utility gradient-gold-subtle {
-  background: linear-gradient(180deg, var(--gold-metallic-10) 0%, transparent 75%);
+  background: linear-gradient(180deg, var(--jaune-or-10) 0%, transparent 75%);
 }
 
 @utility text-gradient-gold {
-  background: linear-gradient(135deg, var(--gold-metallic) 0%, var(--gold-dark) 100%);
+  background: linear-gradient(135deg, var(--jaune-or) 0%, var(--jaune-or) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@utility gradient-mauve-gold {
+  background: linear-gradient(90deg, var(--mauve) 0%, var(--jaune-or) 100%);
+}
+
+.section-bg-mauve {
+  background: var(--gradient-dark-section);
+  color: var(--white-smoke);
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-mauve::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.section-bg-mauve h1, 
+.section-bg-mauve h2, 
+.section-bg-mauve h3, 
+.section-bg-mauve h4,
+.section-bg-mauve h5, 
+.section-bg-mauve h6,
+.section-bg-mauve .luxury-heading-dark {
+  color: var(--pure-white);
+}
+
+.section-bg-mauve p,
+.section-bg-mauve .luxury-subheading-dark {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Light section — CTA-inspired ivory/white with subtle orbs.
+   Drop-in replacement for section-bg-mauve: just swap the class
+   and all white-on-dark colours are automatically inverted. */
+.section-bg-light {
+  background: var(--pure-white);
+  color: var(--night);
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 90%;
+  background: radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.section-bg-light::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  height: 70%;
+  background: radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Typography overrides ── */
+.section-bg-light h1,
+.section-bg-light h2,
+.section-bg-light h3,
+.section-bg-light h4,
+.section-bg-light h5,
+.section-bg-light h6,
+.section-bg-light .luxury-heading-dark {
+  color: var(--night-80);
+}
+
+.section-bg-light p,
+.section-bg-light .luxury-subheading-dark,
+.section-bg-light .text-secondary-dark {
+  color: var(--night-60);
+}
+
+.section-bg-light .kicker {
+  color: var(--night-40);
+}
+
+/* ── Invert white text utilities to dark equivalents ──
+   Exclude a/button elements that carry their own bg (e.g. CTA buttons)
+   by wrapping the override in :not(). Only non-interactive elements
+   and bare links without a background get inverted.             */
+.section-bg-light .text-white:not(a[class*="bg-"]):not(button[class*="bg-"]) { color: var(--night-80) !important; }
+/* Protect white text inside gold/coloured buttons */
+.section-bg-light a[class*="bg-"] .text-white,
+.section-bg-light a[class*="bg-"] span { color: inherit !important; }
+.section-bg-light button[class*="bg-"] .text-white,
+.section-bg-light button[class*="bg-"] span { color: inherit !important; }
+.section-bg-light .text-white\/40 { color: var(--night-40) !important; }
+.section-bg-light .text-white\/50 { color: var(--night-40) !important; }
+.section-bg-light .text-white\/60 { color: var(--night-60) !important; }
+.section-bg-light .text-white\/70 { color: var(--night-60) !important; }
+.section-bg-light .text-white\/80 { color: var(--night) !important; }
+
+/* ── Invert white borders to subtle dark borders ── */
+.section-bg-light .border-white\/5 { border-color: rgba(0,0,0,0.06) !important; }
+.section-bg-light .border-white\/6 { border-color: rgba(0,0,0,0.06) !important; }
+.section-bg-light .border-white\/10 { border-color: rgba(0,0,0,0.08) !important; }
+.section-bg-light .border-white\/20 { border-color: rgba(0,0,0,0.1) !important; }
+
+/* ── Invert white bg utilities to subtle light equivalents ── */
+.section-bg-light .bg-white\/5 { background-color: rgba(1,45,42,0.04) !important; }
+.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(1,45,42,0.03) !important; }
+
+/* ── btn-primary-dark → gold CTA in light sections ── */
+.section-bg-light .btn-primary-dark {
+  background: var(--jaune-or) !important;
+  color: var(--pure-white) !important;
+  border-radius: 9999px;
+}
+.section-bg-light .btn-primary-dark:hover {
+  background: var(--jaune-or-dark, #b5832a) !important;
 }
 
 @utility floating-animation {
@@ -134,16 +370,8 @@ html {
   }
 }
 
-@keyframes tickerScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll {
+/* Horizontal marquee — shared by ticker + trust strip (duration differs per class) */
+@keyframes marquee-translate {
   0% {
     transform: translateX(0);
   }
@@ -154,31 +382,31 @@ html {
 
 /* Stock Ticker Animations */
 .ticker-scroll {
-  animation: tickerScroll 45s linear infinite;
+  animation: marquee-translate 45s linear infinite;
 }
 
 .ticker-scroll-paused {
-  animation: tickerScroll 45s linear infinite;
+  animation: marquee-translate 45s linear infinite;
   animation-play-state: paused;
 }
 
 .animate-scroll {
-  animation: scroll 60s linear infinite;
+  animation: marquee-translate 60s linear infinite;
 }
 
 /* Typography Classes */
 .heading-display {
-  font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.08;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
 /* Brand lockup for header */
 .brand-heading {
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
@@ -186,10 +414,10 @@ html {
 .kicker {
   font-family: var(--font-primary);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-weight: 600;
+  letter-spacing: 0.25em;
+  font-weight: 500;
   line-height: 1.3;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
 }
 
 /* Alignment for financial numerals */
@@ -199,9 +427,16 @@ html {
 }
 
 .heading-primary {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.25;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.font-display {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .text-primary {
@@ -214,7 +449,7 @@ html {
   font-family: var(--font-primary);
   font-weight: 400;
   line-height: 1.5;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
 }
 
 /* Dark Mode Text Colors */
@@ -226,11 +461,11 @@ html {
 }
 
 /* Enhanced typography for luxury feel */
-.font-display {
-  font-family: var(--font-display);
+.font-display-aptos {
+  font-family: var(--font-display-aptos);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.12;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .font-primary {
@@ -239,44 +474,62 @@ html {
   line-height: 1.6;
 }
 
-/* Luxury text treatments */
+/* Section heading — sans-serif bold */
 .luxury-heading {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.25rem, 6vw, 4.25rem);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(2rem, 2.8vw, 2.2rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: var(--night);
+  color: var(--night-80);
 }
 
 .luxury-subheading {
   font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
-  line-height: 1.7;
-  color: var(--night-80);
-  max-width: 42rem;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--night-60);
+  max-width: 38rem;
   margin: 0 auto;
 }
 
-/* Dark Mode Luxury text treatments */
-.luxury-heading-dark {
-  font-family: var(--font-display);
+.luxury-subheading-left {
+  font-family: var(--font-primary);
   font-weight: 300;
-  font-size: clamp(2.25rem, 6vw, 4.25rem);
-  line-height: 1.05;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: var(--night-60);
+  max-width: 38rem;
+}
+
+/* Dark Mode section heading — sans-serif bold */
+.luxury-heading-dark {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 2.875rem);
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--pure-white);
 }
 
 .luxury-subheading-dark {
   font-family: var(--font-primary);
-  font-weight: 400;
-  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 42rem;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 38rem;
   margin: 0 auto;
+}
+
+.luxury-subheading-dark-left {
+  font-family: var(--font-primary);
+  font-weight: 300;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 38rem;
 }
 
 /* Advanced Layout Utilities */
@@ -295,13 +548,17 @@ html {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 bg-[var(--night)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-black/10 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  background: var(--jaune-or);
+  color: var(--pure-white);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(203,152,36,0.28);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -310,12 +567,18 @@ html {
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 border border-[var(--night)]/15 text-[var(--night)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--night)]/30 bg-[var(--white-smoke)]/80 hover:bg-[var(--night)]/2 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  border: 1px solid var(--mauve-20);
+  color: var(--mauve);
+  background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary:hover {
-  transform: translateY(-1px);
+  background: var(--jaune-or);
+  color: var(--pure-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(203,152,36,0.22);
 }
 
 .btn-secondary:active {
@@ -325,13 +588,17 @@ html {
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 bg-[var(--gold-dark)] text-[var(--pure-white)] font-medium text-sm tracking-wide transition-all duration-300 hover:bg-[var(--gold-light)] hover:text-[var(--night)] hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20 rounded-lg relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  background: var(--jaune-or);
+  color: var(--pure-white);
   border: 0;
   transform: translateY(0);
 }
 
 .btn-primary-dark:hover {
   transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(202,148,47,0.35);
+  filter: brightness(1.05);
 }
 
 .btn-primary-dark:active {
@@ -340,12 +607,17 @@ html {
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 border border-[var(--gold-metallic)]/40 text-[var(--gold-light)] font-medium text-sm tracking-wide transition-all duration-300 hover:border-[var(--gold-metallic)]/60 hover:bg-[var(--gold-metallic)]/10 hover:text-[var(--pure-white)] rounded-lg relative overflow-hidden cursor-pointer;
-  background: rgba(202, 148, 47, 0.05);
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  border: 1px solid rgba(202,148,47,0.4);
+  color: var(--jaune-or);
+  background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary-dark:hover {
+  background: rgba(202,148,47,0.12);
+  border-color: var(--jaune-or);
+  color: var(--pure-white);
   transform: translateY(-1px);
 }
 
@@ -354,46 +626,291 @@ html {
   transition-duration: 100ms;
 }
 
-/* Subtle gold-tinted focus rings and hover shadows */
+/* Accessible gold-tinted focus rings */
 .btn-primary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 .btn-secondary:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-10), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
 }
 
 .btn-primary-dark:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-30), 0 0 0 1px var(--gold-light);
+  box-shadow: 0 0 0 3px var(--jaune-or-30), 0 0 0 1px var(--jaune-or-light);
 }
 
 .btn-secondary-dark:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px var(--gold-metallic-20), 0 0 0 1px var(--gold-metallic);
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
-.btn-primary:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-20);
+/*
+ * Landing CTA row — gold / mauve pill with trailing disc.
+ * Consolidates duplicate inline styles in CTA.tsx.
+ */
+.btn-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  transition: all 500ms;
+  cursor: pointer;
+  font-family: var(--font-primary);
 }
 
-.btn-secondary:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-10);
+@media (min-width: 640px) {
+  .btn-cta-pill {
+    width: auto;
+    justify-content: flex-start;
+  }
 }
 
-.btn-primary-dark:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-30);
+.btn-cta-pill__label {
+  position: relative;
+  overflow: hidden;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  transition: color 500ms;
 }
 
-.btn-secondary-dark:hover {
-  box-shadow: 0 8px 24px var(--gold-metallic-20);
+.btn-cta-pill__trail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pure-white);
+  border-radius: 9999px;
+  padding: 0.5rem;
+  transition: transform 500ms;
+}
+
+.btn-cta-pill:hover .btn-cta-pill__trail {
+  transform: translateX(2px);
+}
+
+.btn-cta-pill--gold {
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
+}
+
+.btn-cta-pill--gold .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--gold:hover {
+  background: transparent;
+}
+
+.btn-cta-pill--gold:hover .btn-cta-pill__label {
+  color: var(--jaune-or);
+}
+
+.btn-cta-pill--mauve {
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
+}
+
+.btn-cta-pill--mauve .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--mauve:hover {
+  background: transparent;
+}
+
+.btn-cta-pill--mauve:hover .btn-cta-pill__label {
+  color: var(--night-80);
+}
+
+/* Mauve / dark card — primary line legible on mauve background */
+.btn-cta-pill--outline-light {
+  border-color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-cta-pill--outline-light .btn-cta-pill__label {
+  color: var(--pure-white);
+}
+
+.btn-cta-pill--outline-light:hover {
+  background: var(--pure-white);
+  border-color: var(--pure-white);
+}
+
+.btn-cta-pill--outline-light:hover .btn-cta-pill__label {
+  color: var(--mauve);
+}
+
+/* ── Light CMS / on-site editor chrome (matches landing pills + soft-panel) ── */
+.cms-editor-dock {
+  position: relative;
+  border-radius: var(--radius-card-lg);
+  border: 1px solid var(--command-border);
+  background: var(--pure-white);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.04),
+    0 16px 48px -12px rgba(1,45,42, 0.14);
+}
+
+.cms-editor-dock::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--jaune-or) 75%, var(--mauve) 5%) 50%,
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0.75;
+  z-index: 0;
+}
+
+.cms-editor-pill {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.2rem 0.35rem 0.2rem 0.9rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    color 0.3s,
+    background-color 0.3s,
+    border-color 0.3s,
+    transform 0.2s,
+    box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.cms-editor-pill:active {
+  transform: scale(0.99);
+}
+
+.cms-editor-pill__label {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.cms-editor-pill__disc {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 9999px;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.3s;
+}
+
+.cms-editor-pill:hover .cms-editor-pill__disc {
+  transform: translateX(1px);
+}
+
+.cms-editor-pill--mauveSolid {
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
+  color: var(--pure-white);
+  box-shadow: 0 6px 20px -6px rgba(203, 152, 36, 0.45);
+}
+
+.cms-editor-pill--mauveSolid:hover {
+  box-shadow: 0 8px 28px -6px rgba(203, 152, 36, 0.5);
+  filter: brightness(1.04);
+}
+
+.cms-editor-pill--mauveSolid .cms-editor-pill__disc {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--jaune-or);
+}
+
+.cms-editor-pill--mauveGhost {
+  border-color: var(--mauve-30);
+  background: var(--command-surface);
+  color: var(--mauve);
+}
+
+.cms-editor-pill--mauveGhost:hover {
+  background: var(--mauve-05);
+  border-color: var(--mauve);
+}
+
+.cms-editor-pill--mauveGhost .cms-editor-pill__disc {
+  background: var(--mauve-10);
+  color: var(--mauve);
+}
+
+.cms-editor-pill--goldSolid {
+  border-color: var(--jaune-or);
+  background: var(--jaune-or);
+  color: var(--pure-white);
+  box-shadow: 0 6px 20px -6px rgba(202, 148, 47, 0.45);
+}
+
+.cms-editor-pill--goldSolid:hover {
+  box-shadow: 0 8px 28px -6px rgba(202, 148, 47, 0.55);
+  filter: brightness(1.05);
+}
+
+.cms-editor-pill--goldSolid .cms-editor-pill__disc {
+  background: rgba(1,45,42, 0.12);
+  color: var(--pure-white);
+}
+
+.cms-editor-pill--goldOutline {
+  border-color: var(--jaune-or);
+  background: color-mix(in srgb, var(--jaune-or) 6%, var(--pure-white));
+  color: var(--mauve);
+}
+
+.cms-editor-pill--goldOutline:hover {
+  background: color-mix(in srgb, var(--jaune-or) 12%, var(--pure-white));
+}
+
+.cms-editor-pill--goldOutline .cms-editor-pill__disc {
+  background: var(--jaune-or);
+  color: var(--pure-white);
+}
+
+.cms-editor-pill:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
+}
+
+.cms-editor-pill--goldSolid:focus-visible,
+.cms-editor-pill--goldOutline:focus-visible {
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 /* Card Styles */
 .stat-card {
-  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--gold-metallic)]/20 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/10;
+  @apply p-4 bg-[var(--pure-white)]/80 backdrop-blur-sm border border-[var(--mauve)]/10 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--mauve)]/10 hover:border-[var(--mauve)]/25;
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -401,7 +918,7 @@ html {
 
 /* Dark Mode Card Styles */
 .stat-card-dark {
-  @apply p-4 bg-[var(--night)]/90 backdrop-blur-sm border border-[var(--gold-metallic)]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--gold-metallic)]/20;
+  @apply p-4 bg-[var(--night)]/90 backdrop-blur-sm border border-[var(--jaune-or)]/30 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[var(--jaune-or)]/20;
   overflow: hidden;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -465,17 +982,17 @@ html {
 
 /* Enhanced Typography */
 .hero-title {
-  font-family: var(--font-display);
-  font-weight: 300;
-  line-height: 0.9;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 0.95;
   letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
   font-family: var(--font-primary);
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--night-80);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--night-60);
 }
 
 /* Advanced Animations */
@@ -562,25 +1079,29 @@ html {
 }
 
 /* --- Scroll Reveal Utilities --- */
-.reveal { opacity: 0; transform: translateY(18px); filter: blur(8px); }
-.reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); transition: opacity 700ms var(--ease-out-cubic), transform 700ms var(--ease-out-cubic), filter 700ms var(--ease-out-cubic); }
+.reveal { opacity: 0; transform: translateY(60px); filter: blur(12px); }
+.reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); transition: opacity 1000ms cubic-bezier(0.32, 0.72, 0, 1), transform 1000ms cubic-bezier(0.32, 0.72, 0, 1), filter 1000ms cubic-bezier(0.32, 0.72, 0, 1); }
 
-.reveal-stagger > * { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+.reveal-stagger > * { opacity: 0; transform: translateY(40px); filter: blur(8px); }
 .reveal-stagger.in > * { opacity: 1; transform: translateY(0); filter: blur(0); }
-.reveal-stagger.in > * { transition: opacity 650ms var(--ease-out-cubic), transform 650ms var(--ease-out-cubic), filter 650ms var(--ease-out-cubic); }
+.reveal-stagger.in > * { transition: opacity 900ms cubic-bezier(0.32, 0.72, 0, 1), transform 900ms cubic-bezier(0.32, 0.72, 0, 1), filter 900ms cubic-bezier(0.32, 0.72, 0, 1); }
 .reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
 .reveal-stagger.in > *:nth-child(2) { transition-delay: 120ms; }
 .reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }
 .reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
 .reveal-stagger.in > *:nth-child(5) { transition-delay: 300ms; }
 
+/* Service card hover — gold left accent */
+.service-card { border-left: 2px solid transparent; transition: border-color 500ms var(--ease-out-cubic), background 500ms var(--ease-out-cubic); }
+.service-card:hover { border-left-color: var(--jaune-or); }
+
 /* Card hover micro-interactions */
 .card-hover { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
-.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--gold-metallic-10); }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--jaune-or-10); }
 
 /* Dark Mode Card hover micro-interactions */
 .card-hover-dark { transition: transform 250ms var(--ease-out-cubic), box-shadow 250ms var(--ease-out-cubic); }
-.card-hover-dark:hover { transform: translateY(-4px); box-shadow: 0 8px 20px var(--gold-metallic-10); }
+.card-hover-dark:hover { transform: translateY(-4px); box-shadow: 0 8px 20px var(--jaune-or-10); }
 
 /* Glassmorphic Card hover effects */
 .glass-card-hover {
@@ -789,25 +1310,27 @@ html {
 
 .publication-content h1 {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 400;
   margin: 1.5rem 0 1rem 0;
   color: var(--night);
   font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .publication-content h2 {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 400;
   margin: 1.25rem 0 0.75rem 0;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
   font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 .publication-content h3 {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 400;
   margin: 1rem 0 0.5rem 0;
-  color: var(--night-80);
+  color: rgba(10, 10, 10, 0.8);
   font-family: var(--font-display);
 }
 
@@ -815,10 +1338,10 @@ html {
 .publication-content h5,
 .publication-content h6 {
   font-size: 1.125rem;
-  font-weight: bold;
+  font-weight: 500;
   margin: 0.75rem 0 0.5rem 0;
-  color: var(--night-80);
-  font-family: var(--font-display);
+  color: rgba(10, 10, 10, 0.8);
+  font-family: var(--font-display-aptos);
 }
 
 .publication-content p {
@@ -860,25 +1383,25 @@ html {
 }
 
 .publication-content blockquote {
-  border-left: 4px solid var(--gold-metallic);
+  border-left: 4px solid var(--jaune-or);
   padding-left: 1rem;
   margin: 1rem 0;
   font-style: italic;
-  color: var(--night-80);
-  background-color: var(--gold-metallic-10);
+  color: rgba(10, 10, 10, 0.8);
+  background-color: var(--jaune-or-10);
   padding: 1rem;
   border-radius: 0.375rem;
   font-family: var(--font-primary);
 }
 
 .publication-content a {
-  color: var(--gold-metallic);
+  color: var(--jaune-or);
   text-decoration: underline;
   transition: color 0.2s ease;
 }
 
 .publication-content a:hover {
-  color: var(--gold-dark);
+  color: var(--jaune-or);
 }
 
 .publication-content img {
@@ -968,11 +1491,11 @@ html {
   }
   
   .publication-content h2 {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
   }
   
   .publication-content h3 {
-    font-size: 1.125rem;
+    font-size: 1.1rem;
   }
   
   .publication-content table {

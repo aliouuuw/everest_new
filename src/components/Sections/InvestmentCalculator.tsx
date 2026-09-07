@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FiTrendingUp } from 'react-icons/fi';
-import { FaCalculator, FaChartLine } from 'react-icons/fa';
 import { useReveal } from '../Hooks/useReveal';
 import { useCounter } from '../Hooks/useCounter';
 
@@ -37,7 +35,7 @@ interface InvestmentCalculatorProps {
 }
 
 export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calculatorOnly = false }) => {
-  const sectionRef = useReveal<HTMLElement>();
+  const sectionRef = useReveal<HTMLDivElement>();
 
   const [inputs, setInputs] = useState<CalculatorInputs>({
     initialAmount: 1000000, // 1M F CFA
@@ -167,149 +165,155 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
     }
   ];
 
-  return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--night)] transition-colors duration-500">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="kicker text-gradient-gold">Outil de simulation</span>
-          <h2 className="luxury-heading-dark mt-3">Calculez vos projections</h2>
-          <p className="luxury-subheading-dark mt-5 pt-8">
-            Estimez le potentiel de vos investissements avec nos différents services de gestion
-          </p>
-        </div>
-
+  const calculatorContent = (
+    <>
         {/* Tab Navigation */}
+
+        {/* Navigation Tabs */}
         {!calculatorOnly && (
-          <div className="flex justify-center mb-8">
-            <div className="bg-[var(--night-20)] backdrop-blur-sm border border-[var(--gold-metallic-20)] rounded-xl p-1">
-              <button
-                onClick={() => setActiveTab('calculator')}
-                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
-                  activeTab === 'calculator'
-                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
-                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
-                }`}
-              >
-                Calculateur
-              </button>
-              <button
-                onClick={() => setActiveTab('comparison')}
-                className={`px-6 py-2 rounded-lg font-display text-sm transition-all ${
-                  activeTab === 'comparison'
-                    ? 'bg-gradient-to-r from-[var(--gold-metallic)] to-[var(--gold-dark)] text-[var(--pure-white)] shadow-lg'
-                    : 'text-secondary-dark hover:text-[var(--gold-light)]'
-                }`}
-              >
-                Comparaison
-              </button>
-            </div>
+          <div className="flex items-center gap-8 mb-12 border-b border-[var(--mauve-10)]">
+            <button
+              onClick={() => setActiveTab('calculator')}
+              className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: activeTab === 'calculator' ? 600 : 300,
+                color: activeTab === 'calculator' ? 'var(--mauve)' : 'var(--night-60)',
+                borderBottom: activeTab === 'calculator' ? '2px solid var(--mauve)' : '2px solid transparent',
+              }}
+            >
+              Calculateur
+            </button>
+            <button
+              onClick={() => setActiveTab('comparison')}
+              className="pb-4 text-[11px] tracking-[0.15em] uppercase transition-all duration-300"
+              style={{
+                fontFamily: 'var(--font-primary)',
+                fontWeight: activeTab === 'comparison' ? 600 : 300,
+                color: activeTab === 'comparison' ? 'var(--mauve)' : 'var(--night-60)',
+                borderBottom: activeTab === 'comparison' ? '2px solid var(--mauve)' : '2px solid transparent',
+              }}
+            >
+              Comparaison
+            </button>
           </div>
         )}
 
         {(calculatorOnly || activeTab === 'calculator') ? (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className={calculatorOnly ? "grid grid-cols-1 lg:grid-cols-2 gap-10" : "grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20"}>
             {/* Calculator Inputs */}
-            <div className="space-y-6">
-              <div className="glass-card-dark p-6">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
-                <div className="flex items-center gap-3 mb-6">
-                  <FaCalculator className="text-xl text-[var(--gold-light)]" />
-                  <h3 className="font-display text-lg text-[var(--pure-white)]">Paramètres d'investissement</h3>
-                </div>
+            <div>
+              <div className={calculatorOnly ? "" : "p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl"}>
+                <h3
+                  className={calculatorOnly ? "mb-6" : "mb-8"}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: calculatorOnly ? '1rem' : '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
+                >
+                  Paramètres d'investissement
+                </h3>
 
                 {/* Service Selection */}
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-secondary-dark mb-3">
+                <div className="mb-8">
+                  <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                     Service de gestion
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
                     {serviceComparison.map((service) => (
                       <button
                         key={service.service}
                         onClick={() => handleInputChange('service', service.service)}
-                        className={`p-3 rounded-xl border-2 text-left transition-all ${
-                          inputs.service === service.service
-                            ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
-                            : 'border-[var(--gold-metallic-20)] hover:border-[var(--gold-metallic)]/50'
-                        }`}
+                        className="p-4 text-left transition-all duration-300 rounded-xl"
+                        style={{
+                          border: inputs.service === service.service ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                          background: inputs.service === service.service ? 'var(--mauve-05)' : 'var(--pure-white)',
+                        }}
                       >
-                        <div className="font-display text-sm mb-1 text-[var(--pure-white)]">{service.title}</div>
-                        <div className="text-xs text-secondary-dark">{service.fee} frais/an</div>
+                        <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '0.95rem', color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night)', marginBottom: '0.25rem' }}>
+                          {service.title}
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', color: 'var(--night-60)' }}>
+                          {service.fee} /an
+                        </div>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Input Fields */}
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
+                    <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Investissement initial (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.initialAmount}
                       onChange={(e) => handleInputChange('initialAmount', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl font-medium"
                       min="100000"
                       step="50000"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
+                    <label className="block mb-2 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Versement mensuel (F CFA)
                     </label>
                     <input
                       type="number"
                       value={inputs.monthlyContribution}
                       onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
-                      className="w-full px-3 py-2 border border-[var(--gold-metallic-20)] rounded-lg bg-[var(--night-20)] text-[var(--pure-white)] focus:border-[var(--gold-metallic)] focus:outline-none"
+                      className="w-full px-4 py-3 border border-[var(--mauve-10)] bg-[var(--pure-white)] text-[var(--night)] focus:border-[var(--mauve)] focus:outline-none transition-colors rounded-xl font-medium"
                       min="0"
                       step="5000"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
-                      Horizon d'investissement (années)
-                    </label>
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                        Horizon d'investissement
+                      </label>
+                      <span className="font-bold text-[var(--night)]" style={{ fontFamily: 'var(--font-primary)' }}>
+                        {inputs.timeHorizon} ans
+                      </span>
+                    </div>
                     <input
                       type="range"
                       min="1"
                       max="20"
                       value={inputs.timeHorizon}
                       onChange={(e) => handleInputChange('timeHorizon', e.target.value)}
-                      className="w-full accent-[var(--gold-metallic)]"
+                      className="w-full accent-[var(--mauve)] h-1.5 bg-[var(--mauve-10)] rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="flex justify-between text-xs text-secondary-dark mt-1">
+                    <div className="flex justify-between mt-1 text-[10px] font-medium text-[var(--night-40)]">
                       <span>1 an</span>
-                      <span className="font-medium">{inputs.timeHorizon} ans</span>
                       <span>20 ans</span>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-secondary-dark mb-2">
+                    <label className="block mb-3 text-[10px] font-bold uppercase tracking-widest text-[var(--night-60)]" style={{ fontFamily: 'var(--font-primary)' }}>
                       Rendement annuel attendu
                     </label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-3">
                       {Object.entries(expectedReturns).map(([key, value]) => (
                         <button
                           key={key}
                           onClick={() => handleInputChange('expectedReturn', value)}
-                          className={`px-3 py-2 rounded-lg border text-sm transition-all ${
-                            inputs.expectedReturn === value
-                              ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10 text-[var(--gold-light)]'
-                              : 'border-[var(--gold-metallic-20)] text-secondary-dark hover:border-[var(--gold-metallic)]/50'
-                          }`}
+                          className="p-3 text-center transition-all duration-300 rounded-xl"
+                          style={{
+                            border: inputs.expectedReturn === value ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                            background: inputs.expectedReturn === value ? 'var(--mauve-05)' : 'var(--pure-white)',
+                          }}
                         >
-                          {key === 'conservative' && 'Conservateur'}
-                          {key === 'moderate' && 'Modéré'}
-                          {key === 'aggressive' && 'Dynamique'}
-                          <br />
-                          <span className="text-xs">{formatPercentage(value)}</span>
+                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.8rem', color: inputs.expectedReturn === value ? 'var(--mauve)' : 'var(--night-60)', marginBottom: '0.15rem' }}>
+                            {key === 'conservative' && 'Conservateur'}
+                            {key === 'moderate' && 'Modéré'}
+                            {key === 'aggressive' && 'Dynamique'}
+                          </div>
+                          <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: inputs.expectedReturn === value ? 'var(--mauve)' : 'var(--night-80)' }}>
+                            {formatPercentage(value)}
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -319,64 +323,75 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             </div>
 
             {/* Results */}
-            <div className="space-y-6">
-              <div className="glass-card-dark p-6">
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
+            <div>
+              <div className={calculatorOnly ? "" : "p-8 border border-[var(--mauve-10)] bg-[var(--pure-white)] rounded-2xl"}>
+                <h3
+                  className={calculatorOnly ? "mb-6" : "mb-8"}
+                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: calculatorOnly ? '1rem' : '1.1rem', letterSpacing: '-0.01em', color: 'var(--mauve)' }}
+                >
+                  Projections estimées
+                </h3>
 
-                <div className="flex items-center gap-3 mb-6">
-                  <FiTrendingUp className="text-xl text-[var(--gold-light)]" />
-                  <h3 className="font-display text-lg text-[var(--pure-white)]">Projections estimées</h3>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Total investi</span>
-                    <span className="font-display text-lg text-[var(--pure-white)]">{totalInvestedCounter.value}</span>
+                <div className="space-y-0">
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Total investi</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: 'var(--night)' }}>{totalInvestedCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-3 border-b border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Frais estimés ({serviceFees[inputs.service].min}%)</span>
-                    <span className="font-display text-lg text-red-400">-{totalFeesCounter.value}</span>
+                  <div className="flex justify-between items-center py-5" style={{ borderBottom: '1px solid var(--mauve-10)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>
+                      Frais estimés ({serviceFees[inputs.service].min}%)
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: 'var(--mauve-60)' }}>−{totalFeesCounter.value}</span>
                   </div>
 
-                  <div className="flex justify-between items-center py-3 border-b-2 border-[var(--gold-metallic-20)]">
-                    <span className="text-secondary-dark">Valeur projetée</span>
-                    <span className="font-display text-xl text-emerald-400">{projectedValueCounter.value}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-secondary-dark">Gain net estimé</span>
-                    <span className={`font-display text-lg ${
-                      results.netReturn >= 0 ? 'text-emerald-400' : 'text-red-400'
-                    }`}>
-                      {netReturnCounter.value}
+                  {/* Hero result — projected value */}
+                  <div className="py-6 mt-2 mb-2 rounded-xl px-5" style={{ background: 'var(--mauve-05)', border: '1px solid var(--mauve-15)' }}>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: 'var(--mauve-60)', display: 'block', marginBottom: '0.5rem' }}>
+                      Valeur projetée
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2.2rem', letterSpacing: '-0.02em', color: 'var(--mauve)' }}>
+                      {projectedValueCounter.value}
                     </span>
                   </div>
 
-                  <div className="mt-6 p-4 bg-[var(--gold-metallic)]/10 rounded-lg">
-                    <div className="flex items-center gap-2 mb-2">
-                      <FaChartLine className="text-[var(--gold-light)]" />
-                      <span className="font-display text-sm text-[var(--pure-white)]">Rendement annuel moyen estimé</span>
-                    </div>
-                    <div className="text-2xl font-display text-[var(--gold-light)]">
-                      {avgReturnCounter.value}
-                    </div>
+                  <div className="flex justify-between items-center py-5">
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.875rem', color: 'var(--night-60)' }}>Gain net estimé</span>
+                    <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.1rem', color: results.netReturn >= 0 ? 'var(--jaune-or)' : 'var(--mauve)' }}>
+                      {results.netReturn >= 0 ? '+' : ''}{netReturnCounter.value}
+                    </span>
                   </div>
+                </div>
+
+                {/* Avg return — clean, no gradient noise */}
+                <div className="mt-6 pt-6 flex items-baseline justify-between" style={{ borderTop: '1px solid var(--mauve-10)' }}>
+                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--night-60)' }}>
+                    Rendement annuel moyen
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '2rem', letterSpacing: '-0.02em', color: 'var(--jaune-or)' }}>
+                    {avgReturnCounter.value}
+                  </span>
                 </div>
               </div>
 
-              <div className="text-center">
-                <p className="text-xs text-secondary-dark mb-4">
-                  * Ces projections sont estimatives et ne constituent pas une garantie de performance.
-                  Les marchés financiers comportent des risques.
-                </p>
-                <a
-                  href="#contact"
-                  className="btn-primary font-display tracking-wide"
-                >
-                  Obtenir un conseil personnalisé
-                </a>
-              </div>
+              {/* Disclaimer + CTA */}
+              {!calculatorOnly && (
+                <div className="mt-8">
+                  <p
+                    className="mb-6"
+                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, fontSize: '0.75rem', lineHeight: 1.7, color: 'var(--night-60)' }}
+                  >
+                    * Ces projections sont estimatives et ne constituent pas une garantie de performance.
+                    Les marchés financiers comportent des risques.
+                  </p>
+                  <a
+                    href="https://everest-account-opening.vercel.app/new-home"
+                    className="btn-primary inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase"
+                  >
+                    Ouvrir un compte
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -385,46 +400,73 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
             {serviceComparison.map((service) => (
               <div
                 key={service.service}
-                className={`group relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
-                  inputs.service === service.service
-                    ? 'border-[var(--gold-metallic)] bg-[var(--gold-metallic)]/10'
-                    : 'border-[var(--gold-metallic-20)] bg-[var(--night-20)] backdrop-blur-sm'
-                }`}
+                className="p-8 flex flex-col transition-colors duration-300 hover:border-[var(--mauve)] cursor-pointer rounded-2xl"
+                onClick={() => {
+                  handleInputChange('service', service.service);
+                  setActiveTab('calculator');
+                }}
+                style={{
+                  border: inputs.service === service.service ? '1px solid var(--mauve)' : '1px solid var(--mauve-10)',
+                  background: inputs.service === service.service ? 'var(--mauve-05)' : 'var(--pure-white)',
+                }}
               >
-                <div className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[var(--gold-metallic-10)] blur-2xl" />
-
-                <div className="font-display text-lg mb-3 text-[var(--pure-white)]">{service.title}</div>
-
-                <div className="text-2xl font-display text-[var(--gold-light)] mb-4">
+                <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 700, fontSize: '1.4rem', color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night)', marginBottom: '0.75rem' }}>
+                  {service.title}
+                </div>
+                <div style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, fontSize: '1.8rem', color: 'var(--mauve)', marginBottom: '1.5rem' }}>
                   {service.fee}
                 </div>
 
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-3 mb-8 flex-grow">
                   {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2 text-sm text-secondary-dark">
-                      <div className="w-1.5 h-1.5 bg-[var(--gold-metallic)] rounded-full flex-shrink-0" />
-                      {feature}
+                    <li key={index} className="flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--mauve)] flex-shrink-0" />
+                      <span style={{ fontFamily: 'var(--font-primary)', fontWeight: 400, fontSize: '0.85rem', color: 'var(--night-80)' }}>
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => {
-                    handleInputChange('service', service.service);
-                    setActiveTab('calculator');
+                <span
+                  className="text-[11px] tracking-[0.15em] uppercase"
+                  style={{
+                    fontFamily: 'var(--font-primary)',
+                    fontWeight: 600,
+                    color: inputs.service === service.service ? 'var(--mauve)' : 'var(--night-60)',
                   }}
-                  className={`w-full py-2 px-4 rounded-lg font-display text-sm transition-all ${
-                    inputs.service === service.service
-                      ? 'btn-primary'
-                      : 'btn-secondary'
-                  }`}
                 >
-                  {inputs.service === service.service ? 'Sélectionné' : 'Essayer'}
-                </button>
+                  {inputs.service === service.service ? 'Sélectionné' : 'Simuler →'}
+                </span>
               </div>
             ))}
           </div>
         )}
+    </>
+  );
+
+  if (calculatorOnly) {
+    return <div ref={sectionRef}>{calculatorContent}</div>;
+  }
+
+  return (
+    <section
+      className="reveal relative py-28 md:py-36 overflow-hidden bg-[var(--summit-ivory)]"
+      ref={sectionRef as React.RefObject<HTMLElement>}
+    >
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
+        {/* Header */}
+        <div className="max-w-xl mb-14">
+          <div className="mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[var(--night-80)] bg-[var(--mauve-10)] border border-[var(--mauve-20)]">
+              Outil de simulation
+            </span>
+          </div>
+          <h2 className="luxury-heading" style={{ color: 'var(--night-80)' }}>
+            Calculez vos projections.
+          </h2>
+        </div>
+        {calculatorContent}
       </div>
     </section>
   );

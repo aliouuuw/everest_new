@@ -1,106 +1,146 @@
-import { InvestmentCalculator } from '../components/Sections/InvestmentCalculator';
+import { useState } from 'react'
+import { FiArrowRight, FiDollarSign, FiPercent, FiTarget, FiTrendingUp } from 'react-icons/fi'
+import { CompoundInterestCalculator } from '../components/InvestorProfile/CompoundInterestCalculator'
+import { DividendCalculator } from '../components/InvestorProfile/DividendCalculator'
+import { InvestorProfileInline } from '../components/InvestorProfile/InvestorProfileInline'
+
+type ToolId = 'profil' | 'interets' | 'dividendes'
+
+const TABS = [
+  { id: 'profil' as ToolId, icon: <FiTarget size={18} />, label: "Profil d'Investisseur" },
+  { id: 'interets' as ToolId, icon: <FiPercent size={18} />, label: 'Simulateur' },
+  { id: 'dividendes' as ToolId, icon: <FiDollarSign size={18} />, label: 'Calculateur Dividendes' },
+] as const
+
+const TOOL_META: Record<ToolId, { title: string; subtitle: string; icon: React.ReactNode }> = {
+  profil: {
+    title: "Détermination du Profil d'Investisseur",
+    subtitle: "Identifiez votre profil d'investisseur pour des décisions adaptées à votre tolérance au risque",
+    icon: <FiTarget size={20} />,
+  },
+  interets: {
+    title: "Simulateur",
+    subtitle: "Projettez la croissance de votre investissement grâce à la puissance des intérêts composés",
+    icon: <FiTrendingUp size={20} />,
+  },
+  dividendes: {
+    title: 'Calculateur de Dividendes',
+    subtitle: 'Estimez vos revenus de dividendes et leur croissance potentielle',
+    icon: <FiDollarSign size={20} />,
+  },
+}
 
 export const SimulateurPage: React.FC = () => {
+  const [activeTool, setActiveTool] = useState<ToolId>('profil')
+
+  const meta = TOOL_META[activeTool]
+
   return (
-    <div className="min-h-screen bg-[var(--pure-white)]">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[var(--gold-light)]/20 via-[var(--pure-white)] to-[var(--gold-light)]/10">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="kicker text-gradient-gold">Outil de simulation</span>
-            <h1 className="luxury-heading mt-3">
-              Simulateur d'investissement
-            </h1>
-            <p className="luxury-subheading mt-5 pt-8">
-              Calculez vos projections financières et explorez le potentiel de vos investissements 
-              avec nos différents services de gestion de portefeuille.
-            </p>
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
+      {/* ─── 1. Hero — Mauve Banner (matches Bourse / Contact / Expertises) ─── */}
+      <section className="relative pt-[200px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--everest-green)]">
+        <div className="relative z-10 w-full page-container">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+            <div className="md:col-span-8">
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
+                Outils Investisseurs.
+              </h1>
+            </div>
+
+            <div className="md:col-span-4">
+              <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
+                Utilisez nos outils pour optimiser vos décisions d'investissement sur la BRVM.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <InvestmentCalculator />
+      {/* ─── 2. Tab Navigation ─── */}
+      <div id="outils" className="bg-[var(--pure-white)] border-b border-black/10 sticky top-[64px] z-30">
+        <div className="page-container">
+          <div className="flex justify-center overflow-x-auto no-scrollbar py-4 gap-2 md:gap-4">
+            {TABS.map((tab) => {
+              const isActive = tab.id === activeTool
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTool(tab.id)}
+                  className={`group flex items-center gap-2 px-5 py-2.5 outils-invest-label font-medium whitespace-nowrap rounded-md transition-all duration-200 ${
+                    isActive
+                      ? 'border border-[var(--night)] text-[var(--night)] shadow-sm'
+                      : 'border border-transparent text-[var(--night-60)] hover:text-[var(--night)] hover:bg-[var(--mauve-05)]'
+                  }`}
+                  style={{ fontFamily: 'var(--font-primary)' }}
+                >
+                  <span className={isActive ? 'text-[var(--night-80)]' : 'text-[var(--night-40)] group-hover:text-[var(--night-60)]'}>
+                    {tab.icon}
+                  </span>
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
 
-      {/* Additional Information Section */}
-      <section className="py-16 bg-[var(--white-smoke)]/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="luxury-heading text-3xl mb-6">
-                Pourquoi utiliser notre simulateur ?
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">1</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg mb-2">Projections réalistes</h3>
-                    <p className="text-secondary">
-                      Basées sur des données historiques et des modèles financiers éprouvés
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">2</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg mb-2">Comparaison des services</h3>
-                    <p className="text-secondary">
-                      Évaluez les différents niveaux de service et leurs impacts sur vos rendements
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-[var(--gold-metallic)] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-white text-sm font-bold">3</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-lg mb-2">Planification personnalisée</h3>
-                    <p className="text-secondary">
-                      Adaptez vos paramètres selon vos objectifs et votre profil de risque
-                    </p>
-                  </div>
+      {/* ─── 3. Tool Content ─── */}
+      <section className="py-6 md:py-8">
+        <div className="page-container">
+          {/* White card container */}
+          <div className="bg-[var(--pure-white)] rounded-2xl border border-black/10 shadow-sm overflow-hidden">
+            {/* Tool Header */}
+            <div className="px-6 md:px-10 py-6 border-b border-black/10">
+              <div className="flex items-start justify-center gap-4">
+                <div>
+                  <h2 className="font-bold text-lg md:text-xl tracking-[0.08em] text-[var(--night)] text-center" style={{ fontFamily: 'var(--font-primary)' }}>
+                    {meta.title}
+                  </h2>
+                  <p className="text-base text-[var(--night-60)] mt-1 text-center" style={{ fontFamily: 'var(--font-primary)' }}>
+                    {meta.subtitle}
+                  </p>
                 </div>
               </div>
             </div>
-            
-            <div className="bg-[var(--pure-white)] rounded-2xl p-8 border border-[var(--gold-metallic)]/25 flex flex-col">
-              <div className="flex-1">
-                <h3 className="font-display text-xl mb-4">Besoin d'un conseil personnalisé ?</h3>
-                <p className="text-secondary mb-6">
-                  Nos experts en gestion de portefeuille sont disponibles pour vous accompagner 
-                  dans la définition de votre stratégie d'investissement.
-                </p>
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
-                    <span className="text-sm">Analyse de votre profil de risque</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
-                    <span className="text-sm">Recommandations personnalisées</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-[var(--gold-metallic)] rounded-full"></div>
-                    <span className="text-sm">Accompagnement continu</span>
-                  </div>
+
+            {/* Tool Body */}
+            <div className="p-6 md:p-10">
+              <div>
+                {/* Main tool area */}
+                <div className="lg:col-span-2">
+                  {activeTool === 'profil' && <InvestorProfileInline />}
+                  {activeTool === 'interets' && <CompoundInterestCalculator />}
+                  {activeTool === 'dividendes' && <DividendCalculator />}
                 </div>
               </div>
-              <a
-                href="#contact"
-                className="btn-primary font-display tracking-wide w-full text-center"
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 4. CTA — Dark band (spacing matches FAQ / Expertises) ─── */}
+      <section className="section-bg-light py-12 md:py-20">
+        <div className="page-container relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+            <div className="md:col-span-7">
+              <h2
+                className="font-primary font-bold leading-[0.95] tracking-tight mb-5 text-white"
+                style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
               >
-                Prendre rendez-vous
+                Besoin d'un accompagnement personnalisé ?
+              </h2>
+              <p className="text-lg md:text-xl text-white/60 font-light max-w-2xl">
+                Nos conseillers vous aident à construire une stratégie adaptée à votre profil et vos objectifs.
+              </p>
+            </div>
+            <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">
+              <a href="/contact" className="btn-primary-dark inline-flex items-center justify-center gap-4 px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit">
+                Prendre rendez-vous <FiArrowRight className="text-lg" />
               </a>
             </div>
           </div>
         </div>
       </section>
     </div>
-  );
-};
+  )
+}

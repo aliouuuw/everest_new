@@ -96,14 +96,14 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   const renderFeatureValue = (value: boolean | string, service: string) => {
     if (typeof value === 'boolean') {
       return value ? (
-        <FiCheck className="text-green-600 mx-auto" />
+        <FiCheck className="text-green-600 mx-auto text-xl" />
       ) : (
-        <FiX className="text-red-400 mx-auto" />
+        <FiX className="text-red-400 mx-auto text-xl" />
       );
     }
     return (
-      <span className={`text-sm font-medium ${
-        currentService === service ? 'text-[var(--gold-dark)]' : 'text-[var(--night)]'
+      <span className={`text-sm font-bold ${
+        currentService === service ? 'text-[var(--night-80)]' : 'text-[var(--night)]'
       }`}>
         {value}
       </span>
@@ -137,120 +137,119 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   };
 
   const content = (
-    <div className={`${variant === 'modal' ? 'p-6' : 'mx-auto max-w-6xl px-6'}`}>
-      <div className="text-center max-w-2xl mx-auto mb-8">
-        <span className="kicker text-gradient-gold">Comparaison des services</span>
-        <h2 className="luxury-heading mt-3">Choisissez le service qui vous convient</h2>
-        <p className="luxury-subheading mt-5 pt-8">
-          Comparez nos trois offres pour trouver celle qui correspond à votre style d'investissement et à vos besoins.
-        </p>
+    <div className={`${variant === 'modal' ? 'p-6' : 'page-container'}`}>
+      <div className="mb-20 text-center">
+        <span className="px-4 py-1.5 rounded-full bg-[var(--mauve-10)] text-[10px] font-bold tracking-[0.3em] text-[var(--night-80)] uppercase inline-block mb-8">Comparaison des services</span>
+        <h2 className="font-primary font-bold text-4xl md:text-6xl leading-[1.05] max-w-3xl mx-auto text-[var(--night-80)]">
+          Choisissez le service qui vous convient.
+        </h2>
       </div>
 
       {/* Mobile Cards View */}
-      <div className="lg:hidden space-y-4">
+      <div className="lg:hidden space-y-8">
         {['discretionary', 'mandate', 'assisted'].map((service) => (
           <div
             key={service}
-            className={`relative overflow-hidden rounded-2xl border-2 p-6 transition-all ${
+            className={`border rounded-2xl p-6 ${
               currentService === service
-                ? 'border-[var(--gold-metallic)] bg-[var(--gold-light)]/10'
-                : 'border-[var(--gold-metallic)]/25 bg-[var(--pure-white)]/80 backdrop-blur-sm'
+                ? 'border-[var(--mauve)] bg-[var(--mauve-10)]'
+                : 'border-black/10 bg-white'
             }`}
           >
-            <div className="flex items-center gap-3 mb-4">
-              {getServiceIcon(service)}
-              <h3 className="font-display text-lg">{getServiceTitle(service)}</h3>
+            <div className="flex items-center gap-4 mb-6">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${currentService === service ? 'bg-[var(--mauve)] text-white' : 'bg-[var(--white-smoke)] text-[var(--night)]'}`}>
+                {getServiceIcon(service)}
+              </div>
+              <h3 className="font-primary font-bold text-xl">{getServiceTitle(service)}</h3>
               {currentService === service && (
-                <span className="ml-auto text-xs bg-[var(--gold-metallic)] text-white px-2 py-1 rounded-full">
-                  Votre choix
+                <span className="ml-auto text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--jaune-or)] text-white px-3 py-1 rounded-full">
+                  Actif
                 </span>
               )}
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4 border-t border-black/10 pt-4">
               {serviceFeatures.slice(0, 6).map((feature) => (
                 <div key={feature.name} className="flex justify-between items-center py-2">
-                  <span className="text-sm text-secondary">{feature.name}</span>
+                  <span className="text-sm font-medium text-[rgba(10,10,10,0.6)]">{feature.name}</span>
                   <div className="flex items-center">
                     {renderFeatureValue((feature as any)[service], service)}
                   </div>
                 </div>
               ))}
             </div>
-
-            <div className="mt-6 pt-4 border-t border-[var(--gold-metallic)]/25">
-              <button
-                className="btn-secondary font-display tracking-wide w-full text-center opacity-50 cursor-not-allowed"
-                disabled
-              >
-                Service intégré
-              </button>
-            </div>
           </div>
         ))}
       </div>
 
       {/* Desktop Table View */}
-      <div className="hidden lg:block overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-left p-4 font-display text-lg border-b border-[var(--gold-metallic)]/25">
-                Fonctionnalités
-              </th>
+      <div className="hidden lg:block bg-white rounded-3xl border border-[var(--mauve)]/10 overflow-hidden shadow-sm">
+        <div>
+          {/* Table Header */}
+          <div className="grid grid-cols-4 border-b border-[var(--mauve)]/10 bg-[var(--white-smoke)]/50">
+            <div className="p-8 font-primary font-bold text-lg text-[var(--night)] flex items-end">
+              Fonctionnalités
+            </div>
+            {['discretionary', 'mandate', 'assisted'].map((service) => (
+              <div
+                key={service}
+                className={`p-8 text-center border-l border-[var(--mauve)]/5 relative ${
+                  currentService === service ? 'bg-[var(--mauve)]/5' : ''
+                }`}
+              >
+                {currentService === service && (
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--mauve)]" />
+                )}
+                <div className="flex flex-col items-center gap-4">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${currentService === service ? 'bg-[var(--mauve)] text-white' : 'bg-[var(--white-smoke)] text-[var(--night)]'}`}>
+                    {getServiceIcon(service)}
+                  </div>
+                  <span className="font-primary font-bold text-xl">{getServiceTitle(service)}</span>
+                  {currentService === service && (
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase bg-[var(--jaune-or)] text-white px-4 py-1.5 rounded-full">
+                      Actif
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Table Body */}
+          {serviceFeatures.map((feature, index) => (
+            <div
+              key={feature.name}
+              className={`grid grid-cols-4 border-b border-[var(--mauve)]/5 last:border-0 hover:bg-[var(--white-smoke)]/30 transition-colors ${
+                index % 2 === 0 ? 'bg-[var(--white-smoke)]/10' : ''
+              }`}
+            >
+              <div className="p-6 px-8 font-medium text-[var(--night-80)] flex items-center">
+                {feature.name}
+              </div>
               {['discretionary', 'mandate', 'assisted'].map((service) => (
-                <th
+                <div
                   key={service}
-                  className={`p-4 text-center border-b border-[var(--gold-metallic)]/25 ${
-                    currentService === service ? 'bg-[var(--gold-light)]/10' : ''
+                  className={`p-6 border-l border-[var(--mauve)]/5 text-center flex items-center justify-center ${
+                    currentService === service ? 'bg-[var(--mauve)]/5' : ''
                   }`}
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    {getServiceIcon(service)}
-                    <span className="font-display text-base">{getServiceTitle(service)}</span>
-                    {currentService === service && (
-                      <span className="text-xs bg-[var(--gold-metallic)] text-white px-2 py-1 rounded-full">
-                        Votre choix
-                      </span>
-                    )}
-                  </div>
-                </th>
+                  {renderFeatureValue((feature as any)[service], service)}
+                </div>
               ))}
-            </tr>
-          </thead>
-          <tbody>
-            {serviceFeatures.map((feature, index) => (
-              <tr
-                key={feature.name}
-                className={index % 2 === 0 ? 'bg-[var(--white-smoke)]/50' : ''}
-              >
-                <td className="p-4 font-medium text-[var(--night)] border-b border-[var(--gold-metallic)]/10">
-                  {feature.name}
-                </td>
-                {['discretionary', 'mandate', 'assisted'].map((service) => (
-                  <td
-                    key={service}
-                    className={`p-4 text-center border-b border-[var(--gold-metallic)]/10 ${
-                      currentService === service ? 'bg-[var(--gold-light)]/5' : ''
-                    }`}
-                  >
-                    {renderFeatureValue((feature as any)[service], service)}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-
-        </table>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Legend */}
-      <div className="mt-8 p-4 bg-[var(--white-smoke)]/80 rounded-xl border border-[var(--gold-metallic)]/25">
-        <div className="flex items-start gap-2">
-          <FiInfo className="text-[var(--gold-dark)] mt-0.5 flex-shrink-0" />
-          <div className="text-sm text-secondary">
-            <p className="font-medium text-[var(--night)] mb-1">Note importante:</p>
-            <p>Les frais indiqués sont des fourchettes approximatives. Le montant exact dépend de votre profil d'investissement et du montant géré. Contactez-nous pour un devis personnalisé.</p>
+      <div className="mt-12 p-6 rounded-2xl border border-[var(--mauve)]/10 bg-[var(--white-smoke)]">
+        <div className="flex items-start gap-4">
+          <div className="w-8 h-8 rounded-full bg-[var(--jaune-or)]/20 flex items-center justify-center shrink-0">
+            <FiInfo className="text-[var(--jaune-or)] text-lg" />
+          </div>
+          <div className="text-sm text-[rgba(10,10,10,0.8)] pt-1.5">
+            <p className="font-primary font-bold text-[var(--night)] mb-2">Note importante :</p>
+            <p className="font-light leading-relaxed">Les frais indiqués sont des fourchettes approximatives. Le montant exact dépend de votre profil d'investissement et du montant géré. Contactez-nous pour un devis personnalisé.</p>
           </div>
         </div>
       </div>
@@ -262,7 +261,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
       <>
         <button
           onClick={handleModalToggle}
-          className="btn-secondary font-display tracking-wide flex items-center gap-2"
+          className="btn-secondary font-primary font-bold tracking-wide flex items-center gap-2 rounded-full"
         >
           <FiInfo className="text-sm" />
           Comparer les services
@@ -270,17 +269,19 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
 
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
-              <div className="sticky top-0 flex items-center justify-between p-6 border-b border-[var(--gold-metallic)]/25 bg-white/95 backdrop-blur-sm">
-                <h3 className="font-display text-xl">Comparaison des services</h3>
+            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl">
+              <div className="sticky top-0 flex items-center justify-between p-6 border-b border-[var(--mauve)]/10 bg-white/95 backdrop-blur-md z-20">
+                <h3 className="font-primary font-bold text-xl">Comparaison des services</h3>
                 <button
                   onClick={handleModalToggle}
-                  className="p-2 hover:bg-[var(--gold-light)]/10 rounded-lg transition-colors"
+                  className="p-2 hover:bg-[var(--mauve)]/10 hover:text-[var(--mauve)] rounded-full transition-colors"
                 >
                   <FiX className="text-xl" />
                 </button>
               </div>
-              {content}
+              <div className="py-8">
+                {content}
+              </div>
             </div>
           </div>
         )}
@@ -289,7 +290,7 @@ export const ServiceComparison: React.FC<ServiceComparisonProps> = ({
   }
 
   return (
-    <section ref={sectionRef} className="reveal py-14 sm:py-18 bg-[var(--pure-white)]">
+    <section ref={sectionRef} className="reveal py-24 md:py-40 bg-[var(--pure-white)] font-primary">
       {content}
     </section>
   );

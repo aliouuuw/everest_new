@@ -10,7 +10,7 @@ const MountainWireframe = lazy(() => import('./MountainWireframe').then(m => ({ 
 gsap.registerPlugin(ScrollTrigger);
 
 export const HeroSection: React.FC = () => {
-  const { lenis, scrollTo, isReady } = useLenisContext();
+  const { lenis, isReady } = useLenisContext();
   const heroRef = useRef<HTMLElement>(null);
   const kickerRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -128,7 +128,7 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           <p ref={subheadingRef} className="luxury-subheading mb-10">
-            Votre partenaire de confiance pour le courtage BRVM, les émissions primaires et l'ingénierie financière.
+            Votre partenaire d'excellence pour accéder aux opportunités de marché et réussir vos opérations en Afrique de l'Ouest.
           </p>
 
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-8">
@@ -137,7 +137,7 @@ export const HeroSection: React.FC = () => {
               onClick={() => {
                 const contactElement = document.getElementById('contact');
                 if (contactElement) {
-                  scrollTo(contactElement, { offset: -80 });
+                  contactElement.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
@@ -149,7 +149,7 @@ export const HeroSection: React.FC = () => {
               onClick={() => {
                 const servicesElement = document.getElementById('services');
                 if (servicesElement) {
-                  scrollTo(servicesElement, { offset: -80 });
+                  servicesElement.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
@@ -173,12 +173,12 @@ export const HeroSection: React.FC = () => {
       {/* Remove floating elements for a cleaner composition */}
 
       {/* License information - bottom left */}
-      <div className="absolute bottom-8 left-8 text-xs text-[var(--night-80)] opacity-60 z-10">
+      <div className="absolute bottom-8 left-8 text-xs text-[rgba(10, 10, 10, 0.8)] opacity-60 z-10">
         <span>Agrément n° SGI /DA/2016/60</span>
       </div>
 
       {/* Minimal scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2" style={{ color: 'var(--gold-dark)' }}>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2" style={{ color: 'var(--jaune-or)' }}>
         <div className="flex flex-col items-center px-3 py-2 rounded-full border border-current/20 bg-white/60 backdrop-blur">
           <div className="w-5 h-8 border border-current rounded-full flex justify-center opacity-70">
             <div className="w-0.5 h-2 bg-current rounded-full mt-1.5 animate-pulse"></div>

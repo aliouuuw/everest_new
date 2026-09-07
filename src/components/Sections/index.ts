@@ -1,8 +1,15 @@
 export { ValueProps } from './ValueProps';
+export { TrustStrip } from './TrustStrip';
+export { Positioning } from './Positioning';
+export { Capacity } from './Capacity';
+export { MarketsOpportunities } from './MarketsOpportunities';
 export { Services } from './Services';
 export { Insights } from './Insights';
+export { InsightsMerged } from './InsightsMerged';
 export { MountainTransition } from './MountainTransition';
 export { CTA } from './CTA';
 export { InvestmentCalculator } from './InvestmentCalculator';
+export { NewsSection } from './NewsSection';
+export { FAQ } from './FAQ';
 export { ClientPortalPreview } from './ClientPortalPreview';
 export { DepartmentPage } from './DepartmentPage';
