@@ -7,7 +7,7 @@ Status: open unless marked done.
 
 ## High
 
-- [ ] **Publications are files, not HTML slugs.** `/publications` is the PDF catalogue (`PUBLICATIONS` + preview/download). Home Insights still maps Payload docs to `/publications/[slug]` with « Lire la publication ». After import, `test-1` / `test-2` are HTML pages. Fix: drop public `[slug]`; reuse the PDF list on home. Keep Payload HTML off the public IA.
+- [x] **Publications are files, not HTML slugs.** `/publications` and home Insights use `PUBLICATION_FILES` (PDF download). Public `/publications/[slug]` HTML pages are removed.
 
 - [ ] **Accès Client 404.** Header `to="/auth"`. Astro has no `/auth`. Hide the CTA, stub a message, or point to the live portal.
 

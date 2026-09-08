@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { FiArrowRight, FiCalendar, FiFileText } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { EditableText } from '../../cms';
+import { PUBLICATION_FILES, PUBLICATION_FREQUENCY_LABELS } from '../../data/publications'
 import { useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useMemo } from 'react';
@@ -17,59 +18,7 @@ type NewsArticle = {
   slug: string;
 };
 
-/* ─── Data: Publications ─── */
-
-type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle';
-
-type Publication = {
-  id: string;
-  title: string;
-  desc: string;
-  frequency: Frequency;
-  date: string;
-  fileUrl: string;
-  fileSize: string;
-  pages?: number;
-};
-
-const FREQUENCY_LABELS: Record<Frequency, string> = {
-  hebdomadaire: 'Hebdomadaire',
-  mensuelle: 'Mensuelle',
-  semestrielle: 'Semestrielle',
-};
-
-const PUBLICATIONS: Array<Publication> = [
-  {
-    id: 'revue-hebdo-32',
-    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
-    desc: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
-    frequency: 'hebdomadaire',
-    date: '2026-04-24',
-    fileUrl: '/publications/Revue-Hebdo-32.pdf',
-    fileSize: '14.0 MB',
-    pages: 10,
-  },
-  {
-    id: 'revue-hebdo-example',
-    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
-    desc: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
-    frequency: 'hebdomadaire',
-    date: '2026-04-04',
-    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '13.2 MB',
-    pages: 9,
-  },
-  {
-    id: 'revue-semestrielle-sep-26',
-    title: 'Revue Semestrielle — S1 2026',
-    desc: "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
-    frequency: 'semestrielle',
-    date: '2026-09-20',
-    fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
-    fileSize: '10.5 MB',
-    pages: 16,
-  },
-];
+const FREQUENCY_LABELS = PUBLICATION_FREQUENCY_LABELS
 
 /* ─── Main Component ─── */
 
@@ -94,8 +43,8 @@ export const InsightsMerged: React.FC = () => {
       }));
   }, [rawArticles]);
 
-  const featured = PUBLICATIONS[0];
-  const secondary = PUBLICATIONS.slice(1);
+  const featured = PUBLICATION_FILES[0];
+  const secondary = PUBLICATION_FILES.slice(1);
 
   return (
     <section
@@ -276,7 +225,7 @@ export const InsightsMerged: React.FC = () => {
                 </h3>
 
                 <p className="max-w-xl font-primary text-sm font-light leading-relaxed text-white/70 md:text-[15px]">
-                  {featured.desc}
+                  {featured.description}
                 </p>
               </div>
 
@@ -327,7 +276,7 @@ export const InsightsMerged: React.FC = () => {
                     {secondary[0].title}
                   </h4>
                   <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
-                    {secondary[0].desc}
+                    {secondary[0].description}
                   </p>
                 </div>
                 <div className="mt-8 flex items-center justify-between gap-4">

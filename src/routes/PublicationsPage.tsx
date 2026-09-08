@@ -2,27 +2,18 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '../cms'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
+import {
+  PUBLICATION_FILES,
+  PUBLICATION_FREQUENCY_LABELS,
+  type PublicationFile,
+  type PublicationFrequency,
+} from '../data/publications'
 
-/* ─── Types ─── */
-type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle'
+type Frequency = PublicationFrequency
+type Publication = PublicationFile
 
-type Publication = {
-  id: string
-  title: string
-  description: string
-  frequency: Frequency
-  date: string          // ISO date
-  fileUrl: string       // path under /publications/
-  fileSize: string      // human-readable e.g. "13.2 MB"
-  pages?: number
-}
-
-/* ─── Static catalogue (replace with API/Convex later) ─── */
-const FREQUENCY_LABELS: Record<Frequency, string> = {
-  hebdomadaire: 'Hebdomadaire',
-  mensuelle: 'Mensuelle',
-  semestrielle: 'Semestrielle',
-}
+const FREQUENCY_LABELS = PUBLICATION_FREQUENCY_LABELS
+const PUBLICATIONS = PUBLICATION_FILES
 
 const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: string }> = {
   hebdomadaire: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
@@ -32,39 +23,6 @@ const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: st
 
 const ALL_LABEL = 'tout' as const
 type FilterCategory = Frequency | typeof ALL_LABEL
-
-const PUBLICATIONS: Array<Publication> = [
-  {
-    id: 'revue-hebdo-32',
-    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
-    description: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
-    frequency: 'hebdomadaire',
-    date: '2026-04-24',
-    fileUrl: '/publications/Revue-Hebdo-32.pdf',
-    fileSize: '14.0 MB',
-    pages: 10,
-  },
-  {
-    id: 'revue-hebdo-example',
-    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
-    description: "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
-    frequency: 'hebdomadaire',
-    date: '2026-04-04',
-    fileUrl: '/publications/Revue-Hebdomadaire-example.pdf',
-    fileSize: '13.2 MB',
-    pages: 9,
-  },
-  {
-    id: 'revue-semestrielle-sep-26',
-    title: 'Revue Semestrielle — S1 2026',
-    description: "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
-    frequency: 'semestrielle',
-    date: '2026-09-20',
-    fileUrl: '/publications/Revue-semestrielle-20.09.26-1.pdf',
-    fileSize: '10.5 MB',
-    pages: 16,
-  },
-]
 
 /* ─── PDF Preview Modal ─── */
 const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub, onClose }) => {

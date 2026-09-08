@@ -31,7 +31,7 @@ bun run dev:web
 |------|-----|
 | Home | http://localhost:4321 |
 | Publications list | http://localhost:4321/publications |
-| Publication | http://localhost:4321/publications/[slug] |
+| Publication files | `/publications/*.pdf` (no HTML slug pages) |
 | Actualités list | http://localhost:4321/actualites |
 | Article | http://localhost:4321/actualites/[slug] |
 

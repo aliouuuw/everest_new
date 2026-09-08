@@ -2,54 +2,22 @@ import { Link } from '@tanstack/react-router'
 import { FiArrowRight, FiCalendar, FiFileText } from 'react-icons/fi'
 import { useReveal } from '@/components/Hooks/useReveal'
 import { EditableText } from '@/cms'
-import type { NewsItem, Publication } from '../../lib/payload'
-
-type Frequency = 'hebdomadaire' | 'mensuelle' | 'semestrielle'
-
-type PubCard = {
-  id: string
-  title: string
-  desc: string
-  frequency: Frequency
-  date: string
-  href: string
-}
-
-const FREQUENCY_LABELS: Record<Frequency, string> = {
-  hebdomadaire: 'Hebdomadaire',
-  mensuelle: 'Mensuelle',
-  semestrielle: 'Semestrielle',
-}
-
-function pubFrequency(category: string): Frequency {
-  if (category.includes('mensuel')) return 'mensuelle'
-  if (category.includes('semest')) return 'semestrielle'
-  return 'hebdomadaire'
-}
-
-function mapPublication(pub: Publication): PubCard {
-  return {
-    id: String(pub.id),
-    title: pub.title,
-    desc: pub.excerpt || pub.description,
-    frequency: pubFrequency(pub.category),
-    date: pub.publishedAt?.split('T')[0] ?? '',
-    href: `/publications/${pub.slug}`,
-  }
-}
+import {
+  PUBLICATION_FILES,
+  PUBLICATION_FREQUENCY_LABELS,
+} from '@/data/publications'
+import type { NewsItem } from '../../lib/payload'
 
 type Props = {
   news: NewsItem[]
-  publications: Publication[]
 }
 
-export function InsightsMergedStatic({ news, publications }: Props) {
+export function InsightsMergedStatic({ news }: Props) {
   const sectionRef = useReveal<HTMLElement>()
   const gridRef = useReveal<HTMLDivElement>()
   const articles = news.slice(0, 3)
-  const pubCards = publications.map(mapPublication)
-  const featured = pubCards[0]
-  const secondary = pubCards.slice(1, 3)
+  const featured = PUBLICATION_FILES[0]
+  const secondary = PUBLICATION_FILES.slice(1)
 
   return (
     <section
@@ -193,7 +161,8 @@ export function InsightsMergedStatic({ news, publications }: Props) {
 
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
               <a
-                href={featured.href}
+                href={featured.fileUrl}
+                download
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-[var(--everest-green)] p-7 md:p-9 lg:col-span-7 lg:min-h-[360px]"
               >
                 <div className="relative z-10">
@@ -205,13 +174,32 @@ export function InsightsMergedStatic({ news, publications }: Props) {
                     {featured.title}
                   </h3>
                   <p className="max-w-xl font-primary text-sm font-light leading-relaxed text-white/70 md:text-[15px]">
-                    {featured.desc}
+                    {featured.description}
                   </p>
                 </div>
-                <span className="relative mt-8 inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--jaune-or)]">
-                  Lire la publication
-                  <FiArrowRight className="text-sm" />
-                </span>
+                <div className="relative mt-8 flex items-center justify-between gap-4">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-primary text-xs font-light tracking-wide text-white/50">
+                    <span>
+                      {new Date(featured.date).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
+                    </span>
+                    <span aria-hidden>·</span>
+                    <span>{PUBLICATION_FREQUENCY_LABELS[featured.frequency]}</span>
+                    {featured.pages ? (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span>{featured.pages} pages</span>
+                      </>
+                    ) : null}
+                  </div>
+                  <span className="inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--jaune-or)]">
+                    Télécharger
+                    <FiArrowRight className="text-sm" />
+                  </span>
+                </div>
               </a>
 
               <div className="flex flex-col gap-4 lg:col-span-5 lg:min-h-[360px] lg:gap-6">
@@ -228,18 +216,22 @@ export function InsightsMergedStatic({ news, publications }: Props) {
                   secondary.map((item) => (
                     <a
                       key={item.id}
-                      href={item.href}
+                      href={item.fileUrl}
+                      download
                       className="group flex flex-1 flex-col justify-between overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-5 md:p-6"
                     >
                       <div>
                         <p className="mb-3 font-primary text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--mauve-60)]">
-                          Note de recherche · {FREQUENCY_LABELS[item.frequency]}
+                          Note de recherche · {PUBLICATION_FREQUENCY_LABELS[item.frequency]}
                         </p>
                         <h4 className="font-primary text-sm font-semibold leading-snug text-[var(--night-80)] md:text-base">
                           {item.title}
                         </h4>
                       </div>
-                      <FiArrowRight className="mt-4 text-sm text-[var(--mauve-40)]" aria-hidden />
+                      <div className="mt-4 flex items-center justify-between gap-3 font-primary text-[11px] font-light text-[var(--night-40)]">
+                        <span>{item.fileSize}</span>
+                        <FiArrowRight className="text-sm text-[var(--mauve-40)]" aria-hidden />
+                      </div>
                     </a>
                   ))
                 )}
