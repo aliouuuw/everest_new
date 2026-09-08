@@ -9,13 +9,15 @@ import { ValueProps } from '@/components/Sections/ValueProps'
 import { StaticCMSProvider } from '../cms/StaticCMSProvider'
 import type { NewsItem, SiteContent } from '../lib/payload'
 import { InsightsMergedStatic } from './InsightsMergedStatic'
+import type { PublicationFile } from '@/data/publications'
 
 type Props = {
   siteContent: SiteContent[]
   news: NewsItem[]
+  publications?: Array<PublicationFile>
 }
 
-export default function HomePage({ siteContent, news }: Props) {
+export default function HomePage({ siteContent, news, publications }: Props) {
   return (
     <StaticCMSProvider rows={siteContent} pageKey="home">
       <HeroSectionMountain />
@@ -24,7 +26,7 @@ export default function HomePage({ siteContent, news }: Props) {
       <ValueProps />
       <Capacity />
       <Services />
-      <InsightsMergedStatic news={news} />
+      <InsightsMergedStatic news={news} publications={publications} />
       <CTA
         scheme="ivory"
         secondaryHref="https://everest-account-opening.vercel.app/new-home"

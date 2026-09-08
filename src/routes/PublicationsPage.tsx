@@ -13,7 +13,6 @@ type Frequency = PublicationFrequency
 type Publication = PublicationFile
 
 const FREQUENCY_LABELS = PUBLICATION_FREQUENCY_LABELS
-const PUBLICATIONS = PUBLICATION_FILES
 
 const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: string }> = {
   hebdomadaire: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
@@ -230,7 +229,12 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
 }
 
 /* ─── Page ─── */
-export function PublicationsView() {
+export function PublicationsView({
+  publications: incoming,
+}: {
+  publications?: Array<PublicationFile>
+}) {
+  const publications = incoming && incoming.length > 0 ? incoming : PUBLICATION_FILES
   const heroRef = useReveal<HTMLElement>()
   const filtersRef = useReveal<HTMLDivElement>()
   const listRef = useReveal<HTMLDivElement>()
@@ -252,18 +256,18 @@ export function PublicationsView() {
   const [activeMonth, setActiveMonth] = useState<string>('Tout')
 
   const years = useMemo(() => {
-    const y = new Set(PUBLICATIONS.map(p => new Date(p.date).getFullYear().toString()))
+    const y = new Set(publications.map(p => new Date(p.date).getFullYear().toString()))
     return ['Tout', ...Array.from(y).sort().reverse()]
-  }, [])
+  }, [publications])
 
   const months = useMemo(() => {
     if (activeYear === 'Tout') return ['Tout']
     const m = new Set(
-      PUBLICATIONS.filter(p => new Date(p.date).getFullYear().toString() === activeYear)
+      publications.filter(p => new Date(p.date).getFullYear().toString() === activeYear)
         .map(p => (new Date(p.date).getMonth() + 1).toString().padStart(2, '0'))
     )
     return ['Tout', ...Array.from(m).sort()]
-  }, [activeYear])
+  }, [activeYear, publications])
 
   // Reset month if year changes and month not in new year
   useEffect(() => {
@@ -273,7 +277,7 @@ export function PublicationsView() {
   }, [months, activeMonth])
 
   const filtered = useMemo(() => {
-    let items = PUBLICATIONS
+    let items = publications
 
     if (activeFilter !== ALL_LABEL) {
       items = items.filter(p => p.frequency === activeFilter)
@@ -295,12 +299,12 @@ export function PublicationsView() {
     }
 
     return items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  }, [activeFilter, activeYear, activeMonth, searchQuery])
+  }, [publications, activeFilter, activeYear, activeMonth, searchQuery])
 
   return (
     <div className="bg-[var(--pure-white)] font-primary">
       {/* ─── Hero ─── */}
-      <section ref={heroRef} className="relative pt-[200px] pb-12 md:pb-16 flex items-end bg-[var(--everest-green)]">
+      <section ref={heroRef} className="relative pt-[var(--site-chrome-top)] pb-12 md:pb-16 flex items-end bg-[var(--everest-green)]">
         <div className="relative z-10 w-full page-container">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
             <div className="md:col-span-7">

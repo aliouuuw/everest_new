@@ -25,7 +25,7 @@ export const AboutPage = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
         {/* ─── 1. Hero — Dark Image with Overlay ─── */}
-        <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-16 md:pb-12 md:pt-20 overflow-hidden">
+        <section ref={heroRef} className="relative min-h-[46vh] md:min-h-[48vh] flex items-end pb-10 pt-[var(--site-chrome-top)] md:pb-12 overflow-hidden">
           {/* Background image */}
           <div className="absolute inset-0 z-0">
             <EditableImage

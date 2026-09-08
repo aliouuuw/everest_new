@@ -165,7 +165,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   caption?: string | null;
   tags?: string[] | null;
   order?: number | null;
@@ -197,42 +197,27 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * PDF téléchargeable. Pas de page HTML publique.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "publications".
  */
 export interface Publication {
   id: number;
   title: string;
-  slug: string;
   description: string;
-  excerpt: string;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  category: 'revues-hebdo' | 'revues-mensuelles' | 'teaser-dividende' | 'marches' | 'analyses';
+  frequency: 'hebdomadaire' | 'mensuelle' | 'semestrielle';
+  /**
+   * Fichier PDF de la revue.
+   */
+  file: number | Media;
+  /**
+   * Nombre de pages (optionnel).
+   */
+  pages?: number | null;
   status: 'draft' | 'published' | 'archived';
-  author: number | User;
-  media?: (number | Media)[] | null;
-  attachments?: (number | Media)[] | null;
-  tags?: string[] | null;
   featured?: boolean | null;
-  readingTime?: number | null;
   publishedAt?: string | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
-  canonicalUrl?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -518,22 +503,13 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PublicationsSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
   description?: T;
-  excerpt?: T;
-  content?: T;
-  category?: T;
+  frequency?: T;
+  file?: T;
+  pages?: T;
   status?: T;
-  author?: T;
-  media?: T;
-  attachments?: T;
-  tags?: T;
   featured?: T;
-  readingTime?: T;
   publishedAt?: T;
-  seoTitle?: T;
-  seoDescription?: T;
-  canonicalUrl?: T;
   updatedAt?: T;
   createdAt?: T;
 }

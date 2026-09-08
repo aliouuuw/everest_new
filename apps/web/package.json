@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview --port 4321",
     "check:news": "bun src/lib/mergeNews.check.ts",
+    "check:lead": "bun src/lib/investorLead.check.ts",
     "astro": "astro"
   },
   "dependencies": {

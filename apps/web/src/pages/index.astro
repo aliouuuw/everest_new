@@ -1,16 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import HomePage from '../islands/HomePage'
-import { fetchNewsFeed, fetchSiteContent } from '../lib/payload'
+import {
+  fetchNewsFeed,
+  fetchPublishedPublications,
+  fetchSiteContent,
+  publishedPublicationFiles,
+} from '../lib/payload'
 
-const [site, feed] = await Promise.all([
+const [site, feed, pubs] = await Promise.all([
   fetchSiteContent('home'),
   fetchNewsFeed(20),
+  fetchPublishedPublications(20),
 ])
 const siteContent = site.docs
 const news = feed.slice(0, 6)
+const publications = publishedPublicationFiles(pubs.docs)
 ---
 
 <Layout title="Everest Finance">
-  <HomePage client:load siteContent={siteContent} news={news} />
+  <HomePage client:load siteContent={siteContent} news={news} publications={publications} />
 </Layout>

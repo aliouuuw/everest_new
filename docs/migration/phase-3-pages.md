@@ -15,7 +15,7 @@ Do not port from `main`. The old Vite home (`HeroSection`, `Insights`, `Mountain
 | `/contact` | `ContactPage` | Island |
 | `/faq` | `FAQPage` | Island |
 | `/actualites`, `/actualites/[slug]` | `ActualitesPage`, `ArticlePage` | Island + Payload |
-| `/publications` | `PublicationsPage` (PDF catalogue) | Island |
+| `/publications` | `PublicationsPage` (PDF catalogue) | Island + Payload uploads |
 | `/publications/[slug]` | — | Removed. Publications are files only. |
 | `/marche-capitaux`, `/ingenieurie-financiere`, `/gestion-sous-mandat` | Department routes | Island + `src/data/departments.ts` |
 | `/bourse` | `BoursePage` | Island |
@@ -50,7 +50,7 @@ Redesign components expect:
 1. **`src/styles.css`** tokens (`--mauve`, `--jaune-or`, `btn-primary`, `page-container`, …)
 2. **`EditableText`** — StaticCMSProvider reads Payload `site-content` at build time
 3. **`Link` / `useLocation`** — islands mount inside a thin TanStack router shell, or links become `<a href>` in a follow-up pass
-4. **`InsightsMerged` Convex query** — swap news for Payload `fetchNewsFeed`. Publications stay the PDF catalogue in `src/data/publications.ts`.
+4. **`InsightsMerged` Convex query** — swap news for Payload `fetchNewsFeed`. Publications are Payload PDF uploads; empty CMS falls back to `src/data/publications.ts`.
 
 ## Not in Phase 3
 

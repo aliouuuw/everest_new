@@ -366,7 +366,7 @@ export const PAGE_KEY_LABELS: Record<PageKey, string> = {
 export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
   home: "/",
   about: "/about",
-  services: "/services",
+  services: "/offres",
   offres: "/offres",
   bourse: "/bourse",
   "capital-markets": "/marche-capitaux",

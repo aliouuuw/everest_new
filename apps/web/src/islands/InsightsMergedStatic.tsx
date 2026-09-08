@@ -5,19 +5,22 @@ import { EditableText } from '@/cms'
 import {
   PUBLICATION_FILES,
   PUBLICATION_FREQUENCY_LABELS,
+  type PublicationFile,
 } from '@/data/publications'
 import type { NewsItem } from '../../lib/payload'
 
 type Props = {
   news: NewsItem[]
+  publications?: Array<PublicationFile>
 }
 
-export function InsightsMergedStatic({ news }: Props) {
+export function InsightsMergedStatic({ news, publications: incoming }: Props) {
   const sectionRef = useReveal<HTMLElement>()
   const gridRef = useReveal<HTMLDivElement>()
   const articles = news.slice(0, 3)
-  const featured = PUBLICATION_FILES[0]
-  const secondary = PUBLICATION_FILES.slice(1)
+  const catalogue = incoming && incoming.length > 0 ? incoming : PUBLICATION_FILES
+  const featured = catalogue[0]
+  const secondary = catalogue.slice(1)
 
   return (
     <section

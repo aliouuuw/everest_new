@@ -1,11 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import PublicationsPage from '../../islands/PublicationsPage'
-import { fetchSiteContent } from '../../lib/payload'
+import {
+  fetchPublishedPublications,
+  fetchSiteContent,
+  publishedPublicationFiles,
+} from '../../lib/payload'
 
-const site = await fetchSiteContent('publications')
+const [site, pubs] = await Promise.all([
+  fetchSiteContent('publications'),
+  fetchPublishedPublications(50),
+])
 ---
 
 <Layout title="Publications — Everest Finance">
-  <PublicationsPage client:load siteContent={site.docs} />
+  <PublicationsPage
+    client:load
+    siteContent={site.docs}
+    publications={publishedPublicationFiles(pubs.docs)}
+  />
 </Layout>

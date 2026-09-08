@@ -126,26 +126,9 @@ async function importUsers(payload: Payload): Promise<Map<string, DocId>> {
 
 type AuthorOf = (convexId: unknown) => DocId
 
-async function importPublications(payload: Payload, authorOf: AuthorOf): Promise<void> {
-  for (const doc of readJsonl('publications')) {
-    const slug = asString(doc.slug)
-    await upsert(payload, 'publications', { slug: { equals: slug } }, {
-      title: asString(doc.title),
-      slug,
-      description: asString(doc.description),
-      excerpt: asString(doc.excerpt),
-      content: htmlToLexical(asString(doc.content)),
-      category: asString(doc.category, 'analyses'),
-      status: asString(doc.status, 'draft'),
-      author: authorOf(doc.authorId),
-      tags: asTags(doc.tags),
-      featured: asBoolean(doc.featured),
-      readingTime: asNumber(doc.readingTime),
-      publishedAt: asDate(doc.publishedAt) ?? asDate(doc.createdAt),
-      seoTitle: asString(doc.seoTitle) || undefined,
-      seoDescription: asString(doc.seoDescription) || undefined,
-    }, slug)
-  }
+async function importPublications(_payload: Payload): Promise<void> {
+  // Public publications are uploaded PDFs in admin, not Convex HTML slugs.
+  console.log('Skip Convex HTML publications. Seed PDFs with: bun run seed:publications')
 }
 
 async function importArticles(payload: Payload, authorOf: AuthorOf): Promise<void> {
@@ -250,7 +233,7 @@ async function importConvex(): Promise<void> {
   const authorOf: AuthorOf = (convexId) =>
     userIds.get(asString(convexId)) ?? fallbackAuthor
 
-  await importPublications(payload, authorOf)
+  await importPublications(payload)
   await importArticles(payload, authorOf)
   await importExternalArticles(payload)
   await importSiteContent(payload, authorOf)

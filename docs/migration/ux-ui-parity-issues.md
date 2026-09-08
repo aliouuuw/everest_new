@@ -17,17 +17,17 @@ Status: open unless marked done.
 
 - [ ] **Home CTA « Évaluer mon profil d'investisseur ».** Vite opens `InvestorProfileModal`. Astro sends `secondaryHref` to the account-opening Vercel URL. Same label, different product.
 
-- [ ] **Lenis missing.** Vite `Layout` wraps `LenisWrapper`. Astro `SiteShell` does not. Scroll feel diverges.
+- [x] **Lenis missing.** Vite `Layout` wraps `LenisWrapper`. Astro `SiteShell` now wraps the same wrapper.
 
-- [ ] **Outils quiz does not save a lead.** Island renders `SimulateurView` with no `onSubmitLead`. Result still shows. User thinks the profil is stored.
+- [x] **Outils quiz does not save a lead.** Island posts to Payload `investor-leads` via `onSubmitLead`.
 
 ## Low
 
-- [ ] **Header chrome on `/about` (and similar).** `forceScrolledStylePaths` omits `/about`, `/faq`, `/publications`, `/actualites` list. Hero `padding-top` can clip under ticker + header.
+- [x] **Header chrome on `/about` (and similar).** `forceScrolledStylePaths` includes `/about`, `/faq`, `/publications`, `/actualites`. Image heroes use `--site-chrome-top`.
 
 - [ ] **Site copy mostly defaults.** Import created `home.hero.title`. Other `EditableText` keys stay hardcoded.
 
-- [ ] **`/services`, `/gestion-libre`, `/gestion-assistee`.** Astro redirects to `/offres`. Vite still renders `ServicesPage`. Phase 3 wants the redirects.
+- [x] **`/services`, `/gestion-libre`, `/gestion-assistee`.** Astro and Vite redirect to `/offres`.
 
 ## Informational
 

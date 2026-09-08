@@ -1,14 +1,11 @@
 import type { CollectionConfig } from 'payload'
 import { isEditorOrAdmin, publishedOrStaff } from '../access'
-import { slugField } from '../fields/slug'
 import { triggerSiteRebuild } from '../hooks/triggerSiteRebuild'
 
-const publicationCategories = [
-  { label: 'Revues hebdo', value: 'revues-hebdo' },
-  { label: 'Revues mensuelles', value: 'revues-mensuelles' },
-  { label: 'Teaser dividende', value: 'teaser-dividende' },
-  { label: 'Marchés', value: 'marches' },
-  { label: 'Analyses', value: 'analyses' },
+const frequencies = [
+  { label: 'Hebdomadaire', value: 'hebdomadaire' },
+  { label: 'Mensuelle', value: 'mensuelle' },
+  { label: 'Semestrielle', value: 'semestrielle' },
 ] as const
 
 const publicationStatuses = [
@@ -19,9 +16,14 @@ const publicationStatuses = [
 
 export const Publications: CollectionConfig = {
   slug: 'publications',
+  labels: {
+    singular: 'Publication',
+    plural: 'Publications',
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status', 'publishedAt'],
+    defaultColumns: ['title', 'frequency', 'status', 'publishedAt'],
+    description: 'PDF téléchargeable. Pas de page HTML publique.',
   },
   access: {
     read: publishedOrStaff,
@@ -33,60 +35,56 @@ export const Publications: CollectionConfig = {
     afterChange: [triggerSiteRebuild],
   },
   fields: [
-    { name: 'title', type: 'text', required: true },
-    slugField(),
-    { name: 'description', type: 'textarea', required: true },
-    { name: 'excerpt', type: 'textarea', required: true },
-    { name: 'content', type: 'richText', required: true },
+    { name: 'title', type: 'text', required: true, label: 'Titre' },
+    { name: 'description', type: 'textarea', required: true, label: 'Description' },
     {
-      name: 'category',
+      name: 'frequency',
       type: 'select',
       required: true,
-      options: [...publicationCategories],
+      label: 'Fréquence',
+      options: [...frequencies],
+    },
+    {
+      name: 'file',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      label: 'Fichier PDF',
+      filterOptions: {
+        mimeType: { contains: 'pdf' },
+      },
+      admin: {
+        description: 'Fichier PDF de la revue.',
+      },
+    },
+    {
+      name: 'pages',
+      type: 'number',
+      label: 'Pages',
+      admin: { description: 'Nombre de pages (optionnel).' },
     },
     {
       name: 'status',
       type: 'select',
       required: true,
       defaultValue: 'draft',
+      label: 'Statut',
       options: [...publicationStatuses],
       admin: { position: 'sidebar' },
     },
     {
-      name: 'author',
-      type: 'relationship',
-      relationTo: 'users',
-      required: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'media',
-      type: 'relationship',
-      relationTo: 'media',
-      hasMany: true,
-    },
-    {
-      name: 'attachments',
-      type: 'relationship',
-      relationTo: 'media',
-      hasMany: true,
-    },
-    { name: 'tags', type: 'text', hasMany: true },
-    {
       name: 'featured',
       type: 'checkbox',
       defaultValue: false,
+      label: 'À la une',
       admin: { position: 'sidebar' },
     },
-    { name: 'readingTime', type: 'number', admin: { position: 'sidebar' } },
     {
       name: 'publishedAt',
       type: 'date',
+      label: 'Date de publication',
       admin: { position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } },
     },
-    { name: 'seoTitle', type: 'text' },
-    { name: 'seoDescription', type: 'textarea' },
-    { name: 'canonicalUrl', type: 'text' },
   ],
   timestamps: true,
 }

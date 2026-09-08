@@ -26,7 +26,6 @@ import { FAQPage } from './routes/FAQPage'
 import { CapitalMarketsPage } from './routes/CapitalMarketsPage'
 import { InvestmentBankingPage } from './routes/InvestmentBankingPage'
 import { MandateMgmtPage } from './routes/MandateMgmtPage'
-import { ServicesPage } from './routes/ServicesPage'
 import { OffresPage } from './routes/OffresPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
@@ -220,7 +219,7 @@ const mandateRoute = createRoute({
 const servicesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/services',
-  component: ServicesPage,
+  component: redirectTo('/offres'),
 })
 
 const offresRoute = createRoute({
@@ -232,13 +231,13 @@ const offresRoute = createRoute({
 const gestionLibreRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-libre',
-  component: ServicesPage,
+  component: redirectTo('/offres'),
 })
 
 const gestionAssisteeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/gestion-assistee',
-  component: ServicesPage,
+  component: redirectTo('/offres'),
 })
 
 const bourseRoute = createRoute({

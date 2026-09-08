@@ -113,7 +113,7 @@ export const OffresPage = () => {
                       </ul>
                       <div className="flex items-center justify-between pt-5 border-t border-white/10">
                         <div className="font-primary font-bold text-lg text-white/50"><EditableText id="offres.libre.fees">Frais: 0,40% - 0,60%</EditableText></div>
-                        <a href="/gestion-libre" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
+                        <a href="#services" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
                       </div>
@@ -143,7 +143,7 @@ export const OffresPage = () => {
                       </ul>
                       <div className="flex items-center justify-between pt-5 border-t border-white/10">
                         <div className="font-primary font-bold text-lg text-white/50"><EditableText id="offres.assistee.fees">Frais: 0,60% - 0,80%</EditableText></div>
-                        <a href="/gestion-assistee" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
+                        <a href="#services" className="text-[10px] font-bold tracking-[0.3em] text-[var(--jaune-or)] uppercase hover:text-white transition-colors flex items-center gap-2">
                           Découvrir <FiArrowRight />
                         </a>
                       </div>

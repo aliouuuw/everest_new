@@ -10,8 +10,7 @@ import type { PageKey } from "./registry";
 const PATH_TO_PAGE_KEY: Array<{ match: (path: string) => boolean; key: PageKey }> = [
   { match: (p) => p === "/" || p === "", key: "home" },
   { match: (p) => p === "/about", key: "about" },
-  { match: (p) => p === "/services" || p === "/gestion-libre" || p === "/gestion-assistee", key: "services" },
-  { match: (p) => p === "/offres", key: "offres" },
+  { match: (p) => p === "/offres" || p === "/services" || p === "/gestion-libre" || p === "/gestion-assistee", key: "offres" },
   { match: (p) => p === "/bourse", key: "bourse" },
   { match: (p) => p === "/marche-capitaux", key: "capital-markets" },
   { match: (p) => p === "/ingenieurie-financiere", key: "investment-banking" },

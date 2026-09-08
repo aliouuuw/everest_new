@@ -1,4 +1,12 @@
+import type { PublicationFile, PublicationFrequency } from '@/data/publications'
+
 const payloadUrl = process.env.PAYLOAD_URL || 'http://localhost:3001'
+
+const FREQUENCIES = new Set<PublicationFrequency>([
+  'hebdomadaire',
+  'mensuelle',
+  'semestrielle',
+])
 
 export type PayloadListResponse<T> = {
   docs: T[]
@@ -13,22 +21,23 @@ export type PayloadListResponse<T> = {
   nextPage: number | null
 }
 
+export type PublicationMedia = {
+  url?: string | null
+  filename?: string | null
+  filesize?: number | null
+  mimeType?: string | null
+}
+
 export type Publication = {
   id: number | string
   title: string
-  slug: string
   description: string
-  excerpt: string
-  content: unknown
-  category: string
+  frequency: string
   status: string
-  featured: boolean
+  featured?: boolean
+  pages?: number | null
   publishedAt?: string | null
-  seoTitle?: string | null
-  seoDescription?: string | null
-  readingTime?: number | null
-  tags?: string[] | null
-  author?: { name?: string | null } | number | null
+  file?: number | PublicationMedia | null
 }
 
 export type Article = {
@@ -205,24 +214,35 @@ export function mergeNews(items: NewsItem[]): NewsItem[] {
   })
 }
 
-export function publicationToView(publication: Publication) {
-  const html = lexicalToHtml(publication.content)
-  const words = html.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length
-  const author =
-    publication.author && typeof publication.author === 'object'
-      ? publication.author.name ?? undefined
-      : undefined
+export function publicationToFile(publication: Publication): PublicationFile | null {
+  const file = typeof publication.file === 'object' && publication.file ? publication.file : null
+  const path = file?.url ?? ''
+  const fileUrl = path.startsWith('http') ? path : path ? `${payloadUrl}${path}` : ''
+  if (!fileUrl) return null
+  if (!FREQUENCIES.has(publication.frequency as PublicationFrequency)) return null
   return {
+    id: String(publication.id),
     title: decodeHtmlEntities(publication.title),
-    description: decodeHtmlEntities(publication.description || publication.excerpt),
-    category: publication.category,
-    featured: Boolean(publication.featured),
-    date: publication.publishedAt ?? '',
-    authorName: author,
-    readingTime: publication.readingTime ?? Math.max(1, Math.ceil(words / 200)),
-    tags: publication.tags ?? [],
-    content: html,
+    description: decodeHtmlEntities(publication.description),
+    frequency: publication.frequency as PublicationFrequency,
+    date: (publication.publishedAt ?? '').slice(0, 10),
+    fileUrl,
+    fileSize: file?.filesize ? formatBytes(file.filesize) : '',
+    pages: publication.pages ?? undefined,
   }
+}
+
+export function publishedPublicationFiles(docs: Publication[]): PublicationFile[] {
+  return docs
+    .map(publicationToFile)
+    .filter((item): item is PublicationFile => item !== null)
+}
+
+function formatBytes(bytes: number): string {
+  if (!bytes) return ''
+  const mb = bytes / (1024 * 1024)
+  if (mb >= 1) return `${mb.toFixed(1)} MB`
+  return `${Math.max(1, Math.round(bytes / 1024))} KB`
 }
 
 export function articleToView(article: Article) {

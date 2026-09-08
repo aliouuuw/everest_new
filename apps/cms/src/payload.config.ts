@@ -17,7 +17,17 @@ import { Users } from './collections/Users'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+const corsOrigins = [
+  process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  ...(process.env.PAYLOAD_CORS_ORIGINS ||
+    'http://localhost:4321,http://localhost:8000,http://localhost:3000').split(','),
+]
+  .map((origin) => origin?.trim())
+  .filter((origin): origin is string => Boolean(origin))
+
 export default buildConfig({
+  cors: corsOrigins,
+  csrf: corsOrigins,
   admin: {
     user: Users.slug,
     importMap: {

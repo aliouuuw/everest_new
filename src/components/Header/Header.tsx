@@ -196,10 +196,20 @@ export const Header: React.FC = () => {
   const isLightBackgroundPage = lightBackgroundPaths.some(path => location.pathname.startsWith(path));
 
   // Force "scrolled" header appearance on selected routes from first paint
-  const forceScrolledStylePaths = [ '/offres', '/auth', '/contact', '/bourse', '/outils-investisseur' ];
-  const isForcedScrolledStyle = forceScrolledStylePaths.some(path =>
-      location.pathname.startsWith(path),
-    ) || (location.pathname.startsWith('/actualites/') && location.pathname !== '/actualites');
+  const forceScrolledStylePaths = [
+    '/offres',
+    '/auth',
+    '/contact',
+    '/bourse',
+    '/outils-investisseur',
+    '/about',
+    '/faq',
+    '/publications',
+    '/actualites',
+  ];
+  const isForcedScrolledStyle = forceScrolledStylePaths.some((path) =>
+    location.pathname.startsWith(path),
+  );
 
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
