@@ -9,7 +9,7 @@ Status: open unless marked done.
 
 - [x] **Publications are files, not HTML slugs.** `/publications` and home Insights use `PUBLICATION_FILES` (PDF download). Public `/publications/[slug]` HTML pages are removed.
 
-- [ ] **Accès Client 404.** Header `to="/auth"`. Astro has no `/auth`. Hide the CTA, stub a message, or point to the live portal.
+- [x] **Accès Client 404.** Header `to="/auth"`. Astro `/auth` now shows the Accès Client page with a contact CTA. Convex sign-in stays on Vite.
 
 - [x] **Home Insights news cards have no photos.** Vite `InsightsMerged` uses `article.imageUrl`. `InsightsMergedStatic` now renders the same 16/10 image when `imageUrl` is set.
 

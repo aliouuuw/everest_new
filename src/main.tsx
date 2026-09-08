@@ -43,7 +43,8 @@ import { Settings } from './routes/admin/Settings'
 import { SiteContentPage } from './routes/admin/SiteContentPage'
 import { ArticlesList } from './routes/admin/ArticlesList'
 import { ArticleForm } from './routes/admin/ArticleForm'
-import { AuthPage } from './routes/AuthPage'
+import { AuthView } from './routes/AuthPage'
+import { SigninForm } from './components/Auth/SigninForm'
 import { ActualitesPage } from './routes/ActualitesPage'
 import { ArticlePage } from './routes/ArticlePage'
 import { ContactPage } from './routes/ContactPage'
@@ -60,6 +61,14 @@ function SimulateurRoute() {
         await createLead(payload)
       }}
     />
+  )
+}
+
+function AuthRoute() {
+  return (
+    <AuthView>
+      <SigninForm />
+    </AuthView>
   )
 }
 
@@ -343,7 +352,7 @@ const adminEditArticleRoute = createRoute({
 const authRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/auth',
-  component: AuthPage,
+  component: AuthRoute,
 })
 
 const notFoundRoute = createRoute({

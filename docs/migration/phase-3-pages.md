@@ -20,7 +20,8 @@ Do not port from `main`. The old Vite home (`HeroSection`, `Insights`, `Mountain
 | `/marche-capitaux`, `/ingenieurie-financiere`, `/gestion-sous-mandat` | Department routes | Island + `src/data/departments.ts` |
 | `/bourse` | `BoursePage` | Island |
 | `/outils-investisseur` | `SimulateurPage` | Island |
-| `/portal`, `/dashboard`, `/auth`, `/admin/*` | Client + admin | Stay on Vite until cutover |
+| `/portal`, `/dashboard`, `/admin/*` | Client + admin | Stay on Vite until cutover |
+| `/auth` | `AuthPage` | Island (no Convex sign-in; contact CTA until cutover) |
 
 **Redirects (legacy URLs):**
 
