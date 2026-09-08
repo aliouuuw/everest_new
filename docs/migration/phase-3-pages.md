@@ -8,14 +8,15 @@ Do not port from `main`. The old Vite home (`HeroSection`, `Insights`, `Mountain
 
 | Path | Vite component | Astro status |
 |------|----------------|--------------|
-| `/` | `App` (HeroSectionMountain, TrustStrip, Positioning, ValueProps, Capacity, Services, InsightsMerged, CTA, FAQ) | React island + Payload CMS |
+| `/` | `App` (HeroSectionMountain, TrustStrip, Positioning, ValueProps, Capacity, Services, InsightsMerged, CTA, FAQ) | Island |
 | `/about` | `AboutPage` | Island |
 | `/offres` | `OffresPage` | Island (replaces old `/services` hub) |
 | `/expertises` | `ExpertisesPage` | Island |
 | `/contact` | `ContactPage` | Island |
 | `/faq` | `FAQPage` | Island |
-| `/actualites`, `/actualites/[slug]` | `ActualitesPage`, `ArticlePage` | Payload (started) |
-| `/publications`, `/publications/[slug]` | `PublicationsPage`, `PublicationPage` | Payload (started) |
+| `/actualites`, `/actualites/[slug]` | `ActualitesPage`, `ArticlePage` | Island + Payload |
+| `/publications` | `PublicationsPage` (PDF catalogue) | Island |
+| `/publications/[slug]` | `PublicationPage` | Island + Payload |
 | `/marche-capitaux`, `/ingenieurie-financiere`, `/gestion-sous-mandat` | Department routes | Island + `src/data/departments.ts` |
 | `/bourse` | `BoursePage` | Island |
 | `/outils-investisseur` | `SimulateurPage` | Later |

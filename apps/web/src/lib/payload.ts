@@ -26,6 +26,9 @@ export type Publication = {
   publishedAt?: string | null
   seoTitle?: string | null
   seoDescription?: string | null
+  readingTime?: number | null
+  tags?: string[] | null
+  author?: { name?: string | null } | number | null
 }
 
 export type Article = {
@@ -200,6 +203,26 @@ export function mergeNews(items: NewsItem[]): NewsItem[] {
     const timeB = Date.parse(b.publishedAt ?? '') || 0
     return timeB - timeA
   })
+}
+
+export function publicationToView(publication: Publication) {
+  const html = lexicalToHtml(publication.content)
+  const words = html.replace(/<[^>]*>/g, '').split(/\s+/).filter(Boolean).length
+  const author =
+    publication.author && typeof publication.author === 'object'
+      ? publication.author.name ?? undefined
+      : undefined
+  return {
+    title: decodeHtmlEntities(publication.title),
+    description: decodeHtmlEntities(publication.description || publication.excerpt),
+    category: publication.category,
+    featured: Boolean(publication.featured),
+    date: publication.publishedAt ?? '',
+    authorName: author,
+    readingTime: publication.readingTime ?? Math.max(1, Math.ceil(words / 200)),
+    tags: publication.tags ?? [],
+    content: html,
+  }
 }
 
 export function articleToView(article: Article) {

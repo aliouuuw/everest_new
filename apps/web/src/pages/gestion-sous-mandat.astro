@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro'
+import DepartmentPage from '../islands/DepartmentPage'
+import { fetchSiteContent } from '../lib/payload'
+
+const site = await fetchSiteContent('mandate')
+---
+
+<Layout title="Gestion sous mandat — Everest Finance">
+  <DepartmentPage client:load slug="gestion-sous-mandat" siteContent={site.docs} />
+</Layout>

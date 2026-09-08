@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro'
+import MarketingPage from '../islands/MarketingPage'
+import { fetchSiteContent } from '../lib/payload'
+
+const site = await fetchSiteContent('bourse')
+---
+
+<Layout title="BRVM — Everest Finance">
+  <MarketingPage client:load siteContent={site.docs} pageKey="bourse" />
+</Layout>

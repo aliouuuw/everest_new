@@ -1,27 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { fetchPublishedPublications, lexicalToHtml } from '../../lib/payload'
+import PublicationPage from '../../islands/PublicationPage'
+import { fetchPublishedPublications, publicationToView } from '../../lib/payload'
 
 export async function getStaticPaths() {
   const { docs } = await fetchPublishedPublications(100)
   return docs.map((publication) => ({
     params: { slug: publication.slug },
-    props: { publication },
+    props: { publication: publicationToView(publication) },
   }))
 }
 
 const { publication } = Astro.props
-const html = lexicalToHtml(publication.content)
-const title = publication.seoTitle || publication.title
-const description = publication.seoDescription || publication.excerpt
 ---
 
-<Layout title={`${title} — Everest Finance`} description={description}>
-  <article class="mx-auto max-w-3xl">
-    <a href="/publications" class="text-sm text-secondary">Publications</a>
-    <p class="mt-6 text-xs uppercase tracking-wide text-secondary">{publication.category}</p>
-    <h1 class="mt-2 text-4xl font-extrabold text-primary">{publication.title}</h1>
-    <p class="mt-4 text-lg text-on-surface/70">{publication.excerpt}</p>
-    <div class="mt-8 text-base leading-7 text-on-surface" set:html={html} />
-  </article>
+<Layout title={`${publication.title} — Everest Finance`} description={publication.description}>
+  <PublicationPage client:load publication={publication} />
 </Layout>

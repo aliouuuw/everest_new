@@ -1,203 +1,216 @@
-import { useNavigate, useParams } from '@tanstack/react-router'
+import { Link, useNavigate, useParams } from '@tanstack/react-router'
 import { useQuery } from 'convex/react'
 import { FaArrowLeft, FaCalendar, FaEye, FaShare, FaTag, FaUser } from 'react-icons/fa'
 import { useState } from 'react'
 import { api } from '../../convex/_generated/api'
 import { useReveal } from '../components/Hooks/useReveal'
 
-export const PublicationPage = () => {
-  const { slug } = useParams({ from: '/publications/$slug' })
-  const navigate = useNavigate()
-  const [isSharing, setIsSharing] = useState(false)
-  
+const CATEGORY_LABELS: Record<string, string> = {
+  'revues-hebdo': 'Revues hebdomadaires',
+  'revues-mensuelles': 'Revues mensuelles',
+  'teaser-dividende': 'Teaser des dividendes',
+  marches: 'Marchés',
+  analyses: 'Analyses',
+}
+
+function categoryLabel(category: string) {
+  return CATEGORY_LABELS[category] || category
+}
+
+function formatDate(value: string) {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return 'Date non disponible'
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+}
+
+export type PublicationViewData = {
+  title: string
+  description: string
+  category: string
+  featured: boolean
+  date: string
+  authorName?: string
+  readingTime?: number
+  tags: string[]
+  content: string
+}
+
+export function PublicationView({ publication }: { publication: PublicationViewData }) {
   const heroRef = useReveal<HTMLElement>()
   const contentRef = useReveal<HTMLElement>()
+  const [isSharing, setIsSharing] = useState(false)
 
-  // Fetch publication by slug
-  const publication = useQuery(api.publications.getPublicationBySlug, { slug })
-
-  // Handle sharing
   const handleShare = async () => {
-    if (publication) {
-      try {
-        await navigator.share({
-          title: publication.title,
-          text: publication.description,
-          url: window.location.href,
-        })
-      } catch (error) {
-        console.log('Error sharing:', error)
-      }
-    } else {
-      // Fallback: copy to clipboard
+    try {
+      await navigator.share({
+        title: publication.title,
+        text: publication.description,
+        url: window.location.href,
+      })
+    } catch {
       try {
         await navigator.clipboard.writeText(window.location.href)
         setIsSharing(true)
         setTimeout(() => setIsSharing(false), 2000)
-      } catch (error) {
-        console.log('Error copying to clipboard:', error)
+      } catch {
+        // Share is optional; leave the button as-is.
       }
     }
   }
 
-  // Loading state
-  if (publication === undefined) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--jaune-or)] mx-auto mb-4"></div>
-          <p className="text-[rgba(10, 10, 10, 0.8)]">Chargement de la publication...</p>
-        </div>
-      </div>
-    )
-  }
-
-  // Publication not found
-  if (!publication) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--error-red)]/10 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[var(--error-red)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Publication non trouvée</h1>
-          <p className="text-gray-600 mb-4">La publication que vous recherchez n'existe pas ou a été supprimée.</p>
-          <button
-            onClick={() => navigate({ to: '/publications' })}
-            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded hover:bg-[var(--jaune-or)] transition-colors"
-          >
-            Retour aux publications
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  const getCategoryLabel = (category: string) => {
-    const categoryLabels: Record<string, string> = {
-      'revues-hebdo': 'Revues hebdomadaires',
-      'revues-mensuelles': 'Revues mensuelles',
-      'teaser-dividende': 'Teaser des dividendes',
-      'marches': 'Marchés',
-      'analyses': 'Analyses',
-    }
-    return categoryLabels[category] || category
-  }
-
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString('fr-FR', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    })
-  }
-
   return (
     <div className="min-h-screen bg-[var(--pure-white)]">
-      {/* Hero Section */}
-      <section ref={heroRef} className="py-20 sm:py-28 section-bg-mauve">
+      <section
+        ref={heroRef}
+        className="section-bg-mauve pb-20 pt-[var(--site-chrome-top)] sm:pb-28"
+      >
         <div className="page-container">
           <div className="mx-auto max-w-4xl">
-          {/* Back button */}
-          <button
-            onClick={() => navigate({ to: '/publications' })}
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 group"
-          >
-            <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
-            Retour aux publications
-          </button>
+            <Link
+              to="/publications"
+              className="group mb-8 inline-flex items-center gap-2 text-white/60 transition-colors hover:text-white"
+            >
+              <FaArrowLeft className="transition-transform group-hover:-translate-x-1" />
+              Retour aux publications
+            </Link>
 
-          {/* Category badge */}
-          <div className="mb-6">
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase bg-[var(--jaune-or)]/15 text-[var(--jaune-or)] border border-[var(--jaune-or)]/20">
-              {getCategoryLabel(publication.category)}
-            </span>
-            {publication.featured && (
-              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase bg-white/10 text-white border border-white/20 ml-3">
-                En vedette
+            <div className="mb-6">
+              <span className="inline-flex items-center rounded-full border border-[var(--jaune-or)]/20 bg-[var(--jaune-or)]/15 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] text-[var(--jaune-or)]">
+                {categoryLabel(publication.category)}
               </span>
-            )}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl font-primary font-bold text-white mb-6 leading-tight">
-            {publication.title}
-          </h1>
-
-          {/* Description */}
-          <p className="text-xl text-white/70 mb-8 leading-relaxed font-light border-l-2 border-[var(--jaune-or)] pl-6">
-            {publication.description}
-          </p>
-
-          {/* Meta information */}
-          <div className="flex flex-wrap items-center gap-6 text-white/50 text-sm">
-            <div className="flex items-center gap-2">
-              <FaCalendar className="text-[var(--jaune-or)]" />
-              <span>{publication.createdAt ? formatDate(publication.createdAt) : 'Date non disponible'}</span>
+              {publication.featured && (
+                <span className="ml-3 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                  En vedette
+                </span>
+              )}
             </div>
-            {publication.author && (
-              <div className="flex items-center gap-2">
-                <FaUser className="text-[var(--jaune-or)]" />
-                <span>{publication.author.name}</span>
-              </div>
-            )}
-            {publication.readingTime && (
-              <div className="flex items-center gap-2">
-                <FaEye className="text-[var(--jaune-or)]" />
-                <span>{publication.readingTime} min de lecture</span>
-              </div>
-            )}
-          </div>
 
-          {/* Tags */}
-          {publication.tags.length > 0 && (
-            <div className="flex items-center gap-2 mt-6">
-              <FaTag className="text-[var(--jaune-or)]" />
-              <div className="flex flex-wrap gap-2">
-                {publication.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-white/10 text-white/70 text-xs rounded-full border border-white/15"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            <h1 className="mb-6 font-primary text-4xl font-bold leading-tight text-white sm:text-5xl">
+              {publication.title}
+            </h1>
+
+            <p className="mb-8 border-l-2 border-[var(--jaune-or)] pl-6 text-xl font-light leading-relaxed text-white/70">
+              {publication.description}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-6 text-sm text-white/50">
+              <div className="flex items-center gap-2">
+                <FaCalendar className="text-[var(--jaune-or)]" />
+                <span>{formatDate(publication.date)}</span>
               </div>
+              {publication.authorName && (
+                <div className="flex items-center gap-2">
+                  <FaUser className="text-[var(--jaune-or)]" />
+                  <span>{publication.authorName}</span>
+                </div>
+              )}
+              {publication.readingTime ? (
+                <div className="flex items-center gap-2">
+                  <FaEye className="text-[var(--jaune-or)]" />
+                  <span>{publication.readingTime} min de lecture</span>
+                </div>
+              ) : null}
             </div>
-          )}
+
+            {publication.tags.length > 0 && (
+              <div className="mt-6 flex items-center gap-2">
+                <FaTag className="text-[var(--jaune-or)]" />
+                <div className="flex flex-wrap gap-2">
+                  {publication.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white/70"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Content Section */}
       <section ref={contentRef} className="py-16">
         <div className="page-container">
           <div className="mx-auto max-w-4xl">
-          <div className="prose prose-lg max-w-none">
-            {/* Content */}
-            <div className="bg-white rounded-2xl border border-[var(--jaune-or)]/20 p-8 shadow-sm">
-              <div 
-                className="text-[var(--night)] leading-relaxed publication-content"
-                dangerouslySetInnerHTML={{ __html: publication.content }}
-              />
-            </div>
+            <div className="prose prose-lg max-w-none">
+              <div className="rounded-2xl border border-[var(--jaune-or)]/20 bg-white p-8 shadow-sm">
+                <div
+                  className="publication-content leading-relaxed text-[var(--night)]"
+                  dangerouslySetInnerHTML={{ __html: publication.content }}
+                />
+              </div>
 
-            {/* Share button */}
-            <div className="mt-12 text-center">
-              <button
-                onClick={handleShare}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--jaune-or)] text-white rounded-xl hover:bg-[var(--jaune-or)] transition-colors"
-              >
-                <FaShare />
-                {isSharing ? 'Lien copié !' : 'Partager cette publication'}
-              </button>
+              <div className="mt-12 text-center">
+                <button
+                  onClick={handleShare}
+                  className="inline-flex items-center gap-2 rounded-xl bg-[var(--jaune-or)] px-6 py-3 text-white transition-colors hover:bg-[var(--jaune-or)]/90"
+                >
+                  <FaShare />
+                  {isSharing ? 'Lien copié !' : 'Partager cette publication'}
+                </button>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </section>
     </div>
   )
+}
+
+export const PublicationPage = () => {
+  const { slug } = useParams({ from: '/publications/$slug' })
+  const navigate = useNavigate()
+  const publication = useQuery(api.publications.getPublicationBySlug, { slug })
+
+  if (publication === undefined) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-[var(--jaune-or)]"></div>
+          <p className="text-[rgba(10,10,10,0.8)]">Chargement de la publication...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!publication) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="mb-4 text-2xl font-bold text-gray-900">Publication non trouvée</h1>
+          <p className="mb-4 text-gray-600">
+            La publication que vous recherchez n'existe pas ou a été supprimée.
+          </p>
+          <button
+            onClick={() => navigate({ to: '/publications' })}
+            className="rounded bg-[var(--jaune-or)] px-4 py-2 text-white transition-colors hover:bg-[var(--jaune-or)]/90"
+          >
+            Retour aux publications
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const view: PublicationViewData = {
+    title: publication.title,
+    description: publication.description,
+    category: publication.category,
+    featured: Boolean(publication.featured),
+    date: publication.createdAt
+      ? new Date(publication.createdAt).toISOString()
+      : '',
+    authorName: publication.author?.name,
+    readingTime: publication.readingTime,
+    tags: publication.tags ?? [],
+    content: publication.content,
+  }
+
+  return <PublicationView publication={view} />
 }
