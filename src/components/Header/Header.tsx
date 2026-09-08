@@ -159,6 +159,15 @@ export const Header: React.FC = () => {
     setOpenDropdown(null); // Close any open dropdowns when mobile menu toggles
   };
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [isMobileMenuOpen])
+
   // Close all dropdowns when clicking outside or when another dropdown opens
   useEffect(() => {
     const handleClickOutside = () => {
@@ -240,7 +249,7 @@ export const Header: React.FC = () => {
     'font-primary text-[10px] xl:text-[11px] font-semibold tracking-[0.12em] xl:tracking-[0.15em] uppercase leading-none';
 
   return (
-    <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
+    <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[#012d2a]' : headerBg}`}>
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 md:px-16 lg:px-24 py-3 xl:py-4">
         {/* Logo only — larger */}
         <Link to="/" className="flex shrink-0 items-center transition-opacity hover:opacity-85">
@@ -323,7 +332,8 @@ export const Header: React.FC = () => {
           <button
             onClick={toggleMobileMenu}
             className="p-2 text-white/70 hover:text-white transition-colors"
-            aria-label="Menu"
+            aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Menu'}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -340,8 +350,11 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 border-t border-white/[0.12] bg-[var(--mauve-80)] py-6 shadow-2xl shadow-black/40 xl:hidden z-50">
-          <div className="px-6 space-y-5">
+        <div
+          className="fixed inset-x-0 bottom-0 z-[55] overflow-y-auto border-t border-white/[0.12] bg-[#012d2a] py-6 xl:hidden"
+          style={{ top: 'calc(var(--brvm-ticker-height) + 4.5rem)' }}
+        >
+          <div className="px-6 space-y-5 pb-8">
             <Link
               to="/"
               className="block text-sm transition-colors hover:text-white"
