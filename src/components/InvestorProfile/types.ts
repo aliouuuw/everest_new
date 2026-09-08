@@ -38,3 +38,15 @@ export type LeadData = {
   email: string
   phone?: string
 }
+
+export type LeadSubmitPayload = LeadData & {
+  profileType: InvestorProfileType
+  profileTitle: string
+  riskLevel: number
+  answers: Array<{ questionId: string; value: number }>
+  investmentAmount?: number
+  source?: string
+  userAgent?: string
+}
+
+export type LeadSubmit = (payload: LeadSubmitPayload) => Promise<void>

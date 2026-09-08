@@ -6,8 +6,9 @@ import {
   createRoute,
   createRouter,
 } from '@tanstack/react-router'
-import { ConvexReactClient } from 'convex/react'
+import { ConvexReactClient, useMutation } from 'convex/react'
 import { ConvexAuthProvider } from '@convex-dev/auth/react'
+import { api } from '../convex/_generated/api'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
@@ -30,7 +31,7 @@ import { OffresPage } from './routes/OffresPage'
 import { BoursePage } from './routes/BoursePage'
 import { PortalPage } from './routes/PortalPage'
 import { DashboardPage } from './routes/DashboardPage'
-import { SimulateurPage } from './routes/SimulateurPage'
+import { SimulateurView } from './routes/SimulateurPage'
 import ProtectedAdminLayout from './routes/admin/ProtectedAdminLayout.tsx'
 import { AdminDashboard } from './routes/admin/AdminDashboard'
 import { PublicationsList } from './routes/admin/PublicationsList'
@@ -50,6 +51,17 @@ import { ExpertisesPage } from './routes/ExpertisesPage'
 
 // Initialize ConvexDB client
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL || "")
+
+function SimulateurRoute() {
+  const createLead = useMutation(api.investorProfiles.createLead)
+  return (
+    <SimulateurView
+      onSubmitLead={async (payload) => {
+        await createLead(payload)
+      }}
+    />
+  )
+}
 
 const redirectTo = (target: string) => () => {
   window.location.replace(target)
@@ -229,7 +241,7 @@ const bourseRoute = createRoute({
 const simulateurRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/outils-investisseur',
-  component: SimulateurPage,
+  component: SimulateurRoute,
 })
 
 const portalRoute = createRoute({

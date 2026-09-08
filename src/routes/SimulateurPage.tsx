@@ -3,6 +3,7 @@ import { FiArrowRight, FiDollarSign, FiPercent, FiTarget, FiTrendingUp } from 'r
 import { CompoundInterestCalculator } from '../components/InvestorProfile/CompoundInterestCalculator'
 import { DividendCalculator } from '../components/InvestorProfile/DividendCalculator'
 import { InvestorProfileInline } from '../components/InvestorProfile/InvestorProfileInline'
+import type { LeadSubmit } from '../components/InvestorProfile/types'
 
 type ToolId = 'profil' | 'interets' | 'dividendes'
 
@@ -30,7 +31,9 @@ const TOOL_META: Record<ToolId, { title: string; subtitle: string; icon: React.R
   },
 }
 
-export const SimulateurPage: React.FC = () => {
+export const SimulateurView: React.FC<{ onSubmitLead?: LeadSubmit }> = ({
+  onSubmitLead,
+}) => {
   const [activeTool, setActiveTool] = useState<ToolId>('profil')
 
   const meta = TOOL_META[activeTool]
@@ -108,7 +111,7 @@ export const SimulateurPage: React.FC = () => {
               <div>
                 {/* Main tool area */}
                 <div className="lg:col-span-2">
-                  {activeTool === 'profil' && <InvestorProfileInline />}
+                  {activeTool === 'profil' && <InvestorProfileInline onSubmitLead={onSubmitLead} />}
                   {activeTool === 'interets' && <CompoundInterestCalculator />}
                   {activeTool === 'dividendes' && <DividendCalculator />}
                 </div>
@@ -144,3 +147,6 @@ export const SimulateurPage: React.FC = () => {
     </div>
   )
 }
+
+/** Vite route alias. Lead capture is wired in `main.tsx` (Convex). */
+export const SimulateurPage = SimulateurView

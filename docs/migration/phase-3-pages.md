@@ -19,7 +19,7 @@ Do not port from `main`. The old Vite home (`HeroSection`, `Insights`, `Mountain
 | `/publications/[slug]` | `PublicationPage` | Island + Payload |
 | `/marche-capitaux`, `/ingenieurie-financiere`, `/gestion-sous-mandat` | Department routes | Island + `src/data/departments.ts` |
 | `/bourse` | `BoursePage` | Island |
-| `/outils-investisseur` | `SimulateurPage` | Later |
+| `/outils-investisseur` | `SimulateurPage` | Island |
 | `/portal`, `/dashboard`, `/auth`, `/admin/*` | Client + admin | Stay on Vite until cutover |
 
 **Redirects (legacy URLs):**

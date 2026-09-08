@@ -56,7 +56,7 @@ Override via `SEED_ADMIN_*` in `apps/cms/.env`.
 - [x] Admin seed script
 - [ ] R2 S3 adapter (Phase 4)
 - [x] Convex data import (Phase 1)
-- [x] Public pages port (Phase 3 — `/outils-investisseur` still later)
+- [x] Public pages port (Phase 3)
 
 ## Legacy app (unchanged)
 

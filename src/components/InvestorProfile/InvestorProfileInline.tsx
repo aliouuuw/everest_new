@@ -1,11 +1,9 @@
 import { useState, useCallback, useEffect } from 'react'
 import { FiArrowRight, FiArrowLeft, FiCheck, FiShield, FiTrendingUp, FiTarget, FiZap, FiAnchor, FiBriefcase, FiPhone, FiZap as FiLightning, FiUser, FiMail } from 'react-icons/fi'
-import { useMutation } from 'convex/react'
-import { api } from '../../../convex/_generated/api'
 import { QUESTIONS } from './questions'
 import { calculateProfile } from './scoring'
 import { ProfileReport } from './ProfileReport'
-import type { UserAnswers, ProfileResult, LeadData, Question } from './types'
+import type { UserAnswers, ProfileResult, LeadData, Question, LeadSubmit } from './types'
 
 type Step = 'intro' | 'personal' | 'quiz' | 'result'
 
@@ -24,7 +22,9 @@ const STEP_ICONS = [
   { icon: '📊', label: 'Expérience' },
 ]
 
-export const InvestorProfileInline: React.FC = () => {
+export const InvestorProfileInline: React.FC<{ onSubmitLead?: LeadSubmit }> = ({
+  onSubmitLead,
+}) => {
   const [step, setStep] = useState<Step>('intro')
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<UserAnswers>({})
@@ -33,8 +33,6 @@ export const InvestorProfileInline: React.FC = () => {
   const [isAnimating, setIsAnimating] = useState(false)
   const [direction, setDirection] = useState<'forward' | 'back'>('forward')
   const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const createLead = useMutation(api.investorProfiles.createLead)
 
   // Reset when component mounts
   useEffect(() => {
@@ -86,26 +84,28 @@ export const InvestorProfileInline: React.FC = () => {
       }))
       const investmentAmount = finalAnswers['investment_amount']
 
-      await createLead({
-        firstName: lead.firstName,
-        lastName: lead.lastName,
-        email: lead.email,
-        phone: lead.phone,
-        profileType: profile.type,
-        profileTitle: profile.title,
-        riskLevel: profile.riskLevel,
-        answers: answersArray,
-        investmentAmount,
-        source: 'outils-investisseur',
-        userAgent: navigator.userAgent,
-      })
+      if (onSubmitLead) {
+        await onSubmitLead({
+          firstName: lead.firstName,
+          lastName: lead.lastName,
+          email: lead.email,
+          phone: lead.phone,
+          profileType: profile.type,
+          profileTitle: profile.title,
+          riskLevel: profile.riskLevel,
+          answers: answersArray,
+          investmentAmount,
+          source: 'outils-investisseur',
+          userAgent: navigator.userAgent,
+        })
+      }
     } catch (error) {
       console.error('Failed to submit lead:', error)
     } finally {
       setIsSubmitting(false)
       setStep('result')
     }
-  }, [lead, createLead])
+  }, [lead, onSubmitLead])
 
   const handlePersonalSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
