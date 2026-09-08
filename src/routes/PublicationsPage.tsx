@@ -101,29 +101,50 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
     year: 'numeric',
   })
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null)
-  const [thumbnailLoading, setThumbnailLoading] = useState(true)
 
   useEffect(() => {
-    let cancelled = false
-    setThumbnailLoading(true)
-    setThumbnailUrl(null)
+    const generateThumbnail = async () => {
+      try {
+        // ponytail: `?url` worker imports 504 on Astro islands. Serve the
+        // worker from /public so Vite and Astro both resolve it.
+        const pdfjsLib = await import('pdfjs-dist/build/pdf.mjs')
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs'
 
-    import('../lib/pdfThumbnail')
-      .then(({ pdfThumbnail }) => pdfThumbnail(pub.fileUrl))
-      .then((dataUrl) => {
-        if (!cancelled) {
-          setThumbnailUrl(dataUrl)
-          setThumbnailLoading(false)
+        const loadingTask = pdfjsLib.getDocument({
+          url: pub.fileUrl,
+          withCredentials: false,
+        })
+        
+        const pdf = await loadingTask.promise
+        const page = await pdf.getPage(1)
+        
+        const scale = 1.5
+        const viewport = page.getViewport({ scale })
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        
+        if (!context) {
+          console.warn('Could not get canvas context for PDF thumbnail')
+          return
         }
-      })
-      .catch((error) => {
+        
+        canvas.height = viewport.height
+        canvas.width = viewport.width
+        
+        await page.render({
+          canvasContext: context,
+          viewport: viewport,
+          canvas: canvas,
+        }).promise
+        
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
+        setThumbnailUrl(dataUrl)
+      } catch (error) {
         console.error('Failed to generate PDF thumbnail for', pub.fileUrl, ':', error)
-        if (!cancelled) setThumbnailLoading(false)
-      })
-
-    return () => {
-      cancelled = true
+      }
     }
+
+    generateThumbnail()
   }, [pub.fileUrl])
 
   return (
@@ -139,12 +160,10 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
             <img
               src={thumbnailUrl}
               alt={`${pub.title} preview`}
-              className="h-full w-full object-contain group-hover/preview:scale-105 transition-transform duration-300"
+              className="w-full h-full object-contain group-hover/preview:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black/0 group-hover/preview:bg-black/10 transition-colors duration-300" />
           </>
-        ) : thumbnailLoading ? (
-          <div className="absolute inset-0 animate-pulse bg-[var(--mauve-05)]" aria-hidden />
         ) : (
           <div className="relative z-10 flex flex-col items-center gap-3">
             <div className="w-16 h-20 rounded-lg bg-white shadow-lg flex flex-col items-center justify-center border border-[var(--mauve)]/10 group-hover/preview:scale-105 transition-transform duration-300">
