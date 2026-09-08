@@ -58,7 +58,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
       ? heroBgOverride.value
       : hero_background
 
-  const headlineOverride = useContent(`${slug}.hero.headline`)
+  const headlineOverride = useContent(`${deptPageKey}.hero.headline`)
   const resolvedHeadline =
     headlineOverride?.value !== undefined && headlineOverride.value !== ''
       ? headlineOverride.value
@@ -110,7 +110,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
             <div className="lg:col-span-5 pb-2">
               <div className="border-l-[3px] border-[var(--jaune-or)] pl-6 lg:pl-8">
                 <p className="text-xl md:text-2xl leading-relaxed text-[var(--night)] font-medium mb-8">
-                  <EditableText id={`${slug}.hero.subtitle`}>{hero_subtitle}</EditableText>
+                  <EditableText id={`${deptPageKey}.hero.subtitle`}>{hero_subtitle}</EditableText>
                 </p>
                 <a href="#solutions" className="bg-[var(--jaune-or)] hover:bg-[#b07d24] text-white rounded-full px-8 py-4 text-sm font-bold transition-all inline-block shadow-md hover:shadow-lg hover:-translate-y-0.5">
                   Découvrir nos solutions
@@ -157,7 +157,7 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
                   Conçu pour vos enjeux spécifiques.
                 </h2>
                 <p className="text-lg text-[rgba(10, 10, 10, 0.8)] leading-relaxed font-light">
-                  <EditableText id={`${slug}.presentation`}>{presentation}</EditableText>
+                  <EditableText id={`${deptPageKey}.presentation`}>{presentation}</EditableText>
                 </p>
               </div>
               
@@ -424,10 +424,10 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-7">
               <h2 className="font-primary font-bold text-5xl md:text-7xl leading-[1.05] mb-6 text-[var(--night-80)]">
-                <EditableText id={`${slug}.cta.text`}>{cta_text}</EditableText>
+                <EditableText id={`${deptPageKey}.cta.text`}>{cta_text}</EditableText>
               </h2>
               <p className="text-xl md:text-2xl text-[rgba(10, 10, 10, 0.6)] font-light max-w-2xl">
-                <EditableText id={`${slug}.cta.subtitle`}>{cta_subtitle}</EditableText>
+                <EditableText id={`${deptPageKey}.cta.subtitle`}>{cta_subtitle}</EditableText>
               </p>
             </div>
             <div className="md:col-span-5 flex flex-col sm:flex-row gap-6 md:justify-end">

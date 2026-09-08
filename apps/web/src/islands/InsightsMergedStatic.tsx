@@ -56,13 +56,17 @@ export function InsightsMergedStatic({ news, publications: incoming }: Props) {
         <div className="mb-14 md:mb-18">
           <div className="mb-6 flex items-center justify-between gap-4">
             <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-              Actualités
+              <EditableText id="home.insights.actualitesKicker" as="span">
+                Actualités
+              </EditableText>
             </p>
             <Link
               to="/actualites"
               className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--night-80)]"
             >
-              Toutes les actualités
+              <EditableText id="home.insights.actualitesLink" as="span">
+                Toutes les actualités
+              </EditableText>
               <FiArrowRight className="text-xs" />
             </Link>
           </div>
@@ -151,13 +155,17 @@ export function InsightsMergedStatic({ news, publications: incoming }: Props) {
           <div>
             <div className="mb-6 flex items-center justify-between gap-4">
               <p className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-                Publications
+                <EditableText id="home.insights.publicationsKicker" as="span">
+                  Publications
+                </EditableText>
               </p>
               <Link
                 to="/publications"
                 className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--night-80)]"
               >
-                Toutes les publications
+                <EditableText id="home.insights.publicationsLink" as="span">
+                  Toutes les publications
+                </EditableText>
                 <FiArrowRight className="text-xs" />
               </Link>
             </div>

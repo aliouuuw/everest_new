@@ -15,7 +15,7 @@ Status: open unless marked done.
 
 ## Medium
 
-- [ ] **Home CTA « Évaluer mon profil d'investisseur ».** Vite opens `InvestorProfileModal`. Astro sends `secondaryHref` to the account-opening Vercel URL. Same label, different product.
+- [x] **Home CTA « Évaluer mon profil d'investisseur ».** Product decision: Astro keeps `secondaryHref` to the account-opening Vercel URL. Vite still opens `InvestorProfileModal`.
 
 - [x] **Lenis missing.** Vite `Layout` wraps `LenisWrapper`. Astro `SiteShell` now wraps the same wrapper.
 
@@ -25,7 +25,7 @@ Status: open unless marked done.
 
 - [x] **Header chrome on `/about` (and similar).** `forceScrolledStylePaths` includes `/about`, `/faq`, `/publications`, `/actualites`. Image heroes use `--site-chrome-top`.
 
-- [ ] **Site copy mostly defaults.** Import created `home.hero.title`. Other `EditableText` keys stay hardcoded.
+- [x] **Site copy mostly defaults.** `bun run seed:site-content` fills every registry key. Existing CMS rows stay. JSX children remain fallbacks.
 
 - [x] **`/services`, `/gestion-libre`, `/gestion-assistee`.** Astro and Vite redirect to `/offres`.
 

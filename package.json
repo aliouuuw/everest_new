@@ -29,6 +29,7 @@
     "check:lead": "bun run --cwd apps/web check:lead",
     "seed:admin": "bun run --cwd apps/cms seed:admin",
     "seed:publications": "bun run --cwd apps/cms seed:publications",
+    "seed:site-content": "bun run --cwd apps/cms seed:site-content",
     "migrate:export": "bunx convex export --path scripts/migration/.exports/convex-dev.zip",
     "migrate:import": "bun run --cwd apps/cms import:convex",
     "jobs:fetch-news": "bun run --cwd apps/cms jobs:fetch-news",

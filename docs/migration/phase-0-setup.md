@@ -25,6 +25,8 @@ bun install
 
 # 5. Seed admin user (after Postgres is healthy)
 bun run seed:admin
+bun run seed:site-content
+bun run seed:publications
 
 # 6. Start CMS + Astro (two terminals or one command)
 bun run dev:migration

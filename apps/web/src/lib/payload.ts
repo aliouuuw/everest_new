@@ -144,7 +144,7 @@ export const fetchPublishedArticles = (limit = 20) =>
 export const fetchSiteContent = (pageKey: string) =>
   fetchList<SiteContent>('site-content', {
     'where[pageKey][equals]': pageKey,
-    limit: '100',
+    limit: '200',
   })
 
 export const fetchExternalArticles = (limit = 20) =>
