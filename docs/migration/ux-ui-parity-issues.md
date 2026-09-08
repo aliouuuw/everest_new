@@ -11,7 +11,7 @@ Status: open unless marked done.
 
 - [ ] **Accès Client 404.** Header `to="/auth"`. Astro has no `/auth`. Hide the CTA, stub a message, or point to the live portal.
 
-- [ ] **Home Insights news cards have no photos.** Vite `InsightsMerged` uses `article.imageUrl`. `InsightsMergedStatic` renders an empty 16/10 block.
+- [x] **Home Insights news cards have no photos.** Vite `InsightsMerged` uses `article.imageUrl`. `InsightsMergedStatic` now renders the same 16/10 image when `imageUrl` is set.
 
 ## Medium
 
@@ -37,4 +37,4 @@ Status: open unless marked done.
 
 ## Home (open)
 
-- [ ] **Only the hero paints on `/`.** Sections below stay in the DOM at `.reveal { opacity: 0 }` unless `useReveal` adds `.in`. Nested `SiteShell` + page island can skip hydration. Tracked as the first code fix after this file.
+- [x] **Only the hero paints on `/`.** `.reveal` stayed at opacity 0 when `HomePage` failed to hydrate (Vite 504). Astro `html.astro-public` now shows SSR sections.

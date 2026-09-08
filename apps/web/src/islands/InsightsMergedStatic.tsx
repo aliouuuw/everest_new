@@ -114,8 +114,19 @@ export function InsightsMergedStatic({ news, publications }: Props) {
               const inner = (
                 <>
                   <div className="relative aspect-[16/10] overflow-hidden rounded-t-xl bg-[var(--command-surface)]">
+                    {article.imageUrl ? (
+                      <>
+                        <div className="absolute inset-0 z-10 bg-black/5 transition-colors duration-500 group-hover:bg-transparent" />
+                        <img
+                          src={article.imageUrl}
+                          alt={article.title}
+                          className="h-full w-full transform object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                          referrerPolicy="no-referrer"
+                        />
+                      </>
+                    ) : null}
                     <div className="absolute left-5 top-5 z-20">
-                      <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)]">
+                      <span className="inline-block rounded-full border border-[var(--mauve-15)] bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] backdrop-blur-sm">
                         {article.category}
                       </span>
                     </div>

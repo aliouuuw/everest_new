@@ -1100,6 +1100,16 @@ h1, h2 {
 .reveal-stagger.in > *:nth-child(4) { transition-delay: 240ms; }
 .reveal-stagger.in > *:nth-child(5) { transition-delay: 300ms; }
 
+/* ponytail: Astro islands can fail to hydrate (Vite 504 / nested client:load).
+   `.reveal` then stays opacity 0 and `/` looks like hero-only. Show SSR.
+   Restore hide-until-.in once HomePage hydrates reliably. */
+html.astro-public .reveal,
+html.astro-public .reveal-stagger > * {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
 /* Service card hover — gold left accent */
 .service-card { border-left: 2px solid transparent; transition: border-color 500ms var(--ease-out-cubic), background 500ms var(--ease-out-cubic); }
 .service-card:hover { border-left-color: var(--jaune-or); }
