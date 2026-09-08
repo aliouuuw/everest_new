@@ -24,7 +24,7 @@ export default defineConfig({
     optimizeDeps: {
       // Hoisted monorepo: @astrojs/react/client.js is served via /@fs, so Vite never
       // discovers this import and would serve raw CJS (no `createRoot` export).
-      include: ['react', 'react-dom', 'react-dom/client', 'gsap'],
+      include: ['react', 'react-dom', 'react-dom/client', 'gsap', 'pdfjs-dist/build/pdf.mjs'],
     },
     server: {
       fs: {
