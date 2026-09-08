@@ -1,28 +1,55 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { fetchPublishedArticles, lexicalToHtml } from '../../lib/payload'
+import ArticlePage from '../../islands/ArticlePage'
+import {
+  articleToView,
+  decodeHtmlEntities,
+  externalArticleToView,
+  fetchExternalArticles,
+  fetchNewsFeed,
+  fetchPublishedArticles,
+} from '../../lib/payload'
 
 export async function getStaticPaths() {
-  const { docs } = await fetchPublishedArticles(100)
-  return docs.map((article) => ({
-    params: { slug: article.slug },
-    props: { article },
-  }))
+  const [articles, externals] = await Promise.all([
+    fetchPublishedArticles(100),
+    fetchExternalArticles(100),
+  ])
+
+  return [
+    ...articles.docs.map((article) => ({
+      params: { slug: article.slug },
+      props: {
+        article: articleToView(article),
+        slug: article.slug,
+      },
+    })),
+    ...externals.docs
+      .filter((item) => item.slug)
+      .map((item) => ({
+        params: { slug: item.slug! },
+        props: {
+          article: externalArticleToView(item),
+          slug: item.slug!,
+        },
+      })),
+  ]
 }
 
-const { article } = Astro.props
-const html = lexicalToHtml(article.content)
+const { article, slug } = Astro.props
+const feed = await fetchNewsFeed(50)
+const related = feed
+  .filter((item) => item.slug !== slug)
+  .slice(0, 3)
+  .map((item) => ({
+    href: item.external ? item.href : `/actualites/${item.slug}`,
+    title: decodeHtmlEntities(item.title),
+    category: item.category,
+    imageUrl: item.imageUrl ?? undefined,
+    publishedAt: item.publishedAt ?? '',
+  }))
 ---
 
 <Layout title={`${article.title} — Everest Finance`} description={article.excerpt}>
-  <article class="mx-auto max-w-3xl">
-    <a href="/actualites" class="text-sm text-secondary">Actualités</a>
-    <p class="mt-6 text-xs uppercase tracking-wide text-secondary">{article.category}</p>
-    <h1 class="mt-2 text-4xl font-extrabold text-primary">{article.title}</h1>
-    {article.imageUrl && (
-      <img src={article.imageUrl} alt="" class="mt-6 w-full rounded-xl" />
-    )}
-    <p class="mt-4 text-lg text-on-surface/70">{article.excerpt}</p>
-    <div class="mt-8 text-base leading-7 text-on-surface" set:html={html} />
-  </article>
+  <ArticlePage client:load article={article} related={related} />
 </Layout>

@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 
-type Article = {
+export type ActualitesArticle = {
   title: string;
   excerpt: string;
   category: string;
@@ -14,6 +14,9 @@ type Article = {
   readTime: string;
   imageUrl: string;
   slug?: string;
+  href?: string;
+  external?: boolean;
+  featured?: boolean;
 };
 
 function estimateInternalReadTime(content: string): string {
@@ -21,9 +24,17 @@ function estimateInternalReadTime(content: string): string {
   return `${Math.max(1, Math.ceil(words / 200))} min`;
 }
 
+function articleHref(article: ActualitesArticle): string {
+  if (article.slug) return `/actualites/${article.slug}`
+  if (article.external && article.href) return article.href
+  return article.href ?? '/actualites'
+}
 
+function opensInNewTab(article: ActualitesArticle): boolean {
+  return Boolean(article.external && article.href?.startsWith('http'))
+}
 
-export const ActualitesPage = () => {
+export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,39 +47,12 @@ export const ActualitesPage = () => {
     return () => ctx.revert();
   }, []);
 
-  // ── Internal articles from Convex ───────────────────────────
-  const rawInternalArticles = useQuery(api.articles.getArticles, { status: 'published' });
+  const featuredArticle = useMemo(
+    () => articles.find((article) => article.featured) ?? articles[0] ?? null,
+    [articles],
+  );
 
-  const internalArticles: Article[] = useMemo(() => {
-    if (!rawInternalArticles) return [];
-    return rawInternalArticles.map(a => ({
-      title: a.title,
-      excerpt: a.excerpt,
-      category: a.category,
-      date: new Date(a.publishedAt ?? a.createdAt).toISOString().split('T')[0],
-      readTime: estimateInternalReadTime(a.content),
-      imageUrl: a.imageUrl ?? '',
-      slug: a.slug,
-    }));
-  }, [rawInternalArticles]);
-
-  const featuredArticle: Article | null = useMemo(() => {
-    const f = rawInternalArticles?.find(a => a.featured);
-    if (!f) return null;
-    return {
-      title: f.title,
-      excerpt: f.excerpt,
-      category: f.category,
-      date: new Date(f.publishedAt ?? f.createdAt).toISOString().split('T')[0],
-      readTime: estimateInternalReadTime(f.content),
-      imageUrl: f.imageUrl ?? '',
-      slug: f.slug,
-    };
-  }, [rawInternalArticles]);
-
-  const ARTICLES = useMemo(() =>
-    [...internalArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-  [internalArticles]);
+  const ARTICLES = articles;
 
   const CATEGORIES = useMemo(() => {
     const cats = new Set(['Tout']);
@@ -220,7 +204,12 @@ export const ActualitesPage = () => {
       {featuredArticle && (
       <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
         <div className="page-container">
-          <Link to="/actualites/$slug" params={{ slug: featuredArticle.slug! }} className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(1,45,42,0.1)]">
+          <Link
+            to={articleHref(featuredArticle)}
+            className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(1,45,42,0.1)]"
+            target={opensInNewTab(featuredArticle) ? '_blank' : undefined}
+            rel={opensInNewTab(featuredArticle) ? 'noopener noreferrer' : undefined}
+          >
             <div className="lg:col-span-7 relative overflow-hidden">
               <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
                 <img
@@ -288,9 +277,10 @@ export const ActualitesPage = () => {
                   {filteredArticles.map((article, i) =>
                       <Link
                         key={i}
-                        to="/actualites/$slug"
-                        params={{ slug: article.slug! }}
+                        to={articleHref(article)}
                         className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                        target={opensInNewTab(article) ? '_blank' : undefined}
+                        rel={opensInNewTab(article) ? 'noopener noreferrer' : undefined}
                       >
                         {/* Thumbnail */}
                         <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
@@ -416,3 +406,25 @@ export const ActualitesPage = () => {
     </div>
   );
 };
+
+export const ActualitesPage = () => {
+  const rawInternalArticles = useQuery(api.articles.getArticles, { status: 'published' });
+
+  const articles = useMemo<ActualitesArticle[]>(() => {
+    if (!rawInternalArticles) return [];
+    return rawInternalArticles.map((article) => ({
+      title: article.title,
+      excerpt: article.excerpt,
+      category: article.category,
+      date: new Date(article.publishedAt ?? article.createdAt).toISOString().split('T')[0],
+      readTime: estimateInternalReadTime(article.content),
+      imageUrl: article.imageUrl ?? '',
+      slug: article.slug,
+      featured: article.featured,
+    }));
+  }, [rawInternalArticles]);
+
+  if (rawInternalArticles === undefined) return null;
+  return <ActualitesView articles={articles} />;
+};
+

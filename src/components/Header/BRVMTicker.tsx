@@ -65,12 +65,12 @@ export const BRVMTicker: React.FC = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[60] bg-[var(--pure-white)] border-b border-black/5 py-2"
+      className="fixed top-0 left-0 right-0 z-[60] h-[var(--brvm-ticker-height)] border-b border-black/5 bg-[var(--pure-white)]"
       role="region"
       aria-label="BRVM ticker"
     >
-      <div className="mx-auto max-w-6xl px-4 text-[var(--night)]">
-        <div className="flex items-center justify-between pb-2">
+      <div className="mx-auto flex h-full max-w-6xl items-center px-4 text-[var(--night)]">
+        <div className="flex w-full items-center justify-between">
           {/* BRVM Label - visible on all screen sizes */}
           <div className="flex items-center gap-2 text-secondary">
             <div className="w-2 h-2 bg-[var(--jaune-or)] rounded-full animate-pulse" aria-hidden="true"></div>

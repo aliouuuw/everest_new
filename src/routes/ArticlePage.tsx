@@ -1,102 +1,53 @@
-import { useNavigate, useParams } from '@tanstack/react-router'
+import { stripLeadingArticleImage } from '@/utils/articleContent'
+import { Link, useParams } from '@tanstack/react-router'
 import { FiArrowLeft, FiCalendar, FiClock, FiExternalLink, FiLoader, FiArrowRight } from 'react-icons/fi'
 import { useReveal } from '../components/Hooks/useReveal'
 import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
-import { Link } from '@tanstack/react-router'
 
 function estimateReadTime(text: string): string {
   const words = text.replace(/<[^>]*>/g, '').split(/\s+/).length
   return `${Math.max(1, Math.ceil(words / 200))} min`
 }
 
-export const ArticlePage = () => {
-  const { slug } = useParams({ from: '/actualites/$slug' as const })
-  const navigate = useNavigate()
+export type ArticleViewData = {
+  title: string
+  excerpt: string
+  category: string
+  date: string
+  readTime: string
+  imageUrl: string
+  content: string
+  source?: string
+  sourceUrl?: string
+}
 
+export type RelatedArticle = {
+  href: string
+  title: string
+  category: string
+  imageUrl?: string
+  publishedAt: string
+}
+
+export function ArticleView({
+  article,
+  related = [],
+}: {
+  article: ArticleViewData
+  related?: RelatedArticle[]
+}) {
   const heroRef = useReveal<HTMLDivElement>()
   const contentRef = useReveal<HTMLDivElement>()
-
-  // Query both sources in parallel; whichever returns a result wins
-  const internalArticle = useQuery(api.articles.getArticleBySlug, { slug })
-  const externalArticle = useQuery(
-    api.externalNews.getExternalArticleBySlug,
-    // only query external if internal came back null (not undefined = loading)
-    internalArticle === null ? { slug } : 'skip'
-  )
-
-  // Still loading
-  const isLoading = internalArticle === undefined || (internalArticle === null && externalArticle === undefined)
-
-  // Normalize into a common shape
-  const article = internalArticle
-    ? {
-        title:     internalArticle.title,
-        excerpt:   internalArticle.excerpt,
-        category:  internalArticle.category,
-        date:      new Date(internalArticle.publishedAt ?? internalArticle.createdAt).toISOString().split('T')[0],
-        readTime:  estimateReadTime(internalArticle.content),
-        imageUrl:  internalArticle.imageUrl ?? '',
-        content:   internalArticle.content,
-        source:    undefined as string | undefined,
-        sourceUrl: undefined as string | undefined,
-      }
-    : externalArticle
-      ? {
-          title:     externalArticle.title,
-          excerpt:   externalArticle.excerpt,
-          category:  externalArticle.category,
-          date:      new Date(externalArticle.publishedAt).toISOString().split('T')[0],
-          readTime:  estimateReadTime(externalArticle.content ?? externalArticle.excerpt),
-          imageUrl:  externalArticle.imageUrl,
-          content:   externalArticle.content ?? `<p>${externalArticle.excerpt}</p>`,
-          source:    externalArticle.sourceName as string | undefined,
-          sourceUrl: externalArticle.url as string | undefined,
-        }
-      : null
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
-        <FiLoader className="animate-spin text-[var(--night-80)] w-8 h-8" />
-      </div>
-    )
-  }
-
-  // Article not found
-  if (!article) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
-        <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--mauve)]/10 flex items-center justify-center">
-            <svg className="w-8 h-8 text-[var(--night-80)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-[var(--night)] mb-4">Article non trouvé</h1>
-          <p className="text-[rgba(10,10,10,0.6)] mb-4">L'article que vous recherchez n'existe pas ou a été supprimé.</p>
-          <button
-            onClick={() => navigate({ to: '/actualites' })}
-            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded-full hover:bg-[#b5832a] transition-colors"
-          >
-            Retour aux actualités
-          </button>
-        </div>
-      </div>
-    )
-  }
 
   const formattedDate = new Date(article.date).toLocaleDateString('fr-FR', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   })
 
-  // Get all external articles for "related articles" sidebar
-  const allExternalArticles = useQuery(api.externalNews.getExternalArticles)
-
   return (
-    <div className="min-h-screen bg-[var(--pure-white)] pt-32 pb-24">
+    <div className="min-h-screen bg-[var(--pure-white)] pt-[var(--site-chrome-top)] pb-24">
       <div className="page-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Main Article Column */}
@@ -104,13 +55,13 @@ export const ArticlePage = () => {
             {/* Header Area */}
             <header className="mb-10 text-center lg:text-left flex flex-col items-center lg:items-start">
               {/* Back button */}
-              <button
-                onClick={() => navigate({ to: '/actualites' })}
+              <Link
+                to="/actualites"
                 className="inline-flex items-center gap-2 text-[var(--night)]/50 hover:text-[var(--night-80)] transition-colors mb-8 group text-sm font-bold tracking-[0.1em] uppercase"
               >
                 <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
                 Retour aux actualités
-              </button>
+              </Link>
 
               {/* Meta Info */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-6">
@@ -139,6 +90,7 @@ export const ArticlePage = () => {
             </header>
 
             {/* Featured Image */}
+            {article.imageUrl ? (
             <figure className="mb-12 relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[var(--white-smoke)] border border-black/5">
               <img
                 src={article.imageUrl}
@@ -147,6 +99,7 @@ export const ArticlePage = () => {
                 referrerPolicy="no-referrer"
               />
             </figure>
+            ) : null}
 
             {/* Content Body */}
             <div ref={contentRef}>
@@ -179,13 +132,13 @@ export const ArticlePage = () => {
 
               {/* Footer Back Button */}
               <div className="mt-16 pt-8 border-t border-black/10 text-center">
-                <button
-                  onClick={() => navigate({ to: '/actualites' })}
+                <Link
+                  to="/actualites"
                   className="inline-flex items-center gap-2 text-[var(--night)] hover:text-[var(--night-80)] transition-colors font-bold text-sm tracking-[0.1em] uppercase group"
                 >
                   <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
                   Retour aux actualités
-                </button>
+                </Link>
               </div>
             </div>
           </article>
@@ -220,12 +173,11 @@ export const ArticlePage = () => {
                 Articles connexes
               </h3>
               <div className="space-y-4">
-                {allExternalArticles && allExternalArticles.length > 0 ? (
-                  allExternalArticles.slice(0, 3).map((relArticle) => (
+                {related.length > 0 ? (
+                  related.slice(0, 3).map((relArticle) => (
                     <Link
-                      key={relArticle._id}
-                      to="/actualites/$slug"
-                      params={{ slug: relArticle.slug || '' }}
+                      key={relArticle.href}
+                      to={relArticle.href}
                       className="group block p-4 rounded-xl border border-black/5 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve)]/5 transition-all duration-300"
                     >
                       <div className="flex gap-3">
@@ -263,4 +215,84 @@ export const ArticlePage = () => {
       </div>
     </div>
   )
+}
+
+export const ArticlePage = () => {
+  const { slug } = useParams({ from: '/actualites/$slug' as const })
+
+  const internalArticle = useQuery(api.articles.getArticleBySlug, { slug })
+  const externalArticle = useQuery(
+    api.externalNews.getExternalArticleBySlug,
+    internalArticle === null ? { slug } : 'skip',
+  )
+
+  const isLoading =
+    internalArticle === undefined ||
+    (internalArticle === null && externalArticle === undefined)
+
+  const allExternalArticles = useQuery(api.externalNews.getExternalArticles)
+
+  const article: ArticleViewData | null = internalArticle
+    ? {
+        title: internalArticle.title,
+        excerpt: internalArticle.excerpt,
+        category: internalArticle.category,
+        date: new Date(internalArticle.publishedAt ?? internalArticle.createdAt)
+          .toISOString()
+          .split('T')[0],
+        readTime: estimateReadTime(internalArticle.content),
+        imageUrl: internalArticle.imageUrl ?? '',
+        content: internalArticle.content,
+      }
+    : externalArticle
+      ? {
+          title: externalArticle.title,
+          excerpt: externalArticle.excerpt,
+          category: externalArticle.category,
+          date: new Date(externalArticle.publishedAt).toISOString().split('T')[0],
+          readTime: estimateReadTime(externalArticle.content ?? externalArticle.excerpt),
+          imageUrl: externalArticle.imageUrl,
+          content: stripLeadingArticleImage(
+            externalArticle.content ?? `<p>${externalArticle.excerpt}</p>`,
+            externalArticle.imageUrl,
+          ),
+          source: externalArticle.sourceName,
+          sourceUrl: externalArticle.url,
+        }
+      : null
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
+        <FiLoader className="animate-spin text-[var(--night-80)] w-8 h-8" />
+      </div>
+    )
+  }
+
+  if (!article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--pure-white)]">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-[var(--night)] mb-4">Article non trouvé</h1>
+          <Link
+            to="/actualites"
+            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded-full hover:bg-[#b5832a] transition-colors inline-block"
+          >
+            Retour aux actualités
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const related: RelatedArticle[] =
+    allExternalArticles?.slice(0, 3).map((rel) => ({
+      href: `/actualites/${rel.slug ?? ''}`,
+      title: rel.title,
+      category: rel.category,
+      imageUrl: rel.imageUrl,
+      publishedAt: new Date(rel.publishedAt).toISOString(),
+    })) ?? []
+
+  return <ArticleView article={article} related={related} />
 }

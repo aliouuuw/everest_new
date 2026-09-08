@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { EditableText } from '../cms'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
-import * as pdfjsLib from 'pdfjs-dist'
-import PdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 import { useReveal } from '../components/Hooks/useReveal'
 
 /* ─── Types ─── */
@@ -150,7 +147,8 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
   useEffect(() => {
     const generateThumbnail = async () => {
       try {
-        // Set worker source to local bundled worker
+        const pdfjsLib = await import('pdfjs-dist')
+        const PdfWorker = (await import('pdfjs-dist/build/pdf.worker.min.mjs?url')).default
         pdfjsLib.GlobalWorkerOptions.workerSrc = PdfWorker
         
         // Load PDF with CORS handling
@@ -274,43 +272,14 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
 }
 
 /* ─── Page ─── */
-export const PublicationsPage = () => {
+export function PublicationsView() {
   const heroRef = useReveal<HTMLElement>()
   const filtersRef = useReveal<HTMLDivElement>()
   const listRef = useReveal<HTMLDivElement>()
 
-  const navigate = useNavigate()
-  const search = useRouterState({
-    select: (s) => s.location.search as { frequency?: Frequency },
-  })
-
-  const initialFilter: FilterCategory =
-    search.frequency === 'hebdomadaire' ||
-    search.frequency === 'mensuelle' ||
-    search.frequency === 'semestrielle'
-      ? search.frequency
-      : ALL_LABEL
-
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>(initialFilter)
+  const [activeFilter, setActiveFilter] = useState<FilterCategory>(ALL_LABEL)
   const [searchQuery, setSearchQuery] = useState('')
   const [previewPub, setPreviewPub] = useState<Publication | null>(null)
-
-  useEffect(() => {
-    const f = search.frequency
-    if (f === 'hebdomadaire' || f === 'mensuelle' || f === 'semestrielle') {
-      setActiveFilter(f)
-    } else {
-      setActiveFilter(ALL_LABEL)
-    }
-  }, [search.frequency])
-
-  const goToFilter = (cat: FilterCategory) => {
-    if (cat === ALL_LABEL) {
-      navigate({ to: '/publications', search: {} })
-    } else {
-      navigate({ to: '/publications', search: { frequency: cat } })
-    }
-  }
 
   const handlePreview = useCallback((pub: Publication) => setPreviewPub(pub), [])
   const handleClosePreview = useCallback(() => setPreviewPub(null), [])
@@ -418,7 +387,7 @@ export const PublicationsPage = () => {
                   <button
                     key={cat}
                     type="button"
-                    onClick={() => goToFilter(cat)}
+                    onClick={() => setActiveFilter(cat)}
                     className={`px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow ${
                       isActive
                         ? 'bg-[var(--jaune-or)] text-white border-[var(--jaune-or)]'
@@ -486,3 +455,5 @@ export const PublicationsPage = () => {
     </div>
   )
 }
+
+export const PublicationsPage = () => <PublicationsView />

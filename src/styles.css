@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
+/* Paths are relative to this file (src/). Astro imports it from apps/web, so cwd scanning misses src/. */
+@source "../index.html";
+@source "./**/*.{tsx,ts,jsx,js}";
+@source "../apps/web/src/**/*.{tsx,ts,astro}";
 
 :root {
   /* Brand Colors - Everest Finance Option 2 */
@@ -74,6 +78,11 @@
   --duration-fast: 200ms;
   --duration-normal: 400ms;
   --duration-slow: 700ms;
+
+  /* BRVMTicker + Header bar — keep Header.tsx top offset in sync with BRVMTicker height */
+  --brvm-ticker-height: 2.5rem;
+  --site-header-height: 6rem;
+  --site-chrome-top: calc(var(--brvm-ticker-height) + var(--site-header-height) + 1.5rem);
   --duration-reveal: 900ms;
 
   /* Gradients */
@@ -1506,4 +1515,25 @@ h1, h2 {
   .publication-content td {
     padding: 0.5rem;
   }
+}
+
+/* Article body (actualités detail) */
+.article-content {
+  line-height: 1.7;
+  color: rgba(10, 10, 10, 0.85);
+}
+
+.article-content p,
+.article-content li {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.article-content p {
+  margin: 0.75rem 0;
+  font-family: var(--font-primary);
+}
+
+.article-content img {
+  border-radius: 1rem;
 }

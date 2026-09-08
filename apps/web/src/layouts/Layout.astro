@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import SiteShell from '../islands/SiteShell'
 
 type Props = {
   title: string
@@ -20,19 +21,8 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <header class="border-b border-border bg-surface">
-      <nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-        <a href="/" class="text-sm font-semibold tracking-wide text-primary">
-          Everest Finance
-        </a>
-        <div class="flex gap-6 text-sm font-medium text-primary">
-          <a href="/publications">Publications</a>
-          <a href="/actualites">Actualités</a>
-        </div>
-      </nav>
-    </header>
-    <main class="min-h-screen px-6 py-16">
+    <SiteShell client:load pathname={Astro.url.pathname}>
       <slot />
-    </main>
+    </SiteShell>
   </body>
 </html>

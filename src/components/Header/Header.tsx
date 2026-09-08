@@ -175,7 +175,8 @@ export const Header: React.FC = () => {
   }, [openDropdown]);
 
   // Check if user is authenticated and on dashboard
-  const isAuthenticated = sessionStorage.getItem('isAuthenticated') === 'true';
+  const isAuthenticated =
+    typeof sessionStorage !== 'undefined' && sessionStorage.getItem('isAuthenticated') === 'true';
   const isOnDashboard = location.pathname === '/dashboard';
   
   // Check if user is in admin portal
@@ -190,7 +191,6 @@ export const Header: React.FC = () => {
   const isForcedScrolledStyle = forceScrolledStylePaths.some(path =>
       location.pathname.startsWith(path),
     ) || (location.pathname.startsWith('/actualites/') && location.pathname !== '/actualites');
-  const shouldUseScrolledStyle = isScrolled || isForcedScrolledStyle;
 
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
@@ -224,28 +224,31 @@ export const Header: React.FC = () => {
     return null;
   }
 
-  // Header background: darker mauve/purple on all pages
-  const headerBg = isLightBackgroundPage
-    ? shouldUseScrolledStyle
-      ? 'bg-[#012d2a]'
-      : 'bg-[#012d2a]'
-    : shouldUseScrolledStyle
+  // Header background: solid mauve on inner pages; translucent only on home after scroll
+  const headerBg = isLightBackgroundPage || isForcedScrolledStyle
+    ? 'bg-[#012d2a]'
+    : isScrolled
       ? 'bg-[#6c786eba]/90 backdrop-blur-xl'
       : '';
 
   // Nav link color: always white on mauve bg
   const navLinkColor = 'rgba(255,255,255,0.75)';
 
+  const ctaShellClass =
+    'inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
+  const ctaLabelClass =
+    'font-primary text-[10px] xl:text-[11px] font-semibold tracking-[0.12em] xl:tracking-[0.15em] uppercase leading-none';
+
   return (
-    <header className={`fixed top-[40px] left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
-      <div className="mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24 py-4 flex items-center justify-between">
+    <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}>
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 md:px-16 lg:px-24 py-3 xl:py-4">
         {/* Logo only — larger */}
-        <Link to="/" className="transition-opacity hover:opacity-85 flex items-center">
-          <img src="/logo-everest.png" alt="Everest Finance" className="h-16 w-auto" />
+        <Link to="/" className="flex shrink-0 items-center transition-opacity hover:opacity-85">
+          <img src="/logo-everest.png" alt="Everest Finance" className="h-12 w-auto xl:h-16" />
         </Link>
 
-        {/* Navigation */}
-        <nav className="hidden lg:flex items-center gap-8">
+        {/* Navigation — xl+ only; lg is too tight for nav + dual CTAs */}
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 xl:flex 2xl:gap-8">
           <Link
             to="/"
             className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
@@ -293,36 +296,30 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden shrink-0 items-center gap-2 xl:flex xl:gap-3">
           <a
             href="https://everest-account-opening.vercel.app/new-home"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--jaune-or)] rounded-full transition-all duration-500 hover:bg-[var(--jaune-or)]/90"
+            className={`${ctaShellClass} border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
           >
-            <span
-              className="text-[11px] tracking-[0.15em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
-            >
+            <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
               Ouvrir un compte
             </span>
           </a>
           <Link
             to="/auth"
-            className="group inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full transition-all duration-500 hover:border-white/70 hover:bg-white/10"
+            className={`${ctaShellClass} group border-white/30 bg-transparent hover:border-white/70 hover:bg-white/10`}
           >
-            <FingerprintIcon className="w-3.5 h-3.5 text-white/70 transition-transform duration-300 group-hover:scale-110 group-hover:text-white" />
-            <span
-              className="text-[11px] tracking-[0.15em] uppercase"
-              style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
-            >
+            <FingerprintIcon className="h-3.5 w-3.5 shrink-0 text-white/70 transition-transform duration-300 group-hover:scale-110 group-hover:text-white" />
+            <span className={`${ctaLabelClass} text-white/75`}>
               Accès Client
             </span>
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           <button
             onClick={toggleMobileMenu}
             className="p-2 text-white/70 hover:text-white transition-colors"
@@ -343,7 +340,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-[var(--mauve-80)] border-t border-white/[0.12] py-6 z-50 shadow-2xl shadow-black/40">
+        <div className="absolute top-full left-0 right-0 border-t border-white/[0.12] bg-[var(--mauve-80)] py-6 shadow-2xl shadow-black/40 xl:hidden z-50">
           <div className="px-6 space-y-5">
             <Link
               to="/"
@@ -455,26 +452,20 @@ export const Header: React.FC = () => {
                 href="https://everest-account-opening.vercel.app/new-home"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-5 py-2.5 bg-[var(--jaune-or)] rounded-full w-full transition-all duration-300 hover:bg-[var(--jaune-or)]/90"
+                className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <span
-                  className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--pure-white)' }}
-                >
+                <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
                   Ouvrir un compte
                 </span>
               </a>
               <Link
                 to="/auth"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 border border-white/30 rounded-full w-full justify-center transition-all duration-300 hover:border-white/70 hover:bg-white/10"
+                className={`${ctaShellClass} group w-full border-white/30 bg-transparent hover:border-white/70 hover:bg-white/10`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <FingerprintIcon className="w-3.5 h-3.5 text-white/70" />
-                <span
-                  className="text-[11px] tracking-[0.15em] uppercase"
-                  style={{ fontFamily: 'var(--font-primary)', fontWeight: 500, color: 'rgba(255,255,255,0.75)' }}
-                >
+                <FingerprintIcon className="h-3.5 w-3.5 shrink-0 text-white/70" />
+                <span className={`${ctaLabelClass} text-white/75`}>
                   Accès Client
                 </span>
               </Link>

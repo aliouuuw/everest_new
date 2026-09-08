@@ -1,66 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import NewsList from '../components/NewsList.astro'
+import HomePage from '../islands/HomePage'
 import {
   fetchNewsFeed,
   fetchPublishedPublications,
   fetchSiteContent,
 } from '../lib/payload'
 
-let heroTitle = 'Everest Finance'
-let publications: Awaited<ReturnType<typeof fetchPublishedPublications>>['docs'] = []
-let news: Awaited<ReturnType<typeof fetchNewsFeed>> = []
-
-try {
-  const [site, pubs, feed] = await Promise.all([
-    fetchSiteContent('home'),
-    fetchPublishedPublications(6),
-    fetchNewsFeed(20),
-  ])
-  heroTitle =
-    site.docs.find((item) => item.contentId === 'home.hero.title')?.value ?? heroTitle
-  publications = pubs.docs
-  news = feed.slice(0, 6)
-} catch (error) {
-  console.error('Payload fetch failed. Start the CMS on :3001.', error)
-}
+const [site, feed, pubs] = await Promise.all([
+  fetchSiteContent('home'),
+  fetchNewsFeed(20),
+  fetchPublishedPublications(6),
+])
+const siteContent = site.docs
+const news = feed.slice(0, 6)
+const publications = pubs.docs
 ---
 
 <Layout title="Everest Finance">
-  <section class="mx-auto max-w-4xl">
-    <p class="text-sm font-medium tracking-[0.2em] text-secondary uppercase">
-      Accueil
-    </p>
-    <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-primary">
-      {heroTitle}
-    </h1>
-  </section>
-
-  <section class="mx-auto mt-14 max-w-4xl">
-    <div class="flex items-end justify-between gap-4">
-      <h2 class="text-2xl font-bold text-primary">Publications</h2>
-      <a href="/publications" class="text-sm text-secondary">Voir tout</a>
-    </div>
-    <ul class="mt-6 grid gap-4">
-      {publications.map((item) => (
-        <li class="rounded-xl border border-border bg-surface p-5">
-          <a href={`/publications/${item.slug}`} class="text-lg font-semibold text-primary">
-            {item.title}
-          </a>
-          <p class="mt-2 text-sm text-on-surface/70">{item.excerpt}</p>
-        </li>
-      ))}
-      {publications.length === 0 && (
-        <li class="text-sm text-on-surface/60">Aucune publication pour le moment.</li>
-      )}
-    </ul>
-  </section>
-
-  <section class="mx-auto mt-14 max-w-4xl">
-    <div class="flex items-end justify-between gap-4">
-      <h2 class="text-2xl font-bold text-primary">Actualités</h2>
-      <a href="/actualites" class="text-sm text-secondary">Voir tout</a>
-    </div>
-    <NewsList items={news} empty="Aucune actualité pour le moment." />
-  </section>
+  <HomePage client:load siteContent={siteContent} news={news} publications={publications} />
 </Layout>
