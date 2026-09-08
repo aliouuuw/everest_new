@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import DOMPurify from "dompurify";
-import { useCMS } from "./CMSProvider";
+import { useCMS } from "./cmsContext";
 import { useContent } from "./useContent";
 
 interface EditableRichTextProps {

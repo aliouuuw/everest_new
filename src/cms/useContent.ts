@@ -1,5 +1,4 @@
-import { useCMS } from "./CMSProvider";
-import type { SiteContentRow } from "./CMSProvider";
+import { useCMS, type SiteContentRow } from "./cmsContext";
 
 /**
  * Returns the override row for a given content ID, or undefined when no

@@ -1,11 +1,9 @@
-export { CMSProvider, useCMS } from "./CMSProvider";
+export { useCMS } from "./cmsContext";
+export type { SiteContentRow } from "./cmsContext";
 export { useContent } from "./useContent";
 export { EditableText } from "./EditableText";
 export { EditableImage } from "./EditableImage";
 export { EditableRichText } from "./EditableRichText";
-export { EditToggle } from "./EditToggle";
-export { EditPanel } from "./EditPanel";
-export { pathToPageKey, usePageKey } from "./usePageKey";
 export {
   registry,
   registryIds,

@@ -1,44 +1,19 @@
-import { createContext, useCallback, useContext, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { api } from "../../convex/_generated/api";
 import { useCurrentUser } from "../hooks/useAuth";
 import { usePageKey } from "./usePageKey";
-import { getRegistryEntry, type PageKey } from "./registry";
+import { getRegistryEntry } from "./registry";
 import type { ReactNode } from "react";
+import {
+  CMSContext,
+  type CMSContextValue,
+  type SiteContentRow,
+} from "./cmsContext";
 
-export interface SiteContentRow {
-  _id: string;
-  contentId: string;
-  pageKey: string;
-  type: "text" | "richtext" | "image";
-  value: string;
-  updatedAt: number;
-}
-
-interface CMSContextValue {
-  pageKey: PageKey | null;
-  /** Sparse map: only keys with a Convex row are present. */
-  overrides: Partial<Record<string, SiteContentRow>>;
-  canEdit: boolean;
-  editMode: boolean;
-  panelOpen: boolean;
-  toggleEdit: () => void;
-  togglePanel: () => void;
-  closeAll: () => void;
-  saveContent: (args: { contentId: string; value: string }) => Promise<void>;
-  resetContent: (contentId: string) => Promise<void>;
-}
-
-const CMSContext = createContext<CMSContextValue | null>(null);
-
-export function useCMS(): CMSContextValue {
-  const ctx = useContext(CMSContext);
-  if (!ctx) {
-    throw new Error("useCMS must be used inside a <CMSProvider>");
-  }
-  return ctx;
-}
+export type { SiteContentRow } from "./cmsContext";
+export { useCMS } from "./cmsContext";
 
 interface CMSProviderProps {
   children: ReactNode;

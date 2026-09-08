@@ -1,5 +1,5 @@
 import { FiEdit3, FiLogOut, FiSidebar } from "react-icons/fi";
-import { useCMS } from "./CMSProvider";
+import { useCMS } from "./cmsContext";
 
 /**
  * Floating bottom-right “dock” for admins — matches landing soft-panel + pill

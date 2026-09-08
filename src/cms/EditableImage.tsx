@@ -1,5 +1,5 @@
 import type { CSSProperties, ImgHTMLAttributes } from "react";
-import { useCMS } from "./CMSProvider";
+import { useCMS } from "./cmsContext";
 import { useContent } from "./useContent";
 
 interface EditableImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {

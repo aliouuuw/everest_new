@@ -1,5 +1,5 @@
 import type { CSSProperties, ElementType, ReactNode } from "react";
-import { useCMS } from "./CMSProvider";
+import { useCMS } from "./cmsContext";
 import { useContent } from "./useContent";
 
 interface EditableTextProps {

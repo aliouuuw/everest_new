@@ -14,7 +14,7 @@ import {
 } from '../../cms/registry'
 import { useR2Upload } from '../../hooks/useR2Upload'
 import type { PageKey, RegistryEntry } from '../../cms/registry'
-import type { SiteContentRow } from '../../cms/CMSProvider'
+import type { SiteContentRow } from '../../cms/cmsContext'
 
 interface FieldState {
   value: string

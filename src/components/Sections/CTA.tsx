@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import { useReveal } from '../Hooks/useReveal';
 import { FiArrowRight } from 'react-icons/fi';
-import { InvestorProfileModal } from '../InvestorProfile';
 import { EditableText } from '../../cms';
 import { PillBadge } from '../ui';
 
 type CtaScheme = 'ivory' | 'ink' | 'sand' | 'metallic';
+
+type ProfileModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+};
 
 export const CTA: React.FC<{
   scheme?: CtaScheme;
@@ -13,7 +17,14 @@ export const CTA: React.FC<{
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string | null;
-}> = ({ primaryHref = '/contact', primaryLabel = 'Nous contacter', secondaryLabel = 'Découvrir nos offres' }) => {
+  ProfileModal?: ComponentType<ProfileModalProps>;
+}> = ({
+  primaryHref = '/contact',
+  primaryLabel = 'Nous contacter',
+  secondaryHref,
+  secondaryLabel = 'Découvrir nos offres',
+  ProfileModal,
+}) => {
   const sectionRef = useReveal<HTMLElement>();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -52,15 +63,25 @@ export const CTA: React.FC<{
           </div>
 
           <div className="relative z-10 flex w-full flex-col items-start gap-6 lg:w-2/5 lg:items-end">
-            {secondaryLabel && (
-              <button
-                type="button"
-                onClick={() => setIsProfileOpen(true)}
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
-              >
-                <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
-                <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
-              </button>
+            {secondaryLabel && (secondaryHref || ProfileModal) && (
+              secondaryHref ? (
+                <a
+                  href={secondaryHref}
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
+                >
+                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
+                  <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsProfileOpen(true)}
+                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
+                >
+                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
+                  <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+                </button>
+              )
             )}
             <a
               href={primaryHref}
@@ -75,10 +96,12 @@ export const CTA: React.FC<{
       </div>
     </section>
 
-    <InvestorProfileModal
-      isOpen={isProfileOpen}
-      onClose={() => setIsProfileOpen(false)}
-    />
+    {ProfileModal && (
+      <ProfileModal
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+      />
+    )}
     </>
   );
 };

@@ -9,6 +9,7 @@ import {
   TrustStrip,
   ValueProps,
 } from './components/Sections';
+import { InvestorProfileModal } from './components/InvestorProfile';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
       <InsightsMerged />
       <CTA
         scheme="ivory"
-        secondaryHref="https://everest-account-opening.vercel.app/new-home"
+        ProfileModal={InvestorProfileModal}
         secondaryLabel="Évaluer mon profil d'investisseur"
       />
       <FAQ />
