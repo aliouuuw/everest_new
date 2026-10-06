@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build:astro": "cross-env NODE_OPTIONS=--no-deprecation bun --env-file=.env run --cwd ../web build",
+    "build:astro": "cross-env NODE_OPTIONS=--no-deprecation bun run --cwd ../web build",
     "sync:astro": "node scripts/sync-astro-public.mjs",
     "build": "bun run build:astro && bun run sync:astro && cross-env NODE_OPTIONS=--no-deprecation next build",
     "check:seed": "tsx src/seed/htmlToLexical.check.ts && tsx src/seed/site-content.check.ts && tsx src/storage/r2.check.ts",
