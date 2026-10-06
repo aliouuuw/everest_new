@@ -134,7 +134,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
       </section>
 
       {/* ─── Search + Filters ─── */}
-      <section className="py-10 border-b border-black/5 sticky top-0 z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
+      <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
         <div className="page-container">
           <div className="actu-reveal flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
             

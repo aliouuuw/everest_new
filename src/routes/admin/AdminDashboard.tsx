@@ -167,7 +167,7 @@ export const AdminDashboard = () => {
                       Edit
                     </Link>
                     <a
-                      href={`/publications/${publication.slug}`}
+                      href="/publications"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-1 text-sm bg-[var(--night)]/10 text-[var(--night)] rounded-lg hover:bg-[var(--night)]/20 border border-[var(--night)]/20 transition-all duration-300 hover:shadow-sm"

@@ -1,6 +1,5 @@
 export { AboutPage } from './AboutPage'
 export { PublicationsPage } from './PublicationsPage'
-export { PublicationPage } from './PublicationPage'
 export { FAQPage } from './FAQPage'
 // CEOMessagePage deprecated
 export { CapitalMarketsPage } from './CapitalMarketsPage'

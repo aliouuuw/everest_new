@@ -31,9 +31,9 @@ Status: open unless marked done.
 
 ## Informational
 
-- [ ] Vite still mounts `/publications/$slug` (Convex). Redesign list never links there.
+- [x] Vite `/publications/$slug` redirects to `/publications`. Public catalogue is PDFs only.
 
-- [ ] Publications filters `sticky top-0` sit under ticker + header. Same on Vite.
+- [x] Publications and actualités filters stick under ticker + header (`--site-chrome-sticky`).
 
 ## Home (open)
 

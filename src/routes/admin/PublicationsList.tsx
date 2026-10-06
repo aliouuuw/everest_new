@@ -180,7 +180,7 @@ export const PublicationsList = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-3">
                         <a
-                          href={`/publications/${publication.slug}`}
+                          href="/publications"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-[var(--jaune-or)] hover:text-[var(--jaune-or)] transition-colors p-2 hover:bg-[var(--jaune-or-10)] rounded-lg"

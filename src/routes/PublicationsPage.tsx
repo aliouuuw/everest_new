@@ -326,7 +326,7 @@ export function PublicationsView({
       </section>
 
       {/* ─── Search + Filters ─── */}
-      <section className="py-10 border-b border-black/5 sticky top-0 z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
+      <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
         <div className="page-container">
           <div ref={filtersRef} className="reveal flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Search */}

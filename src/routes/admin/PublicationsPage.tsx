@@ -234,7 +234,7 @@ const PublicationsPage: React.FC = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end gap-2">
                         <button
-                          onClick={() => navigate({ to: `/publications/${publication.slug}` })}
+                          onClick={() => navigate({ to: '/publications' })}
                           className="text-gray-600 hover:text-gray-900 p-1"
                           title="View"
                         >

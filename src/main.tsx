@@ -19,7 +19,6 @@ import { Layout } from './components/Layout.tsx'
 // Import route components - they'll be code-split by Vite automatically
 import { AboutPage } from './routes/AboutPage'
 import { PublicationsPage } from './routes/PublicationsPage'
-import { PublicationPage } from './routes/PublicationPage'
 import { FAQPage } from './routes/FAQPage'
 // CEOMessagePage deprecated
 // import { CEOMessagePage } from './routes/CEOMessagePage'
@@ -137,7 +136,7 @@ const articleRoute = createRoute({
 const publicationRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/publications/$slug',
-  component: PublicationPage,
+  component: redirectTo('/publications'),
 })
 
 const insightsRedirectRoute = createRoute({
