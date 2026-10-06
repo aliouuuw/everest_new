@@ -13,6 +13,7 @@
     "dev:stable": "VITE_DISABLE_HMR=true vite --port 8000",
     "build": "vite build && tsc",
     "build:web": "bun run --cwd apps/web build",
+    "build:site": "bun run --cwd apps/cms build",
     "build:analyze": "vite build --mode analyze",
     "serve": "vite preview",
     "preview": "vite preview",

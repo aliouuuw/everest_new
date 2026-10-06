@@ -41,3 +41,7 @@ next-env.d.ts
 .env
 
 /media
+
+# Astro static export (generated in CI by sync-astro-public.mjs)
+/public/*
+!/public/.gitkeep
