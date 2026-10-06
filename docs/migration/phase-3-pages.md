@@ -1,5 +1,7 @@
 # Phase 3 — Public pages (redesign parity)
 
+**Checkpoint (2026-10-06):** Phase 3 public islands are done. Phase 4 R2 adapter is optional: set `R2_*` in `apps/cms/.env`. Unset keeps files on local disk.
+
 **Source of truth:** `feat/pm-storytelling-refonte` (merged into `feat/astro-payload-migration`).
 
 Do not port from `main`. The old Vite home (`HeroSection`, `Insights`, `MountainTransition`) is obsolete.
@@ -55,9 +57,9 @@ Redesign components expect:
 ## Not in Phase 3
 
 - Payload admin (already on `:3001`)
-- R2 media adapter (Phase 4)
 - Vite `/admin` removal
-- Full DESIGN.md motion parity (GSAP, Lenis, cloud shader) — ship static HTML first, hydrate islands
+- Auth, portal, and dashboard (stay on Vite until cutover)
+- Full DESIGN.md motion parity (GSAP, cloud shader) — Lenis is on Astro `SiteShell`
 
 ## Check
 

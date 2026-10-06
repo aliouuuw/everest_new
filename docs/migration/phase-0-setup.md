@@ -56,7 +56,7 @@ Override via `SEED_ADMIN_*` in `apps/cms/.env`.
 - [x] Collections mapped from Convex schema
 - [x] `docker-compose.yml` — Postgres only
 - [x] Admin seed script
-- [ ] R2 S3 adapter (Phase 4)
+- [x] R2 S3 adapter (Phase 4). Optional: set `R2_*` in `apps/cms/.env`. Unset keeps local `apps/cms/media`.
 - [x] Convex data import (Phase 1)
 - [x] Public pages port (Phase 3)
 

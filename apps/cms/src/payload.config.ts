@@ -13,6 +13,7 @@ import { Media } from './collections/Media'
 import { Publications } from './collections/Publications'
 import { SiteContent } from './collections/SiteContent'
 import { Users } from './collections/Users'
+import { r2StoragePlugins } from './storage/r2'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,5 +56,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [...r2StoragePlugins()],
 })
