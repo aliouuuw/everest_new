@@ -18,3 +18,5 @@ apps/cms/media
 # Convex snapshot exports (local only)
 scripts/migration/.exports/
 .vercel
+.env.local
+.env.vercel
