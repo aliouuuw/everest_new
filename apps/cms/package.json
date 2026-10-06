@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--no-deprecation payload build",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "check:seed": "tsx src/seed/htmlToLexical.check.ts && tsx src/seed/site-content.check.ts && tsx src/storage/r2.check.ts",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev -p 3001",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev -p 3001",
