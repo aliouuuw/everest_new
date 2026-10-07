@@ -8,8 +8,6 @@ const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.resolve(dirname, '../..'),
-  // ponytail: Payload generated CSS + workspace @types/react clash fail `next build` typecheck. Upgrade: exclude seed/check from tsconfig and drop duplicate React types.
-  typescript: { ignoreBuildErrors: true },
   images: {
     localPatterns: [
       {

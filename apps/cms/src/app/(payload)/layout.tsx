@@ -26,7 +26,8 @@ const serverFunction: ServerFunctionClient = async function (args) {
 
 const Layout = ({ children }: Args) => (
   <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
-    {children}
+    {/* ponytail: workspace @types/react 19.0 vs CMS 19.2 clash on ReactNode. Upgrade: one @types/react version in the workspace. */}
+    {children as never}
   </RootLayout>
 )
 

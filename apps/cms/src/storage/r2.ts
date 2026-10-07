@@ -23,7 +23,7 @@ function trim(value: string | undefined): string {
   return value?.trim() ?? ''
 }
 
-export function r2ConfigFromEnv(env: R2Env = process.env): R2Config | null {
+export function r2ConfigFromEnv(env: R2Env = process.env as R2Env): R2Config | null {
   const accountId = trim(env.R2_ACCOUNT_ID)
   const accessKeyId = trim(env.R2_ACCESS_KEY_ID)
   const secretAccessKey = trim(env.R2_SECRET_ACCESS_KEY)
@@ -46,7 +46,7 @@ export function r2FileUrl(publicUrl: string, filename: string, prefix?: string):
   return `${base}/${key}`
 }
 
-export function r2StoragePlugins(env: R2Env = process.env): Plugin[] {
+export function r2StoragePlugins(env: R2Env = process.env as R2Env): Plugin[] {
   const r2 = r2ConfigFromEnv(env)
   if (!r2) return []
 
