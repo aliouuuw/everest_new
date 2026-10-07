@@ -1,0 +1,15 @@
+---
+description: Day-to-day work stays on the staging branch until the user says otherwise.
+alwaysApply: true
+---
+
+# Work on staging
+
+This repo is personal for now. Do day-to-day git work on `staging`.
+
+- Commit and push to `origin/staging`.
+- Do not open a feature branch unless the user asks.
+- Do not merge to `main` unless the user asks.
+- Do not change Gandi apex or www DNS.
+
+Stop this rule when the user says to leave staging.
