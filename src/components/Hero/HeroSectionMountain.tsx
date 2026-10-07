@@ -64,7 +64,7 @@ export const HeroSectionMountain: React.FC = () => {
       ref={heroRef}
       id="hero"
       aria-labelledby={headingId}
-      className="relative min-h-[100dvh] w-full flex items-end bg-[var(--night)] text-white overflow-hidden selection:bg-[var(--jaune-or)] selection:text-[var(--night)]"
+      className="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-[var(--night)] text-white selection:bg-[var(--jaune-or)] selection:text-[var(--night)] md:min-h-[100dvh]"
     >
       {/* ─── Cinematic Video Background (mountain left — open center for type) ─── */}
       <div className="hero-video-wrap absolute inset-0 w-full h-full z-0" aria-hidden>
@@ -112,8 +112,8 @@ export const HeroSectionMountain: React.FC = () => {
       </div>
 
       <div
-        className="relative z-10 w-full page-container pb-32 sm:pb-40 md:pb-44 pt-28 sm:pt-32"
-        style={{ paddingBottom: 'max(7.5rem, env(safe-area-inset-bottom, 0px))' }}
+        className="relative z-10 w-full page-container pt-[calc(var(--site-chrome-sticky)+0.5rem)] pb-24 sm:pt-32 sm:pb-40 md:pb-44"
+        style={{ paddingBottom: 'max(5.5rem, env(safe-area-inset-bottom, 0px))' }}
       >
         <div className="flex w-full max-w-[min(52rem,100%)] flex-col items-start text-left">
           <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
@@ -125,8 +125,8 @@ export const HeroSectionMountain: React.FC = () => {
                 style={{
                   fontFamily: 'var(--font-primary)',
                   fontWeight: 800,
-                  fontSize: 'clamp(2rem, 3.5vw, 2.875rem)',
-                  lineHeight: 1.25,
+                  fontSize: 'clamp(1.625rem, 7.2vw, 2.875rem)',
+                  lineHeight: 1.2,
                   letterSpacing: '-0.03em',
                   color: 'var(--pure-white)',
                 }}
@@ -147,12 +147,12 @@ export const HeroSectionMountain: React.FC = () => {
           <EditableText
             id="home.hero.subtitle"
             as="p"
-            className="hero-body mb-9 sm:mb-10 max-w-[60ch] text-pretty"
+            className="hero-body mb-6 max-w-[60ch] text-pretty line-clamp-4 md:mb-10 md:line-clamp-none"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 500,
-              fontSize: 'clamp(1.0625rem, 0.4vw + 0.95rem, 1.2rem)',
-              lineHeight: 1.65,
+              fontSize: 'clamp(0.9375rem, 2.6vw, 1.2rem)',
+              lineHeight: 1.5,
               color: 'var(--pure-white)',
             }}
           >

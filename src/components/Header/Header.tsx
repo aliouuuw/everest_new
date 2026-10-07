@@ -136,6 +136,16 @@ export const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const root = document.documentElement;
+    const prev = root.style.overflow;
+    root.style.overflow = 'hidden';
+    return () => {
+      root.style.overflow = prev;
+    };
+  }, [isMobileMenuOpen]);
+
   const openDropdownByName = (dropdownName: string) => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -157,6 +167,13 @@ export const Header: React.FC = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     setOpenDropdown(null); // Close any open dropdowns when mobile menu toggles
+  };
+
+  // Closing the drawer unmounts the link and cancels the click. A new page resets the menu.
+  const onMenuNavigate = (e: { currentTarget: HTMLAnchorElement }) => {
+    const url = new URL(e.currentTarget.href, window.location.href);
+    const samePage = url.origin === window.location.origin && url.pathname === window.location.pathname;
+    if (samePage || url.origin !== window.location.origin) setIsMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -247,7 +264,7 @@ export const Header: React.FC = () => {
   const headerBg = isLightBackgroundPage || isForcedScrolledStyle
     ? 'bg-[#012d2a]'
     : isScrolled
-      ? 'bg-[#6c786eba]/90 backdrop-blur-xl'
+      ? 'bg-[#012d2a]/95 backdrop-blur-md'
       : '';
 
   // Nav link color: always white on mauve bg
@@ -262,8 +279,8 @@ export const Header: React.FC = () => {
     <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[#012d2a]' : headerBg}`}>
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 md:px-16 lg:px-24 py-3 xl:py-4">
         {/* Logo only — larger */}
-        <Link to="/" className="flex shrink-0 items-center transition-opacity hover:opacity-85">
-          <img src="/logo-everest.png" alt="Everest Finance" className="h-12 w-auto xl:h-16" />
+        <Link to="/" className="flex min-h-11 shrink-0 items-center transition-opacity hover:opacity-85">
+          <img src="/logo-everest.png" alt="Everest Finance" className="h-12 w-auto sm:h-12 xl:h-16" />
         </Link>
 
         {/* Navigation — xl+ only; lg is too tight for nav + dual CTAs */}
@@ -341,7 +358,7 @@ export const Header: React.FC = () => {
         <div className="xl:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="p-2 text-white/70 hover:text-white transition-colors"
+            className="flex h-11 w-11 items-center justify-center text-white/70 transition-colors hover:text-white touch-manipulation"
             aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Menu'}
             aria-expanded={isMobileMenuOpen}
           >
@@ -361,15 +378,19 @@ export const Header: React.FC = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-x-0 bottom-0 z-[55] overflow-y-auto border-t border-white/[0.12] bg-[#012d2a] py-6 xl:hidden"
-          style={{ top: 'calc(var(--brvm-ticker-height) + 4.5rem)' }}
+          data-lenis-prevent
+          className="fixed inset-x-0 z-[55] overflow-y-auto overscroll-contain border-t border-white/[0.12] bg-[#012d2a] py-6 xl:hidden [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
+          style={{
+            top: 'calc(var(--brvm-ticker-height) + var(--site-header-height))',
+            height: 'calc(100dvh - var(--brvm-ticker-height) - var(--site-header-height))',
+          }}
         >
-          <div className="px-6 space-y-5 pb-8">
+          <div className="space-y-5 px-6 pb-[max(2rem,env(safe-area-inset-bottom))]">
             <Link
               to="/"
-              className="block text-sm transition-colors hover:text-white"
+              className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
               style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={onMenuNavigate}
             >
               Accueil
             </Link>
@@ -388,9 +409,9 @@ export const Header: React.FC = () => {
                     to={item.to}
                     {...(item.search ? { search: item.search } : {})}
                     {...(item.hash ? { hash: item.hash } : {})}
-                    className="block text-sm transition-colors hover:text-white"
+                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={onMenuNavigate}
                   >
                     {item.label}
                   </Link>
@@ -412,9 +433,9 @@ export const Header: React.FC = () => {
                     to={item.to}
                     {...(item.search ? { search: item.search } : {})}
                     {...(item.hash ? { hash: item.hash } : {})}
-                    className="block text-sm transition-colors hover:text-white"
+                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={onMenuNavigate}
                   >
                     {item.label}
                   </Link>
@@ -436,9 +457,9 @@ export const Header: React.FC = () => {
                     to={item.to}
                     {...(item.search ? { search: item.search } : {})}
                     {...(item.hash ? { hash: item.hash } : {})}
-                    className="block text-sm transition-colors hover:text-white"
+                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={onMenuNavigate}
                   >
                     {item.label}
                   </Link>
@@ -460,9 +481,9 @@ export const Header: React.FC = () => {
                     to={item.to}
                     {...(item.search ? { search: item.search } : {})}
                     {...(item.hash ? { hash: item.hash } : {})}
-                    className="block text-sm transition-colors hover:text-white"
+                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
                     style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={onMenuNavigate}
                   >
                     {item.label}
                   </Link>
@@ -476,7 +497,7 @@ export const Header: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={onMenuNavigate}
               >
                 <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
                   Ouvrir un compte
@@ -485,7 +506,7 @@ export const Header: React.FC = () => {
               <Link
                 to="/auth"
                 className={`${ctaShellClass} group w-full border-white/30 bg-transparent hover:border-white/70 hover:bg-white/10`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={onMenuNavigate}
               >
                 <FingerprintIcon className="h-3.5 w-3.5 shrink-0 text-white/70" />
                 <span className={`${ctaLabelClass} text-white/75`}>

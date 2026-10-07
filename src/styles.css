@@ -84,6 +84,7 @@
   --site-header-height: 6rem;
   --site-chrome-sticky: calc(var(--brvm-ticker-height) + var(--site-header-height));
   --site-chrome-top: calc(var(--site-chrome-sticky) + 1.5rem);
+  scroll-padding-top: var(--site-chrome-sticky);
   --duration-reveal: 900ms;
 
   /* Gradients */
@@ -111,6 +112,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --brvm-ticker-height: 2.75rem;
+    --site-header-height: 4.5rem;
+  }
 }
 
 #app {

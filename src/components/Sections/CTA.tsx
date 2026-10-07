@@ -27,6 +27,10 @@ export const CTA: React.FC<{
 }) => {
   const sectionRef = useReveal<HTMLElement>();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const ctaButtonClass =
+    'group inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full font-bold uppercase leading-none text-white transition-all duration-300 max-lg:h-11 max-lg:gap-1.5 max-lg:px-2.5 max-lg:text-xs max-lg:tracking-normal sm:max-lg:px-4 sm:max-lg:tracking-[0.08em] lg:gap-3 lg:px-6 lg:py-3 lg:text-sm lg:tracking-[0.15em]';
+  const mobileSecondaryLabel =
+    secondaryLabel === "Évaluer mon profil d'investisseur" ? 'Évaluer mon profil' : secondaryLabel;
 
   return (
     <>
@@ -37,7 +41,7 @@ export const CTA: React.FC<{
     >
       <div className="page-container">
         <div
-          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
+          className="relative flex flex-col items-start justify-between gap-10 overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] px-3 py-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300 hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)] sm:gap-12 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:gap-20"
         >
           <div className="relative z-10 lg:w-3/5">
             <div className="mb-6">
@@ -62,33 +66,35 @@ export const CTA: React.FC<{
             </EditableText>
           </div>
 
-          <div className="relative z-10 flex w-full flex-col items-start gap-6 lg:w-2/5 lg:items-end">
+          <div className="relative z-10 flex w-full flex-nowrap items-center gap-1.5 sm:gap-3 lg:w-2/5 lg:flex-col lg:items-end lg:gap-6">
             {secondaryLabel && (secondaryHref || ProfileModal) && (
               secondaryHref ? (
                 <a
                   href={secondaryHref}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
+                  className={`${ctaButtonClass} bg-[var(--jaune-or)] hover:bg-[#b07d24] hover:shadow-md`}
                 >
-                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
-                  <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <span className="sm:hidden">{mobileSecondaryLabel}</span>
+                  <EditableText id="home.cta.secondary" as="span" className="hidden sm:inline">{secondaryLabel}</EditableText>
+                  <FiArrowRight className="hidden shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-0.5 sm:block lg:text-lg" />
                 </a>
               ) : (
                 <button
                   type="button"
                   onClick={() => setIsProfileOpen(true)}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-[var(--jaune-or)] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#b07d24] hover:shadow-md sm:justify-start"
+                  className={`${ctaButtonClass} bg-[var(--jaune-or)] hover:bg-[#b07d24] hover:shadow-md`}
                 >
-                  <EditableText id="home.cta.secondary" as="span">{secondaryLabel}</EditableText>
-                  <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <span className="sm:hidden">{mobileSecondaryLabel}</span>
+                  <EditableText id="home.cta.secondary" as="span" className="hidden sm:inline">{secondaryLabel}</EditableText>
+                  <FiArrowRight className="hidden shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-0.5 sm:block lg:text-lg" />
                 </button>
               )
             )}
             <a
               href={primaryHref}
-              className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#012d2a] px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#014542] hover:shadow-lg sm:justify-start"
+              className={`${ctaButtonClass} bg-[#012d2a] hover:bg-[#014542] hover:shadow-lg`}
             >
               <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
-              <FiArrowRight className="text-lg transition-transform duration-300 group-hover:translate-x-0.5" />
+              <FiArrowRight className="hidden shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-0.5 sm:block lg:text-lg" />
             </a>
           </div>
 

@@ -104,7 +104,7 @@ export const Services: React.FC = () => {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1400px] border-b border-[var(--everest-green-10)] px-6 pb-16 pt-24 md:px-16 md:pt-32 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-[1400px] border-b border-[var(--everest-green-10)] px-6 pb-10 pt-16 md:px-16 md:pb-16 md:pt-32 lg:px-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <div className="mb-8">
@@ -150,7 +150,7 @@ export const Services: React.FC = () => {
                   key={s.title}
                   href={s.href}
                   className={[
-                    'group relative z-0 flex min-h-[24rem] flex-col border-[var(--everest-green-10)] bg-[var(--pure-white)] px-0 py-8 sm:px-6 lg:px-8',
+                    'group relative z-0 flex min-h-0 flex-col border-[var(--everest-green-10)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:min-h-[24rem] lg:px-8',
                     'transition-[background-color,box-shadow] duration-500',
                     'hover:z-10 hover:bg-[var(--everest-green)] hover:shadow-[0_20px_40px_-20px_rgba(1,45,42,0.35)]',
                     i > 0 ? 'border-t' : '',
@@ -166,7 +166,7 @@ export const Services: React.FC = () => {
                     style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                   />
 
-                  <div className="mb-10 flex items-center justify-between gap-4">
+                  <div className="mb-4 flex items-center justify-between gap-4 md:mb-10">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--everest-green-10)] bg-[var(--everest-green-05)] text-[var(--night-80)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]">
                       <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
                     </div>
@@ -183,7 +183,7 @@ export const Services: React.FC = () => {
                     {s.title}
                   </h3>
 
-                  <ul className="mb-8 flex-1 space-y-2.5 font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75">
+                  <ul className="mb-4 space-y-2.5 font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 md:mb-8 lg:flex-1">
                     {s.bullets.map((bullet) => (
                       <li key={bullet} className="flex gap-2.5 pl-0.5">
                         <span

@@ -42,7 +42,7 @@ export const Capacity: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden py-24 md:py-32 bg-[var(--everest-green)]"
+      className="reveal relative overflow-hidden bg-[var(--everest-green)] py-16 md:py-32"
     >
       {/* Footer-style atmospheric glow — bottom-centered, very subtle */}
       <div
@@ -63,7 +63,7 @@ export const Capacity: React.FC = () => {
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header — coherent with Positioning: 7/5 split, brand typography */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-end gap-8 lg:gap-16 mb-16 md:mb-20">
+        <div className="mb-10 grid grid-cols-1 gap-6 lg:mb-20 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <div className="mb-6">
               <PillBadge variant="gold">
@@ -104,7 +104,7 @@ export const Capacity: React.FC = () => {
               <div
                 key={c.title}
                 className={[
-                  'group relative flex flex-col pt-8 pb-2 px-0 sm:px-6 lg:px-8 transition-colors duration-500 hover:bg-white/[0.06]',
+                  'group relative flex flex-col px-5 py-6 transition-colors duration-500 hover:bg-white/[0.06] sm:px-6 sm:py-8 lg:px-8',
                   // mobile (1 col): top border on all except first
                   i > 0 ? 'border-t' : '',
                   // sm (2 cols): left border on odd items (col 2), top border on items 2&3 (row 2)
@@ -121,7 +121,7 @@ export const Capacity: React.FC = () => {
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                <div className="mb-10">
+                <div className="mb-4 md:mb-10">
                   <div className={`shrink-0 ${EDITORIAL_ICON_WELL_DARK}`}>
                     <Icon className="text-lg" aria-hidden />
                   </div>

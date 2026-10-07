@@ -66,9 +66,9 @@ export const LenisProvider: React.FC<LenisProviderProps> = ({
 
     // Listen for route changes to reset scroll position
     const handleRouteChange = () => {
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
-      }
+      const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+      if (id && document.getElementById(id)) return;
+      lenisRef.current?.scrollTo(0, { immediate: true });
     };
 
     // Add route change listener

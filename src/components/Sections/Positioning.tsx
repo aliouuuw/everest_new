@@ -36,7 +36,7 @@ export const Positioning: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative overflow-hidden py-24 md:py-32 bg-[var(--pure-white)]"
+      className="reveal relative overflow-hidden bg-[var(--pure-white)] py-16 md:py-32"
     >
       <div
         className="absolute left-0 top-0 h-[60%] w-[45%] pointer-events-none"
@@ -48,7 +48,7 @@ export const Positioning: React.FC = () => {
 
       <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-16 lg:px-24">
         {/* Header — tight full-width block */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-end gap-8 lg:gap-16 mb-16 md:mb-20">
+        <div className="mb-10 grid grid-cols-1 gap-6 lg:mb-20 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <div className="mb-6">
               <span
@@ -96,7 +96,7 @@ export const Positioning: React.FC = () => {
               <div
                 key={p.title}
                 className={[
-                  'group relative z-0 flex flex-col border-[rgba(70,29,76,0.1)] bg-[var(--pure-white)] py-8 px-0 sm:px-6 lg:px-8',
+                  'group relative z-0 flex flex-col border-[rgba(70,29,76,0.1)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:px-8',
                   'transition-[background-color,box-shadow] duration-500',
                   'hover:z-10 hover:bg-[#461D4C] hover:shadow-[0_20px_40px_-20px_rgba(70,29,76,0.35)]',
                   i > 0 ? 'border-t' : '',
@@ -113,7 +113,7 @@ export const Positioning: React.FC = () => {
                   style={{ background: 'linear-gradient(90deg, var(--jaune-or), transparent)' }}
                 />
 
-                <div className="flex items-center gap-4 mb-10">
+                <div className="mb-4 flex items-center gap-4 md:mb-10">
                   <div
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(70,29,76,0.1)] bg-[rgba(70,29,76,0.05)] text-[#461D4C] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]"
                   >

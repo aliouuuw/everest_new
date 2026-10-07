@@ -60,7 +60,7 @@ export const InsightsMerged: React.FC = () => {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-6 pb-16 pt-24 md:px-16 md:pt-32 md:pb-20 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 pb-16 pt-16 md:px-16 md:pb-20 md:pt-32 lg:px-24">
         <div className="mb-10 md:mb-12">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>

@@ -25,6 +25,7 @@ export const BRVMTicker: React.FC = () => {
   const location = useLocation();
   const [currentData, setCurrentData] = useState<Array<StockData>>(mockBRVMData);
   const [isPaused, setIsPaused] = useState(false);
+  const [phoneStart, setPhoneStart] = useState(0);
 
   // Check if user is in admin portal
   const isInAdminorClientPortal = location.pathname.startsWith('/admin') || location.pathname.startsWith('/dashboard');
@@ -53,6 +54,13 @@ export const BRVMTicker: React.FC = () => {
     }, 30000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPhoneStart((start) => (start + 1) % mockBRVMData.length);
+    }, 3500);
+    return () => clearInterval(id);
   }, []);
 
   // Hide ticker if in admin portal
@@ -183,23 +191,16 @@ export const BRVMTicker: React.FC = () => {
             </div>
           </div>
           
-          {/* Mobile Ticker - visible on small screens */}
-          <div className="md:hidden text-xs flex-1 mx-2">
-            <div
-              className="flex items-center gap-3 animate-scroll"
-              onTouchStart={handlePause}
-              onTouchEnd={handleResume}
-              onMouseEnter={handlePause}
-              onMouseLeave={handleResume}
-              style={{ animationPlayState: isPaused ? 'paused' : 'running' }}
-              aria-hidden
-            >
-              {currentData.slice(0, 4).map((stock) => (
-                <div key={stock.symbol} className="flex items-center gap-1.5 whitespace-nowrap min-w-[80px] max-w-[100px]">
-                  <span className="font-medium font-display-aptos truncate">{stock.symbol}</span>
-                  <span className="opacity-80 numeric-tabular truncate">{stock.price.toLocaleString()}</span>
+          {/* Phone: two full quotes. A marquee slices names at 390px. */}
+          <div className="flex min-w-0 flex-1 items-center justify-end gap-4 overflow-hidden text-[13px] leading-none md:hidden">
+            {[0, 1].map((offset) => {
+              const stock = currentData[(phoneStart + offset) % currentData.length];
+              if (!stock) return null;
+              return (
+                <div key={stock.symbol} className="flex shrink-0 items-center gap-1.5 whitespace-nowrap">
+                  <span className="font-medium font-display-aptos">{stock.symbol}</span>
                   <span
-                    className={`truncate ${
+                    className={`numeric-tabular ${
                       stock.change > 0
                         ? 'text-[var(--success-green)]'
                         : stock.change < 0
@@ -207,11 +208,12 @@ export const BRVMTicker: React.FC = () => {
                         : 'text-secondary'
                     }`}
                   >
-                    {stock.change > 0 ? '+' : ''}{stock.changePercent.toFixed(1)}%
+                    {stock.change > 0 ? '+' : ''}
+                    {stock.changePercent.toFixed(1)}%
                   </span>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

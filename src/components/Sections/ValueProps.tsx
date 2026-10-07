@@ -109,7 +109,7 @@ export const ValueProps: React.FC = () => {
       <div className="page-container">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-stretch lg:gap-10">
           {/* Left — image */}
-          <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] lg:col-span-5 lg:min-h-[460px]">
+          <div className="relative min-h-[200px] overflow-hidden rounded-2xl border border-[var(--command-border)] bg-[var(--command-surface)] sm:min-h-[320px] lg:col-span-5 lg:min-h-[460px]">
             <EditableImage
               id="home.valueProps.image"
               src="/Assets_Website/Valueprops1.png"
