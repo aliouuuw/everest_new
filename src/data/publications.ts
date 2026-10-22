@@ -21,7 +21,7 @@ export const PUBLICATION_FREQUENCY_LABELS: Record<PublicationFrequency, string> 
 export const PUBLICATION_FILES: Array<PublicationFile> = [
   {
     id: 'revue-hebdo-32',
-    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
+    title: 'Revue Hebdomadaire, 20 au 24 avril 2026',
     description:
       "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire',
@@ -32,7 +32,7 @@ export const PUBLICATION_FILES: Array<PublicationFile> = [
   },
   {
     id: 'revue-hebdo-example',
-    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
+    title: 'Revue Hebdomadaire, 1 au 4 avril 2026',
     description:
       "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire',
@@ -43,7 +43,7 @@ export const PUBLICATION_FILES: Array<PublicationFile> = [
   },
   {
     id: 'revue-semestrielle-sep-26',
-    title: 'Revue Semestrielle — S1 2026',
+    title: 'Revue Semestrielle, S1 2026',
     description:
       "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
     frequency: 'semestrielle',

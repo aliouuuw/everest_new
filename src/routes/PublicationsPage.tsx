@@ -212,12 +212,10 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
           <span>· {pub.fileSize}</span>
         </div>
 
-        <h3 className="font-primary font-bold text-lg text-[var(--night)] mb-2 leading-snug group-hover:text-[var(--night-80)] transition-colors duration-300">
+        {/* No summary: the CMS summaries use words banned by referential V2.1 I.6 (22 Oct 2026 decision). */}
+        <h3 className="font-primary font-bold text-lg text-[var(--night)] mb-6 flex-1 leading-snug group-hover:text-[var(--night-80)] transition-colors duration-300">
           {pub.title}
         </h3>
-        <p className="text-sm text-[var(--night)]/60 leading-relaxed font-primary mb-6 flex-1">
-          {pub.description}
-        </p>
 
         {/* Actions */}
         <div className="flex items-center gap-2 mt-auto">
@@ -306,7 +304,7 @@ export function PublicationsView({
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase()
       items = items.filter(p =>
-        p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+        p.title.toLowerCase().includes(q)
       )
     }
 

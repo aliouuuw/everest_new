@@ -7,7 +7,7 @@ const webPdfs = join(process.cwd(), '../../public/publications')
 
 const catalogue = [
   {
-    title: 'Revue Hebdomadaire — 20 au 24 avril 2026',
+    title: 'Revue Hebdomadaire, 20 au 24 avril 2026',
     description:
       "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire' as const,
@@ -17,7 +17,7 @@ const catalogue = [
     file: 'Revue-Hebdo-32.pdf',
   },
   {
-    title: 'Revue Hebdomadaire — 1 au 4 avril 2026',
+    title: 'Revue Hebdomadaire, 1 au 4 avril 2026',
     description:
       "Synthèse hebdomadaire des performances du marché boursier régional, tendances sectorielles et recommandations d'investissement.",
     frequency: 'hebdomadaire' as const,
@@ -27,7 +27,7 @@ const catalogue = [
     file: 'Revue-Hebdomadaire-example.pdf',
   },
   {
-    title: 'Revue Semestrielle — S1 2026',
+    title: 'Revue Semestrielle, S1 2026',
     description:
       "Bilan semestriel complet : analyse macro-économique UEMOA, performances des indices, faits marquants et perspectives du second semestre.",
     frequency: 'semestrielle' as const,
