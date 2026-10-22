@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { gsap } from 'gsap';
 import { FiArrowRight } from 'react-icons/fi';
 import { EditableText } from '../../cms';
+import { HOME_TEXT } from '../../content/home';
 
 export const HeroSectionMountain: React.FC = () => {
   const heroRef   = useRef<HTMLElement>(null);
@@ -131,7 +132,7 @@ export const HeroSectionMountain: React.FC = () => {
                   color: 'var(--pure-white)',
                 }}
               >
-                Accès stratégique aux marchés financiers de l&apos;UEMOA
+                {HOME_TEXT['home.hero.title']}
               </EditableText>
             </span>
           </h1>
@@ -145,9 +146,9 @@ export const HeroSectionMountain: React.FC = () => {
           />
 
           <EditableText
-            id="home.hero.subtitle"
+            id="home.hero.n2"
             as="p"
-            className="hero-body mb-6 max-w-[60ch] text-pretty line-clamp-4 md:mb-10 md:line-clamp-none"
+            className="hero-body mb-8 max-w-[60ch] text-pretty md:mb-10"
             style={{
               fontFamily: 'var(--font-primary)',
               fontWeight: 500,
@@ -156,23 +157,29 @@ export const HeroSectionMountain: React.FC = () => {
               color: 'var(--pure-white)',
             }}
           >
-            EVEREST Finance est une plateforme d&apos;ingénierie et d&apos;intermédiation financière opérant au
-            cœur du marché financier régional (SGI agréée AMF-UMOA, n° SGI/DA/2016/60). Nous structurons et
-            facilitons l&apos;accès aux opportunités d&apos;investissement et de financement à travers une
-            approche rigoureuse, sélective et orientée performance.
+            {HOME_TEXT['home.hero.n2']}
           </EditableText>
 
           <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
             <Link
-              to="/opportunites"
+              to="/contact"
               className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
             >
-              <EditableText id="home.hero.ctaPrimary" as="span" className="text-base font-semibold tracking-tight">
-                Accéder aux opportunités
+              <EditableText id="home.hero.cta1" as="span" className="text-base font-semibold tracking-tight">
+                {HOME_TEXT['home.hero.cta1']}
               </EditableText>
               <div className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-5">
                 <FiArrowRight className="text-base shrink-0" aria-hidden />
               </div>
+            </Link>
+            <Link
+              to="/opportunites"
+              className="group inline-flex min-h-11 items-center gap-2 px-1 text-base font-semibold text-white/85 transition-colors duration-200 hover:text-[var(--or-clair)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
+            >
+              <EditableText id="home.hero.cta2" as="span">
+                {HOME_TEXT['home.hero.cta2']}
+              </EditableText>
+              <FiArrowRight className="text-base shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </Link>
           </div>
         </div>

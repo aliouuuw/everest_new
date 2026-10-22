@@ -12,6 +12,8 @@
  *  - Supports `type: "text"`, `type: "richtext"`, and `type: "image"`.
  */
 
+import { HOME_TEXT, type HomeTextId } from "../content/home";
+
 export type RegistryFieldType = "text" | "richtext" | "image";
 
 export interface RegistryEntry {
@@ -38,62 +40,15 @@ export type PageKey =
 
 export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   home: [
-    // Hero
-    { id: "home.hero.title", label: "Hero title", section: "Hero", type: "text" },
-    { id: "home.hero.subtitle", label: "Hero subtitle", section: "Hero", type: "text" },
-    { id: "home.hero.ctaPrimary", label: "Hero primary CTA label", section: "Hero", type: "text" },
-    { id: "home.hero.ctaSecondary", label: "Hero secondary CTA label", section: "Hero", type: "text" },
-
-    // Trust Strip — Partner Logos (JSON array)
+    // Referential V2.1 §1: one entry per text in src/content/home.ts
+    ...(Object.keys(HOME_TEXT) as Array<HomeTextId>).map((id) => ({
+      id,
+      label: id.slice('home.'.length),
+      section: id.split('.')[1],
+      type: "text" as const,
+    })),
+    // Reference logos: shown in La société §2.7 once Legal confirms (not on the home page)
     { id: "home.trust.partners", label: "Partenaires — logos", section: "Trust Strip", type: "text" },
-
-    // Positioning
-    { id: "home.positioning.badge", label: "Badge", section: "Positioning", type: "text" },
-    { id: "home.positioning.title", label: "Title", section: "Positioning", type: "text" },
-    { id: "home.positioning.intro", label: "Intro paragraph", section: "Positioning", type: "text" },
-
-    // Value Props
-    { id: "home.valueProps.badge", label: "Badge", section: "Value Props", type: "text" },
-    { id: "home.valueProps.title", label: "Title", section: "Value Props", type: "text" },
-    { id: "home.valueProps.intro", label: "Intro paragraph", section: "Value Props", type: "text" },
-    { id: "home.valueProps.image", label: "Value Props — image", section: "Value Props", type: "image" },
-
-    // Capacity
-    { id: "home.capacity.badge", label: "Badge", section: "Capacity", type: "text" },
-    { id: "home.capacity.titleLead", label: "Title", section: "Capacity", type: "text" },
-    { id: "home.capacity.intro", label: "Intro paragraph", section: "Capacity", type: "text" },
-
-    // Services
-    { id: "home.services.badge", label: "Badge", section: "Services", type: "text" },
-    { id: "home.services.title", label: "Title", section: "Services", type: "text" },
-    { id: "home.services.intro", label: "Intro paragraph", section: "Services", type: "text" },
-
-    // Insights (Actualités + Publications on home)
-    { id: "home.insights.title", label: "Section title", section: "Insights", type: "text" },
-    { id: "home.insights.subtext", label: "Section intro", section: "Insights", type: "text" },
-    { id: "home.insights.actualitesKicker", label: "Actualités — kicker", section: "Insights", type: "text" },
-    { id: "home.insights.actualitesLink", label: "Actualités — voir tout", section: "Insights", type: "text" },
-    { id: "home.insights.publicationsKicker", label: "Publications — kicker", section: "Insights", type: "text" },
-    { id: "home.insights.publicationsLink", label: "Publications — voir tout", section: "Insights", type: "text" },
-
-    // Markets & Opportunities
-    { id: "home.markets.badge", label: "Badge", section: "Markets & Opportunities", type: "text" },
-    { id: "home.markets.title", label: "Title", section: "Markets & Opportunities", type: "text" },
-    { id: "home.markets.intro", label: "Intro paragraph", section: "Markets & Opportunities", type: "text" },
-    { id: "home.markets.linkLabel", label: "Link: see all news", section: "Markets & Opportunities", type: "text" },
-
-    // Contact CTA block
-    { id: "home.cta.badge", label: "Badge", section: "Contact CTA", type: "text" },
-    { id: "home.cta.title", label: "Title", section: "Contact CTA", type: "text" },
-    { id: "home.cta.intro", label: "Intro paragraph", section: "Contact CTA", type: "text" },
-    { id: "home.cta.primary", label: "Primary button label", section: "Contact CTA", type: "text" },
-    { id: "home.cta.secondary", label: "Secondary button label", section: "Contact CTA", type: "text" },
-
-    // FAQ
-    { id: "home.faq.badge", label: "Badge", section: "FAQ", type: "text" },
-    { id: "home.faq.title", label: "Title", section: "FAQ", type: "text" },
-    { id: "home.faq.intro", label: "Intro paragraph", section: "FAQ", type: "text" },
-    { id: "home.faq.linkLabel", label: "Link: see all questions", section: "FAQ", type: "text" },
   ],
   about: [
     // Hero

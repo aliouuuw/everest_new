@@ -109,6 +109,7 @@ the user agrees.
 |-----|-------|
 | L0 Audit | Done (`19d812b`) |
 | L1 Global frame | Done. `apps/web/e2e/frame.check.cjs`: 276/277 checks pass at 7 widths |
+| L2 Accueil | Done. Text in `src/content/home.ts`; `bun run check:copy` (word for word) and `apps/web/e2e/home.check.ts` (80/80) |
 
 L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
 text, so that no menu entry points to a missing page. L6 finishes them.
@@ -123,6 +124,18 @@ text, so that no menu entry points to a missing page. L6 finishes them.
 3. **Fixed:** `/analyses` sorted the shared publication list in place.
    Without the CMS, this changed the home « À la une » item and broke
    React hydration (error #418).
+
+## Notes from L2
+
+1. Home texts use new CMS ids (`home.*.n1`, `home.*.n2`). The seed only
+   creates missing rows, so the old Payload rows (`home.positioning.title`,
+   `home.cta.*`, …) stay in the database, unused. Clean them up later.
+2. The new ids have no Payload row on staging yet: the page shows the
+   JSX text, which is the referential text. Run `bun run seed:site-content`
+   against the staging database to make them editable in Payload.
+3. Global CSS beats Tailwind utilities: `.font-primary` (weight 400) and
+   `h1, h2 { line-height: 1 !important }` are unlayered. New blocks do not
+   use `font-primary` and mark heading line-heights `!`.
 
 ## Waiting on the user
 

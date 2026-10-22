@@ -1,38 +1,36 @@
 import { HeroSectionMountain } from '@/components/Hero/HeroSectionMountain'
-import { Capacity } from '@/components/Sections/Capacity'
-import { CTA } from '@/components/Sections/CTA'
-import { FAQ } from '@/components/Sections/FAQ'
-import { Positioning } from '@/components/Sections/Positioning'
-import { Services } from '@/components/Sections/Services'
-import { TrustStrip } from '@/components/Sections/TrustStrip'
-import { ValueProps } from '@/components/Sections/ValueProps'
+import {
+  HomeAnalyses,
+  HomeEngagements,
+  HomeExpertises,
+  HomeFinalCta,
+  HomeGovernance,
+  HomePositioning,
+  HomeProofs,
+  HomeSamaNaffa,
+  HomeSegments,
+} from '@/components/Sections/HomeReferentiel'
 import { StaticCMSProvider } from '../cms/StaticCMSProvider'
-import type { NewsItem, SiteContent } from '../lib/payload'
-import { InsightsMergedStatic } from './InsightsMergedStatic'
-import type { PublicationFile } from '@/data/publications'
+import type { SiteContent } from '../lib/payload'
 
 type Props = {
   siteContent: SiteContent[]
-  news: NewsItem[]
-  publications?: Array<PublicationFile>
 }
 
-export default function HomePage({ siteContent, news, publications }: Props) {
+/** Referential V2.1 §1: blocks in the order of the audience hierarchy. */
+export default function HomePage({ siteContent }: Props) {
   return (
     <StaticCMSProvider rows={siteContent} pageKey="home">
       <HeroSectionMountain />
-      <TrustStrip />
-      <Positioning />
-      <ValueProps />
-      <Capacity />
-      <Services />
-      <InsightsMergedStatic news={news} publications={publications} />
-      <CTA
-        scheme="ivory"
-        secondaryHref="https://everest-account-opening.vercel.app/new-home"
-        secondaryLabel="Évaluer mon profil d'investisseur"
-      />
-      <FAQ />
+      <HomePositioning />
+      <HomeProofs />
+      <HomeEngagements />
+      <HomeAnalyses />
+      <HomeExpertises />
+      <HomeSegments />
+      <HomeSamaNaffa />
+      <HomeGovernance />
+      <HomeFinalCta />
     </StaticCMSProvider>
   )
 }

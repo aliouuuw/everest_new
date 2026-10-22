@@ -1,5 +1,7 @@
 /** Fallback copy matching JSX `EditableText` / `EditableImage` children. */
 
+import { HOME_TEXT } from '../../../../src/content/home.ts'
+
 const offres: Record<string, string> = {
   'offres.hero.badge': "Services d'investissement",
   'offres.hero.title': 'Votre partenaire pour investir sur la BRVM.',
@@ -29,11 +31,7 @@ const services = Object.fromEntries(
 )
 
 export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
-  'home.hero.title': "Accès stratégique aux marchés financiers de l'UEMOA",
-  'home.hero.subtitle':
-    "EVEREST Finance est une plateforme d'ingénierie et d'intermédiation financière opérant au cœur du marché financier régional (SGI agréée AMF-UMOA, n° SGI/DA/2016/60). Nous structurons et facilitons l'accès aux opportunités d'investissement et de financement à travers une approche rigoureuse, sélective et orientée performance.",
-  'home.hero.ctaPrimary': 'Accéder aux opportunités',
-  'home.hero.ctaSecondary': 'Découvrir nos offres',
+  ...HOME_TEXT,
   'home.trust.partners': JSON.stringify([
     { name: 'BRVM', logo: '/partners/BRVM.jpg' },
     { name: 'BDK', logo: '/partners/BDK.jpg' },
@@ -49,47 +47,6 @@ export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
     { name: 'CDE', logo: '/partners/CDE-1.jpg' },
     { name: 'Ville de Dakar', logo: '/partners/ville-de-dakar.jpg' },
   ]),
-  'home.positioning.badge': 'Positionnement',
-  'home.positioning.title':
-    'Un intermédiaire de référence au service des flux de capitaux régionaux.',
-  'home.positioning.intro':
-    'Agréée AMF-UMOA (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les flux entre émetteurs UEMOA et investisseurs institutionnels ou privés qualifiés.',
-  'home.valueProps.badge': 'Pourquoi Everest Finance',
-  'home.valueProps.title': 'Exécution rigoureuse, confiance durable.',
-  'home.valueProps.intro':
-    "SGI agréée AMF-UMOA (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline d'exécution et relations institutionnelles au service de nos mandats.",
-  'home.valueProps.image': '/Assets_Website/Valueprops1.png',
-  'home.capacity.badge': "Capacité d'intervention",
-  'home.capacity.titleLead': 'Capacité opérationnelle & relationnelle.',
-  'home.capacity.intro':
-    "Exécution de marché éprouvée : présence MTP UEMOA et BRVM, réseau d'investisseurs qualifiés et ingénierie sur mesure — au service de +500 Mds F CFA levés par nos mandats d'émission.",
-  'home.services.badge': 'Nos expertises',
-  'home.services.title': 'Nos expertises — marchés & patrimoine.',
-  'home.services.intro':
-    "Quatre blocs — titres publics, BRVM, structuration et Private Office — pour couvrir l'origination, la distribution et le conseil patrimonial depuis une plateforme unique.",
-  'home.insights.title': 'Insights',
-  'home.insights.subtext':
-    "Veille de marché, actualités BRVM et notes de recherche pour éclairer vos décisions d'investissement sur les marchés UEMOA.",
-  'home.insights.actualitesKicker': 'Actualités',
-  'home.insights.actualitesLink': 'Toutes les actualités',
-  'home.insights.publicationsKicker': 'Publications',
-  'home.insights.publicationsLink': 'Toutes les publications',
-  'home.markets.badge': 'Marchés & opportunités',
-  'home.markets.title': 'Marchés & opportunités.',
-  'home.markets.intro':
-    'Actualités BRVM, dette souveraine et financement régional : veille structurée sur les marchés UEMOA.',
-  'home.markets.linkLabel': 'Voir toutes les actualités',
-  'home.cta.badge': 'Prise de contact',
-  'home.cta.title': 'Accéder à une expertise financière structurée.',
-  'home.cta.intro':
-    'Échangeons sur vos objectifs — rendement, horizon, contraintes réglementaires — et sur la formule la plus adaptée : courtage, conseil ou gestion sous mandat.',
-  'home.cta.primary': 'Nous contacter',
-  'home.cta.secondary': "Évaluer mon profil d'investisseur",
-  'home.faq.badge': 'FAQ',
-  'home.faq.title': 'Questions fréquentes.',
-  'home.faq.intro':
-    'Trouvez rapidement les réponses aux questions les plus fréquentes sur nos services et les marchés.',
-  'home.faq.linkLabel': 'Toutes les questions',
 
   'about.hero.background': '/Assets_Website/À-propos.png',
   'about.hero.badge': 'À propos',
