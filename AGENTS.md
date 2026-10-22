@@ -7,6 +7,20 @@ Read `docs/referentiel/PLAN.md` first, then
 `docs/referentiel/SITEWEB-REFERENTIEL-V2.1.md`. The referential is the only
 source of public text: copy it word for word, write no copy of your own.
 
+Lots L0 to L8 are done (L7 is blocked on Legal inputs). Next: the design
+pass in `docs/referentiel/DESIGN-PLAN.md`, Phase 1 (accessibility), then
+Phase 2 (type and hierarchy), toward a bolder brand world.
+
+- Public texts live in `src/content/*.ts`, keyed by CMS id. New ids must not
+  reuse an old Payload row (the seed never updates rows).
+- Shared N1/N2 blocks: `src/components/Referentiel.tsx`.
+- Checks before every push: `bun run check:copy`, `bun run check:lexicon`,
+  `bun run check:seed`, then with a preview server on port 4322
+  (`bunx astro preview --port 4322 --host 127.0.0.1` in `apps/web`):
+  `bun apps/web/e2e/pages.check.ts` and `node apps/web/e2e/frame.check.cjs`.
+- Seeding the staging database (`bun run seed:site-content`) needs the
+  user's OK each time.
+
 ## Layout
 
 | Path | What | Status |
