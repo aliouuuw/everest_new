@@ -206,7 +206,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
         <div className="page-container">
           <Link
             to={articleHref(featuredArticle)}
-            className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(1,45,42,0.1)]"
+            className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(14,40,38,0.1)]"
             target={opensInNewTab(featuredArticle) ? '_blank' : undefined}
             rel={opensInNewTab(featuredArticle) ? 'noopener noreferrer' : undefined}
           >

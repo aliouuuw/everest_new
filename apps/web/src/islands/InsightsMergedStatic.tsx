@@ -160,7 +160,7 @@ export function InsightsMergedStatic({ news, publications: incoming }: Props) {
                 </EditableText>
               </p>
               <Link
-                to="/publications"
+                to="/analyses"
                 className="group inline-flex items-center gap-2 font-primary text-xs font-semibold uppercase tracking-[0.12em] text-[var(--night-80)]"
               >
                 <EditableText id="home.insights.publicationsLink" as="span">

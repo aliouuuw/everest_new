@@ -136,7 +136,7 @@ export const Services: React.FC = () => {
           className="overflow-hidden rounded-[1.25rem] border border-[var(--everest-green-10)] bg-[var(--pure-white)]"
           style={{
             boxShadow:
-              '0 8px 32px -12px rgba(1,45,42,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
+              '0 8px 32px -12px rgba(14,40,38,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
           }}
         >
           <div
@@ -152,7 +152,7 @@ export const Services: React.FC = () => {
                   className={[
                     'group relative z-0 flex min-h-0 flex-col border-[var(--everest-green-10)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:min-h-[24rem] lg:px-8',
                     'transition-[background-color,box-shadow] duration-500',
-                    'hover:z-10 hover:bg-[var(--everest-green)] hover:shadow-[0_20px_40px_-20px_rgba(1,45,42,0.35)]',
+                    'hover:z-10 hover:bg-[var(--everest-green)] hover:shadow-[0_20px_40px_-20px_rgba(14,40,38,0.35)]',
                     i > 0 ? 'border-t' : '',
                     i % 2 === 1 ? 'sm:border-l' : 'sm:border-l-0',
                     i >= 2 ? 'sm:border-t' : 'sm:border-t-0',
@@ -167,7 +167,7 @@ export const Services: React.FC = () => {
                   />
 
                   <div className="mb-4 flex items-center justify-between gap-4 md:mb-10">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--everest-green-10)] bg-[var(--everest-green-05)] text-[var(--night-80)] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[var(--everest-green-10)] bg-[var(--everest-green-05)] text-[var(--night-80)] transition-colors duration-500 group-hover:border-[rgba(182,138,62,0.25)] group-hover:bg-[rgba(182,138,62,0.12)] group-hover:text-[var(--jaune-or)]">
                       <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
                     </div>
                     <span className="font-primary text-xs font-bold tracking-[0.16em] text-[var(--night-40)] transition-colors duration-500 group-hover:text-white/35">

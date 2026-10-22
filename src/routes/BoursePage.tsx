@@ -214,7 +214,7 @@ const MarketStatsCard: React.FC<{ stats: MarketStats; delay?: number }> = ({ sta
   return (
     <div
       ref={cardRef}
-      className="border border-black/10 p-8 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
+      className="border border-black/10 p-8 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(14,40,38,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -329,7 +329,7 @@ const TrendingCard: React.FC<{ assets: Array<TrendingAsset>; delay?: number }> =
   return (
     <div
       ref={cardRef}
-      className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
+      className="border border-[var(--mauve)]/10 p-6 rounded-2xl bg-white hover:shadow-[0_8px_24px_rgba(14,40,38,0.06)] hover:border-[var(--mauve)]/20 transition-all duration-300"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-center gap-2 mb-6">
@@ -571,7 +571,7 @@ export const BoursePage: React.FC = () => {
               </div>
 
               {/* Market Insights */}
-              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(14,40,38,0.06)] transition-all duration-300">
                 <div className="flex items-center gap-3 mb-6">
                   <h3 className="font-primary font-bold text-[var(--night)] text-xl">Analyse Marché</h3>
                 </div>
@@ -592,7 +592,7 @@ export const BoursePage: React.FC = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
+              <div className="border border-[var(--mauve)]/10 rounded-2xl bg-white p-6 hover:shadow-[0_8px_24px_rgba(14,40,38,0.06)] transition-all duration-300">
                 <h3 className="font-primary font-bold text-[var(--night)] text-xl mb-6">Actions Rapides</h3>
                 <div className="space-y-3">
                   <button className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-colors font-bold text-sm tracking-wide">

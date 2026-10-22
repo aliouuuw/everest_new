@@ -43,7 +43,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
             }
             .report-container { max-width: 210mm; margin: 0 auto; padding: 30px; }
             .header { 
-              background: linear-gradient(135deg, #012d2a 0%, #012d2a 100%);
+              background: linear-gradient(135deg, #0E2826 0%, #0E2826 100%);
               color: white;
               padding: 40px;
               border-radius: 16px;
@@ -80,7 +80,7 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
               font-weight: 700;
               text-transform: uppercase;
               letter-spacing: 0.1em;
-              color: #012d2a;
+              color: #0E2826;
               margin-bottom: 16px;
               padding-bottom: 8px;
               border-bottom: 2px solid #f0eee9;
@@ -206,24 +206,24 @@ export const ProfileReport: React.FC<ProfileReportProps> = ({
               font-size: 12px;
               color: #666;
             }
-            .footer strong { color: #012d2a; }
+            .footer strong { color: #0E2826; }
             .print-button {
               position: fixed;
               bottom: 30px;
               right: 30px;
               padding: 14px 28px;
-              background: #012d2a;
+              background: #0E2826;
               color: white;
               border: none;
               border-radius: 30px;
               font-size: 14px;
               font-weight: 600;
               cursor: pointer;
-              box-shadow: 0 4px 20px rgba(1,45,42,0.3);
+              box-shadow: 0 4px 20px rgba(14,40,38,0.3);
               transition: all 0.3s ease;
             }
             .print-button:hover {
-              background: #012d2a;
+              background: #0E2826;
               transform: translateY(-2px);
             }
             @media print {

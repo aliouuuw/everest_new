@@ -185,7 +185,7 @@ export const ContactPage = () => {
                   className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-60"
                   style={{
                     background:
-                      'radial-gradient(ellipse at top right, rgba(202,152,36,0.12) 0%, transparent 65%)',
+                      'radial-gradient(ellipse at top right, rgba(182,138,62,0.12) 0%, transparent 65%)',
                   }}
                 />
                 <div className="relative">

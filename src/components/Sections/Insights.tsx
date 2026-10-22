@@ -69,8 +69,8 @@ const ChartLine = () => (
         <stop offset="100%" stopColor="var(--jaune-or)" />
       </linearGradient>
       <linearGradient id="insights-fill" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="rgba(202,152,36,0.25)" />
-        <stop offset="100%" stopColor="rgba(202,152,36,0)" />
+        <stop offset="0%" stopColor="rgba(182,138,62,0.25)" />
+        <stop offset="100%" stopColor="rgba(182,138,62,0)" />
       </linearGradient>
     </defs>
     <path
@@ -127,7 +127,7 @@ export const Insights: React.FC = () => {
               className="pointer-events-none absolute right-0 top-0 h-[60%] w-[60%] opacity-70"
               style={{
                 background:
-                  'radial-gradient(ellipse at top right, rgba(202,152,36,0.12) 0%, transparent 65%)',
+                  'radial-gradient(ellipse at top right, rgba(182,138,62,0.12) 0%, transparent 65%)',
               }}
             />
 
@@ -136,8 +136,8 @@ export const Insights: React.FC = () => {
                 className="mb-6 inline-flex items-center gap-2 rounded-full px-3 py-1 font-primary text-[10px] font-semibold uppercase tracking-[0.2em]"
                 style={{
                   color: 'var(--jaune-or)',
-                  border: '1px solid rgba(202,152,36,0.35)',
-                  background: 'rgba(202,152,36,0.08)',
+                  border: '1px solid rgba(182,138,62,0.35)',
+                  background: 'rgba(182,138,62,0.08)',
                 }}
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--jaune-or)]" aria-hidden />

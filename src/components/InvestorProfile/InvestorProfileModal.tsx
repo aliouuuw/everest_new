@@ -361,7 +361,7 @@ const IntroStep: React.FC<{ onStart: () => void }> = ({ onStart }) => (
 
     <button
       onClick={onStart}
-      className="group w-full sm:w-auto inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(1,45,42,0.3)] active:scale-[0.98]"
+      className="group w-full sm:w-auto inline-flex items-center justify-center gap-4 px-8 py-4 rounded-full bg-[var(--jaune-or)] hover:bg-[#b5832a] text-white transition-all duration-300 hover:shadow-[0_8px_24px_rgba(14,40,38,0.3)] active:scale-[0.98]"
     >
       <span className="text-[14px] tracking-[0.1em] font-bold uppercase" style={{ fontFamily: 'var(--font-primary)' }}>
         Démarrer le test
@@ -425,7 +425,7 @@ const QuizStep: React.FC<{
               onClick={() => onAnswer(question.id, option.value)}
               className={`group relative w-full text-left p-5 md:p-6 rounded-2xl border-2 transition-all duration-300 active:scale-[0.99] ${
                 isSelected
-                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_4px_20px_rgba(1,45,42,0.08)] z-10'
+                  ? 'border-[var(--mauve)] bg-[var(--mauve-05)] shadow-[0_4px_20px_rgba(14,40,38,0.08)] z-10'
                   : 'border-[var(--night-10)] bg-white hover:border-[var(--mauve-30)] hover:bg-[var(--summit-ivory)] hover:shadow-sm'
               }`}
               style={{ animationDelay: `${idx * 60}ms` }}

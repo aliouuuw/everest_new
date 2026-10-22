@@ -1,6 +1,7 @@
 /* eslint-disable sort-imports */
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
+import { SITE_NAV, type NavItem } from '../siteNav';
 // Fingerprint Icon Component
 const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
   <svg
@@ -13,18 +14,11 @@ const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-
   </svg>
 );
 
-interface DropdownItem {
-  label: string;
-  to: string;
-  search?: { frequency?: 'hebdomadaire' | 'mensuelle' | 'semestrielle' };
-  hash?: string;
-}
-
 interface DropdownProps {
   name: string;
   title: string;
   titleTo?: string;
-  items: Array<DropdownItem>;
+  items: Array<NavItem>;
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
@@ -65,7 +59,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
       {titleTo ? (
         <Link
           to={titleTo}
-          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white group"
           style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
           aria-expanded={isOpen}
           aria-haspopup="menu"
@@ -82,7 +76,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
         </Link>
       ) : (
         <button
-          className="flex items-center gap-1 text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white group"
+          className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white group"
           style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
           aria-expanded={isOpen}
           aria-haspopup="menu"
@@ -100,12 +94,11 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
       )}
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-4 w-64 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
+        <div className="absolute top-full left-0 mt-4 w-72 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
           {items.map((item, index) => (
             <Link
               key={index}
               to={item.to}
-              {...(item.search ? { search: item.search } : {})}
               {...(item.hash ? { hash: item.hash } : {})}
               className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--night-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
               style={{ fontFamily: 'var(--font-primary)', }}
@@ -214,15 +207,14 @@ export const Header: React.FC = () => {
 
   // Force "scrolled" header appearance on selected routes from first paint
   const forceScrolledStylePaths = [
-    '/offres',
-    '/auth',
-    '/contact',
-    '/bourse',
-    '/outils-investisseur',
-    '/about',
-    '/faq',
-    '/publications',
+    '/la-societe',
+    '/analyses',
     '/actualites',
+    '/opportunites',
+    '/sama-naffa',
+    '/contact',
+    '/auth',
+    '/faq',
   ];
   const isForcedScrolledStyle = forceScrolledStylePaths.some((path) =>
     location.pathname.startsWith(path),
@@ -231,30 +223,6 @@ export const Header: React.FC = () => {
   // Hide header if authenticated and on dashboard, or if in admin portal
   const shouldHideHeader = (isAuthenticated && isOnDashboard) || isInAdminorClientPortal;
 
-  const expertisesItems: Array<DropdownItem> = [
-    { label: 'Marché Financier Régional (BRVM)', to: '/expertises', hash: 'marche-financier-regional' },
-    { label: 'Marché des Titres Publics', to: '/expertises', hash: 'marche-titres-publics' },
-    { label: 'Structuration & Ingénierie', to: '/expertises', hash: 'ingenierie-financiere' },
-    { label: 'Private Office', to: '/expertises', hash: 'private-office' },
-  ];
-
-  const marchesItems: Array<DropdownItem> = [
-    { label: 'Actualités', to: '/actualites' },
-    { label: 'Publications', to: '/publications' },
-    { label: 'Abécédaire / FAQ', to: '/faq' },
-  ];
-
-  const ressourcesItems: Array<DropdownItem> = [
-    { label: 'Opportunités en cours', to: '/offres' },
-    { label: 'BRVM / Marché régional', to: '/bourse' },
-    { label: 'Outils investisseur', to: '/outils-investisseur' },
-  ];
-
-  const societeItems: Array<DropdownItem> = [
-    { label: 'À propos', to: '/about' },
-    { label: 'Contact', to: '/contact' },
-  ];
-
   // Return null without violating hooks rules
   if (shouldHideHeader) {
     return null;
@@ -262,9 +230,9 @@ export const Header: React.FC = () => {
 
   // Header background: solid mauve on inner pages; translucent only on home after scroll
   const headerBg = isLightBackgroundPage || isForcedScrolledStyle
-    ? 'bg-[#012d2a]'
+    ? 'bg-[var(--everest-green)]'
     : isScrolled
-      ? 'bg-[#012d2a]/95 backdrop-blur-md'
+      ? 'bg-[var(--everest-green)]/95 backdrop-blur-md'
       : '';
 
   // Nav link color: always white on mauve bg
@@ -273,66 +241,45 @@ export const Header: React.FC = () => {
   const ctaShellClass =
     'inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
   const ctaLabelClass =
-    'font-primary text-[10px] xl:text-[11px] font-semibold tracking-[0.12em] xl:tracking-[0.15em] uppercase leading-none';
+    'font-primary text-[10px] 2xl:text-[11px] font-semibold tracking-[0.1em] 2xl:tracking-[0.15em] uppercase leading-none';
 
   return (
-    <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[#012d2a]' : headerBg}`}>
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 md:px-16 lg:px-24 py-3 xl:py-4">
+    <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[var(--everest-green)]' : headerBg}`}>
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-6 md:px-16 lg:px-24 xl:px-6 2xl:px-10 py-3 xl:py-4">
         {/* Logo only — larger */}
         <Link to="/" className="flex min-h-11 shrink-0 items-center transition-opacity hover:opacity-85">
-          <img src="/logo-everest.png" alt="Everest Finance" className="h-12 w-auto sm:h-12 xl:h-16" />
+          <img src="/logo-everest.png" alt="EVEREST Finance" className="h-12 w-auto sm:h-12 xl:h-14" />
         </Link>
 
         {/* Navigation — xl+ only; lg is too tight for nav + dual CTAs */}
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-5 xl:flex 2xl:gap-8">
-          <Link
-            to="/"
-            className="text-[14px] font-bold tracking-[0.04em] transition-colors duration-300 hover:text-white"
-            style={{ fontFamily: 'var(--font-primary)',  color: navLinkColor }}
-          >
-            Accueil
-          </Link>
-
-          <Dropdown
-            name="marches"
-            title="Insights"
-            items={marchesItems}
-            isOpen={openDropdown === 'marches'}
-            onOpen={openDropdownByName}
-            onClose={closeDropdownByName}
-          />
-
-          <Dropdown
-            name="expertises"
-            title="Expertises"
-            titleTo="/expertises"
-            items={expertisesItems}
-            isOpen={openDropdown === 'expertises'}
-            onOpen={openDropdownByName}
-            onClose={closeDropdownByName}
-          />
-
-          <Dropdown
-            name="societe"
-            title="Société"
-            items={societeItems}
-            isOpen={openDropdown === 'societe'}
-            onOpen={openDropdownByName}
-            onClose={closeDropdownByName}
-          />
-
-          <Dropdown
-            name="ressources"
-            title="Ressources"
-            items={ressourcesItems}
-            isOpen={openDropdown === 'ressources'}
-            onOpen={openDropdownByName}
-            onClose={closeDropdownByName}
-          />
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-3 xl:flex 2xl:gap-4">
+          {SITE_NAV.map((item) =>
+            item.children ? (
+              <Dropdown
+                key={item.to}
+                name={item.to}
+                title={item.label}
+                titleTo={item.to}
+                items={item.children}
+                isOpen={openDropdown === item.to}
+                onOpen={openDropdownByName}
+                onClose={closeDropdownByName}
+              />
+            ) : (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white"
+                style={{ fontFamily: 'var(--font-primary)', color: navLinkColor }}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* CTA */}
-        <div className="hidden shrink-0 items-center gap-2 xl:flex xl:gap-3">
+        <div className="hidden shrink-0 items-center gap-2 xl:flex 2xl:gap-3">
           <a
             href="https://everest-account-opening.vercel.app/new-home"
             target="_blank"
@@ -379,117 +326,41 @@ export const Header: React.FC = () => {
       {isMobileMenuOpen && (
         <div
           data-lenis-prevent
-          className="fixed inset-x-0 z-[55] overflow-y-auto overscroll-contain border-t border-white/[0.12] bg-[#012d2a] py-6 xl:hidden [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
+          className="fixed inset-x-0 z-[55] overflow-y-auto overscroll-contain border-t border-white/[0.12] bg-[var(--everest-green)] py-6 xl:hidden [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
           style={{
             top: 'calc(var(--brvm-ticker-height) + var(--site-header-height))',
             height: 'calc(100dvh - var(--brvm-ticker-height) - var(--site-header-height))',
           }}
         >
-          <div className="space-y-5 px-6 pb-[max(2rem,env(safe-area-inset-bottom))]">
-            <Link
-              to="/"
-              className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-              style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
-              onClick={onMenuNavigate}
-            >
-              Accueil
-            </Link>
-
-            <div>
-              <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
-              >
-                Insights
+          <div className="space-y-2 px-6 pb-[max(2rem,env(safe-area-inset-bottom))]">
+            {SITE_NAV.map((item) => (
+              <div key={item.to}>
+                <Link
+                  to={item.to}
+                  className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
+                  style={{ fontFamily: 'var(--font-primary)', color: 'rgba(255,255,255,0.75)' }}
+                  onClick={onMenuNavigate}
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <div className="mt-1 space-y-1 pl-3 border-l border-white/[0.15]">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        to={child.to}
+                        {...(child.hash ? { hash: child.hash } : {})}
+                        className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
+                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                        onClick={onMenuNavigate}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {marchesItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    {...(item.search ? { search: item.search } : {})}
-                    {...(item.hash ? { hash: item.hash } : {})}
-                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={onMenuNavigate}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
-              >
-                Expertises
-              </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {expertisesItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    {...(item.search ? { search: item.search } : {})}
-                    {...(item.hash ? { hash: item.hash } : {})}
-                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={onMenuNavigate}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
-              >
-                Société
-              </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {societeItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    {...(item.search ? { search: item.search } : {})}
-                    {...(item.hash ? { hash: item.hash } : {})}
-                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={onMenuNavigate}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div
-                className="text-[10px] tracking-[0.2em] uppercase mb-3"
-                style={{ fontFamily: 'var(--font-primary)', fontWeight: 600, color: 'var(--jaune-or)' }}
-              >
-                Ressources
-              </div>
-              <div className="space-y-3 pl-3 border-l border-white/[0.15]">
-                {ressourcesItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    {...(item.search ? { search: item.search } : {})}
-                    {...(item.hash ? { hash: item.hash } : {})}
-                    className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                    style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
-                    onClick={onMenuNavigate}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            ))}
 
             <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
               <a

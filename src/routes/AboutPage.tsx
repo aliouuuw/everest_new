@@ -262,12 +262,12 @@ export const AboutPage = () => {
           {/* Soft mauve orb — top right */}
           <div
             className="absolute top-0 right-0 w-[50%] h-[80%] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at top right, rgba(1,45,42,0.07) 0%, rgba(203,152,36,0.03) 45%, transparent 65%)' }}
+            style={{ background: 'radial-gradient(ellipse at top right, rgba(14,40,38,0.07) 0%, rgba(182,138,62,0.03) 45%, transparent 65%)' }}
           />
           {/* Soft gold orb — bottom left */}
           <div
             className="absolute bottom-0 left-0 w-[45%] h-[75%] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 50%, transparent 70%)' }}
+            style={{ background: 'radial-gradient(ellipse at bottom left, rgba(182,138,62,0.08) 0%, rgba(14,40,38,0.04) 50%, transparent 70%)' }}
           />
 
           <div className="page-container relative z-10">

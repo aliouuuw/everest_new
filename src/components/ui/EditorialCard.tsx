@@ -23,7 +23,7 @@ export const EDITORIAL_ICON_WELL_LIGHT =
 
 export const EDITORIAL_ICON_WELL_DARK =
   'w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border text-[var(--jaune-or)] transition-colors duration-500 ' +
-  'bg-[rgba(203,152,36,0.12)] border-[rgba(203,152,36,0.25)] ' +
+  'bg-[rgba(182,138,62,0.12)] border-[rgba(182,138,62,0.25)] ' +
   'group-hover:border-[var(--jaune-or)] group-hover:bg-[var(--jaune-or)] group-hover:text-[var(--night)]';
 
 const wellLight = EDITORIAL_ICON_WELL_LIGHT;
@@ -48,7 +48,7 @@ export const EditorialCard: React.FC<EditorialCardProps> = ({
       className={[
         'group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] p-7 md:p-8 transition-all duration-500',
         isDark
-          ? 'border border-white/[0.08] bg-[rgba(255,255,255,0.02)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_40px_-20px_rgba(1,45,42,0.5)] hover:-translate-y-1 backdrop-blur-2xl'
+          ? 'border border-white/[0.08] bg-[rgba(255,255,255,0.02)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_20px_40px_-20px_rgba(14,40,38,0.5)] hover:-translate-y-1 backdrop-blur-2xl'
           : 'border border-[var(--mauve-10)] bg-[var(--pure-white)] shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:border-[var(--mauve-20)] hover:shadow-[var(--shadow-card-lift)]',
         className,
       ].join(' ')}

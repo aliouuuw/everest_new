@@ -475,7 +475,7 @@ export function SiteContentPage() {
                           type="button"
                           onClick={() => handleSave(entry)}
                           disabled={field.saving || !dirty}
-                          className="rounded-full border-0 bg-[var(--jaune-or)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(202,148,47,0.28)] transition-all hover:-translate-y-0.5 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
+                          className="rounded-full border-0 bg-[var(--jaune-or)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--pure-white)] shadow-[0_4px_16px_rgba(182,138,62,0.28)] transition-all hover:-translate-y-0.5 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0"
                         >
                           {field.saving ? 'Enregistrement…' : 'Enregistrer'}
                         </button>

@@ -89,7 +89,7 @@ export const PROFILES: Record<InvestorProfileType, ProfileResult> = {
     subtitle: "Performance à long terme",
     description: "Vous visez une croissance significative de votre patrimoine et acceptez une volatilité importante. Vous avez un horizon long et une bonne connaissance des marchés financiers.",
     color: '#ca942f',
-    colorLight: 'rgba(202, 148, 47, 0.1)',
+    colorLight: 'rgba(182, 138, 62, 0.1)',
     riskLevel: 4,
     allocation: [
       { label: 'Actions', percentage: 55, color: '#ca942f' },

@@ -412,12 +412,12 @@ export const DepartmentPage = ({ department }: DepartmentPageProps) => {
         {/* Soft mauve orb — top left */}
         <div
           className="absolute top-0 left-0 w-[55%] h-[90%] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse at top left, rgba(14,40,38,0.06) 0%, rgba(182,138,62,0.04) 40%, transparent 65%)' }}
         />
         {/* Soft gold orb — bottom right */}
         <div
           className="absolute bottom-0 right-0 w-[45%] h-[70%] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse at bottom right, rgba(182,138,62,0.08) 0%, rgba(14,40,38,0.04) 45%, transparent 65%)' }}
         />
 
         <div className="page-container relative z-10">

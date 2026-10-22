@@ -141,7 +141,7 @@ export const ServiceFAQ: React.FC<ServiceFAQProps> = ({ service }) => {
             </p>
 
             {/* Contact CTA */}
-            <div className="border border-[var(--mauve)]/10 p-6 rounded-2xl hover:shadow-[0_8px_24px_rgba(1,45,42,0.06)] transition-all duration-300">
+            <div className="border border-[var(--mauve)]/10 p-6 rounded-2xl hover:shadow-[0_8px_24px_rgba(14,40,38,0.06)] transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-[var(--mauve-10)] flex items-center justify-center shrink-0">
                   <FiHelpCircle className="text-[var(--night-80)] text-xl" />

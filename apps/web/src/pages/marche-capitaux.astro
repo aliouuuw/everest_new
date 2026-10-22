@@ -1,11 +1,3 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import DepartmentPage from '../islands/DepartmentPage'
-import { fetchSiteContent } from '../lib/payload'
-
-const site = await fetchSiteContent('capital-markets')
+return Astro.redirect('/expertises#ingenierie-financiere')
 ---
-
-<Layout title="Marché des capitaux — Everest Finance">
-  <DepartmentPage client:load slug="marche-capitaux" siteContent={site.docs} />
-</Layout>

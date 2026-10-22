@@ -121,7 +121,7 @@ export const ValueProps: React.FC = () => {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  'linear-gradient(180deg, transparent 55%, rgba(1,45,42,0.35) 100%)',
+                  'linear-gradient(180deg, transparent 55%, rgba(14,40,38,0.35) 100%)',
               }}
             />
           </div>

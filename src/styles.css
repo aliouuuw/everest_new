@@ -13,9 +13,9 @@
   --line-soft: #eeeeee;
   
   /* Core Brand Palette */
-  --jaune-or: #cb9824;
-  --mauve: #012d2a;
-  --everest-green: #012d2a;
+  --jaune-or: #B68A3E;
+  --mauve: #0E2826;
+  --everest-green: #0E2826;
   --night: #0a0a0a;
   
   /* Extended Opacity/Variations */
@@ -24,27 +24,27 @@
   --night-20: rgba(10, 10, 10, 0.2);
   --night-40: rgba(10, 10, 10, 0.4);
   --night-10: rgba(10, 10, 10, 0.1);
-  --jaune-or-light: rgba(202, 148, 47, 0.4);
-  --jaune-or-30: rgba(202, 148, 47, 0.3);
-  --jaune-or-20: rgba(202, 148, 47, 0.2);
-  --jaune-or-10: rgba(202, 148, 47, 0.1);
-  --mauve-80: rgba(1, 45, 42, 0.8);
-  --mauve-60: rgba(1, 45, 42, 0.6);
-  --mauve-40: rgba(1, 45, 42, 0.4);
-  --mauve-30: rgba(1, 45, 42, 0.3);
-  --mauve-20: rgba(1, 45, 42, 0.2);
-  --mauve-15: rgba(1, 45, 42, 0.15);
-  --mauve-10: rgba(1, 45, 42, 0.1);
-  --mauve-05: rgba(1, 45, 42, 0.05);
-  --mauve-light: rgba(1, 45, 42, 0.05);
-  --mauve-glow: rgba(1, 45, 42, 0.12);
-  --everest-green-60: rgba(1, 45, 42, 0.6);
-  --everest-green-30: rgba(1, 45, 42, 0.3);
-  --everest-green-20: rgba(1, 45, 42, 0.2);
-  --everest-green-10: rgba(1, 45, 42, 0.1);
-  --everest-green-05: rgba(1, 45, 42, 0.05);
-  --gold-pale: rgba(202, 148, 47, 0.06);
-  --gold-warm: rgba(202, 148, 47, 0.12);
+  --jaune-or-light: rgba(182, 138, 62, 0.4);
+  --jaune-or-30: rgba(182, 138, 62, 0.3);
+  --jaune-or-20: rgba(182, 138, 62, 0.2);
+  --jaune-or-10: rgba(182, 138, 62, 0.1);
+  --mauve-80: rgba(14, 40, 38, 0.8);
+  --mauve-60: rgba(14, 40, 38, 0.6);
+  --mauve-40: rgba(14, 40, 38, 0.4);
+  --mauve-30: rgba(14, 40, 38, 0.3);
+  --mauve-20: rgba(14, 40, 38, 0.2);
+  --mauve-15: rgba(14, 40, 38, 0.15);
+  --mauve-10: rgba(14, 40, 38, 0.1);
+  --mauve-05: rgba(14, 40, 38, 0.05);
+  --mauve-light: rgba(14, 40, 38, 0.05);
+  --mauve-glow: rgba(14, 40, 38, 0.12);
+  --everest-green-60: rgba(14, 40, 38, 0.6);
+  --everest-green-30: rgba(14, 40, 38, 0.3);
+  --everest-green-20: rgba(14, 40, 38, 0.2);
+  --everest-green-10: rgba(14, 40, 38, 0.1);
+  --everest-green-05: rgba(14, 40, 38, 0.05);
+  --gold-pale: rgba(182, 138, 62, 0.06);
+  --gold-warm: rgba(182, 138, 62, 0.12);
   
   /* Typography */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -57,17 +57,17 @@
   /* Atmospheric Surfaces */
   --summit-ivory: #faf8f4;
   --summit-fog: #f0eee9;
-  --summit-haze: rgba(1, 45, 42, 0.04);
-  --summit-depth: rgba(1, 45, 42, 0.08);
-  --summit-warm: rgba(202, 148, 47, 0.06);
+  --summit-haze: rgba(14, 40, 38, 0.04);
+  --summit-depth: rgba(14, 40, 38, 0.08);
+  --summit-warm: rgba(182, 138, 62, 0.06);
   --summit-glass: rgba(255, 255, 255, 0.7);
   --summit-glass-strong: rgba(255, 255, 255, 0.85);
 
   /* Command Center Tokens */
   --command-border: rgba(10, 10, 10, 0.06);
-  --command-border-hover: rgba(1, 45, 42, 0.2);
+  --command-border-hover: rgba(14, 40, 38, 0.2);
   --command-surface: #f7f6f3;
-  --command-surface-hover: rgba(1, 45, 42, 0.03);
+  --command-surface-hover: rgba(14, 40, 38, 0.03);
 
   /* Animation */
   --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -79,8 +79,8 @@
   --duration-normal: 400ms;
   --duration-slow: 700ms;
 
-  /* BRVMTicker + Header bar — keep Header.tsx top offset in sync with BRVMTicker height */
-  --brvm-ticker-height: 2.5rem;
+  /* BRVM ticker hidden until a real feed and the legal check (referential §10). Was 2.5rem. */
+  --brvm-ticker-height: 0rem;
   --site-header-height: 6rem;
   --site-chrome-sticky: calc(var(--brvm-ticker-height) + var(--site-header-height));
   --site-chrome-top: calc(var(--site-chrome-sticky) + 1.5rem);
@@ -88,16 +88,16 @@
   --duration-reveal: 900ms;
 
   /* Gradients */
-  --gradient-dark-section: linear-gradient(170deg, #012d2a 0%, #062421 40%, #071a18 100%);
-  --gradient-image-overlay: linear-gradient(180deg, rgba(1,45,42,0.35) 0%, rgba(7,26,24,0.55) 100%);
-  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(1,45,42,0.6) 0%, rgba(7,26,24,0.8) 100%);
+  --gradient-dark-section: linear-gradient(170deg, #0E2826 0%, #062421 40%, #071a18 100%);
+  --gradient-image-overlay: linear-gradient(180deg, rgba(14,40,38,0.35) 0%, rgba(7,26,24,0.55) 100%);
+  --gradient-image-overlay-heavy: linear-gradient(135deg, rgba(14,40,38,0.6) 0%, rgba(7,26,24,0.8) 100%);
   --gradient-light-section: linear-gradient(180deg, var(--pure-white) 0%, var(--summit-ivory) 100%);
   --gradient-ivory-section: linear-gradient(180deg, var(--summit-ivory) 0%, var(--pure-white) 100%);
 
   /* Shadows */
   --shadow-card-float: 0 40px 80px rgba(0,0,0,0.3);
-  --shadow-card-lift: 0 8px 24px rgba(1,45,42,0.1);
-  --shadow-card-hover: 0 20px 40px rgba(1,45,42,0.15);
+  --shadow-card-lift: 0 8px 24px rgba(14,40,38,0.1);
+  --shadow-card-hover: 0 20px 40px rgba(14,40,38,0.15);
 
   /* Border Radius */
   --radius-card: 1rem;
@@ -116,7 +116,7 @@
 
 @media (max-width: 767px) {
   :root {
-    --brvm-ticker-height: 2.75rem;
+    --brvm-ticker-height: 0rem;
     --site-header-height: 4.5rem;
   }
 }
@@ -181,7 +181,7 @@ h1, h2 {
   background: var(--pure-white);
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(1,45,42, 0.06);
+    0 12px 32px rgba(14,40,38, 0.06);
 }
 
 @utility soft-panel-muted {
@@ -277,7 +277,7 @@ h1, h2 {
   left: 0;
   width: 55%;
   height: 90%;
-  background: radial-gradient(ellipse at top left, rgba(1,45,42,0.06) 0%, rgba(203,152,36,0.04) 40%, transparent 65%);
+  background: radial-gradient(ellipse at top left, rgba(14,40,38,0.06) 0%, rgba(182,138,62,0.04) 40%, transparent 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -289,7 +289,7 @@ h1, h2 {
   right: 0;
   width: 45%;
   height: 70%;
-  background: radial-gradient(ellipse at bottom right, rgba(203,152,36,0.08) 0%, rgba(1,45,42,0.04) 45%, transparent 65%);
+  background: radial-gradient(ellipse at bottom right, rgba(182,138,62,0.08) 0%, rgba(14,40,38,0.04) 45%, transparent 65%);
   pointer-events: none;
   z-index: -1;
 }
@@ -338,8 +338,8 @@ h1, h2 {
 .section-bg-light .border-white\/20 { border-color: rgba(0,0,0,0.1) !important; }
 
 /* ── Invert white bg utilities to subtle light equivalents ── */
-.section-bg-light .bg-white\/5 { background-color: rgba(1,45,42,0.04) !important; }
-.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(1,45,42,0.03) !important; }
+.section-bg-light .bg-white\/5 { background-color: rgba(14,40,38,0.04) !important; }
+.section-bg-light .bg-white\/\[0\.03\] { background-color: rgba(14,40,38,0.03) !important; }
 
 /* ── btn-primary-dark → gold CTA in light sections ── */
 .section-bg-light .btn-primary-dark {
@@ -575,7 +575,7 @@ h1, h2 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(203,152,36,0.28);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.28);
   filter: brightness(1.1);
 }
 
@@ -596,7 +596,7 @@ h1, h2 {
   background: var(--jaune-or);
   color: var(--pure-white);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(203,152,36,0.22);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.22);
 }
 
 .btn-secondary:active {
@@ -615,7 +615,7 @@ h1, h2 {
 
 .btn-primary-dark:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(202,148,47,0.35);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.35);
   filter: brightness(1.05);
 }
 
@@ -626,14 +626,14 @@ h1, h2 {
 
 .btn-secondary-dark {
   @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
-  border: 1px solid rgba(202,148,47,0.4);
+  border: 1px solid rgba(182,138,62,0.4);
   color: var(--jaune-or);
   background: transparent;
   transform: translateY(0);
 }
 
 .btn-secondary-dark:hover {
-  background: rgba(202,148,47,0.12);
+  background: rgba(182,138,62,0.12);
   border-color: var(--jaune-or);
   color: var(--pure-white);
   transform: translateY(-1px);
@@ -775,7 +775,7 @@ h1, h2 {
   background: var(--pure-white);
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.04),
-    0 16px 48px -12px rgba(1,45,42, 0.14);
+    0 16px 48px -12px rgba(14,40,38, 0.14);
 }
 
 .cms-editor-dock::after {
@@ -855,11 +855,11 @@ h1, h2 {
   border-color: var(--jaune-or);
   background: var(--jaune-or);
   color: var(--pure-white);
-  box-shadow: 0 6px 20px -6px rgba(203, 152, 36, 0.45);
+  box-shadow: 0 6px 20px -6px rgba(182, 138, 62, 0.45);
 }
 
 .cms-editor-pill--mauveSolid:hover {
-  box-shadow: 0 8px 28px -6px rgba(203, 152, 36, 0.5);
+  box-shadow: 0 8px 28px -6px rgba(182, 138, 62, 0.5);
   filter: brightness(1.04);
 }
 
@@ -888,16 +888,16 @@ h1, h2 {
   border-color: var(--jaune-or);
   background: var(--jaune-or);
   color: var(--pure-white);
-  box-shadow: 0 6px 20px -6px rgba(202, 148, 47, 0.45);
+  box-shadow: 0 6px 20px -6px rgba(182, 138, 62, 0.45);
 }
 
 .cms-editor-pill--goldSolid:hover {
-  box-shadow: 0 8px 28px -6px rgba(202, 148, 47, 0.55);
+  box-shadow: 0 8px 28px -6px rgba(182, 138, 62, 0.55);
   filter: brightness(1.05);
 }
 
 .cms-editor-pill--goldSolid .cms-editor-pill__disc {
-  background: rgba(1,45,42, 0.12);
+  background: rgba(14,40,38, 0.12);
   color: var(--pure-white);
 }
 
@@ -948,12 +948,12 @@ h1, h2 {
   background: rgba(15, 17, 21, 0.15);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(202, 148, 47, 0.15);
+  border: 1px solid rgba(182, 138, 62, 0.15);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 2px 8px rgba(202, 148, 47, 0.08),
-    inset 0 0 16px rgba(202, 148, 47, 0.04);
+    inset 0 2px 8px rgba(182, 138, 62, 0.08),
+    inset 0 0 16px rgba(182, 138, 62, 0.04);
   position: relative;
   overflow: hidden;
 }
@@ -967,7 +967,7 @@ h1, h2 {
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(202, 148, 47, 0.3) 50%,
+    rgba(182, 138, 62, 0.3) 50%,
     transparent 100%);
   opacity: 0.6;
 }
@@ -981,7 +981,7 @@ h1, h2 {
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(202, 148, 47, 0.2) 50%,
+    rgba(182, 138, 62, 0.2) 50%,
     transparent 100%);
   opacity: 0.4;
 }
@@ -1139,13 +1139,13 @@ html.astro-public .reveal-stagger > * {
 .glass-card-hover:hover {
   transform: translateY(-6px) scale(1.02);
   background: rgba(15, 17, 21, 0.25);
-  border-color: rgba(202, 148, 47, 0.25);
+  border-color: rgba(182, 138, 62, 0.25);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.4),
-    0 8px 32px rgba(202, 148, 47, 0.1),
+    0 8px 32px rgba(182, 138, 62, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    inset 0 4px 16px rgba(202, 148, 47, 0.15),
-    inset 0 0 32px rgba(202, 148, 47, 0.08);
+    inset 0 4px 16px rgba(182, 138, 62, 0.15),
+    inset 0 0 32px rgba(182, 138, 62, 0.08);
 }
 
 .glass-card-hover:hover::before {

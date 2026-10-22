@@ -56,7 +56,7 @@ void main() {
 
   /* brand palette: deep-night → everest green → lifted green, gold shimmer */
   vec3 c0   = vec3(0.016, 0.055, 0.052); /* #040e0d */
-  vec3 c1   = vec3(0.004, 0.176, 0.165); /* #012d2a */
+  vec3 c1   = vec3(0.055, 0.157, 0.149); /* #0E2826 */
   vec3 c2   = vec3(0.024, 0.290, 0.267); /* ~#064a44 */
   vec3 gold = vec3(0.792, 0.580, 0.188); /* jaune-or */
 

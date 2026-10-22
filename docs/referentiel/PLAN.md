@@ -90,15 +90,40 @@ the user agrees.
 | Carrières page | ADG / RRHA |
 | Investor space (auth, rights, 10-year logs) for Opportunités and reserved publications | Not specified. Ask before building |
 
+## Decisions (22 Oct 2026)
+
+1. **Em dashes: replace.** A pair of « — » becomes parentheses. A single
+   « — » becomes a comma or a colon. Every other word stays as in Part III.
+2. **FAQ V1.0 source: none.** Keep the FAQ as it is until a source arrives.
+3. **Route map: approved.** Old department routes redirect to the closest
+   entry (see `apps/web/src/pages/*.astro`).
+4. **BRVM ticker: hidden** until a real feed and the legal check.
+5. **Header buttons « Ouvrir un compte » and « Accès Client »: kept.**
+
+## Lot status
+
+| Lot | State |
+|-----|-------|
+| L0 Audit | Done (`19d812b`) |
+| L1 Global frame | Done. `apps/web/e2e/frame.check.cjs`: 276/277 checks pass at 7 widths |
+
+L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
+text, so that no menu entry points to a missing page. L6 finishes them.
+
+## Found during L1 (not in the lot)
+
+1. **Staging PDFs return 500.** `/api/media/file/*.pdf` fails on
+   staging, so « Télécharger » on publications is broken there.
+2. **PDF thumbnails fail on older browsers.** `pdfjs-dist` 5.6 calls
+   `Map.prototype.getOrInsertComputed`, which Chromium 141 lacks. Same
+   error on staging. This is the one E2E check that still fails.
+3. **Fixed:** `/analyses` sorted the shared publication list in place.
+   Without the CMS, this changed the home « À la une » item and broke
+   React hydration (error #418).
+
 ## Questions for the user
 
-1. The referential text contains em dashes (« — »), while I.6 bans the
-   stylistic em dash. Copy word for word, or replace?
-2. The 8 FAQ entries are "unchanged" from V1.0, which is not in this folder.
-   Where is the source text?
-3. Route map above: approve before L1.
-4. The BRVM ticker shows invented quotes that change every few seconds
-   (`src/components/Header/BRVMTicker.tsx`). Hide it until a real feed
-   and the legal check, or keep it?
-5. The header has « Ouvrir un compte » and « Accès Client » buttons.
-   The referential menu has neither. Keep them next to the 8 entries?
+1. §6 CTA « Accéder à l'espace investisseur »: no investor space exists.
+   Link it to `/auth`, or leave it out until the space is built?
+2. Footer social links (LinkedIn, Facebook) had `href="#"`. They are
+   removed. Send the real URLs to add them back. TikTok waits on ADG.

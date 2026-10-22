@@ -147,7 +147,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
   }, [pub.fileUrl])
 
   return (
-    <article className="group relative flex flex-col h-full border border-[var(--mauve)]/10 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(1,45,42,0.08)] hover:border-[var(--mauve)]/20">
+    <article className="group relative flex flex-col h-full border border-[var(--mauve)]/10 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(14,40,38,0.08)] hover:border-[var(--mauve)]/20">
       {/* PDF visual preview area */}
       <button
         type="button"
@@ -298,7 +298,7 @@ export function PublicationsView({
       )
     }
 
-    return items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    return [...items].sort((a, b) =>new Date(b.date).getTime() - new Date(a.date).getTime())
   }, [publications, activeFilter, activeYear, activeMonth, searchQuery])
 
   return (

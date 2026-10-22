@@ -91,7 +91,7 @@ export const CTA: React.FC<{
             )}
             <a
               href={primaryHref}
-              className={`${ctaButtonClass} bg-[#012d2a] hover:bg-[#014542] hover:shadow-lg`}
+              className={`${ctaButtonClass} bg-[#0E2826] hover:bg-[#014542] hover:shadow-lg`}
             >
               <EditableText id="home.cta.primary" as="span">{primaryLabel}</EditableText>
               <FiArrowRight className="hidden shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-0.5 sm:block lg:text-lg" />

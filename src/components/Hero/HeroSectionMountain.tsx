@@ -164,7 +164,7 @@ export const HeroSectionMountain: React.FC = () => {
 
           <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
             <Link
-              to="/offres"
+              to="/opportunites"
               className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
             >
               <EditableText id="home.hero.ctaPrimary" as="span" className="text-base font-semibold tracking-tight">

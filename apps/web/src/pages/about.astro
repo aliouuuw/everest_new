@@ -1,11 +1,3 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import MarketingPage from '../islands/MarketingPage'
-import { fetchSiteContent } from '../lib/payload'
-
-const site = await fetchSiteContent('about')
+return Astro.redirect('/la-societe')
 ---
-
-<Layout title="À propos — Everest Finance">
-  <MarketingPage client:load siteContent={site.docs} pageKey="about" />
-</Layout>

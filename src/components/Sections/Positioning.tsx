@@ -115,7 +115,7 @@ export const Positioning: React.FC = () => {
 
                 <div className="mb-4 flex items-center gap-4 md:mb-10">
                   <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(70,29,76,0.1)] bg-[rgba(70,29,76,0.05)] text-[#461D4C] transition-colors duration-500 group-hover:border-[rgba(203,152,36,0.25)] group-hover:bg-[rgba(203,152,36,0.12)] group-hover:text-[var(--jaune-or)]"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(70,29,76,0.1)] bg-[rgba(70,29,76,0.05)] text-[#461D4C] transition-colors duration-500 group-hover:border-[rgba(182,138,62,0.25)] group-hover:bg-[rgba(182,138,62,0.12)] group-hover:text-[var(--jaune-or)]"
                   >
                     <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
                   </div>

@@ -57,7 +57,7 @@ export const Capacity: React.FC = () => {
         className="absolute right-0 top-0 h-[45%] w-[45%] pointer-events-none opacity-60"
         style={{
           background:
-            'radial-gradient(ellipse at top right, rgba(203,152,36,0.10) 0%, transparent 65%)',
+            'radial-gradient(ellipse at top right, rgba(182,138,62,0.10) 0%, transparent 65%)',
         }}
       />
 
