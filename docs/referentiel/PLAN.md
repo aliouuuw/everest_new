@@ -144,8 +144,9 @@ text, so that no menu entry points to a missing page. L6 finishes them.
    so an old row would override the new text. L3 renamed the chapter
    titles to `about.*.heading` because `about.histoire.title` and
    `about.conformite.title` already exist on staging with old text.
-2. The 51 `about.*` texts have no Payload row on staging yet. The page
-   shows the referential text. Seeding makes them editable.
+2. Seeded on 22 Oct 2026: 51 `about.*` rows created on staging, values
+   equal to `src/content/societe.ts` (265 rows in total, 35 old home rows
+   and the old `about.*` rows unused).
 
 ## Waiting on the user
 
