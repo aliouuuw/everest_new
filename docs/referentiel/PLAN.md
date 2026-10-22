@@ -111,6 +111,7 @@ the user agrees.
 | L1 Global frame | Done. `apps/web/e2e/frame.check.cjs`: 276/277 checks pass at 7 widths |
 | L2 Accueil | Done. Text in `src/content/home.ts`; `bun run check:copy` (word for word) and `apps/web/e2e/home.check.ts` (80/80) |
 | L3 La société | Done. §2.1 to §2.6 in `src/content/societe.ts`; §2.7 hidden (Legal). `apps/web/e2e/pages.check.ts` covers `/` and `/la-societe` (174/174) |
+| L4 Expertises | Done. Hub `/expertises` (common intro) and 4 pages `/expertises/<slug>` (§3.1 to §3.4) in `src/content/expertises.ts`; old `#anchor` links land on the hub cards. 369/369 page checks |
 
 L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
 text, so that no menu entry points to a missing page. L6 finishes them.

@@ -15,7 +15,7 @@ const PAGES = [...NAV_PATHS, '/faq']
 const REDIRECTS = {
   '/about': '/la-societe', '/mot-dg': '/la-societe', '/publications': '/analyses', '/insights': '/analyses',
   '/offres': '/opportunites', '/marches-opportunites': '/opportunites', '/services': '/expertises',
-  '/bourse': '/expertises', '/gestion-sous-mandat': '/expertises', '/marche-capitaux': '/expertises',
+  '/bourse': '/expertises/marche-financier-regional', '/gestion-sous-mandat': '/expertises/private-office', '/marche-capitaux': '/expertises/ingenierie-financiere',
   '/outils-investisseur': '/contact', '/simulateur': '/contact',
 }
 

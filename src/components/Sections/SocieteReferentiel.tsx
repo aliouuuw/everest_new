@@ -4,7 +4,7 @@
 import type { ReactNode } from 'react';
 import { Link } from '@tanstack/react-router';
 import { TEXT, type TextId } from '../../content';
-import { Label, N1, Pair, Section, type Tone } from '../Referentiel';
+import { Block, Label, N1, Pair, Section, type Tone } from '../Referentiel';
 
 const CHAPTERS: Array<{ anchor: string; title: TextId }> = [
   { anchor: 'histoire', title: 'about.histoire.heading' },
@@ -26,13 +26,6 @@ const Chapter = ({ index, tone, children }: { index: number; tone: Tone; childre
       <div className="flex flex-col gap-14 md:gap-16 lg:col-span-8">{children}</div>
     </div>
   </Section>
-);
-
-const Block = ({ label, n1, n2, tone, size = 'statement' }: { label: TextId; n1: TextId; n2: TextId; tone: Tone; size?: 'statement' | 'card' }) => (
-  <div className="flex flex-col gap-5">
-    <Label id={label} tone={tone} as="h3" size="sub" />
-    <Pair n1={n1} n2={n2} tone={tone} as="p" size={size} />
-  </div>
 );
 
 const ENGAGEMENTS = [1, 2, 3, 4, 5, 6] as const;

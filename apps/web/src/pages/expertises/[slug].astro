@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ExpertisesPage from '../../islands/ExpertisesPage'
+import { fetchSiteContent } from '../../lib/payload'
+import { expertiseSlug } from '@/components/Sections/ExpertisesReferentiel'
+import { EXPERTISE_ITEMS, EXPERTISES_TEXT, type ExpertiseKey } from '@/content/expertises'
+
+export function getStaticPaths() {
+  return (Object.keys(EXPERTISE_ITEMS) as Array<ExpertiseKey>).map((expertise) => ({
+    params: { slug: expertiseSlug(expertise) },
+    props: { expertise },
+  }))
+}
+
+const { expertise } = Astro.props as { expertise: ExpertiseKey }
+const site = await fetchSiteContent('expertises')
+const heading = EXPERTISES_TEXT[`expertises.${expertise}.heading`]
+const chapeau = EXPERTISES_TEXT[`expertises.${expertise}.chapeau`]
+---
+
+<Layout title={`${heading} | EVEREST Finance`} description={chapeau}>
+  <ExpertisesPage client:load siteContent={site.docs} expertise={expertise} />
+</Layout>

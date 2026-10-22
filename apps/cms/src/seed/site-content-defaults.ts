@@ -2,6 +2,7 @@
 
 import { HOME_TEXT } from '../../../../src/content/home.ts'
 import { SOCIETE_TEXT } from '../../../../src/content/societe.ts'
+import { EXPERTISES_TEXT } from '../../../../src/content/expertises.ts'
 
 const offres: Record<string, string> = {
   'offres.hero.badge': "Services d'investissement",
@@ -90,58 +91,7 @@ export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
   'mandate.cta.subtitle':
     'Nos gestionnaires de portefeuille analysent votre profil et construisent une allocation sur mesure.',
 
-  'expertises.hero.title': 'Nos expertises.',
-  'expertises.hero.subtitle':
-    "À l'interface des besoins de financement et des stratégies d'investissement — souveraine, BRVM, ingénierie et patrimoine dans la zone UEMOA.",
-  'expertises.mtp.image': '/Assets_Website/mtp.jpg',
-  'expertises.marche-titres-publics.title': 'Marché des Titres Publics.',
-  'expertises.marche-titres-publics.intro':
-    "Nous accompagnons les investisseurs dans leur accès aux émissions souveraines de l'UEMOA, en intégrant une analyse fine des dynamiques de taux et des conditions de marché.",
-  'expertises.marche-titres-publics.approachLabel': 'Notre approche',
-  'expertises.marche-titres-publics.approachText':
-    'Sélection rigoureuse des maturités, gestion active du risque de taux et optimisation du rendement dans un cadre maîtrisé.',
-  'expertises.marche-titres-publics.bullet1': 'Sélection rigoureuse des maturités',
-  'expertises.marche-titres-publics.bullet2': 'Gestion active du risque de taux',
-  'expertises.marche-titres-publics.bullet3':
-    'Optimisation du rendement dans un cadre maîtrisé',
-  'expertises.mfr.image': '/Assets_Website/mfr.jpg',
-  'expertises.marche-financier-regional.title': 'Marché Financier Régional.',
-  'expertises.marche-financier-regional.intro':
-    "Nous intervenons sur la BRVM en assurant une exécution efficiente et un conseil éclairé pour les investisseurs institutionnels et privés qualifiés.",
-  'expertises.marche-financier-regional.approachLabel': 'Notre apport',
-  'expertises.marche-financier-regional.approachText':
-    "Une capacité d'intermédiation fiable, une analyse indépendante et un accès structuré aux opportunités de marché.",
-  'expertises.marche-financier-regional.bullet1': "Capacité d'intermédiation fiable",
-  'expertises.marche-financier-regional.bullet2': 'Analyse indépendante',
-  'expertises.marche-financier-regional.bullet3':
-    'Accès structuré aux opportunités de marché',
-  'expertises.ing.image': '/Assets_Website/s-&-if.jpg',
-  'expertises.ingenierie-financiere.title': 'Structuration & Ingénierie financière.',
-  'expertises.ingenierie-financiere.intro':
-    'Nous concevons et mettons en œuvre des solutions de financement adaptées aux besoins des émetteurs publics et privés de la zone UEMOA.',
-  'expertises.ingenierie-financiere.approachLabel': "Champs d'intervention",
-  'expertises.ingenierie-financiere.approachText':
-    'Émissions obligataires, structuration de dettes, titrisation et optimisation des conditions de financement.',
-  'expertises.ingenierie-financiere.bullet1': 'Émissions obligataires',
-  'expertises.ingenierie-financiere.bullet2': 'Structuration de dettes',
-  'expertises.ingenierie-financiere.bullet3': 'Titrisation',
-  'expertises.ingenierie-financiere.bullet4':
-    'Optimisation des conditions de financement',
-  'expertises.po.image': '/Assets_Website/po.jpg',
-  'expertises.private-office.title': 'Private Office.',
-  'expertises.private-office.intro':
-    'Nous accompagnons une clientèle exigeante dans la structuration et la gestion de leur patrimoine, avec une approche disciplinée et long terme.',
-  'expertises.private-office.approachLabel': 'Notre philosophie',
-  'expertises.private-office.approachText':
-    'Allocation disciplinée, diversification maîtrisée, gestion du risque intégrée et vision de long terme.',
-  'expertises.private-office.bullet1': 'Allocation disciplinée',
-  'expertises.private-office.bullet2': 'Diversification maîtrisée',
-  'expertises.private-office.bullet3': 'Gestion du risque intégrée',
-  'expertises.private-office.bullet4': 'Vision de long terme',
-  'expertises.cta.title': "Besoin d'un accompagnement personnalisé ?",
-  'expertises.cta.subtitle':
-    "Nos équipes vous aident à structurer une stratégie adaptée à votre profil et vos objectifs d'investissement.",
-  'expertises.cta.label': 'Prendre rendez-vous',
+  ...EXPERTISES_TEXT,
 
   'contact.hero.title': 'Parlons de vos projets.',
   'contact.hero.subtitle':

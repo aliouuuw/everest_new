@@ -110,3 +110,11 @@ export const Label = ({ id, tone, as = 'h2', size = 'section' }: { id: TextId; t
     {TEXT[id]}
   </EditableText>
 );
+
+/** A labelled N1/N2 pair (label as a sub-heading above the pair). */
+export const Block = ({ label, n1, n2, tone, size = 'statement' }: { label: TextId; n1: TextId; n2: TextId; tone: Tone; size?: 'statement' | 'card' }) => (
+  <div className="flex flex-col gap-5">
+    <Label id={label} tone={tone} as="h3" size="sub" />
+    <Pair n1={n1} n2={n2} tone={tone} as="p" size={size} />
+  </div>
+);

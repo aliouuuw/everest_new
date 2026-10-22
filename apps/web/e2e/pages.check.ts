@@ -5,6 +5,7 @@
 import { chromium } from 'playwright'
 import { HOME_TEXT } from '../../../src/content/home'
 import { SOCIETE_TEXT } from '../../../src/content/societe'
+import { EXPERTISES_TEXT, EXPERTISE_ITEMS } from '../../../src/content/expertises'
 
 const BASE = process.argv[2] || 'http://127.0.0.1:4322'
 const OUT = process.argv[3] || '/tmp/everest-page-shots'
@@ -52,10 +53,10 @@ const PAGES: PageSpec[] = [
       'Découvrir Sama Naffa →': '/sama-naffa',
       'Entrer en relation avec nos équipes': '/contact',
       'Découvrir nos expertises': '/expertises',
-      'Marché des Titres Publics': '/expertises#marche-titres-publics',
-      'Marché Financier Régional (BRVM)': '/expertises#marche-financier-regional',
-      'Structuration & Ingénierie Financière': '/expertises#ingenierie-financiere',
-      'Private Office': '/expertises#private-office',
+      'Marché des Titres Publics': '/expertises/marche-titres-publics',
+      'Marché Financier Régional (BRVM)': '/expertises/marche-financier-regional',
+      'Structuration & Ingénierie Financière': '/expertises/ingenierie-financiere',
+      'Private Office': '/expertises/private-office',
     },
     gone: ['Questions fréquentes', 'Mds F CFA', 'Insights', 'La confiance d'],
   },
@@ -84,6 +85,42 @@ const PAGES: PageSpec[] = [
     },
     gone: ['2013', 'Équipe dirigeante', 'Stress tests', 'Notre approche', 'Mds'],
   },
+  {
+    path: '/expertises',
+    texts: Object.fromEntries(
+      Object.entries(EXPERTISES_TEXT).filter(([id]) => id.startsWith('expertises.intro.') || /\.(heading|chapeau)$/.test(id)),
+    ),
+    meta: EXPERTISES_TEXT['expertises.intro.n1'],
+    order: ['expertises.intro.n1', 'expertises.intro.n2', 'expertises.mtp.chapeau', 'expertises.brvm.chapeau', 'expertises.structuration.chapeau', 'expertises.privateOffice.chapeau'],
+    links: {
+      'Marché des Titres Publics': '/expertises/marche-titres-publics',
+      'Marché Financier Régional (BRVM)': '/expertises/marche-financier-regional',
+      'Structuration & Ingénierie Financière': '/expertises/ingenierie-financiere',
+      'Private Office': '/expertises/private-office',
+    },
+    gone: ['Nos expertises.', 'Prendre rendez-vous', 'Optimisation'],
+  },
+  ...(
+    [
+      ['mtp', 'marche-titres-publics'],
+      ['brvm', 'marche-financier-regional'],
+      ['structuration', 'ingenierie-financiere'],
+      ['privateOffice', 'private-office'],
+    ] as const
+  ).map(([key, slug]) => {
+    const ids = Object.keys(EXPERTISES_TEXT).filter((id) => id.startsWith(`expertises.${key}.`))
+    return {
+      path: `/expertises/${slug}`,
+      texts: Object.fromEntries(ids.map((id) => [id, EXPERTISES_TEXT[id as keyof typeof EXPERTISES_TEXT]])),
+      meta: EXPERTISES_TEXT[`expertises.${key}.chapeau`],
+      order: [
+        `expertises.${key}.chapeau`,
+        ...Array.from({ length: EXPERTISE_ITEMS[key] }, (_, i) => `expertises.${key}.i${i + 1}.n1`),
+      ],
+      links: { Expertises: '/expertises', 'Contact / Devenir client': '/contact' },
+      gone: ['Optimisation', 'Prendre rendez-vous'],
+    }
+  }),
 ]
 
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
@@ -101,10 +138,17 @@ for (const spec of PAGES) {
     await page.goto(BASE + P, { waitUntil: 'networkidle' })
     const main = page.locator('main')
 
-    const tops = await Promise.all(
-      spec.order.map((id) => main.locator(`[data-cms-id="${id}"]`).last().evaluate((el) => el.getBoundingClientRect().top + window.scrollY)),
+    // Reading order: top first, then left (cards on one row share a top).
+    const pos = await Promise.all(
+      spec.order.map((id) =>
+        main.locator(`[data-cms-id="${id}"]`).last().evaluate((el) => {
+          const r = el.getBoundingClientRect()
+          return [Math.round(r.top + window.scrollY), Math.round(r.left)] as const
+        }),
+      ),
     )
-    check(`${P} ${label} blocks in referential order`, tops.every((t, i) => i === 0 || t > tops[i - 1]), tops.map(Math.round).join(','))
+    const after = (a: readonly [number, number], b: readonly [number, number]) => a[0] > b[0] || (a[0] === b[0] && a[1] > b[1])
+    check(`${P} ${label} blocks in referential order`, pos.every((p, i) => i === 0 || after(p, pos[i - 1])), pos.map((p) => p.join(':')).join(','))
 
     const body = await main.innerText()
     for (const word of ['rendement', 'performance', 'attractif', 'compétitif'])

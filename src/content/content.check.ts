@@ -18,5 +18,6 @@ const referential = words(
 for (const [id, text] of Object.entries(TEXT)) {
   assert.ok(referential.includes(words(text)), `${id} is not word for word in the referential`)
   assert.ok(!text.includes('—'), `${id} still has an em dash`)
+  assert.ok(!text.includes('’'), `${id} has a curly apostrophe (the referential uses ')`)
 }
 console.log(`site copy: ${Object.keys(TEXT).length} texts match the referential`)
