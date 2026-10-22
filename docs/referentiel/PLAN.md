@@ -130,9 +130,9 @@ text, so that no menu entry points to a missing page. L6 finishes them.
 1. Home texts use new CMS ids (`home.*.n1`, `home.*.n2`). The seed only
    creates missing rows, so the old Payload rows (`home.positioning.title`,
    `home.cta.*`, …) stay in the database, unused. Clean them up later.
-2. The new ids have no Payload row on staging yet: the page shows the
-   JSX text, which is the referential text. Run `bun run seed:site-content`
-   against the staging database to make them editable in Payload.
+2. Seeded on 22 Oct 2026: 34 new home rows created in the staging
+   database (Neon), 145 kept. Editors can now change the home texts in
+   Payload. 35 old home rows remain unused (214 rows in total).
 3. Global CSS beats Tailwind utilities: `.font-primary` (weight 400) and
    `h1, h2 { line-height: 1 !important }` are unlayered. New blocks do not
    use `font-primary` and mark heading line-heights `!`.
