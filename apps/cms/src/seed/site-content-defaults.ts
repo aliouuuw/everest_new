@@ -3,6 +3,7 @@
 import { HOME_TEXT } from '../../../../src/content/home.ts'
 import { SOCIETE_TEXT } from '../../../../src/content/societe.ts'
 import { EXPERTISES_TEXT } from '../../../../src/content/expertises.ts'
+import { ACTUALITES_TEXT, ANALYSES_TEXT } from '../../../../src/content/analyses.ts'
 
 const offres: Record<string, string> = {
   'offres.hero.badge': "Services d'investissement",
@@ -125,14 +126,6 @@ export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
     'Notre équipe se tient à votre disposition pour répondre à toutes vos interrogations.',
   'faq.cta.ctaLabel': 'Nous contacter',
 
-  'publications.hero.badge': 'Publications',
-  'publications.hero.title': 'Nos revues & analyses.',
-  'publications.hero.subtitle':
-    "Consultez et téléchargez nos revues hebdomadaires, mensuelles et semestrielles pour suivre l'évolution des marchés.",
-
-  'actualites.hero.background': '/Assets_Website/Actualités.png',
-  'actualites.hero.badge': 'Centre de presse',
-  'actualites.hero.title': 'Actualités & Communiqués.',
-  'actualites.hero.subtitle':
-    'Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.',
+  ...ANALYSES_TEXT,
+  ...ACTUALITES_TEXT,
 }

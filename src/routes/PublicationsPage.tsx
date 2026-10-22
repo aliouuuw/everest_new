@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '../cms'
 import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
-import { useReveal } from '../components/Hooks/useReveal'
+import { N1, N2 } from '../components/Referentiel'
+import { ANALYSES_TEXT } from '../content/analyses'
 import {
   PUBLICATION_FILES,
   PUBLICATION_FREQUENCY_LABELS,
@@ -22,6 +23,17 @@ const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: st
 
 const ALL_LABEL = 'tout' as const
 type FilterCategory = Frequency | typeof ALL_LABEL
+
+/* ─── Referential V2.1 §4: standard disclaimer, on every publication ─── */
+const Disclaimer = ({ className = '' }: { className?: string }) => (
+  <EditableText
+    id="publications.disclaimer"
+    as="p"
+    className={`max-w-4xl text-xs md:text-[0.8125rem] italic leading-relaxed text-[var(--night-80)] ${className}`}
+  >
+    {ANALYSES_TEXT['publications.disclaimer']}
+  </EditableText>
+)
 
 /* ─── PDF Preview Modal ─── */
 const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub, onClose }) => {
@@ -85,6 +97,9 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
             title={pub.title}
             className="w-full h-full border-0"
           />
+        </div>
+        <div className="border-t border-[var(--mauve)]/10 px-6 py-4">
+          <Disclaimer />
         </div>
       </div>
     </div>
@@ -235,9 +250,6 @@ export function PublicationsView({
   publications?: Array<PublicationFile>
 }) {
   const publications = incoming && incoming.length > 0 ? incoming : PUBLICATION_FILES
-  const heroRef = useReveal<HTMLElement>()
-  const filtersRef = useReveal<HTMLDivElement>()
-  const listRef = useReveal<HTMLDivElement>()
 
   const [activeFilter, setActiveFilter] = useState<FilterCategory>(ALL_LABEL)
   const [searchQuery, setSearchQuery] = useState('')
@@ -303,24 +315,18 @@ export function PublicationsView({
 
   return (
     <div className="bg-[var(--pure-white)] font-primary">
-      {/* ─── Hero ─── */}
-      <section ref={heroRef} className="relative pt-[var(--site-chrome-top)] pb-12 md:pb-16 flex items-end bg-[var(--everest-green)]">
-        <div className="relative z-10 w-full page-container">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-            <div className="md:col-span-7">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
-                <EditableText id="publications.hero.badge">Publications</EditableText>
-              </span>
-              <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
-                <EditableText id="publications.hero.title">Nos revues &amp; analyses.</EditableText>
-              </h1>
-            </div>
-
-            <div className="md:col-span-5 pb-2">
-              <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
-                <EditableText id="publications.hero.subtitle">Consultez et téléchargez nos revues hebdomadaires, mensuelles et semestrielles pour suivre l'évolution des marchés.</EditableText>
-              </p>
-            </div>
+      {/* ─── Hero: referential V2.1 §4 ─── */}
+      <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
+        <div className="page-container">
+          <h1
+            className="mb-10 font-bold leading-[0.95]! tracking-tight text-white md:mb-14"
+            style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
+          >
+            Analyses &amp; Publications
+          </h1>
+          <div className="flex max-w-4xl flex-col gap-6">
+            <N1 id="publications.n1" tone="dark" as="p" size="statement" />
+            <N2 id="publications.n2" tone="dark" />
           </div>
         </div>
       </section>
@@ -328,7 +334,7 @@ export function PublicationsView({
       {/* ─── Search + Filters ─── */}
       <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
         <div className="page-container">
-          <div ref={filtersRef} className="reveal flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Search */}
             <div className="relative w-full sm:max-w-sm">
               <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-80)]/40" size={16} />
@@ -403,12 +409,13 @@ export function PublicationsView({
               <p className="text-sm text-[var(--night)]/50 font-primary">Essayez de modifier vos filtres ou votre recherche.</p>
             </div>
           ) : (
-            <div ref={listRef} className="reveal grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((pub) => (
                 <PublicationCard key={pub.id} pub={pub} onPreview={handlePreview} />
               ))}
             </div>
           )}
+          <Disclaimer className="mt-16 md:mt-20" />
         </div>
       </section>
 

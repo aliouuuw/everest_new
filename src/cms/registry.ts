@@ -15,6 +15,7 @@
 import { HOME_TEXT, type HomeTextId } from "../content/home";
 import { SOCIETE_TEXT, type SocieteTextId } from "../content/societe";
 import { EXPERTISES_TEXT, type ExpertisesTextId } from "../content/expertises";
+import { ACTUALITES_TEXT, ANALYSES_TEXT, type ActualitesTextId, type AnalysesTextId } from "../content/analyses";
 
 export type RegistryFieldType = "text" | "richtext" | "image";
 
@@ -193,17 +194,22 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "faq.cta.ctaLabel", label: "CTA — label bouton", section: "CTA", type: "text" },
   ],
   publications: [
-    // Hero
-    { id: "publications.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "publications.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
-    { id: "publications.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Referential V2.1: one entry per text in src/content/analyses.ts
+    ...(Object.keys(ANALYSES_TEXT) as Array<AnalysesTextId>).map((id) => ({
+      id,
+      label: id.slice('publications.'.length),
+      section: "Référentiel",
+      type: "text" as const,
+    })),
   ],
   actualites: [
-    // Hero
-    { id: "actualites.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
-    { id: "actualites.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "actualites.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
-    { id: "actualites.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
+    // Referential V2.1: one entry per text in src/content/analyses.ts
+    ...(Object.keys(ACTUALITES_TEXT) as Array<ActualitesTextId>).map((id) => ({
+      id,
+      label: id.slice('actualites.'.length),
+      section: "Référentiel",
+      type: "text" as const,
+    })),
   ],
 };
 

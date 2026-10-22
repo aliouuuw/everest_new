@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import ActualitesPage from '../../islands/ActualitesPage'
 import { fetchNewsFeed, fetchSiteContent } from '../../lib/payload'
+import { ACTUALITES_TEXT } from '@/content/analyses'
 
 const [feed, site] = await Promise.all([
   fetchNewsFeed(50),
@@ -11,6 +12,7 @@ const [feed, site] = await Promise.all([
 
 <Layout
   title="Actualités | EVEREST Finance"
+  description={ACTUALITES_TEXT['actualites.n1']}
 >
   <ActualitesPage client:load siteContent={site.docs} news={feed} />
 </Layout>

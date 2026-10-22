@@ -6,6 +6,8 @@ import { chromium } from 'playwright'
 import { HOME_TEXT } from '../../../src/content/home'
 import { SOCIETE_TEXT } from '../../../src/content/societe'
 import { EXPERTISES_TEXT, EXPERTISE_ITEMS } from '../../../src/content/expertises'
+import { ACTUALITES_TEXT, ANALYSES_TEXT } from '../../../src/content/analyses'
+import type { Page } from 'playwright'
 
 const BASE = process.argv[2] || 'http://127.0.0.1:4322'
 const OUT = process.argv[3] || '/tmp/everest-page-shots'
@@ -27,6 +29,10 @@ type PageSpec = {
   order: string[]
   links: Record<string, string>
   gone: string[]
+  /** Texts exempt from the lexicon check (the §4 disclaimer quotes « performances passées »). */
+  allow?: string[]
+  /** Page-specific steps, run on desktop. */
+  extra?: (page: Page, P: string) => Promise<void>
 }
 
 const PAGES: PageSpec[] = [
@@ -121,6 +127,29 @@ const PAGES: PageSpec[] = [
       gone: ['Optimisation', 'Prendre rendez-vous'],
     }
   }),
+  {
+    path: '/analyses',
+    texts: ANALYSES_TEXT,
+    meta: ANALYSES_TEXT['publications.n1'],
+    order: ['publications.n1', 'publications.n2', 'publications.disclaimer'],
+    links: {},
+    gone: ['Nos revues', 'Aucune publication trouvée'],
+    allow: [ANALYSES_TEXT['publications.disclaimer']],
+    extra: async (page, P) => {
+      await page.getByRole('button', { name: /Aperçu/ }).first().click()
+      const modal = page.locator('div.fixed.inset-0.z-50')
+      check(`${P} preview shows the disclaimer`, await modal.locator('[data-cms-id="publications.disclaimer"]').isVisible())
+      await page.keyboard.press('Escape')
+    },
+  },
+  {
+    path: '/actualites',
+    texts: ACTUALITES_TEXT,
+    meta: ACTUALITES_TEXT['actualites.n1'],
+    order: ['actualites.n1', 'actualites.n2'],
+    links: {},
+    gone: ['Publicité', 'Newsletter', 'Rubriques', 'Publications récentes', 'Centre de presse', "S'abonner"],
+  },
 ]
 
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
@@ -150,7 +179,8 @@ for (const spec of PAGES) {
     const after = (a: readonly [number, number], b: readonly [number, number]) => a[0] > b[0] || (a[0] === b[0] && a[1] > b[1])
     check(`${P} ${label} blocks in referential order`, pos.every((p, i) => i === 0 || after(p, pos[i - 1])), pos.map((p) => p.join(':')).join(','))
 
-    const body = await main.innerText()
+    let body = await main.innerText()
+    for (const ok of spec.allow ?? []) body = body.split(ok).join(' ')
     for (const word of ['rendement', 'performance', 'attractif', 'compétitif'])
       check(`${P} ${label} no « ${word} »`, !body.toLowerCase().includes(word))
     check(`${P} ${label} no em dash`, !body.includes('—'))
@@ -167,6 +197,7 @@ for (const spec of PAGES) {
     check(`${P} ${label} no hidden text`, hidden.length === 0, hidden.join(','))
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
     check(`${P} ${label} no horizontal scroll`, overflow <= 0, `${overflow}px`)
+    if (spec.extra && label === 'desktop') await spec.extra(page, P)
     check(`${P} ${label} no page errors`, errors.length === 0, errors.join(' | '))
 
     await page.screenshot({ path: `${OUT}/${P === '/' ? 'home' : P.slice(1)}-${label}-full.png`, fullPage: true })

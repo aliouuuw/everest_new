@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
-import { FiArrowRight, FiCalendar, FiClock, FiExternalLink, FiSearch } from 'react-icons/fi';
-import { EditableImage, EditableText } from '../cms';
-import { gsap } from 'gsap';
+import { FiArrowRight, FiCalendar, FiClock, FiSearch } from 'react-icons/fi';
+import { N1, N2 } from '../components/Referentiel';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 
@@ -35,18 +34,6 @@ function opensInNewTab(article: ActualitesArticle): boolean {
 }
 
 export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) {
-  const pageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set('.actu-reveal', { y: 40, opacity: 0 });
-      gsap.to('.actu-reveal', {
-        y: 0, opacity: 1, stagger: 0.08, duration: 0.9, ease: 'power3.out', delay: 0.15
-      });
-    }, pageRef);
-    return () => ctx.revert();
-  }, []);
-
   const featuredArticle = useMemo(
     () => articles.find((article) => article.featured) ?? articles[0] ?? null,
     [articles],
@@ -100,35 +87,19 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
   }, [ARTICLES, activeYear, activeMonth, activeCategory, searchQuery]);
 
   return (
-    <div ref={pageRef} className="font-primary">
-      {/* ─── Hero — Dark Image with Overlay ─── */}
-      <section className="relative min-h-[55vh] flex items-end pb-16 pt-24 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0 z-0">
-          <EditableImage
-            id="actualites.hero.background"
-            src="/Assets_Website/Actualités.png"
-            alt="Actualités financières"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        <div className="relative z-10 w-full page-container">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-end">
-            <div className="md:col-span-7">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--jaune-or)]/15 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-[var(--jaune-or)] mb-6">
-                <EditableText id="actualites.hero.badge">Centre de presse</EditableText>
-              </span>
-              <h1 className="font-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-5 text-white">
-                <EditableText id="actualites.hero.title">Actualités & Communiqués.</EditableText>
-              </h1>
-            </div>
-
-            <div className="md:col-span-5 pb-2">
-              <p className="text-base md:text-lg leading-relaxed text-white/65 font-light mb-8">
-                <EditableText id="actualites.hero.subtitle">Restez informé de nos derniers communiqués de presse, mises à jour et mentions dans les médias.</EditableText>
-              </p>
-            </div>
+    <div>
+      {/* ─── Hero: referential V2.1 §5 ─── */}
+      <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
+        <div className="page-container">
+          <h1
+            className="mb-10 font-bold leading-[0.95]! tracking-tight text-white md:mb-14"
+            style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
+          >
+            Actualités
+          </h1>
+          <div className="flex max-w-4xl flex-col gap-6">
+            <N1 id="actualites.n1" tone="dark" as="p" size="statement" />
+            <N2 id="actualites.n2" tone="dark" />
           </div>
         </div>
       </section>
@@ -136,7 +107,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
       {/* ─── Search + Filters ─── */}
       <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
         <div className="page-container">
-          <div className="actu-reveal flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
             
             {/* Category Filters */}
             <div className="flex flex-wrap items-center gap-2">
@@ -206,7 +177,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
         <div className="page-container">
           <Link
             to={articleHref(featuredArticle)}
-            className="actu-reveal group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(14,40,38,0.1)]"
+            className="group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(14,40,38,0.1)]"
             target={opensInNewTab(featuredArticle) ? '_blank' : undefined}
             rel={opensInNewTab(featuredArticle) ? 'noopener noreferrer' : undefined}
           >
@@ -255,19 +226,10 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
       {/* ─── Main Content: Articles + Sidebar ─── */}
       <section className="bg-[var(--pure-white)] py-24 md:py-40">
         <div className="page-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <div className="max-w-5xl">
 
             {/* Articles Feed */}
-            <div className="lg:col-span-8">
-              <div className="actu-reveal flex items-center justify-between mb-12">
-                <h3 className="font-primary font-bold text-2xl text-[var(--night)]">
-                  Publications récentes
-                  <span className="ml-3 px-3 py-1 rounded-full text-[10px] font-bold tracking-[0.1em] uppercase bg-[var(--mauve-10)] text-[var(--night-80)]">
-                    {ARTICLES.length}
-                  </span>
-                </h3>
-              </div>
-
+            <div>
               {filteredArticles.length === 0 ? (
                 <div className="py-12 text-center text-[var(--night)]/60 font-light">
                   Aucun article ne correspond à vos critères.
@@ -278,7 +240,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                       <Link
                         key={i}
                         to={articleHref(article)}
-                        className="actu-reveal group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                        className="group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
                         target={opensInNewTab(article) ? '_blank' : undefined}
                         rel={opensInNewTab(article) ? 'noopener noreferrer' : undefined}
                       >
@@ -329,77 +291,6 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
 
             </div>
 
-            {/* ─── Sidebar ─── */}
-            <aside className="lg:col-span-4 flex flex-col gap-10">
-
-              {/* Ad Banner — Premium CTA */}
-              <div className="actu-reveal relative overflow-hidden min-h-[400px] flex flex-col justify-end p-8 section-bg-light rounded-2xl">
-                <div className="absolute inset-0">
-                  <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="" className="w-full h-full object-cover opacity-20" />
-                </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-3 py-1 mb-5 text-[9px] tracking-[0.2em] uppercase font-bold text-[var(--jaune-or)] bg-[var(--jaune-or)]/10 rounded-full">
-                    Publicité
-                  </span>
-                  <h4 className="text-xl mb-3 font-primary font-bold leading-[1.25] text-[var(--pure-white)]">
-                    Ouvrez votre compte-titres 100% en ligne
-                  </h4>
-                  <p className="text-sm mb-6 font-light leading-[1.6] text-white/70">
-                    Accédez aux meilleures opportunités de la BRVM avec notre plateforme sécurisée.
-                  </p>
-                  <a
-                    href="https://everest-account-opening.vercel.app/new-home"
-                    className="inline-flex items-center gap-2 bg-[var(--jaune-or)] text-[var(--pure-white)] px-6 py-3 rounded-full text-[11px] tracking-[0.12em] uppercase font-bold hover:bg-white transition-colors duration-300"
-                  >
-                    Commencer <FiExternalLink />
-                  </a>
-                </div>
-              </div>
-
-              {/* Categories */}
-              <div className="actu-reveal border border-black/10 p-8 rounded-2xl">
-                <h3 className="font-primary font-bold text-lg mb-6 text-[var(--night)]">
-                  Rubriques
-                </h3>
-                <ul className="flex flex-col">
-                  {['Communiqués de presse', 'Mentions médias', 'Mises à jour', 'Événements'].map((cat, i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="flex justify-between items-center py-3 text-sm hover:text-[var(--night-80)] transition-colors duration-200 border-b border-black/5 last:border-0 font-normal text-[var(--night)] group"
-                      >
-                        <span>{cat}</span>
-                        <FiArrowRight className="text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Newsletter */}
-              <div className="actu-reveal border border-black/10 p-8 rounded-2xl">
-                <h3 className="font-primary font-bold text-lg mb-2 text-[var(--night)]">
-                  Newsletter
-                </h3>
-                <p className="text-sm mb-5 font-light leading-[1.6] text-[rgba(10,10,10,0.6)]">
-                  Recevez nos communiqués et analyses directement dans votre boîte mail.
-                </p>
-                <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-                  <input
-                    type="email"
-                    placeholder="votre@email.com"
-                    className="bg-white border border-black/10 rounded-full px-5 py-3 text-sm focus:outline-none focus:border-[var(--mauve)] transition-colors"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-[var(--jaune-or)] rounded-full text-white px-5 py-3 text-[11px] tracking-[0.12em] uppercase hover:bg-[#b5832a] hover:text-white transition-colors duration-300 font-bold"
-                  >
-                    S'abonner
-                  </button>
-                </form>
-              </div>
-
-            </aside>
           </div>
         </div>
       </section>

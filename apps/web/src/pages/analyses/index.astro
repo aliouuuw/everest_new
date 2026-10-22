@@ -6,6 +6,7 @@ import {
   fetchSiteContent,
   publishedPublicationFiles,
 } from '../../lib/payload'
+import { ANALYSES_TEXT } from '@/content/analyses'
 
 const [site, pubs] = await Promise.all([
   fetchSiteContent('publications'),
@@ -13,7 +14,7 @@ const [site, pubs] = await Promise.all([
 ])
 ---
 
-<Layout title="Analyses & Publications | EVEREST Finance">
+<Layout title="Analyses & Publications | EVEREST Finance" description={ANALYSES_TEXT['publications.n1']}>
   <PublicationsPage
     client:load
     siteContent={site.docs}
