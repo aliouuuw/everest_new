@@ -41,11 +41,9 @@ Searched `apps/web/src`, `apps/cms/src/seed` and the shared `src/` components:
 Each lot = one commit on `staging`. Check the page at
 https://staging.everestfin.com after the push.
 
-1. **L0 Audit.** For each Part III block, find the file that renders it
-   (Astro page, island, shared component in `src/`, or CMS seed in
-   `apps/cms/src/seed/site-content-defaults.ts`). Write the table in
-   `AUDIT.md` here: block, file, state (absent / different / conform).
-   No code change.
+1. **L0 Audit. Done (22 Oct 2026), see `AUDIT.md`.** For each Part III
+   block: the file that renders it and its state (absent / different /
+   conform). No code change.
 2. **L1 Global frame.** Charter colors. Menu and footer with the 8 entries
    (II.1). Footer copyright and signature (§9). « Mentions légales »,
    « Conditions générales d'utilisation », « Politique de Confidentialité ».
@@ -99,3 +97,8 @@ the user agrees.
 2. The 8 FAQ entries are "unchanged" from V1.0, which is not in this folder.
    Where is the source text?
 3. Route map above: approve before L1.
+4. The BRVM ticker shows invented quotes that change every few seconds
+   (`src/components/Header/BRVMTicker.tsx`). Hide it until a real feed
+   and the legal check, or keep it?
+5. The header has « Ouvrir un compte » and « Accès Client » buttons.
+   The referential menu has neither. Keep them next to the 8 entries?
