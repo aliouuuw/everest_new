@@ -42,7 +42,7 @@ export const Positioning: React.FC = () => {
         className="absolute left-0 top-0 h-[60%] w-[45%] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at top left, rgba(70,29,76,0.05) 0%, transparent 60%)',
+            'radial-gradient(ellipse at top left, rgba(14,40,38,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -53,7 +53,7 @@ export const Positioning: React.FC = () => {
             <div className="mb-6">
               <span
                 className="inline-block px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-[0.2em]"
-                style={{ color: '#461D4C', background: 'rgba(70,29,76,0.1)', border: '1px solid rgba(70,29,76,0.2)' }}
+                style={{ color: '#0E2826', background: 'rgba(14,40,38,0.1)', border: '1px solid rgba(14,40,38,0.2)' }}
               >
                 <EditableText id="home.positioning.badge" as="span">
                   Positionnement
@@ -80,10 +80,10 @@ export const Positioning: React.FC = () => {
 
         {/* 4 pillars — softened matrix (rounded shell + inner hairlines, matches EditorialCard radius) */}
         <div
-          className="overflow-hidden rounded-[1.25rem] border border-[rgba(70,29,76,0.1)] bg-[var(--pure-white)]"
+          className="overflow-hidden rounded-[1.25rem] border border-[rgba(14,40,38,0.1)] bg-[var(--pure-white)]"
           style={{
             boxShadow:
-              '0 8px 32px -12px rgba(70,29,76,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
+              '0 8px 32px -12px rgba(14,40,38,0.12), inset 0 1px 0 rgba(255,255,255,0.85)',
           }}
         >
           <div
@@ -96,9 +96,9 @@ export const Positioning: React.FC = () => {
               <div
                 key={p.title}
                 className={[
-                  'group relative z-0 flex flex-col border-[rgba(70,29,76,0.1)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:px-8',
+                  'group relative z-0 flex flex-col border-[rgba(14,40,38,0.1)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:px-8',
                   'transition-[background-color,box-shadow] duration-500',
-                  'hover:z-10 hover:bg-[#461D4C] hover:shadow-[0_20px_40px_-20px_rgba(70,29,76,0.35)]',
+                  'hover:z-10 hover:bg-[var(--everest-green)] hover:shadow-[0_20px_40px_-20px_rgba(14,40,38,0.35)]',
                   i > 0 ? 'border-t' : '',
                   i % 2 === 1 ? 'sm:border-l' : 'sm:border-l-0',
                   i >= 2 ? 'sm:border-t' : 'sm:border-t-0',
@@ -115,13 +115,13 @@ export const Positioning: React.FC = () => {
 
                 <div className="mb-4 flex items-center gap-4 md:mb-10">
                   <div
-                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(70,29,76,0.1)] bg-[rgba(70,29,76,0.05)] text-[#461D4C] transition-colors duration-500 group-hover:border-[rgba(182,138,62,0.25)] group-hover:bg-[rgba(182,138,62,0.12)] group-hover:text-[var(--jaune-or)]"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[rgba(14,40,38,0.1)] bg-[rgba(14,40,38,0.05)] text-[var(--everest-green)] transition-colors duration-500 group-hover:border-[rgba(182,138,62,0.25)] group-hover:bg-[rgba(182,138,62,0.12)] group-hover:text-[var(--jaune-or)]"
                   >
                     <Icon className="text-lg transition-transform duration-500 group-hover:-translate-y-0.5" aria-hidden />
                   </div>
                 </div>
 
-                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[#461D4C] transition-colors duration-500 group-hover:text-white mb-3 leading-tight">
+                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[var(--everest-green)] transition-colors duration-500 group-hover:text-white mb-3 leading-tight">
                   {p.title}
                 </h3>
                 <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 max-w-xs">

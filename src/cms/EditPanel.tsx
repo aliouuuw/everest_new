@@ -226,7 +226,7 @@ export function EditPanel() {
   return (
     <aside
       data-lenis-prevent
-      className="fixed right-0 top-0 z-[9999] flex h-[100dvh] w-[min(440px,100vw)] flex-col overscroll-contain border-l border-[var(--command-border)] bg-[var(--pure-white)] font-primary shadow-[-12px_0_40px_-16px_rgba(70,29,76,0.2)]"
+      className="fixed right-0 top-0 z-[9999] flex h-[100dvh] w-[min(440px,100vw)] flex-col overscroll-contain border-l border-[var(--command-border)] bg-[var(--pure-white)] font-primary shadow-[-12px_0_40px_-16px_rgba(14,40,38,0.2)]"
     >
       <header className="relative shrink-0 border-b border-[var(--mauve-15)] bg-[var(--mauve)] px-5 py-5 text-[var(--pure-white)]">
         <div
@@ -291,7 +291,7 @@ export function EditPanel() {
               return (
                 <div
                   key={entry.id}
-                  className="mb-3 rounded-2xl border border-[var(--mauve-10)] bg-[var(--pure-white)] p-4 shadow-[0_8px_32px_-12px_rgba(70,29,76,0.12),inset_0_1px_0_rgba(255,255,255,0.85)] last:mb-0"
+                  className="mb-3 rounded-2xl border border-[var(--mauve-10)] bg-[var(--pure-white)] p-4 shadow-[0_8px_32px_-12px_rgba(14,40,38,0.12),inset_0_1px_0_rgba(255,255,255,0.85)] last:mb-0"
                 >
                   <label className="font-primary mb-1 block text-sm font-semibold text-[var(--mauve)]">
                     {entry.label}

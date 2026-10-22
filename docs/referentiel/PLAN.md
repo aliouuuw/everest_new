@@ -114,6 +114,8 @@ the user agrees.
 | L4 Expertises | Done. Hub `/expertises` (common intro) and 4 pages `/expertises/<slug>` (§3.1 to §3.4) in `src/content/expertises.ts`; old `#anchor` links land on the hub cards. 369/369 page checks. Seeded 22 Oct 2026 (46 rows, 311 in total) |
 | L5 Analyses & Actualités | Done: §4 and §5 text, disclaimer under the list and in each PDF preview, ad, dead « Rubriques » links and no-op newsletter removed. Publication cards hide the CMS summaries (banned words); the 3 staging titles use « , » instead of « — » (22 Oct 2026, approved). Actualités is empty: 0 articles on staging. Seeded 22 Oct 2026 (5 rows, 316 in total) |
 | L6 Opportunités, Sama Naffa, Contact | Done: §6, §7 and §8 in `src/content/relation.ts` (CMS page keys `opportunites`, `sama-naffa`, `contact`); 4-step « Parcours Devenir client »; « Coordonnées » with e-mail and phone links; hours card and « sous 24 h » removed. 526/526 page checks. Seeded 22 Oct 2026 (18 rows, 334 in total) |
+| L7 Footer pages | Blocked on inputs, nothing published: no placeholder text on public pages. Footer labels stay plain text until the pages exist. See « L7: what to send » |
+| L8 Lexicon gate | Done: `bun run check:lexicon` scans every built page (or staging with a URL) for banned words, em dashes, fixed spellings and off-charter colors. Fixed: « performance » on /auth, glossary « Indice » and « Spread » removed from /faq, purple #461D4C purged from the CSS |
 
 L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
 text, so that no menu entry points to a missing page. L6 finishes them.
@@ -163,6 +165,18 @@ text, so that no menu entry points to a missing page. L6 finishes them.
    privacy text (L7).
 3. French typography: `EditableText` now keeps « : ; ? ! » on the same
    line as the word before (non-breaking space).
+
+## L7: what to send
+
+| Page | Needed | From |
+|------|--------|------|
+| Mentions légales | V1.0 structure, then: forme sociale et capital, RCCM et identifiant fiscal, directeur de la publication, hébergeur | Direction Juridique |
+| Politique de Confidentialité | V1.0 structure, then: régime des données (also covers the consent line under the contact form) | Direction Juridique |
+| Conditions générales d'utilisation | Full text (the referential only fixes the label) | Direction Juridique |
+| Abécédaire / FAQ | V1.0 text of the 8 entries: qu'est-ce qu'une SGI ; sécurité des avoirs, risque inclus ; la BRVM ; les titres publics ; ouvrir un compte ; les frais ; suivre ses investissements ; Sama Naffa | ADG / V1.0 author |
+
+When a text arrives: add it to `src/content/`, build the page with the
+shared blocks, link it from the footer, seed it.
 
 ## Waiting on the user
 

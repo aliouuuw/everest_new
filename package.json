@@ -27,6 +27,7 @@
     "lint:cms": "bun run --cwd apps/cms lint",
     "check:seed": "bun run --cwd apps/cms check:seed",
     "check:copy": "bun src/content/content.check.ts",
+    "check:lexicon": "bun apps/web/e2e/lexicon.check.ts",
     "check:news": "bun run --cwd apps/web check:news",
     "check:lead": "bun run --cwd apps/web check:lead",
     "seed:admin": "bun run --cwd apps/cms seed:admin",

@@ -68,7 +68,7 @@ export function AuthView({ children }: AuthViewProps) {
                   </div>
                   <div>
                     <div className="font-display-aptos text-lg mb-1">Suivi en temps réel</div>
-                    <p className="text-secondary text-sm">Positions, performance et mouvements à jour.</p>
+                    <p className="text-secondary text-sm">Positions et mouvements à jour.</p>
                   </div>
                 </div>
               </div>
