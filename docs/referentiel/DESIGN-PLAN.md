@@ -96,6 +96,15 @@ Command: `/impeccable adapt`.
 3. **Investor space** CTA on Opportunités: hidden until the space exists.
 4. **Contact form pipeline** (II.2 prospection): see PLAN.md.
 
+## Decisions (22 Oct 2026)
+
+1. **First:** Phase 1, accessibility.
+2. **Tone:** a bolder brand world. The mountain and the caravan carry
+   atmosphere across all pages, not only the home hero. Phase 2 sets the
+   type scale and the proof peaks with that ambition; Phase 3 builds the
+   world (rope device, hero, publication covers).
+3. **Next pass scope:** Phases 1 and 2, then a new critique.
+
 ## Order
 
 Phase 1, then 2, then 3. Phases 4 and 5 can run alongside 3. Re-run
