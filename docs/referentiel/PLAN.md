@@ -99,6 +99,9 @@ the user agrees.
    entry (see `apps/web/src/pages/*.astro`).
 4. **BRVM ticker: hidden** until a real feed and the legal check.
 5. **Header buttons « Ouvrir un compte » and « Accès Client »: kept.**
+6. **§6 CTA « Accéder à l'espace investisseur »: hidden** until the
+   investor space exists.
+7. **Footer social icons: removed** until the real URLs arrive.
 
 ## Lot status
 
@@ -121,9 +124,6 @@ text, so that no menu entry points to a missing page. L6 finishes them.
    Without the CMS, this changed the home « À la une » item and broke
    React hydration (error #418).
 
-## Questions for the user
+## Waiting on the user
 
-1. §6 CTA « Accéder à l'espace investisseur »: no investor space exists.
-   Link it to `/auth`, or leave it out until the space is built?
-2. Footer social links (LinkedIn, Facebook) had `href="#"`. They are
-   removed. Send the real URLs to add them back. TikTok waits on ADG.
+1. Real LinkedIn and Facebook URLs for the footer (user adds them later).
