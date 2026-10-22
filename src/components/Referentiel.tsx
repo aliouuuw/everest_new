@@ -118,3 +118,18 @@ export const Block = ({ label, n1, n2, tone, size = 'statement' }: { label: Text
     <Pair n1={n1} n2={n2} tone={tone} as="p" size={size} />
   </div>
 );
+
+/** Dark page hero: page title (a menu label), then the page N1/N2 or chapeau. */
+export const PageHero = ({ title, children }: { title: string; children?: ReactNode }) => (
+  <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
+    <div className="page-container">
+      <h1
+        className={`font-bold leading-[0.95]! tracking-tight text-white ${children ? 'mb-10 md:mb-14' : ''}`}
+        style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
+      >
+        {title}
+      </h1>
+      {children && <div className="flex max-w-4xl flex-col gap-6">{children}</div>}
+    </div>
+  </section>
+);

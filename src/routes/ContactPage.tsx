@@ -1,13 +1,8 @@
 import { useState } from 'react';
-import {
-  FiArrowRight,
-  FiBriefcase,
-  FiMail,
-  FiMapPin,
-  FiPhone,
-} from 'react-icons/fi';
-import { useReveal } from '../components/Hooks/useReveal';
+import { FiArrowRight } from 'react-icons/fi';
 import { EditableText } from '../cms';
+import { N1, N2, PageHero } from '../components/Referentiel';
+import { Coordonnees, Parcours } from '../components/Sections/RelationReferentiel';
 
 const TOPICS = [
   { value: 'relation', label: 'Entrer en relation' },
@@ -19,8 +14,6 @@ const TOPICS = [
 ];
 
 export const ContactPage = () => {
-  const formRef = useReveal<HTMLElement>();
-
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -51,47 +44,20 @@ export const ContactPage = () => {
 
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
-      {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Expertises) ─── */}
-      <section className="relative pt-[200px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--everest-green)]">
-        <div className="relative z-10 page-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
-            <div className="lg:col-span-8">
-              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
-                <EditableText id="contact.hero.title">Parlons de vos projets.</EditableText>
-              </h1>
-            </div>
-            <div className="lg:col-span-4">
-              <p className="text-base md:text-lg leading-relaxed text-white/70 font-light border-l-2 border-[var(--jaune-or)] pl-6">
-                <EditableText id="contact.hero.subtitle">
-                  Nos équipes sont à votre disposition pour analyser vos besoins et vous
-                  accompagner dans vos projets d&apos;investissement ou de financement.
-                </EditableText>
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Referential V2.1 §8: N1/N2, then the four steps, then the form and the contact details */}
+      <PageHero title="Contact / Devenir client">
+        <N1 id="contact.n1" tone="dark" as="p" size="statement" />
+        <N2 id="contact.n2" tone="dark" />
+      </PageHero>
+
+      <Parcours tone="light" />
 
       {/* ─── Form + info ─── */}
-      <section
-        id="form"
-        ref={formRef}
-        className="reveal bg-[var(--summit-ivory)] py-16 md:py-20"
-      >
+      <section id="form" className="bg-[var(--summit-ivory)] py-16 md:py-20">
         <div className="page-container">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
             {/* Form */}
             <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">
-              <h2 className="luxury-heading mb-3">
-                <EditableText id="contact.form.title">Envoyer un message.</EditableText>
-              </h2>
-              <p className="mb-8 max-w-lg text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base">
-                <EditableText id="contact.form.intro">
-                  Décrivez brièvement votre demande — un conseiller prendra contact sous 24&nbsp;h
-                  ouvrées pour cadrer l&apos;échange.
-                </EditableText>
-              </p>
-
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <FormField
@@ -175,76 +141,9 @@ export const ContactPage = () => {
               </form>
             </div>
 
-            {/* Info panel */}
-            <aside className="flex flex-col gap-4 lg:col-span-5">
-              <div
-                className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-[var(--everest-green)]"
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-60"
-                  style={{
-                    background:
-                      'radial-gradient(ellipse at top right, rgba(182,138,62,0.12) 0%, transparent 65%)',
-                  }}
-                />
-                <div className="relative">
-                  <p className="mb-3 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
-                    <EditableText id="contact.info.badge">Coordonnées</EditableText>
-                  </p>
-                  <h3 className="mb-6 font-primary text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                    <EditableText id="contact.info.company">EVEREST Finance SGI</EditableText>
-                  </h3>
-
-                  <ul className="space-y-5 text-white/75">
-                    <InfoRow icon={FiMapPin}>
-                      18 Boulevard de la République
-                      <br />
-                      BP 11659-13000 — Dakar, Sénégal
-                    </InfoRow>
-                    <InfoRow icon={FiMail}>
-                      <a
-                        href="mailto:contact@everestfin.com"
-                        className="underline-offset-4 transition-colors hover:text-[var(--jaune-or)] hover:underline"
-                      >
-                        contact@everestfin.com
-                      </a>
-                    </InfoRow>
-                    <InfoRow icon={FiPhone}>
-                      <a
-                        href="tel:+221338228700"
-                        className="block transition-colors hover:text-[var(--jaune-or)]"
-                      >
-                        +221 33 822 87 00
-                      </a>
-                      <a
-                        href="tel:+221338228701"
-                        className="block transition-colors hover:text-[var(--jaune-or)]"
-                      >
-                        +221 33 822 87 01
-                      </a>
-                    </InfoRow>
-                    <InfoRow icon={FiBriefcase}>
-                      <EditableText id="contact.info.license">Agrément AMF-UMOA n° SGI/DA/2016/60</EditableText>
-                    </InfoRow>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-7">
-                <p className="mb-1.5 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mauve-60)]">
-                  <EditableText id="contact.hours.badge">Horaires</EditableText>
-                </p>
-                <h4 className="mb-3 font-primary text-base font-semibold tracking-tight text-[var(--night-80)]">
-                  <EditableText id="contact.hours.title">Lundi — Vendredi · 08h30 → 17h30 GMT</EditableText>
-                </h4>
-                <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
-                  <EditableText id="contact.hours.body">
-                    Nous répondons en général sous 24&nbsp;h ouvrées. Pour les demandes urgentes
-                    relatives à une opération en cours, privilégiez le téléphone.
-                  </EditableText>
-                </p>
-              </div>
+            {/* Info panel: §8 « Coordonnées » */}
+            <aside className="rounded-2xl bg-[var(--everest-green)] p-6 md:p-8 lg:col-span-5 lg:self-start">
+              <Coordonnees tone="dark" />
             </aside>
           </div>
         </div>
@@ -290,18 +189,4 @@ const FormField: React.FC<FormFieldProps> = ({
       className="w-full rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
     />
   </div>
-);
-
-const InfoRow: React.FC<{ icon: React.ElementType; children: React.ReactNode }> = ({
-  icon: Icon,
-  children,
-}) => (
-  <li className="flex items-start gap-3">
-    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.12] bg-white/[0.04]">
-      <Icon className="text-[13px] text-[var(--jaune-or)]" aria-hidden />
-    </span>
-    <div className="min-w-0 flex-1 font-primary text-sm font-light leading-relaxed">
-      {children}
-    </div>
-  </li>
 );

@@ -4,6 +4,7 @@ import { HOME_TEXT } from '../../../../src/content/home.ts'
 import { SOCIETE_TEXT } from '../../../../src/content/societe.ts'
 import { EXPERTISES_TEXT } from '../../../../src/content/expertises.ts'
 import { ACTUALITES_TEXT, ANALYSES_TEXT } from '../../../../src/content/analyses.ts'
+import { CONTACT_TEXT, OPPORTUNITES_TEXT, SAMA_NAFFA_TEXT } from '../../../../src/content/relation.ts'
 
 const offres: Record<string, string> = {
   'offres.hero.badge': "Services d'investissement",
@@ -94,22 +95,12 @@ export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
 
   ...EXPERTISES_TEXT,
 
-  'contact.hero.title': 'Parlons de vos projets.',
-  'contact.hero.subtitle':
-    "Nos équipes sont à votre disposition pour analyser vos besoins et vous accompagner dans vos projets d'investissement ou de financement.",
-  'contact.form.title': 'Envoyer un message.',
-  'contact.form.intro':
-    "Décrivez brièvement votre demande — un conseiller prendra contact sous 24 h ouvrées pour cadrer l'échange.",
   'contact.form.privacy':
     'En envoyant ce message, vous acceptez que vos données soient utilisées pour répondre à votre demande.',
   'contact.form.submit': 'Envoyer la demande',
-  'contact.info.badge': 'Coordonnées',
-  'contact.info.company': 'EVEREST Finance SGI',
-  'contact.info.license': 'Agrément AMF-UMOA n° SGI/DA/2016/60',
-  'contact.hours.badge': 'Horaires',
-  'contact.hours.title': 'Lundi — Vendredi · 08h30 → 17h30 GMT',
-  'contact.hours.body':
-    'Nous répondons en général sous 24 h ouvrées. Pour les demandes urgentes relatives à une opération en cours, privilégiez le téléphone.',
+  ...CONTACT_TEXT,
+  ...OPPORTUNITES_TEXT,
+  ...SAMA_NAFFA_TEXT,
 
   'faq.hero.background': '/Assets_Website/Abécédaire-&-FAQ.png',
   'faq.hero.badge': 'Abécédaire & FAQ',

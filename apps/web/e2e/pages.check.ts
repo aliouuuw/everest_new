@@ -7,6 +7,7 @@ import { HOME_TEXT } from '../../../src/content/home'
 import { SOCIETE_TEXT } from '../../../src/content/societe'
 import { EXPERTISES_TEXT, EXPERTISE_ITEMS } from '../../../src/content/expertises'
 import { ACTUALITES_TEXT, ANALYSES_TEXT } from '../../../src/content/analyses'
+import { CONTACT_TEXT, OPPORTUNITES_TEXT, SAMA_NAFFA_TEXT } from '../../../src/content/relation'
 import type { Page } from 'playwright'
 
 const BASE = process.argv[2] || 'http://127.0.0.1:4322'
@@ -150,6 +151,46 @@ const PAGES: PageSpec[] = [
     links: {},
     gone: ['Publicité', 'Newsletter', 'Rubriques', 'Publications récentes', 'Centre de presse', "S'abonner"],
   },
+  {
+    path: '/opportunites',
+    texts: OPPORTUNITES_TEXT,
+    meta: OPPORTUNITES_TEXT['opportunites.n1'],
+    order: ['opportunites.n1', 'opportunites.n2', 'opportunites.cta2'],
+    links: { 'Devenir client': '/contact' },
+    gone: ["Accéder à l'espace investisseur"],
+  },
+  {
+    path: '/sama-naffa',
+    texts: SAMA_NAFFA_TEXT,
+    meta: SAMA_NAFFA_TEXT['sama-naffa.n1'],
+    order: ['sama-naffa.n1', 'sama-naffa.cta'],
+    links: { 'Découvrir Sama Naffa →': 'https://www.samanaffa.com' },
+    gone: [],
+  },
+  {
+    path: '/contact',
+    texts: CONTACT_TEXT,
+    order: [
+      'contact.n1',
+      'contact.n2',
+      'contact.parcours.heading',
+      'contact.step1.n1',
+      'contact.step2.n1',
+      'contact.step3.n1',
+      'contact.step4.n1',
+      'contact.coordonnees.n1',
+    ],
+    links: {
+      'contact@everestfin.com': 'mailto:contact@everestfin.com',
+      '+221 33 822 87 00': 'tel:+221338228700',
+      '+221 33 822 87 01': 'tel:+221338228701',
+    },
+    gone: ['Parlons de vos projets', 'Horaires', 'Lundi', 'Envoyer un message', 'prendra contact sous'],
+    extra: async (page, P) => {
+      const required = await page.locator('main form [required]').count()
+      check(`${P} form keeps its 3 required fields`, required === 3, String(required))
+    },
+  },
 ]
 
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
@@ -157,7 +198,9 @@ for (const spec of PAGES) {
   const P = spec.path
   // II.3: the served HTML holds the whole content (no JavaScript needed)
   const html = decode(await (await fetch(BASE + P)).text())
-  for (const [id, text] of Object.entries(spec.texts)) check(`${P} HTML has ${id}`, html.includes(text))
+  // Text check ignores markup: links (e-mail, phone) and React comments split a text in the raw HTML.
+  const plain = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<[^>]+>/g, '').replace(/\u00a0/g, ' ')
+  for (const [id, text] of Object.entries(spec.texts)) check(`${P} HTML has ${id}`, plain.includes(text))
   if (spec.meta) check(`${P} meta description`, html.includes(`<meta name="description" content="${spec.meta}"`))
 
   for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'phone']] as const) {
@@ -179,7 +222,7 @@ for (const spec of PAGES) {
     const after = (a: readonly [number, number], b: readonly [number, number]) => a[0] > b[0] || (a[0] === b[0] && a[1] > b[1])
     check(`${P} ${label} blocks in referential order`, pos.every((p, i) => i === 0 || after(p, pos[i - 1])), pos.map((p) => p.join(':')).join(','))
 
-    let body = await main.innerText()
+    let body = (await main.innerText()).replace(/\u00a0/g, ' ')
     for (const ok of spec.allow ?? []) body = body.split(ok).join(' ')
     for (const word of ['rendement', 'performance', 'attractif', 'compétitif'])
       check(`${P} ${label} no « ${word} »`, !body.toLowerCase().includes(word))

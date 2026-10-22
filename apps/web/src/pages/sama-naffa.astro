@@ -1,43 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import ReferentielPage from '../islands/ReferentielPage'
+import { fetchSiteContent } from '../lib/payload'
+import { SAMA_NAFFA_TEXT } from '@/content/relation'
 
-// Referential V2.1 §7: gateway page, no N2 (ADG decision). Logo, short text, one CTA. Charters are not mixed.
+const site = await fetchSiteContent('sama-naffa')
 ---
-<Layout title="Sama Naffa | EVEREST Finance">
-  <div class="bg-[var(--pure-white)] text-[var(--night)] font-primary">
-    <section class="relative pt-[200px] pb-12 md:pb-16 bg-[var(--everest-green)]">
-      <div class="page-container">
-        <h1
-          class="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]"
-          style="font-size: clamp(2.375rem, 4.6vw + 1.2rem, 50px)"
-        >
-          Sama Naffa
-        </h1>
-      </div>
-    </section>
 
-    <section class="py-12 md:py-20">
-      <div class="page-container grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
-        <div class="md:col-span-4">
-          <img src="/sama-naffa-logo.png" alt="Sama Naffa, par EVEREST Finance" width="410" height="230" class="w-full max-w-[320px] h-auto" />
-        </div>
-        <div class="md:col-span-8">
-          <p class="max-w-3xl text-lg md:text-xl leading-relaxed text-[var(--night-80)] border-l-2 border-[var(--jaune-or)] pl-6">
-            Sama Naffa est la solution d'épargne portée par EVEREST Finance. Elle permet à chacun d'épargner de manière
-            structurée et d'accéder progressivement aux marchés financiers régionaux : commencer modestement, tenir dans
-            la durée, construire un patrimoine. Sama Naffa dispose de son propre univers, avec ses parcours, son
-            accompagnement et ses outils pédagogiques.
-          </p>
-          <a
-            href="https://www.samanaffa.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-primary-dark mt-10 inline-flex items-center justify-center px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit"
-          >
-            Découvrir Sama Naffa →
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
+<Layout title="Sama Naffa | EVEREST Finance" description={SAMA_NAFFA_TEXT['sama-naffa.n1']}>
+  <ReferentielPage siteContent={site.docs} pageKey="sama-naffa" />
 </Layout>

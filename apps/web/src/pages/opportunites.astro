@@ -1,45 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import ReferentielPage from '../islands/ReferentielPage'
+import { fetchSiteContent } from '../lib/payload'
+import { OPPORTUNITES_TEXT } from '@/content/relation'
 
-// Referential V2.1 §6. CTA « Accéder à l'espace investisseur » waits on the investor space decision (§10).
+const site = await fetchSiteContent('opportunites')
 ---
-<Layout title="Opportunités | EVEREST Finance">
-  <div class="bg-[var(--pure-white)] text-[var(--night)] font-primary">
-    <section class="relative pt-[200px] pb-12 md:pb-16 bg-[var(--everest-green)]">
-      <div class="page-container">
-        <h1
-          class="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)] mb-10"
-          style="font-size: clamp(2.375rem, 4.6vw + 1.2rem, 50px)"
-        >
-          Opportunités
-        </h1>
-        <p class="max-w-3xl text-lg md:text-xl leading-relaxed text-white/80 font-light border-l-2 border-[var(--jaune-or)] pl-6">
-          Les marchés financiers de l'UEMOA offrent aux investisseurs un éventail d'instruments réglementés : titres
-          publics, obligations d'entreprises, actions cotées, organismes de placement collectif. EVEREST Finance
-          identifie, analyse et structure ces opportunités pour les rendre accessibles dans un cadre maîtrisé.
-        </p>
-      </div>
-    </section>
 
-    <section class="py-12 md:py-20">
-      <div class="page-container">
-        <p class="max-w-3xl text-base md:text-lg leading-relaxed text-[var(--night-80)] border-l-2 border-[var(--everest-green)] pl-6">
-          Les informations relatives aux opérations en cours (caractéristiques des instruments, conditions de
-          souscription, documentation réglementaire) sont réservées aux clients de la maison et aux investisseurs
-          enregistrés. Cet encadrement n'est pas une restriction de complaisance : il garantit que chaque investisseur
-          reçoit une information complète, adaptée à sa situation, dans le respect de la réglementation de
-          l'AMF-UMOA. L'espace investisseur donne accès, après identification, aux émissions en cours et à leur
-          documentation, aux caractéristiques des instruments et aux modalités pratiques de souscription.
-          L'inscription est gratuite ; elle nous permet de vérifier que l'information délivrée correspond à votre
-          situation.
-        </p>
-        <a
-          href="/contact"
-          class="btn-primary-dark mt-10 inline-flex items-center justify-center px-10 py-5 text-xs uppercase tracking-[0.2em] font-bold w-fit"
-        >
-          Devenir client
-        </a>
-      </div>
-    </section>
-  </div>
+<Layout title="Opportunités | EVEREST Finance" description={OPPORTUNITES_TEXT['opportunites.n1']}>
+  <ReferentielPage siteContent={site.docs} pageKey="opportunites" />
 </Layout>

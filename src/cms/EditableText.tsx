@@ -2,6 +2,10 @@ import type { CSSProperties, ElementType, ReactNode } from "react";
 import { useCMS } from "./cmsContext";
 import { useContent } from "./useContent";
 
+/** French typography: a space before « : ; ? ! » and after « » must not break the line. */
+const frenchSpaces = (text: string) =>
+  text.replace(/ ([:;?!»])/g, "\u00a0$1").replace(/« /g, "«\u00a0");
+
 interface EditableTextProps {
   id: string;
   /** Fallback content when no override exists. Typically a string. */
@@ -31,10 +35,11 @@ export function EditableText({
 
   const Tag = (as ?? "span") as ElementType;
 
-  const content: ReactNode =
+  const raw: ReactNode =
     override?.value !== undefined && override.value !== ""
       ? override.value
       : children;
+  const content = typeof raw === "string" ? frenchSpaces(raw) : raw;
 
   const editStyle: CSSProperties | undefined = editMode
     ? {

@@ -113,6 +113,7 @@ the user agrees.
 | L3 La société | Done. §2.1 to §2.6 in `src/content/societe.ts`; §2.7 hidden (Legal). `apps/web/e2e/pages.check.ts` covers `/` and `/la-societe` (174/174) |
 | L4 Expertises | Done. Hub `/expertises` (common intro) and 4 pages `/expertises/<slug>` (§3.1 to §3.4) in `src/content/expertises.ts`; old `#anchor` links land on the hub cards. 369/369 page checks. Seeded 22 Oct 2026 (46 rows, 311 in total) |
 | L5 Analyses & Actualités | Done: §4 and §5 text, disclaimer under the list and in each PDF preview, ad, dead « Rubriques » links and no-op newsletter removed. Publication cards hide the CMS summaries (banned words); the 3 staging titles use « , » instead of « — » (22 Oct 2026, approved). Actualités is empty: 0 articles on staging. Seeded 22 Oct 2026 (5 rows, 316 in total) |
+| L6 Opportunités, Sama Naffa, Contact | Done: §6, §7 and §8 in `src/content/relation.ts` (CMS page keys `opportunites`, `sama-naffa`, `contact`); 4-step « Parcours Devenir client »; « Coordonnées » with e-mail and phone links; hours card and « sous 24 h » removed. 526/526 page checks |
 
 L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
 text, so that no menu entry points to a missing page. L6 finishes them.
@@ -149,6 +150,19 @@ text, so that no menu entry points to a missing page. L6 finishes them.
 2. Seeded on 22 Oct 2026: 51 `about.*` rows created on staging, values
    equal to `src/content/societe.ts` (265 rows in total, 35 old home rows
    and the old `about.*` rows unused).
+
+## Found during L6 (not in the lot)
+
+1. **The contact form does not feed the prospection system (II.2).** On
+   submit it opens the visitor's mail app (`mailto:`). The CMS
+   `investor-leads` collection only fits the investor-profile quiz.
+   A real pipeline (store the request, follow-ups D+3, D+7, D+14) is a
+   new feature: decide owner and scope first.
+2. The consent line under the form (« En envoyant ce message, vous
+   acceptez… ») is not in the referential. Kept until Legal writes the
+   privacy text (L7).
+3. French typography: `EditableText` now keeps « : ; ? ! » on the same
+   line as the word before (non-breaking space).
 
 ## Waiting on the user
 

@@ -16,6 +16,7 @@ import { HOME_TEXT, type HomeTextId } from "../content/home";
 import { SOCIETE_TEXT, type SocieteTextId } from "../content/societe";
 import { EXPERTISES_TEXT, type ExpertisesTextId } from "../content/expertises";
 import { ACTUALITES_TEXT, ANALYSES_TEXT, type ActualitesTextId, type AnalysesTextId } from "../content/analyses";
+import { CONTACT_TEXT, OPPORTUNITES_TEXT, SAMA_NAFFA_TEXT, type ContactTextId, type OpportunitesTextId, type SamaNaffaTextId } from "../content/relation";
 
 export type RegistryFieldType = "text" | "richtext" | "image";
 
@@ -39,7 +40,9 @@ export type PageKey =
   | "contact"
   | "faq"
   | "publications"
-  | "actualites";
+  | "actualites"
+  | "opportunites"
+  | "sama-naffa";
 
 export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
   home: [
@@ -159,21 +162,16 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     })),
   ],
   contact: [
-    // Hero
-    { id: "contact.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
-    { id: "contact.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
-    // Form
-    { id: "contact.form.title", label: "Formulaire — titre", section: "Formulaire", type: "text" },
-    { id: "contact.form.intro", label: "Formulaire — intro", section: "Formulaire", type: "richtext" },
+    // Referential V2.1 §8: one entry per text in src/content/relation.ts
+    ...(Object.keys(CONTACT_TEXT) as Array<ContactTextId>).map((id) => ({
+      id,
+      label: id.slice('contact.'.length),
+      section: "Référentiel",
+      type: "text" as const,
+    })),
+    // Form (functional labels, not referential copy)
     { id: "contact.form.privacy", label: "Formulaire — confidentialité", section: "Formulaire", type: "richtext" },
     { id: "contact.form.submit", label: "Formulaire — bouton", section: "Formulaire", type: "text" },
-    // Info panels
-    { id: "contact.info.badge", label: "Coordonnées — badge", section: "Coordonnées", type: "text" },
-    { id: "contact.info.company", label: "Coordonnées — société", section: "Coordonnées", type: "text" },
-    { id: "contact.info.license", label: "Coordonnées — agrément", section: "Coordonnées", type: "text" },
-    { id: "contact.hours.badge", label: "Horaires — badge", section: "Horaires", type: "text" },
-    { id: "contact.hours.title", label: "Horaires — titre", section: "Horaires", type: "text" },
-    { id: "contact.hours.body", label: "Horaires — texte", section: "Horaires", type: "richtext" },
   ],
   faq: [
     // Hero
@@ -207,6 +205,24 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     ...(Object.keys(ACTUALITES_TEXT) as Array<ActualitesTextId>).map((id) => ({
       id,
       label: id.slice('actualites.'.length),
+      section: "Référentiel",
+      type: "text" as const,
+    })),
+  ],
+  "opportunites": [
+    // Referential V2.1: one entry per text in src/content/relation.ts
+    ...(Object.keys(OPPORTUNITES_TEXT) as Array<OpportunitesTextId>).map((id) => ({
+      id,
+      label: id.slice('opportunites.'.length),
+      section: "Référentiel",
+      type: "text" as const,
+    })),
+  ],
+  "sama-naffa": [
+    // Referential V2.1: one entry per text in src/content/relation.ts
+    ...(Object.keys(SAMA_NAFFA_TEXT) as Array<SamaNaffaTextId>).map((id) => ({
+      id,
+      label: id.slice('sama-naffa.'.length),
       section: "Référentiel",
       type: "text" as const,
     })),
@@ -250,6 +266,8 @@ export const PAGE_KEYS: ReadonlyArray<PageKey> = [
   "faq",
   "publications",
   "actualites",
+  "opportunites",
+  "sama-naffa",
 ];
 
 /** Human-readable labels for the admin content editor. */
@@ -267,12 +285,14 @@ export const PAGE_KEY_LABELS: Record<PageKey, string> = {
   faq: "FAQ",
   publications: "Publications",
   actualites: "Actualités",
+  opportunites: "Opportunités",
+  "sama-naffa": "Sama Naffa",
 };
 
 /** Public path to open a preview of the page (marketing site). */
 export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
   home: "/",
-  about: "/about",
+  about: "/la-societe",
   services: "/offres",
   offres: "/offres",
   bourse: "/bourse",
@@ -282,6 +302,8 @@ export const PAGE_KEY_PREVIEW_PATH: Record<PageKey, string> = {
   expertises: "/expertises",
   contact: "/contact",
   faq: "/faq",
-  publications: "/publications",
+  publications: "/analyses",
   actualites: "/actualites",
+  opportunites: "/opportunites",
+  "sama-naffa": "/sama-naffa",
 };
