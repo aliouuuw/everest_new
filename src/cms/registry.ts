@@ -13,6 +13,7 @@
  */
 
 import { HOME_TEXT, type HomeTextId } from "../content/home";
+import { SOCIETE_TEXT, type SocieteTextId } from "../content/societe";
 
 export type RegistryFieldType = "text" | "richtext" | "image";
 
@@ -51,31 +52,13 @@ export const registry: Record<PageKey, ReadonlyArray<RegistryEntry>> = {
     { id: "home.trust.partners", label: "Partenaires — logos", section: "Trust Strip", type: "text" },
   ],
   about: [
-    // Hero
-    { id: "about.hero.background", label: "Hero — image de fond", section: "Hero", type: "image" },
-    { id: "about.hero.badge", label: "Hero — badge", section: "Hero", type: "text" },
-    { id: "about.hero.title", label: "Hero — titre", section: "Hero", type: "text" },
-    { id: "about.hero.subtitle", label: "Hero — sous-titre", section: "Hero", type: "text" },
-    { id: "about.hero.ctaLabel", label: "Hero — label CTA", section: "Hero", type: "text" },
-    // Mission & Vision
-    { id: "about.mission.badge", label: "Mission — badge", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.sectionTitle", label: "Mission — titre de section", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.missionTitle", label: "Notre mission — titre", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.missionBody", label: "Notre mission — corps", section: "Mission & Vision", type: "richtext" },
-    { id: "about.mission.visionTitle", label: "Notre vision — titre", section: "Mission & Vision", type: "text" },
-    { id: "about.mission.visionBody", label: "Notre vision — corps", section: "Mission & Vision", type: "richtext" },
-    // Philosophie
-    { id: "about.philosophie.badge", label: "Philosophie — badge", section: "Philosophie", type: "text" },
-    { id: "about.philosophie.title", label: "Philosophie — titre", section: "Philosophie", type: "text" },
-    // Histoire
-    { id: "about.histoire.badge", label: "Histoire — badge", section: "Histoire", type: "text" },
-    { id: "about.histoire.title", label: "Histoire — titre", section: "Histoire", type: "text" },
-    // Équipe
-    { id: "about.equipe.badge", label: "Équipe — badge", section: "Équipe", type: "text" },
-    { id: "about.equipe.title", label: "Équipe — titre", section: "Équipe", type: "text" },
-    // Conformité
-    { id: "about.conformite.badge", label: "Conformité — badge", section: "Conformité", type: "text" },
-    { id: "about.conformite.title", label: "Conformité — titre", section: "Conformité", type: "text" },
+    // Referential V2.1 §2: one entry per text in src/content/societe.ts
+    ...(Object.keys(SOCIETE_TEXT) as Array<SocieteTextId>).map((id) => ({
+      id,
+      label: id.slice('about.'.length),
+      section: id.split('.')[1],
+      type: "text" as const,
+    })),
   ],
   services: [
     // Hero

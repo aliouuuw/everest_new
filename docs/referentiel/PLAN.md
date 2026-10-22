@@ -110,6 +110,7 @@ the user agrees.
 | L0 Audit | Done (`19d812b`) |
 | L1 Global frame | Done. `apps/web/e2e/frame.check.cjs`: 276/277 checks pass at 7 widths |
 | L2 Accueil | Done. Text in `src/content/home.ts`; `bun run check:copy` (word for word) and `apps/web/e2e/home.check.ts` (80/80) |
+| L3 La société | Done. §2.1 to §2.6 in `src/content/societe.ts`; §2.7 hidden (Legal). `apps/web/e2e/pages.check.ts` covers `/` and `/la-societe` (174/174) |
 
 L1 also built `/opportunites` (§6) and `/sama-naffa` (§7) with their full
 text, so that no menu entry points to a missing page. L6 finishes them.
@@ -136,6 +137,15 @@ text, so that no menu entry points to a missing page. L6 finishes them.
 3. Global CSS beats Tailwind utilities: `.font-primary` (weight 400) and
    `h1, h2 { line-height: 1 !important }` are unlayered. New blocks do not
    use `font-primary` and mark heading line-heights `!`.
+
+## Notes from L3
+
+1. New CMS ids must not reuse an old id: the seed never updates a row,
+   so an old row would override the new text. L3 renamed the chapter
+   titles to `about.*.heading` because `about.histoire.title` and
+   `about.conformite.title` already exist on staging with old text.
+2. The 51 `about.*` texts have no Payload row on staging yet. The page
+   shows the referential text. Seeding makes them editable.
 
 ## Waiting on the user
 

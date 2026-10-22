@@ -1,6 +1,7 @@
 /** Fallback copy matching JSX `EditableText` / `EditableImage` children. */
 
 import { HOME_TEXT } from '../../../../src/content/home.ts'
+import { SOCIETE_TEXT } from '../../../../src/content/societe.ts'
 
 const offres: Record<string, string> = {
   'offres.hero.badge': "Services d'investissement",
@@ -48,28 +49,7 @@ export const SITE_CONTENT_DEFAULTS: Record<string, string> = {
     { name: 'Ville de Dakar', logo: '/partners/ville-de-dakar.jpg' },
   ]),
 
-  'about.hero.background': '/Assets_Website/À-propos.png',
-  'about.hero.badge': 'À propos',
-  'about.hero.title': 'Des idées et des valeurs au service de vos ambitions.',
-  'about.hero.subtitle':
-    "Société de Gestion et d'Intermédiation agréée AMF-UMOA. Nous allions discipline de marché, ingénierie financière et proximité client.",
-  'about.hero.ctaLabel': 'Notre mission',
-  'about.mission.badge': "Notre raison d'être",
-  'about.mission.sectionTitle': 'Mission & Vision',
-  'about.mission.missionTitle': 'Notre mission',
-  'about.mission.missionBody':
-    "Proposer des solutions d'investissement performantes et responsables, fondées sur la transparence, l'expertise et la proximité.",
-  'about.mission.visionTitle': 'Notre vision',
-  'about.mission.visionBody':
-    "Devenir un partenaire de référence en Afrique de l'Ouest pour la gestion de patrimoine et l'accès aux marchés financiers.",
-  'about.philosophie.badge': 'Philosophie',
-  'about.philosophie.title': "Notre approche d'investissement.",
-  'about.histoire.badge': 'Parcours',
-  'about.histoire.title': 'Notre histoire',
-  'about.equipe.badge': 'Leadership',
-  'about.equipe.title': 'Équipe dirigeante',
-  'about.conformite.badge': 'Réglementation',
-  'about.conformite.title': 'Conformité & Sécurité',
+  ...SOCIETE_TEXT,
 
   ...services,
   ...offres,
