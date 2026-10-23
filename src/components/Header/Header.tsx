@@ -259,9 +259,9 @@ export const Header: React.FC = () => {
       : '';
 
   const ctaShellClass =
-    'inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
+    'inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
   const ctaLabelClass =
-    'font-primary text-[10px] 2xl:text-[11px] font-semibold tracking-[0.1em] 2xl:tracking-[0.15em] uppercase leading-none';
+    'font-primary text-[13px] font-semibold leading-none';
 
   return (
     <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[var(--everest-green)]' : headerBg}`}>
