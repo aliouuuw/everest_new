@@ -1,5 +1,9 @@
 # Home media placeholders
 
+Since 23 Oct 2026 the home and hub expertise frame shows drawn illustrations
+(`src/components/Sections/ExpertiseIllustrations.tsx`); these four photos remain on the
+expertise pages' links to the other three.
+
 Status: **placeholders**, re-sourced 23 Oct 2026 after the critique (in-theme West
 African subjects). Higgsfield was not connected. Replace them with generated or
 cleared house imagery before any merge to `main`.
@@ -9,7 +13,7 @@ cropped and graded forest to paper by a PIL gradient map, decorative (`alt=""`,
 `aria-hidden`), and carry no public text. The postcard's printed caption and credit
 are cropped out.
 
-| File in `public/home/` | Expertise frame | Source | Author | Licence |
+| File in `public/home/` | Used on | Source | Author | Licence |
 |---|---|---|---|---|
 | `exp-mtp.webp`, `-sm` | Marché des Titres Publics | [Dakar-Aerial1.jpg](https://commons.wikimedia.org/wiki/File:Dakar-Aerial1.jpg) | Ji-Elle | Public domain |
 | `exp-brvm.webp`, `-sm` | Marché Financier Régional (BRVM) | [Abidjan Plateau.png](https://commons.wikimedia.org/wiki/File:Abidjan_Plateau.png) | ព្រះមហាក្សត្ររាជ | CC0 |
@@ -34,9 +38,7 @@ paper (gradient map), decorative (`alt=""`, `aria-hidden`), no public text. File
 | `private` | Private Office | [Tombouctou-Arrivée d'une caravane de sel (AOF).jpg](https://commons.wikimedia.org/wiki/File:Tombouctou-Arriv%C3%A9e_d%27une_caravane_de_sel_(AOF).jpg) | François-Edmond Fortier | Public domain |
 | `opps` | Opportunités | [Dakar-HarbourAerial.jpg](https://commons.wikimedia.org/wiki/File:Dakar-HarbourAerial.jpg) | Ji-Elle | Public domain |
 | `contact` | Contact / Devenir client | [DakarPlateau.JPG](https://commons.wikimedia.org/wiki/File:DakarPlateau.JPG) (cropped to the skyline) | Ji-Elle | Public domain |
-| `sama` + film `sama.webm`, `sama.mp4`, `sama-poster.webp` | Sama Naffa | [Sénégal - Bargny, un littoral menacé par la pollution et l'érosion côtière (1).webm](https://commons.wikimedia.org/wiki/File:S%C3%A9n%C3%A9gal_-_Bargny,_un_littoral_menac%C3%A9_par_la_pollution_et_l%27%C3%A9rosion_c%C3%B4ti%C3%A8re_(1).webm), 3.1 to 6.0 s, cropped to remove the VOA logo, no audio | VOA Afrique | Public domain (US government work) |
+| `sama` | Sama Naffa | Sama Naffa's own hero still (`sama-naffa/public/hero-sn-poster.jpg`, the fallback of the samanaffa.com film), kept in its own colours like the Sama Naffa logo | Sama Naffa | House asset |
 
-The film plays once, on desktop only, when reduced motion and Save-Data are off
-(script in `apps/web/src/layouts/Layout.astro`). The still is the default.
 Public-domain video on Commons is thin (mostly news and military b-roll); CC BY and
 BY-SA clips were skipped because they need an on-page credit the referential does not have.

@@ -89,7 +89,7 @@ Below it: the statement on paper, then the chain as a full-bleed forest band
 (the one drawn summit line), an open credential band (the fact leads each proof
 sentence, at heading size), the engagements ledger (Éthique & Déontologie closes
 it, larger, on a gold wash), the analyses on paper with two captioned covers,
-the expertise index on white with one image frame, four equal routes on
+the expertise index on white with one drawn frame, four equal routes on
 forest-mid with the closing line at heading size, the Sama Naffa mark on a
 forest field, and the governance close.
 
@@ -98,6 +98,13 @@ forest field, and the governance close.
 No card shadows, decorative rails, or floating panels in home content.
 No repeated card grid and no audience doors. The summit line is drawn once,
 on the chain. It is not repeated at the close.
+
+The expertise frame (home and hub) shows four drawings, one per expertise, in the house
+line: forest field, gold-light 1.5px strokes, square caps, straight segments only, white
+hairlines for secondary structure, no text. Bond certificate with one coupon detached (titres
+publics); eight markets tied to one exchange (BRVM); a three-tranche structure drawn as an
+engineering plate (structuration); an allocation inside the corner brackets of a mandate
+(Private Office). Source: `src/components/Sections/ExpertiseIllustrations.tsx`.
 
 Motion explains one thing per section. A gold order travels the chain from
 « prise d'ordre » to « règlement-livraison » and lights each station. A cover
@@ -163,8 +170,8 @@ As the hero leaves the viewport, the summit recedes slightly (scroll-driven, mot
   3:1 against white), gold submit.
 - Expertises, Opportunités, Sama Naffa and Contact open on the place the page is about
   (`PageHero` `media`): a graded photograph behind a forest veil on the text side, ending in
-  forest. It settles and recedes on scroll like the home summit. One film (Sama Naffa) plays
-  once on motion-enabled desktops. Sources: `docs/referentiel/MEDIA-PLACEHOLDERS.md`.
+  forest. It settles and recedes on scroll like the home summit. Sama Naffa uses its own hero
+  still, in its own colours. Sources: `docs/referentiel/MEDIA-PLACEHOLDERS.md`.
 - The Expertises hub reuses the home index and its swap frame. Each expertise page names its
   disciplines at heading size beside the text, and ends on photo links to the other three.
 - Opportunités sets the four instruments its N1 names as a ledger (same words, `aria-hidden`).
