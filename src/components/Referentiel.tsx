@@ -11,11 +11,20 @@ import { TEXT, type TextId } from '../content';
 
 export type Tone = 'light' | 'ivory' | 'dark';
 
-const GREEN_RULE = { light: 'var(--everest-green)', ivory: 'var(--everest-green)', dark: 'color-mix(in srgb, var(--everest-green-mid) 55%, white)' };
+/** N2 rule: charter #1A3A35 on light grounds, a light tint of it on dark (DESIGN-PLAN 2.3). */
+export const GREEN_RULE = { light: 'var(--everest-green-mid)', ivory: 'var(--everest-green-mid)', dark: 'color-mix(in srgb, var(--everest-green-mid) 45%, white)' };
 
-export const Filet = ({ color, children }: { color: string; children: ReactNode }) => (
+/**
+ * A text on its rule. In a Pair the N1 rule runs down through the gap into the N2 rule,
+ * so the pair reads as one line: gold, then green.
+ */
+export const Filet = ({ color, width = 3, join, children }: { color: string; width?: 2 | 3; join?: 'down' | 'up'; knot?: boolean; children: ReactNode }) => (
   <div className="relative pl-5 md:pl-6">
-    <span aria-hidden className="absolute left-0 top-[0.2em] bottom-[0.2em] w-[3px] rounded-full" style={{ background: color }} />
+    <span
+      aria-hidden
+      className={`absolute rounded-full ${width === 3 ? 'left-0 w-[3px]' : 'left-[0.5px] w-[2px]'} ${join === 'up' ? 'top-0' : 'top-[0.2em]'}`}
+      style={{ background: color, bottom: join === 'down' ? 'calc(-1 * var(--pair-gap))' : '0.2em' }}
+    />
     {children}
   </div>
 );
@@ -24,10 +33,12 @@ const N1_SIZE = {
   section: 'text-[clamp(1.5rem,1.05rem+1.5vw,2.25rem)] font-bold leading-[1.18]! tracking-[-0.01em]',
   statement: 'text-[clamp(1.375rem,1rem+1.25vw,2rem)] font-semibold leading-[1.3]! tracking-[-0.01em]',
   card: 'text-lg md:text-xl font-semibold leading-snug!',
+  /** The peaks of a page (home proofs, governance): one step above the section heading. */
+  peak: 'text-[clamp(1.625rem,1rem+2.3vw,3rem)] font-bold leading-[1.08]! tracking-[-0.02em] [font-variant-numeric:lining-nums_tabular-nums]',
 };
 
-export const N1 = ({ id, tone, as = 'h2', size = 'section' }: { id: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE }) => (
-  <Filet color="var(--jaune-or)">
+export const N1 = ({ id, tone, as = 'h2', size = 'section', joined }: { id: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE; joined?: boolean; knot?: boolean }) => (
+  <Filet color="var(--jaune-or)" join={joined ? 'down' : undefined}>
     <EditableText
       id={id}
       as={as}
@@ -38,31 +49,32 @@ export const N1 = ({ id, tone, as = 'h2', size = 'section' }: { id: TextId; tone
   </Filet>
 );
 
-export const N2 = ({ id, tone }: { id: TextId; tone: Tone }) => (
-  <Filet color={GREEN_RULE[tone]}>
+export const N2 = ({ id, tone, joined }: { id: TextId; tone: Tone; joined?: boolean }) => (
+  <Filet color={GREEN_RULE[tone]} width={2} join={joined ? 'up' : undefined}>
     <EditableText
       id={id}
       as="p"
-      className={`max-w-[62ch] text-base md:text-[1.0625rem] leading-relaxed ${tone === 'dark' ? 'text-white/75' : 'text-[var(--night-80)]'}`}
+      className={`max-w-[36em] text-pretty text-base md:text-[1.0625rem] leading-relaxed ${tone === 'dark' ? 'text-white/75' : 'text-[var(--night-80)]'}`}
     >
       {TEXT[id]}
     </EditableText>
   </Filet>
 );
 
-export const Pair = ({ n1, n2, tone, as, size }: { n1: TextId; n2: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE }) => (
-  <div className="flex flex-col gap-5 md:gap-6">
-    <N1 id={n1} tone={tone} as={as} size={size} />
-    <N2 id={n2} tone={tone} />
+export const Pair = ({ n1, n2, tone, as, size }: { n1: TextId; n2: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE; knot?: boolean }) => (
+  <div className="flex flex-col gap-[var(--pair-gap)] [--pair-gap:1.25rem] md:[--pair-gap:1.5rem]">
+    <N1 id={n1} tone={tone} as={as} size={size} joined />
+    <N2 id={n2} tone={tone} joined />
   </div>
 );
 
-export const Section = ({ tone, children, id }: { tone: Tone; children: ReactNode; id?: string }) => (
+const GROUND = { light: 'var(--pure-white)', ivory: 'var(--summit-ivory)', dark: 'var(--everest-green)' };
+
+export const Section = ({ tone, children, id, peak, className = '' }: { tone: Tone; children: ReactNode; id?: string; peak?: boolean; rope?: ReactNode | boolean; className?: string }) => (
   <section
     id={id}
-    className={`py-16 md:py-28 ${
-      tone === 'dark' ? 'bg-[var(--everest-green)]' : tone === 'ivory' ? 'bg-[var(--summit-ivory)]' : 'bg-[var(--pure-white)]'
-    }`}
+    className={`${peak ? 'py-20 md:py-36' : 'py-16 md:py-28'} ${className}`}
+    style={{ background: GROUND[tone] }}
   >
     <div className="page-container">{children}</div>
   </section>
@@ -78,7 +90,7 @@ export const ArrowUpRight = () => (
 export const TextLink = ({ to, children, tone = 'light', arrow = true }: { to: string; children: ReactNode; tone?: Tone; arrow?: boolean }) => (
   <Link
     to={to}
-    className={`group inline text-[0.95rem] font-semibold transition-colors duration-300 ${
+    className={`group inline py-3.5 text-[0.95rem] font-semibold transition-colors duration-300 ${
       tone === 'dark' ? 'text-[var(--or-clair)] hover:text-white' : 'text-[var(--everest-green)] hover:text-[var(--jaune-or)]'
     }`}
   >
