@@ -24,7 +24,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
    missing texts are held back by decision or by Legal (§2.7, investor-space CTA).
    Reverse check: every site text exists in the referential (`bun run check:copy`, 155 texts).
 2. **Rules of the pen (I.6):** checked on every built page by `bun run check:lexicon`.
-3. **Open gaps:** 4 to decide, 3 to fix, 9 blocked on inputs. See the last section.
+3. **Open gaps:** 3 to decide, 3 to fix, 9 blocked on inputs. See the last section.
 
 ## Part I: Positioning
 
@@ -65,7 +65,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 
 | Point | Status | Evidence |
 |---|---|---|
-| II.1 Eight main entries, same labels and same order in menu and footer | Gap: decide | The footer lists the 8 entries in order. The header shows 6: « La société », « Analyses & Publications » and « Actualités » are grouped in one menu, and the bar says « Contact » for « Contact / Devenir client » (header pass, 23 Oct 2026). This breaks « taxonomie unique » (II.1, II.3). Choose: restore 8 flat entries, or have ADG accept the grouping. |
+| II.1 Eight main entries, same labels and same order in menu and footer | Done by decision | The footer lists the 8 entries in order. The header shows 6: « La société », « Analyses & Publications » and « Actualités » are grouped in one menu, and the bar says « Contact » for « Contact / Devenir client ». Owner decision, 23 Oct 2026: keep the grouping (PLAN decision 8). ADG is informed, because II.1 and II.3 ask for one taxonomy. |
 | II.1 Expertises: four symmetric pages | Done | Hub and 4 pages, same structure. |
 | II.1 Footer: legal notice, privacy policy, Abécédaire / FAQ, Carrières (to confirm) | Blocked | Labels present as plain text; the pages wait for Legal and the FAQ text. Carrières waits for ADG / RRHA. |
 | II.1 Copyright line | Done by decision | « © 2026 EVEREST Finance, SGI agréée AMF-UMOA n° SGI/DA/2016/60. Tous droits réservés. » (em dash → comma, decision 1). |
@@ -127,10 +127,9 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 
 **To decide (ADG or owner)**
 
-1. Header taxonomy: 6 grouped entries against the 8 flat entries of II.1.
-2. Sama Naffa page head with Sama Naffa's own image (« chartes non mélangées »).
-3. Gold and green rules of Part III: confirm the design reading without rules.
-4. « Private Office, deuxième porte » (I.2): which door is meant.
+1. Sama Naffa page head with Sama Naffa's own image (« chartes non mélangées »).
+2. Gold and green rules of Part III: confirm the design reading without rules.
+3. « Private Office, deuxième porte » (I.2): which door is meant.
 
 **To fix (dev team)**
 

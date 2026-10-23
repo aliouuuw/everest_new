@@ -104,6 +104,9 @@ the user agrees.
 6. **§6 CTA « Accéder à l'espace investisseur »: hidden** until the
    investor space exists.
 7. **Footer social icons: removed** until the real URLs arrive.
+8. **Header grouping: kept** (23 Oct 2026). The header shows 6 entries: « La société »,
+   « Analyses & Publications » and « Actualités » share one menu. The footer keeps the
+   8 entries of II.1. ADG is informed (see `COMPLIANCE-V2.1.md`).
 
 ## Lot status
 
