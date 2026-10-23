@@ -47,6 +47,9 @@
   --everest-green-05: rgba(14, 40, 38, 0.05);
   --gold-pale: rgba(182, 138, 62, 0.06);
   --gold-warm: rgba(182, 138, 62, 0.12);
+
+  /* One focus ring for every control: 3.14:1 on white, 4.96:1 on forest */
+  --focus-ring: var(--jaune-or);
   
   /* Typography */
   --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -346,11 +349,11 @@ h1, h2 {
 /* ── btn-primary-dark → gold CTA in light sections ── */
 .section-bg-light .btn-primary-dark {
   background: var(--jaune-or) !important;
-  color: var(--pure-white) !important;
+  color: var(--everest-green) !important;
   border-radius: 9999px;
 }
 .section-bg-light .btn-primary-dark:hover {
-  background: var(--jaune-or-dark, #b5832a) !important;
+  background: var(--or-clair) !important;
 }
 
 @utility floating-animation {
@@ -568,103 +571,81 @@ h1, h2 {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
-  color: var(--pure-white);
+  color: var(--everest-green);
   border: 0;
-  transform: translateY(0);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(182,138,62,0.28);
-  filter: brightness(1.1);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  transition-duration: 100ms;
+  background: var(--or-clair);
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
   border: 1px solid var(--mauve-20);
   color: var(--mauve);
   background: transparent;
-  transform: translateY(0);
 }
 
 .btn-secondary:hover {
   background: var(--jaune-or);
-  color: var(--pure-white);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(182,138,62,0.22);
-}
-
-.btn-secondary:active {
-  transform: translateY(0);
-  transition-duration: 100ms;
+  color: var(--everest-green);
 }
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
-  color: var(--pure-white);
+  color: var(--everest-green);
   border: 0;
-  transform: translateY(0);
 }
 
 .btn-primary-dark:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(182,138,62,0.35);
-  filter: brightness(1.05);
-}
-
-.btn-primary-dark:active {
-  transform: translateY(0);
-  transition-duration: 100ms;
+  background: var(--or-clair);
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
   border: 1px solid rgba(182,138,62,0.4);
   color: var(--jaune-or);
   background: transparent;
-  transform: translateY(0);
 }
 
 .btn-secondary-dark:hover {
   background: rgba(182,138,62,0.12);
   border-color: var(--jaune-or);
   color: var(--pure-white);
-  transform: translateY(-1px);
 }
 
-.btn-secondary-dark:active {
-  transform: translateY(0);
-  transition-duration: 100ms;
+/* Focus: one ring for every control. Unlayered, so it beats Tailwind `outline-none`. */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
-/* Accessible gold-tinted focus rings */
-.btn-primary:focus-visible {
+/* Anchor targets (skip link, in-page nav) take focus but need no ring around a whole section. */
+[tabindex="-1"]:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
-.btn-secondary:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
+/* Skip link: off screen until a keyboard user focuses it. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--jaune-or);
+  color: var(--everest-green);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transform: translateY(-200%);
 }
 
-.btn-primary-dark:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-30), 0 0 0 1px var(--jaune-or-light);
-}
-
-.btn-secondary-dark:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
+.skip-link:focus {
+  transform: none;
 }
 
 /*
@@ -722,7 +703,7 @@ h1, h2 {
 }
 
 .btn-cta-pill--gold .btn-cta-pill__label {
-  color: var(--pure-white);
+  color: var(--everest-green);
 }
 
 .btn-cta-pill--gold:hover {
@@ -739,7 +720,7 @@ h1, h2 {
 }
 
 .btn-cta-pill--mauve .btn-cta-pill__label {
-  color: var(--pure-white);
+  color: var(--everest-green);
 }
 
 .btn-cta-pill--mauve:hover {

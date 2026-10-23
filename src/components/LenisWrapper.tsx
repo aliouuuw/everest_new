@@ -39,6 +39,10 @@ const LenisContent: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       const id = decodeURIComponent(url.hash.slice(1));
       if (!scrollToId(lenis, id)) return;
       e.preventDefault();
+      // preventDefault also cancels the focus move: keyboard and screen reader users land on the target.
+      const element = document.getElementById(id)!;
+      if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '-1');
+      element.focus({ preventScroll: true });
       if (window.location.hash !== url.hash) {
         history.pushState(null, '', url.pathname + url.search + url.hash);
       }

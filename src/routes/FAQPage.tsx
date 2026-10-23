@@ -186,14 +186,16 @@ export const FAQPage = () => {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Rechercher..."
-                        className="w-full px-4 py-3 bg-white border border-[var(--mauve)]/20 focus:border-[var(--mauve)] outline-none font-primary text-lg transition-colors rounded-full"
+                        aria-label="Rechercher"
+                        className="w-full px-4 py-3 bg-white border border-[var(--mauve)]/20 focus:border-[var(--mauve)] font-primary text-lg transition-colors rounded-full"
                       />
                       
                       <div className="flex flex-wrap gap-2 mt-4">
                         <button
                           type="button"
                           onClick={() => setActiveLetter('')}
-                          className={`text-xs font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === '' ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                          aria-pressed={activeLetter === ''}
+                          className={`inline-flex min-h-11 items-center text-xs font-bold tracking-[0.2em] uppercase px-4 rounded-full border transition-colors ${activeLetter === '' ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-[var(--everest-green)]' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                         >
                           Tous
                         </button>
@@ -202,7 +204,8 @@ export const FAQPage = () => {
                             key={l}
                             type="button"
                             onClick={() => setActiveLetter(l)}
-                            className={`text-xs font-bold uppercase px-4 py-1.5 rounded-full border transition-all ${activeLetter === l ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-white' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
+                            aria-pressed={activeLetter === l}
+                            className={`inline-flex min-h-11 min-w-11 items-center justify-center text-xs font-bold uppercase px-4 rounded-full border transition-colors ${activeLetter === l ? 'border-[var(--jaune-or)] bg-[var(--jaune-or)] text-[var(--everest-green)]' : 'border-[var(--mauve)]/10 text-[var(--night-80)] hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'}`}
                           >
                             {l}
                           </button>

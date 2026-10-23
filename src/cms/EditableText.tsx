@@ -3,7 +3,7 @@ import { useCMS } from "./cmsContext";
 import { useContent } from "./useContent";
 
 /** French typography: a space before « : ; ? ! » and after « » must not break the line. */
-const frenchSpaces = (text: string) =>
+export const frenchSpaces = (text: string) =>
   text.replace(/ ([:;?!»])/g, "\u00a0$1").replace(/« /g, "«\u00a0");
 
 interface EditableTextProps {

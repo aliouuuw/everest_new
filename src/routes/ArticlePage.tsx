@@ -57,7 +57,7 @@ export function ArticleView({
               {/* Back button */}
               <Link
                 to="/actualites"
-                className="inline-flex items-center gap-2 text-[var(--night)]/50 hover:text-[var(--night-80)] transition-colors mb-8 group text-sm font-bold tracking-[0.1em] uppercase"
+                className="inline-flex items-center gap-2 text-[var(--night-80)] hover:text-[var(--night-80)] transition-colors mb-8 group text-sm font-bold tracking-[0.1em] uppercase"
               >
                 <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
                 Retour aux actualités
@@ -68,11 +68,11 @@ export function ArticleView({
                 <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-bold tracking-[0.3em] uppercase bg-[var(--mauve)]/10 text-[var(--night-80)]">
                   {article.category}
                 </span>
-                <div className="flex items-center gap-2 text-sm text-[var(--night)]/50">
+                <div className="flex items-center gap-2 text-sm text-[var(--night-80)]">
                   <FiCalendar />
                   <span>{formattedDate}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-[var(--night)]/50">
+                <div className="flex items-center gap-2 text-sm text-[var(--night-80)]">
                   <FiClock />
                   <span>{article.readTime} de lecture</span>
                 </div>
@@ -112,7 +112,7 @@ export function ArticleView({
               {article.source && article.sourceUrl && (
                 <div className="mt-16 flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 bg-[var(--white-smoke)] rounded-2xl border border-black/5 gap-4">
                   <div className="flex flex-col">
-                    <span className="text-xs tracking-[0.1em] uppercase font-bold text-[var(--night)]/40 mb-1">
+                    <span className="text-xs tracking-[0.1em] uppercase font-bold text-[var(--night-80)] mb-1">
                       Source originale
                     </span>
                     <span className="text-base text-[var(--night)] font-medium">
@@ -123,7 +123,7 @@ export function ArticleView({
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 text-[var(--night-80)] rounded-full hover:bg-[var(--jaune-or)] hover:text-white transition-colors text-[11px] tracking-[0.1em] uppercase font-bold whitespace-nowrap"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--pure-white)] border border-[var(--jaune-or)]/30 text-[var(--night-80)] rounded-full hover:bg-[var(--jaune-or)] hover:text-[var(--everest-green)] transition-colors text-[11px] tracking-[0.1em] uppercase font-bold whitespace-nowrap"
                   >
                     Lire sur le site original <FiExternalLink size={14} />
                   </a>
@@ -198,7 +198,7 @@ export function ArticleView({
                           <h4 className="text-sm font-primary font-bold text-[var(--night)] line-clamp-2 group-hover:text-[var(--night-80)] transition-colors">
                             {relArticle.title}
                           </h4>
-                          <p className="text-[11px] text-[var(--night)]/50 mt-1">
+                          <p className="text-[11px] text-[var(--night-80)] mt-1">
                             {new Date(relArticle.publishedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}
                           </p>
                         </div>
@@ -206,7 +206,7 @@ export function ArticleView({
                     </Link>
                   ))
                 ) : (
-                  <p className="text-sm text-[var(--night)]/50">Aucun article connexe</p>
+                  <p className="text-sm text-[var(--night-80)]">Aucun article connexe</p>
                 )}
               </div>
             </div>
@@ -276,7 +276,7 @@ export const ArticlePage = () => {
           <h1 className="text-2xl font-bold text-[var(--night)] mb-4">Article non trouvé</h1>
           <Link
             to="/actualites"
-            className="px-4 py-2 bg-[var(--jaune-or)] text-white rounded-full hover:bg-[#b5832a] transition-colors inline-block"
+            className="px-4 py-2 bg-[var(--jaune-or)] text-[var(--everest-green)] rounded-full hover:bg-[var(--or-clair)] transition-colors inline-block"
           >
             Retour aux actualités
           </Link>

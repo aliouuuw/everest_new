@@ -22,8 +22,10 @@ export const Footer = () => {
     marginBottom: '1.25rem',
   };
 
+  // 44px hit area below lg (touch widths); desktop keeps the compact list.
+  const tapClass = 'max-lg:inline-flex max-lg:min-h-11 max-lg:items-center';
   const linkClass =
-    'text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]';
+    `${tapClass} text-secondary-dark text-[0.8rem] font-light leading-loose hover:!text-[var(--jaune-or)]`;
 
   const renderLinkList = (items: Array<NavItem>) => (
     <ul>
@@ -43,7 +45,7 @@ export const Footer = () => {
   );
 
   return (
-    <footer className="relative bg-[var(--everest-green)]" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer className="relative bg-[var(--everest-green)]" style={{ borderTop: '1px solid color-mix(in srgb, var(--or-clair) 18%, transparent)' }}>
       {/* Subtle green ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-25"
@@ -76,15 +78,15 @@ export const Footer = () => {
                 18 Boulevard de la République,<br />Dakar, Sénégal,<br />BP 11659-13000
               </li>
               <li>
-                <a href="mailto:contact@everestfin.com" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                <a href="mailto:contact@everestfin.com" style={linkStyle} className={`${tapClass} hover:!text-[var(--jaune-or)]`}>
                   contact@everestfin.com
                 </a>
               </li>
               <li className="flex flex-col ">
-                <a href="tel:+221338228700" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                <a href="tel:+221338228700" style={linkStyle} className={`${tapClass} hover:!text-[var(--jaune-or)]`}>
                   +221 33 822 87 00
                 </a>
-                <a href="tel:+221338228701" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+                <a href="tel:+221338228701" style={linkStyle} className={`${tapClass} hover:!text-[var(--jaune-or)]`}>
                   +221 33 822 87 01
                 </a>
               </li>
@@ -103,7 +105,7 @@ export const Footer = () => {
           <span>Mentions légales</span>
           <span>Conditions générales d'utilisation</span>
           <span>Politique de Confidentialité</span>
-          <Link to="/faq" style={linkStyle} className="hover:!text-[var(--jaune-or)]">
+          <Link to="/faq" style={linkStyle} className={`${tapClass} hover:!text-[var(--jaune-or)]`}>
             Abécédaire / FAQ
           </Link>
         </div>

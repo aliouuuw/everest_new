@@ -14,17 +14,31 @@ const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-
   </svg>
 );
 
+/** `page` on the exact entry, `true` on the parent of the current page (DESIGN-PLAN 1.4). */
+const currentState = (to: string, pathname: string): 'page' | 'true' | undefined => {
+  const path = pathname.replace(/\/$/, '') || '/';
+  if (path === to) return 'page';
+  return to !== '/' && path.startsWith(`${to}/`) ? 'true' : undefined;
+};
+
+const navLinkClass = (current: string | undefined) =>
+  `whitespace-nowrap text-[13px] font-bold transition-colors duration-300 ${
+    current ? 'text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
+  }`;
+
 interface DropdownProps {
   name: string;
   title: string;
   titleTo?: string;
   items: Array<NavItem>;
+  pathname: string;
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen, onOpen, onClose }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, pathname, isOpen, onOpen, onClose }) => {
+  const titleCurrent = titleTo ? currentState(titleTo, pathname) : undefined;
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -59,8 +73,9 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
       {titleTo ? (
         <Link
           to={titleTo}
-          className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white group"
-          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          className={`group flex items-center gap-1 ${navLinkClass(titleCurrent)}`}
+          style={{ fontFamily: 'var(--font-primary)' }}
+          aria-current={titleCurrent}
           aria-expanded={isOpen}
           aria-haspopup="menu"
         >
@@ -76,8 +91,8 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
         </Link>
       ) : (
         <button
-          className="flex items-center gap-1 whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white group"
-          style={{ fontFamily: 'var(--font-primary)',  color: 'rgba(255,255,255,0.75)' }}
+          className={`group flex items-center gap-1 ${navLinkClass(undefined)}`}
+          style={{ fontFamily: 'var(--font-primary)' }}
           aria-expanded={isOpen}
           aria-haspopup="menu"
         >
@@ -95,17 +110,25 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
 
       {isOpen && (
         <div className="absolute top-full left-0 mt-4 w-72 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
-          {items.map((item, index) => (
-            <Link
-              key={index}
-              to={item.to}
-              {...(item.hash ? { hash: item.hash } : {})}
-              className="block px-6 py-3 text-[14px] font-bold transition-all duration-200 text-[var(--night-80)] hover:text-[var(--jaune-or)] hover:bg-white/[0.08] first:rounded-t-xl last:rounded-b-xl"
-              style={{ fontFamily: 'var(--font-primary)', }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {items.map((item, index) => {
+            const current = item.hash ? undefined : currentState(item.to, pathname);
+            return (
+              <Link
+                key={index}
+                to={item.to}
+                {...(item.hash ? { hash: item.hash } : {})}
+                aria-current={current}
+                className={`block px-6 py-3 text-[14px] font-bold transition-colors duration-200 ${
+                  current
+                    ? 'bg-[var(--summit-ivory)] text-[var(--everest-green)]'
+                    : 'text-[var(--night-80)] hover:bg-[var(--summit-ivory)] hover:text-[var(--everest-green)]'
+                }`}
+                style={{ fontFamily: 'var(--font-primary)', }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>
@@ -235,9 +258,6 @@ export const Header: React.FC = () => {
       ? 'bg-[var(--everest-green)]/95 backdrop-blur-md'
       : '';
 
-  // Nav link color: always white on mauve bg
-  const navLinkColor = 'rgba(255,255,255,0.75)';
-
   const ctaShellClass =
     'inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
   const ctaLabelClass =
@@ -261,6 +281,7 @@ export const Header: React.FC = () => {
                 title={item.label}
                 titleTo={item.to}
                 items={item.children}
+                pathname={location.pathname}
                 isOpen={openDropdown === item.to}
                 onOpen={openDropdownByName}
                 onClose={closeDropdownByName}
@@ -269,8 +290,9 @@ export const Header: React.FC = () => {
               <Link
                 key={item.to}
                 to={item.to}
-                className="whitespace-nowrap text-[13px] font-bold transition-colors duration-300 hover:text-white"
-                style={{ fontFamily: 'var(--font-primary)', color: navLinkColor }}
+                aria-current={currentState(item.to, location.pathname)}
+                className={navLinkClass(currentState(item.to, location.pathname))}
+                style={{ fontFamily: 'var(--font-primary)' }}
               >
                 {item.label}
               </Link>
@@ -284,9 +306,9 @@ export const Header: React.FC = () => {
             href="https://everest-account-opening.vercel.app/new-home"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${ctaShellClass} border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
+            className={`${ctaShellClass} border-transparent bg-[var(--jaune-or)] hover:bg-[var(--or-clair)]`}
           >
-            <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
+            <span className={`${ctaLabelClass} text-[var(--everest-green)]`}>
               Ouvrir un compte
             </span>
           </a>
@@ -337,8 +359,11 @@ export const Header: React.FC = () => {
               <div key={item.to}>
                 <Link
                   to={item.to}
-                  className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                  style={{ fontFamily: 'var(--font-primary)', color: 'rgba(255,255,255,0.75)' }}
+                  aria-current={currentState(item.to, location.pathname)}
+                  className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
+                    currentState(item.to, location.pathname) ? 'font-semibold text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
+                  }`}
+                  style={{ fontFamily: 'var(--font-primary)' }}
                   onClick={onMenuNavigate}
                 >
                   {item.label}
@@ -350,8 +375,13 @@ export const Header: React.FC = () => {
                         key={child.label}
                         to={child.to}
                         {...(child.hash ? { hash: child.hash } : {})}
-                        className="flex min-h-11 items-center text-sm transition-colors hover:text-white touch-manipulation"
-                        style={{ fontFamily: 'var(--font-primary)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}
+                        aria-current={child.hash ? undefined : currentState(child.to, location.pathname)}
+                        className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
+                          !child.hash && currentState(child.to, location.pathname)
+                            ? 'font-semibold text-[var(--or-clair)]'
+                            : 'font-light text-white/60 hover:text-white'
+                        }`}
+                        style={{ fontFamily: 'var(--font-primary)' }}
                         onClick={onMenuNavigate}
                       >
                         {child.label}
@@ -367,10 +397,10 @@ export const Header: React.FC = () => {
                 href="https://everest-account-opening.vercel.app/new-home"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
+                className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--or-clair)]`}
                 onClick={onMenuNavigate}
               >
-                <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
+                <span className={`${ctaLabelClass} text-[var(--everest-green)]`}>
                   Ouvrir un compte
                 </span>
               </a>

@@ -116,10 +116,12 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                 return (
                   <button
                     key={cat}
+                    type="button"
                     onClick={() => setActiveCategory(cat)}
+                    aria-pressed={isActive}
                     className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-300 border font-primary rounded-full ${
                       isActive 
-                        ? 'font-bold text-[var(--pure-white)] bg-[var(--jaune-or)] border-[var(--jaune-or)] shadow-sm' 
+                        ? 'font-bold text-[var(--everest-green)] bg-[var(--jaune-or)] border-[var(--jaune-or)] shadow-sm' 
                         : 'font-bold text-[var(--night-80)] bg-white border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] shadow-sm'
                     }`}
                   >
@@ -136,9 +138,10 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                 <input
                   type="text"
                   placeholder="Rechercher..."
+                  aria-label="Rechercher"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] outline-none font-primary text-sm transition-colors rounded-full shadow-sm"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] font-primary text-sm transition-colors rounded-full shadow-sm"
                 />
               </div>
 
@@ -146,7 +149,8 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                 <select 
                   value={activeYear}
                   onChange={(e) => setActiveYear(e.target.value)}
-                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
+                  aria-label="Année"
+                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
                 >
                   <option value="Tout">Année</option>
                   {years.filter(y => y !== 'Tout').map(y => (
@@ -157,8 +161,9 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                 <select 
                   value={activeMonth}
                   onChange={(e) => setActiveMonth(e.target.value)}
+                  aria-label="Mois"
                   disabled={activeYear === 'Tout'}
-                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
+                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
                 >
                   <option value="Tout">Mois</option>
                   {months.filter(m => m !== 'Tout').map(m => (
@@ -192,7 +197,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                 <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
               </div>
               <div className="absolute top-6 left-6 z-10">
-                <span className="inline-block bg-[var(--jaune-or)] px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-white rounded-full">
+                <span className="inline-block bg-[var(--jaune-or)] px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-[var(--everest-green)] rounded-full">
                   À la une
                 </span>
               </div>
@@ -203,7 +208,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                   {featuredArticle.category}
                 </span>
                 <span className="w-1 h-1 bg-[rgba(10,10,10,0.3)] rounded-full" />
-                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.05em] text-[rgba(10,10,10,0.5)]">
+                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.05em] text-[var(--night-80)]">
                   <FiCalendar className="text-xs" /> {new Date(featuredArticle.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </span>
               </div>
@@ -231,7 +236,7 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
             {/* Articles Feed */}
             <div>
               {filteredArticles.length === 0 ? (
-                <div className="py-12 text-center text-[var(--night)]/60 font-light">
+                <div className="py-12 text-center text-[var(--night-80)] font-light">
                   Aucun article ne correspond à vos critères.
                 </div>
               ) : (
@@ -266,17 +271,17 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                             <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--night-80)]">
                               {article.category}
                             </span>
-                            <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                            <span className="flex items-center gap-1 text-[10px] text-[var(--night-80)]">
                               <FiCalendar className="text-[9px]" />
                               {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
                             </span>
-                            <span className="flex items-center gap-1 text-[10px] text-[rgba(10,10,10,0.5)]">
+                            <span className="flex items-center gap-1 text-[10px] text-[var(--night-80)]">
                               <FiClock className="text-[9px]" /> {article.readTime}
                             </span>
                           </div>
-                          <h4 className="mb-3 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35] text-[var(--night)]">
+                          <h2 className="mb-3 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35]! text-[var(--night)]">
                             {article.title}
-                          </h4>
+                          </h2>
                           <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
                             {article.excerpt}
                           </p>

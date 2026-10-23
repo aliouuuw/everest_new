@@ -4,6 +4,11 @@ import { EditableText } from '../cms';
 import { N1, N2, PageHero } from '../components/Referentiel';
 import { Coordonnees, Parcours } from '../components/Sections/RelationReferentiel';
 
+const FIELD_CLASS =
+  'w-full rounded-xl border border-[var(--mauve-20)] bg-[var(--pure-white)] px-4 py-3 font-primary text-base sm:text-sm text-[var(--night)] transition-colors duration-200 focus:border-[var(--mauve)]';
+const LABEL_CLASS =
+  'mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--everest-green)]';
+
 const TOPICS = [
   { value: 'relation', label: 'Entrer en relation' },
   { value: 'opportunites', label: 'Accéder aux opportunités en cours' },
@@ -64,6 +69,7 @@ export const ContactPage = () => {
                     label="Nom complet"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     required
                     value={form.name}
                     onChange={handleChange}
@@ -72,6 +78,7 @@ export const ContactPage = () => {
                     label="Email professionnel"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     value={form.email}
                     onChange={handleChange}
@@ -81,13 +88,14 @@ export const ContactPage = () => {
                   label="Organisation (optionnel)"
                   name="organization"
                   type="text"
+                  autoComplete="organization"
                   value={form.organization}
                   onChange={handleChange}
                 />
                 <div>
                   <label
                     htmlFor="topic"
-                    className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
+                    className={LABEL_CLASS}
                   >
                     Sujet
                   </label>
@@ -96,7 +104,7 @@ export const ContactPage = () => {
                     name="topic"
                     value={form.topic}
                     onChange={handleChange}
-                    className="w-full rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
+                    className={FIELD_CLASS}
                   >
                     {TOPICS.map((t) => (
                       <option key={t.value} value={t.value}>
@@ -108,7 +116,7 @@ export const ContactPage = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
+                    className={LABEL_CLASS}
                   >
                     Message
                   </label>
@@ -119,12 +127,12 @@ export const ContactPage = () => {
                     value={form.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full resize-none rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
+                    className={`${FIELD_CLASS} resize-none`}
                     placeholder="Décrivez votre demande, votre horizon et vos contraintes éventuelles."
                   />
                 </div>
                 <div className="flex flex-col items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
-                  <p className="max-w-xs font-primary text-xs font-light leading-relaxed text-[var(--night-40)]">
+                  <p className="max-w-xs font-primary text-xs font-light leading-relaxed text-[var(--night-80)]">
                     <EditableText id="contact.form.privacy">
                       En envoyant ce message, vous acceptez que vos données soient utilisées pour
                       répondre à votre demande.
@@ -132,10 +140,10 @@ export const ContactPage = () => {
                   </p>
                   <button
                     type="submit"
-                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--jaune-or)] px-6 py-3 font-primary text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#062421]"
+                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--jaune-or)] px-6 py-3 min-h-11 font-primary text-xs font-bold uppercase tracking-[0.14em] text-[var(--everest-green)] transition-colors duration-300 hover:bg-[var(--or-clair)]"
                   >
                     <EditableText id="contact.form.submit" as="span">Envoyer la demande</EditableText>
-                    <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <FiArrowRight aria-hidden className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>
                 </div>
               </form>
@@ -161,6 +169,7 @@ interface FormFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
+  autoComplete?: string;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -170,14 +179,15 @@ const FormField: React.FC<FormFieldProps> = ({
   value,
   onChange,
   required,
+  autoComplete,
 }) => (
   <div>
     <label
       htmlFor={name}
-      className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
+      className={LABEL_CLASS}
     >
       {label}
-      {required && <span className="ml-1 text-[var(--jaune-or)]">*</span>}
+      {required && <span aria-hidden className="ml-1 text-[var(--jaune-or)]">*</span>}
     </label>
     <input
       id={name}
@@ -186,7 +196,8 @@ const FormField: React.FC<FormFieldProps> = ({
       value={value}
       onChange={onChange}
       required={required}
-      className="w-full rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
+      autoComplete={autoComplete}
+      className={FIELD_CLASS}
     />
   </div>
 );

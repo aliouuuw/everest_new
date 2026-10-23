@@ -16,9 +16,9 @@ type Publication = PublicationFile
 const FREQUENCY_LABELS = PUBLICATION_FREQUENCY_LABELS
 
 const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: string }> = {
-  hebdomadaire: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
-  mensuelle: { text: 'var(--jaune-or)', bg: 'var(--jaune-or-10)', border: 'var(--jaune-or-20)' },
-  semestrielle: { text: 'var(--mauve)', bg: 'var(--mauve-10)', border: 'var(--mauve-20)' },
+  hebdomadaire: { text: 'var(--everest-green)', bg: 'color-mix(in srgb, var(--or-clair) 30%, white)', border: 'var(--or-clair)' },
+  mensuelle: { text: 'var(--everest-green)', bg: 'color-mix(in srgb, var(--or-clair) 30%, white)', border: 'var(--or-clair)' },
+  semestrielle: { text: 'var(--everest-green)', bg: 'var(--mauve-10)', border: 'var(--mauve-20)' },
 }
 
 const ALL_LABEL = 'tout' as const
@@ -59,7 +59,12 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`pub-${pub.id}-title`}
+        className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden"
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--mauve)]/10">
           <div className="flex items-center gap-3 min-w-0">
@@ -67,8 +72,8 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
               <FiFileText className="text-[var(--night-80)]" size={18} />
             </div>
             <div className="min-w-0">
-              <h3 className="font-primary font-bold text-base text-[var(--night)] truncate">{pub.title}</h3>
-              <p className="text-xs text-[var(--night)]/50 font-primary">{pub.fileSize}{pub.pages ? ` · ${pub.pages} pages` : ''}</p>
+              <h2 id={`pub-${pub.id}-title`} className="font-primary font-bold text-base leading-snug! text-[var(--night)] truncate">{pub.title}</h2>
+              <p className="text-xs text-[var(--night-80)] font-primary">{pub.fileSize}{pub.pages ? ` · ${pub.pages} pages` : ''}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -81,8 +86,10 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
               Télécharger
             </a>
             <button
+              type="button"
+              autoFocus
               onClick={onClose}
-              className="w-9 h-9 rounded-full flex items-center justify-center border border-[var(--mauve)]/10 hover:bg-[var(--mauve-10)] transition-colors"
+              className="w-11 h-11 rounded-full flex items-center justify-center border border-[var(--mauve)]/10 hover:bg-[var(--mauve-10)] transition-colors"
               aria-label="Fermer"
             >
               <FiX size={18} className="text-[var(--night)]" />
@@ -167,13 +174,14 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
       <button
         type="button"
         onClick={() => onPreview(pub)}
+        aria-label={`Aperçu : ${pub.title}`}
         className="relative h-52 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex flex-col items-center justify-center cursor-pointer group/preview overflow-hidden"
       >
         {thumbnailUrl ? (
           <>
             <img
               src={thumbnailUrl}
-              alt={`${pub.title} preview`}
+              alt=""
               className="w-full h-full object-contain group-hover/preview:scale-105 transition-transform duration-300"
             />
             <div className="absolute inset-0 bg-black/0 group-hover/preview:bg-black/10 transition-colors duration-300" />
@@ -205,7 +213,7 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
 
       {/* Content */}
       <div className="flex-1 flex flex-col p-6">
-        <div className="flex items-center gap-2 text-xs text-[var(--night)]/50 font-primary mb-3">
+        <div className="flex items-center gap-2 text-xs text-[var(--night-80)] font-primary mb-3">
           <FiCalendar size={12} />
           <time dateTime={pub.date}>{formattedDate}</time>
           {pub.pages && <span>· {pub.pages} pages</span>}
@@ -213,9 +221,9 @@ const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication
         </div>
 
         {/* No summary: the CMS summaries use words banned by referential V2.1 I.6 (22 Oct 2026 decision). */}
-        <h3 className="font-primary font-bold text-lg text-[var(--night)] mb-6 flex-1 leading-snug group-hover:text-[var(--night-80)] transition-colors duration-300">
+        <h2 className="font-primary font-bold text-lg text-[var(--night)] mb-6 flex-1 leading-snug! group-hover:text-[var(--night-80)] transition-colors duration-300">
           {pub.title}
-        </h3>
+        </h2>
 
         {/* Actions */}
         <div className="flex items-center gap-2 mt-auto">
@@ -339,9 +347,10 @@ export function PublicationsView({
               <input
                 type="text"
                 placeholder="Rechercher une revue..."
+                aria-label="Rechercher une revue"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] outline-none font-primary text-sm transition-colors rounded-full shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] font-primary text-sm transition-colors rounded-full shadow-sm"
               />
             </div>
 
@@ -356,7 +365,7 @@ export function PublicationsView({
                     onClick={() => setActiveFilter(cat)}
                     className={`px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow ${
                       isActive
-                        ? 'bg-[var(--jaune-or)] text-white border-[var(--jaune-or)]'
+                        ? 'bg-[var(--jaune-or)] text-[var(--everest-green)] border-[var(--jaune-or)]'
                         : 'bg-white text-[var(--night-80)] border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'
                     }`}
                     aria-pressed={isActive}
@@ -371,7 +380,8 @@ export function PublicationsView({
               <select 
                 value={activeYear}
                 onChange={(e) => setActiveYear(e.target.value)}
-                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
+                aria-label="Année"
+                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
               >
                 <option value="Tout">Année</option>
                 {years.filter(y => y !== 'Tout').map(y => (
@@ -382,8 +392,9 @@ export function PublicationsView({
               <select 
                 value={activeMonth}
                 onChange={(e) => setActiveMonth(e.target.value)}
+                aria-label="Mois"
                 disabled={activeYear === 'Tout'}
-                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:outline-none focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
+                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
               >
                 <option value="Tout">Mois</option>
                 {months.filter(m => m !== 'Tout').map(m => (
@@ -403,8 +414,8 @@ export function PublicationsView({
               <div className="w-16 h-16 mx-auto mb-4 bg-[var(--mauve-10)] rounded-full flex items-center justify-center">
                 <FiFileText className="w-7 h-7 text-[var(--night-80)]" />
               </div>
-              <h3 className="text-lg font-primary font-bold text-[var(--night)] mb-2">Aucune publication trouvée</h3>
-              <p className="text-sm text-[var(--night)]/50 font-primary">Essayez de modifier vos filtres ou votre recherche.</p>
+              <h2 className="text-lg font-primary font-bold leading-snug! text-[var(--night)] mb-2">Aucune publication trouvée</h2>
+              <p className="text-sm text-[var(--night-80)] font-primary">Essayez de modifier vos filtres ou votre recherche.</p>
             </div>
           ) : (
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
