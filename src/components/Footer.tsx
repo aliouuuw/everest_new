@@ -45,14 +45,7 @@ export const Footer = () => {
   );
 
   return (
-    <footer className={`relative bg-[var(--everest-green)]${location.pathname === '/' ? ' home-footer' : ''}`} style={location.pathname === '/' ? undefined : { borderTop: '1px solid color-mix(in srgb, var(--or-clair) 18%, transparent)' }}>
-      {/* Subtle green ambient glow */}
-      {location.pathname !== '/' && <div
-        className="absolute inset-0 pointer-events-none opacity-25"
-        style={{
-          background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--everest-green-10) 0%, transparent 70%)',
-        }}
-      />}
+    <footer className="home-footer relative bg-[var(--everest-green)]">
       <div className="site-footer-container mx-auto max-w-6xl px-6 py-20 relative z-10">
         <div className="site-footer-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
 

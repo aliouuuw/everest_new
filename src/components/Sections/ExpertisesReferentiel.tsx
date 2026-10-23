@@ -1,11 +1,10 @@
 /**
  * Expertises, referential V2.1 §3: a hub with the common intro, and four symmetric pages (§3.1 to §3.4).
  */
-import type { ReactNode } from 'react';
 import { Link } from '@tanstack/react-router';
 import type { TextId } from '../../content';
 import { EXPERTISE_ITEMS, type ExpertiseKey } from '../../content/expertises';
-import { Label, N1, N2, Pair, Section, TextLink } from '../Referentiel';
+import { ArrowUpRight, Label, N1, N2, PageHero, Pair, RULE, Section, TextLink } from '../Referentiel';
 import { SITE_NAV } from '../siteNav';
 
 const KEYS = Object.keys(EXPERTISE_ITEMS) as Array<ExpertiseKey>;
@@ -16,40 +15,31 @@ const PATH = Object.fromEntries(KEYS.map((k, i) => [k, NAV.children![i].to])) as
 export const expertisePath = (key: ExpertiseKey) => PATH[key];
 export const expertiseSlug = (key: ExpertiseKey) => PATH[key].split('/').pop()!;
 
-const Hero = ({ children }: { children: ReactNode }) => (
-  <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
-    <div className="page-container">{children}</div>
-  </section>
-);
-
-const H1_STYLE = { fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' };
-
 export const ExpertisesHub = () => (
   <div className="bg-[var(--pure-white)] text-[var(--night)]">
-    <Hero>
-      <h1 className="mb-10 font-bold leading-[0.95]! tracking-tight text-white md:mb-14" style={H1_STYLE}>
-        {NAV.label}
-      </h1>
-      <div className="flex max-w-4xl flex-col gap-6">
-        <N1 id="expertises.intro.n1" tone="dark" as="p" size="statement" />
-        <N2 id="expertises.intro.n2" tone="dark" />
-      </div>
-    </Hero>
+    <PageHero title={NAV.label}>
+      <N1 id="expertises.intro.n1" tone="dark" as="p" size="statement" />
+      <N2 id="expertises.intro.n2" tone="dark" />
+    </PageHero>
 
-    <Section tone="ivory">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+    {/* An index, as on the home: one row per expertise, the name links to its page. */}
+    <Section tone="light">
+      <div className="shadow-[inset_0_-1px_0_var(--home-rule)]">
         {KEYS.map((k) => (
           <article
             key={k}
             id={expertiseSlug(k)}
-            className="flex scroll-mt-[calc(var(--site-chrome-sticky)+1.5rem)] flex-col gap-6 rounded-[1.25rem] border border-[var(--everest-green)]/10 bg-[var(--pure-white)] p-7 md:p-10"
+            className={`group grid scroll-mt-[calc(var(--site-chrome-sticky)+1.5rem)] grid-cols-1 gap-3 py-8 transition-shadow duration-200 hover:shadow-[inset_0_1px_0_var(--home-gold)] focus-within:shadow-[inset_0_1px_0_var(--home-gold)] lg:grid-cols-12 lg:gap-16 lg:py-10 ${RULE.light}`}
           >
-            <h2 className="text-lg font-bold md:text-xl">
-              <TextLink to={expertisePath(k)}>
-                <Label id={`expertises.${k}.heading` as TextId} tone="light" as="span" size="sub" />
-              </TextLink>
+            <h2 className="lg:col-span-5">
+              <Link to={expertisePath(k)} className="home-link text-[var(--home-ink)]">
+                <Label id={`expertises.${k}.heading` as TextId} tone="light" as="span" size="title" />
+                <ArrowUpRight />
+              </Link>
             </h2>
-            <N1 id={`expertises.${k}.chapeau` as TextId} tone="light" as="p" size="card" />
+            <div className="lg:col-span-7">
+              <N1 id={`expertises.${k}.chapeau` as TextId} tone="light" as="p" size="lead" />
+            </div>
           </article>
         ))}
       </div>
@@ -62,25 +52,24 @@ export const ExpertiseDetail = ({ expertise }: { expertise: ExpertiseKey }) => {
   const others = KEYS.filter((k) => k !== expertise);
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
-      <Hero>
-        <Link
-          to={NAV.to}
-          className="mb-6 inline-block text-[0.95rem] font-semibold text-[var(--or-clair)] transition-colors duration-300 hover:text-white"
-        >
-          {NAV.label}
-        </Link>
-        <h1 className="mb-10 font-bold leading-[1.02]! tracking-tight text-white md:mb-14" style={H1_STYLE}>
-          <Label id={`expertises.${expertise}.heading` as TextId} tone="dark" as="span" />
-        </h1>
-        <div className="max-w-4xl">
-          <N1 id={`expertises.${expertise}.chapeau` as TextId} tone="dark" as="p" size="statement" />
-        </div>
-      </Hero>
+      <PageHero
+        title={<Label id={`expertises.${expertise}.heading` as TextId} tone="dark" as="span" size="inherit" />}
+        above={
+          <Link
+            to={NAV.to}
+            className="mb-4 inline-flex min-h-11 items-center text-[15px] font-semibold text-[var(--home-gold-light)] transition-colors duration-200 hover:text-white"
+          >
+            {NAV.label}
+          </Link>
+        }
+      >
+        <N1 id={`expertises.${expertise}.chapeau` as TextId} tone="dark" as="p" size="statement" />
+      </PageHero>
 
       <Section tone="light">
-        <div className="flex flex-col gap-14 md:gap-20">
+        <div className="flex flex-col gap-12 md:gap-16">
           {items.map((base) => (
-            <div key={base} className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-16">
+            <div key={base} className={`grid grid-cols-1 gap-4 pt-6 md:pt-8 lg:grid-cols-12 lg:gap-16 ${RULE.light}`}>
               <div className="lg:col-span-4">
                 <Label id={`${base}.label` as TextId} tone="light" as="h2" size="sub" />
               </div>
@@ -93,7 +82,7 @@ export const ExpertiseDetail = ({ expertise }: { expertise: ExpertiseKey }) => {
       </Section>
 
       <Section tone="ivory">
-        <nav aria-label={NAV.label} className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-x-10">
+        <nav aria-label={NAV.label} className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-x-10">
           {others.map((k) => (
             <TextLink key={k} to={expertisePath(k)}>
               {NAV.children![KEYS.indexOf(k)].label}

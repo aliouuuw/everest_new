@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { FiArrowRight } from 'react-icons/fi';
 import { EditableText } from '../cms';
-import { N1, N2, PageHero } from '../components/Referentiel';
+import { ArrowUpRight, N1, N2, PageHero } from '../components/Referentiel';
 import { Coordonnees, Parcours } from '../components/Sections/RelationReferentiel';
 
+/** Square fields on the home rule; the gold focus ring comes from the global token. */
 const FIELD_CLASS =
-  'w-full rounded-xl border border-[var(--mauve-20)] bg-[var(--pure-white)] px-4 py-3 font-primary text-base sm:text-sm text-[var(--night)] transition-colors duration-200 focus:border-[var(--mauve)]';
-const LABEL_CLASS =
-  'mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--everest-green)]';
+  'w-full min-h-12 rounded-none border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] bg-[var(--home-white)] px-4 py-3 text-base text-[var(--home-ink)] transition-colors duration-200 hover:border-[var(--home-mid)] focus:border-[var(--home-ink)]';
+const LABEL_CLASS = 'mb-2 block text-[14px] font-semibold text-[var(--home-ink)]';
 
 const TOPICS = [
   { value: 'relation', label: 'Entrer en relation' },
@@ -48,7 +47,7 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
+    <div className="bg-[var(--pure-white)] text-[var(--night)]">
       {/* Referential V2.1 §8: N1/N2, then the four steps, then the form and the contact details */}
       <PageHero title="Contact / Devenir client">
         <N1 id="contact.n1" tone="dark" as="p" size="statement" />
@@ -58,12 +57,12 @@ export const ContactPage = () => {
       <Parcours tone="light" />
 
       {/* ─── Form + info ─── */}
-      <section id="form" className="bg-[var(--summit-ivory)] py-16 md:py-20">
+      <section id="form" className="bg-[var(--home-paper)] py-12 md:py-20 lg:py-28">
         <div className="page-container">
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
             {/* Form */}
-            <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">
-              <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="lg:col-span-7">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <FormField
                     label="Nom complet"
@@ -132,25 +131,22 @@ export const ContactPage = () => {
                   />
                 </div>
                 <div className="flex flex-col items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
-                  <p className="max-w-xs font-primary text-xs font-light leading-relaxed text-[var(--night-80)]">
+                  <p className="max-w-xs text-[13px] leading-[1.55] text-[var(--home-mid)]">
                     <EditableText id="contact.form.privacy">
                       En envoyant ce message, vous acceptez que vos données soient utilisées pour
                       répondre à votre demande.
                     </EditableText>
                   </p>
-                  <button
-                    type="submit"
-                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--jaune-or)] px-6 py-3 min-h-11 font-primary text-xs font-bold uppercase tracking-[0.14em] text-[var(--everest-green)] transition-colors duration-300 hover:bg-[var(--or-clair)]"
-                  >
+                  <button type="submit" className="home-button cursor-pointer">
                     <EditableText id="contact.form.submit" as="span">Envoyer la demande</EditableText>
-                    <FiArrowRight aria-hidden className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <ArrowUpRight />
                   </button>
                 </div>
               </form>
             </div>
 
             {/* Info panel: §8 « Coordonnées » */}
-            <aside className="rounded-2xl bg-[var(--everest-green)] p-6 md:p-8 lg:col-span-5 lg:self-start">
+            <aside className="antialiased bg-[var(--home-ink)] p-6 md:p-10 lg:col-span-5 lg:self-start">
               <Coordonnees tone="dark" />
             </aside>
           </div>
@@ -187,7 +183,7 @@ const FormField: React.FC<FormFieldProps> = ({
       className={LABEL_CLASS}
     >
       {label}
-      {required && <span aria-hidden className="ml-1 text-[var(--jaune-or)]">*</span>}
+      {required && <span aria-hidden className="ml-1 text-[var(--home-gold)]">*</span>}
     </label>
     <input
       id={name}

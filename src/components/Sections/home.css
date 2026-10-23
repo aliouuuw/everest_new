@@ -1,6 +1,6 @@
 /* EVEREST Finance home. One container, one type scale, one drawing (the summit line on the chain).
    Each section has its own ground. Motion explains that section: chain order, document lift, expertise swap. */
-.everest-home {
+:root {
   --home-ink: #0E2826;
   --home-mid: #1A3A35;
   --home-gold: #B68A3E;
@@ -16,6 +16,9 @@
   --home-t-title: 22px;
   --home-t-body: 16px;
   --home-t-meta: 13px;
+}
+/* Tokens live on :root so inner pages share the home scale, actions and rules. */
+.everest-home {
   background: var(--home-white);
   color: var(--home-ink);
   font-family: 'Plus Jakarta Sans', sans-serif; /* taste-skill-ignore: retained brand family, no new font licence assumed. */
@@ -70,7 +73,7 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   text-decoration: none;
   transition: color 200ms var(--home-ease), background-color 200ms var(--home-ease);
 }
-.everest-home svg[viewBox="0 0 24 24"] { flex-shrink: 0; width: 18px; height: 18px; transition: transform 240ms var(--home-ease); }
+.everest-home svg[viewBox="0 0 24 24"], .home-link svg, .home-button svg { flex-shrink: 0; width: 18px; height: 18px; transition: transform 240ms var(--home-ease); }
 .home-link:hover svg, .home-button:hover svg, .home-expertise-title a:hover svg, .home-publication:hover .home-publication-title svg { transform: translate(2px, -2px); }
 .home-button { background: var(--home-gold); color: var(--home-ink); padding: 16px 22px; border-radius: 0; }
 .home-button:hover { background: var(--home-gold-light); }

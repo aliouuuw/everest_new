@@ -4,7 +4,7 @@
 import type { ReactNode } from 'react';
 import { Link } from '@tanstack/react-router';
 import { TEXT, type TextId } from '../../content';
-import { Block, Label, N1, Pair, Section, type Tone } from '../Referentiel';
+import { Block, Label, N1, PageHero, Pair, Section, type Tone } from '../Referentiel';
 
 const CHAPTERS: Array<{ anchor: string; title: TextId }> = [
   { anchor: 'histoire', title: 'about.histoire.heading' },
@@ -23,7 +23,7 @@ const Chapter = ({ index, tone, children }: { index: number; tone: Tone; childre
           <Label id={CHAPTERS[index].title} tone={tone} />
         </div>
       </div>
-      <div className="flex flex-col gap-14 md:gap-16 lg:col-span-8">{children}</div>
+      <div className="flex flex-col gap-12 md:gap-14 lg:col-span-8">{children}</div>
     </div>
   </Section>
 );
@@ -32,28 +32,20 @@ const ENGAGEMENTS = [1, 2, 3, 4, 5, 6] as const;
 
 export const SocietePage = () => (
   <div className="bg-[var(--pure-white)] text-[var(--night)]">
-    <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
-      <div className="page-container">
-        <h1
-          className="mb-10 font-bold leading-[0.95]! tracking-tight text-[var(--pure-white)] md:mb-14"
-          style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
-        >
-          La société
-        </h1>
-        <nav aria-label="La société" className="flex flex-wrap gap-x-8 gap-y-3">
-          {CHAPTERS.map((c) => (
-            <Link
-              key={c.anchor}
-              to="/la-societe"
-              hash={c.anchor}
-              className="text-[0.95rem] font-semibold text-white/75 transition-colors duration-300 hover:text-[var(--or-clair)]"
-            >
-              {TEXT[c.title]}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </section>
+    <PageHero title="La société">
+      <nav aria-label="La société" className="flex flex-wrap gap-x-8 gap-y-1 xl:w-max">
+        {CHAPTERS.map((c) => (
+          <Link
+            key={c.anchor}
+            to="/la-societe"
+            hash={c.anchor}
+            className="inline-flex min-h-11 items-center text-[15px] font-semibold text-[color-mix(in_srgb,var(--home-white)_78%,var(--home-ink))] transition-colors duration-200 hover:text-[var(--home-gold-light)]"
+          >
+            {TEXT[c.title]}
+          </Link>
+        ))}
+      </nav>
+    </PageHero>
 
     <Chapter index={0} tone="light">
       <Pair n1="about.histoire.n1" n2="about.histoire.n2" tone="light" as="p" size="statement" />
@@ -80,7 +72,8 @@ export const SocietePage = () => (
 
     <Chapter index={3} tone="dark">
       <N1 id="about.engagements.n1" tone="dark" as="p" size="statement" />
-      <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2">
+      {/* A ledger, like the home: Éthique & Déontologie closes it at full width on a gold wash, as its public rank says. */}
+      <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 [&>*:last-child]:md:col-span-2 [&>*:last-child]:bg-[color-mix(in_srgb,var(--home-gold)_16%,transparent)] [&>*:last-child]:px-6 [&>*:last-child]:pb-8 [&>*:last-child]:shadow-none">
         {ENGAGEMENTS.map((n) => (
           <Block
             key={n}

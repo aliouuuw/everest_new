@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { Link } from '@tanstack/react-router';
-import { FiArrowRight, FiCalendar, FiClock, FiSearch } from 'react-icons/fi';
-import { N1, N2 } from '../components/Referentiel';
+import { FiSearch } from 'react-icons/fi';
+import { ArrowUpRight, N1, N2, PageHero, RULE } from '../components/Referentiel';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 
@@ -86,31 +86,24 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
     });
   }, [ARTICLES, activeYear, activeMonth, activeCategory, searchQuery]);
 
+  const dateLabel = (date: string) => new Date(date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
   return (
     <div>
       {/* ─── Hero: referential V2.1 §5 ─── */}
-      <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
-        <div className="page-container">
-          <h1
-            className="mb-10 font-bold leading-[0.95]! tracking-tight text-white md:mb-14"
-            style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
-          >
-            Actualités
-          </h1>
-          <div className="flex max-w-4xl flex-col gap-6">
-            <N1 id="actualites.n1" tone="dark" as="p" size="statement" />
-            <N2 id="actualites.n2" tone="dark" />
-          </div>
-        </div>
-      </section>
+      <PageHero title="Actualités">
+        <N1 id="actualites.n1" tone="dark" as="p" size="statement" />
+        <N2 id="actualites.n2" tone="dark" />
+      </PageHero>
 
+      {/* An empty collection shows no toolbar and no « no match » message (DESIGN-PLAN 4.1). */}
+      {ARTICLES.length > 0 && (
+        <>
       {/* ─── Search + Filters ─── */}
-      <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
+      <section className="py-6 md:py-8 bg-[var(--home-white)] shadow-[inset_0_-1px_0_var(--home-rule)]">
         <div className="page-container">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
-            
-            {/* Category Filters */}
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 justify-between">
+            <div className="flex flex-wrap items-center gap-1">
               {CATEGORIES.map((cat) => {
                 const isActive = activeCategory === cat;
                 return (
@@ -119,10 +112,8 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
                     type="button"
                     onClick={() => setActiveCategory(cat)}
                     aria-pressed={isActive}
-                    className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-300 border font-primary rounded-full ${
-                      isActive 
-                        ? 'font-bold text-[var(--everest-green)] bg-[var(--jaune-or)] border-[var(--jaune-or)] shadow-sm' 
-                        : 'font-bold text-[var(--night-80)] bg-white border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)] shadow-sm'
+                    className={`min-h-12 px-4 text-[15px] font-semibold transition-colors cursor-pointer ${
+                      isActive ? 'bg-[var(--home-ink)] text-white' : 'text-[var(--home-ink)] hover:bg-[var(--home-paper)]'
                     }`}
                   >
                     {cat}
@@ -131,39 +122,31 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
               })}
             </div>
 
-            {/* Right side: Search + Selectors */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full lg:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
               <div className="relative w-full sm:w-64">
-                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-80)]/40" size={16} />
+                <FiSearch aria-hidden className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--home-mid)]" size={16} />
                 <input
                   type="text"
                   placeholder="Rechercher..."
                   aria-label="Rechercher"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] font-primary text-sm transition-colors rounded-full shadow-sm"
+                  className="w-full min-h-12 pl-11 pr-4 border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] bg-white text-[15px] text-[var(--home-ink)] transition-colors"
                 />
               </div>
-
               <div className="flex items-center gap-2">
-                <select 
-                  value={activeYear}
-                  onChange={(e) => setActiveYear(e.target.value)}
-                  aria-label="Année"
-                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
-                >
+                <select value={activeYear} onChange={(e) => setActiveYear(e.target.value)} aria-label="Année" className="min-h-12 px-4 cursor-pointer border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] bg-white text-[15px] text-[var(--home-ink)] transition-colors">
                   <option value="Tout">Année</option>
                   {years.filter(y => y !== 'Tout').map(y => (
                     <option key={y} value={y}>{y}</option>
                   ))}
                 </select>
-
-                <select 
+                <select
                   value={activeMonth}
                   onChange={(e) => setActiveMonth(e.target.value)}
                   aria-label="Mois"
                   disabled={activeYear === 'Tout'}
-                  className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
+                  className="min-h-12 px-4 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] bg-white text-[15px] text-[var(--home-ink)] transition-colors"
                 >
                   <option value="Tout">Mois</option>
                   {months.filter(m => m !== 'Tout').map(m => (
@@ -178,49 +161,29 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
 
       {/* ─── Featured Article ─── */}
       {featuredArticle && (
-      <section className="bg-[var(--pure-white)] py-24 md:py-40 border-b border-black/10">
+      <section className="bg-[var(--home-paper)] py-12 md:py-20 lg:py-28">
         <div className="page-container">
           <Link
             to={articleHref(featuredArticle)}
-            className="group grid grid-cols-1 lg:grid-cols-12 gap-0 border border-black/10 hover:border-[var(--mauve)]/50 transition-all duration-500 rounded-2xl overflow-hidden hover:shadow-[0_8px_24px_rgba(14,40,38,0.1)]"
+            className="group grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16"
             target={opensInNewTab(featuredArticle) ? '_blank' : undefined}
             rel={opensInNewTab(featuredArticle) ? 'noopener noreferrer' : undefined}
           >
-            <div className="lg:col-span-7 relative overflow-hidden">
-              <div className="aspect-[16/10] lg:aspect-auto lg:absolute lg:inset-0">
-                <img
-                  src={featuredArticle.imageUrl}
-                  alt={featuredArticle.title}
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
-              </div>
-              <div className="absolute top-6 left-6 z-10">
-                <span className="inline-block bg-[var(--jaune-or)] px-4 py-1.5 text-[10px] tracking-[0.15em] uppercase font-bold text-[var(--everest-green)] rounded-full">
-                  À la une
-                </span>
-              </div>
+            <div className="lg:col-span-7 aspect-[16/10] overflow-hidden bg-[var(--home-ink)]">
+              <img src={featuredArticle.imageUrl} alt={featuredArticle.title} className="h-full w-full object-cover" referrerPolicy="no-referrer" />
             </div>
-            <div className="lg:col-span-5 p-8 lg:p-12 flex flex-col justify-center bg-[var(--white-smoke)]/30">
-              <div className="flex items-center gap-4 mb-6">
-                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.1em] uppercase font-bold text-[var(--night-80)]">
-                  {featuredArticle.category}
-                </span>
-                <span className="w-1 h-1 bg-[rgba(10,10,10,0.3)] rounded-full" />
-                <span className="flex items-center gap-1.5 text-[10px] tracking-[0.05em] text-[var(--night-80)]">
-                  <FiCalendar className="text-xs" /> {new Date(featuredArticle.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                </span>
-              </div>
-              <h2 className="mb-6 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-3xl md:text-4xl leading-[1.2] text-[var(--night)]">
+            <div className="lg:col-span-5 flex flex-col justify-center gap-4">
+              <p className="text-[13px] leading-[1.5] text-[var(--home-mid)]">
+                <span className="font-semibold text-[var(--home-ink)]">À la une</span>{' · '}{featuredArticle.category}{' · '}
+                <time dateTime={featuredArticle.date}>{dateLabel(featuredArticle.date)}</time>
+              </p>
+              <h2 className="text-[clamp(26px,2.6vw,36px)] font-medium leading-[1.2]! tracking-[-0.02em] text-[var(--home-ink)] transition-colors duration-200 group-hover:text-[var(--home-mid)]">
                 {featuredArticle.title}
               </h2>
-              <p className="mb-8 font-light text-base leading-[1.7] text-[rgba(10,10,10,0.7)]">
-                {featuredArticle.excerpt}
-              </p>
-              <span className="inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase group-hover:gap-4 group-hover:text-[var(--night-80)] transition-all duration-300 font-bold text-[var(--night)]">
+              <p className="text-base leading-[1.65] text-[var(--home-mid)]">{featuredArticle.excerpt}</p>
+              <span className="home-link text-[var(--home-ink)]">
                 Lire le communiqué
-                <span className="inline-block w-6 h-[1px] bg-current group-hover:w-10 transition-all duration-500" />
+                <ArrowUpRight />
               </span>
             </div>
           </Link>
@@ -228,77 +191,49 @@ export function ActualitesView({ articles }: { articles: ActualitesArticle[] }) 
       </section>
       )}
 
-      {/* ─── Main Content: Articles + Sidebar ─── */}
-      <section className="bg-[var(--pure-white)] py-24 md:py-40">
+      {/* ─── Articles ─── */}
+      <section className="bg-[var(--home-white)] py-12 md:py-20 lg:py-28">
         <div className="page-container">
           <div className="max-w-5xl">
-
-            {/* Articles Feed */}
-            <div>
               {filteredArticles.length === 0 ? (
-                <div className="py-12 text-center text-[var(--night-80)] font-light">
-                  Aucun article ne correspond à vos critères.
-                </div>
+                <p className="py-12 text-base text-[var(--home-mid)]">Aucun article ne correspond à vos critères.</p>
               ) : (
-                <div className="border-t border-black/10">
+                <div className="shadow-[inset_0_-1px_0_var(--home-rule)]">
                   {filteredArticles.map((article, i) =>
                       <Link
                         key={i}
                         to={articleHref(article)}
-                        className="group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 border-b border-black/10 hover:bg-[var(--white-smoke)]/30 transition-colors"
+                        className={`group grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-8 py-10 ${RULE.light}`}
                         target={opensInNewTab(article) ? '_blank' : undefined}
                         rel={opensInNewTab(article) ? 'noopener noreferrer' : undefined}
                       >
-                        {/* Thumbnail */}
-                        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--white-smoke)] rounded-2xl">
-                          {article.imageUrl ? (
-                            <img
-                              src={article.imageUrl}
-                              alt={article.title}
-                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              referrerPolicy="no-referrer"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex items-center justify-center">
-                              <span className="text-[var(--night-80)]/30 text-4xl font-bold">{article.title[0]}</span>
-                            </div>
+                        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--home-paper)]">
+                          {article.imageUrl && (
+                            <img src={article.imageUrl} alt={article.title} className="absolute inset-0 h-full w-full object-cover" referrerPolicy="no-referrer" />
                           )}
                         </div>
-
-                        {/* Content */}
-                        <div className="flex flex-col justify-center">
-                          <div className="flex flex-wrap items-center gap-2 mb-4">
-                            <span className="text-[10px] tracking-[0.12em] uppercase font-bold text-[var(--night-80)]">
-                              {article.category}
-                            </span>
-                            <span className="flex items-center gap-1 text-[10px] text-[var(--night-80)]">
-                              <FiCalendar className="text-[9px]" />
-                              {new Date(article.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
-                            </span>
-                            <span className="flex items-center gap-1 text-[10px] text-[var(--night-80)]">
-                              <FiClock className="text-[9px]" /> {article.readTime}
-                            </span>
-                          </div>
-                          <h2 className="mb-3 group-hover:text-[var(--night-80)] transition-colors duration-300 font-primary font-bold text-xl leading-[1.35]! text-[var(--night)]">
+                        <div className="flex flex-col justify-center gap-3">
+                          <p className="text-[13px] leading-[1.5] text-[var(--home-mid)]">
+                            {article.category}{' · '}<time dateTime={article.date}>{dateLabel(article.date)}</time>{' · '}{article.readTime}
+                          </p>
+                          <h2 className="text-[19px] md:text-[22px] font-semibold leading-[1.35]! tracking-[-0.015em] text-[var(--home-ink)] transition-colors duration-200 group-hover:text-[var(--home-mid)]">
                             {article.title}
                           </h2>
-                          <p className="mb-4 line-clamp-2 font-light text-sm leading-[1.65] text-[rgba(10,10,10,0.7)]">
-                            {article.excerpt}
-                          </p>
-                          <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.12em] uppercase text-[var(--night-80)] group-hover:gap-3 transition-all duration-300 font-bold">
-                            Lire <FiArrowRight />
+                          <p className="line-clamp-2 text-[15px] leading-[1.65] text-[var(--home-mid)]">{article.excerpt}</p>
+                          <span className="home-link text-[var(--home-ink)]">
+                            Lire
+                            <ArrowUpRight />
                           </span>
                         </div>
                       </Link>
                   )}
                 </div>
               )}
-
-            </div>
-
           </div>
         </div>
       </section>
+        </>
+      )}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 /**
- * Building blocks for referential V2.1 pages.
- * Each N1 sits on a gold rule and each N2 on a green rule (Part III: « N1 sur filet doré, N2 sur filet vert »).
+ * Building blocks for referential V2.1 pages, drawn in the home system (DESIGN.md):
+ * one type scale at weight 500, 1px horizontal rules, square actions, the outward arrow.
+ * Part III's « N1 sur filet doré, N2 sur filet vert » codes the levels of the source document;
+ * here the N1 leads and the N2 follows in forest-mid, as on the home. No side rails.
  * No reveal animation: every text is visible without JavaScript.
  * Global CSS beats Tailwind here: no `font-primary` class (it forces weight 400) and heading line-heights use `!`.
  */
@@ -11,137 +13,114 @@ import { TEXT, type TextId } from '../content';
 
 export type Tone = 'light' | 'ivory' | 'dark';
 
-/** N2 rule: charter #1A3A35 on light grounds, a light tint of it on dark (DESIGN-PLAN 2.3). */
-export const GREEN_RULE = { light: 'var(--everest-green-mid)', ivory: 'var(--everest-green-mid)', dark: 'color-mix(in srgb, var(--everest-green-mid) 45%, white)' };
-
-/**
- * A text on its rule. In a Pair the N1 rule runs down through the gap into the N2 rule,
- * so the pair reads as one line: gold, then green.
- */
-export const Filet = ({ color, width = 3, join, children }: { color: string; width?: 2 | 3; join?: 'down' | 'up'; knot?: boolean; children: ReactNode }) => (
-  <div className="relative pl-5 md:pl-6">
-    <span
-      aria-hidden
-      className={`absolute rounded-full ${width === 3 ? 'left-0 w-[3px]' : 'left-[0.5px] w-[2px]'} ${join === 'up' ? 'top-0' : 'top-[0.2em]'}`}
-      style={{ background: color, bottom: join === 'down' ? 'calc(-1 * var(--pair-gap))' : '0.2em' }}
-    />
-    {children}
-  </div>
-);
-
-const N1_SIZE = {
-  section: 'text-[clamp(1.5rem,1.05rem+1.5vw,2.25rem)] font-bold leading-[1.18]! tracking-[-0.01em]',
-  statement: 'text-[clamp(1.375rem,1rem+1.25vw,2rem)] font-semibold leading-[1.3]! tracking-[-0.01em]',
-  card: 'text-lg md:text-xl font-semibold leading-snug!',
-  /** The peaks of a page (home proofs, governance): one step above the section heading. */
-  peak: 'text-[clamp(1.625rem,1rem+2.3vw,3rem)] font-bold leading-[1.08]! tracking-[-0.02em] [font-variant-numeric:lining-nums_tabular-nums]',
+const INK = { light: 'text-[var(--home-ink)]', ivory: 'text-[var(--home-ink)]', dark: 'text-white' };
+/** Supporting text: forest-mid on light grounds, white mixed into forest on dark (home.css). */
+const SOFT = {
+  light: 'text-[var(--home-mid)]',
+  ivory: 'text-[var(--home-mid)]',
+  dark: 'text-[color-mix(in_srgb,var(--home-white)_82%,var(--home-ink))]',
+};
+/** The home's 1px rule, as an inset shadow so it never shifts layout. */
+export const RULE = {
+  light: 'shadow-[inset_0_1px_0_var(--home-rule)]',
+  ivory: 'shadow-[inset_0_1px_0_var(--home-rule)]',
+  dark: 'shadow-[inset_0_1px_0_color-mix(in_srgb,var(--home-white)_18%,transparent)]',
 };
 
-export const N1 = ({ id, tone, as = 'h2', size = 'section', joined }: { id: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE; joined?: boolean; knot?: boolean }) => (
-  <Filet color="var(--jaune-or)" join={joined ? 'down' : undefined}>
-    <EditableText
-      id={id}
-      as={as}
-      className={`text-balance ${N1_SIZE[size]} ${tone === 'dark' ? 'text-white' : 'text-[var(--everest-green)]'}`}
-    >
-      {TEXT[id]}
-    </EditableText>
-  </Filet>
+/** Home scale: heading 42, statement 28, title 22, display 68. */
+const N1_SIZE = {
+  section: 'text-[clamp(28px,2.9vw,42px)] font-medium leading-[1.15]! tracking-[-0.025em]',
+  statement: 'text-[clamp(21px,1.95vw,28px)] font-normal leading-[1.45]! tracking-[-0.015em]',
+  card: 'text-[19px] md:text-[22px] font-semibold leading-[1.35]! tracking-[-0.015em]',
+  /** A chapeau read as text, in an index row. */
+  lead: 'text-[17px] md:text-[19px] font-normal leading-[1.55]! tracking-[-0.005em]',
+  peak: 'text-[clamp(34px,4.7vw,68px)] font-medium leading-[1.07]! tracking-[-0.035em]',
+};
+
+export const N1 = ({ id, tone, as = 'h2', size = 'section' }: { id: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE }) => (
+  <EditableText id={id} as={as} className={`max-w-[34em] text-balance ${N1_SIZE[size]} ${INK[tone]}`}>
+    {TEXT[id]}
+  </EditableText>
 );
 
-export const N2 = ({ id, tone, joined }: { id: TextId; tone: Tone; joined?: boolean }) => (
-  <Filet color={GREEN_RULE[tone]} width={2} join={joined ? 'up' : undefined}>
-    <EditableText
-      id={id}
-      as="p"
-      className={`max-w-[36em] text-pretty text-base md:text-[1.0625rem] leading-relaxed ${tone === 'dark' ? 'text-white/75' : 'text-[var(--night-80)]'}`}
-    >
-      {TEXT[id]}
-    </EditableText>
-  </Filet>
+export const N2 = ({ id, tone }: { id: TextId; tone: Tone }) => (
+  <EditableText id={id} as="p" className={`max-w-[36em] text-pretty text-[15px] md:text-base leading-[1.65] ${SOFT[tone]}`}>
+    {TEXT[id]}
+  </EditableText>
 );
 
-export const Pair = ({ n1, n2, tone, as, size }: { n1: TextId; n2: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE; knot?: boolean }) => (
-  <div className="flex flex-col gap-[var(--pair-gap)] [--pair-gap:1.25rem] md:[--pair-gap:1.5rem]">
-    <N1 id={n1} tone={tone} as={as} size={size} joined />
-    <N2 id={n2} tone={tone} joined />
+export const Pair = ({ n1, n2, tone, as, size }: { n1: TextId; n2: TextId; tone: Tone; as?: ElementType; size?: keyof typeof N1_SIZE }) => (
+  <div className={`flex flex-col ${size === 'card' ? 'gap-3' : 'gap-5 md:gap-6'}`}>
+    <N1 id={n1} tone={tone} as={as} size={size} />
+    <N2 id={n2} tone={tone} />
   </div>
 );
 
-const GROUND = { light: 'var(--pure-white)', ivory: 'var(--summit-ivory)', dark: 'var(--everest-green)' };
+const GROUND = { light: 'var(--home-white)', ivory: 'var(--home-paper)', dark: 'var(--home-ink)' };
 
-export const Section = ({ tone, children, id, peak, className = '' }: { tone: Tone; children: ReactNode; id?: string; peak?: boolean; rope?: ReactNode | boolean; className?: string }) => (
+export const Section = ({ tone, children, id, peak, className = '' }: { tone: Tone; children: ReactNode; id?: string; peak?: boolean; className?: string }) => (
   <section
     id={id}
-    className={`${peak ? 'py-20 md:py-36' : 'py-16 md:py-28'} ${className}`}
+    className={`${peak ? 'py-20 md:py-36' : 'py-12 md:py-20 lg:py-28'} ${tone === 'dark' ? 'antialiased' : ''} ${className}`}
     style={{ background: GROUND[tone] }}
   >
     <div className="page-container">{children}</div>
   </section>
 );
 
-/** Up-right arrow, drawn to match the 3px rules. */
+/** The home's outward arrow: straight strokes, square caps. */
 export const ArrowUpRight = () => (
-  <svg aria-hidden viewBox="0 0 16 16" className="ml-1 inline h-3.5 w-3.5 align-[-0.1em] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4.5 11.5l7-7M6 4.5h5.5V10" />
+  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+    <path d="M6 18 18 6M8 6h10v10" />
   </svg>
 );
 
 export const TextLink = ({ to, children, tone = 'light', arrow = true }: { to: string; children: ReactNode; tone?: Tone; arrow?: boolean }) => (
   <Link
     to={to}
-    className={`group inline py-3.5 text-[0.95rem] font-semibold transition-colors duration-300 ${
-      tone === 'dark' ? 'text-[var(--or-clair)] hover:text-white' : 'text-[var(--everest-green)] hover:text-[var(--jaune-or)]'
-    }`}
+    className={`home-link ${tone === 'dark' ? 'text-white hover:text-[var(--home-gold-light)]!' : 'text-[var(--home-ink)]'}`}
   >
     {children}
-    {arrow && (
-      <span className={`whitespace-nowrap ${tone === 'dark' ? '' : 'text-[var(--jaune-or)]'}`}>
-        {'\u00a0'}
-        <ArrowUpRight />
-      </span>
-    )}
+    {arrow && <ArrowUpRight />}
   </Link>
 );
 
-
 const LABEL_SIZE = {
-  section: 'text-[clamp(1.75rem,1.2rem+1.8vw,2.75rem)] font-bold leading-[1.1]! tracking-[-0.015em]',
-  sub: 'text-sm md:text-[0.95rem] font-bold',
+  section: N1_SIZE.section,
+  title: N1_SIZE.card,
+  /** Takes the size of its parent (a page title). */
+  inherit: '',
+  sub: 'text-[15px] font-semibold leading-[1.4]!',
 };
 
-/** A referential heading (section title or block label), shown without a rule. */
+/** A referential heading (section title or block label). */
 export const Label = ({ id, tone, as = 'h2', size = 'section' }: { id: TextId; tone: Tone; as?: ElementType; size?: keyof typeof LABEL_SIZE }) => (
   <EditableText
     id={id}
     as={as}
-    className={`text-balance ${LABEL_SIZE[size]} ${
-      tone === 'dark' ? (size === 'sub' ? 'text-[var(--or-clair)]' : 'text-white') : size === 'sub' ? 'text-[var(--everest-green)]/70' : 'text-[var(--everest-green)]'
-    }`}
+    className={`text-balance ${LABEL_SIZE[size]} ${size === 'sub' && tone === 'dark' ? 'text-[var(--home-gold-light)]' : INK[tone]}`}
   >
     {TEXT[id]}
   </EditableText>
 );
 
-/** A labelled N1/N2 pair (label as a sub-heading above the pair). */
+/** A labelled N1/N2 pair on the home rule: label, then the pair. */
 export const Block = ({ label, n1, n2, tone, size = 'statement' }: { label: TextId; n1: TextId; n2: TextId; tone: Tone; size?: 'statement' | 'card' }) => (
-  <div className="flex flex-col gap-5">
+  <div className={`flex flex-col gap-4 pt-6 md:pt-8 ${RULE[tone]}`}>
     <Label id={label} tone={tone} as="h3" size="sub" />
     <Pair n1={n1} n2={n2} tone={tone} as="p" size={size} />
   </div>
 );
 
-/** Dark page hero: page title (a menu label), then the page N1/N2 or chapeau. */
-export const PageHero = ({ title, children }: { title: string; children?: ReactNode }) => (
-  <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
+/** Forest page head: page title (a menu label) at display size, then the page N1/N2 or chapeau. */
+export const PageHero = ({ title, above, children }: { title: ReactNode; above?: ReactNode; children?: ReactNode }) => (
+  <section className="antialiased bg-[var(--home-ink)] pt-[148px] pb-12 md:pt-[180px] md:pb-20">
     <div className="page-container">
-      <h1
-        className={`font-bold leading-[0.95]! tracking-tight text-white ${children ? 'mb-10 md:mb-14' : ''}`}
-        style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
-      >
+      {above}
+      <h1 className={`max-w-[18ch] text-balance text-[clamp(40px,4.7vw,68px)] font-medium leading-[1.07]! tracking-[-0.035em] text-white ${children ? 'mb-8 md:mb-12' : ''}`}>
         {title}
       </h1>
-      {children && <div className="flex max-w-4xl flex-col gap-6">{children}</div>}
+      {children && <div className="flex max-w-4xl flex-col gap-5 md:gap-6">{children}</div>}
     </div>
   </section>
 );
