@@ -49,8 +49,9 @@ The home borrows the clarity of a research reading room. The summit establishes
 the house's identity; genuine documents show its output. Dense copy remains
 available through native disclosures rather than a wall of repeated panels.
 
-This document describes the home, not a mandate to restyle every inner page.
-Source: `src/components/Sections/home.css`. Earlier rope and card-heavy passes
+The inner pages share this system (23 Oct 2026): tokens live on `:root` in
+`src/components/Sections/home.css`, and `src/components/Referentiel.tsx` draws the
+N1/N2 blocks, page heads, links and rules in it. Source: those two files. Earlier rope and card-heavy passes
 are rejected directions, not components to restore.
 
 ## Colors
@@ -145,3 +146,18 @@ As the hero leaves the viewport, the summit recedes slightly (scroll-driven, mot
   with a static gold underline; never add words to do it.
 - Do not add motion merely to meet an animated-element count.
 - Do not generalize unresolved inner-page defects into design-system rules.
+
+## Inner pages
+
+- Page head: forest band, the menu label at display size (68, weight 500), then the page N1 (statement) and N2.
+- No side rails. Part III's « filet doré / filet vert » codes the levels of the source
+  document; on screen the N1 leads and the N2 follows in forest-mid. Blocks and index rows
+  sit on the home's 1px rule.
+- Container and footer are the home's on every page (header gutters, 1400px).
+- Lists of things are indexes or ledgers, not card grids: the expertise index, the
+  engagements ledger (Éthique & Déontologie closes it on a gold wash), the four
+  « Parcours » steps on rules.
+- Documents show their real cover (`public/publications/covers/<id>.webp`), then date,
+  format, pages, size. No client-side PDF rendering.
+- Controls are square: filters (active = forest fill), fields (1px border at 55% forest,
+  3:1 against white), gold submit.

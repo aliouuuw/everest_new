@@ -105,6 +105,17 @@ Command: `/impeccable adapt`.
    world (rope device, hero, publication covers).
 3. **Next pass scope:** Phases 1 and 2, then a new critique.
 
+## Progress (23 Oct 2026)
+
+- Phase 1: done (`40504a4`).
+- Home redesign and header pass: done (`ff1029c`, `8d328d5`).
+- Inner pages on the home system: done. Covers 2.3 (rules replaced by the home's
+  horizontal rule), 2.4 (`max-w-[36em]`), 2.6 (sentence case, one arrow), 3.3
+  (real covers, no client pdf.js, date first and size last), 4.1 (empty
+  Actualités hides its toolbar). 3.4 Sama Naffa: logo and text in one composition.
+- Still open: 2.5 font decision, 3.1/3.2 signature, 3.5 WhatsApp bubble (owner: keep),
+  4.2 sticky anchor nav, 5.x phone length.
+
 ## Order
 
 Phase 1, then 2, then 3. Phases 4 and 5 can run alongside 3. Re-run

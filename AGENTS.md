@@ -9,8 +9,10 @@ source of public text: copy it word for word, write no copy of your own.
 
 Lots L0 to L8 are done (L7 is blocked on Legal inputs). Design pass
 (`docs/referentiel/DESIGN-PLAN.md`): Phase 1 (accessibility) and the home
-redesign are done. Now: the header pass, then carry the home system to the
-inner pages (Phase 2). Read `docs/referentiel/DESIGN-HANDOFF-2.md` first.
+redesign, the header pass and the inner-page pass (home system on every
+page, see `DESIGN.md` « Inner pages ») are done. Next: a new
+`/impeccable critique`, then Phase 3 (signature). Read
+`docs/referentiel/DESIGN-HANDOFF-2.md` first.
 
 - Public texts live in `src/content/*.ts`, keyed by CMS id. New ids must not
   reuse an old Payload row (the seed never updates rows).
