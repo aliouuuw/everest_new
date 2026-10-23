@@ -45,19 +45,19 @@ export const Footer = () => {
   );
 
   return (
-    <footer className="relative bg-[var(--everest-green)]" style={{ borderTop: '1px solid color-mix(in srgb, var(--or-clair) 18%, transparent)' }}>
+    <footer className={`relative bg-[var(--everest-green)]${location.pathname === '/' ? ' home-footer' : ''}`} style={location.pathname === '/' ? undefined : { borderTop: '1px solid color-mix(in srgb, var(--or-clair) 18%, transparent)' }}>
       {/* Subtle green ambient glow */}
-      <div
+      {location.pathname !== '/' && <div
         className="absolute inset-0 pointer-events-none opacity-25"
         style={{
           background: 'radial-gradient(ellipse 50% 30% at 50% 100%, var(--everest-green-10) 0%, transparent 70%)',
         }}
-      />
-      <div className="mx-auto max-w-6xl px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
+      />}
+      <div className="site-footer-container mx-auto max-w-6xl px-6 py-20 relative z-10">
+        <div className="site-footer-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10">
 
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="site-footer-brand lg:col-span-2">
             <img src="/logo-everest.png" alt="EVEREST Finance" className="h-32 w-auto brightness-125 mb-5" />
             <p className="text-secondary-dark text-[0.85rem] font-light leading-relaxed">
               Encordés, vers le sommet
@@ -71,7 +71,7 @@ export const Footer = () => {
             {renderLinkList(expertises)}
           </div>
 
-          <div>
+          <div className="site-footer-contact">
             <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Coordonnées</div>
             <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
               <li>
@@ -96,7 +96,7 @@ export const Footer = () => {
 
         {/* Bottom bar */}
         <div
-          className="mt-16 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-[var(--pure-white)]/5 text-secondary-dark text-[0.7rem] font-light"
+          className="site-footer-bottom mt-16 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-[var(--pure-white)]/5 text-secondary-dark text-[0.7rem] font-light"
         >
           <span className="opacity-70">
             &copy; {new Date().getFullYear()} EVEREST Finance, SGI agréée AMF-UMOA n° SGI/DA/2016/60. Tous droits réservés.

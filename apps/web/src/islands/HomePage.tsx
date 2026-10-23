@@ -1,10 +1,9 @@
 import { HeroSectionMountain } from '@/components/Hero/HeroSectionMountain'
 import {
   HomeAnalyses,
+  HomeClosing,
   HomeEngagements,
   HomeExpertises,
-  HomeFinalCta,
-  HomeGovernance,
   HomePositioning,
   HomeProofs,
   HomeSamaNaffa,
@@ -21,16 +20,17 @@ type Props = {
 export default function HomePage({ siteContent }: Props) {
   return (
     <StaticCMSProvider rows={siteContent} pageKey="home">
-      <HeroSectionMountain />
-      <HomePositioning />
-      <HomeProofs />
-      <HomeEngagements />
-      <HomeAnalyses />
-      <HomeExpertises />
-      <HomeSegments />
-      <HomeSamaNaffa />
-      <HomeGovernance />
-      <HomeFinalCta />
+      <div className="everest-home">
+        <HeroSectionMountain />
+        <HomePositioning />
+        <HomeProofs />
+        <HomeEngagements />
+        <HomeAnalyses />
+        <HomeExpertises />
+        <HomeSegments />
+        <HomeSamaNaffa />
+        <HomeClosing />
+      </div>
     </StaticCMSProvider>
   )
 }

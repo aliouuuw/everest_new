@@ -1,187 +1,53 @@
-import { useEffect, useId, useRef, useState } from 'react';
-import { useCloudShader } from './useCloudShader';
-import { Link } from '@tanstack/react-router';
-import { gsap } from 'gsap';
-import { FiArrowRight } from 'react-icons/fi';
+import { useEffect, useId, useState } from 'react';
 import { EditableText } from '../../cms';
 import { HOME_TEXT } from '../../content/home';
+import { HomeArrow } from '../Sections/HomeReferentiel';
 
+/** The poster is the default. The short film only loads on motion-enabled desktop connections. */
 export const HeroSectionMountain: React.FC = () => {
-  const heroRef   = useRef<HTMLElement>(null);
-  const videoRef   = useRef<HTMLVideoElement>(null);
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-  const headingId  = useId();
-  const [cloudVisible, setCloudVisible] = useState(false);
-  const { start: startCloud } = useCloudShader(canvasRef);
+  const headingId = useId();
+  const [playVideo, setPlayVideo] = useState(false);
 
   useEffect(() => {
-    const v = videoRef.current;
-    if (v) {
-      v.play().catch(() => {
-        /* autoplay may need user gesture; ignore */
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set('.hero-video-wrap', { scale: 1, opacity: 1 });
-        gsap.set('.hero-kicker', { y: 0, opacity: 1 });
-        gsap.set('.hero-title-line', { y: '0%' });
-        gsap.set('.hero-body', { y: 0, opacity: 1 });
-        gsap.set('.hero-cta', { y: 0, opacity: 1 });
-        gsap.set('.hero-rule', { scaleX: 1, transformOrigin: 'center' });
-        return;
-      }
-
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
-      gsap.set('.hero-video-wrap', { scale: 1.1, opacity: 0 });
-      gsap.set('.hero-kicker', { y: 20, opacity: 0 });
-      gsap.set('.hero-title-line', { y: '110%' });
-      gsap.set('.hero-body', { y: 30, opacity: 0 });
-      gsap.set('.hero-cta', { y: 20, opacity: 0 });
-        gsap.set('.hero-rule', { scaleX: 0, transformOrigin: 'right' });
-
-      tl
-        .to('.hero-video-wrap', { scale: 1, opacity: 1, duration: 2.4, ease: 'power2.out' })
-        .to('.hero-kicker', { y: 0, opacity: 1, duration: 0.8 }, '-=1.4')
-        .to(
-          '.hero-title-line',
-          { y: '0%', duration: 1.4, stagger: 0.12, ease: 'power4.out' },
-          '-=1.0',
-        )
-        .to('.hero-rule', { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }, '-=0.8')
-        .to('.hero-body', { y: 0, opacity: 1, duration: 1.0 }, '-=0.6')
-        .to('.hero-cta', { y: 0, opacity: 1, duration: 0.8 }, '-=0.5');
-    }, heroRef);
-
-    return () => ctx.revert();
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const media = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)');
+    const update = () => setPlayVideo(media.matches && !saveData);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
   }, []);
 
   return (
-    <section
-      ref={heroRef}
-      id="hero"
-      aria-labelledby={headingId}
-      className="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-[var(--night)] text-white selection:bg-[var(--jaune-or)] selection:text-[var(--night)] md:min-h-[100dvh]"
-    >
-      {/* ─── Cinematic Video Background (mountain left — open center for type) ─── */}
-      <div className="hero-video-wrap absolute inset-0 w-full h-full z-0" aria-hidden>
-        <video
-          ref={videoRef}
-          autoPlay
-          loop={false}
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          controlsList="nodownload noplaybackrate noremoteplayback"
-          className="h-full w-full min-h-full min-w-full object-cover [object-position:0%_50%] md:[object-position:0%_48%] motion-reduce:object-center"
-          style={{ display: 'block' }}
-          onEnded={() => { setCloudVisible(true); startCloud(); }}
-        >
-          <source src="/ai-hero-bg-1.mp4" type="video/mp4" />
-        </video>
-        <canvas
-          ref={canvasRef}
-          aria-hidden
-          className="absolute inset-0 h-full w-full pointer-events-none"
-          style={{
-            opacity: cloudVisible ? 0.6 : 0,
-            transition: 'opacity 2500ms ease-in-out',
-          }}
+    <section id="hero" className="home-hero" aria-labelledby={headingId}>
+      <div className="home-hero-media" aria-hidden="true">
+        <img
+          src="/hero/summit-1920.webp"
+          srcSet="/hero/summit-1080.webp 1080w, /hero/summit-1920.webp 1920w"
+          sizes="100vw"
+          alt=""
+          width={1920}
+          height={1080}
+          fetchPriority="high"
         />
-        <div
-          className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[color-mix(in_srgb,var(--everest-green)_38%,transparent)] from-[45%] via-[color-mix(in_srgb,var(--everest-green)_12%,transparent)] to-transparent"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,var(--everest-green)_58%,black_42%)] via-[color-mix(in_srgb,var(--everest-green)_20%,transparent)] to-transparent pointer-events-none" />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 60% 30% at 100% 100%, rgb(0, 0, 0) 0%, rgba(10, 10, 10, 0.98) 0% 30%, transparent 80%)',
-          }}
-        />
-        <div className="absolute inset-0 bg-[var(--everest-green)]/[0.04] mix-blend-soft-light pointer-events-none" />
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.035] mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {playVideo && (
+          <video autoPlay muted playsInline preload="metadata" poster="/hero/summit-1920.webp" disablePictureInPicture>
+            <source src="/hero/summit.webm" type="video/webm" />
+            <source src="/hero/summit.mp4" type="video/mp4" />
+          </video>
+        )}
       </div>
-
-      <div
-        className="relative z-10 w-full page-container pt-[calc(var(--site-chrome-sticky)+0.5rem)] pb-24 sm:pt-32 sm:pb-40 md:pb-44"
-        style={{ paddingBottom: 'max(5.5rem, env(safe-area-inset-bottom, 0px))' }}
-      >
-        <div className="flex w-full max-w-[min(52rem,100%)] flex-col items-start text-left">
-          <h1 id={headingId} className="text-balance mb-6 sm:mb-7 w-full max-w-4xl">
-            <span className="block overflow-hidden">
-              <EditableText
-                id="home.hero.title"
-                as="span"
-                className="hero-title-line block"
-                style={{
-                  fontFamily: 'var(--font-primary)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(1.625rem, 7.2vw, 2.875rem)',
-                  lineHeight: 1.2,
-                  letterSpacing: '-0.03em',
-                  color: 'var(--pure-white)',
-                }}
-              >
-                {HOME_TEXT['home.hero.title']}
-              </EditableText>
-            </span>
-          </h1>
-
-          <div
-            className="hero-rule h-px w-20 sm:w-32 md:w-40 mb-7 sm:mb-8"
-            style={{
-              background:
-                'linear-gradient(90deg, transparent, color-mix(in srgb, var(--jaune-or) 85%, var(--mauve) 15%) 50%, transparent)',
-            }}
-          />
-
-          <EditableText
-            id="home.hero.n2"
-            as="p"
-            className="hero-body mb-8 max-w-[60ch] text-pretty md:mb-10"
-            style={{
-              fontFamily: 'var(--font-primary)',
-              fontWeight: 500,
-              fontSize: 'clamp(0.9375rem, 2.6vw, 1.2rem)',
-              lineHeight: 1.5,
-              color: 'var(--pure-white)',
-            }}
-          >
-            {HOME_TEXT['home.hero.n2']}
-          </EditableText>
-
-          <div className="hero-cta flex w-full max-w-4xl flex-col flex-wrap items-stretch gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:items-center sm:gap-5">
-            <Link
-              to="/contact"
-              className="btn-primary-dark inline-flex min-h-[3.75rem] min-w-[min(100%,14rem)] sm:min-w-0 items-center justify-center pl-9 pr-3 py-3.5 text-base w-full sm:w-fit group touch-manipulation transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
-            >
-              <EditableText id="home.hero.cta1" as="span" className="text-base font-semibold tracking-tight">
-                {HOME_TEXT['home.hero.cta1']}
-              </EditableText>
-              <div className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--night)]/15 transition-transform duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-0.5 group-hover:bg-[var(--night)]/25 sm:ml-5">
-                <FiArrowRight className="text-base shrink-0" aria-hidden />
-              </div>
-            </Link>
-            <Link
-              to="/opportunites"
-              className="group inline-flex min-h-11 items-center gap-2 px-1 text-base font-semibold text-white/85 transition-colors duration-200 hover:text-[var(--or-clair)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--jaune-or)]"
-            >
-              <EditableText id="home.hero.cta2" as="span">
-                {HOME_TEXT['home.hero.cta2']}
-              </EditableText>
-              <FiArrowRight className="text-base shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-            </Link>
+      <div className="home-container home-hero-content">
+        <h1 id={headingId}><EditableText id="home.hero.title">{HOME_TEXT['home.hero.title']}</EditableText></h1>
+        <div className="home-hero-foot">
+          <div className="home-hero-actions">
+            <a className="home-button" href="/contact">
+              <EditableText id="home.hero.cta1">{HOME_TEXT['home.hero.cta1']}</EditableText><HomeArrow />
+            </a>
+            <a className="home-link" href="/opportunites">
+              <EditableText id="home.hero.cta2">{HOME_TEXT['home.hero.cta2']}</EditableText><HomeArrow />
+            </a>
           </div>
+          <EditableText id="home.hero.n2" as="p" className="home-body">{HOME_TEXT['home.hero.n2']}</EditableText>
         </div>
       </div>
     </section>

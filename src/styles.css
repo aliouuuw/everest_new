@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
+@import "./components/Sections/home.css";
 /* Paths are relative to this file (src/). Astro imports it from apps/web, so cwd scanning misses src/. */
 @source "../index.html";
 @source "./**/*.{tsx,ts,jsx,js}";
@@ -52,9 +53,9 @@
   --focus-ring: var(--jaune-or);
   
   /* Typography */
-  --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Fraunces', 'Georgia', serif;
-  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display-aptos: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Backgrounds */
   --cream: #faf6ef;
@@ -152,11 +153,6 @@ html {
 /* Ensure Lenis works with all scrollable containers */
 [data-lenis-prevent] {
   overscroll-behavior: contain;
-}
-
-/* Prevent scroll restoration conflicts */
-html {
-  scroll-restoration: manual;
 }
 
 h1, h2 {
