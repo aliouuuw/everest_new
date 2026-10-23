@@ -49,7 +49,7 @@ export const ContactPage = () => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
       {/* Referential V2.1 §8: N1/N2, then the four steps, then the form and the contact details */}
-      <PageHero title="Contact / Devenir client">
+      <PageHero title="Contact / Devenir client" media={{ name: 'contact', position: '60% 70%' }}>
         <N1 id="contact.n1" tone="dark" as="p" size="statement" />
         <N2 id="contact.n2" tone="dark" />
       </PageHero>

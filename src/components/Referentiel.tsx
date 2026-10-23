@@ -112,15 +112,46 @@ export const Block = ({ label, n1, n2, tone, size = 'statement' }: { label: Text
   </div>
 );
 
-/** Forest page head: page title (a menu label) at display size, then the page N1/N2 or chapeau. */
-export const PageHero = ({ title, above, children }: { title: ReactNode; above?: ReactNode; children?: ReactNode }) => (
-  <section className="antialiased bg-[var(--home-ink)] pt-[148px] pb-12 md:pt-[180px] md:pb-20">
+/** A page head photograph from `public/pages` (graded forest to paper, see MEDIA-PLACEHOLDERS.md). */
+export type HeadMedia = {
+  /** File stem: `/pages/head-<name>-lg.webp` and `-sm.webp`. */
+  name: string;
+  /** CSS object-position, so the subject clears the text side. */
+  position?: string;
+  /** A short film over the still: `/pages/<film>.webm`, `.mp4`, `-poster.webp`. Started by the page script, desktop and motion-enabled only. */
+  film?: string;
+};
+
+/**
+ * Forest page head: page title (a menu label) at display size, then the page N1/N2 or chapeau.
+ * With `media`, the place the page is about fills the band behind a forest veil on the text side.
+ */
+export const PageHero = ({ title, above, media, children }: { title: ReactNode; above?: ReactNode; media?: HeadMedia; children?: ReactNode }) => (
+  <section className={`page-head antialiased bg-[var(--home-ink)] pt-[148px] pb-12 md:pt-[180px] md:pb-20 ${media ? 'page-head-photo' : ''}`}>
+    {media && (
+      <div className="page-head-media" aria-hidden="true">
+        <img
+          src={`/pages/head-${media.name}-lg.webp`}
+          srcSet={`/pages/head-${media.name}-sm.webp 1200w, /pages/head-${media.name}-lg.webp 2400w`}
+          sizes="100vw"
+          alt=""
+          fetchPriority="high"
+          style={media.position ? { objectPosition: media.position } : undefined}
+        />
+        {media.film && (
+          <video data-head-film muted playsInline preload="none" disablePictureInPicture poster={`/pages/${media.film}-poster.webp`} style={media.position ? { objectPosition: media.position } : undefined}>
+            <source data-src={`/pages/${media.film}.webm`} type="video/webm" />
+            <source data-src={`/pages/${media.film}.mp4`} type="video/mp4" />
+          </video>
+        )}
+      </div>
+    )}
     <div className="page-container">
       {above}
       <h1 className={`max-w-[18ch] text-balance text-[clamp(40px,4.7vw,68px)] font-medium leading-[1.07]! tracking-[-0.035em] text-white ${children ? 'mb-8 md:mb-12' : ''}`}>
         {title}
       </h1>
-      {children && <div className="flex max-w-4xl flex-col gap-5 md:gap-6">{children}</div>}
+      {children && <div className={`flex flex-col gap-5 md:gap-6 ${media ? 'max-w-[44rem]' : 'max-w-4xl'}`}>{children}</div>}
     </div>
   </section>
 );

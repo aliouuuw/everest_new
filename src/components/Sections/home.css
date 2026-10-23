@@ -73,7 +73,7 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   text-decoration: none;
   transition: color 200ms var(--home-ease), background-color 200ms var(--home-ease);
 }
-.everest-home svg[viewBox="0 0 24 24"], .home-link svg, .home-button svg { flex-shrink: 0; width: 18px; height: 18px; transition: transform 240ms var(--home-ease); }
+.everest-home svg[viewBox="0 0 24 24"], .home-link svg, .home-button svg, .home-expertise-title svg { flex-shrink: 0; width: 18px; height: 18px; transition: transform 240ms var(--home-ease); }
 .home-link:hover svg, .home-button:hover svg, .home-expertise-title a:hover svg, .home-publication:hover .home-publication-title svg { transform: translate(2px, -2px); }
 .home-button { background: var(--home-gold); color: var(--home-ink); padding: 16px 22px; border-radius: 0; }
 .home-button:hover { background: var(--home-gold-light); }
@@ -245,6 +245,42 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 .home-footer .site-footer-bottom { border: 0; }
 .home-footer .site-footer-bottom > span:first-child { opacity: 1; }
 
+/* Inner page head with a photograph: the place the page is about, behind a forest veil on the text side.
+   The band still ends in forest, so the next section meets the same edge as before. */
+.page-head-photo { position: relative; isolation: isolate; overflow: clip; display: flex; flex-direction: column; justify-content: flex-end; min-height: 640px; }
+.page-head-media { position: absolute; inset: 0; z-index: -1; }
+.page-head-media img, .page-head-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.page-head-media video:not([data-playing]) { visibility: hidden; }
+.page-head-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--home-ink) 0%, color-mix(in srgb, var(--home-ink) 90%, transparent) 38%, color-mix(in srgb, var(--home-ink) 30%, transparent) 66%, transparent 92%), /* taste-skill-ignore: image legibility scrim. */
+    linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 60%, transparent) 0%, transparent 24%, transparent 72%, var(--home-ink) 100%); /* taste-skill-ignore: image legibility scrim. */
+}
+@media (max-width: 767px) {
+  .page-head-photo { min-height: 0; }
+  .page-head-media::after { background: linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 25%, transparent) 0%, color-mix(in srgb, var(--home-ink) 62%, transparent) 28%, var(--home-ink) 64%); } /* taste-skill-ignore: image legibility scrim. */
+}
+
+/* Opportunités: the instruments the N1 names, as a ledger (same squares as the home engagements). */
+.opps-ledger { list-style: none; margin: 0; padding: 0; box-shadow: inset 0 -1px 0 var(--home-rule); }
+.opps-ledger li { position: relative; padding: 22px 0 22px 28px; font-size: var(--home-t-statement); line-height: 1.3; font-weight: 500; letter-spacing: -0.015em; color: var(--home-ink); box-shadow: inset 0 1px 0 var(--home-rule); transition: box-shadow 200ms var(--home-ease); }
+.opps-ledger li::first-letter { text-transform: uppercase; }
+.opps-ledger li::before { content: ''; position: absolute; left: 0; top: 50%; width: 9px; height: 9px; background: var(--home-gold); translate: 0 -50%; }
+.opps-ledger li:hover { box-shadow: inset 0 1px 0 var(--home-gold); }
+
+/* Contact: the four steps of the relationship on one line; each station sits where its step begins. */
+.parcours { position: relative; }
+.parcours-track { display: none; }
+.parcours-step { position: relative; }
+@media (min-width: 768px) {
+  .parcours { padding-top: 40px; }
+  .parcours-track { display: block; position: absolute; top: 0; left: 0; right: 0; height: 1.5px; background: color-mix(in srgb, var(--home-gold) 55%, transparent); container-type: inline-size; }
+  .parcours-pulse { position: absolute; top: 50%; left: 0; width: 11px; height: 11px; background: var(--home-gold); translate: -50% -50%; opacity: 0; }
+  .parcours-step::before { content: ''; position: absolute; top: -40px; left: 0; width: 9px; height: 9px; background: var(--home-ink); translate: 0 calc(-50% + 0.75px); }
+}
+
 @media (max-width: 1023px) {
   .home-section { padding-block: 80px; }
   .home-hero-content { gap: 48px; }
@@ -322,11 +358,11 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .home-hero-media { animation: home-summit-settle 1800ms var(--home-ease) both; }
+  .home-hero-media, .page-head-media { animation: home-summit-settle 1800ms var(--home-ease) both; }
   @keyframes home-summit-settle { from { transform: scale(1.035); } to { transform: scale(1); } }
   /* Scroll-linked motion. Every drawing is complete by default; scroll only replays it. Longhands: see AGENTS minifier trap. */
   @supports (animation-timeline: view()) {
-    .home-hero-media img, .home-hero-media video {
+    .home-hero-media img, .home-hero-media video, .page-head-media img, .page-head-media video {
       animation-name: home-summit-recede;
       animation-duration: auto;
       animation-timing-function: linear;
@@ -357,6 +393,14 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   .home-chain-stations li:nth-child(4)::before { animation-delay: 4.9s; }
   .home-chain-stations li:nth-child(5)::before { animation-delay: 6.3s; }
   @keyframes home-station-lit { 0% { background: var(--home-gold); scale: 1.6; } 14% { background: var(--home-gold-light); scale: 1; } 100% { background: var(--home-gold-light); scale: 1; } }
+  /* Contact: the mark walks the relationship from the first contact to the open account, and lights each step as it passes. */
+  .parcours-pulse { animation: parcours-walk 8s linear infinite; }
+  @keyframes parcours-walk { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 82% { transform: translateX(78cqw); opacity: 1; } 92%, 100% { transform: translateX(78cqw); opacity: 0; } }
+  .parcours-step::before { animation: parcours-lit 8s linear infinite; }
+  .parcours-step:nth-child(2)::before { animation-delay: 2.15s; }
+  .parcours-step:nth-child(3)::before { animation-delay: 4.3s; }
+  .parcours-step:nth-child(4)::before { animation-delay: 6.45s; }
+  @keyframes parcours-lit { 0% { background: var(--home-gold); scale: 1.6; } 12% { background: var(--home-gold); scale: 1; } 30%, 100% { background: var(--home-ink); scale: 1; } }
   /* The N2 unfolds instead of snapping; closed or unsupported, the native state is unchanged. */
   @supports selector(::details-content) {
     .everest-home { interpolate-size: allow-keywords; }

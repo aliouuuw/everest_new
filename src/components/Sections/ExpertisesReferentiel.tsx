@@ -4,7 +4,7 @@
 import { Link } from '@tanstack/react-router';
 import type { TextId } from '../../content';
 import { EXPERTISE_ITEMS, type ExpertiseKey } from '../../content/expertises';
-import { ArrowUpRight, Label, N1, N2, PageHero, Pair, RULE, Section, TextLink } from '../Referentiel';
+import { ArrowUpRight, Label, N1, N2, PageHero, Pair, RULE, Section } from '../Referentiel';
 import { SITE_NAV } from '../siteNav';
 
 const KEYS = Object.keys(EXPERTISE_ITEMS) as Array<ExpertiseKey>;
@@ -12,36 +12,57 @@ const NAV = SITE_NAV.find((item) => item.children)!;
 /** Nav children follow the referential order, like EXPERTISE_ITEMS. */
 const PATH = Object.fromEntries(KEYS.map((k, i) => [k, NAV.children![i].to])) as Record<ExpertiseKey, string>;
 
+/** Placeholder places (MEDIA-PLACEHOLDERS.md): the frame on the hub and the home, the head of each page. */
+const PLACE: Record<ExpertiseKey, { frame: string; head: string; position: string }> = {
+  mtp: { frame: 'exp-mtp', head: 'mtp', position: '60% 50%' },
+  brvm: { frame: 'exp-brvm', head: 'brvm', position: '70% 55%' },
+  structuration: { frame: 'exp-structuration', head: 'structuration', position: '78% 40%' },
+  privateOffice: { frame: 'exp-private', head: 'private', position: '75% 60%' },
+};
+
+const Frame = ({ name, sizes }: { name: string; sizes: string }) => (
+  <img
+    src={`/home/${name}.webp`}
+    srcSet={`/home/${name}-sm.webp 576w, /home/${name}.webp 960w`}
+    sizes={sizes}
+    alt=""
+    aria-hidden="true"
+    width={960}
+    height={1200}
+    loading="lazy"
+    decoding="async"
+  />
+);
+
 export const expertisePath = (key: ExpertiseKey) => PATH[key];
 export const expertiseSlug = (key: ExpertiseKey) => PATH[key].split('/').pop()!;
 
 export const ExpertisesHub = () => (
   <div className="bg-[var(--pure-white)] text-[var(--night)]">
-    <PageHero title={NAV.label}>
+    <PageHero title={NAV.label} media={{ name: 'hub', position: '70% 60%' }}>
       <N1 id="expertises.intro.n1" tone="dark" as="p" size="statement" />
       <N2 id="expertises.intro.n2" tone="dark" />
     </PageHero>
 
-    {/* An index, as on the home: one row per expertise, the name links to its page. */}
+    {/* The home's index: one frame, four places. Pointer or focus on a row swaps the frame (CSS :has), no hydration needed. */}
     <Section tone="light">
-      <div className="shadow-[inset_0_-1px_0_var(--home-rule)]">
-        {KEYS.map((k) => (
-          <article
-            key={k}
-            id={expertiseSlug(k)}
-            className={`group grid scroll-mt-[calc(var(--site-chrome-sticky)+1.5rem)] grid-cols-1 gap-3 py-8 transition-shadow duration-200 hover:shadow-[inset_0_1px_0_var(--home-gold)] focus-within:shadow-[inset_0_1px_0_var(--home-gold)] lg:grid-cols-12 lg:gap-16 lg:py-10 ${RULE.light}`}
-          >
-            <h2 className="lg:col-span-5">
-              <Link to={expertisePath(k)} className="home-link text-[var(--home-ink)]">
-                <Label id={`expertises.${k}.heading` as TextId} tone="light" as="span" size="title" />
-                <ArrowUpRight />
-              </Link>
-            </h2>
-            <div className="lg:col-span-7">
+      <div className="home-expertise-layout mt-0!">
+        <div className="home-expertise-media lg:sticky! lg:top-[calc(var(--site-chrome-sticky)+2rem)] lg:self-start">
+          {KEYS.map((k) => <Frame key={k} name={PLACE[k].frame} sizes="(max-width: 1023px) 0px, 36vw" />)}
+        </div>
+        <div className="home-expertise-list">
+          {KEYS.map((k) => (
+            <article key={k} id={expertiseSlug(k)} className="scroll-mt-[calc(var(--site-chrome-sticky)+1.5rem)] gap-4 py-8! lg:py-10!">
+              <h2 className="home-expertise-title">
+                <Link to={expertisePath(k)}>
+                  <Label id={`expertises.${k}.heading` as TextId} tone="light" as="span" size="inherit" />
+                  <ArrowUpRight />
+                </Link>
+              </h2>
               <N1 id={`expertises.${k}.chapeau` as TextId} tone="light" as="p" size="lead" />
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </Section>
   </div>
@@ -53,6 +74,7 @@ export const ExpertiseDetail = ({ expertise }: { expertise: ExpertiseKey }) => {
   return (
     <div className="bg-[var(--pure-white)] text-[var(--night)]">
       <PageHero
+        media={{ name: PLACE[expertise].head, position: PLACE[expertise].position }}
         title={<Label id={`expertises.${expertise}.heading` as TextId} tone="dark" as="span" size="inherit" />}
         above={
           <Link
@@ -66,14 +88,17 @@ export const ExpertiseDetail = ({ expertise }: { expertise: ExpertiseKey }) => {
         <N1 id={`expertises.${expertise}.chapeau` as TextId} tone="dark" as="p" size="statement" />
       </PageHero>
 
+      {/* Each discipline is named at heading size and stays beside its text while it is read. */}
       <Section tone="light">
-        <div className="flex flex-col gap-12 md:gap-16">
+        <div className="flex flex-col gap-14 md:gap-20">
           {items.map((base) => (
-            <div key={base} className={`grid grid-cols-1 gap-4 pt-6 md:pt-8 lg:grid-cols-12 lg:gap-16 ${RULE.light}`}>
-              <div className="lg:col-span-4">
-                <Label id={`${base}.label` as TextId} tone="light" as="h2" size="sub" />
+            <div key={base} className={`grid grid-cols-1 gap-5 pt-6 md:pt-8 lg:grid-cols-12 lg:gap-16 ${RULE.light}`}>
+              <div className="lg:col-span-5">
+                <div className="lg:sticky lg:top-[calc(var(--site-chrome-sticky)+2rem)]">
+                  <Label id={`${base}.label` as TextId} tone="light" as="h2" size="section" />
+                </div>
               </div>
-              <div className="lg:col-span-8">
+              <div className="lg:col-span-7">
                 <Pair n1={`${base}.n1` as TextId} n2={`${base}.n2` as TextId} tone="light" as="p" size="card" />
               </div>
             </div>
@@ -81,14 +106,30 @@ export const ExpertiseDetail = ({ expertise }: { expertise: ExpertiseKey }) => {
         </div>
       </Section>
 
+      {/* The other three places, then the relationship. */}
       <Section tone="ivory">
-        <nav aria-label={NAV.label} className="flex flex-col sm:flex-row sm:flex-wrap sm:gap-x-10">
-          {others.map((k) => (
-            <TextLink key={k} to={expertisePath(k)}>
-              {NAV.children![KEYS.indexOf(k)].label}
-            </TextLink>
-          ))}
-          <TextLink to="/contact">{SITE_NAV[SITE_NAV.length - 1].label}</TextLink>
+        <nav aria-label={NAV.label} className="flex flex-col gap-10">
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-3">
+            {others.map((k) => (
+              <li key={k}>
+                <Link to={expertisePath(k)} className="group flex flex-col gap-4 text-[var(--home-ink)]">
+                  <span className="block aspect-[4/3] overflow-hidden bg-[var(--home-ink)] [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:transition-[filter] [&>img]:duration-500 group-hover:[&>img]:brightness-110">
+                    <Frame name={PLACE[k].frame} sizes="(max-width: 639px) 100vw, 30vw" />
+                  </span>
+                  <span className="home-link min-h-0! text-[19px]! font-semibold tracking-[-0.015em] group-hover:text-[var(--home-mid)]">
+                    {NAV.children![KEYS.indexOf(k)].label}
+                    <ArrowUpRight />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div>
+            <Link to="/contact" className="home-button">
+              {SITE_NAV[SITE_NAV.length - 1].label}
+              <ArrowUpRight />
+            </Link>
+          </div>
         </nav>
       </Section>
     </div>

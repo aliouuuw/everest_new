@@ -317,9 +317,6 @@ export const Header: React.FC = () => {
     '/la-societe',
     '/analyses',
     '/actualites',
-    '/opportunites',
-    '/sama-naffa',
-    '/contact',
     '/auth',
     '/faq',
   ];
