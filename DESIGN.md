@@ -1,0 +1,147 @@
+---
+name: EVEREST Finance Home
+description: Publication-led home system, scoped to the public landing page
+colors:
+  forest: "#0E2826"
+  forest-mid: "#1A3A35"
+  gold: "#B68A3E"
+  gold-light: "#D4B26C"
+  white: "#FFFFFF"
+  paper: "#FAF8F4"
+typography:
+  display:
+    fontFamily: "Plus Jakarta Sans, sans-serif"
+    fontSize: "clamp(48px, 4.7vw, 68px)"
+    fontWeight: 500
+    lineHeight: 1.07
+    letterSpacing: "-0.035em"
+  headline:
+    fontFamily: "Plus Jakarta Sans, sans-serif"
+    fontSize: "clamp(28px, 3vw, 42px)"
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: "-0.025em"
+  body:
+    fontFamily: "Plus Jakarta Sans, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.7
+rounded:
+  action: "0"
+spacing:
+  section: "112px"
+  section-mobile: "48px"
+components:
+  button-primary:
+    backgroundColor: "{colors.gold}"
+    textColor: "{colors.forest}"
+    rounded: "{rounded.action}"
+    padding: "18px 24px"
+  button-primary-hover:
+    backgroundColor: "{colors.gold-light}"
+---
+
+# Design System: EVEREST Finance Home
+
+## Overview
+
+The home borrows the clarity of a research reading room. The summit establishes
+the house's identity; genuine documents show its output. Dense copy remains
+available through native disclosures rather than a wall of repeated panels.
+
+This document describes the home, not a mandate to restyle every inner page.
+Source: `src/components/Sections/home.css`. Earlier rope and card-heavy passes
+are rejected directions, not components to restore.
+
+## Colors
+
+Use only the referential's six charter values. Grounds alternate so the page
+is not one white field. Paper carries the positioning statement, the analyses,
+and Sama Naffa. White carries the proofs and the expertise index. Forest carries
+the hero, the chain, the engagements, and the close. Forest-mid carries the
+four routes. Gold identifies the primary action and the chain order.
+Gradients exist only as legibility scrims on the summit image.
+
+## Typography
+
+Use the retained Plus Jakarta Sans family without an unprovided Aptos face.
+Do not introduce a licensed or downloaded face without a separate decision.
+
+The desktop hero is two lines. On phones the fixed referential headline takes
+three readable lines; do not rewrite it or shrink it to body size to satisfy a
+generic two-line rule. Long section statements stay quieter than the hero.
+Body text is 16px, with a 15px phone hero paragraph.
+
+## Layout
+
+One container shared with the header and footer: at most 1400px, with the header's
+gutters (24 / 64 / 96 / 24 / 40px at 0 / 768 / 1024 / 1280 / 1536px). Main breakpoints: 1023px and 600px.
+Type scale: 68 display, 42 heading, 28 statement, 22 title, 16 body, 13 meta.
+Prose has two sizes only: body 16/1.65, dense 15/1.6 (proof columns, opened details,
+the ledger). Proportional numerals. Light-on-dark sections use grayscale smoothing.
+
+The hero owns the first viewport. Desktop places actions and supporting copy
+on separate bottom axes. Phone places the copy before the actions and preserves
+an unobstructed view of the summit between title and copy.
+
+Below it: the statement on paper, then the chain as a full-bleed forest band
+(the one drawn summit line), an open credential band (the fact leads each proof
+sentence, at heading size), the engagements ledger (Éthique & Déontologie closes
+it, larger, on a gold wash), the analyses on paper with two captioned covers,
+the expertise index on white with one image frame, four equal routes on
+forest-mid with the closing line at heading size, the Sama Naffa mark on a
+forest field, and the governance close.
+
+## Elevation & Depth
+
+No card shadows, decorative rails, or floating panels in home content.
+No repeated card grid and no audience doors. The summit line is drawn once,
+on the chain. It is not repeated at the close.
+
+Motion explains one thing per section. A gold order travels the chain from
+« prise d'ordre » to « règlement-livraison » and lights each station. A cover
+lifts when it is the document under the pointer. The expertise frame swaps to
+the row under the pointer, and that row's rule turns gold. Route names turn
+gold-light under the pointer. Nothing changes width. Depth comes from the
+summit scene and a tight forest-tinted shadow on the report covers only.
+The global menu keeps its existing overlay behavior.
+
+## Shapes
+
+Square primary actions. Bare directional arrows.
+
+Disclosures: one pattern only, the bare chevron row, used by the four expertise
+details (owner decision, 23 Oct 2026, reversing the four-look version). Every other
+N2 is plain visible text: the page shows its evidence (I.6).
+Do not replace the company logos. The Sama Naffa mark sits on a flat forest field, with no radius and no shadow.
+
+## Components
+
+The expertise `details`/`summary` uses the N1 itself as its accessible control name.
+The N2 stays in the HTML, expands without JavaScript, and has no invented label.
+Where `::details-content` is supported, the N2 unfolds in height; it never fades.
+Chain labels are parsed from the positioning N2 at render time; if the CMS text no
+longer has five stations in parentheses, the diagram is not drawn.
+Summary targets are at least 44px.
+
+Report covers link to `/analyses`, where the publication disclaimer is available.
+Use canonical catalogue records. Do not invent report titles, editions, or dates.
+Do not use the stock growth-chart semestrial cover on the home.
+
+The short summit film loads on desktop only when reduced motion and Save-Data
+are off. It plays once; the poster always supplies a still fallback. Honor live
+changes to reduced-motion preferences. Never hide copy for an entrance animation.
+As the hero leaves the viewport, the summit recedes slightly (scroll-driven, motion-enabled only).
+
+## Do's and Don'ts
+
+- Do preserve the referential text and the fixed block order.
+- Do use the existing gold focus ring and forest text on gold.
+- Do test both the Astro dev server and the production preview.
+- Do keep home footer links at least 44px high on touch widths.
+- Do not add eyebrows, decorative numbering, mock metrics, or card tiles. Proofs are an open band.
+- Do not put text in decorative SVG or media (alt stays empty).
+- Do link a destination the referential names in passing (« La société », « Sama Naffa »)
+  with a static gold underline; never add words to do it.
+- Do not add motion merely to meet an animated-element count.
+- Do not generalize unresolved inner-page defects into design-system rules.
