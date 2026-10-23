@@ -161,3 +161,11 @@ As the hero leaves the viewport, the summit recedes slightly (scroll-driven, mot
   format, pages, size. No client-side PDF rendering.
 - Controls are square: filters (active = forest fill), fields (1px border at 55% forest,
   3:1 against white), gold submit.
+- Expertises, Opportunités, Sama Naffa and Contact open on the place the page is about
+  (`PageHero` `media`): a graded photograph behind a forest veil on the text side, ending in
+  forest. It settles and recedes on scroll like the home summit. One film (Sama Naffa) plays
+  once on motion-enabled desktops. Sources: `docs/referentiel/MEDIA-PLACEHOLDERS.md`.
+- The Expertises hub reuses the home index and its swap frame. Each expertise page names its
+  disciplines at heading size beside the text, and ends on photo links to the other three.
+- Opportunités sets the four instruments its N1 names as a ledger (same words, `aria-hidden`).
+- The « Parcours » steps sit on one gold line; a gold mark walks it from step 1 to step 4.
