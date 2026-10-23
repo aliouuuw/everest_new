@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EditableText } from '../cms'
-import { FiCalendar, FiDownload, FiEye, FiFileText, FiSearch, FiX } from 'react-icons/fi'
-import { N1, N2 } from '../components/Referentiel'
+import { FiSearch, FiX } from 'react-icons/fi'
+import { ArrowUpRight, N1, N2, PageHero } from '../components/Referentiel'
 import { ANALYSES_TEXT } from '../content/analyses'
 import {
   PUBLICATION_FILES,
@@ -15,12 +15,6 @@ type Publication = PublicationFile
 
 const FREQUENCY_LABELS = PUBLICATION_FREQUENCY_LABELS
 
-const FREQUENCY_COLORS: Record<Frequency, { text: string; bg: string; border: string }> = {
-  hebdomadaire: { text: 'var(--everest-green)', bg: 'color-mix(in srgb, var(--or-clair) 30%, white)', border: 'var(--or-clair)' },
-  mensuelle: { text: 'var(--everest-green)', bg: 'color-mix(in srgb, var(--or-clair) 30%, white)', border: 'var(--or-clair)' },
-  semestrielle: { text: 'var(--everest-green)', bg: 'var(--mauve-10)', border: 'var(--mauve-20)' },
-}
-
 const ALL_LABEL = 'tout' as const
 type FilterCategory = Frequency | typeof ALL_LABEL
 
@@ -29,7 +23,7 @@ const Disclaimer = ({ className = '' }: { className?: string }) => (
   <EditableText
     id="publications.disclaimer"
     as="p"
-    className={`max-w-4xl text-xs md:text-[0.8125rem] italic leading-relaxed text-[var(--night-80)] ${className}`}
+    className={`max-w-4xl text-[13px] leading-[1.6] text-[var(--home-mid)] ${className}`}
   >
     {ANALYSES_TEXT['publications.disclaimer']}
   </EditableText>
@@ -56,56 +50,47 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
       onClick={(e) => { if (e.target === overlayRef.current) onClose() }}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-[color-mix(in_srgb,var(--home-ink)_82%,transparent)]" />
 
       {/* Modal */}
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={`pub-${pub.id}-title`}
-        className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-5xl h-[85vh] flex flex-col bg-white overflow-hidden"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--mauve)]/10">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'var(--mauve-10)' }}>
-              <FiFileText className="text-[var(--night-80)]" size={18} />
-            </div>
-            <div className="min-w-0">
-              <h2 id={`pub-${pub.id}-title`} className="font-primary font-bold text-base leading-snug! text-[var(--night)] truncate">{pub.title}</h2>
-              <p className="text-xs text-[var(--night-80)] font-primary">{pub.fileSize}{pub.pages ? ` · ${pub.pages} pages` : ''}</p>
-            </div>
+        <div className="flex items-center justify-between gap-6 px-6 py-4 shadow-[inset_0_-1px_0_var(--home-rule)]">
+          <div className="min-w-0">
+            <h2 id={`pub-${pub.id}-title`} className="truncate text-base font-semibold leading-snug! text-[var(--home-ink)]">{pub.title}</h2>
+            <p className="text-[13px] text-[var(--home-mid)]">{pub.pages ? `${pub.pages} pages · ` : ''}{pub.fileSize}</p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <a
-              href={pub.fileUrl}
-              download
-              className="btn-primary-dark inline-flex items-center gap-2"
-            >
-              <FiDownload size={14} />
+            <a href={pub.fileUrl} download className="home-button">
               Télécharger
+              <ArrowUpRight />
             </a>
             <button
               type="button"
               autoFocus
               onClick={onClose}
-              className="w-11 h-11 rounded-full flex items-center justify-center border border-[var(--mauve)]/10 hover:bg-[var(--mauve-10)] transition-colors"
+              className="w-12 h-12 flex items-center justify-center text-[var(--home-ink)] hover:bg-[var(--home-paper)] transition-colors"
               aria-label="Fermer"
             >
-              <FiX size={18} className="text-[var(--night)]" />
+              <FiX size={20} />
             </button>
           </div>
         </div>
 
         {/* PDF Embed */}
-        <div className="flex-1 bg-[#f5f5f5]">
+        <div className="flex-1 bg-[var(--home-paper)]">
           <iframe
             src={`${pub.fileUrl}#toolbar=1&navpanes=0`}
             title={pub.title}
             className="w-full h-full border-0"
           />
         </div>
-        <div className="border-t border-[var(--mauve)]/10 px-6 py-4">
+        <div className="px-6 py-4 shadow-[inset_0_1px_0_var(--home-rule)]">
           <Disclaimer />
         </div>
       </div>
@@ -113,135 +98,46 @@ const PreviewModal: React.FC<{ pub: Publication; onClose: () => void }> = ({ pub
   )
 }
 
-/* ─── Publication Card ─── */
+/* ─── Publication: the document itself, as on the home. Date and format first, size last. ─── */
 const PublicationCard: React.FC<{ pub: Publication; onPreview: (pub: Publication) => void }> = ({ pub, onPreview }) => {
-  const freq = FREQUENCY_COLORS[pub.frequency]
   const formattedDate = new Date(pub.date).toLocaleDateString('fr-FR', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   })
-  const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null)
-
-  useEffect(() => {
-    const generateThumbnail = async () => {
-      try {
-        // ponytail: `?url` worker imports 504 on Astro islands. Serve the
-        // worker from /public so Vite and Astro both resolve it.
-        const pdfjsLib = await import('pdfjs-dist/build/pdf.mjs')
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs'
-
-        const loadingTask = pdfjsLib.getDocument({
-          url: pub.fileUrl,
-          withCredentials: false,
-        })
-        
-        const pdf = await loadingTask.promise
-        const page = await pdf.getPage(1)
-        
-        const scale = 1.5
-        const viewport = page.getViewport({ scale })
-        const canvas = document.createElement('canvas')
-        const context = canvas.getContext('2d')
-        
-        if (!context) {
-          console.warn('Could not get canvas context for PDF thumbnail')
-          return
-        }
-        
-        canvas.height = viewport.height
-        canvas.width = viewport.width
-        
-        await page.render({
-          canvasContext: context,
-          viewport: viewport,
-          canvas: canvas,
-        }).promise
-        
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
-        setThumbnailUrl(dataUrl)
-      } catch (error) {
-        console.error('Failed to generate PDF thumbnail for', pub.fileUrl, ':', error)
-      }
-    }
-
-    generateThumbnail()
-  }, [pub.fileUrl])
+  // Covers are prebuilt (public/publications/covers/<id>.webp). A CMS issue without one shows a paper sheet.
+  const [hasCover, setHasCover] = useState(true)
 
   return (
-    <article className="group relative flex flex-col h-full border border-[var(--mauve)]/10 rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(14,40,38,0.08)] hover:border-[var(--mauve)]/20">
-      {/* PDF visual preview area */}
+    <article className="home-publication">
       <button
         type="button"
         onClick={() => onPreview(pub)}
         aria-label={`Aperçu : ${pub.title}`}
-        className="relative h-52 bg-gradient-to-br from-[var(--mauve-10)] to-[var(--summit-ivory)] flex flex-col items-center justify-center cursor-pointer group/preview overflow-hidden"
+        className="block w-full cursor-pointer text-left"
       >
-        {thumbnailUrl ? (
-          <>
-            <img
-              src={thumbnailUrl}
-              alt=""
-              className="w-full h-full object-contain group-hover/preview:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover/preview:bg-black/10 transition-colors duration-300" />
-          </>
+        {hasCover ? (
+          <img src={`/publications/covers/${pub.id}.webp`} alt="" width={1108} height={1568} loading="lazy" onError={() => setHasCover(false)} />
         ) : (
-          <div className="relative z-10 flex flex-col items-center gap-3">
-            <div className="w-16 h-20 rounded-lg bg-white shadow-lg flex flex-col items-center justify-center border border-[var(--mauve)]/10 group-hover/preview:scale-105 transition-transform duration-300">
-              <div className="w-8 h-0.5 bg-[var(--mauve)]/15 rounded mb-1" />
-              <div className="w-6 h-0.5 bg-[var(--mauve)]/10 rounded mb-1" />
-              <div className="w-7 h-0.5 bg-[var(--mauve)]/15 rounded mb-1" />
-              <div className="w-5 h-0.5 bg-[var(--mauve)]/10 rounded mb-1" />
-              <div className="w-7 h-0.5 bg-[var(--mauve)]/15 rounded" />
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--night-80)] opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300">
-              <FiEye size={12} />
-              Aperçu
-            </span>
-          </div>
+          <span aria-hidden className="block aspect-[1108/1568] w-full bg-[var(--home-white)] shadow-[0_1px_2px_color-mix(in_srgb,var(--home-ink)_18%,transparent)]" />
         )}
-
-        {/* Frequency badge — top-left */}
-        <span
-          className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.15em]"
-          style={{ color: freq.text, background: freq.bg, border: `1px solid ${freq.border}` }}
-        >
-          {FREQUENCY_LABELS[pub.frequency]}
-        </span>
       </button>
-
-      {/* Content */}
-      <div className="flex-1 flex flex-col p-6">
-        <div className="flex items-center gap-2 text-xs text-[var(--night-80)] font-primary mb-3">
-          <FiCalendar size={12} />
+      <div className="flex flex-col gap-2">
+        <p className="text-[13px] leading-[1.5] text-[var(--home-mid)]">
           <time dateTime={pub.date}>{formattedDate}</time>
-          {pub.pages && <span>· {pub.pages} pages</span>}
-          <span>· {pub.fileSize}</span>
-        </div>
-
+          {' · '}{FREQUENCY_LABELS[pub.frequency]}
+          {pub.pages ? ` · ${pub.pages} pages` : ''}
+          {' · '}{pub.fileSize}
+        </p>
         {/* No summary: the CMS summaries use words banned by referential V2.1 I.6 (22 Oct 2026 decision). */}
-        <h2 className="font-primary font-bold text-lg text-[var(--night)] mb-6 flex-1 leading-snug! group-hover:text-[var(--night-80)] transition-colors duration-300">
-          {pub.title}
-        </h2>
-
-        {/* Actions */}
-        <div className="flex items-center gap-2 mt-auto">
-          <button
-            type="button"
-            onClick={() => onPreview(pub)}
-            className="flex-1 btn-secondary inline-flex items-center justify-center gap-2"
-          >
-            <FiEye size={14} />
+        <h2 className="text-[18px] font-semibold leading-[1.35]! tracking-[-0.01em] text-[var(--home-ink)]">{pub.title}</h2>
+        <div className="flex flex-wrap items-center gap-x-8">
+          <button type="button" onClick={() => onPreview(pub)} className="home-link cursor-pointer text-[var(--home-ink)]">
             Aperçu
           </button>
-          <a
-            href={pub.fileUrl}
-            download
-            className="flex-1 btn-primary inline-flex items-center justify-center gap-2"
-          >
-            <FiDownload size={14} />
+          <a href={pub.fileUrl} download className="home-link text-[var(--home-ink)]">
             Télécharger
+            <ArrowUpRight />
           </a>
         </div>
       </div>
@@ -320,42 +216,32 @@ export function PublicationsView({
   }, [publications, activeFilter, activeYear, activeMonth, searchQuery])
 
   return (
-    <div className="bg-[var(--pure-white)] font-primary">
+    <div className="bg-[var(--pure-white)]">
       {/* ─── Hero: referential V2.1 §4 ─── */}
-      <section className="bg-[var(--everest-green)] pt-[180px] pb-14 md:pb-20">
-        <div className="page-container">
-          <h1
-            className="mb-10 font-bold leading-[0.95]! tracking-tight text-white md:mb-14"
-            style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}
-          >
-            Analyses &amp; Publications
-          </h1>
-          <div className="flex max-w-4xl flex-col gap-6">
-            <N1 id="publications.n1" tone="dark" as="p" size="statement" />
-            <N2 id="publications.n2" tone="dark" />
-          </div>
-        </div>
-      </section>
+      <PageHero title="Analyses & Publications">
+        <N1 id="publications.n1" tone="dark" as="p" size="statement" />
+        <N2 id="publications.n2" tone="dark" />
+      </PageHero>
 
       {/* ─── Search + Filters ─── */}
-      <section className="py-10 border-b border-black/5 sticky top-[var(--site-chrome-sticky)] z-20 bg-[var(--pure-white)]/95 backdrop-blur-md">
+      <section className="py-6 md:py-8 bg-[var(--home-white)] shadow-[inset_0_-1px_0_var(--home-rule)]">
         <div className="page-container">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Search */}
             <div className="relative w-full sm:max-w-sm">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--night-80)]/40" size={16} />
+              <FiSearch aria-hidden className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--home-mid)]" size={16} />
               <input
                 type="text"
                 placeholder="Rechercher une revue..."
                 aria-label="Rechercher une revue"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-[var(--mauve)]/15 focus:border-[var(--mauve)] font-primary text-sm transition-colors rounded-full shadow-sm"
+                className="w-full min-h-12 pl-11 pr-4 bg-white border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] text-[15px] text-[var(--home-ink)] transition-colors"
               />
             </div>
 
             {/* Category Filters */}
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-1">
               {filters.map((cat) => {
                 const isActive = activeFilter === cat
                 return (
@@ -363,10 +249,10 @@ export function PublicationsView({
                     key={cat}
                     type="button"
                     onClick={() => setActiveFilter(cat)}
-                    className={`px-4 py-2 border rounded-full text-[11px] tracking-[0.1em] uppercase font-bold transition-all shadow-sm hover:shadow ${
+                    className={`min-h-12 px-4 text-[15px] font-semibold transition-colors cursor-pointer ${
                       isActive
-                        ? 'bg-[var(--jaune-or)] text-[var(--everest-green)] border-[var(--jaune-or)]'
-                        : 'bg-white text-[var(--night-80)] border-[var(--mauve)]/10 hover:border-[var(--mauve)]/30 hover:bg-[var(--mauve-10)]'
+                        ? 'bg-[var(--home-ink)] text-white'
+                        : 'text-[var(--home-ink)] hover:bg-[var(--home-paper)]'
                     }`}
                     aria-pressed={isActive}
                   >
@@ -376,12 +262,12 @@ export function PublicationsView({
               })}
             </div>
             
-            <div className="flex items-center gap-2 ml-auto">
+            <div className="flex items-center gap-2 sm:ml-auto">
               <select 
                 value={activeYear}
                 onChange={(e) => setActiveYear(e.target.value)}
                 aria-label="Année"
-                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] text-[var(--night)] shadow-sm cursor-pointer"
+                className="min-h-12 px-4 bg-white cursor-pointer border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] text-[15px] text-[var(--home-ink)] transition-colors"
               >
                 <option value="Tout">Année</option>
                 {years.filter(y => y !== 'Tout').map(y => (
@@ -394,7 +280,7 @@ export function PublicationsView({
                 onChange={(e) => setActiveMonth(e.target.value)}
                 aria-label="Mois"
                 disabled={activeYear === 'Tout'}
-                className="px-4 py-2.5 bg-white border border-[var(--mauve)]/15 rounded-full text-sm font-primary focus:border-[var(--mauve)] disabled:opacity-50 text-[var(--night)] shadow-sm cursor-pointer"
+                className="min-h-12 px-4 bg-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] hover:border-[var(--home-mid)] focus:border-[var(--home-ink)] text-[15px] text-[var(--home-ink)] transition-colors"
               >
                 <option value="Tout">Mois</option>
                 {months.filter(m => m !== 'Tout').map(m => (
@@ -407,18 +293,15 @@ export function PublicationsView({
       </section>
 
       {/* ─── Publications Grid ─── */}
-      <section className="py-20 md:py-28">
+      <section className="bg-[var(--home-paper)] py-12 md:py-20 lg:py-28">
         <div className="page-container">
           {filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="w-16 h-16 mx-auto mb-4 bg-[var(--mauve-10)] rounded-full flex items-center justify-center">
-                <FiFileText className="w-7 h-7 text-[var(--night-80)]" />
-              </div>
-              <h2 className="text-lg font-primary font-bold leading-snug! text-[var(--night)] mb-2">Aucune publication trouvée</h2>
-              <p className="text-sm text-[var(--night-80)] font-primary">Essayez de modifier vos filtres ou votre recherche.</p>
+            <div className="py-12">
+              <h2 className="mb-2 text-[22px] font-semibold leading-snug! text-[var(--home-ink)]">Aucune publication trouvée</h2>
+              <p className="text-[15px] text-[var(--home-mid)]">Essayez de modifier vos filtres ou votre recherche.</p>
             </div>
           ) : (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-12">
               {filtered.map((pub) => (
                 <PublicationCard key={pub.id} pub={pub} onPreview={handlePreview} />
               ))}
