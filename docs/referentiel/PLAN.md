@@ -98,7 +98,9 @@ the user agrees.
 3. **Route map: approved.** Old department routes redirect to the closest
    entry (see `apps/web/src/pages/*.astro`).
 4. **BRVM ticker: hidden** until a real feed and the legal check.
-5. **Header buttons « Ouvrir un compte » and « Accès Client »: kept.**
+5. **Header buttons: « Devenir client » (opens the account site) and
+   « Accès Client ».** « Devenir client » replaced « Ouvrir un compte »
+   (owner, 23 Oct 2026).
 6. **§6 CTA « Accéder à l'espace investisseur »: hidden** until the
    investor space exists.
 7. **Footer social icons: removed** until the real URLs arrive.

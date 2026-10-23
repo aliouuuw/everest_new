@@ -7,9 +7,10 @@ Read `docs/referentiel/PLAN.md` first, then
 `docs/referentiel/SITEWEB-REFERENTIEL-V2.1.md`. The referential is the only
 source of public text: copy it word for word, write no copy of your own.
 
-Lots L0 to L8 are done (L7 is blocked on Legal inputs). Next: the design
-pass in `docs/referentiel/DESIGN-PLAN.md`, Phase 1 (accessibility), then
-Phase 2 (type and hierarchy), toward a bolder brand world.
+Lots L0 to L8 are done (L7 is blocked on Legal inputs). Design pass
+(`docs/referentiel/DESIGN-PLAN.md`): Phase 1 (accessibility) and the home
+redesign are done. Now: the header pass, then carry the home system to the
+inner pages (Phase 2). Read `docs/referentiel/DESIGN-HANDOFF-2.md` first.
 
 - Public texts live in `src/content/*.ts`, keyed by CMS id. New ids must not
   reuse an old Payload row (the seed never updates rows).

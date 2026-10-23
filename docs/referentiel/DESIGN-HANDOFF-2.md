@@ -9,7 +9,9 @@ tree now, and the traps that cost time.
 
 ## 1. Where things stand
 
-- **Nothing is committed.** All home work is uncommitted on `staging` (HEAD `40504a4`).
+- **Home committed (23 Oct 2026):** `ff1029c` on `staging`, not yet pushed.
+  The header pass (`Header.tsx`, `nav-ledger.css`, `frame.check.cjs`) is
+  uncommitted on top of it.
 - **The owner rewound the last pass** (a Swiss/editorial restyle) with the words
   "not quite satisfied". The tree now holds the pass before it (section 4).
 - **The owner's last stated direction still stands:** "much more Swiss / editorial,
@@ -169,8 +171,8 @@ empty. Any new visible string fails it. That is intended.
 ## 10. Open owner decisions (unchanged)
 
 1. Display typeface (licensed or self-hosted) vs Plus Jakarta Sans.
-2. Header labels « Ouvrir un compte » / « Accès Client » are not referential; header
-   buttons are pills while the home uses square buttons.
+2. Header labels: decided 23 Oct 2026, « Devenir client » and « Accès Client »
+   (see PLAN.md decision 5).
 3. Partner logos (Legal), BRVM live band (data rights), house photography.
 4. `/analyses` has no anchor per issue, so the home covers link to the listing.
-5. Commit message when the owner approves: `feat(web): redesign the referential landing page`.
+5. (Done: the home is committed as `ff1029c`.)
