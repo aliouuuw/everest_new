@@ -2,10 +2,11 @@
 import Layout from '../layouts/Layout.astro'
 import MarketingPage from '../islands/MarketingPage'
 import { fetchSiteContent } from '../lib/payload'
+import { CONTACT_TEXT } from '@/content/relation'
 
 const site = await fetchSiteContent('contact')
 ---
 
-<Layout title="Contact | EVEREST Finance">
+<Layout title="Contact / Devenir client | EVEREST Finance" description={CONTACT_TEXT['contact.n1']}>
   <MarketingPage client:load siteContent={site.docs} pageKey="contact" />
 </Layout>
