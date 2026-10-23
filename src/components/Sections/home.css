@@ -1,5 +1,5 @@
-/* EVEREST Finance home. One container, one type scale, one drawing (the summit line on the chain).
-   Each section has its own ground. Motion explains that section: chain order, document lift, expertise swap. */
+/* EVEREST Finance home. One container, one type scale. White and mist surfaces carry rounded panels;
+   dark sections are lit fields. Motion explains each section: the order runs, documents lift, the expertise drawing swaps. */
 :root {
   --home-ink: #0E2826;
   --home-mid: #1A3A35;
@@ -16,6 +16,16 @@
   --home-t-title: 22px;
   --home-t-body: 16px;
   --home-t-meta: 13px;
+  /* Surfaces: tints of the charter (owner, 23 Oct 2026: tints, soft gradients and rounded corners allowed). */
+  --home-mist: color-mix(in srgb, var(--home-ink) 4%, var(--home-white));
+  --home-mist-strong: color-mix(in srgb, var(--home-ink) 8%, var(--home-white));
+  --home-edge: color-mix(in srgb, var(--home-ink) 8%, transparent);
+  --home-edge-strong: color-mix(in srgb, var(--home-ink) 16%, transparent);
+  --home-radius: 20px;
+  --home-radius-sm: 12px;
+  /* One light source, from above: tight, forest-tinted, never a halo. */
+  --home-lift: 0 1px 2px color-mix(in srgb, var(--home-ink) 8%, transparent), 0 16px 32px -16px color-mix(in srgb, var(--home-ink) 28%, transparent);
+  --home-lift-high: 0 2px 4px color-mix(in srgb, var(--home-ink) 10%, transparent), 0 28px 48px -20px color-mix(in srgb, var(--home-ink) 38%, transparent);
 }
 /* Tokens live on :root so inner pages share the home scale, actions and rules. */
 .everest-home {
@@ -31,7 +41,7 @@
 @media (min-width: 1280px) { .everest-home, .home-footer { --home-gutter: 24px; } }
 @media (min-width: 1536px) { .everest-home, .home-footer { --home-gutter: 40px; } }
 .everest-home ::selection { background: var(--home-gold-light); color: var(--home-ink); }
-html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
+html:has(.everest-home) { scrollbar-color: #1A3A35 var(--home-mist); }
 .home-container { box-sizing: border-box; width: 100%; max-width: 1400px; margin-inline: auto; padding-inline: var(--home-gutter); }
 .home-section { padding-block: 112px; }
 .everest-home h1, .everest-home h2, .everest-home h3, .everest-home p, .everest-home figure { margin: 0; }
@@ -54,14 +64,14 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 /* Two prose sizes only: body 16, dense 15 (narrow proof columns, opened details, the ledger). */
 .everest-home .home-body-small, .everest-home .home-reading > .home-body { font-size: 15px; line-height: 1.6; }
 /* Light on dark: grayscale smoothing keeps the strokes from blooming. */
-.home-hero, .home-chain, .home-engagements, .home-segments, .home-sama-mark, .home-closing { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.home-hero, .home-field, .home-sama-mark { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 /* A destination named in the referential text, made reachable. Static underline, gold rule. */
 .home-inline-link { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; text-decoration-color: var(--home-gold); transition: color 200ms var(--home-ease); }
 .home-inline-link:hover { color: var(--home-gold); }
 .home-engagements .home-inline-link, .home-segments .home-inline-link { text-decoration-color: var(--home-gold-light); }
 .home-engagements .home-inline-link:hover, .home-segments .home-inline-link:hover { color: var(--home-gold-light); }
 
-/* Actions: square, forest on gold; links carry the outward arrow. */
+/* Actions: rounded, forest on gold; links carry the outward arrow. */
 .home-link, .home-button {
   display: inline-flex;
   align-items: center;
@@ -75,12 +85,9 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 }
 .everest-home svg[viewBox="0 0 24 24"], .home-link svg, .home-button svg, .home-expertise-title svg { flex-shrink: 0; width: 18px; height: 18px; transition: transform 240ms var(--home-ease); }
 .home-link:hover svg, .home-button:hover svg, .home-expertise-title a:hover svg, .home-publication:hover .home-publication-title svg { transform: translate(2px, -2px); }
-.home-button { background: var(--home-gold); color: var(--home-ink); padding: 16px 22px; border-radius: 0; }
+.home-button { background: var(--home-gold); color: var(--home-ink); padding: 16px 22px; border-radius: var(--home-radius-sm); }
 .home-button:hover { background: var(--home-gold-light); }
 .home-link:hover { color: var(--home-mid); }
-
-/* The summit line: gold, straight segments, square caps, constant 1.5px at every width. */
-.home-line { fill: none; stroke: var(--home-gold); stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; vector-effect: non-scaling-stroke; }
 
 /* Hero */
 .home-hero {
@@ -101,7 +108,8 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   background: linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 55%, transparent), transparent 35%, var(--home-ink) 92%), /* taste-skill-ignore: image legibility scrim. */
     linear-gradient(90deg, color-mix(in srgb, var(--home-ink) 50%, transparent), transparent 75%); /* taste-skill-ignore: image legibility scrim. */
 }
-.home-hero-content { display: flex; flex-direction: column; justify-content: flex-end; gap: 72px; padding-block: 180px 64px; }
+/* Bottom padding clears the positioning panel that rises 72px over the hero's edge. */
+.home-hero-content { display: flex; flex-direction: column; justify-content: flex-end; gap: 72px; padding-block: 180px 136px; }
 .home-hero h1 { max-width: 1100px; font-size: var(--home-t-display); line-height: 1.07 !important; font-weight: 500; letter-spacing: -0.035em; text-wrap: balance; }
 .home-hero-foot { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 64px; }
 .home-hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -109,88 +117,92 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 .home-hero .home-link:hover { color: var(--home-gold-light); }
 .home-hero .home-body { max-width: 36em; color: var(--home-white); }
 
-/* Positioning on paper. The chain is a full-bleed forest instrument, not a diagram on white. */
-.home-positioning { padding-bottom: 0; background: var(--home-paper); }
+/* Fields: the dark sections are lit, not flat. One directional forest gradient, a slow gold-light sheen, grain against banding. */
+.home-field { position: relative; isolation: isolate; overflow: clip; background: linear-gradient(160deg, var(--home-ink) 35%, var(--home-mid) 100%); color: var(--home-white); }
+.home-field::before, .home-field::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.home-field::before { background: linear-gradient(105deg, transparent 30%, color-mix(in srgb, var(--home-gold-light) 16%, transparent) 50%, transparent 70%); background-size: 260% 100%; background-position: 20% 0; }
+.home-field::after { opacity: 0.07; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Panels: the house's work set on white, rounded, edged in their own colour, lit from above. */
+.home-panel { background: var(--home-white); border-radius: var(--home-radius); box-shadow: 0 0 0 1px var(--home-edge), var(--home-lift); }
+
+/* Positioning: the first white panel rises over the summit's lower edge. */
+.home-positioning { position: relative; z-index: 1; display: flow-root; padding-top: 0; padding-bottom: 0; background: var(--home-mist); }
+.home-positioning-panel { margin-top: -72px; padding: 88px 64px 56px; } /* text starts below the fold; the fold shows the panel's edge */
 .home-positioning:not(:has(.home-chain)) { padding-bottom: 112px; }
 .home-positioning-text { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 72px; align-items: start; }
 .everest-home .home-statement { font-size: var(--home-t-statement); line-height: 1.45; font-weight: 400; letter-spacing: -0.015em; text-wrap: pretty; }
 .home-positioning .home-body { color: var(--home-mid); }
-.everest-home .home-chain { margin-top: 88px; padding-block: 72px 64px; background: var(--home-ink); color: var(--home-white); }
-.home-chain-roof { display: block; width: 100%; height: auto; overflow: visible; }
-.home-line-drop { stroke: color-mix(in srgb, var(--home-white) 32%, transparent); stroke-width: 1; }
-.home-chain-stations { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
-.home-chain-stations li { position: relative; padding: 24px 8px 0; text-align: center; font-size: 15px; line-height: 1.4; font-weight: 600; }
-.home-chain-stations li::first-letter { text-transform: uppercase; }
-.home-chain-stations li::before { content: ''; position: absolute; top: 0; left: 50%; width: 9px; height: 9px; background: var(--home-gold-light); translate: -50% -50%; }
-.home-chain-track { position: absolute; top: -1px; left: 0; right: 0; height: 0; container-type: inline-size; pointer-events: none; }
-.home-chain-pulse { position: absolute; top: 0; left: 0; width: 11px; height: 11px; background: var(--home-gold); translate: -50% -50%; opacity: 0; }
-.everest-home .home-chain-base { position: relative; display: flex; justify-content: space-between; gap: 24px; margin-top: 48px; padding-top: 16px; border-top: 1.5px solid color-mix(in srgb, var(--home-gold-light) 70%, transparent); font-size: 14px; font-weight: 500; color: color-mix(in srgb, var(--home-white) 78%, var(--home-ink)); }
-.home-chain-base::before, .home-chain-base::after { content: ''; position: absolute; top: -1px; }
-.home-chain-base::before { left: 0; width: 7px; height: 7px; background: var(--home-gold-light); translate: 0 -50%; }
-.home-chain-base::after { right: 1px; width: 9px; height: 9px; border-top: 1.5px solid var(--home-gold-light); border-right: 1.5px solid var(--home-gold-light); translate: 0 -50%; rotate: 45deg; }
 
-/* Proofs: an open credential band. The verifiable fact leads; nothing is folded. */
-.home-proofs { padding-block: 0; background: var(--home-white); }
-/* Subgrid: every proof's evidence starts on the same line, whatever the sentence length above it. */
-.home-proof-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.home-proof { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; padding: 56px 32px 64px; box-shadow: inset 1px 0 0 var(--home-rule); }
-.home-proof:first-child { padding-left: 0; box-shadow: none; }
-.home-proof:last-child { padding-right: 0; }
+/* The chain, run as an order: five stations from « prise d'ordre » to « règlement-livraison », each turning done in turn. */
+.everest-home .home-chain { margin-top: 96px; padding-block: 96px; }
+.home-timeline { padding: 40px 48px 44px; background: var(--home-white); color: var(--home-ink); border-radius: var(--home-radius); box-shadow: 0 0 0 1px var(--home-edge), 0 2px 4px color-mix(in srgb, var(--home-ink) 30%, transparent), 0 32px 64px -24px color-mix(in srgb, #000 55%, transparent); }
+.home-timeline-head { display: flex; align-items: center; gap: 16px; font-size: 14px; font-weight: 600; color: var(--home-mid); }
+.home-timeline-head span:first-child::first-letter, .home-timeline-head span:last-child::first-letter { text-transform: uppercase; }
+.home-timeline-head i { flex: 1; height: 1px; background: var(--home-edge-strong); }
+.home-timeline-steps { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 32px 0 0; padding: 0; list-style: none; }
+.home-timeline-steps::before { content: ''; position: absolute; top: 15px; left: 10%; right: 10%; height: 2px; border-radius: 2px; background: var(--home-mist-strong); }
+.home-timeline-steps li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; font-size: 15px; line-height: 1.35; font-weight: 600; }
+.home-timeline-steps li span:last-child::first-letter { text-transform: uppercase; }
+.home-timeline-node { position: relative; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--home-gold); color: var(--home-ink); box-shadow: 0 0 0 6px var(--home-white); }
+.home-timeline-node svg { width: 16px; height: 16px; }
+.home-timeline-bar { position: relative; height: 6px; margin-top: 32px; border-radius: 999px; background: var(--home-mist-strong); overflow: hidden; }
+.home-timeline-bar span { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, var(--home-gold), var(--home-gold-light)); }
+
+/* Proofs: the agrément as a white record panel, the three other facts set by type beside it. */
+.home-proofs { background: var(--home-white); }
+.home-proof-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 20px; }
+.home-proof { grid-column: 2; display: flex; flex-direction: column; gap: 14px; padding: 32px 36px; border-radius: var(--home-radius); background: var(--home-mist); box-shadow: inset 0 0 0 1px var(--home-edge); }
+.home-proof:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); align-items: end; column-gap: 56px; }
+.home-proof-record { grid-column: 1; grid-row: 1 / span 2; justify-content: space-between; gap: 32px; padding: 48px; background: var(--home-white); box-shadow: 0 0 0 1px var(--home-edge), var(--home-lift-high); }
 .everest-home .home-proof-n1 { font-size: var(--home-t-body); line-height: 1.5 !important; font-weight: 500; color: var(--home-mid); }
 .home-proof-lead > span { white-space: nowrap; }
-.home-proof-lead { display: block; margin-bottom: 8px; font-size: var(--home-t-heading); line-height: 1.12; font-weight: 500; letter-spacing: -0.025em; color: var(--home-ink); }
-.home-proof .home-body { margin-top: 20px; color: var(--home-mid); }
+.home-proof-lead { display: block; margin-bottom: 6px; font-size: var(--home-t-statement); line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; color: var(--home-ink); }
+.home-proof-record .home-proof-lead { margin-bottom: 28px; font-size: var(--home-t-display); line-height: 1.05; letter-spacing: -0.035em; }
+.home-record-fields { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.home-record-field { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 10px; border-radius: 999px; background: var(--home-mist); box-shadow: inset 0 0 0 1px var(--home-edge); font-size: 15px; font-weight: 600; color: var(--home-ink); }
+.home-record-field svg { flex: none; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--home-gold); color: var(--home-ink); }
+.home-proof .home-body { color: var(--home-mid); }
 
-/* Engagements: a ledger. Éthique & Déontologie closes it at full width, as its public rank says. */
-.home-engagements { padding-block: 96px; background: var(--home-ink); color: var(--home-white); }
-.home-engagement-layout { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 72px; align-items: center; }
-.home-commitments { display: grid; grid-template-columns: 1fr; list-style: none; margin: 0 0 32px; padding: 0; box-shadow: inset 0 1px 0 color-mix(in srgb, var(--home-white) 18%, transparent); }
-.home-commitments li { position: relative; padding: 18px 0 18px 22px; font-size: var(--home-t-body); line-height: 1.45; box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--home-white) 18%, transparent); transition: color 200ms var(--home-ease); }
-.home-commitments li::before { content: ''; position: absolute; left: 0; top: 50%; width: 7px; height: 7px; background: var(--home-gold-light); translate: 0 -50%; transition: background-color 200ms var(--home-ease); }
-.home-commitments li:hover { color: var(--home-white); }
-.home-commitments li:hover::before { background: var(--home-gold); }
-.home-commitments li:last-child { margin-top: 10px; padding: 22px 0 22px 22px; background: color-mix(in srgb, var(--home-gold) 16%, transparent); box-shadow: none; font-size: var(--home-t-title); font-weight: 600; color: var(--home-gold-light); }
-.home-commitments li:last-child:hover { color: var(--home-gold-light); }
-.home-commitments li:last-child::before { left: 0; }
+/* Engagements: a white checklist on the lit field. Éthique & Déontologie closes it and leads by scale. */
+.home-engagement-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: center; }
+.home-commitments { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; list-style: none; margin: 0 0 28px; padding: 10px; border-radius: var(--home-radius); background: var(--home-white); color: var(--home-ink); box-shadow: 0 2px 4px color-mix(in srgb, #000 20%, transparent), 0 32px 64px -24px color-mix(in srgb, #000 50%, transparent); }
+.home-commitments li { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 12px 16px; border-radius: var(--home-radius-sm); font-size: var(--home-t-body); line-height: 1.4; font-weight: 500; transition: background-color 240ms var(--home-ease); }
+.home-commitments li svg { flex: none; width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--home-mist-strong); color: var(--home-mid); }
+.home-commitments li:hover { background: var(--home-mist); }
+.home-commitments li:last-child { grid-column: 1 / -1; min-height: 72px; margin-top: 4px; padding-inline: 18px; background: var(--home-mist); font-size: var(--home-t-statement); font-weight: 600; letter-spacing: -0.015em; }
+.home-commitments li:last-child svg { width: 28px; height: 28px; padding: 6px; background: var(--home-ink); color: var(--home-white); }
 .home-engagements .home-body { max-width: 36em; font-size: 15px; color: color-mix(in srgb, var(--home-white) 82%, var(--home-ink)); }
 
-/* Analyses: the documents themselves, on paper, captioned with their catalogue titles. */
-.home-analyses { background: var(--home-paper); }
+/* Analyses: the documents, staggered as if just set down. */
+.home-analyses { background: var(--home-mist); }
 .home-analysis-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 80px; align-items: center; }
 .home-analysis-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .home-analysis-intro .home-body { color: var(--home-mid); }
-.home-publications { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; list-style: none; margin: 0; padding: 0; }
-.home-publication { display: flex; flex-direction: column; gap: 16px; color: inherit; text-decoration: none; }
-.home-publication img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1108 / 1568;
-  object-fit: cover;
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--home-ink) 18%, transparent), 0 18px 28px -18px color-mix(in srgb, var(--home-ink) 55%, transparent);
-}
+.home-publications { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; list-style: none; margin: 0; padding: 0; }
+.home-publications li:nth-child(2) { margin-top: 56px; }
+.home-publication { display: flex; flex-direction: column; gap: 14px; color: inherit; text-decoration: none; }
+.home-publication img { display: block; width: 100%; height: auto; aspect-ratio: 1108 / 1568; object-fit: cover; border-radius: var(--home-radius-sm); box-shadow: 0 0 0 1px var(--home-edge), var(--home-lift); transition: transform 500ms var(--home-ease), box-shadow 500ms var(--home-ease); }
+.home-publication:is(:hover, :focus-visible) img { transform: translateY(-8px); box-shadow: 0 0 0 1px var(--home-edge), var(--home-lift-high); }
 .home-publication-title { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.4; font-weight: 600; }
 .home-publication-title svg { width: 16px !important; height: 16px !important; }
 .home-publication:hover .home-publication-title { color: var(--home-mid); }
-/* Picked up: the cover rises. No tilt. The shadow says the sheet left the desk. */
-.home-publication img { transition: transform 400ms var(--home-ease), box-shadow 400ms var(--home-ease); }
-.home-publication:is(:hover, :focus-visible) img { transform: translateY(-8px); box-shadow: 0 1px 2px color-mix(in srgb, var(--home-ink) 18%, transparent), 0 28px 32px -16px color-mix(in srgb, var(--home-ink) 55%, transparent); }
 
-/* Expertises: an index with one frame. The page's only disclosure lives here. */
+/* Expertises: one drawn frame and four rows; the row under the pointer lights and swaps the drawing. */
 .home-expertises { background: var(--home-white); }
-.home-expertise-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: stretch; margin-top: 64px; }
-/* One frame, four places. The first image is the floor; the others rise over it from below. */
-.home-expertise-media { position: relative; overflow: clip; aspect-ratio: 4 / 5; background: var(--home-ink); }
+.home-expertise-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: stretch; margin-top: 56px; }
+.home-expertise-media { position: relative; overflow: clip; aspect-ratio: 4 / 5; border-radius: var(--home-radius); background: var(--home-ink); }
 .home-expertise-media > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .home-expertise-media > :not(:first-child) { clip-path: inset(100% 0 0 0); transition: clip-path 640ms var(--home-ease); }
 .home-expertise-layout:has(article:nth-child(2):is(:hover, :focus-within)) .home-expertise-media > :nth-child(2),
 .home-expertise-layout:has(article:nth-child(3):is(:hover, :focus-within)) .home-expertise-media > :nth-child(3),
 .home-expertise-layout:has(article:nth-child(4):is(:hover, :focus-within)) .home-expertise-media > :nth-child(4) { clip-path: inset(0); }
-.home-expertise-list { display: flex; flex-direction: column; box-shadow: inset 0 -1px 0 var(--home-rule); }
-.home-expertise-list article { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 24px 0; box-shadow: inset 0 1px 0 var(--home-rule); transition: box-shadow 200ms var(--home-ease); }
-.home-expertise-layout article:is(:hover, :focus-within) { box-shadow: inset 0 1px 0 var(--home-gold); }
+.home-expertise-list { display: flex; flex-direction: column; gap: 8px; }
+.home-expertise-list article { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 24px 28px; border-radius: var(--home-radius); transition: background-color 280ms var(--home-ease), box-shadow 280ms var(--home-ease); }
+.home-expertise-layout article:is(:hover, :focus-within) { background: var(--home-mist); box-shadow: inset 0 0 0 1px var(--home-edge); }
 .home-expertise-title a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: inherit; font-size: var(--home-t-title); line-height: 1.3; font-weight: 600; letter-spacing: -0.015em; text-decoration: none; }
 .home-expertise-title a:hover { color: var(--home-mid); }
+.home-expertise-layout article:is(:hover, :focus-within) .home-expertise-title svg { color: var(--home-gold); transform: translate(2px, -2px); }
 .home-reading summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; cursor: pointer; list-style: none; color: var(--home-mid); }
 .home-reading summary::-webkit-details-marker { display: none; }
 .home-reading summary::marker { content: ''; }
@@ -200,38 +212,41 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 .home-reading[open] .home-chevron { transform: rotate(180deg); }
 .home-reading > .home-body { padding: 12px 56px 4px 0; }
 
-/* Segments: four equal routes on forest-mid. The closing line is the thesis. No width change. */
-.home-segments { background: var(--home-mid); color: var(--home-white); }
-.home-audiences { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin-top: 48px; }
+/* Segments: the thesis on the left (heading, then « Quatre portes… »), the four routes as one list on the right. */
+.home-segments .home-container { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-areas: "head list" "close list"; column-gap: 72px; align-items: start; }
+.everest-home .home-segments .home-heading { grid-area: head; max-width: 22ch; font-size: var(--home-t-statement); line-height: 1.4 !important; letter-spacing: -0.015em; color: color-mix(in srgb, var(--home-white) 82%, var(--home-ink)); }
+.home-segments [data-cms-id="home.segments.n2"] { display: contents; }
+.home-audiences { grid-area: list; display: grid; grid-template-columns: 1fr; margin: 0; padding: 8px; border-radius: var(--home-radius); background: color-mix(in srgb, var(--home-white) 7%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--home-white) 12%, transparent); }
 .everest-home .home-audiences .home-body {
   display: block;
   max-width: none;
   margin: 0;
-  padding: 0;
-  background: transparent;
+  padding: 22px 24px;
+  border-radius: var(--home-radius-sm);
   color: color-mix(in srgb, var(--home-white) 80%, var(--home-mid));
+  transition: background-color 240ms var(--home-ease);
 }
-.home-audiences strong { font-size: inherit; line-height: inherit; font-weight: 600; letter-spacing: 0; color: var(--home-white); transition: color 200ms var(--home-ease); }
-.home-audiences .home-body:hover strong { color: var(--home-gold-light); }
-.everest-home .home-audience-close { max-width: 14ch; margin-top: 56px; font-size: var(--home-t-heading); line-height: 1.15; font-weight: 500; letter-spacing: -0.025em; color: var(--home-gold-light); text-wrap: balance; }
+.everest-home .home-audiences .home-body + .home-body { box-shadow: 0 -1px 0 color-mix(in srgb, var(--home-white) 10%, transparent); }
+.everest-home .home-audiences .home-body:hover { background: color-mix(in srgb, var(--home-white) 7%, transparent); }
+.home-audiences strong { display: block; margin-bottom: 4px; font-size: 18px; line-height: 1.35; font-weight: 600; letter-spacing: -0.01em; color: var(--home-white); }
+.everest-home .home-audience-close { grid-area: close; align-self: end; max-width: 14ch; margin-top: 40px; font-size: var(--home-t-heading); line-height: 1.05; font-weight: 500; letter-spacing: -0.035em; color: var(--home-white); text-wrap: balance; }
 
-/* Sama Naffa: the gateway. The mark sits on the house color. */
-.home-sama { background: var(--home-paper); }
+/* Sama Naffa: the gateway. The mark sits on the house colour, in a rounded frame. */
+.home-sama { background: var(--home-mist); }
 .home-sama-layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 72px; align-items: center; }
 .home-sama-text { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .home-sama-text .home-body { color: var(--home-mid); }
-.home-sama-mark { justify-self: end; display: grid; place-items: center; width: min(100%, 420px); min-height: 280px; padding: 48px 36px; background: var(--home-ink); }
+.home-sama-mark { justify-self: end; display: grid; place-items: center; width: min(100%, 420px); min-height: 280px; padding: 48px 36px; border-radius: var(--home-radius); background: var(--home-ink); box-shadow: var(--home-lift); }
 .home-sama-mark img { width: min(100%, 280px); height: auto; }
 
 /* Closing: governance as the last word, then the one relationship action. */
-.home-closing { padding-block: 128px 112px; background: var(--home-ink); color: var(--home-white); }
+.home-closing { padding-block: 128px 112px; background: linear-gradient(200deg, var(--home-mid) 0%, var(--home-ink) 62%); } /* ends in forest: the footer continues it without a seam */
 .home-closing-layout { display: grid; gap: 48px; }
-.home-closing-layout > div { border-top: 1px solid color-mix(in srgb, var(--home-gold-light) 45%, transparent); padding-top: 36px; }
-.home-ledger { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; max-width: 1100px; margin: 8px 0 0; padding: 0; list-style: none; }
-.home-ledger li { position: relative; padding: 20px 0 20px 26px; font-size: var(--home-t-body); line-height: 1.65; color: color-mix(in srgb, var(--home-white) 86%, var(--home-ink)); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--home-white) 16%, transparent); }
-.home-ledger li::before { content: ''; position: absolute; left: 0; top: 29px; width: 8px; height: 8px; background: var(--home-gold-light); }
-.home-ledger li:first-child { grid-column: 1 / -1; font-size: var(--home-t-title); line-height: 1.4; color: var(--home-white); }
-.home-ledger li:first-child::before { top: 33px; }
+.home-ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 56px; max-width: 1100px; margin: 0; padding: 0; list-style: none; }
+.home-ledger li { display: flex; align-items: flex-start; gap: 14px; font-size: var(--home-t-body); line-height: 1.6; color: color-mix(in srgb, var(--home-white) 86%, var(--home-ink)); }
+.home-ledger li svg { flex: none; width: 22px; height: 22px; margin-top: 1px; padding: 4px; border-radius: 50%; background: color-mix(in srgb, var(--home-white) 12%, transparent); color: var(--home-white); }
+.home-ledger li:first-child { grid-column: 1 / -1; padding-bottom: 8px; font-size: var(--home-t-statement); line-height: 1.35; color: var(--home-white); }
+.home-ledger li:first-child svg { width: 30px; height: 30px; margin-top: 2px; padding: 7px; background: var(--home-white); color: var(--home-ink); }
 .everest-home .home-heading-close { max-width: 24ch; font-size: var(--home-t-display); line-height: 1.07 !important; letter-spacing: -0.035em; }
 .home-closing .home-body { color: color-mix(in srgb, var(--home-white) 86%, var(--home-ink)); }
 .home-final-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 32px; margin-top: 40px; }
@@ -286,27 +301,28 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   .home-section { padding-block: 80px; }
   .home-hero-content { gap: 48px; }
   .home-hero-foot { gap: 32px; }
-  .home-positioning { padding-bottom: 0; }
   .home-positioning:not(:has(.home-chain)) { padding-bottom: 80px; }
+  .home-positioning-panel { padding: 40px; }
   .home-positioning-text, .home-engagement-layout, .home-analysis-layout, .home-sama-layout { grid-template-columns: 1fr; gap: 32px; }
-  .home-proof-grid { grid-template-columns: 1fr 1fr; }
-  .home-proof:nth-child(odd) { padding-left: 0; box-shadow: none; }
-  .home-proof:nth-child(even) { padding-right: 0; }
-  .home-proof:nth-child(n + 3) { padding-top: 0; }
+  .everest-home .home-chain { margin-top: 72px; padding-block: 72px; }
+  .home-timeline { padding: 32px; }
+  .home-proof-grid { grid-template-columns: 1fr; }
+  .home-proof, .home-proof-record { grid-column: 1; grid-row: auto; padding: 32px; }
   .home-expertise-layout { grid-template-columns: 1fr; margin-top: 40px; }
   .home-expertise-media { display: none; }
-  .home-audiences { grid-template-columns: 1fr 1fr; gap: 28px 32px; margin-top: 40px; }
+  .home-segments .home-container { grid-template-columns: 1fr; grid-template-areas: "head" "list" "close"; }
+  .home-audiences { margin-top: 32px; }
   .home-ledger { grid-template-columns: 1fr; }
   .home-publications { max-width: 560px; }
   .home-sama-mark { justify-self: start; width: 100%; min-height: 0; padding: 36px 28px; }
   .home-sama-mark img { width: 200px; }
 }
 @media (max-width: 600px) {
-  .home-section { padding-block: 48px; }
+  .home-section { padding-block: 40px; }
   .home-hero { min-height: max(820px, 100svh); }
   .home-hero-media img, .home-hero-media video { object-position: 68% 25%; }
   .home-hero-media::after { background: linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 70%, transparent), transparent 40%, var(--home-ink) 69%); } /* taste-skill-ignore: image legibility scrim. */
-  .home-hero-content { padding-block: 144px 40px; justify-content: space-between; gap: 160px; }
+  .home-hero-content { padding-block: 144px 72px; justify-content: space-between; gap: 160px; }
   .home-hero h1 { font-size: clamp(31px, 8.5vw, 42px); max-width: 420px; line-height: 1.13 !important; letter-spacing: -0.03em; }
   .home-hero-foot { display: flex; flex-direction: column-reverse; align-items: stretch; gap: 28px; }
   .home-hero .home-body { font-size: 15px; line-height: 1.65; }
@@ -314,36 +330,46 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   .home-hero .home-button, .home-final-actions .home-button { width: 100%; justify-content: space-between; }
   .everest-home .home-heading { font-size: 28px; }
   .everest-home .home-body { font-size: 15px; line-height: 1.65; }
-  .home-positioning { padding-bottom: 0; }
   .home-positioning:not(:has(.home-chain)) { padding-bottom: 56px; }
+  .home-positioning-panel { margin-top: -40px; padding: 48px 20px 24px; }
   .home-positioning-text { gap: 20px; }
-  .everest-home .home-chain { margin-top: 28px; padding-block: 28px 24px; }
-  .home-line-drop { display: none; }
-  .home-chain-stations { grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-top: 20px; }
-  .home-chain-stations li { padding: 0 0 0 18px; text-align: left; font-size: 14px; }
-  .home-chain-stations li::before { top: 0.7em; left: 0; width: 7px; height: 7px; }
-  .everest-home .home-chain-base { flex-direction: column; gap: 2px; margin-top: 24px; font-size: 13px; }
-  .home-proof-grid { grid-template-columns: 1fr; }
-  .home-proof, .home-proof:nth-child(n) { padding: 28px 0; box-shadow: inset 0 1px 0 var(--home-rule); }
-  .home-proof:first-child { box-shadow: none; }
-  .home-proof .home-body { margin-top: 12px; }
+  .everest-home .home-chain { margin-top: 32px; padding-block: 32px; }
+  .home-timeline { padding: 20px 18px; }
+  .home-timeline-head { font-size: 13px; }
+  /* Phones: the same chain on a vertical rail, so no station name breaks inside a word. */
+  .home-timeline-steps { grid-template-columns: 1fr; gap: 8px; margin-top: 16px; }
+  .home-timeline-steps::before { top: 12px; bottom: 12px; left: 11px; right: auto; width: 2px; height: auto; }
+  .home-timeline-steps li { flex-direction: row; gap: 12px; text-align: left; font-size: 14px; }
+  .home-timeline-node { width: 24px; height: 24px; box-shadow: 0 0 0 4px var(--home-white); }
+  .home-timeline-node svg { width: 12px; height: 12px; }
+  .home-timeline-bar { margin-top: 20px; }
+  .home-proof-grid { gap: 10px; }
+  .home-proof, .home-proof-record, .home-proof:last-child { display: flex; gap: 12px; padding: 20px; }
+  .home-proof-record .home-proof-lead { margin-bottom: 14px; font-size: 34px; }
+  .home-record-fields { gap: 6px; }
+  .home-record-field { padding: 6px 12px 6px 8px; font-size: 14px; }
   .home-proof-lead { font-size: 28px; }
-  .home-engagements { padding-block: 56px; }
-  .home-commitments li { padding-block: 14px; }
-  .home-commitments li:last-child { padding-block: 16px; font-size: 19px; }
+  .home-commitments { gap: 2px; margin-bottom: 20px; padding: 6px; }
+  .home-commitments li { gap: 8px; min-height: 48px; padding: 8px 10px; font-size: 14px; }
+  .home-commitments li svg { width: 20px; height: 20px; }
+  .home-commitments li:last-child { min-height: 52px; padding-inline: 10px; font-size: 18px; }
   .home-publications { gap: 16px; }
+  .home-publications li:nth-child(2) { margin-top: 24px; }
   .home-publication-title { font-size: var(--home-t-meta); }
-  .home-expertise-list article { padding: 16px 0; }
+  .home-expertise-list { gap: 4px; }
+  .home-expertise-list article { padding: 12px 16px; }
   .home-expertise-title a { font-size: 20px; }
   .home-reading > .home-body { padding-right: 0; }
-  .home-audiences { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
-  .home-audiences strong { font-size: inherit; }
-  .home-ledger li, .home-ledger li:first-child { font-size: 15px; padding-block: 14px; }
-  .home-ledger li::before, .home-ledger li:first-child::before { top: 22px; }
-  .everest-home .home-audience-close { margin-top: 24px; font-size: 28px; }
+  .home-audiences { margin-top: 20px; padding: 4px; }
+  .everest-home .home-audiences .home-body { padding: 14px 14px; }
+  .home-audiences strong { margin-bottom: 2px; font-size: 16px; }
+  .home-ledger { grid-template-columns: 1fr; gap: 12px; }
+  .home-ledger li, .home-ledger li:first-child { font-size: 15px; padding: 0; }
+  .everest-home .home-segments .home-heading { font-size: 19px; }
+  .everest-home .home-audience-close { margin-top: 20px; font-size: 28px; }
   .home-sama-mark { padding: 20px 16px; }
   .home-sama-mark img { width: 180px; }
-  .home-closing { padding-block: 72px 56px; }
+  .home-closing { padding-block: 48px 40px; }
   .everest-home .home-heading-close { font-size: 34px; line-height: 1.12 !important; }
   .home-final-actions { gap: 8px; margin-top: 24px; }
   .home-footer .site-footer-container { padding-block: 32px; }
@@ -361,7 +387,10 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 @media (prefers-reduced-motion: no-preference) {
   .home-hero-media, .page-head-media { animation: home-summit-settle 1800ms var(--home-ease) both; }
   @keyframes home-summit-settle { from { transform: scale(1.035); } to { transform: scale(1); } }
-  /* Scroll-linked motion. Every drawing is complete by default; scroll only replays it. Longhands: see AGENTS minifier trap. */
+  /* The lit fields: the sheen drifts across, slowly, like light moving over the range. */
+  .home-field::before { animation: home-sheen 22s ease-in-out infinite alternate; }
+  @keyframes home-sheen { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+  /* Scroll-linked motion. Everything is in place by default; scroll only lets the surfaces settle. Longhands: see AGENTS minifier trap. */
   @supports (animation-timeline: view()) {
     .home-hero-media img, .home-hero-media video, .page-head-media img {
       animation-name: home-summit-recede;
@@ -372,28 +401,30 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
       animation-range: exit 0% exit 100%;
     }
     @keyframes home-summit-recede { from { transform: scale(1.08) translateY(-3%); } to { transform: scale(1.08) translateY(4%); } }
-    /* The roof is laid from the first station to the last; the routes climb from the gates to the summit. */
-    .home-chain-roof {
+    .home-timeline, .home-proof, .home-publications li, .home-audiences {
+      animation-name: home-settle-up;
       animation-duration: auto;
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: view();
-      animation-range: entry 10% cover 42%;
+      animation-range: entry 0% entry 60%;
     }
-    .home-chain-roof { animation-name: home-reveal-across; }
-    @keyframes home-reveal-across { from { clip-path: inset(-4px 100% -4px -4px); } to { clip-path: inset(-4px -4px -4px -4px); } }
+    @keyframes home-settle-up { from { translate: 0 40px; } to { translate: 0 0; } }
   }
-  /* One order travels the chain, prise d'ordre to règlement-livraison; each station lights as it passes. */
-  .home-chain-pulse { animation: home-chain-travel 7s linear infinite; }
-  /* Transform along the track (container units), so the loop never touches layout. */
-  @keyframes home-chain-travel { 0% { transform: translateX(0); opacity: 0; } 4% { opacity: 1; } 92% { opacity: 1; } 100% { transform: translateX(100cqw); opacity: 0; } }
-  .home-chain-stations li::before { animation: home-station-lit 7s linear infinite; }
-  .home-chain-stations li:nth-child(1)::before { animation-delay: 0.7s; }
-  .home-chain-stations li:nth-child(2)::before { animation-delay: 2.1s; }
-  .home-chain-stations li:nth-child(3)::before { animation-delay: 3.5s; }
-  .home-chain-stations li:nth-child(4)::before { animation-delay: 4.9s; }
-  .home-chain-stations li:nth-child(5)::before { animation-delay: 6.3s; }
-  @keyframes home-station-lit { 0% { background: var(--home-gold); scale: 1.6; } 14% { background: var(--home-gold-light); scale: 1; } 100% { background: var(--home-gold-light); scale: 1; } }
+  /* The order runs: each station turns from pending to done in turn, the bar follows, then the next order starts. */
+  .home-timeline-node { animation: 9s linear infinite; }
+  .home-timeline-steps li:nth-child(1) .home-timeline-node { animation-name: home-node-1; }
+  .home-timeline-steps li:nth-child(2) .home-timeline-node { animation-name: home-node-2; }
+  .home-timeline-steps li:nth-child(3) .home-timeline-node { animation-name: home-node-3; }
+  .home-timeline-steps li:nth-child(4) .home-timeline-node { animation-name: home-node-4; }
+  .home-timeline-steps li:nth-child(5) .home-timeline-node { animation-name: home-node-5; }
+  @keyframes home-node-1 { 0%, 6% { background: var(--home-mist-strong); color: transparent; } 9%, 88% { background: var(--home-gold); color: var(--home-ink); } 94%, 100% { background: var(--home-mist-strong); color: transparent; } }
+  @keyframes home-node-2 { 0%, 20% { background: var(--home-mist-strong); color: transparent; } 23%, 88% { background: var(--home-gold); color: var(--home-ink); } 94%, 100% { background: var(--home-mist-strong); color: transparent; } }
+  @keyframes home-node-3 { 0%, 34% { background: var(--home-mist-strong); color: transparent; } 37%, 88% { background: var(--home-gold); color: var(--home-ink); } 94%, 100% { background: var(--home-mist-strong); color: transparent; } }
+  @keyframes home-node-4 { 0%, 48% { background: var(--home-mist-strong); color: transparent; } 51%, 88% { background: var(--home-gold); color: var(--home-ink); } 94%, 100% { background: var(--home-mist-strong); color: transparent; } }
+  @keyframes home-node-5 { 0%, 62% { background: var(--home-mist-strong); color: transparent; } 65%, 88% { background: var(--home-gold); color: var(--home-ink); } 94%, 100% { background: var(--home-mist-strong); color: transparent; } }
+  .home-timeline-bar span { animation: home-bar 9s linear infinite; }
+  @keyframes home-bar { 0%, 4% { clip-path: inset(0 100% 0 0 round 999px); } 65%, 88% { clip-path: inset(0 0 0 0 round 999px); } 94%, 100% { clip-path: inset(0 100% 0 0 round 999px); } }
   /* Contact: the mark walks the relationship from the first contact to the open account, and lights each step as it passes. */
   .parcours-pulse { animation: parcours-walk 8s linear infinite; }
   @keyframes parcours-walk { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 82% { transform: translateX(78cqw); opacity: 1; } 92%, 100% { transform: translateX(78cqw); opacity: 0; } }

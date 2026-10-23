@@ -60,12 +60,12 @@ export const Footer = () => {
           <div>{renderLinkList(SITE_NAV)}</div>
 
           <div>
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Expertises</div>
+            <div className="kicker text-white" style={headingStyle}>Expertises</div>
             {renderLinkList(expertises)}
           </div>
 
           <div className="site-footer-contact">
-            <div className="kicker text-[var(--jaune-or)]" style={headingStyle}>Coordonnées</div>
+            <div className="kicker text-white" style={headingStyle}>Coordonnées</div>
             <ul className="space-y-3 text-secondary-dark text-[0.8rem] font-light leading-relaxed">
               <li>
                 18 Boulevard de la République,<br />Dakar, Sénégal,<br />BP 11659-13000

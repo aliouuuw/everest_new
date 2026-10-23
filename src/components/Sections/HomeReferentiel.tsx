@@ -1,6 +1,6 @@
 /** Home. Copy and block order follow referential V2.1, Part III, section 1.
  * Evidence is shown, not folded (I.6: la preuve précède l'affirmation). Only the four
- * expertise details stay behind a disclosure. The only drawing is the logo's summit line. */
+ * expertise details stay behind a disclosure. The chain runs as one order; each proof carries a small drawing. */
 import { Fragment } from 'react';
 import { EditableText, useContent } from '../../cms';
 import { frenchSpaces } from '../../cms/EditableText';
@@ -32,18 +32,6 @@ const Copy = ({ id, as = 'p', className = 'home-body' }: { id: HomeTextId; as?: 
   <EditableText id={id} as={as} className={className}>{HOME_TEXT[id]}</EditableText>
 );
 
-/** The EVEREST summit, from the logo: foot, peak, notch, shoulder, long descent. Straight segments only. */
-const SUMMIT = [[0, 1], [0.28, 0], [0.46, 0.45], [0.51, 0.36], [1, 1]] as const;
-const summitPoints = (x: number, y: number, w: number, h: number) =>
-  SUMMIT.map(([px, py]) => `${(x + px * w).toFixed(1)},${(y + py * h).toFixed(1)}`).join(' ');
-const summitY = (x: number, w: number, h: number) => {
-  for (let i = 1; i < SUMMIT.length; i++) {
-    const [x0, y0] = SUMMIT[i - 1], [x1, y1] = SUMMIT[i];
-    if (x / w <= x1) return (y0 + ((x / w - x0) / (x1 - x0)) * (y1 - y0)) * h;
-  }
-  return h;
-};
-
 /** Reads the chain out of the positioning N2 so the diagram labels stay the referential's words. */
 const parseChain = (n2: string) => {
   const stations = n2.match(/\(([^)]+)\)/)?.[1].split(', ');
@@ -51,27 +39,25 @@ const parseChain = (n2: string) => {
   return stations?.length === 5 ? { stations, from: span?.[1], to: span?.[2] } : null;
 };
 
-const ROOF_W = 1200;
-const ROOF_H = 132;
-const ROOF_PEAK = 92;
+const Check = () => (
+  <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m3.5 8.5 3 3 6-7" />
+  </svg>
+);
 
-/** Sous un même toit: five stations under the summit line, on a forest band. */
-const ChainFigure = ({ stations, from, to }: { stations: string[]; from?: string; to?: string }) => (
-  <figure className="home-chain" aria-hidden="true">
+/** The chain, run as one order: five stations from « prise d'ordre » to « règlement-livraison », labels read from the N2. */
+const ChainTimeline = ({ stations, from, to }: { stations: string[]; from?: string; to?: string }) => (
+  <figure className="home-chain home-field" aria-hidden="true">
     <div className="home-container">
-      <svg className="home-chain-roof" viewBox={`0 0 ${ROOF_W} ${ROOF_H}`} fill="none">
-        <polyline className="home-line" points={summitPoints(0, 6, ROOF_W, ROOF_PEAK)} />
-        {stations.map((station, i) => {
-          const x = ((i + 0.5) / stations.length) * ROOF_W;
-          return <line key={station} className="home-line home-line-drop" x1={x} x2={x} y1={6 + summitY(x, ROOF_W, ROOF_PEAK)} y2={ROOF_H} />;
-        })}
-      </svg>
-      <ol className="home-chain-stations">
-        {stations.map((station) => <li key={station}>{station}</li>)}
-      </ol>
-      {from && to && (
-        <p className="home-chain-base"><span>{from}</span><span>{to}</span><span className="home-chain-track"><span className="home-chain-pulse" /></span></p>
-      )}
+      <div className="home-timeline">
+        {from && to && <p className="home-timeline-head"><span>{from}</span><i /><span>{to}</span></p>}
+        <ol className="home-timeline-steps">
+          {stations.map((station) => (
+            <li key={station}><span className="home-timeline-node"><Check /></span><span>{station}</span></li>
+          ))}
+        </ol>
+        <div className="home-timeline-bar"><span /></div>
+      </div>
     </div>
   </figure>
 );
@@ -81,12 +67,14 @@ export const HomePositioning = () => {
   return (
     <section id="positionnement" className="home-section home-positioning">
       <div className="home-container">
-        <div className="home-positioning-text">
-          <Copy id="home.positioning.n1" className="home-statement" />
-          <Copy id="home.positioning.n2" />
+        <div className="home-panel home-positioning-panel">
+          <div className="home-positioning-text">
+            <Copy id="home.positioning.n1" className="home-statement" />
+            <Copy id="home.positioning.n2" />
+          </div>
         </div>
       </div>
-      {chain && <ChainFigure {...chain} />}
+      {chain && <ChainTimeline {...chain} />}
     </section>
   );
 };
@@ -99,11 +87,28 @@ const PROOFS = [
   ['proof4', "Une équipe d'une vingtaine"],
 ] as const;
 
+/** The agrément as a record: its own sentence, split into the panel's fields. Words and spaces unchanged. */
+const RecordFields = ({ rest }: { rest: string }) => {
+  // « depuis le 30 mars 2016 (n° SGI/DA/2016/60). »: the number reads as a field value; its parentheses and
+  // full stop stay in the text for readers and the copy check, hidden only from sight.
+  const m = rest.match(/^(.*?) \((n° [^)]+)\)\.$/);
+  if (!m) return <span className="home-record-fields"><span className="home-record-field"><Check />{rest}</span></span>;
+  return (
+    <span className="home-record-fields">
+      <span className="home-record-field"><Check />{m[1]}</span>
+      <span className="sr-only"> (</span>
+      <span className="home-record-field"><Check />{m[2]}</span>
+      <span className="sr-only">).</span>
+    </span>
+  );
+};
+
 const Proof = ({ k, lead }: { k: (typeof PROOFS)[number][0]; lead: string }) => {
   const n1 = useHomeText(`home.${k}.n1`);
   const split = n1.startsWith(lead);
+  const record = k === 'proof2' && split;
   return (
-    <article className="home-proof">
+    <article className={`home-proof${record ? ' home-proof-record' : ''}`}>
       <h2 className="home-proof-n1" data-cms-id={`home.${k}.n1`}>
         {split ? (
           <>
@@ -111,7 +116,7 @@ const Proof = ({ k, lead }: { k: (typeof PROOFS)[number][0]; lead: string }) => 
             <span className="home-proof-lead">
               {lead.split(' ').map((word, i) => <Fragment key={i}>{i ? ' ' : ''}<span>{word}</span></Fragment>)}
             </span>
-            {n1.slice(lead.length)}
+            {record ? <RecordFields rest={n1.slice(lead.length)} /> : n1.slice(lead.length)}
           </>
         ) : n1}
       </h2>
@@ -135,19 +140,19 @@ export const HomeEngagements = () => {
   // An unexpected CMS format remains readable rather than losing any of its text.
   if (end < 0 || names.length !== 6) {
     return (
-      <section id="engagements" className="home-section home-engagements">
+      <section id="engagements" className="home-section home-engagements home-field">
         <div className="home-container"><Copy id="home.engagements.n1" as="h2" className="home-heading" /><Copy id="home.engagements.n2" /></div>
       </section>
     );
   }
   return (
-    <section id="engagements" className="home-section home-engagements">
+    <section id="engagements" className="home-section home-engagements home-field">
       <div className="home-container home-engagement-layout">
         <Copy id="home.engagements.n1" as="h2" className="home-heading" />
         <div data-cms-id="home.engagements.n2">
           <ul className="home-commitments">
             {names.map((name, i) => (
-              <li key={name}>{name}<Hidden>{i < names.length - 1 ? ' · ' : '. '}</Hidden></li>
+              <li key={name}><Check />{name}<Hidden>{i < names.length - 1 ? ' · ' : '. '}</Hidden></li>
             ))}
           </ul>
           <p className="home-body">{withLink(n2.slice(end + 2), 'La société', '/la-societe')}</p>
@@ -228,7 +233,7 @@ export const HomeSegments = () => {
   // Four audiences and a closing line, or the paragraph as written: a CMS edit never loses words.
   const split = sentences.length === 4 && sentences.every((s) => s.includes(', '));
   return (
-    <section id="segments" className="home-section home-segments">
+    <section id="segments" className="home-section home-segments home-field">
       <div className="home-container">
         <Copy id="home.segments.n1" as="h2" className="home-heading" />
         {split ? (
@@ -273,13 +278,13 @@ const GovernanceLedger = () => {
   if (lines.length < 3) return <Copy id="home.governance.n2" />;
   return (
     <ul className="home-ledger" data-cms-id="home.governance.n2">
-      {lines.map((line, i) => <li key={i}>{line}{i < lines.length - 1 && <Hidden> </Hidden>}</li>)}
+      {lines.map((line, i) => <li key={i}><Check />{line}{i < lines.length - 1 && <Hidden> </Hidden>}</li>)}
     </ul>
   );
 };
 
 export const HomeClosing = () => (
-  <section id="gouvernance" className="home-section home-closing">
+  <section id="gouvernance" className="home-section home-closing home-field">
     <div className="home-container home-closing-layout">
       <Copy id="home.governance.n1" as="h2" className="home-heading home-heading-close" />
       <div>
