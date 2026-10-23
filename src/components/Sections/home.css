@@ -181,11 +181,11 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
 .home-expertise-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: stretch; margin-top: 64px; }
 /* One frame, four places. The first image is the floor; the others rise over it from below. */
 .home-expertise-media { position: relative; overflow: clip; aspect-ratio: 4 / 5; background: var(--home-ink); }
-.home-expertise-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.home-expertise-media img:not(:first-child) { clip-path: inset(100% 0 0 0); transition: clip-path 640ms var(--home-ease); }
-.home-expertise-layout:has(article:nth-child(2):is(:hover, :focus-within)) img:nth-child(2),
-.home-expertise-layout:has(article:nth-child(3):is(:hover, :focus-within)) img:nth-child(3),
-.home-expertise-layout:has(article:nth-child(4):is(:hover, :focus-within)) img:nth-child(4) { clip-path: inset(0); }
+.home-expertise-media > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.home-expertise-media > :not(:first-child) { clip-path: inset(100% 0 0 0); transition: clip-path 640ms var(--home-ease); }
+.home-expertise-layout:has(article:nth-child(2):is(:hover, :focus-within)) .home-expertise-media > :nth-child(2),
+.home-expertise-layout:has(article:nth-child(3):is(:hover, :focus-within)) .home-expertise-media > :nth-child(3),
+.home-expertise-layout:has(article:nth-child(4):is(:hover, :focus-within)) .home-expertise-media > :nth-child(4) { clip-path: inset(0); }
 .home-expertise-list { display: flex; flex-direction: column; box-shadow: inset 0 -1px 0 var(--home-rule); }
 .home-expertise-list article { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 24px 0; box-shadow: inset 0 1px 0 var(--home-rule); transition: box-shadow 200ms var(--home-ease); }
 .home-expertise-layout article:is(:hover, :focus-within) { box-shadow: inset 0 1px 0 var(--home-gold); }
@@ -249,8 +249,7 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
    The band still ends in forest, so the next section meets the same edge as before. */
 .page-head-photo { position: relative; isolation: isolate; overflow: clip; display: flex; flex-direction: column; justify-content: flex-end; min-height: 640px; }
 .page-head-media { position: absolute; inset: 0; z-index: -1; }
-.page-head-media img, .page-head-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
-.page-head-media video:not([data-playing]) { visibility: hidden; }
+.page-head-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
 .page-head-media::after {
   content: '';
   position: absolute;
@@ -258,6 +257,8 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   background: linear-gradient(90deg, var(--home-ink) 0%, color-mix(in srgb, var(--home-ink) 90%, transparent) 38%, color-mix(in srgb, var(--home-ink) 30%, transparent) 66%, transparent 92%), /* taste-skill-ignore: image legibility scrim. */
     linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 60%, transparent) 0%, transparent 24%, transparent 72%, var(--home-ink) 100%); /* taste-skill-ignore: image legibility scrim. */
 }
+/* Title only (Sama Naffa): the picture stays open; the veil sits under the title. */
+.page-head-bare .page-head-media::after { background: linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 86%, transparent) 0%, color-mix(in srgb, var(--home-ink) 55%, transparent) 16%, transparent 32%, transparent 52%, color-mix(in srgb, var(--home-ink) 82%, transparent) 86%, var(--home-ink) 100%); } /* taste-skill-ignore: image legibility scrim. */
 @media (max-width: 767px) {
   .page-head-photo { min-height: 0; }
   .page-head-media::after { background: linear-gradient(180deg, color-mix(in srgb, var(--home-ink) 25%, transparent) 0%, color-mix(in srgb, var(--home-ink) 62%, transparent) 28%, var(--home-ink) 64%); } /* taste-skill-ignore: image legibility scrim. */
@@ -362,7 +363,7 @@ html:has(.everest-home) { scrollbar-color: #1A3A35 #FAF8F4; }
   @keyframes home-summit-settle { from { transform: scale(1.035); } to { transform: scale(1); } }
   /* Scroll-linked motion. Every drawing is complete by default; scroll only replays it. Longhands: see AGENTS minifier trap. */
   @supports (animation-timeline: view()) {
-    .home-hero-media img, .home-hero-media video, .page-head-media img, .page-head-media video {
+    .home-hero-media img, .home-hero-media video, .page-head-media img {
       animation-name: home-summit-recede;
       animation-duration: auto;
       animation-timing-function: linear;

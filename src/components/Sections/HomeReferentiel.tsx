@@ -7,6 +7,7 @@ import { frenchSpaces } from '../../cms/EditableText';
 import { HOME_TEXT, type HomeTextId } from '../../content/home';
 import { SITE_NAV } from '../siteNav';
 import { PUBLICATION_FILES } from '../../data/publications';
+import { ExpertiseIllustration } from './ExpertiseIllustrations';
 
 const useHomeText = (id: HomeTextId) => frenchSpaces(useContent(id)?.value || HOME_TEXT[id]);
 
@@ -181,27 +182,11 @@ export const HomeAnalyses = () => (
 
 const EXPERTISE_KEYS = ['mtp', 'brvm', 'structuration', 'privateOffice'] as const;
 const EXPERTISE_LINKS = SITE_NAV.find((item) => item.children)?.children ?? [];
-const EXPERTISE_MEDIA = ['exp-mtp', 'exp-brvm', 'exp-structuration', 'exp-private'];
 
 const Chevron = () => (
   <svg aria-hidden="true" className="home-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
     <path d="m6 9 6 6 6-6" />
   </svg>
-);
-
-/** Placeholder imagery until house photography is cleared: decorative, so it carries no text. */
-const Picture = ({ name }: { name: string }) => (
-  <img
-    src={`/home/${name}.webp`}
-    srcSet={`/home/${name}-sm.webp 576w, /home/${name}.webp 960w`}
-    sizes="(max-width: 1023px) 0px, 36vw"
-    alt=""
-    aria-hidden="true"
-    width={960}
-    height={1200}
-    loading="lazy"
-    decoding="async"
-  />
 );
 
 export const HomeExpertises = () => (
@@ -211,7 +196,7 @@ export const HomeExpertises = () => (
       <div className="home-expertise-layout">
         {/* Pointer or focus on a row swaps the frame (CSS :has), so it works without hydration. */}
         <div className="home-expertise-media">
-          {EXPERTISE_MEDIA.map((name) => <Picture key={name} name={name} />)}
+          {EXPERTISE_KEYS.map((key) => <ExpertiseIllustration key={key} expertise={key} />)}
         </div>
         <div className="home-expertise-list">
           {EXPERTISE_KEYS.map((key, i) => (

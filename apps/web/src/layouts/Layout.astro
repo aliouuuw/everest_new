@@ -24,24 +24,5 @@ const {
     <SiteShell client:load pathname={Astro.url.pathname}>
       <slot />
     </SiteShell>
-    <script>
-      // Page-head film (PageHero `media.film`): the still is the default. The film loads on
-      // motion-enabled desktop connections only, plays once, and stops if reduced motion is turned on.
-      const film = document.querySelector<HTMLVideoElement>('video[data-head-film]')
-      if (film) {
-        const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
-        const media = window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)')
-        const start = () => {
-          if (!media.matches || saveData || film.dataset.loaded) return
-          film.dataset.loaded = 'true'
-          film.querySelectorAll<HTMLSourceElement>('source[data-src]').forEach((s) => (s.src = s.dataset.src!))
-          film.addEventListener('playing', () => film.setAttribute('data-playing', ''), { once: true })
-          film.load()
-          film.play().catch(() => {})
-        }
-        start()
-        media.addEventListener('change', () => (media.matches ? start() : film.pause()))
-      }
-    </script>
   </body>
 </html>

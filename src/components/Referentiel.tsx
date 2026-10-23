@@ -118,8 +118,6 @@ export type HeadMedia = {
   name: string;
   /** CSS object-position, so the subject clears the text side. */
   position?: string;
-  /** A short film over the still: `/pages/<film>.webm`, `.mp4`, `-poster.webp`. Started by the page script, desktop and motion-enabled only. */
-  film?: string;
 };
 
 /**
@@ -127,7 +125,7 @@ export type HeadMedia = {
  * With `media`, the place the page is about fills the band behind a forest veil on the text side.
  */
 export const PageHero = ({ title, above, media, children }: { title: ReactNode; above?: ReactNode; media?: HeadMedia; children?: ReactNode }) => (
-  <section className={`page-head antialiased bg-[var(--home-ink)] pt-[148px] pb-12 md:pt-[180px] md:pb-20 ${media ? 'page-head-photo' : ''}`}>
+  <section className={`page-head antialiased bg-[var(--home-ink)] pt-[148px] pb-12 md:pt-[180px] md:pb-20 ${media ? `page-head-photo${children ? '' : ' page-head-bare'}` : ''}`}>
     {media && (
       <div className="page-head-media" aria-hidden="true">
         <img
@@ -138,12 +136,6 @@ export const PageHero = ({ title, above, media, children }: { title: ReactNode; 
           fetchPriority="high"
           style={media.position ? { objectPosition: media.position } : undefined}
         />
-        {media.film && (
-          <video data-head-film muted playsInline preload="none" disablePictureInPicture poster={`/pages/${media.film}-poster.webp`} style={media.position ? { objectPosition: media.position } : undefined}>
-            <source data-src={`/pages/${media.film}.webm`} type="video/webm" />
-            <source data-src={`/pages/${media.film}.mp4`} type="video/mp4" />
-          </video>
-        )}
       </div>
     )}
     <div className="page-container">

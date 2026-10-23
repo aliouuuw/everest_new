@@ -6,6 +6,7 @@ import type { TextId } from '../../content';
 import { EXPERTISE_ITEMS, type ExpertiseKey } from '../../content/expertises';
 import { ArrowUpRight, Label, N1, N2, PageHero, Pair, RULE, Section } from '../Referentiel';
 import { SITE_NAV } from '../siteNav';
+import { ExpertiseIllustration } from './ExpertiseIllustrations';
 
 const KEYS = Object.keys(EXPERTISE_ITEMS) as Array<ExpertiseKey>;
 const NAV = SITE_NAV.find((item) => item.children)!;
@@ -48,7 +49,7 @@ export const ExpertisesHub = () => (
     <Section tone="light">
       <div className="home-expertise-layout mt-0!">
         <div className="home-expertise-media lg:sticky! lg:top-[calc(var(--site-chrome-sticky)+2rem)] lg:self-start">
-          {KEYS.map((k) => <Frame key={k} name={PLACE[k].frame} sizes="(max-width: 1023px) 0px, 36vw" />)}
+          {KEYS.map((k) => <ExpertiseIllustration key={k} expertise={k} />)}
         </div>
         <div className="home-expertise-list">
           {KEYS.map((k) => (

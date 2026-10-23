@@ -47,7 +47,7 @@ export const OpportunitesPage = () => {
 /** §7: logo, short text, one CTA to the Sama Naffa site. No N2 (ADG decision). Charters not mixed. */
 export const SamaNaffaPage = () => (
   <div className="bg-[var(--pure-white)] text-[var(--night)]">
-    <PageHero title="Sama Naffa" media={{ name: 'sama', film: 'sama', position: '40% 70%' }} />
+    <PageHero title="Sama Naffa" media={{ name: 'sama', position: '50% 62%' }} />
     {/* As on the home: the line and the action on paper, the mark on a flat forest field. */}
     <Section tone="ivory">
       <div className="home-sama-layout">
