@@ -2,15 +2,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { SITE_NAV, type NavItem } from '../siteNav';
-// Fingerprint Icon Component
-const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.97-4.659.97-7.132A8 8 0 0012 4a8 8 0 00-8 8c0 2.473.325 4.866.97 7.132M9 12a2 2 0 104 0m-4 0a2 2 0 104 0" />
+import './nav-ledger.css';
+
+/** Same outward arrow as the home. Marks the account link, which leaves this site. */
+const OutArrow = () => (
+  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter" className="h-3.5 w-3.5 shrink-0">
+    <path d="M6 18 18 6M8 6h10v10" />
   </svg>
 );
 
@@ -21,10 +18,23 @@ const currentState = (to: string, pathname: string): 'page' | 'true' | undefined
   return to !== '/' && path.startsWith(`${to}/`) ? 'true' : undefined;
 };
 
-const navLinkClass = (current: string | undefined) =>
+const navLinkClass = (current: string | undefined, open = false) =>
   `whitespace-nowrap text-[13px] font-bold transition-colors duration-300 ${
-    current ? 'text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
+    current || open ? 'text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
   }`;
+
+/** The bar says Contact. « Devenir client » is the action beside it, not part of the same label. */
+const barLabel = (item: NavItem) => (item.to === '/contact' ? 'Contact' : item.label);
+
+const HOUSE_TOS = ['/la-societe', '/analyses', '/actualites'] as const;
+
+const houseItems = () => HOUSE_TOS.map((to) => SITE_NAV.find((item) => item.to === to)!);
+
+/** Closed label is the current page in the group, otherwise the first official label. The button does not navigate. */
+const houseLabel = (pathname: string) => {
+  const active = houseItems().find((item) => currentState(item.to, pathname));
+  return active?.label ?? houseItems()[0].label;
+};
 
 interface DropdownProps {
   name: string;
@@ -35,12 +45,19 @@ interface DropdownProps {
   isOpen: boolean;
   onOpen: (name: string) => void;
   onClose: (name: string) => void;
+  onDismiss: () => void;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, pathname, isOpen, onOpen, onClose }) => {
-  const titleCurrent = titleTo ? currentState(titleTo, pathname) : undefined;
+const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, pathname, isOpen, onOpen, onClose, onDismiss }) => {
+  const own = titleTo ? currentState(titleTo, pathname) : undefined;
+  const childCurrent = items.some((item) => !item.hash && currentState(item.to, pathname));
+  const titleCurrent = own ?? (childCurrent ? 'true' : undefined);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const focusMenu = useRef(false);
+  const suppressOpen = useRef(false);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
@@ -51,8 +68,9 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, pathna
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
+      if (dropdownRef.current?.contains(document.activeElement)) return;
       onClose(name);
-    }, 150); // Small delay to prevent flickering when moving between trigger and dropdown
+    }, 150);
   };
 
   useEffect(() => {
@@ -63,72 +81,124 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, pathna
     };
   }, []);
 
+  useEffect(() => {
+    if (!isOpen || !focusMenu.current) return;
+    focusMenu.current = false;
+    dropdownRef.current?.querySelector<HTMLElement>('[role="menu"] a')?.focus();
+  }, [isOpen]);
+
   return (
-    <div 
-      className="relative" 
+    <div
+      className="relative"
       ref={dropdownRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onBlur={(event) => {
+        const next = event.relatedTarget;
+        if (next instanceof Node && dropdownRef.current?.contains(next)) return;
+        onDismiss();
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          const trigger = linkRef.current ?? buttonRef.current;
+          onDismiss();
+          if (trigger && document.activeElement !== trigger) {
+            suppressOpen.current = true;
+            trigger.focus();
+          }
+        }
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          const first = dropdownRef.current?.querySelector<HTMLElement>('[role="menu"] a');
+          if (first) {
+            first.focus();
+            return;
+          }
+          focusMenu.current = true;
+          onOpen(name);
+        }
+      }}
     >
       {titleTo ? (
         <Link
+          ref={linkRef}
           to={titleTo}
-          className={`group flex items-center gap-1 ${navLinkClass(titleCurrent)}`}
+          className={`group flex items-center gap-1 ${navLinkClass(titleCurrent, isOpen)}`}
           style={{ fontFamily: 'var(--font-primary)' }}
           aria-current={titleCurrent}
           aria-expanded={isOpen}
           aria-haspopup="menu"
+          onFocus={() => {
+            if (suppressOpen.current) {
+              suppressOpen.current = false;
+              return;
+            }
+            onOpen(name);
+          }}
         >
           {title}
           <svg
-            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+            className={`h-3.5 w-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </Link>
       ) : (
         <button
-          className={`group flex items-center gap-1 ${navLinkClass(undefined)}`}
+          ref={buttonRef}
+          type="button"
+          className={`group flex items-center gap-1 border-0 bg-transparent p-0 ${navLinkClass(titleCurrent, isOpen)}`}
           style={{ fontFamily: 'var(--font-primary)' }}
+          aria-current={titleCurrent}
           aria-expanded={isOpen}
           aria-haspopup="menu"
+          onClick={() => (isOpen ? onDismiss() : onOpen(name))}
+          onFocus={() => {
+            if (suppressOpen.current) {
+              suppressOpen.current = false;
+              return;
+            }
+            onOpen(name);
+          }}
         >
           {title}
           <svg
-            className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+            className={`h-3.5 w-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
       )}
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-4 w-72 bg-[var(--pure-white)] border border-white/[0.15] rounded-2xl py-3 z-50 shadow-2xl shadow-black/40 backdrop-blur-sm">
-          {items.map((item, index) => {
-            const current = item.hash ? undefined : currentState(item.to, pathname);
-            return (
-              <Link
-                key={index}
-                to={item.to}
-                {...(item.hash ? { hash: item.hash } : {})}
-                aria-current={current}
-                className={`block px-6 py-3 text-[14px] font-bold transition-colors duration-200 ${
-                  current
-                    ? 'bg-[var(--summit-ivory)] text-[var(--everest-green)]'
-                    : 'text-[var(--night-80)] hover:bg-[var(--summit-ivory)] hover:text-[var(--everest-green)]'
-                }`}
-                style={{ fontFamily: 'var(--font-primary)', }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <div className="absolute top-full left-0 z-50 pt-2">
+          <div role="menu" className="nav-ledger w-max min-w-60 bg-[var(--summit-ivory)]">
+            {items.map((item) => {
+              const current = item.hash ? undefined : currentState(item.to, pathname);
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  {...(item.hash ? { hash: item.hash } : {})}
+                  role="menuitem"
+                  aria-current={current}
+                  className={`nav-ledger-item${current ? ' is-current' : ''}`}
+                >
+                  <span className="nav-ledger-mark" aria-hidden="true" />
+                  <span className="nav-ledger-label">{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -139,6 +209,7 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -180,9 +251,18 @@ export const Header: React.FC = () => {
     }, 0);
   };
 
+  const dismissDropdown = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpenDropdown(null);
+  };
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    setOpenDropdown(null); // Close any open dropdowns when mobile menu toggles
+    setOpenDropdown(null);
+    setMobileGroup(null);
   };
 
   // Closing the drawer unmounts the link and cancels the click. A new page resets the menu.
@@ -201,19 +281,23 @@ export const Header: React.FC = () => {
     }
   }, [isMobileMenuOpen])
 
+  useEffect(() => {
+    setOpenDropdown(null);
+    setMobileGroup(null);
+  }, [location.pathname]);
+
   // Close all dropdowns when clicking outside or when another dropdown opens
   useEffect(() => {
-    const handleClickOutside = () => {
+    if (!openDropdown) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target;
+      const menu = document.querySelector('header nav [role="menu"]');
+      const dropdown = menu?.parentElement?.parentElement;
+      if (target instanceof Node && dropdown?.contains(target)) return;
       setOpenDropdown(null);
     };
-
-    if (openDropdown) {
-      document.addEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
   }, [openDropdown]);
 
   // Check if user is authenticated and on dashboard
@@ -258,10 +342,8 @@ export const Header: React.FC = () => {
       ? 'bg-[var(--everest-green)]/95 backdrop-blur-md'
       : '';
 
-  const ctaShellClass =
-    'inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border box-border px-4 xl:px-5 whitespace-nowrap transition-all duration-300';
-  const ctaLabelClass =
-    'font-primary text-[13px] font-semibold leading-none';
+  const quietLinkClass =
+    'inline-flex h-11 shrink-0 items-center gap-1.5 whitespace-nowrap text-[13px] font-semibold leading-none text-white/80 transition-colors hover:text-white';
 
   return (
     <header className={`fixed top-[var(--brvm-ticker-height)] left-0 right-0 z-[55] transition-all duration-500 ${isMobileMenuOpen ? 'bg-[var(--everest-green)]' : headerBg}`}>
@@ -271,20 +353,36 @@ export const Header: React.FC = () => {
           <img src="/logo-everest.png" alt="EVEREST Finance" className="h-12 w-auto sm:h-12 xl:h-14" />
         </Link>
 
-        {/* Navigation — xl+ only; lg is too tight for nav + dual CTAs */}
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-3 xl:flex 2xl:gap-4">
-          {SITE_NAV.map((item) =>
-            item.children ? (
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 xl:flex 2xl:gap-x-5">
+          {SITE_NAV.map((item) => {
+            if (HOUSE_TOS.includes(item.to as (typeof HOUSE_TOS)[number]) && item.to !== '/la-societe') return null;
+            if (item.to === '/la-societe') {
+              return (
+                <Dropdown
+                  key="house"
+                  name="house"
+                  title={houseLabel(location.pathname)}
+                  items={houseItems()}
+                  pathname={location.pathname}
+                  isOpen={openDropdown === 'house'}
+                  onOpen={openDropdownByName}
+                  onClose={closeDropdownByName}
+                  onDismiss={dismissDropdown}
+                />
+              );
+            }
+            return item.children ? (
               <Dropdown
                 key={item.to}
                 name={item.to}
-                title={item.label}
+                title={barLabel(item)}
                 titleTo={item.to}
                 items={item.children}
                 pathname={location.pathname}
                 isOpen={openDropdown === item.to}
                 onOpen={openDropdownByName}
                 onClose={closeDropdownByName}
+                onDismiss={dismissDropdown}
               />
             ) : (
               <Link
@@ -294,32 +392,24 @@ export const Header: React.FC = () => {
                 className={navLinkClass(currentState(item.to, location.pathname))}
                 style={{ fontFamily: 'var(--font-primary)' }}
               >
-                {item.label}
+                {barLabel(item)}
               </Link>
-            ),
-          )}
+            );
+          })}
         </nav>
 
-        {/* CTA */}
-        <div className="hidden shrink-0 items-center gap-2 xl:flex 2xl:gap-3">
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
           <a
             href="https://everest-account-opening.vercel.app/new-home"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${ctaShellClass} border-transparent bg-[var(--jaune-or)] hover:bg-[var(--or-clair)]`}
+            className={quietLinkClass}
           >
-            <span className={`${ctaLabelClass} text-[var(--everest-green)]`}>
-              Ouvrir un compte
-            </span>
+            Devenir client
+            <OutArrow />
           </a>
-          <Link
-            to="/auth"
-            className={`${ctaShellClass} group border-white/30 bg-transparent hover:border-white/70 hover:bg-white/10`}
-          >
-            <FingerprintIcon className="h-3.5 w-3.5 shrink-0 text-white/70 transition-transform duration-300 group-hover:scale-110 group-hover:text-white" />
-            <span className={`${ctaLabelClass} text-white/75`}>
-              Accès Client
-            </span>
+          <Link to="/auth" className={quietLinkClass}>
+            Accès Client
           </Link>
         </div>
 
@@ -355,64 +445,135 @@ export const Header: React.FC = () => {
           }}
         >
           <div className="space-y-2 px-6 pb-[max(2rem,env(safe-area-inset-bottom))]">
-            {SITE_NAV.map((item) => (
-              <div key={item.to}>
-                <Link
-                  to={item.to}
-                  aria-current={currentState(item.to, location.pathname)}
-                  className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
-                    currentState(item.to, location.pathname) ? 'font-semibold text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
-                  }`}
-                  style={{ fontFamily: 'var(--font-primary)' }}
-                  onClick={onMenuNavigate}
-                >
-                  {item.label}
-                </Link>
-                {item.children && (
-                  <div className="mt-1 space-y-1 pl-3 border-l border-white/[0.15]">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        to={child.to}
-                        {...(child.hash ? { hash: child.hash } : {})}
-                        aria-current={child.hash ? undefined : currentState(child.to, location.pathname)}
-                        className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
-                          !child.hash && currentState(child.to, location.pathname)
-                            ? 'font-semibold text-[var(--or-clair)]'
-                            : 'font-light text-white/60 hover:text-white'
-                        }`}
-                        style={{ fontFamily: 'var(--font-primary)' }}
-                        onClick={onMenuNavigate}
+            {SITE_NAV.map((item) => {
+              if (HOUSE_TOS.includes(item.to as (typeof HOUSE_TOS)[number]) && item.to !== '/la-societe') return null;
+              if (item.to === '/la-societe') {
+                const groupOpen = mobileGroup === 'house';
+                const label = houseLabel(location.pathname);
+                return (
+                  <div key="house">
+                    <button
+                      type="button"
+                      className={`flex min-h-11 w-full items-center justify-between text-sm touch-manipulation ${
+                        houseItems().some((entry) => currentState(entry.to, location.pathname))
+                          ? 'font-semibold text-[var(--or-clair)]'
+                          : 'text-white/75'
+                      }`}
+                      style={{ fontFamily: 'var(--font-primary)' }}
+                      aria-expanded={groupOpen}
+                      onClick={() => setMobileGroup((current) => (current === 'house' ? null : 'house'))}
+                    >
+                      {label}
+                      <svg
+                        className={`h-3.5 w-3.5 transition-transform ${groupOpen ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
-                        {child.label}
-                      </Link>
-                    ))}
+                        <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {groupOpen && (
+                      <div className="mt-1 space-y-1 border-l border-white/[0.15] pl-3">
+                        {houseItems().map((child) => (
+                          <Link
+                            key={child.to}
+                            to={child.to}
+                            aria-current={currentState(child.to, location.pathname)}
+                            className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
+                              currentState(child.to, location.pathname)
+                                ? 'font-semibold text-[var(--or-clair)]'
+                                : 'font-light text-white/60 hover:text-white'
+                            }`}
+                            style={{ fontFamily: 'var(--font-primary)' }}
+                            onClick={onMenuNavigate}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                );
+              }
+              const groupId = item.to.replace(/^\//, '') || 'home';
+              const groupOpen = mobileGroup === item.to;
+              const children = item.children ?? [];
+              return (
+                <div key={item.to} className="relative">
+                  <Link
+                    id={`nav-${groupId}`}
+                    to={item.to}
+                    aria-current={currentState(item.to, location.pathname)}
+                    className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
+                      children.length > 0 ? 'pr-12' : ''
+                    } ${
+                      currentState(item.to, location.pathname) ? 'font-semibold text-[var(--or-clair)]' : 'text-white/75 hover:text-white'
+                    }`}
+                    style={{ fontFamily: 'var(--font-primary)' }}
+                    onClick={onMenuNavigate}
+                  >
+                    {barLabel(item)}
+                  </Link>
+                  {children.length > 0 && (
+                    <button
+                      type="button"
+                      className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-white/70"
+                      aria-expanded={groupOpen}
+                      aria-controls={`nav-group-${groupId}`}
+                      aria-labelledby={`nav-${groupId}`}
+                      onClick={() => setMobileGroup((current) => (current === item.to ? null : item.to))}
+                    >
+                      <svg
+                        className={`h-3.5 w-3.5 transition-transform ${groupOpen ? 'rotate-180' : ''}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
+                  {children.length > 0 && groupOpen && (
+                    <div id={`nav-group-${groupId}`} className="mt-1 space-y-1 border-l border-white/[0.15] pl-3">
+                      {children.map((child) => (
+                        <Link
+                          key={child.label}
+                          to={child.to}
+                          {...(child.hash ? { hash: child.hash } : {})}
+                          aria-current={child.hash ? undefined : currentState(child.to, location.pathname)}
+                          className={`flex min-h-11 items-center text-sm transition-colors touch-manipulation ${
+                            !child.hash && currentState(child.to, location.pathname)
+                              ? 'font-semibold text-[var(--or-clair)]'
+                              : 'font-light text-white/60 hover:text-white'
+                          }`}
+                          style={{ fontFamily: 'var(--font-primary)' }}
+                          onClick={onMenuNavigate}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
 
-            <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
+            <div className="flex flex-col gap-1 border-t border-white/[0.12] pt-4">
               <a
                 href="https://everest-account-opening.vercel.app/new-home"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--or-clair)]`}
+                className={`${quietLinkClass} w-full`}
                 onClick={onMenuNavigate}
               >
-                <span className={`${ctaLabelClass} text-[var(--everest-green)]`}>
-                  Ouvrir un compte
-                </span>
+                Devenir client
+                <OutArrow />
               </a>
-              <Link
-                to="/auth"
-                className={`${ctaShellClass} group w-full border-white/30 bg-transparent hover:border-white/70 hover:bg-white/10`}
-                onClick={onMenuNavigate}
-              >
-                <FingerprintIcon className="h-3.5 w-3.5 shrink-0 text-white/70" />
-                <span className={`${ctaLabelClass} text-white/75`}>
-                  Accès Client
-                </span>
+              <Link to="/auth" className={`${quietLinkClass} w-full`} onClick={onMenuNavigate}>
+                Accès Client
               </Link>
             </div>
           </div>
