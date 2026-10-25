@@ -1,7 +1,7 @@
 /* eslint-disable sort-imports */
 import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
-import { SITE_NAV, type NavItem } from '../siteNav';
+import { HEADER_NAV, type NavItem } from '../siteNav';
 // Fingerprint Icon Component
 const FingerprintIcon: React.FC<{ className?: string }> = ({ className = "w-4 h-4" }) => (
   <svg
@@ -55,6 +55,13 @@ const Dropdown: React.FC<DropdownProps> = ({ name, title, titleTo, items, isOpen
       ref={dropdownRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={(event) => {
+        if (!(event.relatedTarget instanceof Node && dropdownRef.current?.contains(event.relatedTarget))) onClose(name);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') onClose(name);
+      }}
     >
       {titleTo ? (
         <Link
@@ -252,8 +259,8 @@ export const Header: React.FC = () => {
         </Link>
 
         {/* Navigation — xl+ only; lg is too tight for nav + dual CTAs */}
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-3 xl:flex 2xl:gap-4">
-          {SITE_NAV.map((item) =>
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-6 xl:flex 2xl:gap-8">
+          {HEADER_NAV.map((item) =>
             item.children ? (
               <Dropdown
                 key={item.to}
@@ -333,7 +340,7 @@ export const Header: React.FC = () => {
           }}
         >
           <div className="space-y-2 px-6 pb-[max(2rem,env(safe-area-inset-bottom))]">
-            {SITE_NAV.map((item) => (
+            {HEADER_NAV.map((item) => (
               <div key={item.to}>
                 <Link
                   to={item.to}
@@ -345,7 +352,7 @@ export const Header: React.FC = () => {
                 </Link>
                 {item.children && (
                   <div className="mt-1 space-y-1 pl-3 border-l border-white/[0.15]">
-                    {item.children.map((child) => (
+                    {item.children.filter((child) => child.to !== item.to).map((child) => (
                       <Link
                         key={child.label}
                         to={child.to}

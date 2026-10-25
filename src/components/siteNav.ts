@@ -26,3 +26,22 @@ export const SITE_NAV: Array<NavItem> = [
   { label: 'Sama Naffa', to: '/sama-naffa' },
   { label: 'Contact / Devenir client', to: '/contact' },
 ];
+
+const byPath = (to: string) => SITE_NAV.find((item) => item.to === to)!;
+
+/**
+ * The header groups the house pages in one dropdown and shortens « Contact / Devenir client »
+ * to « Contact » (owner decision, 25 Oct 2026). The footer keeps SITE_NAV as II.1 lists it.
+ */
+export const HEADER_NAV: Array<NavItem> = [
+  byPath('/'),
+  {
+    label: byPath('/la-societe').label,
+    to: '/la-societe',
+    children: [byPath('/la-societe'), byPath('/analyses'), byPath('/actualites')],
+  },
+  byPath('/expertises'),
+  byPath('/opportunites'),
+  byPath('/sama-naffa'),
+  { label: 'Contact', to: '/contact' },
+];
