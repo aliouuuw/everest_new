@@ -66,7 +66,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 
 | Point | Status | Evidence |
 |---|---|---|
-| II.1 Eight main entries, same labels and same order in menu and footer | Done | Since 25 Oct 2026 the validated header is back: 8 flat entries, same labels and order as the footer (PLAN decision 8). |
+| II.1 Eight main entries, same labels and same order in menu and footer | Done by decision | The footer lists the 8 entries in order. The header groups « La société », « Analyses & Publications » and « Actualités » under « La société », and says « Contact » for « Contact / Devenir client » (PLAN decision 8, 25 Oct 2026). ADG is informed, because II.1 and II.3 ask for one taxonomy. |
 | II.1 Expertises: four symmetric pages | Done | Hub and 4 pages, same structure. |
 | II.1 Footer: legal notice, privacy policy, Abécédaire / FAQ, Carrières (to confirm) | Blocked | Labels present as plain text; the pages wait for Legal and the FAQ text. Carrières waits for ADG / RRHA. |
 | II.1 Copyright line | Done by decision | « © 2026 EVEREST Finance, SGI agréée AMF-UMOA n° SGI/DA/2016/60. Tous droits réservés. » (em dash → comma, decision 1). |

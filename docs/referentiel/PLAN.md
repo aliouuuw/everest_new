@@ -104,9 +104,11 @@ the user agrees.
 6. **§6 CTA « Accéder à l'espace investisseur »: hidden** until the
    investor space exists.
 7. **Footer social icons: removed** until the real URLs arrive.
-8. **Header: the validated header, 8 flat entries** (25 Oct 2026). The grouped
-   header of 23 Oct left with the redesign. The menu and the footer show the same
-   8 entries in the same order (II.1). The account button reads « Devenir client ».
+8. **Header grouping** (owner, 25 Oct 2026): in the validated header style, the bar
+   shows Accueil · La société ▾ (La société, Analyses & Publications, Actualités) ·
+   Expertises ▾ · Opportunités · Sama Naffa · Contact. « Contact » shortens
+   « Contact / Devenir client » in the header only. The footer keeps the 8 entries
+   of II.1. The account button reads « Devenir client ».
 9. **Interface frozen** (team, 25 Oct 2026): « L'objectif de cette étape est
    uniquement de revoir le contenu et de mettre en place le CMS. » The site keeps
    the validated interface; only text and CMS change.
