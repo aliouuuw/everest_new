@@ -1,4 +1,4 @@
-import { ExpertiseDetail, ExpertisesHub } from '@/components/Sections/ExpertisesReferentiel'
+import { ExpertiseDetailPage, ExpertisesPage as ExpertisesHub } from '@/routes/ExpertisesPage'
 import type { ExpertiseKey } from '@/content/expertises'
 import { StaticCMSProvider } from '../cms/StaticCMSProvider'
 import type { SiteContent } from '../lib/payload'
@@ -12,7 +12,7 @@ type Props = {
 export default function ExpertisesPage({ siteContent, expertise }: Props) {
   return (
     <StaticCMSProvider rows={siteContent} pageKey="expertises">
-      {expertise ? <ExpertiseDetail expertise={expertise} /> : <ExpertisesHub />}
+      {expertise ? <ExpertiseDetailPage expertise={expertise} /> : <ExpertisesHub />}
     </StaticCMSProvider>
   )
 }

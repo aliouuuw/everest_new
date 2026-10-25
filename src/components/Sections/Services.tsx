@@ -1,61 +1,18 @@
 import { useLocation } from '@tanstack/react-router';
 import { useEffect, useRef } from 'react';
 import { FiArrowRight, FiBarChart2, FiBriefcase, FiGlobe, FiLayers } from 'react-icons/fi';
-import { PillBadge } from '../ui';
 import { EditableText } from '../../cms';
+import { HOME_TEXT, type HomeTextId } from '../../content/home';
+import { SITE_NAV } from '../siteNav';
 
-const services: Array<{
-  icon: React.ElementType;
-  kicker: string;
-  title: string;
-  bullets: string[];
-  href: string;
-  index: string;
-}> = [
-  {
-    icon: FiGlobe,
-    kicker: 'Expertise I',
-    title: 'Marché financier régional (BRVM)',
-    bullets: [
-      'Actions & obligations sur place',
-      "Intermédiation & conseil d'exécution",
-    ],
-    href: '/expertises#marche-financier-regional',
-    index: 'I',
-  },
-  {
-    icon: FiBarChart2,
-    kicker: 'Expertise II',
-    title: 'Marché des Titres Publics',
-    bullets: [
-      'Émissions souveraines & stratégie de taux',
-      'MTP UEMAO et pilotage de sensibilité',
-    ],
-    href: '/expertises#marche-titres-publics',
-    index: 'II',
-  },
-  {
-    icon: FiLayers,
-    kicker: 'Expertise III',
-    title: 'Structuration & ingénierie financière',
-    bullets: [
-      "Solutions sur mesure pour l'émetteur",
-      'Levées, financement & accompagnement UEMOA',
-    ],
-    href: '/expertises#ingenierie-financiere',
-    index: 'III',
-  },
-  {
-    icon: FiBriefcase,
-    kicker: 'Expertise IV',
-    title: 'Private Office',
-    bullets: [
-      "Allocation & vision patrimoniale long terme",
-      'Conseil sur mesure pour profils exigeants',
-    ],
-    href: '/expertises#private-office',
-    index: 'IV',
-  },
+const NAV = SITE_NAV.find((item) => item.children)!.children!;
+
+/** Referential V2.1 §1 « Bloc expertises »: the four vignettes (N1, N2) in the order of Part III, linking to their pages. */
+const services: Array<{ icon: React.ElementType; key: 'mtp' | 'brvm' | 'structuration' | 'privateOffice'; index: string }> = [
+  { icon: FiBarChart2, key: 'mtp', index: 'I' },
+  { icon: FiGlobe, key: 'brvm', index: 'II' },
+  { icon: FiLayers, key: 'structuration', index: 'III' },
+  { icon: FiBriefcase, key: 'privateOffice', index: 'IV' },
 ];
 
 export const Services: React.FC = () => {
@@ -106,28 +63,11 @@ export const Services: React.FC = () => {
 
       <div className="relative z-10 mx-auto max-w-[1400px] border-b border-[var(--everest-green-10)] px-6 pb-10 pt-16 md:px-16 md:pb-16 md:pt-32 lg:px-24">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <div className="mb-8">
-              <PillBadge variant="green">
-                <EditableText id="home.services.badge" as="span">
-                  Nos expertises
-                </EditableText>
-              </PillBadge>
-            </div>
-            <h2 className="luxury-heading" style={{ color: 'var(--night-80)' }}>
-              <EditableText id="home.services.title" as="span">
-                Nos expertises — marchés &amp; patrimoine.
-              </EditableText>
-            </h2>
+          <div className="max-w-3xl">
+            <EditableText id="home.expertises.n1" as="h2" className="luxury-heading" style={{ color: 'var(--night-80)' }}>
+              {HOME_TEXT['home.expertises.n1']}
+            </EditableText>
           </div>
-          <EditableText
-            id="home.services.intro"
-            as="p"
-            className="text-secondary max-w-md text-base md:text-lg"
-          >
-            Quatre blocs — titres publics, BRVM, structuration et Private Office — pour couvrir l'origination,
-            la distribution et le conseil patrimonial depuis une plateforme unique.
-          </EditableText>
         </div>
       </div>
 
@@ -145,10 +85,13 @@ export const Services: React.FC = () => {
           >
             {services.map((s, i) => {
               const Icon = s.icon;
+              const n1 = `home.expertises.${s.key}.n1` as HomeTextId;
+              const n2 = `home.expertises.${s.key}.n2` as HomeTextId;
               return (
                 <a
-                  key={s.title}
-                  href={s.href}
+                  key={s.key}
+                  href={NAV[i].to}
+                  aria-label={NAV[i].label}
                   className={[
                     'group relative z-0 flex min-h-0 flex-col border-[var(--everest-green-10)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:min-h-[24rem] lg:px-8',
                     'transition-[background-color,box-shadow] duration-500',
@@ -175,29 +118,17 @@ export const Services: React.FC = () => {
                     </span>
                   </div>
 
-                  <p className="mb-2 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
-                    {s.kicker}
-                  </p>
-
                   <h3 className="mb-4 font-primary text-xl font-bold leading-tight tracking-tight text-[var(--night-80)] transition-colors duration-500 group-hover:text-white md:text-2xl">
-                    {s.title}
+                    {NAV[i].label}
                   </h3>
 
-                  <ul className="mb-4 space-y-2.5 font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 md:mb-8 lg:flex-1">
-                    {s.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-2.5 pl-0.5">
-                        <span
-                          className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--night-80)] transition-colors duration-500 group-hover:bg-[var(--jaune-or)]"
-                          aria-hidden
-                        />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mb-4 space-y-2.5 font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 md:mb-8 lg:flex-1">
+                    <EditableText id={n1} as="p" className="font-semibold text-[var(--night-80)] transition-colors duration-500 group-hover:text-white">{HOME_TEXT[n1]}</EditableText>
+                    <EditableText id={n2} as="p">{HOME_TEXT[n2]}</EditableText>
+                  </div>
 
                   <span className="mt-auto inline-flex items-center gap-2 font-primary text-sm font-semibold text-[var(--night-80)] transition-all duration-300 group-hover:gap-3 group-hover:text-[var(--jaune-or)]">
-                    Découvrir l&apos;expertise
-                    <FiArrowRight className="text-base opacity-80 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <FiArrowRight className="text-base opacity-80 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden />
                   </span>
                 </a>
               );

@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import ExpertisesPage from '../islands/ExpertisesPage'
+import MarketingPage from '../islands/MarketingPage'
 import { fetchSiteContent } from '../lib/payload'
 import { EXPERTISES_TEXT } from '@/content/expertises'
 
@@ -8,5 +8,5 @@ const site = await fetchSiteContent('expertises')
 ---
 
 <Layout title="Expertises | EVEREST Finance" description={EXPERTISES_TEXT['expertises.intro.n1']}>
-  <ExpertisesPage client:load siteContent={site.docs} />
+  <MarketingPage client:load siteContent={site.docs} pageKey="expertises" />
 </Layout>

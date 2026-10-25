@@ -16,9 +16,8 @@ export default function SiteShell({ pathname, children }: Props) {
     <LocationContext.Provider value={pathname}>
       <LenisWrapper>
         <div className="antialiased min-h-screen bg-[var(--pure-white)] text-[var(--night)] relative">
-          <a href="#main" className="skip-link">Aller au contenu</a>
           <Header />
-          <main id="main" tabIndex={-1} className="relative">{children}</main>
+          <main className="relative">{children}</main>
           <Footer />
           <WhatsAppButton />
         </div>

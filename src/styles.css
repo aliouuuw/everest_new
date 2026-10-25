@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
-@import "./components/Sections/home.css";
 /* Paths are relative to this file (src/). Astro imports it from apps/web, so cwd scanning misses src/. */
 @source "../index.html";
 @source "./**/*.{tsx,ts,jsx,js}";
@@ -17,8 +16,6 @@
   --jaune-or: #B68A3E;
   --mauve: #0E2826;
   --everest-green: #0E2826;
-  --everest-green-mid: #1A3A35;
-  --or-clair: #D4B26C;
   --night: #0a0a0a;
   
   /* Extended Opacity/Variations */
@@ -48,14 +45,11 @@
   --everest-green-05: rgba(14, 40, 38, 0.05);
   --gold-pale: rgba(182, 138, 62, 0.06);
   --gold-warm: rgba(182, 138, 62, 0.12);
-
-  /* One focus ring for every control: 3.14:1 on white, 4.96:1 on forest */
-  --focus-ring: var(--jaune-or);
   
   /* Typography */
-  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-primary: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-display: 'Fraunces', 'Georgia', serif;
-  --font-display-aptos: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display-aptos: 'Aptos', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
   /* Backgrounds */
   --cream: #faf6ef;
@@ -155,6 +149,11 @@ html {
   overscroll-behavior: contain;
 }
 
+/* Prevent scroll restoration conflicts */
+html {
+  scroll-restoration: manual;
+}
+
 h1, h2 {
   line-height: 1 !important;
 } 
@@ -199,9 +198,9 @@ h1, h2 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Main column width + horizontal insets: the Header bar's (max-w 1400, px-6 / md:px-16 / lg:px-24 / xl:px-6 / 2xl:px-10) */
+/* Main column width + horizontal insets — matches `Header` bar (max-w 1400, px-6 / md:px-16 / lg:px-24) */
 @utility page-container {
-  @apply mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24 xl:px-6 2xl:px-10;
+  @apply mx-auto w-full max-w-[1400px] px-6 md:px-16 lg:px-24;
 }
 
 /* Outils investisseur — label scale: 14px (sm) → 16px (md) → 18px (lg) */
@@ -345,11 +344,11 @@ h1, h2 {
 /* ── btn-primary-dark → gold CTA in light sections ── */
 .section-bg-light .btn-primary-dark {
   background: var(--jaune-or) !important;
-  color: var(--everest-green) !important;
+  color: var(--pure-white) !important;
   border-radius: 9999px;
 }
 .section-bg-light .btn-primary-dark:hover {
-  background: var(--or-clair) !important;
+  background: var(--jaune-or-dark, #b5832a) !important;
 }
 
 @utility floating-animation {
@@ -567,81 +566,103 @@ h1, h2 {
 
 /* Enhanced Button Styles */
 .btn-primary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
-  color: var(--everest-green);
+  color: var(--pure-white);
   border: 0;
+  transform: translateY(0);
 }
 
 .btn-primary:hover {
-  background: var(--or-clair);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.28);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
 .btn-secondary {
-  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply flex items-center justify-center px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   border: 1px solid var(--mauve-20);
   color: var(--mauve);
   background: transparent;
+  transform: translateY(0);
 }
 
 .btn-secondary:hover {
   background: var(--jaune-or);
-  color: var(--everest-green);
+  color: var(--pure-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.22);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
 /* Dark Theme Button Styles for Services Page */
 .btn-primary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   background: var(--jaune-or);
-  color: var(--everest-green);
+  color: var(--pure-white);
   border: 0;
+  transform: translateY(0);
 }
 
 .btn-primary-dark:hover {
-  background: var(--or-clair);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(182,138,62,0.35);
+  filter: brightness(1.05);
+}
+
+.btn-primary-dark:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
 .btn-secondary-dark {
-  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-colors duration-300 rounded-full relative overflow-hidden cursor-pointer;
+  @apply px-7 py-3.5 font-medium text-sm tracking-wide transition-all duration-300 rounded-full relative overflow-hidden cursor-pointer;
   border: 1px solid rgba(182,138,62,0.4);
   color: var(--jaune-or);
   background: transparent;
+  transform: translateY(0);
 }
 
 .btn-secondary-dark:hover {
   background: rgba(182,138,62,0.12);
   border-color: var(--jaune-or);
   color: var(--pure-white);
+  transform: translateY(-1px);
 }
 
-/* Focus: one ring for every control. Unlayered, so it beats Tailwind `outline-none`. */
-:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 3px;
+.btn-secondary-dark:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
 }
 
-/* Anchor targets (skip link, in-page nav) take focus but need no ring around a whole section. */
-[tabindex="-1"]:focus {
+/* Accessible gold-tinted focus rings */
+.btn-primary:focus-visible {
   outline: none;
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
-/* Skip link: off screen until a keyboard user focuses it. */
-.skip-link {
-  position: fixed;
-  top: 0.75rem;
-  left: 0.75rem;
-  z-index: 100;
-  padding: 0.75rem 1.25rem;
-  border-radius: 9999px;
-  background: var(--jaune-or);
-  color: var(--everest-green);
-  font-weight: 600;
-  font-size: 0.9375rem;
-  transform: translateY(-200%);
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mauve-10), 0 0 0 1px var(--mauve);
 }
 
-.skip-link:focus {
-  transform: none;
+.btn-primary-dark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--jaune-or-30), 0 0 0 1px var(--jaune-or-light);
+}
+
+.btn-secondary-dark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--jaune-or-20), 0 0 0 1px var(--jaune-or);
 }
 
 /*
@@ -699,7 +720,7 @@ h1, h2 {
 }
 
 .btn-cta-pill--gold .btn-cta-pill__label {
-  color: var(--everest-green);
+  color: var(--pure-white);
 }
 
 .btn-cta-pill--gold:hover {
@@ -716,7 +737,7 @@ h1, h2 {
 }
 
 .btn-cta-pill--mauve .btn-cta-pill__label {
-  color: var(--everest-green);
+  color: var(--pure-white);
 }
 
 .btn-cta-pill--mauve:hover {

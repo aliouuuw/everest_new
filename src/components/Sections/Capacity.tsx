@@ -1,43 +1,22 @@
 import { useReveal } from '../Hooks/useReveal';
-import { FiTrendingUp, FiUsers, FiBarChart2, FiLayers } from 'react-icons/fi';
+import { FiAward, FiCheckCircle, FiHeart, FiMessageCircle, FiShield, FiZap } from 'react-icons/fi';
 import { EDITORIAL_ICON_WELL_DARK } from '../ui/EditorialCard';
-import { PillBadge } from '../ui';
-import { EditableText } from '../../cms';
+import { EditableText, useContent } from '../../cms';
+import { frenchSpaces } from '../../cms/EditableText';
+import { HOME_TEXT } from '../../content/home';
 
-const CAPABILITIES = [
-  {
-    icon: FiTrendingUp,
-    num: 'I',
-    kicker: 'MTP UEMOA',
-    title: "Marché des titres publics",
-    desc: "Présence active sur les émissions souveraines et lecture des dynamiques de taux sous-régionales.",
-  },
-  {
-    icon: FiUsers,
-    num: 'II',
-    kicker: 'Réseau',
-    title: "Investisseurs qualifiés",
-    desc: "Accès direct à des institutionnels et investisseurs privés pour une distribution sélective.",
-  },
-  {
-    icon: FiBarChart2,
-    num: 'III',
-    kicker: 'Exécution',
-    title: "Obligations & bourse (BRVM)",
-    desc: "Transactions sur le compartiment obligataire et intervention sur le marché actions régional.",
-  },
-  {
-    icon: FiLayers,
-    num: 'IV',
-    kicker: 'Ingénierie',
-    title: "Structuration sur mesure",
-    desc: "Montage de dette, capital et offres ad hoc au sein d'un processus d'origination rigoureux.",
-  },
-];
+const ICONS = [FiAward, FiHeart, FiCheckCircle, FiMessageCircle, FiZap, FiShield];
 
+/** Referential V2.1 §1 « Bloc engagements »: the six names of the N2, then its last sentences. */
 export const Capacity: React.FC = () => {
   const sectionRef = useReveal<HTMLElement>();
   const gridRef = useReveal<HTMLDivElement>();
+  const n2 = frenchSpaces(useContent('home.engagements.n2')?.value || HOME_TEXT['home.engagements.n2']);
+  const end = n2.indexOf('. ');
+  const names = end > 0 ? n2.slice(0, end).split(' · ') : [];
+  const split = names.length === 6;
+  const rest = split ? n2.slice(end + 2) : n2;
+  const at = rest.lastIndexOf('La société');
 
   return (
     <section
@@ -65,28 +44,15 @@ export const Capacity: React.FC = () => {
         {/* Header — coherent with Positioning: 7/5 split, brand typography */}
         <div className="mb-10 grid grid-cols-1 gap-6 lg:mb-20 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <div className="mb-6">
-              <PillBadge variant="gold">
-                <EditableText id="home.capacity.badge" as="span">
-                  Capacité d&apos;intervention
-                </EditableText>
-              </PillBadge>
-            </div>
-            <h2 className="luxury-heading-dark">
-              <EditableText id="home.capacity.titleLead" as="span">
-                Capacité opérationnelle &amp; relationnelle.
-              </EditableText>
-            </h2>
+            <EditableText id="home.engagements.n1" as="h2" className="luxury-heading-dark">
+              {HOME_TEXT['home.engagements.n1']}
+            </EditableText>
           </div>
           <div className="lg:col-span-5">
-            <EditableText
-              id="home.capacity.intro"
-              as="p"
-              className="luxury-subheading-dark-left max-w-md lg:ml-auto"
-            >
-              Exécution de marché éprouvée : présence MTP UEMOA et BRVM, réseau d'investisseurs qualifiés et
-              ingénierie sur mesure — au service de +500 Mds F CFA levés par nos mandats d'émission.
-            </EditableText>
+            <p data-cms-id="home.engagements.n2" className="luxury-subheading-dark-left max-w-md lg:ml-auto">
+              {split && <span className="sr-only">{names.join(' · ')}. </span>}
+              {at > 0 ? <>{rest.slice(0, at)}<a href="/la-societe" className="underline decoration-[var(--jaune-or)] underline-offset-4 hover:text-white">La société</a>{rest.slice(at + 'La société'.length)}</> : rest}
+            </p>
           </div>
         </div>
 
@@ -96,13 +62,14 @@ export const Capacity: React.FC = () => {
         >
           <div
             ref={gridRef}
-            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 [&>*]:border-white/[0.08]"
+            aria-hidden={split ? true : undefined}
+            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 [&>*]:border-white/[0.08]"
           >
-          {CAPABILITIES.map((c, i) => {
-            const Icon = c.icon;
+          {(split ? names : []).map((name, i) => {
+            const Icon = ICONS[i];
             return (
               <div
-                key={c.title}
+                key={name}
                 className={[
                   'group relative flex flex-col px-5 py-6 transition-colors duration-500 hover:bg-white/[0.06] sm:px-6 sm:py-8 lg:px-8',
                   // mobile (1 col): top border on all except first
@@ -110,9 +77,9 @@ export const Capacity: React.FC = () => {
                   // sm (2 cols): left border on odd items (col 2), top border on items 2&3 (row 2)
                   i % 2 === 1 ? 'sm:border-l' : 'sm:border-l-0',
                   i >= 2 ? 'sm:border-t' : 'sm:border-t-0',
-                  // lg (4 cols): left border on all except first, no top border
-                  i > 0 ? 'lg:border-l' : 'lg:border-l-0',
-                  'lg:border-t-0',
+                  // lg (3 cols): left border except on each row start, top border on the second row
+                  i % 3 !== 0 ? 'lg:border-l' : 'lg:border-l-0',
+                  i >= 3 ? 'lg:border-t' : 'lg:border-t-0',
                 ].join(' ')}
               >
                 <span
@@ -127,22 +94,9 @@ export const Capacity: React.FC = () => {
                   </div>
                 </div>
 
-                <p
-                  className="font-primary text-[10px] font-semibold uppercase tracking-[0.22em] mb-2"
-                  style={{ color: 'var(--jaune-or)' }}
-                >
-                  {c.kicker}
-                </p>
-
-                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-white mb-3 leading-tight">
-                  {c.title}
+                <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-white leading-tight">
+                  {name}
                 </h3>
-                <p
-                  className="font-primary text-sm font-light leading-relaxed max-w-xs"
-                  style={{ color: 'rgba(255,255,255,0.62)' }}
-                >
-                  {c.desc}
-                </p>
               </div>
             );
           })}

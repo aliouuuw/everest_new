@@ -1,12 +1,30 @@
-import { useState } from 'react';
-import { EditableText } from '../cms';
-import { ArrowUpRight, N1, N2, PageHero } from '../components/Referentiel';
-import { Coordonnees, Parcours } from '../components/Sections/RelationReferentiel';
+import { Fragment, useState } from 'react';
+import {
+  FiArrowRight,
+  FiMapPin,
+} from 'react-icons/fi';
+import { FiFileText, FiKey, FiPhoneCall, FiUserCheck } from 'react-icons/fi';
+import { useReveal } from '../components/Hooks/useReveal';
+import { Positioning } from '../components/Sections/Positioning';
+import { EditableText, useContent } from '../cms';
+import { TEXT, type TextId } from '../content';
 
-/** Square fields on the home rule; the gold focus ring comes from the global token. */
-const FIELD_CLASS =
-  'w-full min-h-12 rounded-none border border-[color-mix(in_srgb,var(--home-ink)_55%,transparent)] bg-[var(--home-white)] px-4 py-3 text-base text-[var(--home-ink)] transition-colors duration-200 hover:border-[var(--home-mid)] focus:border-[var(--home-ink)]';
-const LABEL_CLASS = 'mb-2 block text-[14px] font-semibold text-[var(--home-ink)]';
+/** Referential V2.1 §8 « Parcours Devenir client »: four steps, in the pillar grid of the validated home. */
+const STEP_ICONS = [FiPhoneCall, FiUserCheck, FiFileText, FiKey];
+const Parcours = () => (
+  <Positioning
+    heading={<EditableText id="contact.parcours.heading" as="span">{TEXT['contact.parcours.heading']}</EditableText>}
+    pillars={[1, 2, 3, 4].map((n, i) => ({
+      icon: STEP_ICONS[i],
+      title: <EditableText id={`contact.step${n}.n1` as TextId} as="span">{TEXT[`contact.step${n}.n1` as TextId]}</EditableText>,
+      desc: <EditableText id={`contact.step${n}.n2` as TextId} as="span">{TEXT[`contact.step${n}.n2` as TextId]}</EditableText>,
+    }))}
+  />
+);
+
+/** §8 « Coordonnées »: one CMS text, set verbatim in the validated panel; the e-mail address and phone numbers become links. */
+const LINKABLE = /([\w.-]+@[\w-]+\.[a-z]{2,}|\+\d{3}(?:\s\d{2,3}){4})/;
+const useCoordonnees = () => ({ text: useContent('contact.coordonnees.n1')?.value || TEXT['contact.coordonnees.n1'] });
 
 const TOPICS = [
   { value: 'relation', label: 'Entrer en relation' },
@@ -18,6 +36,9 @@ const TOPICS = [
 ];
 
 export const ContactPage = () => {
+  const formRef = useReveal<HTMLElement>();
+  const coord = useCoordonnees();
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -47,28 +68,47 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="bg-[var(--pure-white)] text-[var(--night)]">
-      {/* Referential V2.1 §8: N1/N2, then the four steps, then the form and the contact details */}
-      <PageHero title="Contact / Devenir client" media={{ name: 'contact', position: '60% 70%' }}>
-        <N1 id="contact.n1" tone="dark" as="p" size="statement" />
-        <N2 id="contact.n2" tone="dark" />
-      </PageHero>
+    <div className="bg-[var(--pure-white)] text-[var(--night)] font-primary">
+      {/* ─── Hero — Mauve Banner (matches Bourse / Outils / Expertises) ─── */}
+      <section className="relative pt-[200px] pb-12 md:pb-16 border-b border-black/10 bg-[var(--everest-green)]">
+        <div className="relative z-10 page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+            <div className="lg:col-span-6">
+              <h1 className="font-primary font-bold leading-[0.95] tracking-tight text-[var(--pure-white)]" style={{ fontSize: 'clamp(2.375rem, 4.6vw + 1.2rem, 50px)' }}>
+                Contact / Devenir client
+              </h1>
+            </div>
+            <div className="lg:col-span-6 space-y-4">
+              <EditableText id="contact.n1" as="p" className="text-base md:text-lg leading-relaxed text-white/80 font-light border-l-2 border-[var(--jaune-or)] pl-6">
+                {TEXT['contact.n1']}
+              </EditableText>
+              <EditableText id="contact.n2" as="p" className="text-sm md:text-base leading-relaxed text-white/60 font-light pl-6">
+                {TEXT['contact.n2']}
+              </EditableText>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <Parcours tone="light" />
+      <Parcours />
 
       {/* ─── Form + info ─── */}
-      <section id="form" className="bg-[var(--home-paper)] py-12 md:py-20 lg:py-28">
+      <section
+        id="form"
+        ref={formRef}
+        className="reveal bg-[var(--summit-ivory)] py-16 md:py-20"
+      >
         <div className="page-container">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-6">
             {/* Form */}
-            <div className="lg:col-span-7">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="rounded-2xl border border-[var(--command-border)] bg-[var(--pure-white)] p-6 md:p-8 lg:col-span-7 lg:p-10">
+
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <FormField
                     label="Nom complet"
                     name="name"
                     type="text"
-                    autoComplete="name"
                     required
                     value={form.name}
                     onChange={handleChange}
@@ -77,7 +117,6 @@ export const ContactPage = () => {
                     label="Email professionnel"
                     name="email"
                     type="email"
-                    autoComplete="email"
                     required
                     value={form.email}
                     onChange={handleChange}
@@ -87,14 +126,13 @@ export const ContactPage = () => {
                   label="Organisation (optionnel)"
                   name="organization"
                   type="text"
-                  autoComplete="organization"
                   value={form.organization}
                   onChange={handleChange}
                 />
                 <div>
                   <label
                     htmlFor="topic"
-                    className={LABEL_CLASS}
+                    className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
                   >
                     Sujet
                   </label>
@@ -103,7 +141,7 @@ export const ContactPage = () => {
                     name="topic"
                     value={form.topic}
                     onChange={handleChange}
-                    className={FIELD_CLASS}
+                    className="w-full rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
                   >
                     {TOPICS.map((t) => (
                       <option key={t.value} value={t.value}>
@@ -115,7 +153,7 @@ export const ContactPage = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className={LABEL_CLASS}
+                    className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
                   >
                     Message
                   </label>
@@ -126,28 +164,63 @@ export const ContactPage = () => {
                     value={form.message}
                     onChange={handleChange}
                     rows={5}
-                    className={`${FIELD_CLASS} resize-none`}
+                    className="w-full resize-none rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
                     placeholder="Décrivez votre demande, votre horizon et vos contraintes éventuelles."
                   />
                 </div>
                 <div className="flex flex-col items-start justify-between gap-4 pt-2 sm:flex-row sm:items-center">
-                  <p className="max-w-xs text-[13px] leading-[1.55] text-[var(--home-mid)]">
+                  <p className="max-w-xs font-primary text-xs font-light leading-relaxed text-[var(--night-40)]">
                     <EditableText id="contact.form.privacy">
                       En envoyant ce message, vous acceptez que vos données soient utilisées pour
                       répondre à votre demande.
                     </EditableText>
                   </p>
-                  <button type="submit" className="home-button cursor-pointer">
+                  <button
+                    type="submit"
+                    className="group inline-flex items-center gap-2 rounded-full bg-[var(--jaune-or)] px-6 py-3 font-primary text-xs font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#062421]"
+                  >
                     <EditableText id="contact.form.submit" as="span">Envoyer la demande</EditableText>
-                    <ArrowUpRight />
+                    <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Info panel: §8 « Coordonnées » */}
-            <aside className="antialiased bg-[var(--home-ink)] p-6 md:p-10 lg:col-span-5 lg:self-start">
-              <Coordonnees tone="dark" />
+            {/* Info panel */}
+            <aside className="flex flex-col gap-4 lg:col-span-5">
+              <div
+                className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-[var(--everest-green)]"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute right-0 top-0 h-full w-1/2 opacity-60"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at top right, rgba(182,138,62,0.12) 0%, transparent 65%)',
+                  }}
+                />
+                <div className="relative">
+                  <EditableText id="contact.coordonnees.heading" as="h2" className="mb-3 font-primary text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--jaune-or)]">
+                    {TEXT['contact.coordonnees.heading']}
+                  </EditableText>
+                  <ul className="space-y-5 text-white/75">
+                    <InfoRow icon={FiMapPin}>
+                      <p data-cms-id="contact.coordonnees.n1" className="leading-relaxed">
+                        {coord.text.split(LINKABLE).map((part, i) => {
+                          if (i % 2 === 0) return <Fragment key={i}>{part}</Fragment>;
+                          const href = part.includes('@') ? `mailto:${part}` : `tel:${part.replace(/\s/g, '')}`;
+                          return (
+                            <a key={i} href={href} className="underline-offset-4 transition-colors hover:text-[var(--jaune-or)] hover:underline">
+                              {part}
+                            </a>
+                          );
+                        })}
+                      </p>
+                    </InfoRow>
+                  </ul>
+                </div>
+              </div>
+
             </aside>
           </div>
         </div>
@@ -165,7 +238,6 @@ interface FormFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
-  autoComplete?: string;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -175,15 +247,14 @@ const FormField: React.FC<FormFieldProps> = ({
   value,
   onChange,
   required,
-  autoComplete,
 }) => (
   <div>
     <label
       htmlFor={name}
-      className={LABEL_CLASS}
+      className="mb-1.5 block font-primary text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)]"
     >
       {label}
-      {required && <span aria-hidden className="ml-1 text-[var(--home-gold)]">*</span>}
+      {required && <span className="ml-1 text-[var(--jaune-or)]">*</span>}
     </label>
     <input
       id={name}
@@ -192,8 +263,21 @@ const FormField: React.FC<FormFieldProps> = ({
       value={value}
       onChange={onChange}
       required={required}
-      autoComplete={autoComplete}
-      className={FIELD_CLASS}
+      className="w-full rounded-xl border border-[var(--command-border)] bg-[var(--pure-white)] px-4 py-3 font-primary text-sm text-[var(--night)] outline-none transition-colors duration-200 focus:border-[var(--mauve)]"
     />
   </div>
+);
+
+const InfoRow: React.FC<{ icon: React.ElementType; children: React.ReactNode }> = ({
+  icon: Icon,
+  children,
+}) => (
+  <li className="flex items-start gap-3">
+    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.12] bg-white/[0.04]">
+      <Icon className="text-[13px] text-[var(--jaune-or)]" aria-hidden />
+    </span>
+    <div className="min-w-0 flex-1 font-primary text-sm font-light leading-relaxed">
+      {children}
+    </div>
+  </li>
 );

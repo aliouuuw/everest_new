@@ -1,97 +1,32 @@
-import { useEffect, useRef, useState } from 'react';
-import { FiCalendar, FiDatabase, FiUsers } from 'react-icons/fi';
+import { FiAward, FiCalendar, FiLink, FiUsers } from 'react-icons/fi';
 import { useReveal } from '../Hooks/useReveal';
 import { EDITORIAL_ICON_WELL_LIGHT } from '../ui/EditorialCard';
-import { PillBadge } from '../ui';
 import { EditableImage, EditableText } from '../../cms';
+import { HOME_TEXT, type HomeTextId } from '../../content/home';
 
-const STATS = [
-  {
-    prefix: '',
-    value: 10,
-    suffix: '+',
-    unit: 'ans',
-    label: "d'expérience au service des émetteurs et investisseurs institutionnels de l'UEMOA.",
-    icon: FiCalendar,
-  },
-  {
-    prefix: '+',
-    value: 500,
-    suffix: '',
-    unit: 'Mds F CFA',
-    label: "levés par émissions d'obligations, titres de capital et fonds communs de titrisation.",
-    icon: FiDatabase,
-  },
-  {
-    prefix: '+',
-    value: 200,
-    suffix: '',
-    unit: 'Mds F CFA',
-    label: "de transactions intermédiées sur le marché financier régional.",
-    icon: FiUsers,
-  },
+/** Referential V2.1 §1 « Bloc preuves »: the four markers, N1 then N2, in the row style of the validated page. */
+const PROOFS: Array<{ k: 'proof1' | 'proof2' | 'proof3' | 'proof4'; icon: React.ElementType }> = [
+  { k: 'proof1', icon: FiCalendar },
+  { k: 'proof2', icon: FiAward },
+  { k: 'proof3', icon: FiLink },
+  { k: 'proof4', icon: FiUsers },
 ];
 
-function useCounter(target: number, duration = 1600, started = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!started) return;
-    let start: number | null = null;
-    const step = (ts: number) => {
-      if (start === null) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
-      else setCount(target);
-    };
-    requestAnimationFrame(step);
-  }, [started, target, duration]);
-  return count;
-}
-
-type StatRowProps = (typeof STATS)[number] & { delay?: number };
-
-function AnimatedStatRow({ prefix, value, suffix, unit, label, icon: Icon, delay = 0 }: StatRowProps) {
-  const ref = useRef<HTMLLIElement>(null);
-  const [started, setStarted] = useState(false);
-  const count = useCounter(value, 1600, started);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setStarted(true), delay);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.4 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [delay]);
-
+function ProofRow({ k, icon: Icon }: (typeof PROOFS)[number]) {
+  const n1 = `home.${k}.n1` as HomeTextId;
+  const n2 = `home.${k}.n2` as HomeTextId;
   return (
-    <li ref={ref} className="group flex items-center gap-4 py-5 md:gap-5 md:py-6">
+    <li className="group flex items-start gap-4 py-5 md:gap-5 md:py-6">
       <div className={`shrink-0 ${EDITORIAL_ICON_WELL_LIGHT}`}>
         <Icon className="text-lg" aria-hidden />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="mb-1 flex items-baseline gap-2">
-          <span className="font-primary text-3xl font-bold leading-none tracking-tight text-[var(--night-80)] numeric-tabular md:text-[2.25rem]">
-            {prefix}
-            {count}
-            {suffix}
-          </span>
-          <span className="font-primary text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mauve-60)] md:text-[13px]">
-            {unit}
-          </span>
-        </div>
-        <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
-          {label}
-        </p>
+        <EditableText id={n1} as="h3" className="mb-1 font-primary text-lg font-bold leading-snug! tracking-tight text-[var(--night-80)] md:text-xl">
+          {HOME_TEXT[n1]}
+        </EditableText>
+        <EditableText id={n2} as="p" className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)]">
+          {HOME_TEXT[n2]}
+        </EditableText>
       </div>
     </li>
   );
@@ -113,7 +48,7 @@ export const ValueProps: React.FC = () => {
             <EditableImage
               id="home.valueProps.image"
               src="/Assets_Website/Valueprops1.png"
-              alt="Everest Finance — engagement régional"
+              alt=""
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div
@@ -126,35 +61,14 @@ export const ValueProps: React.FC = () => {
             />
           </div>
 
-          {/* Right — heading + animated stats list */}
+          {/* Right — the four proofs */}
           <div
             ref={contentRef}
             className="reveal flex flex-col justify-center lg:col-span-7"
           >
-            <div className="mb-4">
-              <PillBadge>
-                <EditableText id="home.valueProps.badge" as="span">
-                  Pourquoi Everest Finance
-                </EditableText>
-              </PillBadge>
-            </div>
-            <h2 className="luxury-heading mb-4 max-w-xl">
-              <EditableText id="home.valueProps.title" as="span">
-                Exécution rigoureuse, confiance durable.
-              </EditableText>
-            </h2>
-            <EditableText
-              id="home.valueProps.intro"
-              as="p"
-              className="mb-6 max-w-xl text-sm font-light leading-relaxed text-[var(--night-60)] md:text-base"
-            >
-              SGI agréée AMF-UMOA (n° SGI/DA/2016/60), nous combinons ancrage régional, discipline
-              d&apos;exécution et relations institutionnelles au service de nos mandats.
-            </EditableText>
-
             <ul className="divide-y divide-[var(--command-border)] border-y border-[var(--command-border)]">
-              {STATS.map((s, i) => (
-                <AnimatedStatRow key={s.label} {...s} delay={i * 180} />
+              {PROOFS.map((p) => (
+                <ProofRow key={p.k} {...p} />
               ))}
             </ul>
           </div>

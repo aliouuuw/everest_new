@@ -1,35 +1,10 @@
-import { FiGitBranch, FiGlobe, FiPieChart, FiSend } from 'react-icons/fi';
+import type { ReactNode } from 'react';
 import { useReveal } from '../Hooks/useReveal';
-import { EditableText } from '../../cms';
 
-const PILLARS = [
-  {
-    icon: FiGitBranch,
-    num: '01',
-    title: 'Structuration',
-    desc: "Montages adaptés aux émetteurs publics et privés, coordination des acteurs de la chaîne d'investissement.",
-  },
-  {
-    icon: FiGlobe,
-    num: '02',
-    title: 'Intermédiation',
-    desc: "Discipline d'exécution sur les titres publics et intervention sur le marché financier régional (BRVM).",
-  },
-  {
-    icon: FiSend,
-    num: '03',
-    title: 'Distribution',
-    desc: "Placement d'instruments de dette et de capital auprès d'investisseurs qualifiés.",
-  },
-  {
-    icon: FiPieChart,
-    num: '04',
-    title: 'Allocation',
-    desc: "Conseil stratégique en allocation, alignement sur le profil de risque du portefeuille.",
-  },
-];
+export type Pillar = { icon: React.ElementType; title: ReactNode; desc?: ReactNode };
 
-export const Positioning: React.FC = () => {
+/** Heading, side text and a matrix of pillars. Text comes from the referential (see HomePage). */
+export const Positioning: React.FC<{ heading: ReactNode; intro?: ReactNode; pillars: Pillar[]; footer?: ReactNode; columns?: 4 | 5; pillarsHidden?: boolean }> = ({ heading, intro, pillars, footer, columns = 4, pillarsHidden }) => {
   const sectionRef = useReveal<HTMLElement>();
   const gridRef = useReveal<HTMLDivElement>();
 
@@ -50,32 +25,13 @@ export const Positioning: React.FC = () => {
         {/* Header — tight full-width block */}
         <div className="mb-10 grid grid-cols-1 gap-6 lg:mb-20 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <div className="mb-6">
-              <span
-                className="inline-block px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-[0.2em]"
-                style={{ color: '#0E2826', background: 'rgba(14,40,38,0.1)', border: '1px solid rgba(14,40,38,0.2)' }}
-              >
-                <EditableText id="home.positioning.badge" as="span">
-                  Positionnement
-                </EditableText>
-              </span>
+            <h2 className="luxury-heading">{heading}</h2>
+          </div>
+          {intro && (
+            <div className="lg:col-span-5">
+              <div className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto">{intro}</div>
             </div>
-            <h2 className="luxury-heading">
-              <EditableText id="home.positioning.title" as="span">
-                Un intermédiaire de référence au service des flux de capitaux régionaux.
-              </EditableText>
-            </h2>
-          </div>
-          <div className="lg:col-span-5">
-            <EditableText
-              id="home.positioning.intro"
-              as="p"
-              className="text-secondary text-base md:text-lg leading-relaxed max-w-md lg:ml-auto"
-            >
-              Agréée AMF-UMOA (n° SGI/DA/2016/60) et ancrée à Dakar, nous relayons depuis plus de 10 ans les
-              flux entre émetteurs UEMOA et investisseurs institutionnels ou privés qualifiés.
-            </EditableText>
-          </div>
+          )}
         </div>
 
         {/* 4 pillars — softened matrix (rounded shell + inner hairlines, matches EditorialCard radius) */}
@@ -88,13 +44,14 @@ export const Positioning: React.FC = () => {
         >
           <div
             ref={gridRef}
-            className="reveal-stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            aria-hidden={pillarsHidden || undefined}
+            className={`reveal-stagger grid grid-cols-1 sm:grid-cols-2 ${columns === 5 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'}`}
           >
-          {PILLARS.map((p, i) => {
+          {pillars.map((p, i) => {
             const Icon = p.icon;
             return (
               <div
-                key={p.title}
+                key={i}
                 className={[
                   'group relative z-0 flex flex-col border-[rgba(14,40,38,0.1)] bg-[var(--pure-white)] px-5 py-6 sm:px-6 sm:py-8 lg:px-8',
                   'transition-[background-color,box-shadow] duration-500',
@@ -124,14 +81,17 @@ export const Positioning: React.FC = () => {
                 <h3 className="font-primary text-xl md:text-2xl font-bold tracking-tight text-[var(--everest-green)] transition-colors duration-500 group-hover:text-white mb-3 leading-tight">
                   {p.title}
                 </h3>
-                <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 max-w-xs">
-                  {p.desc}
-                </p>
+                {p.desc && (
+                  <p className="font-primary text-sm font-light leading-relaxed text-[var(--night-60)] transition-colors duration-500 group-hover:text-white/75 max-w-xs">
+                    {p.desc}
+                  </p>
+                )}
               </div>
             );
           })}
           </div>
         </div>
+        {footer}
       </div>
     </section>
   );
