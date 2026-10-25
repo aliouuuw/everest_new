@@ -63,8 +63,10 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
 
     if (w >= 1280) {
       const nav = page.locator('header nav')
+      // The header groups the house pages (owner decision, 25 Oct 2026); the footer keeps the 8 entries of II.1.
+      const BAR = ['Accueil', 'La société', 'Expertises', 'Opportunités', 'Sama Naffa', 'Contact']
       const items = (await nav.locator(':scope > a, :scope > div > a').allInnerTexts()).map((t) => t.trim())
-      check(`${label} menu 8 entries in order`, JSON.stringify(items) === JSON.stringify(NAV), items.join(' | '))
+      check(`${label} menu 6 entries in order`, JSON.stringify(items) === JSON.stringify(BAR), items.join(' | '))
       // nothing in the header overlaps or wraps
       const boxes = await page.evaluate(() => {
         const hdr = document.querySelector('header > div')
@@ -90,12 +92,37 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
       check(`${label} Expertises dropdown 4 items`, dd.length === 4, dd.join(' | '))
       await page.screenshot({ path: path.join(OUT, `${label}-dropdown.png`), clip: { x: 0, y: 0, width: w, height: 420 } })
       await page.mouse.move(5, 600)
+      await page.waitForTimeout(250)
 
-      // click each menu entry
-      for (let i = 0; i < NAV.length; i++) {
+      await nav.getByText('La société', { exact: true }).hover()
+      await page.waitForTimeout(250)
+      const house = (await page.locator('header nav div.absolute a').allInnerTexts()).map((t) => t.trim())
+      const HOUSE = ['La société', 'Analyses & Publications', 'Actualités']
+      check(`${label} La société dropdown 3 items`, JSON.stringify(house) === JSON.stringify(HOUSE), house.join(' | '))
+      await page.screenshot({ path: path.join(OUT, `${label}-dropdown-house.png`), clip: { x: 0, y: 0, width: w, height: 360 } })
+      await page.mouse.move(5, 600)
+      await page.waitForTimeout(250)
+
+      // keyboard: the group opens on focus and lists its pages
+      await page.goto(BASE + '/', { waitUntil: 'load' })
+      await page.waitForTimeout(600) // let the header island hydrate before focusing
+      await nav.getByText('La société', { exact: true }).focus()
+      await page.waitForTimeout(250)
+      check(`${label} La société dropdown opens on focus`, (await page.locator('header nav div.absolute a').count()) === 3)
+
+      // click each bar entry, then each house page through its dropdown
+      const BAR_PATHS = ['/', '/la-societe', '/expertises', '/opportunites', '/sama-naffa', '/contact']
+      for (let i = 0; i < BAR.length; i++) {
         await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
-        await Promise.all([page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === NAV_PATHS[i].replace(/\/$/, '')), nav.getByText(NAV[i], { exact: true }).click()])
-        check(`${label} click « ${NAV[i]} » goes to ${NAV_PATHS[i]}`, true)
+        await Promise.all([page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === BAR_PATHS[i].replace(/\/$/, '')), nav.getByText(BAR[i], { exact: true }).click()])
+        check(`${label} click « ${BAR[i]} » goes to ${BAR_PATHS[i]}`, true)
+      }
+      for (const [name, dest] of [['Analyses & Publications', '/analyses'], ['Actualités', '/actualites']]) {
+        await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
+        await nav.getByText('La société', { exact: true }).hover()
+        await page.waitForTimeout(250)
+        await Promise.all([page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === dest), page.locator('header nav div.absolute').getByText(name, { exact: true }).click()])
+        check(`${label} dropdown « ${name} » goes to ${dest}`, true)
       }
     } else {
       // mobile drawer
@@ -105,7 +132,9 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
       await page.screenshot({ path: path.join(OUT, `${label}-menu-open.png`) })
       const drawer = page.locator('header [data-lenis-prevent]')
       const top = (await drawer.locator(':scope > div > div:not(.pt-4) > a').allInnerTexts()).map((t) => t.trim())
-      check(`${label} drawer 8 entries in order`, JSON.stringify(top) === JSON.stringify(NAV), top.join(' | '))
+      const DRAWER = ['Accueil', 'La société', 'Expertises', 'Opportunités', 'Sama Naffa', 'Contact']
+      check(`${label} drawer 6 entries in order`, JSON.stringify(top) === JSON.stringify(DRAWER), top.join(' | '))
+      check(`${label} drawer lists Analyses & Publications`, await drawer.getByText('Analyses & Publications', { exact: true }).isVisible())
       await Promise.all([page.waitForURL('**/sama-naffa**'), drawer.getByText('Sama Naffa', { exact: true }).click()])
       check(`${label} drawer link navigates`, page.url().includes('/sama-naffa'))
     }
