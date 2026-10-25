@@ -7,20 +7,23 @@ Read `docs/referentiel/PLAN.md` first, then
 `docs/referentiel/SITEWEB-REFERENTIEL-V2.1.md`. The referential is the only
 source of public text: copy it word for word, write no copy of your own.
 
-Lots L0 to L8 are done (L7 is blocked on Legal inputs). Design pass
-(`docs/referentiel/DESIGN-PLAN.md`): Phase 1 (accessibility) and the home
-redesign, the header pass and the inner-page pass (home system on every
-page, see `DESIGN.md` « Inner pages ») are done. Next: a new
-`/impeccable critique`, then Phase 3 (signature). Read
-`docs/referentiel/DESIGN-HANDOFF-2.md` first.
+Lots L0 to L8 are done (L7 is blocked on Legal inputs). **The interface is
+frozen** (team request, 25 Oct 2026): this step only adapts content to the
+referential and sets up the CMS. The site uses the validated interface of
+`883cbef` / `c9cdad0` (old components, old header and footer), filled with
+referential text. Do not redesign; the 23–24 Oct redesign was withdrawn
+(see `DESIGN.md`). Open points: `docs/referentiel/COMPLIANCE-V2.1.md`.
 
 - Public texts live in `src/content/*.ts`, keyed by CMS id. New ids must not
   reuse an old Payload row (the seed never updates rows).
-- Shared N1/N2 blocks: `src/components/Referentiel.tsx`.
+- Text goes into the old components through their props or `EditableText`
+  ids (`HOME_TEXT`, `SOCIETE_TEXT`, …); page heads use `src/components/PageHead.tsx`.
 - Checks before every push: `bun run check:copy`, `bun run check:lexicon`,
   `bun run check:seed`, then with a preview server on port 4322
   (`bunx astro preview --port 4322 --host 127.0.0.1` in `apps/web`):
   `bun apps/web/e2e/pages.check.ts` and `node apps/web/e2e/frame.check.cjs`.
+  Where external requests hang (sandbox), set `E2E_OFFLINE=1` and serve
+  `apps/web/dist` with `python3 -m http.server 4322`.
 - Seeding the staging database (`bun run seed:site-content`) needs the
   user's OK each time.
 

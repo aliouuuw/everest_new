@@ -6,7 +6,7 @@ Source checked: `~/Downloads/SITEWEB-REFERENTIEL.docx` (EF-SITE-REFERENTIEL-2026
 tracked changes, no comments and no images. Its only red text is the « [EN ATTENTE] » note
 of §2.7. Its gold left rule is the « filet doré » of Part III.
 
-Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locally.
+Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locally. Updated 25 Oct 2026 after the interface was restored.
 
 ## Status key
 
@@ -24,7 +24,8 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
    missing texts are held back by decision or by Legal (§2.7, investor-space CTA).
    Reverse check: every site text exists in the referential (`bun run check:copy`, 155 texts).
 2. **Rules of the pen (I.6):** checked on every built page by `bun run check:lexicon`.
-3. **Open gaps:** 3 to decide, 3 to fix, 9 blocked on inputs. See the last section.
+3. **Open gaps:** 2 to decide, 3 to fix, 9 blocked on inputs. See the last section.
+4. **Interface:** since 25 Oct 2026 the site uses the validated interface again; only text and CMS changed (PLAN decision 9).
 
 ## Part I: Positioning
 
@@ -65,7 +66,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 
 | Point | Status | Evidence |
 |---|---|---|
-| II.1 Eight main entries, same labels and same order in menu and footer | Done by decision | The footer lists the 8 entries in order. The header shows 6: « La société », « Analyses & Publications » and « Actualités » are grouped in one menu, and the bar says « Contact » for « Contact / Devenir client ». Owner decision, 23 Oct 2026: keep the grouping (PLAN decision 8). ADG is informed, because II.1 and II.3 ask for one taxonomy. |
+| II.1 Eight main entries, same labels and same order in menu and footer | Done | Since 25 Oct 2026 the validated header is back: 8 flat entries, same labels and order as the footer (PLAN decision 8). |
 | II.1 Expertises: four symmetric pages | Done | Hub and 4 pages, same structure. |
 | II.1 Footer: legal notice, privacy policy, Abécédaire / FAQ, Carrières (to confirm) | Blocked | Labels present as plain text; the pages wait for Legal and the FAQ text. Carrières waits for ADG / RRHA. |
 | II.1 Copyright line | Done by decision | « © 2026 EVEREST Finance, SGI agréée AMF-UMOA n° SGI/DA/2016/60. Tous droits réservés. » (em dash → comma, decision 1). |
@@ -79,7 +80,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 | II.2 Actualités: no communication on open operations | Done | 0 articles on staging; empty state shows no toolbar. |
 | II.2 Opportunités: no yield, no access condition, no calendar in public | Done | §6 text only; the instrument ledger repeats N1 words. |
 | II.2 Sama Naffa: register « construire », never « gagner » | Done | |
-| II.2 Sama Naffa: charters not mixed | Gap: decide | Since 23 Oct 2026 the /sama-naffa page head shows Sama Naffa's own full-colour hero image inside the EVEREST layout. Either ADG accepts it, or the head returns to a charter image. |
+| II.2 Sama Naffa: charters not mixed | Done | The page shows the Sama Naffa logo, its short text and its CTA, in the EVEREST layout. The Sama Naffa hero image left with the redesign (25 Oct 2026). |
 | II.2 Contact: the form feeds the prospection system (follow-ups D+3, D+7, D+14) | Gap: fix | The form opens the visitor's e-mail client (`mailto:`). Nothing records the request or schedules follow-ups. Needs a backend and the CRM target. |
 | II.2 Contact: data protection compliant | Blocked | The consent line under the form is not referential text; it waits for Legal's privacy policy wording. |
 | II.3 Server rendering: the delivered HTML holds all the content | Done | No-JS checks (`home-design.check.ts`, `pages.check.ts`). |
@@ -95,7 +96,7 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 | Point | Status | Evidence |
 |---|---|---|
 | Texts word for word | Done | 118 of 121 present; reverse check 155 / 155. |
-| « N1 sur filet doré, N2 sur filet vert » | Gap: decide | The .docx draws these rules; the site dropped them for the home and inner-page design (owner-approved home, 23 Oct 2026). Part III states it as a presentation rule, so ADG should confirm the design reading. |
+| « N1 sur filet doré, N2 sur filet vert » | Gap: decide | The .docx draws these rules; the validated interface does not draw them, and the interface is frozen for this step. Part III states it as a presentation rule, so ADG should confirm the design reading. |
 | N2 « sous l'accroche ou au dépliage » | Done | All N2 visible, except the 4 home expertise vignettes (native disclosure, owner decision). |
 | §1 Home | Done | All blocks; hero CTAs and final CTAs present. |
 | §2.1 to §2.6 La société | Done | |
@@ -127,9 +128,8 @@ Site checked: `staging` at `8e738dc` plus the fixes of 23 Oct 2026, built locall
 
 **To decide (ADG or owner)**
 
-1. Sama Naffa page head with Sama Naffa's own image (« chartes non mélangées »).
-2. Gold and green rules of Part III: confirm the design reading without rules.
-3. « Private Office, deuxième porte » (I.2): which door is meant.
+1. Gold and green rules of Part III: confirm the design reading without rules.
+2. « Private Office, deuxième porte » (I.2): which door is meant.
 
 **To fix (dev team)**
 
