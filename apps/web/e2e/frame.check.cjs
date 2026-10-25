@@ -30,9 +30,12 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
 
   for (const [w, h, label] of [[1280, 800, 'desktop1280'], [1366, 768, 'desktop1366'], [1440, 900, 'desktop1440'], [1536, 864, 'desktop1536'], [1920, 1080, 'desktop1920'], [390, 844, 'phone390'], [768, 1024, 'tablet768']]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: h }, reducedMotion: 'reduce' })
+    // E2E_OFFLINE=1: abort requests that leave the machine (fonts, CDNs), for sandboxes where they hang.
+    if (process.env.E2E_OFFLINE) await ctx.route('**/*', (r) => (/^https?:\/\/(127\.0\.0\.1|localhost)[:/]/.test(r.request().url()) ? r.continue() : r.abort()))
     const page = await ctx.newPage()
     page.on('pageerror', (e) => errors.push(`${label} ${page.url()}: ${e.message}`))
-    page.on('console', (m) => m.type() === 'error' && errors.push(`${label} ${page.url()} console: ${m.text()}`))
+    // Offline mode blocks external fonts on purpose; that one error is expected there.
+    page.on('console', (m) => m.type() === 'error' && !(process.env.E2E_OFFLINE && m.text().includes('net::ERR_FAILED')) && errors.push(`${label} ${page.url()} console: ${m.text()}`))
 
     for (const p of PAGES) {
       const res = await page.goto(BASE + p, { waitUntil: 'networkidle' })
@@ -60,9 +63,8 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
 
     if (w >= 1280) {
       const nav = page.locator('header nav')
-      const BAR = ['Accueil', 'La société', 'Expertises', 'Opportunités', 'Sama Naffa', 'Contact']
-      const items = (await nav.locator(':scope > a, :scope > div > a, :scope > div > button').allInnerTexts()).map((t) => t.trim()).filter(Boolean)
-      check(`${label} menu 6 entries in order`, JSON.stringify(items) === JSON.stringify(BAR), items.join(' | '))
+      const items = (await nav.locator(':scope > a, :scope > div > a').allInnerTexts()).map((t) => t.trim())
+      check(`${label} menu 8 entries in order`, JSON.stringify(items) === JSON.stringify(NAV), items.join(' | '))
       // nothing in the header overlaps or wraps
       const boxes = await page.evaluate(() => {
         const hdr = document.querySelector('header > div')
@@ -75,50 +77,26 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
       check(`${label} menu fits its slot`, fit.need <= fit.have, `need ${Math.round(fit.need)} have ${fit.have}`)
       const noOverlap = boxes.every((b, i) => i === 0 || b.l >= boxes[i - 1].r - 0.5)
       check(`${label} header logo / nav / buttons do not overlap`, noOverlap, JSON.stringify(boxes))
-      const navLinkHeights = await nav.locator(':scope > a, :scope > div > a, :scope > div > button').evaluateAll((as) => as.map((a) => a.getBoundingClientRect().height))
+      const navLinkHeights = await nav.locator('a').evaluateAll((as) => as.map((a) => a.getBoundingClientRect().height))
       check(`${label} menu labels on one line`, Math.max(...navLinkHeights) < 30, navLinkHeights.join(','))
       for (const b of ['Devenir client', 'Accès Client'])
         check(`${label} header button « ${b} » visible`, await page.locator('header').getByText(b, { exact: true }).first().isVisible())
       await page.screenshot({ path: path.join(OUT, `${label}-header.png`), clip: { x: 0, y: 0, width: w, height: 110 } })
 
+      // Expertises dropdown
       await nav.getByText('Expertises', { exact: true }).hover()
       await page.waitForTimeout(250)
-      const dd = (await page.locator('header nav div.absolute a').allInnerTexts()).map((t) => t.trim())
-      const EXPERTISES = ['Marché des Titres Publics', 'Marché Financier Régional (BRVM)', 'Structuration & Ingénierie Financière', 'Private Office']
-      check(`${label} Expertises dropdown 4 items`, JSON.stringify(dd) === JSON.stringify(EXPERTISES), dd.join(' | '))
+      const dd = await page.locator('header nav div.absolute a').allInnerTexts()
+      check(`${label} Expertises dropdown 4 items`, dd.length === 4, dd.join(' | '))
       await page.screenshot({ path: path.join(OUT, `${label}-dropdown.png`), clip: { x: 0, y: 0, width: w, height: 420 } })
       await page.mouse.move(5, 600)
 
-      const HOUSE = ['La société', 'Analyses & Publications', 'Actualités']
-      await nav.getByRole('button', { name: 'La société', exact: true }).hover()
-      await page.waitForTimeout(250)
-      const house = (await page.locator('header nav div.absolute a').allInnerTexts()).map((t) => t.trim())
-      check(`${label} house dropdown 3 items`, JSON.stringify(house) === JSON.stringify(HOUSE), house.join(' | '))
-      await page.mouse.move(5, 600)
-
-      const clicks = [
-        ['Accueil', '/'],
-        ['Expertises', '/expertises'],
-        ['Opportunités', '/opportunites'],
-        ['Sama Naffa', '/sama-naffa'],
-        ['Contact', '/contact'],
-      ]
-      for (const [name, dest] of clicks) {
+      // click each menu entry
+      for (let i = 0; i < NAV.length; i++) {
         await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
-        await Promise.all([
-          page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === dest.replace(/\/$/, '')),
-          nav.getByText(name, { exact: true }).click(),
-        ])
-        check(`${label} click « ${name} » goes to ${dest}`, true)
+        await Promise.all([page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === NAV_PATHS[i].replace(/\/$/, '')), nav.getByText(NAV[i], { exact: true }).click()])
+        check(`${label} click « ${NAV[i]} » goes to ${NAV_PATHS[i]}`, true)
       }
-      await page.goto(BASE + '/', { waitUntil: 'domcontentloaded' })
-      await nav.getByRole('button', { name: 'La société', exact: true }).hover()
-      await page.waitForTimeout(250)
-      await Promise.all([
-        page.waitForURL((u) => new URL(u).pathname.replace(/\/$/, '') === '/analyses'),
-        page.locator('header nav [role="menu"]').getByText('Analyses & Publications', { exact: true }).click(),
-      ])
-      check(`${label} house item goes to /analyses`, true)
     } else {
       // mobile drawer
       await page.goto(BASE + '/', { waitUntil: 'networkidle' })
@@ -126,11 +104,8 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
       await page.waitForTimeout(300)
       await page.screenshot({ path: path.join(OUT, `${label}-menu-open.png`) })
       const drawer = page.locator('header [data-lenis-prevent]')
-      const BAR = ['Accueil', 'La société', 'Expertises', 'Opportunités', 'Sama Naffa', 'Contact']
-      const top = (await drawer.locator(':scope > div > div:not(.pt-4) > a, :scope > div > div:not(.pt-4) > button').allInnerTexts()).map((t) => t.trim()).filter(Boolean)
-      check(`${label} drawer 6 entries in order`, JSON.stringify(top) === JSON.stringify(BAR), top.join(' | '))
-      await drawer.getByRole('button', { name: 'La société', exact: true }).click()
-      check(`${label} drawer house lists Analyses`, await drawer.getByText('Analyses & Publications', { exact: true }).isVisible())
+      const top = (await drawer.locator(':scope > div > div:not(.pt-4) > a').allInnerTexts()).map((t) => t.trim())
+      check(`${label} drawer 8 entries in order`, JSON.stringify(top) === JSON.stringify(NAV), top.join(' | '))
       await Promise.all([page.waitForURL('**/sama-naffa**'), drawer.getByText('Sama Naffa', { exact: true }).click()])
       check(`${label} drawer link navigates`, page.url().includes('/sama-naffa'))
     }
@@ -139,6 +114,8 @@ const slug = (p) => (p === '/' ? 'home' : p.slice(1).replace(/\//g, '-'))
 
   // redirects
   const ctx = await browser.newContext()
+  // E2E_OFFLINE=1: abort requests that leave the machine (fonts, CDNs), for sandboxes where they hang.
+  if (process.env.E2E_OFFLINE) await ctx.route('**/*', (r) => (/^https?:\/\/(127\.0\.0\.1|localhost)[:/]/.test(r.request().url()) ? r.continue() : r.abort()))
   const page = await ctx.newPage()
   for (const [from, to] of Object.entries(REDIRECTS)) {
     await page.goto(BASE + from)

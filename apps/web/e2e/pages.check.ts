@@ -205,6 +205,8 @@ for (const spec of PAGES) {
 
   for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'phone']] as const) {
     const page = await browser.newPage({ viewport: { width: w, height: h }, reducedMotion: 'reduce' })
+    // E2E_OFFLINE=1: abort requests that leave the machine (fonts, CDNs), for sandboxes where they hang.
+    if (process.env.E2E_OFFLINE) await page.route('**/*', (r) => (/^https?:\/\/(127\.0\.0\.1|localhost)[:/]/.test(r.request().url()) ? r.continue() : r.abort()))
     const errors: string[] = []
     page.on('pageerror', (e) => errors.push(e.message))
     await page.goto(BASE + P, { waitUntil: 'networkidle' })
