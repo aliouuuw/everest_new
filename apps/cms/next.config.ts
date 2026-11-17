@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // The account-opening form (public/ouverture/) uses relative asset paths: it must be
+  // opened at a URL inside its folder, not at the bare /ouverture.
+  async redirects() {
+    return [{ source: '/ouverture', destination: '/ouverture/index.html', permanent: false }]
+  },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],

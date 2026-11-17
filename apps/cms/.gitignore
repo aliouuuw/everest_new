@@ -45,3 +45,6 @@ next-env.d.ts
 # Astro static export (generated in CI by sync-astro-public.mjs)
 /public/*
 !/public/.gitkeep
+
+# account-opening identity documents (local dev)
+/private

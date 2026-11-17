@@ -8,11 +8,14 @@ import sharp from 'sharp'
 import { Articles } from './collections/Articles'
 import { Categories } from './collections/Categories'
 import { ExternalArticles } from './collections/ExternalArticles'
+import { DossiersOuverture } from './collections/DossiersOuverture'
 import { InvestorLeads } from './collections/InvestorLeads'
 import { Media } from './collections/Media'
+import { PiecesOuverture } from './collections/PiecesOuverture'
 import { Publications } from './collections/Publications'
 import { SiteContent } from './collections/SiteContent'
 import { Users } from './collections/Users'
+import { ouvertureEndpoints } from './ouverture/endpoints'
 import { r2StoragePlugins } from './storage/r2'
 
 const filename = fileURLToPath(import.meta.url)
@@ -44,7 +47,10 @@ export default buildConfig({
     Categories,
     SiteContent,
     InvestorLeads,
+    DossiersOuverture,
+    PiecesOuverture,
   ],
+  endpoints: ouvertureEndpoints,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

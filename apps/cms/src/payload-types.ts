@@ -75,6 +75,8 @@ export interface Config {
     categories: Category;
     'site-content': SiteContent;
     'investor-leads': InvestorLead;
+    'dossiers-ouverture': DossiersOuverture;
+    'pieces-ouverture': PiecesOuverture;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +92,8 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'site-content': SiteContentSelect<false> | SiteContentSelect<true>;
     'investor-leads': InvestorLeadsSelect<false> | InvestorLeadsSelect<true>;
+    'dossiers-ouverture': DossiersOuvertureSelect<false> | DossiersOuvertureSelect<true>;
+    'pieces-ouverture': PiecesOuvertureSelect<false> | PiecesOuvertureSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -344,6 +348,84 @@ export interface InvestorLead {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dossiers-ouverture".
+ */
+export interface DossiersOuverture {
+  id: number;
+  reference?: string | null;
+  statut: 'brouillon' | 'recu' | 'examen' | 'complement' | 'valide' | 'refuse';
+  envoyeLe?: string | null;
+  /**
+   * Visible par l’équipe seulement.
+   */
+  notesInternes?: string | null;
+  titulaire?: string | null;
+  courriel?: string | null;
+  telephone?: string | null;
+  categorie?: string | null;
+  gestion?: string | null;
+  residence?: string | null;
+  /**
+   * Pièces demandées et leur statut. Les fichiers sont dans « Pièces (ouverture) », filtrés par dossier.
+   */
+  pieces?:
+    | {
+        cle?: string | null;
+        libelle?: string | null;
+        statut?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  profil?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  reponses?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  schemaVersion?: string | null;
+  jetonHash: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pieces-ouverture".
+ */
+export interface PiecesOuverture {
+  id: number;
+  dossier: number | DossiersOuverture;
+  /**
+   * Clé de la pièce dans le formulaire.
+   */
+  cle: string;
+  libelle?: string | null;
+  sha256?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -397,6 +479,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'investor-leads';
         value: number | InvestorLead;
+      } | null)
+    | ({
+        relationTo: 'dossiers-ouverture';
+        value: number | DossiersOuverture;
+      } | null)
+    | ({
+        relationTo: 'pieces-ouverture';
+        value: number | PiecesOuverture;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -610,6 +700,57 @@ export interface InvestorLeadsSelect<T extends boolean = true> {
   userAgent?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dossiers-ouverture_select".
+ */
+export interface DossiersOuvertureSelect<T extends boolean = true> {
+  reference?: T;
+  statut?: T;
+  envoyeLe?: T;
+  notesInternes?: T;
+  titulaire?: T;
+  courriel?: T;
+  telephone?: T;
+  categorie?: T;
+  gestion?: T;
+  residence?: T;
+  pieces?:
+    | T
+    | {
+        cle?: T;
+        libelle?: T;
+        statut?: T;
+        id?: T;
+      };
+  profil?: T;
+  reponses?: T;
+  schemaVersion?: T;
+  jetonHash?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pieces-ouverture_select".
+ */
+export interface PiecesOuvertureSelect<T extends boolean = true> {
+  dossier?: T;
+  cle?: T;
+  libelle?: T;
+  sha256?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

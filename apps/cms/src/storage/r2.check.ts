@@ -41,3 +41,15 @@ assert.equal(
 )
 
 console.log('r2 storage: env gate and public URLs hold')
+
+assert.equal(
+  r2StoragePlugins({
+    R2_ACCOUNT_ID: 'acct',
+    R2_ACCESS_KEY_ID: 'key',
+    R2_SECRET_ACCESS_KEY: 'secret',
+    R2_BUCKET_NAME: 'everest-media',
+    R2_PUBLIC_URL: 'https://cdn.example.com',
+    R2_PRIVATE_BUCKET_NAME: 'everest-pieces',
+  }).length,
+  2,
+)
