@@ -1,0 +1,326 @@
+/*
+ * Brand layer for the account-opening form, on top of ouverture.vendor.css (generated, scoped).
+ * Goal: the form reads as a page of the site. Same chrome (site header and footer), charter colours
+ * (src/styles.css), site font, gold pill actions. Layout and breakpoints stay the vendor's: this file
+ * changes colours, type, radii and the offsets under the fixed site header only.
+ */
+.ouverture-app {
+  --band: var(--everest-green);
+  --gold: var(--jaune-or);
+  --bg: var(--summit-ivory);
+  --surface: var(--pure-white);
+  --sunk: var(--white-smoke);
+  --ink: var(--everest-green);
+  --muted: #4f5d5a;
+  --line: var(--timberwolf);
+  --line-2: #c9c6bb;
+  --accent: var(--jaune-or);
+  --accent-ink: #7a5a1e;
+  --accent-wash: var(--gold-pale);
+  --primary: var(--everest-green);
+  --font-display: var(--font-primary);
+  --font-body: var(--font-primary);
+  --r: 16px;
+  --r-sm: 12px;
+  /* Real height of the site header, measured in ouverture.astro (the header's size comes from its content). */
+  --chrome: var(--ouv-header, var(--site-chrome-sticky));
+  --ouv-bar: 53px;
+
+  padding-top: var(--chrome);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-primary);
+}
+
+/* The site sets h1, h2 { line-height: 1 !important }; the form's headings wrap on two lines. */
+.ouverture-app h1,
+.ouverture-app h2 {
+  line-height: 1.15 !important;
+}
+
+/* Bar under the site header: the form's own name and help, where the vendor header was. */
+.ouverture-app .ouv-bar {
+  position: sticky;
+  top: var(--chrome);
+  z-index: 50; /* under the site header (55) */
+  height: var(--ouv-bar);
+  background: var(--pure-white);
+  border-bottom: 1px solid var(--line);
+}
+.ouverture-app .ouv-bar-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  /* Same container as the site header (Header.tsx: max-w-[1400px] px-6 md:px-16 lg:px-24 xl:px-6 2xl:px-10),
+     so the label lines up with the logo and the help with the header actions. */
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+@media (min-width: 768px) { .ouverture-app .ouv-bar-in { padding-inline: 64px } }
+@media (min-width: 1024px) { .ouverture-app .ouv-bar-in { padding-inline: 96px } }
+@media (min-width: 1280px) { .ouverture-app .ouv-bar-in { padding-inline: 24px } }
+@media (min-width: 1536px) { .ouverture-app .ouv-bar-in { padding-inline: 40px } }
+.ouverture-app .ouv-bar-home {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ouverture-app .ouv-bar-home:hover { color: var(--accent-ink) }
+.ouverture-app .help-trigger { color: var(--ink); font-size: 13px }
+.ouverture-app .help-trigger > span { border-color: var(--line-2) }
+
+/*
+ * Tablet and desktop (the vendor's mobile layout starts at 700px): one scroll, the page's.
+ * The form column flows with the page; the image (welcome), the rail and the side panel are pinned
+ * under the site header and the bar while it scrolls, then the site footer follows.
+ */
+@media (min-width: 701px) {
+  .ouverture-app {
+    --pinned-top: calc(var(--chrome) + var(--ouv-bar));
+    --pinned-h: calc(100svh - var(--pinned-top));
+  }
+  .ouverture-app .start-screen,
+  .ouverture-app .app-layout {
+    min-height: var(--pinned-h);
+    align-items: start; /* sticky children need their own height, not the row's */
+  }
+  .ouverture-app .start-content { min-height: var(--pinned-h) }
+  .ouverture-app .start-editorial,
+  .ouverture-app .journey-rail,
+  .ouverture-app .context-panel {
+    position: sticky;
+    top: var(--pinned-top);
+    height: var(--pinned-h);
+    min-height: 0;
+  }
+  /* Only if the rail or the panel is taller than a short screen (many sub-steps): they scroll inside. */
+  .ouverture-app .journey-rail,
+  .ouverture-app .context-panel { overflow-y: auto; overscroll-behavior: contain }
+  /* The vendor image column has min-height 750-770px; its copy (anchored to the bottom) was cut on short
+     screens. It now takes the screen height and its type follows the viewport height. */
+  .ouverture-app .editorial-copy { bottom: clamp(28px, 6vh, 64px) }
+  .ouverture-app .editorial-copy h2 {
+    font-size: clamp(30px, min(3.8vw, 6vh), 60px);
+    margin: clamp(12px, 2.4vh, 24px) 0;
+  }
+  .ouverture-app .editorial-copy p { font-size: 14px; line-height: 1.7; margin: 0 }
+  .ouverture-app .editorial-location { margin-top: clamp(16px, 4vh, 40px) }
+}
+@media (max-width: 700px) {
+  .ouverture-app .start-screen,
+  .ouverture-app .app-layout { min-height: calc(100svh - var(--chrome) - var(--ouv-bar)) }
+}
+
+/* Welcome screen */
+.ouverture-app .start-editorial h2 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.ouverture-app .start-editorial h2 em {
+  font-style: normal;
+  color: var(--jaune-or);
+}
+.ouverture-app .start-inner h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.ouverture-app .start-inner h1 span { color: rgba(14, 40, 38, 0.55) }
+.ouverture-app .start-route b {
+  border-color: var(--jaune-or);
+  color: var(--accent-ink);
+}
+
+/* Actions: the site's gold pill (header « Devenir client », home « Entrer en relation »). */
+.ouverture-app .start-cta,
+.ouverture-app .btn-primary {
+  background: var(--jaune-or);
+  color: var(--pure-white);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.ouverture-app .start-cta { padding: 18px 28px }
+.ouverture-app .start-cta:hover,
+.ouverture-app .btn-primary:hover {
+  background: #a27a35;
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+.ouverture-app .btn-ghost { color: var(--ink) }
+.ouverture-app .btn-ghost:hover { color: var(--accent-ink) }
+.ouverture-app .btn-sm,
+.ouverture-app .btn-add { border-radius: 999px }
+
+/* Journey rail: same forest as the site header, so header and rail read as one frame. */
+.ouverture-app .journey-rail {
+  background: var(--everest-green);
+}
+.ouverture-app .journey-rail .kicker { color: var(--jaune-or) }
+.ouverture-app .journey-rail .progress { background: rgba(255, 255, 255, 0.14) }
+.ouverture-app .journey-rail #bar { background: var(--jaune-or) }
+.ouverture-app .phase-label strong { font-size: 13px; color: rgba(255, 255, 255, 0.82) }
+.ouverture-app .phase-label small { font-size: 12px; color: rgba(255, 255, 255, 0.55) }
+.ouverture-app .phase-number { border-color: rgba(255, 255, 255, 0.25); color: rgba(255, 255, 255, 0.7); font-size: 11px }
+.ouverture-app .phase-block.active .phase-number { background: var(--jaune-or); border-color: var(--jaune-or); color: var(--pure-white) }
+.ouverture-app .phase-block.complete .phase-number { border-color: var(--jaune-or); color: var(--jaune-or) }
+/* Active and complete at once (all its steps valid): the vendor rule left gold text on a gold disc. */
+.ouverture-app .phase-block.active.complete .phase-number { background: var(--jaune-or); color: var(--pure-white) }
+
+/* Sub-steps: one 14px slot per marker, so the tick and the dot sit on the label's centre line. */
+.ouverture-app .local-steps { border-left-color: rgba(255, 255, 255, 0.14) }
+.ouverture-app .local-steps button { font-size: 13px; gap: 10px; color: rgba(255, 255, 255, 0.62) }
+.ouverture-app .local-steps .current button { color: var(--pure-white) }
+.ouverture-app .local-dot,
+.ouverture-app .local-steps .valid .local-dot {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--jaune-or);
+}
+.ouverture-app .local-dot:empty::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.ouverture-app .local-steps .current .local-dot { background: none; box-shadow: none }
+.ouverture-app .local-steps .current .local-dot:empty::before {
+  background: var(--jaune-or);
+  border-color: var(--jaune-or);
+  box-shadow: 0 0 0 4px rgba(182, 138, 62, 0.22);
+}
+.ouverture-app .rail-bottom { border-top-color: rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.6) }
+.ouverture-app .rail-bottom p { font-size: 12px; line-height: 1.7 }
+.ouverture-app .rail-bottom button { font-size: 13px; color: rgba(255, 255, 255, 0.85) }
+.ouverture-app .rail-lock { color: var(--jaune-or) }
+
+/* Question area */
+.ouverture-app .step-head h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.ouverture-app .card-opt,
+.ouverture-app .opt-row {
+  border-color: var(--line);
+  border-radius: var(--r);
+}
+.ouverture-app .card-opt .opt-l { font-size: 15px }
+.ouverture-app .card-opt .opt-d { font-size: 13px }
+.ouverture-app .card-opt:hover,
+.ouverture-app .opt-row:hover {
+  background: var(--summit-ivory);
+  border-color: var(--jaune-or);
+}
+.ouverture-app .card-opt:has(input:checked),
+.ouverture-app .opt-row:has(input:checked) {
+  background: var(--gold-pale);
+  border-color: var(--jaune-or);
+  box-shadow: 0 0 0 1px var(--jaune-or);
+}
+.ouverture-app .card-opt input:checked + .mark,
+.ouverture-app .opt-row input:checked + .mark {
+  background: var(--everest-green);
+  border-color: var(--everest-green);
+}
+.ouverture-app .field[data-field="cat"] .card-opt:has(input:checked):after { color: var(--jaune-or) }
+.ouverture-app .field[data-field="gestion"] .card-opt:after { font-size: 12px }
+
+/* Side panel: the site's warm fog instead of the vendor sage. */
+.ouverture-app .context-panel {
+  background: var(--white-smoke);
+  border-left-color: var(--line);
+}
+
+/* Mobile: the progress strip sticks under the site header. */
+.ouverture-app .mobile-phase {
+  background: var(--white-smoke);
+  border-bottom-color: var(--line);
+  font-size: 12px;
+}
+.ouverture-app .mobile-phase > span { color: var(--ink) }
+.ouverture-app .mobile-phase > button { color: var(--accent-ink); font-size: 12px }
+
+.ouverture-app .context-help h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.ouverture-app .context-symbol { color: var(--jaune-or); border-color: var(--line) }
+
+/* Step changes scroll #main into view: land it below the site header and the bar. */
+.ouverture-app #main { scroll-margin-top: calc(var(--chrome) + var(--ouv-bar)) }
+
+/* The site's floating WhatsApp button covers the form's actions; hide it while the client fills the form. */
+body[data-view="journey"] > astro-island button.fixed.bottom-6.right-6,
+body[data-view="journey"] button.fixed.bottom-6.right-6 { display: none }
+
+/* Tailwind's reset removes the browser's dialog centring. */
+.ouverture-app dialog { margin: auto }
+.ouverture-app dialog h2 { margin-bottom: 24px; font-weight: 700; letter-spacing: -0.02em }
+
+/* Field labels: one line is exactly 20px, so a label with « facultatif » keeps its input level with its neighbour.
+   A long label still wraps (no fixed height). */
+.ouverture-app .field > .label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; /* baseline alignment of two font sizes added a pixel */
+  gap: 0 8px;
+  min-height: 20px;
+  line-height: 20px;
+}
+.ouverture-app .field > .label .opt { line-height: 20px }
+
+/* Side panel: readable sizes for the small print (vendor 9-11px). */
+.ouverture-app .context-help summary { font-size: 13px }
+.ouverture-app .context-help details p,
+.ouverture-app .summary-tip { font-size: 13px; line-height: 1.7 }
+.ouverture-app .project-row span { font-size: 12px }
+.ouverture-app .project-row strong { font-size: 14px }
+.ouverture-app .project-row button { font-size: 12px }
+.ouverture-app .support-note p,
+.ouverture-app .support-note button { font-size: 13px }
+
+/* A help line between a label and its options was glued to the first option. */
+.ouverture-app .field > .label + .help { margin: 4px 0 12px }
+
+/* Phones: the strip keeps one line (label and help side by side). */
+.ouverture-app .ouv-bar-home,
+.ouverture-app .help-trigger { white-space: nowrap }
+@media (max-width: 480px) {
+  .ouverture-app .ouv-bar-in { gap: 10px }
+  .ouverture-app .ouv-bar-home { font-size: 13px }
+  .ouverture-app .help-trigger { font-size: 12px; gap: 6px }
+}
+@media (max-width: 379px) {
+  /* Narrowest phones: icon only, as in the vendor layout; the words stay in the button for screen readers. */
+  .ouverture-app .help-trigger { font-size: 0 }
+  .ouverture-app .help-trigger > span { font-size: 12px }
+}
+
+/* Paragraphs justified, as in a printed document; French hyphenation avoids wide gaps in narrow columns.
+   Centred notes keep their centring (more specific vendor rules). */
+.ouverture-app p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+/* Too narrow to justify (about 230px): justified lines there open wide gaps between words. */
+.ouverture-app .journey-rail p,
+.ouverture-app .context-panel p {
+  text-align: left;
+  hyphens: manual;
+  -webkit-hyphens: manual;
+}

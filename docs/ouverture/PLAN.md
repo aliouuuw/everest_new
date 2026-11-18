@@ -1,6 +1,7 @@
 # Account opening: build plan
 
-The form (`public/ouverture/`, vendor copy) is served by the site at `/ouverture/`.
+The form is the Astro page `/ouverture` (`apps/web/src/pages/ouverture.astro`), inside the site header and footer.
+Vendor scripts and side pages stay in `public/ouverture/` (see its `SOURCE.md`).
 Payload (`apps/cms`) is the whole backend: API, storage, back office. No separate server.
 
 API contract: `public/ouverture/engine.js`, object `api`. Endpoints: `apps/cms/src/ouverture/endpoints.ts`.
@@ -16,14 +17,16 @@ API contract: `public/ouverture/engine.js`, object `api`. Endpoints: `apps/cms/s
 
 Before going live:
 
-1. Private R2 bucket `everest-ouverture-pieces` is created (18 Nov 2026, account awade@everestfin.com, r2.dev access off,
-   no custom domain). Still to do: an R2 API token (Object Read & Write, this bucket only), then set on Vercel
-   `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PRIVATE_BUCKET_NAME`. The media bucket is not needed
-   for it. Without these, uploads answer 503 on Vercel.
-2. Push the schema to the staging database (2 new tables). Needs the user's OK.
-3. Point the 3 « Devenir client » links to `/ouverture/` (Header ×2, InvestmentCalculator).
+1. Done 18 Nov 2026: private R2 bucket `everest-ouverture-pieces` (account awade@everestfin.com, r2.dev access off,
+   no custom domain). Its 4 variables are on Vercel Preview (staging). Production needs the same 4.
+2. Done 18 Nov 2026: schema pushed to the staging database (additive only, checked by a dry run).
+3. Done 18 Nov 2026: the links to the old external form (`everest-account-opening.vercel.app`) point to `/ouverture`
+   (Header ×2, InvestmentCalculator, AuthPage, ArticlePage). The Opportunités « Devenir client » still goes to `/contact`.
 
-Known gap: the form's final screen says « un accusé de réception vous a été envoyé par courriel ». No email is sent yet (phase 2).
+Known gaps (vendor copy, to decide with the team):
+
+- On the last step, « Pourquoi cette étape ? » says « …terminer la simulation. Aucune demande réelle ne sera envoyée. » also in live mode (`engine.js`, `envoi`).
+- The form's final screen says « un accusé de réception vous a été envoyé par courriel ». No email is sent yet (phase 2).
 
 ## Phase 2: emails and complement requests
 

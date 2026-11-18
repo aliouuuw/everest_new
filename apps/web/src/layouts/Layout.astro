@@ -5,10 +5,13 @@ import SiteShell from '../islands/SiteShell'
 type Props = {
   title: string
   description?: string
+  /** e.g. "noindex" for the account-opening form */
+  robots?: string
 }
 
 const {
   title,
+  robots,
   description = "EVEREST Finance, Société de Gestion et d'Intermédiation agréée par l'AMF-UMOA (n° SGI/DA/2016/60). Accès intégré aux marchés financiers de l'UEMOA.",
 } = Astro.props
 ---
@@ -18,6 +21,7 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <title>{title}</title>
   </head>
   <body>
