@@ -385,7 +385,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ calc
                     Les marchés financiers comportent des risques.
                   </p>
                   <a
-                    href="https://everest-account-opening.vercel.app/new-home"
+                    href="/ouverture"
                     className="btn-primary inline-flex items-center gap-3 text-[11px] tracking-[0.15em] uppercase"
                   >
                     Ouvrir un compte

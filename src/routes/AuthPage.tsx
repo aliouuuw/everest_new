@@ -36,9 +36,7 @@ export function AuthView({ children }: AuthViewProps) {
               <p className="text-sm text-secondary">
                 Pas encore client ?{' '}
                 <a
-                  href="https://everest-account-opening.vercel.app/new-home"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/ouverture"
                   className="text-[var(--jaune-or)] hover:text-[var(--jaune-or)] font-medium transition-colors underline underline-offset-2"
                 >
                   Ouvrir un compte

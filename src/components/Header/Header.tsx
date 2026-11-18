@@ -222,6 +222,7 @@ export const Header: React.FC = () => {
     '/contact',
     '/auth',
     '/faq',
+    '/ouverture',
   ];
   const isForcedScrolledStyle = forceScrolledStylePaths.some((path) =>
     location.pathname.startsWith(path),
@@ -288,9 +289,7 @@ export const Header: React.FC = () => {
         {/* CTA */}
         <div className="hidden shrink-0 items-center gap-2 xl:flex 2xl:gap-3">
           <a
-            href="https://everest-account-opening.vercel.app/new-home"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/ouverture"
             className={`${ctaShellClass} border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
           >
             <span className={`${ctaLabelClass} text-[var(--pure-white)]`}>
@@ -371,9 +370,7 @@ export const Header: React.FC = () => {
 
             <div className="pt-4 border-t border-white/[0.12] flex flex-col gap-3">
               <a
-                href="https://everest-account-opening.vercel.app/new-home"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/ouverture"
                 className={`${ctaShellClass} group w-full border-transparent bg-[var(--jaune-or)] hover:bg-[var(--jaune-or)]/90`}
                 onClick={onMenuNavigate}
               >

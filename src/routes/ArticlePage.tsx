@@ -159,7 +159,7 @@ export function ArticleView({
                   Accédez aux meilleures opportunités de la BRVM avec notre plateforme sécurisée.
                 </p>
                 <a
-                  href="https://everest-account-opening.vercel.app/new-home"
+                  href="/ouverture"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[var(--night-80)] rounded-full hover:bg-white/90 transition-colors text-[11px] tracking-[0.1em] uppercase font-bold"
                 >
                   Commencer <FiArrowRight size={14} />
