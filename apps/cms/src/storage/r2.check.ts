@@ -40,7 +40,6 @@ assert.equal(
   1,
 )
 
-console.log('r2 storage: env gate and public URLs hold')
 
 assert.equal(
   r2StoragePlugins({
@@ -53,3 +52,16 @@ assert.equal(
   }).length,
   2,
 )
+
+assert.equal(
+  r2StoragePlugins({
+    R2_ACCOUNT_ID: 'acct',
+    R2_ACCESS_KEY_ID: 'key',
+    R2_SECRET_ACCESS_KEY: 'secret',
+    R2_PRIVATE_BUCKET_NAME: 'everest-pieces',
+  }).length,
+  1,
+  'private bucket works without the media bucket',
+)
+
+console.log('r2 storage: env gate and public URLs hold')

@@ -48,40 +48,46 @@ export function r2FileUrl(publicUrl: string, filename: string, prefix?: string):
   return `${base}/${key}`
 }
 
-export function r2StoragePlugins(env: R2Env = process.env as R2Env): Plugin[] {
-  const r2 = r2ConfigFromEnv(env)
-  if (!r2) return []
-
-  return [
-    s3Storage({
-      enabled: true,
-      bucket: r2.bucket,
-      config: {
-        credentials: r2.credentials,
-        region: 'auto',
-        endpoint: r2.endpoint,
-        forcePathStyle: true,
-      },
-      collections: {
-        media: {
-          disablePayloadAccessControl: true,
-          generateFileURL: ({ filename, prefix }) =>
-            r2FileUrl(r2.publicUrl, filename, prefix),
-        },
-      },
-    }),
-    ...privateBucket(r2, trim(env.R2_PRIVATE_BUCKET_NAME)),
-  ]
+function s3Config(endpoint: string, credentials: R2Config['credentials']) {
+  return { credentials, region: 'auto', endpoint, forcePathStyle: true }
 }
 
-/** Identity documents: private bucket, files served only through Payload access control (staff). */
-function privateBucket(r2: R2Config, bucket: string): Plugin[] {
-  if (!bucket) return []
+export function r2StoragePlugins(env: R2Env = process.env as R2Env): Plugin[] {
+  const r2 = r2ConfigFromEnv(env)
+  const media: Plugin[] = r2
+    ? [
+        s3Storage({
+          enabled: true,
+          bucket: r2.bucket,
+          config: s3Config(r2.endpoint, r2.credentials),
+          collections: {
+            media: {
+              disablePayloadAccessControl: true,
+              generateFileURL: ({ filename, prefix }) =>
+                r2FileUrl(r2.publicUrl, filename, prefix),
+            },
+          },
+        }),
+      ]
+    : []
+  return [...media, ...privateBucket(env)]
+}
+
+/**
+ * Identity documents: private bucket, files served only through Payload access control (staff).
+ * Independent of the media bucket: needs account, keys and R2_PRIVATE_BUCKET_NAME only.
+ */
+function privateBucket(env: R2Env): Plugin[] {
+  const accountId = trim(env.R2_ACCOUNT_ID)
+  const accessKeyId = trim(env.R2_ACCESS_KEY_ID)
+  const secretAccessKey = trim(env.R2_SECRET_ACCESS_KEY)
+  const bucket = trim(env.R2_PRIVATE_BUCKET_NAME)
+  if (!accountId || !accessKeyId || !secretAccessKey || !bucket) return []
   return [
     s3Storage({
       enabled: true,
       bucket,
-      config: { credentials: r2.credentials, region: 'auto', endpoint: r2.endpoint, forcePathStyle: true },
+      config: s3Config(`https://${accountId}.r2.cloudflarestorage.com`, { accessKeyId, secretAccessKey }),
       collections: { 'pieces-ouverture': true },
     }),
   ]

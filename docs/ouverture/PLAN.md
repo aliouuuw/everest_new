@@ -16,7 +16,10 @@ API contract: `public/ouverture/engine.js`, object `api`. Endpoints: `apps/cms/s
 
 Before going live:
 
-1. Create a private R2 bucket (no public access) and set `R2_PRIVATE_BUCKET_NAME` on Vercel. Without it, uploads answer 503 on Vercel.
+1. Private R2 bucket `everest-ouverture-pieces` is created (18 Nov 2026, account awade@everestfin.com, r2.dev access off,
+   no custom domain). Still to do: an R2 API token (Object Read & Write, this bucket only), then set on Vercel
+   `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PRIVATE_BUCKET_NAME`. The media bucket is not needed
+   for it. Without these, uploads answer 503 on Vercel.
 2. Push the schema to the staging database (2 new tables). Needs the user's OK.
 3. Point the 3 « Devenir client » links to `/ouverture/` (Header ×2, InvestmentCalculator).
 
